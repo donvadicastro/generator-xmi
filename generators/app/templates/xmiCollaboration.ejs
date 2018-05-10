@@ -1,0 +1,28 @@
+import {Promise} from 'es6-promise';
+
+<% (lifelines || []).forEach(function (lifeline, index) { %>
+import {<%= lifeline.elementRef.name %>} from '../components/<%= lifeline.elementRef.name %>'; <% }) %>
+
+
+export class <%= name %> {
+    constructor(
+        <% (lifelines || []).forEach(function (lifeline, index) { %>
+        /**
+        * <%= lifeline.elementRef.name %> component
+        */
+        private cmp<%= lifeline.elementRef.name %>:  <%= lifeline.elementRef.name %>,
+        <% }) %>
+    ) {}
+
+    /**
+    /* Execute process
+    */
+    run(inputState) {
+        return Promise.resolve(inputState)
+            <% (messages || []).forEach(function (message) { %>
+            // <%= message.from.elementRef.name %> call <%= message.to.elementRef.name %>
+            .then((state) => this.cmp<%= message.to.elementRef.name %>.<%= message.operation.name %>(state))
+            <% }) %>
+        ;
+    }
+}

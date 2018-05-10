@@ -1,0 +1,7 @@
+import {<%= name %>} from './process/<%= name %>';
+
+<% (lifelines || []).forEach(function (lifeline, index) { %>
+import {<%= lifeline.elementRef.name %>} from './components/<%= lifeline.elementRef.name %>'; <% }) %>
+
+const process = new EA_Collaboration1(<% (lifelines || []).forEach(function (lifeline) { %> new <%= lifeline.name %>(), <% }) %>);
+process.run(0).then(ret => console.log(ret));

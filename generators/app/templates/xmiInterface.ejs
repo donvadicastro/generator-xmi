@@ -1,0 +1,15 @@
+export interface <%= name %>Contract {
+  <% (attributes || []).forEach(function (attr) { %>
+    /**
+    * <%= attr.name %> property
+    */
+    <%= attr.name %>;
+  <% }) %>
+
+  <% (operations || []).forEach(function (operation) { %>
+    /**
+    * <%= operation.name %> description.
+    */
+    <%= operation.name %>(state: any): Promise<any>;
+  <% }) %>
+}

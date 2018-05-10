@@ -1,0 +1,22 @@
+import {<%= name %>Contract} from '../contracts/<%= name %>';
+import {Promise} from 'es6-promise';
+
+export class <%= name %> implements <%= name %>Contract {
+  <% (attributes || []).forEach(function (attr) { %>
+  /**
+  * <%= attr.name %> property
+  */
+  <%= attr.name %>;
+  <% }) %>
+
+  <% (operations || []).forEach(function (operation) { %>
+  /**
+  * <%= operation.name %> description.
+  */
+  <%= operation.name %>(state: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      reject(new Error('Not implemented'));
+    });
+  }
+  <% }) %>
+}
