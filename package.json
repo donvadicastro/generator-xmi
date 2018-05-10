@@ -1,0 +1,52 @@
+{
+  "name": "generator-xmi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "generators/app/index.js",
+  "keywords": [
+    "",
+    "yeoman-generator"
+  ],
+  "files": [
+    "generators"
+  ],
+  "dependencies": {
+    "@types/object-path": "^0.9.29",
+    "chalk": "^2.1.0",
+    "object-path": "^0.11.4",
+    "treeify": "^1.1.0",
+    "xml2js": "^0.4.19",
+    "yeoman-generator": "^2.0.5",
+    "yosay": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^5.0.2",
+    "@types/jest": "^22.2.3",
+    "@types/node": "^10.0.4",
+    "fs-extra": "^5.0.0",
+    "jest": "^22.4.3",
+    "ts-jest": "^22.4.4",
+    "typescript": "^2.8.3"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "verbose": false,
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "author": "",
+  "license": "ISC"
+}

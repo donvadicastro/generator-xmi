@@ -1,0 +1,22 @@
+import xmiBase from "../xmiBase";
+import {xmiFragment} from "./xmiFragment";
+import {xmiOperation} from "../class/xmiOperation";
+import {xmiClass} from "../xmiClass";
+import {xmiLifeline} from "../xmiLifeline";
+
+export class xmiMessage extends xmiBase{
+    from: xmiLifeline;
+    to: xmiLifeline;
+    operation: xmiOperation;
+
+    constructor(raw: any, fragments: xmiFragment[]) {
+        super(raw);
+
+        const fromFragment = fragments.filter(x => x.id === raw.$.sendEvent)[0];
+        const toFragment = fragments.filter(x => x.id === raw.$.receiveEvent)[0];
+
+        this.from = fromFragment && fromFragment.lifeline;
+        this.to = toFragment && toFragment.lifeline;
+        this.operation = this.to && this.to.elementRef && (<xmiClass>this.to.elementRef).operations.filter(x => x.id === raw.$.signature)[0];
+    }
+}
