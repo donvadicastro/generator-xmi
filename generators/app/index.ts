@@ -13,7 +13,12 @@ const yosay = require('yosay');
 const treeify = require('treeify');
 const parseString = require('xml2js').parseString;
 
-export class XmiGenerator extends Generator {
+export class XmiGenerator extends (Generator as { new(args: any, opts: any): any; }) {
+    constructor(args: any, opts: any) {
+        super(args, opts);
+        this.argument('xmiFileName', {type: String, required: true});
+    }
+
     prompting() {
         this.log(yosay(`Welcome to the top-notch ${chalk.red('generator-xmi')} generator!`));
     }
@@ -57,7 +62,7 @@ export class XmiGenerator extends Generator {
     }
 
     _readData(callback: (result: any) => void) {
-        const file = this.fs.read(this.templatePath('../files/project6_activity.xml'));
+        const file = this.fs.read(this.templatePath(this.options.xmiFileName));
 
         parseString(file, (err: any, result: any) => {
             callback(result);
