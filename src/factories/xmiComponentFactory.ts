@@ -7,6 +7,8 @@ import {xmiPackage} from "../entities/xmiPackage";
 import {xmiCollaboration} from "../entities/xmiCollaboration";
 import {xmiActor} from "../entities/xmiActor";
 import {xmiDiagram} from "../entities/xmiDiagram";
+import {xmiScreen} from "../entities/ui/xmiScreen";
+import {xmiGUIElement} from "../entities/ui/xmiGUIElement";
 
 export class xmiComponentFactory {
     private _idHash: {[key: string]: xmiBase} = {};
@@ -21,11 +23,16 @@ export class xmiComponentFactory {
 }
 
     static get(raw: any): xmiBase | null {
-        let element = null;
+        let element = this.getByKey(raw.$['xmi:id']);
 
         switch (raw.$['xmi:type']) {
             case 'uml:Class':
-                element = new xmiClass(raw);
+                // Screen package elements are represented as classes
+                if (element instanceof xmiScreen || element instanceof xmiGUIElement) {
+                    element.parseChildren(raw);
+                } else {
+                    element = new xmiClass(raw);
+                }
                 break;
 
             case 'uml:Component':
@@ -46,10 +53,21 @@ export class xmiComponentFactory {
 
             case 'uml:Actor':
                 element = new xmiActor(raw);
+                break;
+
+            case 'uml:Screen':
+                element = new xmiScreen(raw);
+                break;
+
+            case 'uml:GUIElement':
+                element = new xmiGUIElement(raw);
+                break;
         }
 
         if (element && raw.$['xmi:id']) {
             this.instance.idHash[raw.$['xmi:id']] = element;
+        } else if (element && raw.$['xmi:idref']) {
+            this.instance.idHash[raw.$['xmi:idref']] = element;
         }
 
         return element;

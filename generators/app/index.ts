@@ -66,7 +66,7 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
 
         parseString(file, (err: any, result: any) => {
             callback(result);
-            //this.fs.writeJSON(this.templatePath('../files/project6_activity.json'), result);
+            //this.fs.writeJSON(this.templatePath('../files/test.json'), result);
         });
     }
 }
