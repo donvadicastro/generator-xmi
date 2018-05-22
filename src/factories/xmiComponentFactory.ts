@@ -6,12 +6,14 @@ import {xmiComponent} from "../entities/xmiComponent";
 import {xmiPackage} from "../entities/xmiPackage";
 import {xmiCollaboration} from "../entities/xmiCollaboration";
 import {xmiActor} from "../entities/xmiActor";
-import {xmiDiagram} from "../entities/xmiDiagram";
+import {xmiDiagram} from "../entities/diagrams/xmiDiagram";
 import {xmiScreen} from "../entities/ui/xmiScreen";
 import {xmiGUIElement} from "../entities/ui/xmiGUIElement";
+import {xmiUMLDiagram} from "../entities/diagrams/xmiUMLDiagram";
 
 export class xmiComponentFactory {
     private _idHash: {[key: string]: xmiBase} = {};
+    private _idHashDeffered: {[key: string]: {source: any, property: string}} = {};
     private static _instance = new xmiComponentFactory();
 
     static get instance(): xmiComponentFactory {
@@ -19,8 +21,12 @@ export class xmiComponentFactory {
     }
 
     get idHash() {
-      return this._idHash;
-}
+        return this._idHash;
+    }
+
+    get idHashDeffered() {
+        return this._idHashDeffered;
+    }
 
     static get(raw: any): xmiBase | null {
         let element = this.getByKey(raw.$['xmi:id']);
@@ -30,7 +36,9 @@ export class xmiComponentFactory {
                 // Screen package elements are represented as classes
                 if (element instanceof xmiScreen || element instanceof xmiGUIElement) {
                     element.parseChildren(raw);
-                } else {
+                }
+                // Collaboration as a class can happens when linked to another diagram
+                else if(!(element instanceof xmiCollaboration) && !(element instanceof xmiUMLDiagram)) {
                     element = new xmiClass(raw);
                 }
                 break;
@@ -62,6 +70,10 @@ export class xmiComponentFactory {
             case 'uml:GUIElement':
                 element = new xmiGUIElement(raw);
                 break;
+
+            case 'uml:UMLDiagram':
+                element = new xmiUMLDiagram(raw);
+                break;
         }
 
         if (element && raw.$['xmi:id']) {
@@ -89,5 +101,37 @@ export class xmiComponentFactory {
 
     static getByKey(key: string): xmiBase {
         return this.instance.idHash[key];
+    }
+
+    /**
+     * Deffered reference linking
+     * @param source
+     * @param {string} property
+     * @param {string} key
+     */
+    static getByKeyDeffered(source: any, property: string, key: string) {
+        source[property] = this.getByKey(key);
+
+        if (!source[property]) {
+            this.instance.idHashDeffered[key] = {source: source, property: property};
+        }
+    }
+
+    /**
+     * Update deffered references
+     */
+    static updateRefs() {
+        for(let key in this.instance.idHashDeffered) {
+            const ref = this.instance.idHashDeffered[key];
+            const link = this.instance.idHash[key];
+
+            if(!link) {
+                throw new Error(`No link for "${key}"`);
+            }
+
+            ref.source[ref.property] = this.instance.idHash[key];
+        }
+
+        this.instance._idHashDeffered = {};
     }
 }

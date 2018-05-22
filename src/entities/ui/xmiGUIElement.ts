@@ -1,11 +1,19 @@
 import xmiBase from "../xmiBase";
 import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
+import {xmiLink} from "../xmiLink";
 
 export class xmiGUIElement extends xmiBase {
-    children: xmiBase[] = [];
+    links: {informationFLow: xmiLink[]} = {informationFLow: []};
+
+    children: xmiGUIElement[] = [];
 
     constructor(raw: any) {
         super(raw);
+
+        if(raw.links && raw.links.length && raw.links[0].InformationFlow) {
+            this.links.informationFLow = raw.links[0].InformationFlow.map((x: any) => xmiComponentFactory.getLink(x));
+        }
+
         this.parseChildren(raw);
     }
 

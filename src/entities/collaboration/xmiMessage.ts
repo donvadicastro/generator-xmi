@@ -7,7 +7,10 @@ import {xmiLifeline} from "../xmiLifeline";
 export class xmiMessage extends xmiBase{
     from: xmiLifeline;
     to: xmiLifeline;
-    operation: xmiOperation;
+
+    get operation(): xmiOperation {
+        return this.to && this.to.elementRef && (<xmiClass>this.to.elementRef).operations.filter(x => x.id === this.raw.$.signature)[0];
+    }
 
     constructor(raw: any, fragments: xmiFragment[]) {
         super(raw);
@@ -17,6 +20,5 @@ export class xmiMessage extends xmiBase{
 
         this.from = fromFragment && fromFragment.lifeline;
         this.to = toFragment && toFragment.lifeline;
-        this.operation = this.to && this.to.elementRef && (<xmiClass>this.to.elementRef).operations.filter(x => x.id === raw.$.signature)[0];
     }
 }

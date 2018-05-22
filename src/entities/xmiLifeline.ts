@@ -6,10 +6,14 @@ import {xmiComponent} from "./xmiComponent";
 import {xmiActor} from "./xmiActor";
 
 export class xmiLifeline extends xmiBase {
-    elementRef: xmiClass | xmiComponent | xmiActor;
+    attribute: string;
+
+    get elementRef(): xmiClass | xmiComponent | xmiActor {
+        return xmiComponentFactory.getByKey(this.attribute);
+    }
 
     constructor(raw: any, attributes: xmiAttribute[]) {
         super(raw);
-        this.elementRef = xmiComponentFactory.getByKey(attributes.filter(x => x.id === raw.$.represents)[0].type);
+        this.attribute = attributes.filter(x => x.id === raw.$.represents)[0].type;
     }
 }

@@ -25,7 +25,10 @@ export class XmiParser {
             .filter((x: any) => x.$.name).map((x: any) => xmiComponentFactory.get(x));
 
         this.packge = <xmiPackage>xmiComponentFactory.get(get(this.data, this.PACKAGE_ROOT));
-        this.diagrams = get(this.data, this.DIAGRAMS_PATH);
+        this.diagrams = (get(this.data, this.DIAGRAMS_PATH, [])).map(x => xmiComponentFactory.getDiagram(x));
+
+        // update references
+        xmiComponentFactory.updateRefs();
     }
 
     toConsole() {
