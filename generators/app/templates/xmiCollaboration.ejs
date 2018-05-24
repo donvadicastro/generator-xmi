@@ -20,7 +20,7 @@ export class <%= name %> {
     run(inputState) {
         return Promise.resolve(inputState)
             <% (messages || []).forEach(function (message) { %>
-            // <%= message.from.elementRef.name %> call <%= message.to.elementRef.name %>
+            // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to.elementRef.name %>
             .then((state) => this.cmp<%= message.to.elementRef.name %>.<%= message.operation.name %>(state))
             <% }) %>
         ;

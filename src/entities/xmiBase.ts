@@ -1,4 +1,5 @@
 import {get} from 'object-path';
+const camel = require('to-camel-case');
 
 export default class xmiBase {
     raw: any;
@@ -15,7 +16,7 @@ export default class xmiBase {
 
         this.id = this.raw.$['xmi:id'] || this.raw.$['xmi:ifrefs'];
         this.type = this.raw.$['xmi:type'];
-        this.name = this.raw.$.name;
+        this.name = this.raw.$.name && camel(this.raw.$.name);
         this.description = get(this.raw, ['properties', '0', '$', 'documentation']);
         this.alias = get(this.raw, ['properties', '0', '$', 'alias']);
         this.stereotype = get(this.raw, ['properties', '0', '$', 'stereotype']);

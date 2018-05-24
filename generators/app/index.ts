@@ -7,13 +7,17 @@ import {xmiPackage} from "../../src/entities/xmiPackage";
 import {default as chalk} from "chalk";
 import {xmiCollaboration} from "../../src/entities/xmiCollaboration";
 import {xmiActor} from "../../src/entities/xmiActor";
+import {xmiScreen} from "../../src/entities/ui/xmiScreen";
 
 const Generator = require('yeoman-generator');
 const yosay = require('yosay');
 const treeify = require('treeify');
 const parseString = require('xml2js').parseString;
+const camel = require('to-camel-case');
 
 export class XmiGenerator extends (Generator as { new(args: any, opts: any): any; }) {
+    testFiles: string[] = [];
+
     constructor(args: any, opts: any) {
         super(args, opts);
         this.argument('xmiFileName', {type: String, required: true});
@@ -23,7 +27,16 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
         this.log(yosay(`Welcome to the top-notch ${chalk.red('generator-xmi')} generator!`));
     }
 
-    parsing() {
+    clean() {
+        const done = this.async();
+
+        this.log(chalk.green('Clean'));
+        this.spawnCommand('rimraf', ['dist']).on('close', done);
+    }
+
+    generate() {
+        const done = this.async();
+
         this._readData((result: any) => {
             const parser = new XmiParser(result);
             parser.parse();
@@ -33,13 +46,20 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
 
             this.log(chalk.green('Generate'));
             this._generate(null, parser.packge);
+
+            this.log(chalk.green('Rebuild'));
+
+            this.testFiles.forEach(x => this.spawnCommand('tsc', [x]));
+            done();
         });
     }
 
     _generate(path: string | null, pkg: any) {
         path = path || 'dist';
 
-        pkg.children.forEach((x: any) => {
+        pkg.children.filter((x: any) => x.name).forEach((x: any) => {
+            this.log(`Processing "${x.name} (${x.type})" package element`);
+
             if(x instanceof xmiActor) {
                 this.fs.copyTpl(this.templatePath('xmiActor.ejs'), this.destinationPath(`${path}/components/${x.name}.ts`), x);
             }
@@ -50,10 +70,18 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
             }
 
             if(x instanceof xmiCollaboration) {
+                const testFileDest = `${path}/test/process_${x.name}.ts`;
                 this.fs.copyTpl(this.templatePath('xmiCollaboration.ejs'), this.destinationPath(`${path}/process/${x.name}.ts`), x);
-                this.fs.copyTpl(this.templatePath('test.ejs'), this.destinationPath(`${path}/test.ts`), x);
+                this.fs.copyTpl(this.templatePath('test/xmiComponent.ejs'), this.destinationPath(testFileDest), x);
+                this.testFiles.push(testFileDest);
             }
 
+            if(x instanceof xmiScreen) {
+                const testFileDest = `${path}/test/screen_${x.name}.ts`;
+                this.fs.copyTpl(this.templatePath('xmiScreen.ejs'), this.destinationPath(`${path}/screens/${x.name}.ts`), x);
+                this.fs.copyTpl(this.templatePath('test/xmiScreen.ejs'), this.destinationPath(testFileDest), x);
+                this.testFiles.push(testFileDest);
+            }
 
             if(x instanceof xmiPackage) {
                 this._generate(`${path}/${x.name}`, x);
