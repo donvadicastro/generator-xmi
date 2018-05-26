@@ -9,8 +9,8 @@ export class xmiDiagram extends xmiBase {
             .children.find(x => x instanceof xmiCollaboration);
     }
 
-  constructor(raw: any) {
-    super(raw);
+  constructor(raw: any, parent: xmiPackage | null) {
+    super(raw, parent);
 
     this.type = this.raw.properties[0].$.type;
     this.name = this.raw.properties[0].$.name;

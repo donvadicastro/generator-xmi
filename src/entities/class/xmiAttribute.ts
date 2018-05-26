@@ -1,12 +1,12 @@
 import {get} from "object-path";
 import xmiBase from "../xmiBase";
-import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
+import {xmiClass} from "../xmiClass";
 
 export class xmiAttribute extends xmiBase {
     type: string;
 
-    constructor(raw: any) {
-        super(raw);
+    constructor(raw: any, parent: xmiBase) {
+        super(raw, parent);
         this.type = get(raw, ['properties', '0', '$', 'type']) ||
             get(raw, ['type', '0', '$', 'xmi:idref']);
     }

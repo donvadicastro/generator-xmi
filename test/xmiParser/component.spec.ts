@@ -30,7 +30,7 @@ describe('xmiParser', () => {
 
             if(c1.required != null) {
                 expect(c1.required.length).toBe(1);
-                expect(c1.required[0].name).toBe('In');
+                expect(c1.required[0].name).toBe('in');
                 expect(c1.required[0].ref).toBe(entities[3].children[0]); //Contracts -> In
             }
 
@@ -39,7 +39,7 @@ describe('xmiParser', () => {
 
             if(c1.provided != null) {
                 expect(c1.provided.length).toBe(2);
-                expect(c1.provided[0].name).toBe('Out');
+                expect(c1.provided[0].name).toBe('out');
                 expect(c1.provided[0].ref).toBe(entities[3].children[1]); //Contracts -> Out
             }
         });

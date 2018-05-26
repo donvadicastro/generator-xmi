@@ -18,12 +18,12 @@ describe('xmiParser', () => {
             const screen: xmiScreen = <xmiScreen>(<xmiPackage>parser.packge.children[0]).children[0];
 
             expect(screen.name).toBe('admin');
-            expect(screen.children.map(x => x.name)).toEqual(['First Name', 'Panel', 'Save']);
+            expect(screen.children.map(x => x.name)).toEqual(['firstName', 'panel', 'save']);
             expect(screen.children.map(x => x.alias)).toEqual(['firstName', undefined, undefined]);
             expect(screen.children.map(x => x.stereotype)).toEqual(['textbox', 'panel', 'button']);
 
             const lastName = (<xmiGUIElement>screen.children[1]).children[0];
-            expect(lastName.name).toBe('Last Name');
+            expect(lastName.name).toBe('lastName');
             expect(lastName.alias).toBe('lastName');
             expect(lastName.stereotype).toBeUndefined();
         });

@@ -4,11 +4,11 @@ import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 export class xmiPackage extends xmiBase {
     children: xmiBase[];
 
-    constructor(raw: any) {
-        super(raw);
+    constructor(raw: any, parent: xmiPackage | null) {
+        super(raw, parent);
 
         this.children = (raw.packagedElement || []).reverse()
-            .map((x: any) => xmiComponentFactory.get(x)).filter((x: any) => x).reverse();
+            .map((x: any) => xmiComponentFactory.get(x, this)).filter((x: any) => x).reverse();
     }
 
     toConsole() {

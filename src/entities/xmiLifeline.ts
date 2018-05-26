@@ -4,6 +4,7 @@ import {xmiAttribute} from "./class/xmiAttribute";
 import {xmiClass} from "./xmiClass";
 import {xmiComponent} from "./xmiComponent";
 import {xmiActor} from "./xmiActor";
+import {xmiPackage} from "./xmiPackage";
 
 export class xmiLifeline extends xmiBase {
     attribute: string;
@@ -12,8 +13,8 @@ export class xmiLifeline extends xmiBase {
         return xmiComponentFactory.getByKey(this.attribute);
     }
 
-    constructor(raw: any, attributes: xmiAttribute[]) {
-        super(raw);
+    constructor(raw: any, parent: xmiBase, attributes: xmiAttribute[]) {
+        super(raw, parent);
         this.attribute = attributes.filter(x => x.id === raw.$.represents)[0].type;
     }
 }

@@ -1,7 +1,9 @@
 import {get} from 'object-path';
+import {xmiPackage} from "./xmiPackage";
 const camel = require('to-camel-case');
 
 export default class xmiBase {
+    parent: xmiPackage | xmiBase | null;
     raw: any;
 
     id: string;
@@ -11,7 +13,20 @@ export default class xmiBase {
     alias: string;
     stereotype: string;
 
-    constructor(raw: any) {
+    get path(): xmiBase[] {
+        let path = [];
+        let parent = this.parent;
+
+        while (parent) {
+            path.push(parent);
+            parent = parent.parent;
+        }
+
+        return path;
+    }
+
+    constructor(raw: any, parent: xmiPackage | xmiBase | null) {
+        this.parent = parent;
         this.raw = raw;
 
         this.id = this.raw.$['xmi:id'] || this.raw.$['xmi:ifrefs'];

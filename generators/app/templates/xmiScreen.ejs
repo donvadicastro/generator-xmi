@@ -1,5 +1,13 @@
 const inquirer = require('inquirer');
 
+<% (children || []).filter(x => x.stereotype === 'button').forEach(function (child, i) { %>
+<% var elementRef = child.links.informationFLow[0].end.elementRef %>
+import {<%= elementRef.name %>} from '<%= path.map(function() { return '..'; }).join('/') %>/<%= elementRef.path.slice(0, elementRef.path.length - 1).reverse().map(function(a) { return a.name; }).join('/') %>/process/<%= elementRef.name %>';
+<% (elementRef.lifelines || []).forEach(function (lifeline, index) { %>
+import {<%= lifeline.elementRef.name %>} from '<%= path.map(function() { return '..'; }).join('/') %>/<%= elementRef.path.slice(0, elementRef.path.length - 1).reverse().map(function(a) { return a.name; }).join('/') %>/components/<%= lifeline.elementRef.name %>'; <% }) %>
+<% }) %>
+
+
 export class <%= name %> {
     run() {
         const answers = inquirer.prompt([
@@ -8,8 +16,10 @@ export class <%= name %> {
             <% }) %>
         ]);
 
-        <% (children || []).filter(x => x.stereotype === 'button').forEach(function (child) { %>
+        <% (children || []).filter(x => x.stereotype === 'button').forEach(function (child, i) { %>
+        <% var elementRef = child.links.informationFLow[0].end.elementRef %>
+        const collaboration<%= i %> = new <%= elementRef.name %>(<% (elementRef.lifelines || []).forEach(function (lifeline) { %> new <%= lifeline.name %>(), <% }) %>);
+        collaboration<%= i %>.run(answers);
         <% }) %>
-
     }
 }

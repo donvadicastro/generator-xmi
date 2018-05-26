@@ -12,8 +12,8 @@ export class xmiMessage extends xmiBase{
         return this.to && this.to.elementRef && (<xmiClass>this.to.elementRef).operations.filter(x => x.id === this.raw.$.signature)[0];
     }
 
-    constructor(raw: any, fragments: xmiFragment[]) {
-        super(raw);
+    constructor(raw: any, parent: xmiBase, fragments: xmiFragment[]) {
+        super(raw, parent);
 
         const fromFragment = fragments.filter(x => x.id === raw.$.sendEvent)[0];
         const toFragment = fragments.filter(x => x.id === raw.$.receiveEvent)[0];

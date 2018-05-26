@@ -28,51 +28,52 @@ export class xmiComponentFactory {
         return this._idHashDeffered;
     }
 
-    static get(raw: any): xmiBase | null {
+    static get(raw: any, parent: xmiPackage | null): xmiBase | null {
         let element = this.getByKey(raw.$['xmi:id']);
 
         switch (raw.$['xmi:type']) {
             case 'uml:Class':
                 // Screen package elements are represented as classes
                 if (element instanceof xmiScreen || element instanceof xmiGUIElement) {
+                    element.parent = parent;
                     element.parseChildren(raw);
                 }
                 // Collaboration as a class can happens when linked to another diagram
                 else if(!(element instanceof xmiCollaboration) && !(element instanceof xmiUMLDiagram)) {
-                    element = new xmiClass(raw);
+                    element = new xmiClass(raw, parent);
                 }
                 break;
 
             case 'uml:Component':
-                element = new xmiComponent(raw);
+                element = new xmiComponent(raw, parent);
                 break;
 
             case 'uml:Interface':
-                element = new xmiInterface(raw);
+                element = new xmiInterface(raw, parent);
                 break;
 
             case 'uml:Package':
-                element = new xmiPackage(raw);
+                element = new xmiPackage(raw, parent);
                 break;
 
             case 'uml:Collaboration':
-                element = new xmiCollaboration(raw);
+                element = new xmiCollaboration(raw, parent);
                 break;
 
             case 'uml:Actor':
-                element = new xmiActor(raw);
+                element = new xmiActor(raw, parent);
                 break;
 
             case 'uml:Screen':
-                element = new xmiScreen(raw);
+                element = new xmiScreen(raw, parent);
                 break;
 
             case 'uml:GUIElement':
-                element = new xmiGUIElement(raw);
+                element = new xmiGUIElement(raw, parent);
                 break;
 
             case 'uml:UMLDiagram':
-                element = new xmiUMLDiagram(raw);
+                element = new xmiUMLDiagram(raw, parent);
                 break;
         }
 
@@ -85,15 +86,15 @@ export class xmiComponentFactory {
         return element;
     }
 
-    static getDiagram(raw: any) {
-        const element = new xmiDiagram(raw);
+    static getDiagram(raw: any, parent: xmiPackage | null) {
+        const element = new xmiDiagram(raw, parent);
 
         this.instance.idHash[raw.$['xmi:id']] = element;
         return element;
     }
 
-    static getLink(raw: any) {
-        const link = new xmiLink(raw);
+    static getLink(raw: any, parent: xmiBase) {
+        const link = new xmiLink(raw, parent);
 
         this.instance.idHash[raw.$['xmi:id']] = link;
         return link;
