@@ -8,6 +8,7 @@ import {default as chalk} from "chalk";
 import {xmiCollaboration} from "../../src/entities/xmiCollaboration";
 import {xmiActor} from "../../src/entities/xmiActor";
 import {xmiScreen} from "../../src/entities/ui/xmiScreen";
+import {xmiInterface} from "../../src/entities/xmiInterface";
 
 const Generator = require('yeoman-generator');
 const yosay = require('yosay');
@@ -70,14 +71,21 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
                 this.generatedFiles.push(destFileName);
             }
 
+            if(x instanceof xmiInterface) {
+                const interfaceFileName = this.destinationPath(`${path}/contracts/${x.name}.ts`);
+
+                this.fs.copyTpl(this.templatePath('xmiInterface.ejs'), interfaceFileName, x);
+                this.generatedFiles.push(interfaceFileName);
+            }
+
             if(x instanceof xmiClass || x instanceof xmiComponent) {
                 const interfaceFileName = this.destinationPath(`${path}/contracts/${x.name}.ts`);
                 const classFileName = this.destinationPath(`${path}/components/${x.name}.ts`);
 
                 this.fs.copyTpl(this.templatePath('xmiInterface.ejs'), interfaceFileName, x);
-                this.fs.copyTpl(this.templatePath('xmiClass.ejs'), classFileName, x);
-
                 this.generatedFiles.push(interfaceFileName);
+
+                this.fs.copyTpl(this.templatePath('xmiClass.ejs'), classFileName, x);
                 this.generatedFiles.push(classFileName);
             }
 
@@ -120,7 +128,7 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
 
     _beautify(filename: string) {
         this.fs.write(filename, beautify(this.fs.read(filename), {
-            jslint_happy: true
+            jslint_happy: true, preserve_newlines: false
         }));
     }
 }

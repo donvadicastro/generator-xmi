@@ -1,14 +1,16 @@
 <%
-var impl = [name];
-(provided || []).forEach(function (x) { impl.push(x.name); });
+  var impl = provided || [];
 %>
 
+import {<%= name %>Contract} from '../contracts/<%= name %>';
+
 <% impl.forEach(function (value) { %>
-import {<%= value %>Contract} from '../contracts/<%= value %>';
-<%})%>
+<% if(value.name) { %>
+import {<%= value.name %>Contract} from '<%= path.map(function() { return '..'; }).join('/') %>/<%= value.ref.path.slice(0, value.path.length - 1).reverse().map(function(a) { return a.name; }).join('/') %>/contracts/<%= value.name %>';
+<%}})%>
 import {Promise} from 'es6-promise';
 
-export class <%= name %> implements <%= impl.join(', ') %> {
+export class <%= name %> implements <%= name %>Contract <% if (impl.length) { %>, <%}%><%= impl.map(function(x) { return x.name + 'Contract' }).join(', ') %> {
   <% (attributes || []).forEach(function (attr) { %>
   /**
   * <%= attr.name %> property
@@ -26,4 +28,21 @@ export class <%= name %> implements <%= impl.join(', ') %> {
     });
   }
   <% }) %>
+
+  <% impl.forEach(function (value) { %>
+    //#region <%= value.name %>Contract implementation
+
+    <% (value.ref.operations || []).forEach(function (operation) { %>
+    /**
+    * <%= operation.name %> description.
+    */
+    <%= operation.name %>(state: any): Promise<any> {
+      return new Promise((resolve, reject) => {
+        reject(new Error('Not implemented'));
+      });
+    }
+    <% }) %>
+
+    //#endregion
+  <%})%>
 }
