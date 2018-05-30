@@ -10,6 +10,7 @@ import {xmiDiagram} from "../entities/diagrams/xmiDiagram";
 import {xmiScreen} from "../entities/ui/xmiScreen";
 import {xmiGUIElement} from "../entities/ui/xmiGUIElement";
 import {xmiUMLDiagram} from "../entities/diagrams/xmiUMLDiagram";
+import {xmiMessageEndpoint} from "../connectors/xmiMessageEndpoint";
 
 export class xmiComponentFactory {
     private _idHash: {[key: string]: xmiBase} = {};
@@ -75,6 +76,9 @@ export class xmiComponentFactory {
             case 'uml:UMLDiagram':
                 element = new xmiUMLDiagram(raw, parent);
                 break;
+
+            case 'uml:MessageEndpoint':
+                element = new xmiMessageEndpoint(raw, parent);
         }
 
         if (element && raw.$['xmi:id']) {

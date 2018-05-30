@@ -14,9 +14,11 @@ const yosay = require('yosay');
 const treeify = require('treeify');
 const parseString = require('xml2js').parseString;
 const camel = require('to-camel-case');
+const beautify = require('js-beautify').js;
 
 export class XmiGenerator extends (Generator as { new(args: any, opts: any): any; }) {
     testFiles: string[] = [];
+    generatedFiles: string[] = [];
 
     constructor(args: any, opts: any) {
         super(args, opts);
@@ -50,6 +52,8 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
             this.log(chalk.green('Rebuild'));
 
             this.testFiles.forEach(x => this.spawnCommand('tsc', [x]));
+            this.generatedFiles.forEach(x => this._beautify(x));
+
             done();
         });
     }
@@ -61,26 +65,42 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
             this.log(`Processing "${x.name} (${x.type})" package element`);
 
             if(x instanceof xmiActor) {
-                this.fs.copyTpl(this.templatePath('xmiActor.ejs'), this.destinationPath(`${path}/components/${x.name}.ts`), x);
+                const destFileName = this.destinationPath(`${path}/components/${x.name}.ts`);
+                this.fs.copyTpl(this.templatePath('xmiActor.ejs'), destFileName, x);
+                this.generatedFiles.push(destFileName);
             }
 
             if(x instanceof xmiClass || x instanceof xmiComponent) {
-                this.fs.copyTpl(this.templatePath('xmiInterface.ejs'), this.destinationPath(`${path}/contracts/${x.name}.ts`), x);
-                this.fs.copyTpl(this.templatePath('xmiClass.ejs'), this.destinationPath(`${path}/components/${x.name}.ts`), x);
+                const interfaceFileName = this.destinationPath(`${path}/contracts/${x.name}.ts`);
+                const classFileName = this.destinationPath(`${path}/components/${x.name}.ts`);
+
+                this.fs.copyTpl(this.templatePath('xmiInterface.ejs'), interfaceFileName, x);
+                this.fs.copyTpl(this.templatePath('xmiClass.ejs'), classFileName, x);
+
+                this.generatedFiles.push(interfaceFileName);
+                this.generatedFiles.push(classFileName);
             }
 
             if(x instanceof xmiCollaboration) {
                 const testFileDest = `${path}/test/process_${x.name}.ts`;
-                this.fs.copyTpl(this.templatePath('xmiCollaboration.ejs'), this.destinationPath(`${path}/process/${x.name}.ts`), x);
+                const diagramFileName = this.destinationPath(`${path}/process/${x.name}.ts`);
+
+                this.fs.copyTpl(this.templatePath('xmiCollaboration.ejs'), diagramFileName, x);
                 this.fs.copyTpl(this.templatePath('test/xmiComponent.ejs'), this.destinationPath(testFileDest), x);
+
                 this.testFiles.push(testFileDest);
+                this.generatedFiles.push(diagramFileName);
             }
 
             if(x instanceof xmiScreen) {
                 const testFileDest = `${path}/test/screen_${x.name}.ts`;
-                this.fs.copyTpl(this.templatePath('xmiScreen.ejs'), this.destinationPath(`${path}/screens/${x.name}.ts`), x);
+                const screenFileName = this.destinationPath(`${path}/screens/${x.name}.ts`);
+
+                this.fs.copyTpl(this.templatePath('xmiScreen.ejs'), screenFileName, x);
                 this.fs.copyTpl(this.templatePath('test/xmiScreen.ejs'), this.destinationPath(testFileDest), x);
+
                 this.testFiles.push(testFileDest);
+                this.generatedFiles.push(screenFileName);
             }
 
             if(x instanceof xmiPackage) {
@@ -94,8 +114,14 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
 
         parseString(file, (err: any, result: any) => {
             callback(result);
-            //this.fs.writeJSON(this.templatePath('../files/test.json'), result);
+            this.fs.writeJSON(this.templatePath('../files/test.json'), result);
         });
+    }
+
+    _beautify(filename: string) {
+        this.fs.write(filename, beautify(this.fs.read(filename), {
+            jslint_happy: true
+        }));
     }
 }
 

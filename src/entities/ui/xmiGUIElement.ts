@@ -6,6 +6,7 @@ import {xmiPackage} from "../xmiPackage";
 
 export class xmiGUIElement extends xmiBase {
     links: {informationFLow: xmiLink[]} = {informationFLow: []};
+    properties: Map<string, string>;
 
     children: xmiGUIElement[] = [];
 
@@ -15,6 +16,9 @@ export class xmiGUIElement extends xmiBase {
         if(raw.links && raw.links.length && raw.links[0].InformationFlow) {
             this.links.informationFLow = raw.links[0].InformationFlow.map((x: any) => xmiComponentFactory.getLink(x, this));
         }
+
+        this.properties = new Map((raw.tags[0].tag || []).map((x: any) => [x.$.name, x.$.value]));
+        this.properties.set('label', raw.$.name);
 
         this.parseChildren(raw);
     }

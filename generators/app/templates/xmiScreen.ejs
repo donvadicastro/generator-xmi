@@ -12,8 +12,11 @@ export class <%= name %> {
     run() {
         const answers = inquirer.prompt([
             <% (children || []).filter(x => x.stereotype !== 'button').forEach(function (child) { %>
-            { type: '<%= {textbox: 'input'}[child.stereotype] %>', name: '<%= child.alias || child.name %>', message: 'Please enter <%= child.name %>' },
-            <% }) %>
+            <% if (child.stereotype === 'checkbox') { %>
+            { type: '<%= child.stereotype %>', name: '<%= child.alias || child.name %>', message: 'Please enter <%= child.properties.get('label') || child.name %>', choices: [<%- child.properties.get('dictionary').split(',').map(function(x) {return '\'' + x + '\'';}) %>] },
+            <% } else { %>
+            { type: '<%= child.stereotype %>', name: '<%= child.alias || child.name %>', message: 'Please enter <%= child.properties.get('label') || child.name %>' },
+            <% }}) %>
         ]);
 
         <% (children || []).filter(x => x.stereotype === 'button').forEach(function (child, i) { %>

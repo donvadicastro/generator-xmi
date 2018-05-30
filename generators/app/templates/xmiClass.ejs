@@ -1,7 +1,14 @@
-import {<%= name %>Contract} from '../contracts/<%= name %>';
+<%
+var impl = [name];
+(provided || []).forEach(function (x) { impl.push(x.name); });
+%>
+
+<% impl.forEach(function (value) { %>
+import {<%= value %>Contract} from '../contracts/<%= value %>';
+<%})%>
 import {Promise} from 'es6-promise';
 
-export class <%= name %> implements <%= name %>Contract {
+export class <%= name %> implements <%= impl.join(', ') %> {
   <% (attributes || []).forEach(function (attr) { %>
   /**
   * <%= attr.name %> property
