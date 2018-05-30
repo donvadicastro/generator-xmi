@@ -8,6 +8,12 @@ import {<%= name %>Contract} from '../contracts/<%= name %>';
 <% if(value.name) { %>
 import {<%= value.name %>Contract} from '<%= path.map(function() { return '..'; }).join('/') %>/<%= value.ref.path.slice(0, value.path.length - 1).reverse().map(function(a) { return a.name; }).join('/') %>/contracts/<%= value.name %>';
 <%}})%>
+
+<% (required || []).forEach(function (value) { %>
+import {<%= value.name %>Contract} from '<%= path.map(function() { return '..'; }).join('/') %>/<%= value.ref.path.slice(0, value.path.length - 1).reverse().map(function(a) { return a.name; }).join('/') %>/contracts/<%= value.name %>';
+<%})%>
+
+
 import {Promise} from 'es6-promise';
 
 export class <%= name %> implements <%= name %>Contract <% if (impl.length) { %>, <%}%><%= impl.map(function(x) { return x.name + 'Contract' }).join(', ') %> {
@@ -17,6 +23,13 @@ export class <%= name %> implements <%= name %>Contract <% if (impl.length) { %>
   */
   <%= attr.name %>;
   <% }) %>
+
+  constructor(
+  <% (required || []).map(function (value, i, list) { %>
+    <%= value.ref.name %>: <%= value.ref.name %>Contract <% if(i < list.length) { %>,<% } %>
+  <% }) %>) {
+    //constructor
+  }
 
   <% (operations || []).forEach(function (operation) { %>
   /**
