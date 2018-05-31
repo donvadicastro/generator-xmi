@@ -26,7 +26,7 @@ export class <%= name %> implements <%= name %>Contract <% if (impl.length) { %>
 
   constructor(
   <% (required || []).map(function (value, i, list) { %>
-    <%= value.ref.name %>: <%= value.ref.name %>Contract <% if(i < list.length) { %>,<% } %>
+    private <%= value.ref.name %>: <%= value.ref.name %>Contract <% if(i < list.length) { %>,<% } %>
   <% }) %>) {
     //constructor
   }
