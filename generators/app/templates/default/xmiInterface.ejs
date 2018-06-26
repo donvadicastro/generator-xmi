@@ -1,11 +1,15 @@
 import {Promise} from 'es6-promise';
 
+<% (attributes || []).filter(x => x.typeRef).forEach(function (attribute) { %>
+import {<%= attribute.typeRef.name %>Contract} from '<%= path.map(function() { return '..'; }).join('/') %>/<%= attribute.typeRef.path.slice(0, attribute.typeRef.path.length - 1).reverse().map(a => a.name).join('/') %>/contracts/<%= attribute.typeRef.name %>';
+<% }) %>
+
 export interface <%= name %>Contract {
   <% (attributes || []).forEach(function (attr) { %>
     /**
     * <%= attr.name %> property
     */
-    <%= attr.name %>: <%= attr.type %>;
+    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %>;
   <% }) %>
 
   <% (operations || []).forEach(function (operation) { %>

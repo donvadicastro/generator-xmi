@@ -54,7 +54,7 @@ export class <%= name %> implements <%= name %>Contract <% if (provided.length) 
     /**
     * <%= attribute.name %> description.
     */
-    <%= attribute.name %>: <%= attribute.typeRef ? attribute.typeRef.name : attribute.type %>Contract;
+    <%= attribute.name %>: <%= attribute.typeRef ? attribute.typeRef.name + 'Contract' : attribute.type %>;
     <% }) %>
 
 
