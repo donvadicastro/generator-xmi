@@ -14,10 +14,11 @@ const Generator = require('yeoman-generator');
 const yosay = require('yosay');
 const treeify = require('treeify');
 const parseString = require('xml2js').parseString;
-const camel = require('to-camel-case');
+const pascal = require('to-pascal-case');
 const beautify = require('js-beautify').js;
 
 export class XmiGenerator extends (Generator as { new(args: any, opts: any): any; }) {
+    type: string = 'default';
     testFiles: string[] = [];
     generatedFiles: string[] = [];
 
@@ -64,17 +65,18 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
 
         pkg.children.filter((x: any) => x.name).forEach((x: any) => {
             this.log(`Processing "${x.name} (${x.type})" package element`);
+            x.className = pascal(x.name);
 
             if(x instanceof xmiActor) {
                 const destFileName = this.destinationPath(`${path}/components/${x.name}.ts`);
-                this.fs.copyTpl(this.templatePath('xmiActor.ejs'), destFileName, x);
+                this.fs.copyTpl(this.templatePath(`${this.type}/xmiActor.ejs`), destFileName, x);
                 this.generatedFiles.push(destFileName);
             }
 
             if(x instanceof xmiInterface) {
                 const interfaceFileName = this.destinationPath(`${path}/contracts/${x.name}.ts`);
 
-                this.fs.copyTpl(this.templatePath('xmiInterface.ejs'), interfaceFileName, x);
+                this.fs.copyTpl(this.templatePath(`${this.type}/xmiInterface.ejs`), interfaceFileName, x);
                 this.generatedFiles.push(interfaceFileName);
             }
 
@@ -82,10 +84,10 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
                 const interfaceFileName = this.destinationPath(`${path}/contracts/${x.name}.ts`);
                 const classFileName = this.destinationPath(`${path}/components/${x.name}.ts`);
 
-                this.fs.copyTpl(this.templatePath('xmiInterface.ejs'), interfaceFileName, x);
+                this.fs.copyTpl(this.templatePath(`${this.type}/xmiInterface.ejs`), interfaceFileName, x);
                 this.generatedFiles.push(interfaceFileName);
 
-                this.fs.copyTpl(this.templatePath('xmiClass.ejs'), classFileName, x);
+                this.fs.copyTpl(this.templatePath(`${this.type}/xmiClass.ejs`), classFileName, x);
                 this.generatedFiles.push(classFileName);
             }
 
@@ -93,8 +95,8 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
                 const testFileDest = `${path}/test/process_${x.name}.ts`;
                 const diagramFileName = this.destinationPath(`${path}/process/${x.name}.ts`);
 
-                this.fs.copyTpl(this.templatePath('xmiCollaboration.ejs'), diagramFileName, x);
-                this.fs.copyTpl(this.templatePath('test/xmiComponent.ejs'), this.destinationPath(testFileDest), x);
+                this.fs.copyTpl(this.templatePath(`${this.type}/xmiCollaboration.ejs`), diagramFileName, x);
+                this.fs.copyTpl(this.templatePath(`${this.type}/test/xmiComponent.ejs`), this.destinationPath(testFileDest), x);
 
                 this.testFiles.push(testFileDest);
                 this.generatedFiles.push(diagramFileName);
@@ -104,8 +106,8 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
                 const testFileDest = `${path}/test/screen_${x.name}.ts`;
                 const screenFileName = this.destinationPath(`${path}/screens/${x.name}.ts`);
 
-                this.fs.copyTpl(this.templatePath('xmiScreen.ejs'), screenFileName, x);
-                this.fs.copyTpl(this.templatePath('test/xmiScreen.ejs'), this.destinationPath(testFileDest), x);
+                this.fs.copyTpl(this.templatePath(`${this.type}/xmiScreen.ejs`), screenFileName, x);
+                this.fs.copyTpl(this.templatePath(`${this.type}/test/xmiScreen.ejs`), this.destinationPath(testFileDest), x);
 
                 this.testFiles.push(testFileDest);
                 this.generatedFiles.push(screenFileName);

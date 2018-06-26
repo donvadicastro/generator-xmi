@@ -17,30 +17,30 @@ describe('xmiParser', () => {
             //building
             expect(building.attributes.length).toBe(1);
             expect(building.attributes[0].name).toBe('code');
-            expect(building.attributes[0].type).toBe('EAJava_int');
+            expect(building.attributes[0].type).toBe('number');
 
             expect(building.operations.length).toBe(1);
             expect(building.operations[0].name).toBe('build');
             expect(building.operations[0].parameters.length).toBe(2);
             expect(building.operations[0].parameters[0].name).toBe('big');
-            expect(building.operations[0].parameters[0].type).toBe('EAJava_boolean');
+            expect(building.operations[0].parameters[0].type).toBe('boolean');
             expect(building.operations[0].parameters[1].name).toBe('return');
-            expect(building.operations[0].parameters[1].type).toBe('EAJava_void');
+            expect(building.operations[0].parameters[1].type).toBe('void');
 
             //team
             expect(team.attributes.length).toBe(2);
             expect(team.attributes[0].name).toBe('description');
-            expect(team.attributes[0].type).toBe('EAJava_char');
+            expect(team.attributes[0].type).toBe('string');
             expect(team.attributes[1].name).toBe('name');
-            expect(team.attributes[1].type).toBe('EAJava_char');
+            expect(team.attributes[1].type).toBe('string');
 
             expect(team.operations.length).toBe(1);
             expect(team.operations[0].name).toBe('create');
             expect(team.operations[0].parameters.length).toBe(2);
             expect(team.operations[0].parameters[0].name).toBe('x');
-            expect(team.operations[0].parameters[0].type).toBe('EAJava_int');
+            expect(team.operations[0].parameters[0].type).toBe('number');
             expect(team.operations[0].parameters[1].name).toBe('return');
-            expect(team.operations[0].parameters[1].type).toBe('EAJava_void');
+            expect(team.operations[0].parameters[1].type).toBe('void');
         });
     });
 });

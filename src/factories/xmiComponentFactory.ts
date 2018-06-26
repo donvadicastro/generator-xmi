@@ -11,6 +11,7 @@ import {xmiScreen} from "../entities/ui/xmiScreen";
 import {xmiGUIElement} from "../entities/ui/xmiGUIElement";
 import {xmiUMLDiagram} from "../entities/diagrams/xmiUMLDiagram";
 import {xmiMessageEndpoint} from "../connectors/xmiMessageEndpoint";
+import {xmiAttribute} from "../entities/class/xmiAttribute";
 
 export class xmiComponentFactory {
     private _idHash: {[key: string]: xmiBase} = {};
@@ -29,7 +30,7 @@ export class xmiComponentFactory {
         return this._idHashDeffered;
     }
 
-    static get(raw: any, parent: xmiPackage | null): xmiBase | null {
+    static get(raw: any, parent: xmiPackage | xmiInterface | null): xmiBase | null {
         let element = this.getByKey(raw.$['xmi:id']);
 
         switch (raw.$['xmi:type']) {
@@ -41,24 +42,24 @@ export class xmiComponentFactory {
                 }
                 // Collaboration as a class can happens when linked to another diagram
                 else if(!(element instanceof xmiCollaboration) && !(element instanceof xmiUMLDiagram)) {
-                    element = new xmiClass(raw, parent);
+                    element = new xmiClass(raw, <xmiPackage>parent);
                 }
                 break;
 
             case 'uml:Component':
-                element = new xmiComponent(raw, parent);
+                element = new xmiComponent(raw, <xmiPackage>parent);
                 break;
 
             case 'uml:Interface':
-                element = new xmiInterface(raw, parent);
+                element = new xmiInterface(raw, <xmiPackage>parent);
                 break;
 
             case 'uml:Package':
-                element = new xmiPackage(raw, parent);
+                element = new xmiPackage(raw, <xmiPackage>parent);
                 break;
 
             case 'uml:Collaboration':
-                element = new xmiCollaboration(raw, parent);
+                element = new xmiCollaboration(raw, <xmiPackage>parent);
                 break;
 
             case 'uml:Actor':
@@ -66,19 +67,24 @@ export class xmiComponentFactory {
                 break;
 
             case 'uml:Screen':
-                element = new xmiScreen(raw, parent);
+                element = new xmiScreen(raw, <xmiPackage>parent);
                 break;
 
             case 'uml:GUIElement':
-                element = new xmiGUIElement(raw, parent);
+                element = new xmiGUIElement(raw, <xmiPackage>parent);
                 break;
 
             case 'uml:UMLDiagram':
-                element = new xmiUMLDiagram(raw, parent);
+                element = new xmiUMLDiagram(raw, <xmiPackage>parent);
                 break;
 
             case 'uml:MessageEndpoint':
                 element = new xmiMessageEndpoint(raw, parent);
+                break;
+
+            case 'uml:Property':
+                element = new xmiAttribute(raw, parent);
+                break;
         }
 
         if (element && raw.$['xmi:id']) {

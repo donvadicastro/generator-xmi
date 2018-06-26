@@ -1,22 +1,27 @@
 <%
-  var impl = provided || [];
+provided = (typeof provided === 'undefined' || provided === null) ? [] : provided;
+required = (typeof required === 'undefined' || required === null) ? [] : required;
 %>
 
 import {<%= name %>Contract} from '../contracts/<%= name %>';
 
-<% impl.forEach(function (value) { %>
+<% provided.forEach(function (value) { %>
 <% if(value.name) { %>
 import {<%= value.name %>Contract} from '<%= path.map(function() { return '..'; }).join('/') %>/<%= value.ref.path.slice(0, value.path.length - 1).reverse().map(function(a) { return a.name; }).join('/') %>/contracts/<%= value.name %>';
+
+<% (value.ref.attributes || []).filter(x => x.typeRef).forEach(function (attribute) { %>
+  import {<%= attribute.typeRef.name %>Contract} from '<%= path.map(function() { return '..'; }).join('/') %>/<%= attribute.typeRef.path.slice(0, attribute.typeRef.path.length - 1).reverse().map(a => a.name).join('/') %>/contracts/<%= attribute.typeRef.name %>';
+<% }) %>
+
+
 <%}})%>
 
 <% (required || []).forEach(function (value) { %>
 import {<%= value.name %>Contract} from '<%= path.map(function() { return '..'; }).join('/') %>/<%= value.ref.path.slice(0, value.path.length - 1).reverse().map(function(a) { return a.name; }).join('/') %>/contracts/<%= value.name %>';
 <%})%>
-
-
 import {Promise} from 'es6-promise';
 
-export class <%= name %> implements <%= name %>Contract <% if (impl.length) { %>, <%}%><%= impl.map(function(x) { return x.name + 'Contract' }).join(', ') %> {
+export class <%= name %> implements <%= name %>Contract <% if (provided.length) { %>, <%}%><%= provided.map(function(x) { return x.name + 'Contract' }).join(', ') %> {
   <% (attributes || []).forEach(function (attr) { %>
   /**
   * <%= attr.name %> property
@@ -42,10 +47,18 @@ export class <%= name %> implements <%= name %>Contract <% if (impl.length) { %>
   }
   <% }) %>
 
-  <% impl.forEach(function (value) { %>
+  <% provided.forEach(function (value) { %>
     //#region <%= value.name %>Contract implementation
 
-    <% (value.ref.operations || []).forEach(function (operation) { %>
+    <% (value.ref.attributes || []).forEach(function (attribute) { %>
+    /**
+    * <%= attribute.name %> description.
+    */
+    <%= attribute.name %>: <%= attribute.typeRef ? attribute.typeRef.name : attribute.type %>Contract;
+    <% }) %>
+
+
+        <% (value.ref.operations || []).forEach(function (operation) { %>
     /**
     * <%= operation.name %> description.
     */

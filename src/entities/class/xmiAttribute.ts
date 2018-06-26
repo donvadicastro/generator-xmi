@@ -1,13 +1,28 @@
+import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
+
+const camel = require('to-camel-case');
+
 import {get} from "object-path";
 import xmiBase from "../xmiBase";
-import {xmiClass} from "../xmiClass";
+import {TypeConverter} from "../../utils/typeConverter";
 
 export class xmiAttribute extends xmiBase {
     type: string;
+    typeRef: xmiBase | null = null;
 
-    constructor(raw: any, parent: xmiBase) {
+    constructor(raw: any, parent: xmiBase | null) {
         super(raw, parent);
-        this.type = get(raw, ['properties', '0', '$', 'type']) ||
-            get(raw, ['type', '0', '$', 'xmi:idref']);
+        this.name = this.name && camel(this.name);
+
+        this.type = /*this.raw.$['xmi:idref'] || */
+            get(raw, ['type', '0', '$', 'xmi:idref']) ||
+            get(raw, ['properties', '0', '$', 'type']);
+
+        console.log(this.type);
+        if(TypeConverter.isPrimititive(this.type)) {
+            this.type = TypeConverter.convert(this.type);
+        } else {
+            xmiComponentFactory.getByKeyDeffered(this, 'typeRef', this.type);
+        }
     }
 }

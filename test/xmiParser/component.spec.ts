@@ -18,14 +18,14 @@ describe('xmiParser', () => {
             // attributes
             expect(c1.attributes.length).toBe(1);
             expect(c1.attributes[0].name).toBe('attr1');
-            expect(c1.attributes[0].type).toBe('EAJava_int');
+            expect(c1.attributes[0].type).toBe('number');
 
             // operations
             expect(c1.operations.length).toBe(1);
             expect(c1.operations[0].name).toBe('fn1');
             expect(c1.operations[0].parameters.length).toBe(1);
             expect(c1.operations[0].parameters[0].name).toBe('return');
-            expect(c1.operations[0].parameters[0].type).toBe('EAJava_void');
+            expect(c1.operations[0].parameters[0].type).toBe('void');
 
             // in
             expect(c1.required).not.toBeNull();

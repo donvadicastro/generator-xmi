@@ -1,9 +1,11 @@
+import {Promise} from 'es6-promise';
+
 export interface <%= name %>Contract {
   <% (attributes || []).forEach(function (attr) { %>
     /**
     * <%= attr.name %> property
     */
-    <%= attr.name %>;
+    <%= attr.name %>: <%= attr.type %>;
   <% }) %>
 
   <% (operations || []).forEach(function (operation) { %>
