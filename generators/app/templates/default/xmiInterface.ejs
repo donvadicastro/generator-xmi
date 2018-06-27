@@ -1,18 +1,18 @@
 import {Promise} from 'es6-promise';
 
-<% (attributes || []).filter(x => x.typeRef).forEach(function (attribute) { %>
-import {<%= attribute.typeRef.name %>Contract} from '<%= path.map(function() { return '..'; }).join('/') %>/<%= attribute.typeRef.path.slice(0, attribute.typeRef.path.length - 1).reverse().map(a => a.name).join('/') %>/contracts/<%= attribute.typeRef.name %>';
+<% (entity.attributes || []).filter(x => x.typeRef).forEach(function (attribute) { %>
+  import {<%= attribute.typeRef.name %>Contract} from '<%= entity.getRelativePath(attribute.typeRef) %>/contracts/<%= attribute.typeRef.name %>';
 <% }) %>
 
-export interface <%= name %>Contract {
-  <% (attributes || []).forEach(function (attr) { %>
+export interface <%= entity.name %>Contract {
+  <% (entity.attributes || []).forEach(function (attr) { %>
     /**
     * <%= attr.name %> property
     */
     <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %>;
   <% }) %>
 
-  <% (operations || []).forEach(function (operation) { %>
+  <% (entity.operations || []).forEach(function (operation) { %>
     /**
     * <%= operation.name %> description.
     */

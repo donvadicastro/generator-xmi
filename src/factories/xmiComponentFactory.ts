@@ -12,10 +12,13 @@ import {xmiGUIElement} from "../entities/ui/xmiGUIElement";
 import {xmiUMLDiagram} from "../entities/diagrams/xmiUMLDiagram";
 import {xmiMessageEndpoint} from "../connectors/xmiMessageEndpoint";
 import {xmiAttribute} from "../entities/class/xmiAttribute";
+import {xmiInOut} from "../entities/component/xmiInOut";
 
 export class xmiComponentFactory {
     private _idHash: {[key: string]: xmiBase} = {};
     private _idHashDeffered: {[key: string]: {source: any, property: string}} = {};
+    private _dependencyHash: {[key: string]: xmiBase} = {};
+
     private static _instance = new xmiComponentFactory();
 
     static get instance(): xmiComponentFactory {
@@ -108,6 +111,19 @@ export class xmiComponentFactory {
 
         this.instance.idHash[raw.$['xmi:id']] = link;
         return link;
+    }
+
+    static registerProvide(raw: any, register: xmiBase) {
+        const provide = new xmiInOut(raw, null);
+        this.instance._dependencyHash[provide.name] = register;
+
+        console.log('REGISTER', provide.name);
+        return provide;
+    }
+
+    static resolveDependency(key: string): xmiBase {
+        console.log('RESOLVE', key);
+        return this.instance._dependencyHash[key];
     }
 
     static getByKey(key: string): xmiBase {

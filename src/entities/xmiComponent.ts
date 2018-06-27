@@ -22,7 +22,7 @@ export class xmiComponent extends xmiClass {
         }
 
         if(this.raw.provided) {
-            this.provided = this.raw.provided.map((x: any) => new xmiInOut(x, null));
+            this.provided = this.raw.provided.map((x: any) => xmiComponentFactory.registerProvide(x, this));
         }
 
         if(this.raw.required) {

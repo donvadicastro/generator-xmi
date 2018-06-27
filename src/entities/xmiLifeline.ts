@@ -4,7 +4,6 @@ import {xmiAttribute} from "./class/xmiAttribute";
 import {xmiClass} from "./xmiClass";
 import {xmiComponent} from "./xmiComponent";
 import {xmiActor} from "./xmiActor";
-import {xmiPackage} from "./xmiPackage";
 
 export class xmiLifeline extends xmiBase {
     attribute: string;

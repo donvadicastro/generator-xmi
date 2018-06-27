@@ -1,0 +1,72 @@
+import {<%= entity.name %>Contract} from '../contracts/<%= entity.name %>';
+
+<% (entity.provided || []).forEach(function (value) { %>
+<% if(value.name) { %>
+  import {<%= value.name %>Contract} from '<%= entity.getRelativePath(value.ref) %>/contracts/<%= value.name %>';
+
+  <% (value.ref.attributes || []).filter(x => x.typeRef).forEach(function (attribute) { %>
+    import {<%= attribute.typeRef.name %>Contract} from '<%= entity.getRelativePath(attribute.typeRef) %>/contracts/<%= attribute.typeRef.name %>';
+  <% }) %>
+<%}})%>
+
+<% (entity.required || []).forEach(function (value) { %>
+  import {<%= value.name %>Contract} from '<%= entity.getRelativePath(value.ref) %>/contracts/<%= value.name %>';
+<%})%>
+import {Promise} from 'es6-promise';
+
+/**
+* This file is auto-generated. Do not update it's content!
+*/
+export abstract class <%= entity.name %>Base implements <%= entity.name %>Contract <% if ((entity.provided || []).length) { %>, <%}%><%= (entity.provided || []).map(function(x) { return x.name + 'Contract' }).join(', ') %> {
+  <% (entity.attributes || []).forEach(function (attr) { %>
+  /**
+  * <%= attr.name %> property
+  */
+  <%= attr.name %>;
+  <% }) %>
+
+  constructor(
+  <% (entity.required || []).map(function (value, i, list) { %>
+    protected <%= value.ref.name %>: <%= value.ref.name %>Contract <% if(i < list.length) { %>,<% } %>
+  <% }) %>) {
+    //constructor
+  }
+
+  <% (entity.operations || []).forEach(function (operation) { %>
+  /**
+  * <%= operation.name %> description.
+  */
+  <%= operation.name %>(state: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      reject(new Error('Not implemented'));
+    });
+  }
+  <% }) %>
+
+  <% (entity.provided || []).forEach(function (value) { %>
+    //#region <%= value.name %>Contract implementation
+
+    <% (value.ref.attributes || []).forEach(function (attribute) { %>
+    /**
+    * <%= attribute.name %> description.
+    */
+    get <%= attribute.name %>(): <%= attribute.typeRef ? attribute.typeRef.name + 'Contract' : attribute.type %> {
+      throw new Error('Not implemented');
+    }
+    <% }) %>
+
+
+    <% (value.ref.operations || []).forEach(function (operation) { %>
+    /**
+    * <%= operation.name %> description.
+    */
+    <%= operation.name %>(state: any): Promise<any> {
+      return new Promise((resolve, reject) => {
+        reject(new Error('Not implemented'));
+      });
+    }
+    <% }) %>
+
+    //#endregion
+  <%})%>
+}

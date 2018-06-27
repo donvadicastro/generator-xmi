@@ -25,6 +25,11 @@ export default class xmiBase {
         return path;
     }
 
+    getRelativePath(element: xmiBase) {
+        return this.path.map(x => '..').join('/') + '/' +
+            element.path.slice(0, element.path.length - 1).reverse().map(x => x.name).join('/');
+    }
+
     constructor(raw: any, parent: xmiPackage | xmiBase | null) {
         this.parent = parent;
         this.raw = raw;
