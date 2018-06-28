@@ -44,7 +44,7 @@ export abstract class <%= entity.name %>Base implements <%= entity.name %>Contra
   */
   <%= operation.name %>(state: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.notifyComplete('<%= entity.name %>::<%= operation.name %>');
+      this.notifyComplete('<%= entity.name %>::<%= operation.name %>', state.start);
       resolve(state);
     });
   }
@@ -77,8 +77,10 @@ export abstract class <%= entity.name %>Base implements <%= entity.name %>Contra
     //#endregion
   <%})%>
 
-  private notifyComplete(message: string) {
+  private notifyComplete(message: string, start: Date) {
+    const duration = Math.abs(+new Date() - +start);
+
     readline.moveCursor(process.stdout, 0, -1);
-    process.stdout.write('--> ' + chalk.bgGreen(message) + '\n');
+    process.stdout.write(`--> ${chalk.bgGreen(message)}: ${duration} ms\n`);
   }
 }
