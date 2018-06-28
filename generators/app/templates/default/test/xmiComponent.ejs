@@ -29,6 +29,6 @@ const flow = new <%= entity.name %>(<% (entity.lifelines || []).forEach(function
 
 console.log('Flow execution:');
 flow.run({}).then(ret => {
-    console.log('--> ' + chalk.bgGreen('Completed'));
+    console.log('--> Completed');
     process.exit(0);
 });
