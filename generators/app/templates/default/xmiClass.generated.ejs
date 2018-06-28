@@ -1,3 +1,6 @@
+const chalk = require("chalk");
+import * as readline from "readline";
+
 import {<%= entity.name %>Contract} from '../contracts/<%= entity.name %>';
 
 <% (entity.provided || []).forEach(function (value) { %>
@@ -32,13 +35,17 @@ export abstract class <%= entity.name %>Base implements <%= entity.name %>Contra
     //constructor
   }
 
+  initialize(): void {
+  }
+
   <% (entity.operations || []).forEach(function (operation) { %>
   /**
   * <%= operation.name %> description.
   */
   <%= operation.name %>(state: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      reject(new Error('Not implemented'));
+      this.notifyComplete('<%= entity.name %>::<%= operation.name %>');
+      resolve(state);
     });
   }
   <% }) %>
@@ -69,4 +76,9 @@ export abstract class <%= entity.name %>Base implements <%= entity.name %>Contra
 
     //#endregion
   <%})%>
+
+  private notifyComplete(message: string) {
+    readline.moveCursor(process.stdout, 0, -1);
+    process.stdout.write('--> ' + chalk.bgGreen(message) + '\n');
+  }
 }

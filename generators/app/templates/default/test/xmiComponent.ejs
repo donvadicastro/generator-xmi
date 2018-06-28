@@ -1,3 +1,6 @@
+const chalk = require("chalk");
+
+import "reflect-metadata";
 import {<%= entity.name %>} from '../process/<%= entity.name %>';
 
 <%
@@ -16,7 +19,7 @@ import {<%= entity.name %>} from '../process/<%= entity.name %>';
     import {<%= x.name %>} from '<%= entity.getRelativePath(x) %>/components/<%= x.name %>';
 <% }) %>
 
-const process = new <%= entity.name %>(<% (entity.lifelines || []).forEach(function (lifeline) { %>
+const flow = new <%= entity.name %>(<% (entity.lifelines || []).forEach(function (lifeline) { %>
     new <%= lifeline.name %>(
         <% (lifeline.elementRef.required || []).map(function (value, i, list) { %>
             new <%= factory.resolveDependency(value.ref.name).name %>(),
@@ -24,4 +27,8 @@ const process = new <%= entity.name %>(<% (entity.lifelines || []).forEach(funct
     ),
 <% }) %>);
 
-process.run(0).then(ret => console.log(ret));
+console.log('Flow execution:');
+flow.run(0).then(ret => {
+    console.log('--> ' + chalk.bgGreen('Completed));
+    process.exit(0);
+});

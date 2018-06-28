@@ -22,7 +22,10 @@ export class <%= entity.name %> {
         return Promise.resolve(inputState)
             <% (entity.messages || []).forEach(function (message) { %>
             // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to.elementRef.name %>
-            .then((state) => this.cmp<%= message.to.elementRef.name %>.<%= message.operation.name %>(state))
+            .then((state) => {
+                console.log('--> <%= message.to.elementRef.name %>::<%= message.operation.name %>');
+                return this.cmp<%= message.to.elementRef.name %>.<%= message.operation.name %>(state);
+            })
             <% }) %>
         ;
     }
