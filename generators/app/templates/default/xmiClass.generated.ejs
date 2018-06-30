@@ -38,6 +38,22 @@ export abstract class <%= entity.name %>Base implements <%= entity.name %>Contra
   initialize(): void {
   }
 
+  <% if(entity.fragments.find(x => x.interactionOperator === 'loop')) { %>
+  /**
+  * Loop condition.
+  */
+  get loopCondition(): boolean {
+    return true;
+  }
+
+  /**
+  * Get loop delay in ms.
+  */
+  get loopDelay(): number {
+    return 30 * 1000; //30 sec
+  }
+  <% } %>
+
   <% (entity.operations || []).forEach(function (operation) { %>
   /**
   * <%= operation.name %> description.

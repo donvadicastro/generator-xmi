@@ -1,4 +1,4 @@
-import xmiBase from './xmiBase';
+import {xmiClass} from "./xmiClass";
 
-export class xmiActor extends xmiBase {
+export class xmiActor extends xmiClass {
 }

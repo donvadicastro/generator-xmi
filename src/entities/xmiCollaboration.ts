@@ -27,4 +27,16 @@ export class xmiCollaboration extends xmiBase {
         this.messages = get(this.raw, 'ownedBehavior.0.message', [])
             .map((x: any) => new xmiMessage(x, this, this.fragments));
     }
+
+    get loopFragments() {
+        return this.fragments.filter(x => x.type === 'uml:CombinedFragment' && x.interactionOperator === 'loop');
+    }
+
+    toConsole() {
+        return {
+            lifelines: this.lifelines.map(x => x.toConsole()),
+            fragments: this.fragments.filter(x => x.name).map(x => x.toConsole()),
+            messages: this.messages.map(x => x.toConsole())
+        };
+    }
 }

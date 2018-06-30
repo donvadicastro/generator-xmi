@@ -66,7 +66,7 @@ export class xmiComponentFactory {
                 break;
 
             case 'uml:Actor':
-                element = new xmiActor(raw, parent);
+                element = new xmiActor(raw, <xmiPackage>parent);
                 break;
 
             case 'uml:Screen':

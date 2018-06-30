@@ -18,4 +18,17 @@ export interface <%= entity.name %>Contract {
     */
     <%= operation.name %>(state: any): Promise<any>;
   <% }) %>
-}
+
+    <% if((entity.fragments || []).find(x => x.interactionOperator === 'loop')) { %>
+  /**
+  * Loop condition.
+  */
+  loopCondition: boolean;
+
+  /**
+  * Get loop delay in ms.
+  */
+  loopDelay: number;
+    <% } %>
+
+  }

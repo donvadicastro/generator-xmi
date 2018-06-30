@@ -1,3 +1,4 @@
+const chalk = require("chalk");
 import {Promise} from 'es6-promise';
 
 <% (entity.lifelines || []).forEach(function (lifeline, index) { %>
@@ -19,16 +20,32 @@ export class <%= entity.name %> {
     /* Execute process
     */
     run(inputState) {
-        return Promise.resolve(inputState)
-            <% (entity.messages || []).forEach(function (message) { %>
+        let flowAsync = Promise.resolve(inputState);
+
+        <% let hasLoop = false, loopElement = null; %>
+        <% (entity.messages || []).forEach(function (message) { %>
             // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to.elementRef.name %>
-            .then((state) => {
+
+            <% if(message.from && message.from.elementRef.fragments.find(x => x.interactionOperator === 'loop')) { %>
+                <% hasLoop = true; loopElement = message.from.elementRef; %>
+                while(this.cmp<%= message.from.elementRef.name %>.loopCondition) {
+            <% } %>
+            flowAsync = flowAsync.then((state: any) => {
                 state.start = new Date();
                 console.log('--> <%= message.to.elementRef.name %>::<%= message.operation.name %>');
 
                 return this.cmp<%= message.to.elementRef.name %>.<%= message.operation.name %>(state);
-            })
-            <% }) %>
-        ;
+            });
+        <% }) %>
+
+        <% if(hasLoop) { %>
+            // flow delay between loops
+            flowAsync = flowAsync.then((state) => {
+                console.log(`--> sleep for ${this.cmp<%= loopElement.name %>.loopDelay} ms.`);
+                return new Promise((resolve) => (setTimeout(() => resolve(state), this.cmp<%= loopElement.name %>.loopDelay)));
+            }); }
+        <% } %>
+
+        return flowAsync.catch(x => console.log(chalk.red('ERROR: '), x));
     }
 }

@@ -18,7 +18,7 @@ export class xmiMessage extends xmiBase{
         const fromFragment = fragments.filter(x => x.id === raw.$.sendEvent)[0];
         const toFragment = fragments.filter(x => x.id === raw.$.receiveEvent)[0];
 
-        this.from = fromFragment && fromFragment.lifeline;
-        this.to = toFragment && toFragment.lifeline;
+        this.from = fromFragment && fromFragment.lifelines[0];
+        this.to = toFragment && toFragment.lifelines[0];
     }
 }

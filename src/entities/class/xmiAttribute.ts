@@ -18,7 +18,6 @@ export class xmiAttribute extends xmiBase {
             get(raw, ['type', '0', '$', 'xmi:idref']) ||
             get(raw, ['properties', '0', '$', 'type']);
 
-        console.log(this.type);
         if(TypeConverter.isPrimititive(this.type)) {
             this.type = TypeConverter.convert(this.type);
         } else {
