@@ -76,7 +76,7 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
             options.entity = x;
 
             if (x instanceof xmiActor) {
-                const destFileName = this.destinationPath(`${path}/components/${x.name}.generated.ts`);
+                const destFileName = this.destinationPath(`${path}/components/generated/${x.name}.generated.ts`);
                 this.fs.copyTpl(this.templatePath(`${this.type}/xmiActor.ejs`), destFileName, options);
                 this.generatedFiles.push(destFileName);
             }
@@ -90,7 +90,7 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
 
             if (x instanceof xmiClass || x instanceof xmiComponent) {
                 const interfaceFileName = this.destinationPath(`${path}/contracts/${x.name}.ts`);
-                const baseClassFileName = this.destinationPath(`${path}/components/${x.name}.generated.ts`);
+                const baseClassFileName = this.destinationPath(`${path}/components/generated/${x.name}.generated.ts`);
                 const classFileName = this.destinationPath(`${path}/components/${x.name}.ts`);
 
                 this.fs.copyTpl(this.templatePath(`${this.type}/xmiInterface.ejs`), interfaceFileName, options);

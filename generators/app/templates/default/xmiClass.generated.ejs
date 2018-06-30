@@ -1,19 +1,19 @@
 const chalk = require("chalk");
 import * as readline from "readline";
 
-import {<%= entity.name %>Contract} from '../contracts/<%= entity.name %>';
+import {<%= entity.name %>Contract} from '../../contracts/<%= entity.name %>';
 
 <% (entity.provided || []).forEach(function (value) { %>
 <% if(value.name) { %>
-  import {<%= value.name %>Contract} from '<%= entity.getRelativePath(value.ref) %>/contracts/<%= value.name %>';
+  import {<%= value.name %>Contract} from '../<%= entity.getRelativePath(value.ref) %>/contracts/<%= value.name %>';
 
   <% (value.ref.attributes || []).filter(x => x.typeRef).forEach(function (attribute) { %>
-    import {<%= attribute.typeRef.name %>Contract} from '<%= entity.getRelativePath(attribute.typeRef) %>/contracts/<%= attribute.typeRef.name %>';
+    import {<%= attribute.typeRef.name %>Contract} from '../<%= entity.getRelativePath(attribute.typeRef) %>/contracts/<%= attribute.typeRef.name %>';
   <% }) %>
 <%}})%>
 
 <% (entity.required || []).forEach(function (value) { %>
-  import {<%= value.name %>Contract} from '<%= entity.getRelativePath(value.ref) %>/contracts/<%= value.name %>';
+  import {<%= value.name %>Contract} from '../<%= entity.getRelativePath(value.ref) %>/contracts/<%= value.name %>';
 <%})%>
 import {Promise} from 'es6-promise';
 
