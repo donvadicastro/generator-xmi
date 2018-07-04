@@ -21,6 +21,8 @@ const beautify = require('js-beautify').js;
 
 export class XmiGenerator extends (Generator as { new(args: any, opts: any): any; }) {
     type: string = 'default';
+    dist = 'dist';
+
     testFiles: string[] = [];
     generatedFiles: string[] = [];
 
@@ -50,6 +52,9 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
             this.log(chalk.green('Model'));
             this.log(treeify.asTree(parser.toConsole(), true, true));
 
+            this.log(chalk.green('Bootstrap'));
+            this._bootstrap();
+
             this.log(chalk.green('Generate'));
             this._generate(null, parser.packge);
 
@@ -62,8 +67,17 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
         });
     }
 
+    _bootstrap() {
+        if (!this.fs.exists(this.destinationPath(this.dist))) {
+            this.fs.copy(
+                this.templatePath(`${this.type}/bootstrap`),
+                this.destinationPath(this.dist)
+            );
+        }
+    }
+
     _generate(path: string | null, pkg: any) {
-        path = path || 'dist';
+        path = path || this.dist;
 
         const options: any = {
             factory: xmiComponentFactory

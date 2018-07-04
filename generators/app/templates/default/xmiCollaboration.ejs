@@ -19,7 +19,7 @@ export class <%= entity.name %> {
     /**
     /* Execute process
     */
-    run(inputState) {
+    run(inputState: any) {
         let flowAsync = Promise.resolve(inputState);
 
         <% let hasLoop = false, loopElement = null; %>
