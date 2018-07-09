@@ -1,6 +1,7 @@
 import {readJSONSync} from "fs-extra";
 import {XmiParser} from "../../src/xmiParser";
 import {xmiClass} from "../../src/entities/xmiClass";
+import {xmiPackage} from "../../src/entities/xmiPackage";
 
 describe('xmiParser', () => {
     describe('Classes', () => {
@@ -10,9 +11,9 @@ describe('xmiParser', () => {
         parser.parse();
 
         it('Verify class structure', () => {
-            const entities = parser.packge.children[0].children;
-            const building: xmiClass = entities[0];
-            const team: xmiClass = entities[1];
+            const entities = (<xmiPackage>parser.packge.children[0]).children;
+            const building: xmiClass = <xmiClass>entities[0];
+            const team: xmiClass = <xmiClass>entities[1];
 
             //building
             expect(building.attributes.length).toBe(1);

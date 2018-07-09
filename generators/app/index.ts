@@ -68,12 +68,10 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
     }
 
     _bootstrap() {
-        if (!this.fs.exists(this.destinationPath(this.dist))) {
-            this.fs.copy(
-                this.templatePath(`${this.type}/bootstrap`),
-                this.destinationPath(this.dist)
-            );
-        }
+        this.fs.exists(this.destinationPath(this.dist)) || this.fs.copy(
+            this.templatePath(`${this.type}/bootstrap`),
+            this.destinationPath(this.dist)
+        );
     }
 
     _generate(path: string | null, pkg: any) {
