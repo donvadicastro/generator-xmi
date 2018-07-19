@@ -6,7 +6,7 @@ const inquirer = require('inquirer');
 
 <% (elementRef.lifelines || []).forEach(function (lifeline, index) { %>
     import {<%= lifeline.elementRef.name %>} from '<%= entity.getRelativePath(elementRef) %>/components/<%= lifeline.elementRef.name %>';
-<% }) %>
+<% })}) %>
 
 /**
 * Terminal screen class.

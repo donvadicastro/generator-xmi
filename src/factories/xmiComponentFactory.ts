@@ -13,6 +13,7 @@ import {xmiUMLDiagram} from "../entities/diagrams/xmiUMLDiagram";
 import {xmiMessageEndpoint} from "../connectors/xmiMessageEndpoint";
 import {xmiAttribute} from "../entities/class/xmiAttribute";
 import {xmiInOut} from "../entities/component/xmiInOut";
+import {xmiUseCase} from "../entities/xmiUseCase";
 
 export class xmiComponentFactory {
     private _idHash: {[key: string]: xmiBase} = {};
@@ -87,6 +88,10 @@ export class xmiComponentFactory {
 
             case 'uml:Property':
                 element = new xmiAttribute(raw, parent);
+                break;
+
+            case 'uml:UseCase':
+                element = element || new xmiUseCase(raw, parent);
                 break;
         }
 

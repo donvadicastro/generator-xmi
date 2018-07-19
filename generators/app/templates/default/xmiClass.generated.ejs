@@ -1,6 +1,4 @@
-const chalk = require("chalk");
-import * as readline from "readline";
-
+import {ComponentBase} from '../<%= entity.getRelativeRoot() %>/base/componentBase';
 import {<%= entity.name %>Contract} from '../../contracts/<%= entity.name %>';
 
 <% (entity.provided || []).forEach(function (value) { %>
@@ -20,7 +18,7 @@ import {Promise} from 'es6-promise';
 /**
 * This file is auto-generated. Do not update it's content!
 */
-export abstract class <%= entity.name %>Base implements <%= entity.name %>Contract <% if ((entity.provided || []).length) { %>, <%}%><%= (entity.provided || []).map(function(x) { return x.name + 'Contract' }).join(', ') %> {
+export abstract class <%= entity.name %>Base extends ComponentBase implements <%= entity.name %>Contract <% if ((entity.provided || []).length) { %>, <%}%><%= (entity.provided || []).map(function(x) { return x.name + 'Contract' }).join(', ') %> {
   <% (entity.attributes || []).forEach(function (attr) { %>
   /**
   * <%= attr.name %> property
@@ -32,10 +30,7 @@ export abstract class <%= entity.name %>Base implements <%= entity.name %>Contra
   <% (entity.required || []).map(function (value, i, list) { %>
     protected <%= value.ref.name %>: <%= value.ref.name %>Contract <% if(i < list.length) { %>,<% } %>
   <% }) %>) {
-    //constructor
-  }
-
-  initialize(): void {
+    super();
   }
 
   <% if(entity.fragments.find(x => x.interactionOperator === 'loop')) { %>
@@ -92,11 +87,4 @@ export abstract class <%= entity.name %>Base implements <%= entity.name %>Contra
 
     //#endregion
   <%})%>
-
-  private notifyComplete(message: string, start: Date) {
-    const duration = Math.abs(+new Date() - +start);
-
-    readline.moveCursor(process.stdout, 0, -1);
-    process.stdout.write(`--> ${chalk.bgGreen(message)}: ${duration} ms\n`);
-  }
 }

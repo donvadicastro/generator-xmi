@@ -1,0 +1,3289 @@
+{
+  "xmi:XMI": {
+    "$": {
+      "xmi:version": "2.1",
+      "xmlns:uml": "http://schema.omg.org/spec/UML/2.1",
+      "xmlns:xmi": "http://schema.omg.org/spec/XMI/2.1"
+    },
+    "xmi:Documentation": [
+      {
+        "$": {
+          "exporter": "Enterprise Architect",
+          "exporterVersion": "6.5"
+        }
+      }
+    ],
+    "uml:Model": [
+      {
+        "$": {
+          "xmi:type": "uml:Model",
+          "name": "EA_Model",
+          "visibility": "public"
+        },
+        "packagedElement": [
+          {
+            "$": {
+              "xmi:type": "uml:Package",
+              "xmi:id": "EAPK_69F203BD_FA14_42d1_81D0_C281B257B5CB",
+              "name": "Model",
+              "visibility": "public"
+            },
+            "packagedElement": [
+              {
+                "$": {
+                  "xmi:type": "uml:Package",
+                  "xmi:id": "EAPK_664D3A6A_098E_4715_A265_C3D62660127B",
+                  "name": "Use Case Model",
+                  "visibility": "public"
+                },
+                "ownedComment": [
+                  {
+                    "$": {
+                      "xmi:type": "uml:Comment",
+                      "xmi:id": "EAID_EF5B877A_660A_4309_91BA_7D95A4DC9F9A",
+                      "body": "Actors are the users of the system being modeled. Each Actor will have a well-defined role, and in the context of that role have useful interactions with the system.\n\nA person may perform the role of more than one Actor, although they will only assume one role during one use case interaction.\n\nAn Actor role may be performed by a non-human system, such as another computer program."
+                    },
+                    "annotatedElement": [
+                      {
+                        "$": {
+                          "xmi:idref": "EAPK_A61A58E9_76E5_40d6_98CC_1EEAAFF8B2F1"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Comment",
+                      "xmi:id": "EAID_E2DF74D9_F322_459e_814F_FCEB4D02D118",
+                      "body": "This package contains use cases which define how an Actor will interact with the proposed system. \n\nEach interaction may be specified using scenarios, sequence diagrams, communication diagrams and other dynamic diagrams or textual descriptions which together describe how the system, when viewed as a \"black-box\", interacts with a user."
+                    },
+                    "annotatedElement": [
+                      {
+                        "$": {
+                          "xmi:idref": "EAPK_D14A9835_A869_4077_A637_E10A7812EC68"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Comment",
+                      "xmi:id": "EAID_DB44FB60_8520_415b_8B2B_3CBC0D90E4E0",
+                      "body": "The Use Case model is a catalogue of system functionality described using UML Use Cases. Each Use Case represents a single, repeatable interaction that a user or \"actor\" experiences when using the system. \n\nA Use Case typically includes one or more \"scenarios\" which describe the interactions that go on between the Actor and the System, and documents the results and exceptions that occur from the user's perspective.\n\nUse Cases may include other Use Cases as part of a larger pattern of interaction and may also be extended by other use cases to handle exceptional conditions"
+                    }
+                  }
+                ],
+                "packagedElement": [
+                  {
+                    "$": {
+                      "xmi:type": "uml:Class",
+                      "xmi:id": "EAID_1CAA5A23_B18D_444e_8956_75345EE0EBCA",
+                      "name": "$help://use_case_model_pattern.htm",
+                      "visibility": "public"
+                    }
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Class",
+                      "xmi:id": "EAID_602D23C6_E171_46f0_9326_B353F488C99C",
+                      "name": "$help://actor.htm",
+                      "visibility": "public"
+                    }
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Class",
+                      "xmi:id": "EAID_F7255547_4FC8_4355_84D4_AF626D9C0ADC",
+                      "name": "$help://usecasediagram.htm",
+                      "visibility": "public"
+                    }
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Package",
+                      "xmi:id": "EAPK_A61A58E9_76E5_40d6_98CC_1EEAAFF8B2F1",
+                      "name": "Actors",
+                      "visibility": "public"
+                    },
+                    "packagedElement": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:Actor",
+                          "xmi:id": "EAID_E2763646_97E7_4c2d_8FB8_5D59C3CE65F2",
+                          "name": "User",
+                          "visibility": "public"
+                        },
+                        "ownedAttribute": [
+                          {
+                            "$": {
+                              "xmi:type": "uml:Property",
+                              "xmi:id": "EAID_dstD16D07_FAC1_4c79_B32D_80235AFF96A0",
+                              "visibility": "public",
+                              "association": "EAID_0BD16D07_FAC1_4c79_B32D_80235AFF96A0",
+                              "isStatic": "false",
+                              "isReadOnly": "true",
+                              "isDerived": "false",
+                              "isOrdered": "false",
+                              "isUnique": "true",
+                              "isDerivedUnion": "false",
+                              "aggregation": "none"
+                            },
+                            "type": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_02EF09B2_AF12_42e0_81CA_5A8EF82B2BCB"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "$": {
+                              "xmi:type": "uml:Property",
+                              "xmi:id": "EAID_dstB121C1_C71B_4755_8811_5BD2380105B7",
+                              "visibility": "public",
+                              "association": "EAID_67B121C1_C71B_4755_8811_5BD2380105B7",
+                              "isStatic": "false",
+                              "isReadOnly": "true",
+                              "isDerived": "false",
+                              "isOrdered": "false",
+                              "isUnique": "true",
+                              "isDerivedUnion": "false",
+                              "aggregation": "none"
+                            },
+                            "type": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_B2FD402B_460B_4ac0_87FC_5334CB1B8FD3"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:Association",
+                          "xmi:id": "EAID_0BD16D07_FAC1_4c79_B32D_80235AFF96A0",
+                          "visibility": "public"
+                        },
+                        "memberEnd": [
+                          {
+                            "$": {
+                              "xmi:idref": "EAID_dstD16D07_FAC1_4c79_B32D_80235AFF96A0"
+                            }
+                          },
+                          {
+                            "$": {
+                              "xmi:idref": "EAID_srcD16D07_FAC1_4c79_B32D_80235AFF96A0"
+                            }
+                          }
+                        ],
+                        "ownedEnd": [
+                          {
+                            "$": {
+                              "xmi:type": "uml:Property",
+                              "xmi:id": "EAID_srcD16D07_FAC1_4c79_B32D_80235AFF96A0",
+                              "visibility": "public",
+                              "association": "EAID_0BD16D07_FAC1_4c79_B32D_80235AFF96A0",
+                              "isStatic": "false",
+                              "isReadOnly": "true",
+                              "isDerived": "false",
+                              "isOrdered": "false",
+                              "isUnique": "true",
+                              "isDerivedUnion": "false",
+                              "aggregation": "none"
+                            },
+                            "type": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_E2763646_97E7_4c2d_8FB8_5D59C3CE65F2"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:Association",
+                          "xmi:id": "EAID_67B121C1_C71B_4755_8811_5BD2380105B7",
+                          "visibility": "public"
+                        },
+                        "memberEnd": [
+                          {
+                            "$": {
+                              "xmi:idref": "EAID_dstB121C1_C71B_4755_8811_5BD2380105B7"
+                            }
+                          },
+                          {
+                            "$": {
+                              "xmi:idref": "EAID_srcB121C1_C71B_4755_8811_5BD2380105B7"
+                            }
+                          }
+                        ],
+                        "ownedEnd": [
+                          {
+                            "$": {
+                              "xmi:type": "uml:Property",
+                              "xmi:id": "EAID_srcB121C1_C71B_4755_8811_5BD2380105B7",
+                              "visibility": "public",
+                              "association": "EAID_67B121C1_C71B_4755_8811_5BD2380105B7",
+                              "isStatic": "false",
+                              "isReadOnly": "true",
+                              "isDerived": "false",
+                              "isOrdered": "false",
+                              "isUnique": "true",
+                              "isDerivedUnion": "false",
+                              "aggregation": "none"
+                            },
+                            "type": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_E2763646_97E7_4c2d_8FB8_5D59C3CE65F2"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Package",
+                      "xmi:id": "EAPK_D14A9835_A869_4077_A637_E10A7812EC68",
+                      "name": "Primary Use Cases",
+                      "visibility": "public"
+                    },
+                    "ownedComment": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:Comment",
+                          "xmi:id": "EAID_F15CDCC9_0C99_42ae_ABD0_43828BC378C0",
+                          "body": "The System Boundary shows the logical interface between users and the system being described."
+                        }
+                      }
+                    ],
+                    "packagedElement": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:UseCase",
+                          "xmi:id": "EAID_B2FD402B_460B_4ac0_87FC_5334CB1B8FD3",
+                          "name": "Use Case1",
+                          "visibility": "public"
+                        },
+                        "nestedClassifier": [
+                          {
+                            "$": {
+                              "xmi:type": "uml:Collaboration",
+                              "xmi:id": "EAID_CB000000_02B_460B_4ac0_87FC_5334CB1B8FD",
+                              "name": "EA_Collaboration1",
+                              "visibility": "public"
+                            },
+                            "ownedBehavior": [
+                              {
+                                "$": {
+                                  "xmi:type": "uml:Interaction",
+                                  "xmi:id": "EAID_IN000000_02B_460B_4ac0_87FC_5334CB1B8FD",
+                                  "name": "EA_Interaction1",
+                                  "visibility": "public"
+                                },
+                                "lifeline": [
+                                  {
+                                    "$": {
+                                      "xmi:type": "uml:Lifeline",
+                                      "xmi:id": "EAID_C3741B6A_6590_41bb_9087_07FC8D82C760",
+                                      "name": "Object1",
+                                      "visibility": "public",
+                                      "represents": "EAID_AT000000_6590_41bb_9087_07FC8D82C760"
+                                    }
+                                  },
+                                  {
+                                    "$": {
+                                      "xmi:type": "uml:Lifeline",
+                                      "xmi:id": "EAID_LL000000_97E7_4c2d_8FB8_5D59C3CE65F2",
+                                      "name": "User",
+                                      "visibility": "public",
+                                      "represents": "EAID_AT000000_000_97E7_4c2d_8FB8_5D59C3CE65F"
+                                    }
+                                  }
+                                ],
+                                "fragment": [
+                                  {
+                                    "$": {
+                                      "xmi:type": "uml:OccurrenceSpecification",
+                                      "xmi:id": "EAID_FR000000_97E7_4c2d_8FB8_5D59C3CE65F2",
+                                      "covered": "EAID_LL000000_97E7_4c2d_8FB8_5D59C3CE65F2"
+                                    }
+                                  },
+                                  {
+                                    "$": {
+                                      "xmi:type": "uml:OccurrenceSpecification",
+                                      "xmi:id": "EAID_FR000000_6590_41bb_9087_07FC8D82C760",
+                                      "covered": "EAID_C3741B6A_6590_41bb_9087_07FC8D82C760"
+                                    }
+                                  }
+                                ],
+                                "message": [
+                                  {
+                                    "$": {
+                                      "xmi:type": "uml:Message",
+                                      "xmi:id": "EAID_EEE434D3_AF39_410e_8DAE_8A3A2FF3D451",
+                                      "messageKind": "complete",
+                                      "messageSort": "synchCall",
+                                      "sendEvent": "EAID_FR000000_97E7_4c2d_8FB8_5D59C3CE65F2",
+                                      "receiveEvent": "EAID_FR000000_6590_41bb_9087_07FC8D82C760"
+                                    }
+                                  }
+                                ]
+                              }
+                            ],
+                            "ownedAttribute": [
+                              {
+                                "$": {
+                                  "xmi:type": "uml:Property",
+                                  "xmi:id": "EAID_AT000000_6590_41bb_9087_07FC8D82C760"
+                                }
+                              },
+                              {
+                                "$": {
+                                  "xmi:type": "uml:Property",
+                                  "xmi:id": "EAID_AT000000_000_97E7_4c2d_8FB8_5D59C3CE65F"
+                                },
+                                "type": [
+                                  {
+                                    "$": {
+                                      "xmi:idref": "EAID_E2763646_97E7_4c2d_8FB8_5D59C3CE65F2"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:UseCase",
+                          "xmi:id": "EAID_02EF09B2_AF12_42e0_81CA_5A8EF82B2BCB",
+                          "name": "Use Case2",
+                          "visibility": "public"
+                        }
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:Class",
+                          "xmi:id": "EAID_86BB3AF4_3C39_4ccd_84DC_6F292AC7C7AF",
+                          "name": "System Boundary",
+                          "visibility": "public"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "xmi:Extension": [
+      {
+        "$": {
+          "extender": "Enterprise Architect",
+          "extenderID": "6.5"
+        },
+        "elements": [
+          {
+            "element": [
+              {
+                "$": {
+                  "xmi:idref": "EAPK_69F203BD_FA14_42d1_81D0_C281B257B5CB"
+                },
+                "packageproperties": [
+                  ""
+                ],
+                "paths": [
+                  ""
+                ],
+                "times": [
+                  {
+                    "$": {
+                      "created": "2012-04-17 00:00:00",
+                      "modified": "2012-04-17 00:00:00",
+                      "lastloaddate": "2018-07-14 00:24:16"
+                    }
+                  }
+                ],
+                "flags": [
+                  {
+                    "$": {
+                      "iscontrolled": "FALSE",
+                      "isprotected": "FALSE",
+                      "usedtd": "FALSE",
+                      "logxml": "FALSE",
+                      "packageFlags": "isModel=1;"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAPK_664D3A6A_098E_4715_A265_C3D62660127B",
+                  "xmi:type": "uml:Package",
+                  "name": "Use Case Model",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package2": "EAID_664D3A6A_098E_4715_A265_C3D62660127B",
+                      "package": "EAPK_69F203BD_FA14_42d1_81D0_C281B257B5CB",
+                      "tpos": "3",
+                      "ea_localid": "2",
+                      "ea_eleType": "package"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Package",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "phase": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  ""
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Model"
+                    }
+                  }
+                ],
+                "packageproperties": [
+                  {
+                    "$": {
+                      "tpos": "3"
+                    }
+                  }
+                ],
+                "paths": [
+                  ""
+                ],
+                "times": [
+                  {
+                    "$": {
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15",
+                      "lastloaddate": "2018-07-14 00:24:15",
+                      "lastsavedate": "2018-07-14 00:24:15"
+                    }
+                  }
+                ],
+                "flags": [
+                  {
+                    "$": {
+                      "iscontrolled": "FALSE",
+                      "isprotected": "FALSE",
+                      "batchsave": "0",
+                      "batchload": "0",
+                      "usedtd": "FALSE",
+                      "logxml": "FALSE",
+                      "packageFlags": "isModel=1;VICON=1;"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_1CAA5A23_B18D_444e_8956_75345EE0EBCA",
+                  "xmi:type": "uml:Text",
+                  "name": "$help://use_case_model_pattern.htm",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_664D3A6A_098E_4715_A265_C3D62660127B",
+                      "tpos": "0",
+                      "ea_localid": "3",
+                      "ea_eleType": "element",
+                      "name": "$help://use_case_model_pattern.htm"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Text",
+                      "nType": "19",
+                      "alias": "Read about Use Case Modeling",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Use Case Model"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_602D23C6_E171_46f0_9326_B353F488C99C",
+                  "xmi:type": "uml:Text",
+                  "name": "$help://actor.htm",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_664D3A6A_098E_4715_A265_C3D62660127B",
+                      "tpos": "0",
+                      "ea_localid": "4",
+                      "ea_eleType": "element",
+                      "name": "$help://actor.htm"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Text",
+                      "nType": "19",
+                      "alias": "Read about Actors",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Use Case Model"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_DB44FB60_8520_415b_8B2B_3CBC0D90E4E0",
+                  "xmi:type": "uml:Note",
+                  "name": "Note",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_664D3A6A_098E_4715_A265_C3D62660127B",
+                      "tpos": "0",
+                      "ea_localid": "6",
+                      "ea_eleType": "element",
+                      "name": "Note"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "documentation": "The Use Case model is a catalogue of system functionality described using UML Use Cases. Each Use Case represents a single, repeatable interaction that a user or \"actor\" experiences when using the system. \n\nA Use Case typically includes one or more \"scenarios\" which describe the interactions that go on between the Actor and the System, and documents the results and exceptions that occur from the user's perspective.\n\nUse Cases may include other Use Cases as part of a larger pattern of interaction and may also be extended by other use cases to handle exceptional conditions",
+                      "isSpecification": "false",
+                      "sType": "Note",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Use Case Model"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_E2DF74D9_F322_459e_814F_FCEB4D02D118",
+                  "xmi:type": "uml:Note",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_664D3A6A_098E_4715_A265_C3D62660127B",
+                      "tpos": "0",
+                      "ea_localid": "5",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "documentation": "This package contains use cases which define how an Actor will interact with the proposed system. \n\nEach interaction may be specified using scenarios, sequence diagrams, communication diagrams and other dynamic diagrams or textual descriptions which together describe how the system, when viewed as a \"black-box\", interacts with a user.",
+                      "isSpecification": "false",
+                      "sType": "Note",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Use Case Model",
+                      "eventflags": "LNK=bcdd;"
+                    }
+                  }
+                ],
+                "links": [
+                  {
+                    "NoteLink": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_5A089C2F_461E_4d05_95C1_6B9D3697F61E",
+                          "start": "EAID_D14A9835_A869_4077_A637_E10A7812EC68",
+                          "end": "EAID_E2DF74D9_F322_459e_814F_FCEB4D02D118"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_EF5B877A_660A_4309_91BA_7D95A4DC9F9A",
+                  "xmi:type": "uml:Note",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_664D3A6A_098E_4715_A265_C3D62660127B",
+                      "tpos": "0",
+                      "ea_localid": "2",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "documentation": "Actors are the users of the system being modeled. Each Actor will have a well-defined role, and in the context of that role have useful interactions with the system.\n\nA person may perform the role of more than one Actor, although they will only assume one role during one use case interaction.\n\nAn Actor role may be performed by a non-human system, such as another computer program.",
+                      "isSpecification": "false",
+                      "sType": "Note",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Use Case Model",
+                      "eventflags": "LNK=b0e5;"
+                    }
+                  }
+                ],
+                "links": [
+                  {
+                    "NoteLink": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_FD424A74_3205_42e7_8315_1B312B3A09FF",
+                          "start": "EAID_A61A58E9_76E5_40d6_98CC_1EEAAFF8B2F1",
+                          "end": "EAID_EF5B877A_660A_4309_91BA_7D95A4DC9F9A"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_F7255547_4FC8_4355_84D4_AF626D9C0ADC",
+                  "xmi:type": "uml:Text",
+                  "name": "$help://usecasediagram.htm",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_664D3A6A_098E_4715_A265_C3D62660127B",
+                      "tpos": "0",
+                      "ea_localid": "7",
+                      "ea_eleType": "element",
+                      "name": "$help://usecasediagram.htm"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Text",
+                      "nType": "19",
+                      "alias": "View Further Examples",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Use Case Model"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAPK_A61A58E9_76E5_40d6_98CC_1EEAAFF8B2F1",
+                  "xmi:type": "uml:Package",
+                  "name": "Actors",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package2": "EAID_A61A58E9_76E5_40d6_98CC_1EEAAFF8B2F1",
+                      "package": "EAPK_664D3A6A_098E_4715_A265_C3D62660127B",
+                      "tpos": "0",
+                      "ea_localid": "3",
+                      "ea_eleType": "package"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Package",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "Java"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Use Case Model",
+                      "eventflags": "LNK=b0db;"
+                    }
+                  }
+                ],
+                "packageproperties": [
+                  ""
+                ],
+                "paths": [
+                  ""
+                ],
+                "times": [
+                  {
+                    "$": {
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15",
+                      "lastloaddate": "2018-07-14 00:24:15",
+                      "lastsavedate": "2018-07-14 00:24:15"
+                    }
+                  }
+                ],
+                "flags": [
+                  {
+                    "$": {
+                      "iscontrolled": "FALSE",
+                      "isprotected": "FALSE",
+                      "batchsave": "0",
+                      "batchload": "0",
+                      "usedtd": "FALSE",
+                      "logxml": "FALSE"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_E2763646_97E7_4c2d_8FB8_5D59C3CE65F2",
+                  "xmi:type": "uml:Actor",
+                  "name": "User",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_A61A58E9_76E5_40d6_98CC_1EEAAFF8B2F1",
+                      "tpos": "0",
+                      "ea_localid": "10",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Actor",
+                      "nType": "0",
+                      "scope": "public",
+                      "isRoot": "false",
+                      "isLeaf": "false",
+                      "isAbstract": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Actors",
+                      "eventflags": "LNK=7938;"
+                    }
+                  }
+                ],
+                "links": [
+                  {
+                    "UseCase": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_0BD16D07_FAC1_4c79_B32D_80235AFF96A0",
+                          "start": "EAID_E2763646_97E7_4c2d_8FB8_5D59C3CE65F2",
+                          "end": "EAID_02EF09B2_AF12_42e0_81CA_5A8EF82B2BCB"
+                        }
+                      },
+                      {
+                        "$": {
+                          "xmi:id": "EAID_67B121C1_C71B_4755_8811_5BD2380105B7",
+                          "start": "EAID_E2763646_97E7_4c2d_8FB8_5D59C3CE65F2",
+                          "end": "EAID_B2FD402B_460B_4ac0_87FC_5334CB1B8FD3"
+                        }
+                      }
+                    ],
+                    "Sequence": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_EEE434D3_AF39_410e_8DAE_8A3A2FF3D451",
+                          "start": "EAID_E2763646_97E7_4c2d_8FB8_5D59C3CE65F2",
+                          "end": "EAID_C3741B6A_6590_41bb_9087_07FC8D82C760"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAPK_D14A9835_A869_4077_A637_E10A7812EC68",
+                  "xmi:type": "uml:Package",
+                  "name": "Primary Use Cases",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package2": "EAID_D14A9835_A869_4077_A637_E10A7812EC68",
+                      "package": "EAPK_664D3A6A_098E_4715_A265_C3D62660127B",
+                      "tpos": "0",
+                      "ea_localid": "4",
+                      "ea_eleType": "package"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Package",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "Java"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Use Case Model",
+                      "eventflags": "LNK=bcdd;"
+                    }
+                  }
+                ],
+                "packageproperties": [
+                  ""
+                ],
+                "paths": [
+                  ""
+                ],
+                "times": [
+                  {
+                    "$": {
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15",
+                      "lastloaddate": "2018-07-14 00:24:15",
+                      "lastsavedate": "2018-07-14 00:24:15"
+                    }
+                  }
+                ],
+                "flags": [
+                  {
+                    "$": {
+                      "iscontrolled": "FALSE",
+                      "isprotected": "FALSE",
+                      "batchsave": "0",
+                      "batchload": "0",
+                      "usedtd": "FALSE",
+                      "logxml": "FALSE"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_B2FD402B_460B_4ac0_87FC_5334CB1B8FD3",
+                  "xmi:type": "uml:UseCase",
+                  "name": "Use Case1",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_D14A9835_A869_4077_A637_E10A7812EC68",
+                      "tpos": "0",
+                      "ea_localid": "12",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "documentation": "UseCase1 description",
+                      "isSpecification": "false",
+                      "sType": "UseCase",
+                      "nType": "0",
+                      "scope": "public",
+                      "isRoot": "false",
+                      "isLeaf": "false",
+                      "isAbstract": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-19 23:36:48",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Primary Use Cases",
+                      "eventflags": "LNK=d053;"
+                    }
+                  }
+                ],
+                "EAModel.scenario": [
+                  {
+                    "EAScenario": [
+                      {
+                        "$": {
+                          "name": "Basic Path",
+                          "type": "Basic Path",
+                          "weight": "0.00",
+                          "description": "Description1",
+                          "subject": "EAID_B2FD402B_460B_4ac0_87FC_5334CB1B8FD3",
+                          "xmi:id": "EAID_5EEE628E_38F1_4515_B9AD_5FCF08C67F44"
+                        },
+                        "EAScenarioContent": [
+                          {
+                            "path": [
+                              {
+                                "step": [
+                                  {
+                                    "$": {
+                                      "name": "Action1",
+                                      "guid": "{4C473736-D596-48f5-8CBC-65B9E82609ED}",
+                                      "level": "1",
+                                      "uses": "",
+                                      "useslist": "",
+                                      "result": "",
+                                      "state": "",
+                                      "trigger": "1",
+                                      "link": ""
+                                    }
+                                  },
+                                  {
+                                    "$": {
+                                      "name": "Action2",
+                                      "guid": "{3CF1A432-22EF-46b8-8345-906A2DA18496}",
+                                      "level": "2",
+                                      "uses": "",
+                                      "useslist": "",
+                                      "result": "",
+                                      "state": "",
+                                      "trigger": "0",
+                                      "link": ""
+                                    }
+                                  },
+                                  {
+                                    "$": {
+                                      "name": "Action3",
+                                      "guid": "{6AE148AD-A9B8-41f5-A9BA-67459B462D0C}",
+                                      "level": "3",
+                                      "uses": "",
+                                      "useslist": "",
+                                      "result": "",
+                                      "state": "",
+                                      "trigger": "1",
+                                      "link": ""
+                                    }
+                                  }
+                                ],
+                                "context": [
+                                  {
+                                    "item": [
+                                      {
+                                        "$": {
+                                          "oldname": "User",
+                                          "guid": "{E2763646-97E7-4c2d-8FB8-5D59C3CE65F2}"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "links": [
+                  {
+                    "UseCase": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_67B121C1_C71B_4755_8811_5BD2380105B7",
+                          "start": "EAID_E2763646_97E7_4c2d_8FB8_5D59C3CE65F2",
+                          "end": "EAID_B2FD402B_460B_4ac0_87FC_5334CB1B8FD3"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_C3741B6A_6590_41bb_9087_07FC8D82C760",
+                  "xmi:type": "uml:Sequence",
+                  "name": "Object1",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_D14A9835_A869_4077_A637_E10A7812EC68",
+                      "owner": "EAID_B2FD402B_460B_4ac0_87FC_5334CB1B8FD3",
+                      "tpos": "0",
+                      "ea_localid": "14",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Sequence",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Primary Use Cases",
+                      "eventflags": "LNK=7938;"
+                    }
+                  }
+                ],
+                "links": [
+                  {
+                    "Sequence": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_EEE434D3_AF39_410e_8DAE_8A3A2FF3D451",
+                          "start": "EAID_E2763646_97E7_4c2d_8FB8_5D59C3CE65F2",
+                          "end": "EAID_C3741B6A_6590_41bb_9087_07FC8D82C760"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_02EF09B2_AF12_42e0_81CA_5A8EF82B2BCB",
+                  "xmi:type": "uml:UseCase",
+                  "name": "Use Case2",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_D14A9835_A869_4077_A637_E10A7812EC68",
+                      "tpos": "0",
+                      "ea_localid": "13",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "UseCase",
+                      "nType": "0",
+                      "scope": "public",
+                      "isRoot": "false",
+                      "isLeaf": "false",
+                      "isAbstract": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Primary Use Cases",
+                      "eventflags": "LNK=1f90;"
+                    }
+                  }
+                ],
+                "links": [
+                  {
+                    "UseCase": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_0BD16D07_FAC1_4c79_B32D_80235AFF96A0",
+                          "start": "EAID_E2763646_97E7_4c2d_8FB8_5D59C3CE65F2",
+                          "end": "EAID_02EF09B2_AF12_42e0_81CA_5A8EF82B2BCB"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_86BB3AF4_3C39_4ccd_84DC_6F292AC7C7AF",
+                  "xmi:type": "uml:Boundary",
+                  "name": "System Boundary",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_D14A9835_A869_4077_A637_E10A7812EC68",
+                      "tpos": "0",
+                      "ea_localid": "15",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Boundary",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=3;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Primary Use Cases",
+                      "eventflags": "LNK=c65f;"
+                    }
+                  }
+                ],
+                "links": [
+                  {
+                    "NoteLink": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_15E717BE_1D33_4605_9398_B2B89B44BD62",
+                          "start": "EAID_F15CDCC9_0C99_42ae_ABD0_43828BC378C0",
+                          "end": "EAID_86BB3AF4_3C39_4ccd_84DC_6F292AC7C7AF"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_F15CDCC9_0C99_42ae_ABD0_43828BC378C0",
+                  "xmi:type": "uml:Note",
+                  "name": "Note",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_D14A9835_A869_4077_A637_E10A7812EC68",
+                      "tpos": "0",
+                      "ea_localid": "11",
+                      "ea_eleType": "element",
+                      "name": "Note"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "documentation": "The System Boundary shows the logical interface between users and the system being described.",
+                      "isSpecification": "false",
+                      "sType": "Note",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Primary Use Cases",
+                      "eventflags": "LNK=c605;"
+                    }
+                  }
+                ],
+                "links": [
+                  {
+                    "NoteLink": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_15E717BE_1D33_4605_9398_B2B89B44BD62",
+                          "start": "EAID_F15CDCC9_0C99_42ae_ABD0_43828BC378C0",
+                          "end": "EAID_86BB3AF4_3C39_4ccd_84DC_6F292AC7C7AF"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "connectors": [
+          {
+            "connector": [
+              {
+                "$": {
+                  "xmi:idref": "EAID_5A089C2F_461E_4d05_95C1_6B9D3697F61E"
+                },
+                "source": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_D14A9835_A869_4077_A637_E10A7812EC68"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "8",
+                          "type": "Package",
+                          "name": "Primary Use Cases"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      ""
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "target": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_E2DF74D9_F322_459e_814F_FCEB4D02D118"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "5",
+                          "type": "Note"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      ""
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "model": [
+                  {
+                    "$": {
+                      "ea_localid": "2"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "ea_type": "NoteLink"
+                    }
+                  }
+                ],
+                "modifiers": [
+                  {
+                    "$": {
+                      "isRoot": "false",
+                      "isLeaf": "false"
+                    }
+                  }
+                ],
+                "documentation": [
+                  ""
+                ],
+                "appearance": [
+                  {
+                    "$": {
+                      "linemode": "3",
+                      "linecolor": "0",
+                      "linewidth": "0",
+                      "seqno": "0",
+                      "headStyle": "0",
+                      "lineStyle": "0"
+                    }
+                  }
+                ],
+                "labels": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "virtualInheritance": "0"
+                    }
+                  }
+                ],
+                "style": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "tags": [
+                  ""
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_FD424A74_3205_42e7_8315_1B312B3A09FF"
+                },
+                "source": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_A61A58E9_76E5_40d6_98CC_1EEAAFF8B2F1"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "9",
+                          "type": "Package",
+                          "name": "Actors"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      ""
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "target": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_EF5B877A_660A_4309_91BA_7D95A4DC9F9A"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "2",
+                          "type": "Note"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      ""
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "model": [
+                  {
+                    "$": {
+                      "ea_localid": "3"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "ea_type": "NoteLink"
+                    }
+                  }
+                ],
+                "modifiers": [
+                  {
+                    "$": {
+                      "isRoot": "false",
+                      "isLeaf": "false"
+                    }
+                  }
+                ],
+                "documentation": [
+                  ""
+                ],
+                "appearance": [
+                  {
+                    "$": {
+                      "linemode": "3",
+                      "linecolor": "0",
+                      "linewidth": "0",
+                      "seqno": "0",
+                      "headStyle": "0",
+                      "lineStyle": "0"
+                    }
+                  }
+                ],
+                "labels": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "virtualInheritance": "0"
+                    }
+                  }
+                ],
+                "style": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "tags": [
+                  ""
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_0BD16D07_FAC1_4c79_B32D_80235AFF96A0"
+                },
+                "source": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_E2763646_97E7_4c2d_8FB8_5D59C3CE65F2"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "10",
+                          "type": "Actor",
+                          "name": "User"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Owned=0;Navigable=Non-Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "target": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_02EF09B2_AF12_42e0_81CA_5A8EF82B2BCB"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "13",
+                          "type": "UseCase",
+                          "name": "Use Case2"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Owned=0;Navigable=Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "model": [
+                  {
+                    "$": {
+                      "ea_localid": "4"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "ea_type": "UseCase",
+                      "direction": "Source -> Destination"
+                    }
+                  }
+                ],
+                "modifiers": [
+                  {
+                    "$": {
+                      "isRoot": "false",
+                      "isLeaf": "false"
+                    }
+                  }
+                ],
+                "documentation": [
+                  ""
+                ],
+                "appearance": [
+                  {
+                    "$": {
+                      "linemode": "3",
+                      "linecolor": "-1",
+                      "linewidth": "0",
+                      "seqno": "0",
+                      "headStyle": "0",
+                      "lineStyle": "0"
+                    }
+                  }
+                ],
+                "labels": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "virtualInheritance": "0"
+                    }
+                  }
+                ],
+                "style": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "tags": [
+                  ""
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_67B121C1_C71B_4755_8811_5BD2380105B7"
+                },
+                "source": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_E2763646_97E7_4c2d_8FB8_5D59C3CE65F2"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "10",
+                          "type": "Actor",
+                          "name": "User"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Owned=0;Navigable=Non-Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "target": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_B2FD402B_460B_4ac0_87FC_5334CB1B8FD3"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "12",
+                          "type": "UseCase",
+                          "name": "Use Case1"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Owned=0;Navigable=Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "model": [
+                  {
+                    "$": {
+                      "ea_localid": "5"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "ea_type": "UseCase",
+                      "direction": "Source -> Destination"
+                    }
+                  }
+                ],
+                "modifiers": [
+                  {
+                    "$": {
+                      "isRoot": "false",
+                      "isLeaf": "false"
+                    }
+                  }
+                ],
+                "documentation": [
+                  ""
+                ],
+                "appearance": [
+                  {
+                    "$": {
+                      "linemode": "3",
+                      "linecolor": "-1",
+                      "linewidth": "0",
+                      "seqno": "0",
+                      "headStyle": "0",
+                      "lineStyle": "0"
+                    }
+                  }
+                ],
+                "labels": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "virtualInheritance": "0"
+                    }
+                  }
+                ],
+                "style": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "tags": [
+                  ""
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_EEE434D3_AF39_410e_8DAE_8A3A2FF3D451"
+                },
+                "source": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_E2763646_97E7_4c2d_8FB8_5D59C3CE65F2"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "10",
+                          "type": "Actor",
+                          "name": "User"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Owned=0;Navigable=Non-Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "target": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_C3741B6A_6590_41bb_9087_07FC8D82C760"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "14",
+                          "type": "Sequence",
+                          "name": "Object1"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "isNavigable": "true"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Owned=0;Navigable=Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "model": [
+                  {
+                    "$": {
+                      "ea_localid": "6"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "ea_type": "Sequence",
+                      "direction": "Source -> Destination"
+                    }
+                  }
+                ],
+                "documentation": [
+                  ""
+                ],
+                "appearance": [
+                  {
+                    "$": {
+                      "linemode": "1",
+                      "linecolor": "-1",
+                      "linewidth": "0",
+                      "seqno": "1",
+                      "headStyle": "0",
+                      "lineStyle": "0"
+                    }
+                  }
+                ],
+                "labels": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "virtualInheritance": "0",
+                      "diagram": "EAID_E5691295_F1A2_49b6_9638_A97D86B24BDF",
+                      "privatedata1": "Synchronous",
+                      "privatedata2": "void",
+                      "privatedata3": "Call",
+                      "privatedata4": "0",
+                      "privatedata5": "$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;",
+                      "sequence_points": "PtStartX=55;PtStartY=0;PtEndX=55;PtEndY=0;"
+                    }
+                  }
+                ],
+                "style": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "tags": [
+                  ""
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_15E717BE_1D33_4605_9398_B2B89B44BD62"
+                },
+                "source": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_F15CDCC9_0C99_42ae_ABD0_43828BC378C0"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "11",
+                          "type": "Note",
+                          "name": "Note"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      ""
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "target": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_86BB3AF4_3C39_4ccd_84DC_6F292AC7C7AF"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "15",
+                          "type": "Boundary",
+                          "name": "System Boundary"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      ""
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "model": [
+                  {
+                    "$": {
+                      "ea_localid": "1"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "ea_type": "NoteLink"
+                    }
+                  }
+                ],
+                "modifiers": [
+                  {
+                    "$": {
+                      "isRoot": "false",
+                      "isLeaf": "false"
+                    }
+                  }
+                ],
+                "documentation": [
+                  ""
+                ],
+                "appearance": [
+                  {
+                    "$": {
+                      "linemode": "3",
+                      "linecolor": "0",
+                      "linewidth": "0",
+                      "seqno": "0",
+                      "headStyle": "0",
+                      "lineStyle": "0"
+                    }
+                  }
+                ],
+                "labels": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "virtualInheritance": "0"
+                    }
+                  }
+                ],
+                "style": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "tags": [
+                  ""
+                ]
+              }
+            ]
+          }
+        ],
+        "primitivetypes": [
+          {
+            "packagedElement": [
+              {
+                "$": {
+                  "xmi:type": "uml:Package",
+                  "xmi:id": "EAPrimitiveTypesPackage",
+                  "name": "EA_PrimitiveTypes_Package",
+                  "visibility": "public"
+                }
+              }
+            ]
+          }
+        ],
+        "profiles": [
+          ""
+        ],
+        "diagrams": [
+          {
+            "diagram": [
+              {
+                "$": {
+                  "xmi:id": "EAID_13962A49_0B46_4036_85F0_A5FA5153BAAD"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_664D3A6A_098E_4715_A265_C3D62660127B",
+                      "localID": "1",
+                      "owner": "EAPK_664D3A6A_098E_4715_A265_C3D62660127B"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "Use Case Model",
+                      "type": "Use Case"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "version": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15"
+                    }
+                  }
+                ],
+                "style1": [
+                  {
+                    "$": {
+                      "value": "ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=0;HighlightForeign=0;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=0;PPgs.cy=0;DocSize.cx=827;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.0;ExplicitNavigability=0;ShowShape=1;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"
+                    }
+                  }
+                ],
+                "style2": [
+                  {
+                    "$": {
+                      "value": "SaveTag=355190C2;ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=0;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.0;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;"
+                    }
+                  }
+                ],
+                "swimlanes": [
+                  {
+                    "$": {
+                      "value": "locked=false;orientation=0;width=0;inbar=false;names=false;color=0;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;cls=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"
+                    }
+                  }
+                ],
+                "matrixitems": [
+                  {
+                    "$": {
+                      "value": "locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  ""
+                ],
+                "elements": [
+                  {
+                    "element": [
+                      {
+                        "$": {
+                          "geometry": "Left=537;Top=294;Right=725;Bottom=464;",
+                          "subject": "EAID_E2DF74D9_F322_459e_814F_FCEB4D02D118",
+                          "seqno": "1",
+                          "style": "DUID=053A045C;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=537;Top=26;Right=728;Bottom=235;",
+                          "subject": "EAID_EF5B877A_660A_4309_91BA_7D95A4DC9F9A",
+                          "seqno": "2",
+                          "style": "DUID=1418193B;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=47;Top=333;Right=257;Bottom=359;",
+                          "subject": "EAID_F7255547_4FC8_4355_84D4_AF626D9C0ADC",
+                          "seqno": "3",
+                          "style": "HideIcon=0;DUID=701D904A;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=47;Top=275;Right=257;Bottom=305;",
+                          "subject": "EAID_1CAA5A23_B18D_444e_8956_75345EE0EBCA",
+                          "seqno": "4",
+                          "style": "HideIcon=0;DUID=286A3E36;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=47;Top=305;Right=257;Bottom=335;",
+                          "subject": "EAID_602D23C6_E171_46f0_9326_B353F488C99C",
+                          "seqno": "5",
+                          "style": "HideIcon=0;DUID=CAAF01F1;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=336;Top=295;Right=476;Bottom=387;",
+                          "subject": "EAID_D14A9835_A869_4077_A637_E10A7812EC68",
+                          "seqno": "6",
+                          "style": "DUID=7745EE2B;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=336;Top=34;Right=476;Bottom=124;",
+                          "subject": "EAID_A61A58E9_76E5_40d6_98CC_1EEAAFF8B2F1",
+                          "seqno": "7",
+                          "style": "DUID=7F943C06;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=21;Top=35;Right=285;Bottom=258;",
+                          "subject": "EAID_DB44FB60_8520_415b_8B2B_3CBC0D90E4E0",
+                          "seqno": "8",
+                          "style": "LCol=8355711;BCol=14745599;BFol=2631720;LWth=1;DUID=C1A2C1B5;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "EDGE=2;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;Path=;",
+                          "subject": "EAID_FD424A74_3205_42e7_8315_1B312B3A09FF",
+                          "style": "Mode=3;EOID=10F4B602;SOID=C898EFE4;Hidden=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "EDGE=2;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;Path=;",
+                          "subject": "EAID_5A089C2F_461E_4d05_95C1_6B9D3697F61E",
+                          "style": "Mode=3;EOID=B5334E7F;SOID=74ED1616;Hidden=0;"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:id": "EAID_6407D28D_30B2_41a9_8CE0_31F0258D5704"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_A61A58E9_76E5_40d6_98CC_1EEAAFF8B2F1",
+                      "localID": "2",
+                      "owner": "EAPK_A61A58E9_76E5_40d6_98CC_1EEAAFF8B2F1"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "Actors",
+                      "type": "Use Case"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "version": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15"
+                    }
+                  }
+                ],
+                "style1": [
+                  {
+                    "$": {
+                      "value": "ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=0;HighlightForeign=0;PackageContents=0;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=0;PPgs.cy=0;DocSize.cx=827;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"
+                    }
+                  }
+                ],
+                "style2": [
+                  {
+                    "$": {
+                      "value": "SaveTag=ADAB1BA5;ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=0;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;"
+                    }
+                  }
+                ],
+                "swimlanes": [
+                  {
+                    "$": {
+                      "value": "locked=false;orientation=0;width=0;inbar=false;names=false;color=0;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;cls=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"
+                    }
+                  }
+                ],
+                "matrixitems": [
+                  {
+                    "$": {
+                      "value": "locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  ""
+                ],
+                "elements": [
+                  {
+                    "element": [
+                      {
+                        "$": {
+                          "geometry": "Left=160;Top=130;Right=210;Bottom=230;",
+                          "subject": "EAID_E2763646_97E7_4c2d_8FB8_5D59C3CE65F2",
+                          "seqno": "1",
+                          "style": "DUID=362B8876;"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:id": "EAID_AC91D663_EA4E_45cd_B127_0DF9DB652C0E"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_D14A9835_A869_4077_A637_E10A7812EC68",
+                      "localID": "3",
+                      "owner": "EAPK_D14A9835_A869_4077_A637_E10A7812EC68"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "Primary Use Cases",
+                      "type": "Use Case"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "version": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15"
+                    }
+                  }
+                ],
+                "style1": [
+                  {
+                    "$": {
+                      "value": "ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=0;HighlightForeign=0;PackageContents=0;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=0;PPgs.cy=0;DocSize.cx=827;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"
+                    }
+                  }
+                ],
+                "style2": [
+                  {
+                    "$": {
+                      "value": "SaveTag=7B186E33;ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=0;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;"
+                    }
+                  }
+                ],
+                "swimlanes": [
+                  {
+                    "$": {
+                      "value": "locked=false;orientation=0;width=0;inbar=false;names=false;color=0;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;cls=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"
+                    }
+                  }
+                ],
+                "matrixitems": [
+                  {
+                    "$": {
+                      "value": "locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  ""
+                ],
+                "elements": [
+                  {
+                    "element": [
+                      {
+                        "$": {
+                          "geometry": "Left=310;Top=257;Right=430;Bottom=337;",
+                          "subject": "EAID_02EF09B2_AF12_42e0_81CA_5A8EF82B2BCB",
+                          "seqno": "1",
+                          "style": "DUID=22115B75;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=573;Top=48;Right=736;Bottom=130;",
+                          "subject": "EAID_F15CDCC9_0C99_42ae_ABD0_43828BC378C0",
+                          "seqno": "2",
+                          "style": "DUID=2932CF77;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=77;Top=162;Right=127;Bottom=262;",
+                          "subject": "EAID_E2763646_97E7_4c2d_8FB8_5D59C3CE65F2",
+                          "seqno": "3",
+                          "style": "DUID=A8B02362;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=309;Top=126;Right=429;Bottom=206;",
+                          "subject": "EAID_B2FD402B_460B_4ac0_87FC_5334CB1B8FD3",
+                          "seqno": "4",
+                          "style": "DUID=6D3F01E8;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=239;Top=48;Right=504;Bottom=395;",
+                          "subject": "EAID_86BB3AF4_3C39_4ccd_84DC_6F292AC7C7AF",
+                          "seqno": "5",
+                          "style": "DUID=48E84B3F;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "EDGE=2;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;Path=;",
+                          "subject": "EAID_67B121C1_C71B_4755_8811_5BD2380105B7",
+                          "style": "Mode=3;EOID=7705308B;SOID=54917710;Hidden=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "EDGE=2;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;Path=;",
+                          "subject": "EAID_0BD16D07_FAC1_4c79_B32D_80235AFF96A0",
+                          "style": "Mode=3;EOID=99481CEE;SOID=54917710;Hidden=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "SX=-14;SY=40;EX=-14;EY=44;EDGE=4;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;Path=;",
+                          "subject": "EAID_15E717BE_1D33_4605_9398_B2B89B44BD62",
+                          "style": "Mode=3;EOID=5F8E1D34;SOID=2EE12CC7;Hidden=0;"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:id": "EAID_E5691295_F1A2_49b6_9638_A97D86B24BDF"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_D14A9835_A869_4077_A637_E10A7812EC68",
+                      "localID": "4",
+                      "owner": "EAPK_D14A9835_A869_4077_A637_E10A7812EC68",
+                      "parent": "EAID_B2FD402B_460B_4ac0_87FC_5334CB1B8FD3"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "Use Case1",
+                      "type": "Sequence"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "version": "1.0",
+                      "created": "2018-07-14 00:24:15",
+                      "modified": "2018-07-14 00:24:15"
+                    }
+                  }
+                ],
+                "style1": [
+                  {
+                    "$": {
+                      "value": "ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=0;HighlightForeign=0;PackageContents=0;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=0;PPgs.cy=0;DocSize.cx=827;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"
+                    }
+                  }
+                ],
+                "style2": [
+                  {
+                    "$": {
+                      "value": "SaveTag=874F6CB2;ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=0;INT_ARGS=;INT_RET=;INT_ATT=;SeqTopMargin=50;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;"
+                    }
+                  }
+                ],
+                "swimlanes": [
+                  {
+                    "$": {
+                      "value": "locked=false;orientation=0;width=0;inbar=false;names=false;color=0;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;cls=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"
+                    }
+                  }
+                ],
+                "matrixitems": [
+                  {
+                    "$": {
+                      "value": "locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  ""
+                ],
+                "elements": [
+                  {
+                    "element": [
+                      {
+                        "$": {
+                          "geometry": "Left=215;Top=50;Right=305;Bottom=421;",
+                          "subject": "EAID_C3741B6A_6590_41bb_9087_07FC8D82C760",
+                          "seqno": "1",
+                          "style": "DUID=DA38F948;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=70;Top=50;Right=160;Bottom=421;",
+                          "subject": "EAID_E2763646_97E7_4c2d_8FB8_5D59C3CE65F2",
+                          "seqno": "2",
+                          "style": "DUID=3FDA49A5;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "SX=0;SY=0;EX=0;EY=0;Path=;",
+                          "subject": "EAID_EEE434D3_AF39_410e_8DAE_8A3A2FF3D451",
+                          "style": ";Hidden=0;"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

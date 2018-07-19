@@ -1,0 +1,5 @@
+{
+    "name": "<%= entity.name %>",
+    "description": "<%= entity.description %>",
+    "basicPathScenarios": [<%- (entity.basicPathScenarios || []).map(x => `"${x}"`) %>]
+}

@@ -11,6 +11,7 @@ import { xmiScreen } from "../../src/entities/ui/xmiScreen";
 import { xmiInterface } from "../../src/entities/xmiInterface";
 import {xmiComponentFactory} from "../../src/factories/xmiComponentFactory";
 import any = jasmine.any;
+import {xmiUseCase} from "../../src/entities/xmiUseCase";
 
 const Generator = require('yeoman-generator');
 const yosay = require('yosay');
@@ -21,7 +22,7 @@ const beautify = require('js-beautify').js;
 
 export class XmiGenerator extends (Generator as { new(args: any, opts: any): any; }) {
     type: string = 'default';
-    dist = 'dist';
+    dist: string = 'dist';
 
     testFiles: string[] = [];
     generatedFiles: string[] = [];
@@ -29,6 +30,7 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
     constructor(args: any, opts: any) {
         super(args, opts);
         this.argument('xmiFileName', { type: String, required: true });
+        this.argument('destination', { type: String, required: true });
     }
 
     prompting() {
@@ -60,22 +62,25 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
 
             this.log(chalk.green('Rebuild'));
 
-            this.testFiles.forEach(x => {this.spawnCommand('tsc', [x]); this._beautify(x); });
-            this.generatedFiles.forEach(x => this._beautify(x));
+            this.testFiles.forEach(x => {
+                //this.spawnCommand('tsc', ['--project', this.options.destination, x]);
+                this._beautify(x);
+            });
 
+            this.generatedFiles.forEach(x => this._beautify(x));
             done();
         });
     }
 
     _bootstrap() {
-        this.fs.exists(this.destinationPath(this.dist)) || this.fs.copy(
+        this.fs.exists(this.destinationPath(this.options.destination)) || this.fs.copy(
             this.templatePath(`${this.type}/bootstrap`),
-            this.destinationPath(this.dist)
+            this.destinationPath(this.options.destination)
         );
     }
 
     _generate(path: string | null, pkg: any) {
-        path = path || this.dist;
+        path = path || this.options.destination;
 
         const options: any = {
             factory: xmiComponentFactory
@@ -139,6 +144,11 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
                 this.generatedFiles.push(screenFileName);
             }
 
+            if (x instanceof xmiUseCase) {
+                this.fs.copyTpl(this.templatePath(`${this.type}/xmiUseCase.ejs`),
+                    this.destinationPath(`${this.options.destination}/documentation/useCases/${x.name}.json`), options);
+            }
+
             if (x instanceof xmiPackage) {
                 this._generate(`${path}/${x.name}`, x);
             }
@@ -149,8 +159,8 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
         const file = this.fs.read(this.templatePath(this.options.xmiFileName));
 
         parseString(file, (err: any, result: any) => {
+            //this.fs.writeJSON(this.templatePath('../files/test.json'), result);
             callback(result);
-            // this.fs.writeJSON(this.templatePath('../files/test.json'), result);
         });
     }
 

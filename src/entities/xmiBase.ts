@@ -30,6 +30,10 @@ export default class xmiBase {
             element.path.slice(0, element.path.length - 1).reverse().map(x => x.name).join('/');
     }
 
+    getRelativeRoot() {
+        return this.path.map(x => '..').join('/');
+    }
+
     constructor(raw: any, parent: xmiPackage | xmiBase | null) {
         this.parent = parent;
         this.raw = raw;
