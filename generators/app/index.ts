@@ -145,8 +145,17 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
             }
 
             if (x instanceof xmiUseCase) {
-                this.fs.copyTpl(this.templatePath(`${this.type}/xmiUseCase.ejs`),
-                    this.destinationPath(`${this.options.destination}/documentation/useCases/${x.name}.json`), options);
+                const dest = this.destinationPath(`${this.options.destination}/documentation/useCases/${x.name}.json`);
+
+                if(this.fs.exists(dest)) {
+                    let data = this.fs.readJSON(dest);
+                    this.fs.copyTpl(this.templatePath(`${this.type}/xmiUseCase.ejs`), dest, options);
+
+                    data = {...data, ...this.fs.readJSON(dest)};
+                    this.fs.delete(dest);
+                    this.fs.writeJSON(dest, data);
+                } else
+                    this.fs.copyTpl(this.templatePath(`${this.type}/xmiUseCase.ejs`), dest, options);
             }
 
             if (x instanceof xmiPackage) {

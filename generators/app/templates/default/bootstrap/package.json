@@ -1,0 +1,38 @@
+{
+  "name": "dist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+
+    "jira:sync": "node cmd/jira_sync.js"
+  },
+  "author": "",
+  "license": "ISC",
+
+  "jira": {
+    "url": "<company>.atlassian.net",
+    "username": "username",
+    "password": "password",
+    "project": "<ProjectName>"
+  },
+
+  "devDependencies": {
+    "@types/es6-promise": "^3.3.0",
+    "@types/node": "^8.0.29",
+    "jest": "^22.4.3",
+    "jira-connector": "^2.8.0",
+    "ts-node": "3.3.0",
+    "typescript": "2.5.2"
+  },
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "mongodb": "3.0.10",
+    "reflect-metadata": "^0.1.12",
+    "twitter": "^1.7.1",
+    "typeorm": "^0.2.7",
+    "winston": "^3.0.0"
+  }
+}

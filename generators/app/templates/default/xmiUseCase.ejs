@@ -1,5 +1,14 @@
+<% var normlalize = function(str) { return str && str
+        .replace(/\n/g, ". ")
+        .replace(/\\/g, "\\\\")
+        .replace(/\"/g, '\\"')
+        .replace(/\r/g, "\\r")
+        .replace(/\t/g, "\\t")
+        .replace(/\f/g, "\\f");
+} %>
+
 {
-    "name": "<%= entity.name %>",
-    "description": "<%= entity.description %>",
-    "basicPathScenarios": [<%- (entity.basicPathScenarios || []).map(x => `"${x}"`) %>]
+    "name": "<%- normlalize(entity.nameOrigin) %>",
+    "description": "<%- normlalize(entity.description) %>",
+    "basicPathScenarios": [<%- (entity.basicPathScenarios || []).map(x => `"${normlalize(x)}"`) %>]
 }

@@ -9,6 +9,7 @@ export default class xmiBase {
     id: string;
     type: string;
     name: string;
+    nameOrigin: string;
     description: string;
     alias: string;
     stereotype: string;
@@ -40,7 +41,8 @@ export default class xmiBase {
 
         this.id = this.raw.$['xmi:id'] || this.raw.$['xmi:ifrefs'];
         this.type = this.raw.$['xmi:type'];
-        this.name = this.raw.$.name && camel(this.raw.$.name);
+        this.nameOrigin = this.raw.$.name;
+        this.name = this.nameOrigin && camel(this.nameOrigin);
         this.description = get(this.raw, ['properties', '0', '$', 'documentation']);
         this.alias = get(this.raw, ['properties', '0', '$', 'alias']);
         this.stereotype = get(this.raw, ['properties', '0', '$', 'stereotype']);

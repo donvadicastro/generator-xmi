@@ -1,12 +1,14 @@
 const inquirer = require('inquirer');
 
 <% (entity.children || []).filter(x => x.stereotype === 'button').forEach(function (child, i) { %>
-<% var elementRef = child.links.informationFLow[0].end.elementRef %>
-    import {<%= elementRef.name %>Contract} from '<%= entity.getRelativePath(elementRef) %>/process/<%= elementRef.name %>';
+<% if(child.links.informationFLow.length && child.links.informationFLow[0].end) {%>
+    <% var elementRef = child.links.informationFLow[0].end.elementRef %>
+        import {<%= elementRef.name %>Contract} from '<%= entity.getRelativePath(elementRef) %>/process/<%= elementRef.name %>';
 
-<% (elementRef.lifelines || []).forEach(function (lifeline, index) { %>
-    import {<%= lifeline.elementRef.name %>} from '<%= entity.getRelativePath(elementRef) %>/components/<%= lifeline.elementRef.name %>';
-<% })}) %>
+    <% (elementRef.lifelines || []).forEach(function (lifeline, index) { %>
+        import {<%= lifeline.elementRef.name %>} from '<%= entity.getRelativePath(elementRef) %>/components/<%= lifeline.elementRef.name %>';
+    <% }) %>
+<% }}) %>
 
 /**
 * Terminal screen class.
@@ -24,9 +26,11 @@ export class <%= entity.name %> {
         ]);
 
         <% (entity.children || []).filter(x => x.stereotype === 'button').forEach(function (child, i) { %>
-        <% var elementRef = child.links.informationFLow[0].end.elementRef %>
-        const collaboration<%= i %> = new <%= elementRef.name %>(<% (elementRef.lifelines || []).forEach(function (lifeline) { %> new <%= lifeline.name %>(), <% }) %>);
-        collaboration<%= i %>.run(answers);
+            <% if(child.links.informationFLow.length && child.links.informationFLow[0].end) {%>
+                <% var elementRef = child.links.informationFLow[0].end.elementRef %>
+                const collaboration<%= i %> = new <%= elementRef.name %>(<% (elementRef.lifelines || []).forEach(function (lifeline) { %> new <%= lifeline.name %>(), <% }) %>);
+                collaboration<%= i %>.run(answers);
+            <% } %>
         <% }) %>
     }
 }
