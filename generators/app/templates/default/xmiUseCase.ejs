@@ -4,11 +4,11 @@
         .replace(/\"/g, '\\"')
         .replace(/\r/g, "\\r")
         .replace(/\t/g, "\\t")
-        .replace(/\f/g, "\\f");
-} %>
-
+        .replace(/\f/g, "\\f"); }%>
 {
     "name": "<%- normlalize(entity.nameOrigin) %>",
     "description": "<%- normlalize(entity.description) %>",
-    "basicPathScenarios": [<%- (entity.basicPathScenarios || []).map(x => `"${normlalize(x)}"`) %>]
+    "scenarios": [<% entity.scenarios.forEach((x, i) => { %>
+        { "type": "<%= x.type %>", "steps": [<%- x.steps.map(y => '"' + normlalize(y) + '"') %>]}<%if(entity.scenarios.length-1 > i) {%>,<%}%>
+    <% }) %>]
 }

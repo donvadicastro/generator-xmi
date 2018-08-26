@@ -60,8 +60,11 @@ export class JiraClient {
             <%= data.description %>
             
             h2. Scenarios
-            <% _.each(data.basicPathScenarios, function(scenario) { %>
-            * <%= scenario %>
+            <% _.each(data.scenarios, function(scenario) { %>
+            h4. <%= scenario.type %>
+            <% _.each(scenario.steps, function(step) { %>
+            * <%= step %>
+            <% }) %>
             <% }) %>
         `);
     }

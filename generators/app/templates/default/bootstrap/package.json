@@ -30,6 +30,7 @@
   "dependencies": {
     "chalk": "^2.1.0",
     "mongodb": "3.0.10",
+    "node-persist": "^3.0.1",
     "reflect-metadata": "^0.1.12",
     "twitter": "^1.7.1",
     "typeorm": "^0.2.7",

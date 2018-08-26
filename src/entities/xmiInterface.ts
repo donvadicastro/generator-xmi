@@ -4,6 +4,7 @@ import {get} from "object-path";
 import {xmiAttribute} from "./class/xmiAttribute";
 import {xmiPackage} from "./xmiPackage";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
+
 const pascal = require('to-pascal-case');
 
 export class xmiInterface extends xmiBase {
@@ -12,8 +13,6 @@ export class xmiInterface extends xmiBase {
 
     constructor(raw: any, parent: xmiPackage | null) {
         super(raw, parent);
-
-        //this.name = this.name && pascal(this.name);
 
         if(this.raw.ownedAttribute) {
             this.attributes = this.raw.ownedAttribute

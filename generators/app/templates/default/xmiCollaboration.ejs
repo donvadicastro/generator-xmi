@@ -1,4 +1,6 @@
 const chalk = require("chalk");
+const storage = require('node-persist');
+
 import {Promise} from 'es6-promise';
 
 <% (entity.lifelines || []).forEach(function (lifeline, index) { %>
@@ -21,6 +23,12 @@ export class <%= entity.name %> {
     */
     run(inputState: any) {
         let flowAsync = Promise.resolve(inputState);
+
+        // Configure state storage
+        flowAsync = flowAsync.then((state: any) => {
+            console.log('--> initialize local state storage');
+            return storage.init(/* options ... */);
+        });
 
         <% let hasLoop = false, loopElement = null; %>
         <% (entity.messages || []).forEach(function (message) { %>

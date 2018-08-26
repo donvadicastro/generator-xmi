@@ -2,10 +2,10 @@ import xmiBase from "../entities/xmiBase";
 import {xmiInterface} from "../entities/xmiInterface";
 import {xmiClass} from "../entities/xmiClass";
 import {xmiLink} from "../entities/xmiLink";
-import {xmiComponent} from "../entities/xmiComponent";
+import {xmiActor} from "../entities/xmiActor";
+// import {xmiComponent} from "../entities/xmiComponent";
 import {xmiPackage} from "../entities/xmiPackage";
 import {xmiCollaboration} from "../entities/xmiCollaboration";
-import {xmiActor} from "../entities/xmiActor";
 import {xmiDiagram} from "../entities/diagrams/xmiDiagram";
 import {xmiScreen} from "../entities/ui/xmiScreen";
 import {xmiGUIElement} from "../entities/ui/xmiGUIElement";
@@ -50,10 +50,6 @@ export class xmiComponentFactory {
                 }
                 break;
 
-            case 'uml:Component':
-                element = new xmiComponent(raw, <xmiPackage>parent);
-                break;
-
             case 'uml:Interface':
                 element = new xmiInterface(raw, <xmiPackage>parent);
                 break;
@@ -67,7 +63,8 @@ export class xmiComponentFactory {
                 break;
 
             case 'uml:Actor':
-                element = new xmiActor(raw, <xmiPackage>parent);
+                const actor = require('../entities/xmiActor');
+                element = new actor.xmiActor(raw, <xmiPackage>parent);
                 break;
 
             case 'uml:Screen':
@@ -88,6 +85,11 @@ export class xmiComponentFactory {
 
             case 'uml:Property':
                 element = new xmiAttribute(raw, parent);
+                break;
+
+            case 'uml:Component':
+                const c = require('../entities/xmiComponent');
+                element = new c.xmiComponent(raw, <xmiPackage>parent);
                 break;
 
             case 'uml:UseCase':
@@ -122,12 +124,10 @@ export class xmiComponentFactory {
         const provide = new xmiInOut(raw, null);
         this.instance._dependencyHash[provide.name] = register;
 
-        console.log('REGISTER', provide.name);
         return provide;
     }
 
     static resolveDependency(key: string): xmiBase {
-        console.log('RESOLVE', key);
         return this.instance._dependencyHash[key];
     }
 
