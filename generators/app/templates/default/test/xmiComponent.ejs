@@ -9,7 +9,7 @@ import {<%= entity.name %>} from '../process/<%= entity.name %>';
     (entity.lifelines || []).forEach(function (lifeline, index) {
         imports.push(lifeline.elementRef);
 
-        (lifeline.elementRef.required || []).map(x => factory.resolveDependency(x.ref.name)).forEach(value => {
+        (lifeline.elementRef.required || []).map(x => factory.resolveDependency(x.ref ? x.ref.name : x.name)).forEach(value => {
             imports.push(value);
         })
     });
@@ -22,7 +22,7 @@ import {<%= entity.name %>} from '../process/<%= entity.name %>';
 const flow = new <%= entity.name %>(<% (entity.lifelines || []).forEach(function (lifeline) { %>
     new <%= lifeline.name %>(
         <% (lifeline.elementRef.required || []).map(function (value, i, list) { %>
-            new <%= factory.resolveDependency(value.ref.name).name %>(),
+            new <%= factory.resolveDependency(value.ref ? value.ref.name : value.name).name %>(),
         <% }) %>
     ),
 <% }) %>);

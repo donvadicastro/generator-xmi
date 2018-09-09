@@ -165,7 +165,7 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
     }
 
     _readData(callback: (result: any) => void) {
-        const file = this.fs.read(this.templatePath(this.options.xmiFileName));
+        const file = this.fs.read(this.options.xmiFileName);
 
         parseString(file, (err: any, result: any) => {
             //this.fs.writeJSON(this.templatePath('../files/test.json'), result);

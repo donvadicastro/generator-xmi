@@ -32,12 +32,11 @@ export class xmiInterface extends xmiBase {
     }
 
     toConsole() {
-        const ret: any = super.toConsole();
+        const key: string = super.toConsole();
+        const ret: any = {[key]: {}};
 
-        ret[this.name] = {
-            attributes: this.attributes.map(x => ({[x.name]: x.type})),
-            operations: this.operations.map(x => ({[x.name]: x.parameters.map(x => x.name).join(',')}))
-        };
+        this.attributes.length && (ret[key].attributes = this.attributes.map(x => ({[x.name]: x.type})));
+        this.operations.length && (ret[key].operations = this.operations.map(x => ({[x.name]: x.parameters.map(x => x.name).join(',')})));
 
         return ret;
     }

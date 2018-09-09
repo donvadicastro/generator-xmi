@@ -48,9 +48,7 @@ export default class xmiBase {
         this.stereotype = get(this.raw, ['properties', '0', '$', 'stereotype']);
     }
 
-    toConsole(): any {
-        return {
-            [this.name]: this.id
-        };
+    toConsole(): any | string {
+        return `${this.name} (${this.id})`;
     }
 }

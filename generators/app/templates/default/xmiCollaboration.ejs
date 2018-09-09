@@ -32,7 +32,7 @@ export class <%= entity.name %> {
 
         <% let hasLoop = false, loopElement = null; %>
         <% (entity.messages || []).forEach(function (message) { %>
-            // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to.elementRef.name %>
+            // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to && message.to.elementRef.name %>
 
             <% if(message.from && message.from.elementRef.fragments.find(x => x.interactionOperator === 'loop')) { %>
                 <% hasLoop = true; loopElement = message.from.elementRef; %>

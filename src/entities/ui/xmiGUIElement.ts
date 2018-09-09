@@ -29,13 +29,12 @@ export class xmiGUIElement extends xmiBase {
     }
 
     toConsole() {
-        const ret: any = super.toConsole();
-
-        ret[this.name] = this.children.map(x => x.toConsole()) || [];
+        const key: string = super.toConsole();
+        const ret: any = {[key]: this.children.map(x => x.toConsole()) || []};
 
 
         if(this.links.informationFLow.length) {
-            ret[this.name].flow = this.links.informationFLow.map(x => `-> ${x.end && x.end.name}(${<xmiUMLDiagram>x.end && ((<xmiUMLDiagram>x.end).elementRef || {name: ''}).name})`);
+            ret[key].flow = this.links.informationFLow.map(x => `-> ${x.end && x.end.name}(${<xmiUMLDiagram>x.end && ((<xmiUMLDiagram>x.end).elementRef || {name: ''}).name})`);
         }
 
         return ret;

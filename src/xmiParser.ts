@@ -27,6 +27,9 @@ export class XmiParser {
         this.packge = <xmiPackage>xmiComponentFactory.get(get(this.data, this.PACKAGE_ROOT), null);
         this.diagrams = (get(this.data, this.DIAGRAMS_PATH, [])).map(x => xmiComponentFactory.getDiagram(x, null));
 
+        //run initializers
+        xmiComponentFactory.initialize();
+
         // update references
         xmiComponentFactory.updateRefs();
     }

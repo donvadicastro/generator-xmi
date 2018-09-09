@@ -12,9 +12,6 @@ export class xmiPackage extends xmiBase {
     }
 
     toConsole() {
-        const ret: any = super.toConsole();
-
-        ret[this.name] = this.children.map(x => x.toConsole());
-        return ret;
+        return {[super.toConsole()]: this.children.map(x => x.toConsole())};
     }
 }

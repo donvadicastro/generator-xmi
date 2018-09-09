@@ -29,4 +29,14 @@ export class xmiComponent extends xmiClass {
             this.required = this.raw.required.map((x: any) => new xmiInOut(x, null));
         }
     }
+
+    toConsole() {
+        const ret: any = super.toConsole();
+        const key: string = Object.keys(ret)[0];
+
+        this.required && (ret[key].required = this.required.map(x => x.name));
+        this.provided && (ret[key].provided = this.provided.map(x => x.name));
+
+        return ret;
+    }
 }

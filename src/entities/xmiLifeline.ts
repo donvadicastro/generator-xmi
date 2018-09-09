@@ -7,14 +7,15 @@ import {xmiActor} from "./xmiActor";
 
 export class xmiLifeline extends xmiBase {
     attribute: string;
-
-    get elementRef(): xmiClass | xmiComponent | xmiActor {
-        return <xmiClass>xmiComponentFactory.getByKey(this.attribute);
-    }
+    elementRef: xmiClass | xmiComponent | xmiActor;
 
     constructor(raw: any, parent: xmiBase, attributes: xmiAttribute[]) {
         super(raw, parent);
+
         this.attribute = attributes.filter(x => x.id === raw.$.represents)[0].type;
+        this.elementRef = <xmiClass>xmiComponentFactory.getByKey(this.attribute);
+
+        xmiComponentFactory.getByKeyDeffered(this, 'elementRef', this.attribute);
     }
 
     toConsole() {
