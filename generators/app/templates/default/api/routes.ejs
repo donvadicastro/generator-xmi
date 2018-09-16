@@ -1,9 +1,11 @@
 import { Application } from 'express';
 
-/*import*/
-import scanArticleRouter from './routes/process/crawler/scanArticle/router';
+<% value.forEach(x => { %>
+import <%= x.entity.name %>Router from './routes<%= x.path %>/router';
+<% }) %>
 
 export default function routes(app: Application): void {
-    /*route*/
-    app.use('/api/v1/process/crawler/scan-article', scanArticleRouter);
+<% value.forEach(x => { %>
+    app.use('/api/v1<%= x.url %>', <%= x.entity.name %>Router);
+<% }) %>
 };

@@ -19,6 +19,7 @@ const treeify = require('treeify');
 const parseString = require('xml2js').parseString;
 const pascal = require('to-pascal-case');
 const beautify = require('js-beautify').js;
+const kebabCase = require('just-kebab-case');
 
 export class XmiGenerator extends (Generator as { new(args: any, opts: any): any; }) {
     type: string = 'default';
@@ -26,6 +27,7 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
 
     testFiles: string[] = [];
     generatedFiles: string[] = [];
+    collaborationDiagrams: any[] = [];
 
     constructor(args: any, opts: any) {
         super(args, opts);
@@ -58,7 +60,7 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
             this._bootstrap();
 
             this.log(chalk.green('Generate'));
-            this._generate(null, parser.packge);
+            this._generate('', parser.packge);
 
             this.log(chalk.green('Rebuild'));
 
@@ -79,8 +81,8 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
         );
     }
 
-    _generate(path: string | null, pkg: any) {
-        path = path || this.options.destination;
+    _generate(localPath: string | null, pkg: any) {
+        const path = this.options.destination + '/design' + localPath;
 
         const options: any = {
             factory: xmiComponentFactory
@@ -125,12 +127,30 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
             if (x instanceof xmiCollaboration) {
                 const testFileDest = `${path}/test/process_${x.name}.ts`;
                 const diagramFileName = this.destinationPath(`${path}/process/${x.name}.ts`);
+                const apiRouterFileName = this.destinationPath(`${this.options.destination}/api/server/routes/${localPath}/router.ts`);
+                const apiControllerFileName = this.destinationPath(`${this.options.destination}/api/server/routes/${localPath}/controller.ts`);
+                const apiSwaggerConfig = this.destinationPath(`${this.options.destination}/api/server/swagger/api.yaml`);
 
                 this.fs.copyTpl(this.templatePath(`${this.type}/xmiCollaboration.ejs`), diagramFileName, options);
                 this.fs.copyTpl(this.templatePath(`${this.type}/test/xmiComponent.ejs`), this.destinationPath(testFileDest), options);
 
+                this.fs.copyTpl(this.templatePath(`${this.type}/api/router.ejs`), apiRouterFileName, options);
+                this.fs.copyTpl(this.templatePath(`${this.type}/api/controller.ejs`), apiControllerFileName, options);
+                this.fs.append(apiSwaggerConfig, `  
+  ${this._getLocationFromPath(localPath)}:
+    post:
+      tags:
+        - Process
+      description: ${x.nameOrigin}
+      responses:
+        200:
+          description: Returns execution result`);
+
                 this.testFiles.push(testFileDest);
                 this.generatedFiles.push(diagramFileName);
+                this.generatedFiles.push(apiRouterFileName);
+                this.generatedFiles.push(apiControllerFileName);
+                this.collaborationDiagrams.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
             }
 
             if (x instanceof xmiScreen) {
@@ -159,9 +179,14 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
             }
 
             if (x instanceof xmiPackage) {
-                this._generate(`${path}/${x.name}`, x);
+                this._generate(`${localPath}/${x.name}`, x);
             }
         });
+
+        this.fs.copyTpl(
+            this.templatePath(`${this.type}/api/routes.ejs`),
+            this.destinationPath(`${this.options.destination}/api/server/routes.ts`), {value: this.collaborationDiagrams}
+        );
     }
 
     _readData(callback: (result: any) => void) {
@@ -177,6 +202,10 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
         this.fs.write(filename, beautify(this.fs.read(filename), {
             jslint_happy: true, preserve_newlines: false
         }));
+    }
+
+    _getLocationFromPath(path: string | null): string {
+        return (path || '').split('/').map((x: string) => kebabCase(x)).join('/');
     }
 }
 

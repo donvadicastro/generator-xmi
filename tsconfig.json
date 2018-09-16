@@ -59,6 +59,7 @@
   ],
   "exclude": [
     "node_modules",
+    "generators/app/templates/default/bootstrap",
     "**/*.spec.ts"
   ]
 }

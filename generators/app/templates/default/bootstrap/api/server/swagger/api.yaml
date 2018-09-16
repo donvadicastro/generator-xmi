@@ -28,12 +28,3 @@ definitions:
         example: no_stress
 
 paths:
-
-  /process/crawler/scan-article:
-    post:
-      tags:
-        - Process
-      description: Scan article
-      responses:
-        200:
-          description: Returns execution result
