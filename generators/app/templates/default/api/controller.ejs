@@ -1,0 +1,17 @@
+import {Request, Response} from 'express';
+import {eaCollaboration1} from "../../../../../../design/diagrams/crawler/scanArticle/process/eaCollaboration1";
+import {contentManager} from "../../../../../../design/componentModel/managers/components/contentManager";
+import {configManager} from "../../../../../../design/componentModel/managers/components/configManager";
+import {storage} from "../../../../../../design/componentModel/components/components/storage";
+
+export default class Controller {
+    private flow: eaCollaboration1;
+
+    constructor() {
+        this.flow = new eaCollaboration1(new contentManager(), new storage(new configManager(), ), );
+    }
+
+    run(req: Request, res: Response): void {
+        this.flow.run({}).then(ret => res.status(201).json(ret));
+    }
+}

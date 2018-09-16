@@ -1,0 +1,9 @@
+import { Application } from 'express';
+
+/*import*/
+import scanArticleRouter from './routes/process/crawler/scanArticle/router';
+
+export default function routes(app: Application): void {
+    /*route*/
+    app.use('/api/v1/process/crawler/scan-article', scanArticleRouter);
+};
