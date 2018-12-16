@@ -114,6 +114,7 @@ export class xmiComponentFactory {
                 this.instance.lifelineHash.push(<xmiLifeline>element);
                 break;
 
+            case 'uml:CombinedFragment':
             case 'uml:OccurrenceSpecification':
                 element = new xmiFragment(raw, <xmiBase>parent, options);
                 break;

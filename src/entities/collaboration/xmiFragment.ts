@@ -28,11 +28,15 @@ export class xmiFragment extends xmiBase {
             });
 
             covered.forEach((x: string) => {
-                const c = <xmiComponent>xmiComponentFactory.getByKey(x);
+                const c = <xmiComponent | xmiLifeline>xmiComponentFactory.getByKey(x);
                 const self = this;
 
-                c ? c.fragments.push(this) :
+                if(c) {
+                    const fragments = ((<xmiLifeline>c).elementRef || c).fragments;
+                    fragments.indexOf(this) === -1 && fragments.push(this);
+                } else {
                     xmiComponentFactory.resolveKeyDeffered(x, (x) => (<xmiComponent>x).fragments.push(self));
+                }
             });
         }
     }

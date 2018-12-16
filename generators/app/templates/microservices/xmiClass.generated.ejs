@@ -1,0 +1,13 @@
+import {KafkaClientExt} from "../../clients/kafkaClient";
+import {ExchangeConnectorProcessBase} from "../base/processBase";
+import {IMessageBase} from "../../contracts/messages/baseMessage";
+import {Message} from "kafka-node";
+import {DbClient} from "../../clients/dbClient";
+
+/**
+ * <%= entity.name %> actor implementation.
+ */
+export default class <%= entity.name %> extends ExchangeConnectorProcessBase {
+    <%- include('partial/class/constructor', {entity: entity}) -%>
+    <%- include('partial/class/methods', {entity: entity}) -%>
+}

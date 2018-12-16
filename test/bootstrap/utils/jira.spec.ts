@@ -23,7 +23,7 @@ describe('JIRA utils', () => {
         });
     });
 
-    it('should sync file correct', (done) => {
+    xit('should sync file correct', (done) => {
         jest.spyOn(jira, 'call');
 
         jira.syncFile(path.dirname(__dirname) + '\\data\\useCase1.json')

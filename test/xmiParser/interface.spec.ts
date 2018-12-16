@@ -13,7 +13,7 @@ describe('xmiParser', () => {
         it('Verify interface realization', () => {
             const entities = parser.packge.children[0].children;
             const a: xmiClass = entities[0];
-            const b: xmiInterface = entities[1];
+            const b: xmiInterface = entities[2];
 
             //A
             expect(a.attributes.length).toBe(0);

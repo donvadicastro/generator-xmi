@@ -41,7 +41,7 @@ export class xmiCollaboration extends xmiBase {
                 }
 
                 //when lifeline is not presenter in XMI, but message use
-                if(message.to && !this.lifelines.find(x => x.elementRef === message.to.elementRef)) {
+                if(message.to && !this.lifelines.find(x => (x || {}).elementRef === message.to.elementRef)) {
                     const lifeline = xmiComponentFactory.instance.lifelineHash.find(x => x.elementRef === message.to.elementRef);
                     assert(lifeline, `Lifeline for TO(${message.to.elementRef.name}) object not exists: ${this.path.map(x => x.name).join(' -> ')}`);
 

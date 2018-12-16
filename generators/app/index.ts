@@ -12,6 +12,7 @@ import { xmiInterface } from "../../src/entities/xmiInterface";
 import {xmiComponentFactory} from "../../src/factories/xmiComponentFactory";
 import any = jasmine.any;
 import {xmiUseCase} from "../../src/entities/xmiUseCase";
+import * as fs from "fs";
 
 const Generator = require('yeoman-generator');
 const yosay = require('yosay');
@@ -20,6 +21,7 @@ const parseString = require('xml2js').parseString;
 const pascal = require('to-pascal-case');
 const beautify = require('js-beautify').js;
 const kebabCase = require('just-kebab-case');
+const glob = require("glob");
 
 export class XmiGenerator extends (Generator as { new(args: any, opts: any): any; }) {
     type: string = 'default';
@@ -75,10 +77,14 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
     }
 
     _bootstrap() {
-        this.fs.exists(this.destinationPath(this.options.destination)) || this.fs.copy(
-            this.templatePath(`${this.type}/bootstrap`),
-            this.destinationPath(this.options.destination)
-        );
+        if(!this.fs.exists(this.destinationPath(this.options.destination))) {
+            const from = this.templatePath(`${this.type}/bootstrap`);
+            const to = this.destinationPath(this.options.destination);
+            const extra = ['.cfignore', '.env', '.yo-rc.json'];
+
+            this.fs.copy(from, to);
+            extra.forEach(x => this.fs.copy(`${from}/${x}`, `${to}/${x}`));
+        }
     }
 
     _generate(localPath: string | null, pkg: any) {
