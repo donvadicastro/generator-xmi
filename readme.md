@@ -61,7 +61,7 @@ export interface buildingContract {
 }
 ```
 
-#### Implementing interface generation
+#### Interface generation
 **Important!!!** Interface properties are not reflected in object that it implement. Only methods.
 
 ![interface generation](./assets/wiki/images/interface.png)
