@@ -112,7 +112,7 @@ export interface bContract {
 ```
 
 ### Component generation
-![interface generation](./assets/wiki/images/component.png)
+![component generation](./assets/wiki/images/component.png)
 
 C1
 ```typescript
@@ -176,5 +176,68 @@ Out.interface
 ```typescript
 export interface outContract {
     outFn(state: any): Promise < any > ;
+}
+```
+
+### Components dependency generation
+![components dependency generation](./assets/wiki/images/component-dep.png)
+
+* `TelegramBot` and `StorageService` components depends on `ConfidurationService` component
+* Dependent component is injected through component constructor
+* Exposed interfaces are represented as component public methods 
+
+ConfigurationService.generated
+```typescript
+export abstract class configurationServiceBase extends ComponentBase implements configurationServiceContract, configureContract {
+    constructor() { super(); }
+
+    getConfig(state: any): Promise < any > { ... }
+}
+```
+
+StorageService.generated
+```typescript
+export abstract class storageServiceBase extends ComponentBase implements storageServiceContract, persistenseContract {
+    constructor(protected configure: configureContract) {
+        super();
+    }
+
+    save(state: any): Promise < any > {
+        ...
+    }
+}
+```
+
+TelegramBot.generated
+```typescript
+export abstract class telegramBotBase extends ComponentBase implements telegramBotContract, notificationContract, providedInterface1Contract {
+    constructor(protected configure: configureContract) {
+        super();
+    }
+
+    onMessage(state: any): Promise < any > {
+        ...
+    }
+}
+```
+
+Configure.interface
+```typescript
+export interface configureContract {
+    getConfig(state: any): Promise < any > ;
+}
+```
+
+Persistense.interface
+```typescript
+export interface persistenseContract {
+    save(state: any): Promise < any > ;
+}
+```
+
+Notification.interface
+```typescript
+export interface notificationContract {
+    onMessage(state: any): Promise < any > ;
 }
 ```
