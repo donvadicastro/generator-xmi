@@ -315,3 +315,5 @@ export class eaCollaboration1 {
     }
 }
 ```
+
+![UI generation example](./assets/wiki/images/ui-example.png)
