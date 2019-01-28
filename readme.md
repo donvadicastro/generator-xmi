@@ -316,4 +316,5 @@ export class eaCollaboration1 {
 }
 ```
 
+`ts-node design\userInterfaceModel\test\screen_iteraction.ts`
 ![UI generation example](./assets/wiki/images/ui-example.png)
