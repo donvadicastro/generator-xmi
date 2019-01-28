@@ -318,3 +318,42 @@ export class eaCollaboration1 {
 
 `ts-node design\userInterfaceModel\test\screen_iteraction.ts`
 ![UI generation example](./assets/wiki/images/ui-example.png)
+
+### Sequence diagram loop generation
+![Sequence loop](./assets/wiki/images/loop.png)
+
+Loop condition is used to repeat certain sub-flow number of times based on loop condition check result.
+
+When generated - component declaration is extended with additional properties:
+* `loopCondition` - returns condition value to determine should be loop repeated or halted.
+* `loopDelay` - timeout between loop executions.
+
+```typescript
+export abstract class c1Base extends ComponentBase implements c1Contract {
+    constructor() { super(); }
+
+    /**
+     * Loop condition.
+     * Check condition value to determine should be loop repeated or halted.
+     * When function returns TRUE - loop is going to be repeated.
+     */
+    get loopCondition(): boolean {
+        return true;
+    }
+
+    /**
+     * Get loop delay in ms.
+     * This parameter is used to sleep between loop executions.
+     */
+    get loopDelay(): number {
+        return 30 * 1000; //30 sec
+    }
+
+    /**
+     * op1 description.
+     */
+    op1(state: any): Promise < any > {
+        ...
+    }
+}
+```
