@@ -9,6 +9,7 @@ import {TypeConverter} from "../../utils/typeConverter";
 export class xmiAttribute extends xmiBase {
     type: string;
     typeRef: xmiBase | null = null;
+    typeDefaultValue = 'null';
 
     constructor(raw: any, parent: xmiBase | null) {
         super(raw, parent);
@@ -20,6 +21,7 @@ export class xmiAttribute extends xmiBase {
 
         if(TypeConverter.isPrimititive(this.type)) {
             this.type = TypeConverter.convert(this.type);
+            this.typeDefaultValue = TypeConverter.getTypeDefaultValue(this.type);
         } else {
             xmiComponentFactory.getByKeyDeffered(this, 'typeRef', this.type);
         }

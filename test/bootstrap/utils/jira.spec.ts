@@ -1,4 +1,4 @@
-import {JiraClient} from "../../../generators/app/templates/default/bootstrap/utils/jira";
+import {JiraClient} from "../../../generators/monolith/templates/bootstrap/utils/jira";
 const path = require('path');
 
 describe('JIRA utils', () => {

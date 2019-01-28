@@ -1,0 +1,88 @@
+{
+    "name": "generator-xmi",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "webpack --config webpack.config.js --mode none",
+        "test": "tsc && jest"
+    },
+    "author": "",
+    "license": "ISC",
+    "mongo": {
+        "active": false,
+        "url": "mongodb://localhost:27017"
+    },
+    "kafka": {
+        "url": "localhost:9290",
+        "prefix": "custom-",
+        "autoCreateTopics": false,
+        "consumer": {
+            "autoCommit": true,
+            "fetchMaxWaitMs": 1000,
+            "fetchMaxBytes": 1048576,
+            "encoding": "buffer"
+        }
+    },
+    "dependencies": {
+        "chalk": "^2.4.1",
+        "kafka-node": "^3.0.1",
+        "mongodb": "^3.1.6",
+        "websocket": "^1.0.28"
+    },
+    "devDependencies": {
+        "@types/core-js": "^2.5.0",
+        "@types/jest": "^23.3.2",
+        "@types/kafka-node": "^2.0.7",
+        "@types/mongodb": "^3.1.10",
+        "awesome-typescript-loader": "^5.2.1",
+        "chalk": "^2.1.0",
+        "change-case": "^3.0.2",
+        "coveralls": "^3.0.2",
+        "eslint": "^5.9.0",
+        "eslint-config-prettier": "^3.3.0",
+        "eslint-config-xo": "^0.25.0",
+        "eslint-plugin-prettier": "^3.0.0",
+        "husky": "^1.2.0",
+        "jest": "^23.6.0",
+        "lint-staged": "^8.1.0",
+        "prettier": "^1.15.2",
+        "source-map-loader": "^0.2.4",
+        "ts-node": "^7.0.1",
+        "tslint": "^5.11.0",
+        "tslint-loader": "^3.5.4",
+        "typescript": "^3.1.1",
+        "webpack": "^4.21.0",
+        "webpack-cli": "^3.1.2",
+        "yeoman-assert": "^3.1.0",
+        "yeoman-generator": "^2.0.1",
+        "yeoman-test": "^1.7.0",
+        "yosay": "^2.0.1"
+    },
+    "lint-staged": {
+        "*.js": [
+            "eslint --fix",
+            "git add"
+        ],
+        "*.json": [
+            "prettier --write",
+            "git add"
+        ]
+    },
+    "eslintConfig": {
+        "extends": [
+            "xo",
+            "prettier"
+        ],
+        "env": {
+            "jest": true,
+            "node": true
+        },
+        "rules": {
+            "prettier/prettier": "error"
+        },
+        "plugins": [
+            "prettier"
+        ]
+    }
+}

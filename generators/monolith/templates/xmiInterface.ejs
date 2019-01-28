@@ -1,0 +1,37 @@
+import {Promise} from 'es6-promise';
+
+<% (entity.attributes || []).filter(x => x.typeRef).forEach(function (attribute) { %>
+  import {<%= attribute.typeRef.name %>Contract} from '<%= entity.getRelativePath(attribute.typeRef) %>/contracts/<%= attribute.typeRef.name %>';
+<% }) %>
+
+/**
+ * This file is auto-generated. Do not update it's content!
+ */
+export interface <%= entity.name %>Contract {
+  <% (entity.attributes || []).forEach(function (attr) { %>
+    /**
+    * <%= attr.name %> property
+    */
+    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %>;
+  <% }) %>
+
+  <% (entity.operations || []).forEach(function (operation) { %>
+    /**
+    * <%= operation.name %> description.
+    */
+    <%= operation.name %>(state: any): Promise<any>;
+  <% }) %>
+
+    <% if((entity.fragments || []).find(x => x.interactionOperator === 'loop')) { %>
+  /**
+  * Loop condition.
+  */
+  loopCondition: boolean;
+
+  /**
+  * Get loop delay in ms.
+  */
+  loopDelay: number;
+    <% } %>
+
+  }
