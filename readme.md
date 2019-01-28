@@ -25,20 +25,16 @@ where "type" can be next:
 ### Class generation
 ![class diagrams](./assets/wiki/images/class.png)
 
-bulding
 ```typescript
-import { buildingBase } from './generated/building.generated';
-
+// bulding
 export class building extends buildingBase {
     //override base actions to implement own business behaviors
     build(state: any): Promise < any > {
         return super.build(state);
     }
 }
-```
 
-building.generated
-```typescript
+// building.generated
 export abstract class buildingBase extends ComponentBase implements buildingContract {
     code: number = 0;
 
@@ -50,10 +46,8 @@ export abstract class buildingBase extends ComponentBase implements buildingCont
         ...
     }
 }
-```
 
-building.contract
-```typescript
+// building.contract
 export interface buildingContract {
     code: number;
 
@@ -66,16 +60,12 @@ export interface buildingContract {
 
 ![interface generation](./assets/wiki/images/interface.png)
 
-A
 ```typescript
-import { aBase } from './generated/a.generated';
-
+// A
 export class a extends aBase {
 }
-```
 
-A.generated
-```typescript
+// A.generated
 export abstract class aBase extends ComponentBase implements aContract {
     ...
     
@@ -87,18 +77,14 @@ export abstract class aBase extends ComponentBase implements aContract {
         ...
     }
 }
-```
 
-A.contract
-```typescript
+// A.contract
 export interface aContract {
     fn1(state: any): Promise < any > ;
     fn2(state: any): Promise < any > ;
 }
-```
 
-B.contract
-```typescript
+// B.contract
 /**
  * This file is auto-generated. Do not update it's content!
  */
@@ -114,20 +100,15 @@ export interface bContract {
 ### Component generation
 ![component generation](./assets/wiki/images/component.png)
 
-C1
-```typescript
-import { c1Base } from './generated/c1.generated';
-
-export class c1 extends c1Base {}
-```
-
-C1.generated
-
 * input interfaces will be transformed into component constructor injected property
 * output interfaces will be transformed into component public methods
 
 ```typescript
-export abstract class c1Base extends ComponentBase implements c1Contract, outContract, out2Contract {
+// C1
+export class c1 extends c1Base {}
+
+// C1.generated
+export abstract class c1Base extends ComponentBase implements ... {
     // component own property
     attr1: number = 0;
 
@@ -146,14 +127,8 @@ export abstract class c1Base extends ComponentBase implements c1Contract, outCon
         ...
     }
 }
-```
 
-C2.generated
-
-* input interfaces will be transformed into component constructor injected property
-* output interfaces will be transformed into component public methods
-
-```typescript
+// C2.generated
 export abstract class c2Base extends ComponentBase implements c2Contract, inContract {
     constructor(protected out: outContract) {
         super();
@@ -163,17 +138,13 @@ export abstract class c2Base extends ComponentBase implements c2Contract, inCont
         ...
     }
 }
-```
 
-In.interface
-```typescript
+// In.interface
 export interface inContract {
     inFn(state: any): Promise < any > ;
 }
-```
 
-Out.interface
-```typescript
+// Out.interface
 export interface outContract {
     outFn(state: any): Promise < any > ;
 }
@@ -188,16 +159,15 @@ export interface outContract {
 
 ConfigurationService.generated
 ```typescript
-export abstract class configurationServiceBase extends ComponentBase implements configurationServiceContract, configureContract {
+// ConfigurationService.generated
+export abstract class configurationServiceBase extends ComponentBase implements ... {
     constructor() { super(); }
 
     getConfig(state: any): Promise < any > { ... }
 }
-```
 
-StorageService.generated
-```typescript
-export abstract class storageServiceBase extends ComponentBase implements storageServiceContract, persistenseContract {
+// StorageService.generated
+export abstract class storageServiceBase extends ComponentBase implements ... {
     constructor(protected configure: configureContract) {
         super();
     }
@@ -206,11 +176,9 @@ export abstract class storageServiceBase extends ComponentBase implements storag
         ...
     }
 }
-```
 
-TelegramBot.generated
-```typescript
-export abstract class telegramBotBase extends ComponentBase implements telegramBotContract, notificationContract, providedInterface1Contract {
+// TelegramBot.generated
+export abstract class telegramBotBase extends ComponentBase implements ... {
     constructor(protected configure: configureContract) {
         super();
     }
@@ -219,24 +187,18 @@ export abstract class telegramBotBase extends ComponentBase implements telegramB
         ...
     }
 }
-```
 
-Configure.interface
-```typescript
+// Configure.interface
 export interface configureContract {
     getConfig(state: any): Promise < any > ;
 }
-```
 
-Persistense.interface
-```typescript
+// Persistense.interface
 export interface persistenseContract {
     save(state: any): Promise < any > ;
 }
-```
 
-Notification.interface
-```typescript
+// Notification.interface
 export interface notificationContract {
     onMessage(state: any): Promise < any > ;
 }
