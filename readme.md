@@ -203,3 +203,53 @@ export interface notificationContract {
     onMessage(state: any): Promise < any > ;
 }
 ```
+
+### Sequence diagram generation
+![sequence diagram generation](./assets/wiki/images/sequence.png)
+
+* `inputState` is an process initial data
+* All actors injected into process through constructor injection
+* Actions considered as async operations and returned `Promise`
+
+```typescript
+export class eaCollaboration1 {
+    constructor(
+        // Actor1
+        private cmpactor1: actor1Contract,
+
+        // C1
+        private cmpc1: c1Contract,
+
+        // C2
+        private cmpc2: c2Contract) {}
+
+    /**
+    /* Execute process
+    */
+    run(inputState: any) {
+        let flowAsync = Promise.resolve(inputState);
+
+        // Configure state storage
+        flowAsync = flowAsync.then((state: any) => {
+            return storage.init( /* options ... */ );
+        });
+
+        // actor1 call c1
+        flowAsync = flowAsync.then((state: any) => {
+            return this.cmpc1.fn1(state);
+        });
+
+        // c1 call c2
+        flowAsync = flowAsync.then((state: any) => {
+            return this.cmpc2.fn2(state);
+        });
+
+        // c2 call c1
+        flowAsync = flowAsync.then((state: any) => {
+            return this.cmpc1.ret1(state);
+        });
+
+        return flowAsync.catch(x => console.log(chalk.red('ERROR: '), x));
+    }
+}
+```
