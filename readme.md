@@ -22,7 +22,7 @@ where "type" can be next:
 - **microservices** - generates set of individual actors
 
 ## Generation examples
-#### Class generation
+### Class generation
 ![class diagrams](./assets/wiki/images/class.png)
 
 bulding
@@ -61,7 +61,7 @@ export interface buildingContract {
 }
 ```
 
-#### Interface generation
+### Interface generation
 **Important!!!** Interface properties are not reflected in object that it implement. Only methods.
 
 ![interface generation](./assets/wiki/images/interface.png)
@@ -108,5 +108,73 @@ export interface bContract {
     
     fn1(state: any): Promise < any > ;
     fn2(state: any): Promise < any > ;
+}
+```
+
+### Component generation
+![interface generation](./assets/wiki/images/component.png)
+
+C1
+```typescript
+import { c1Base } from './generated/c1.generated';
+
+export class c1 extends c1Base {}
+```
+
+C1.generated
+
+* input interfaces will be transformed into component constructor injected property
+* output interfaces will be transformed into component public methods
+
+```typescript
+export abstract class c1Base extends ComponentBase implements c1Contract, outContract, out2Contract {
+    // component own property
+    attr1: number = 0;
+
+    // constructor injected IN interface
+    constructor(protected in: inContract) {
+        super();
+    }
+    
+    // component own method
+    fn1(state: any): Promise < any > {
+        ...
+    }
+
+    // output defined interface methods
+    outFn(state: any): Promise < any > {
+        ...
+    }
+}
+```
+
+C2.generated
+
+* input interfaces will be transformed into component constructor injected property
+* output interfaces will be transformed into component public methods
+
+```typescript
+export abstract class c2Base extends ComponentBase implements c2Contract, inContract {
+    constructor(protected out: outContract) {
+        super();
+    }
+
+    inFn(state: any): Promise < any > {
+        ...
+    }
+}
+```
+
+In.interface
+```typescript
+export interface inContract {
+    inFn(state: any): Promise < any > ;
+}
+```
+
+Out.interface
+```typescript
+export interface outContract {
+    outFn(state: any): Promise < any > ;
 }
 ```
