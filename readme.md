@@ -253,3 +253,65 @@ export class eaCollaboration1 {
     }
 }
 ```
+
+### UI iteractions generation
+![UI generation](./assets/wiki/images/ui.png)
+
+* Screen can be configured to execute instructions (designed as sequence diagram) when applied to action control (button)
+* By default user input to start process can be obtained though CMD terminal
+
+```typescript
+//process.generated
+export class iteraction {
+    run() {
+        const answers = inquirer.prompt([{
+            type: 'checkbox',
+            name: 'sex',
+            message: 'Enter Sex',
+            choices: ['male', 'female']
+        }, {
+            type: 'textbox',
+            name: 'firstName',
+            message: 'Enter first name'
+        }, {
+            type: '',
+            name: 'lastName',
+            message: 'Enter last name'
+        }, ]);
+
+        const collaboration0 = new eaCollaboration1(new comp1(), new comp2());
+        collaboration0.run(answers);
+    }
+}
+
+//sequence.generated
+export class eaCollaboration1 {
+    constructor(
+        // Comp1
+        private cmpcomp1: comp1Contract,
+
+        // Comp2
+        private cmpcomp2: comp2Contract) {}
+
+    run(inputState: any) {
+        let flowAsync = Promise.resolve(inputState);
+
+        // Configure state storage
+        flowAsync = flowAsync.then((state: any) => {
+            return storage.init( /* options ... */ );
+        });
+
+        // Start call comp1
+        flowAsync = flowAsync.then((state: any) => {
+            return this.cmpcomp1.op1(state);
+        });
+
+        // comp1 call comp2
+        flowAsync = flowAsync.then((state: any) => {
+            return this.cmpcomp2.op2(state);
+        });
+
+        return flowAsync.catch(x => console.log(chalk.red('ERROR: '), x));
+    }
+}
+```
