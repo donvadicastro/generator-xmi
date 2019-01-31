@@ -385,20 +385,42 @@ export class eaCollaboration1 {
 `ts-node design\userInterfaceModel\test\screen_iteraction.ts`
 ![UI generation example](./assets/wiki/images/ui-example.png)
 
-## Generated project structure
+## Generated project
 ### File and directory structure
 * "**api**" - contains all necessary files to start project as local web service
 * "**cmd**" - contains set of executable commands to execute repetative actions
 * "**design**" - contains all EA-related generated files and artifacts: classes, components, diagrams implementation, etc
 * "**utils**" - project specific utilities
 
-### Local web server
+### Build-in commands
 Each generated sequence diagrams can be represented as individual API endpoint so can be triggered by any REST client or from bound Swagger client. Swagger is also added as part of generated project.
 
 Next command will be available after project generation:
-* "api:compile" - compile application
-* "api:start" - start local web server
-* "api:dev" - start local web server in debug mode (with ability to debug)
-* "api:test" - test generated project
+* "**api:compile**" - compile application
+* "**api:start**" - start local web server
+* "**api:dev**" - start local web server in debug mode (with ability to debug)
+* "**api:test**" - test generated project
 
+### Start local web server
 Navigate to "[http://localhost:3000/api-explorer](http://localhost:3000/api-explorer)" to run local Swagger.
+
+### "Design to API" mapping explanation
+#### Sequence diagram as REST API endpoint implementation
+Each sequence diagram presented in model will be translated into individual REST API endpoint that can interact with system through POST method.
+
+##### Example
+Diagram
+![Sequence diagram](./assets/wiki/images/sequence.png)
+
+REST API contract
+![REST API](./assets/wiki/images/api.png)
+
+REST API call
+```CMD
+curl -X POST "http://localhost:3000/api/v1/sequence" -H "accept: application/json"
+
+--> initialize local state storage
+--> c1::fn1: 1 ms
+--> c2::fn2: 0 ms
+--> c1::ret1: 0 ms
+```
