@@ -17,6 +17,9 @@
   * [Sequence diagram loop generation](#sequence-diagram-loop-generation)
 - [User interface diagram](#user-interface-diagram)
   * [UI iteractions generation](#ui-iteractions-generation)
+- [Generated project structure](#generated-project-structure)
+  * [File and directory structure](#file-and-directory-structure)
+  * [Local web server](#local-web-server)
 
 <!-- tocstop -->
 
