@@ -7,7 +7,7 @@
     "build": "tsc",
     "test": "jest",
 
-    "api:start": "node dist/index.js",
+    "api:start": "npm run api:compile && node dist/api/server/index.js",
     "api:compile": "ts-node build.ts && tsc",
     "api:dev": "nodemon api/server/index.ts | pino -o 'short'",
     "api:dev:debug": "nodemon --exec 'node -r ts-node/register --inspect-brk' api/server/index.ts  | pino -o 'short'",
@@ -44,6 +44,7 @@
     "jira-connector": "^2.8.0",
     "mocha": "^5.0.5",
     "nodemon": "^1.18.4",
+    "pino": "^4.17.6",
     "shelljs": "^0.7.8",
     "supertest": "^3.1.0",
     "ts-node": "3.3.0",

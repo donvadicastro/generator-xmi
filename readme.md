@@ -1,19 +1,40 @@
-## Generate solution
+## Table of Contents
+<!-- to regenerate call "markdown-toc -i readme.md" -->
+
+<!-- toc -->
+
+- [Call generatoror](#call-generatoror)
+    + [Call generator with default options](#call-generator-with-default-options)
+    + [Call generator with additional options](#call-generator-with-additional-options)
+- [Class diagram](#class-diagram)
+  * [Interface generation](#interface-generation)
+  * [Class generation](#class-generation)
+- [Component diagram](#component-diagram)
+  * [Component generation](#component-generation)
+  * [Components dependency generation](#components-dependency-generation)
+- [Sequence diagram](#sequence-diagram)
+  * [Sequence diagram generation](#sequence-diagram-generation)
+  * [Sequence diagram loop generation](#sequence-diagram-loop-generation)
+- [User interface diagram](#user-interface-diagram)
+  * [UI iteractions generation](#ui-iteractions-generation)
+
+<!-- tocstop -->
+
+## Call generatoror
 #### Call generator with default options
 ```
 yo xmi <file-path>
 ```
 
-"**<file-path>**" is the path to XMI file and is required option. An error will be thrown when file path not specified.
+* "**file-path**" is the path to XMI file and is required option. An error will be thrown when file path not specified.
 
 Next options will be applied by default:
+* "**type**" (default is "monolith") - type of project hat will be generated
+* "**destination**" (default is "dist") - path, relative to current dir, where project will be generated
 
-- destination: **dist**
-- type: **monolith**
-
-#### Call generator with options
+#### Call generator with additional options
 ```
-yo xmi <file-path> --destination=<destination-path> --type=<type>
+yo xmi <file-path> --destination=<destination> --type=<type>
 ```
 
 where "type" can be next:
@@ -21,40 +42,7 @@ where "type" can be next:
 - **monolith** - default when not specified and generates project as monolith "node"-based application
 - **microservices** - generates set of individual actors
 
-## Generation examples
-### Class generation
-![class diagrams](./assets/wiki/images/class.png)
-
-```typescript
-// bulding
-export class building extends buildingBase {
-    //override base actions to implement own business behaviors
-    build(state: any): Promise < any > {
-        return super.build(state);
-    }
-}
-
-// building.generated
-export abstract class buildingBase extends ComponentBase implements buildingContract {
-    code: number = 0;
-
-    constructor() {
-        super();
-    }
-
-    build(state: any): Promise < any > {
-        ...
-    }
-}
-
-// building.contract
-export interface buildingContract {
-    code: number;
-
-    build(state: any): Promise < any > ;
-}
-```
-
+## Class diagram
 ### Interface generation
 **Important!!!** Interface properties are not reflected in object that it implement. Only methods.
 
@@ -97,6 +85,40 @@ export interface bContract {
 }
 ```
 
+### Class generation
+![class diagrams](./assets/wiki/images/class.png)
+
+```typescript
+// bulding
+export class building extends buildingBase {
+    //override base actions to implement own business behaviors
+    build(state: any): Promise < any > {
+        return super.build(state);
+    }
+}
+
+// building.generated
+export abstract class buildingBase extends ComponentBase implements buildingContract {
+    code: number = 0;
+
+    constructor() {
+        super();
+    }
+
+    build(state: any): Promise < any > {
+        ...
+    }
+}
+
+// building.contract
+export interface buildingContract {
+    code: number;
+
+    build(state: any): Promise < any > ;
+}
+```
+
+## Component diagram
 ### Component generation
 ![component generation](./assets/wiki/images/component.png)
 
@@ -204,6 +226,7 @@ export interface notificationContract {
 }
 ```
 
+## Sequence diagram
 ### Sequence diagram generation
 ![sequence diagram generation](./assets/wiki/images/sequence.png)
 
@@ -254,6 +277,46 @@ export class eaCollaboration1 {
 }
 ```
 
+### Sequence diagram loop generation
+![Sequence loop](./assets/wiki/images/loop.png)
+
+Loop condition is used to repeat certain sub-flow number of times based on loop condition check result.
+
+When generated - component declaration is extended with additional properties:
+* `loopCondition` - returns condition value to determine should be loop repeated or halted.
+* `loopDelay` - timeout between loop executions.
+
+```typescript
+export abstract class c1Base extends ComponentBase implements c1Contract {
+    constructor() { super(); }
+
+    /**
+     * Loop condition.
+     * Check condition value to determine should be loop repeated or halted.
+     * When function returns TRUE - loop is going to be repeated.
+     */
+    get loopCondition(): boolean {
+        return true;
+    }
+
+    /**
+     * Get loop delay in ms.
+     * This parameter is used to sleep between loop executions.
+     */
+    get loopDelay(): number {
+        return 30 * 1000; //30 sec
+    }
+
+    /**
+     * op1 description.
+     */
+    op1(state: any): Promise < any > {
+        ...
+    }
+}
+```
+
+## User interface diagram
 ### UI iteractions generation
 ![UI generation](./assets/wiki/images/ui.png)
 
@@ -319,41 +382,20 @@ export class eaCollaboration1 {
 `ts-node design\userInterfaceModel\test\screen_iteraction.ts`
 ![UI generation example](./assets/wiki/images/ui-example.png)
 
-### Sequence diagram loop generation
-![Sequence loop](./assets/wiki/images/loop.png)
+## Generated project structure
+### File and directory structure
+* "**api**" - contains all necessary files to start project as local web service
+* "**cmd**" - contains set of executable commands to execute repetative actions
+* "**design**" - contains all EA-related generated files and artifacts: classes, components, diagrams implementation, etc
+* "**utils**" - project specific utilities
 
-Loop condition is used to repeat certain sub-flow number of times based on loop condition check result.
+### Local web server
+Each generated sequence diagrams can be represented as individual API endpoint so can be triggered by any REST client or from bound Swagger client. Swagger is also added as part of generated project.
 
-When generated - component declaration is extended with additional properties:
-* `loopCondition` - returns condition value to determine should be loop repeated or halted.
-* `loopDelay` - timeout between loop executions.
+Next command will be available after project generation:
+* "api:compile" - compile application
+* "api:start" - start local web server
+* "api:dev" - start local web server in debug mode (with ability to debug)
+* "api:test" - test generated project
 
-```typescript
-export abstract class c1Base extends ComponentBase implements c1Contract {
-    constructor() { super(); }
-
-    /**
-     * Loop condition.
-     * Check condition value to determine should be loop repeated or halted.
-     * When function returns TRUE - loop is going to be repeated.
-     */
-    get loopCondition(): boolean {
-        return true;
-    }
-
-    /**
-     * Get loop delay in ms.
-     * This parameter is used to sleep between loop executions.
-     */
-    get loopDelay(): number {
-        return 30 * 1000; //30 sec
-    }
-
-    /**
-     * op1 description.
-     */
-    op1(state: any): Promise < any > {
-        ...
-    }
-}
-```
+Navigate to "[http://localhost:3000/api-explorer](http://localhost:3000/api-explorer)" to run local Swagger.

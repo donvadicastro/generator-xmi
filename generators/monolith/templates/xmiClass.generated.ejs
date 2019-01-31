@@ -68,7 +68,7 @@ export abstract class <%= entity.name %>Base extends ComponentBase implements <%
     /**
     * <%= attribute.name %> description.
     */
-    get <%= attribute.name %>(): <%= attribute.typeRef ? attribute.typeRef.name + 'Contract' : attribute.type %> {
+    get <%= attribute.name %>(): <%= attribute.typeRef ? attribute.typeRef.name + 'Contract' : (attribute.type || 'any') %> {
       throw new Error('Not implemented');
     }
     <% }) %>
