@@ -410,9 +410,11 @@ Each sequence diagram presented in model will be translated into individual REST
 
 ##### Example
 Diagram
+
 ![Sequence diagram](./assets/wiki/images/sequence.png)
 
 REST API contract
+
 ![REST API](./assets/wiki/images/api.png)
 
 REST API call
