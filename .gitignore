@@ -9,5 +9,7 @@ node_modules
 *.js.map
 *.css.map
 
-src/**/*.js
-src/**/*.js.map
+*.js
+*.js.map
+
+!generators/monolith/templates/bootstrap/api/public
