@@ -121,6 +121,46 @@ export interface buildingContract {
 }
 ```
 
+### Class association generation
+![class association diagrams](./assets/wiki/images/association.png)
+
+```typescript
+// city
+export abstract class cityBase extends ComponentBase implements cityContract {
+    name: string = '';
+
+    airlineRef: airlineContract | null = null;
+    
+    constructor() {
+        super();
+    }
+}
+
+// airline
+export abstract class airlineBase extends ComponentBase implements airlineContract {
+    name: string = '';
+
+    aircraftRefList: aircraftContract[] = [];
+    
+    cityRef: cityContract | null = null;
+    
+    constructor() {
+        super();
+    }
+}
+
+// aircraft
+export abstract class aircraftBase extends ComponentBase implements aircraftContract {
+    number: string = '';
+
+    airlineRef: airlineContract | null = null;
+    
+    constructor() {
+        super();
+    }
+}
+```
+
 ## Component diagram
 ### Component generation
 ![component generation](./assets/wiki/images/component.png)

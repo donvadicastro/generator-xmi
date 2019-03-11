@@ -1,6 +1,7 @@
 export class TypeConverter {
     private static typesMap: {[key: string]: string} = {
         EAJava_char: 'string',
+        EAJava_String: 'string',
         EAJava_date: 'Date',
         EAJava_int: 'number',
         EAJava_void: 'void',
@@ -9,7 +10,9 @@ export class TypeConverter {
 
         int: 'number',
         char: 'string',
-        boolean: 'boolean'
+        boolean: 'boolean',
+
+        'http://schema.omg.org/spec/UML/2.1/uml.xml#String': 'string'
     };
 
     public static isPrimititive(typeName: string): boolean {

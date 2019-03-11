@@ -53,10 +53,10 @@ describe('xmiParser', () => {
             const airplane = <xmiPackage>parser.packge.children[2] as xmiClass;
 
             expect(aircraft.connections[0].typeRef).toBe(airplane);
-            expect(aircraft.connections[0].multiplicity).toBe("0..*");
+            expect(aircraft.connections[0].multiplicity).toBe("1");
 
             expect(airplane.connections[0].typeRef).toBe(aircraft);
-            expect(airplane.connections[0].multiplicity).toBe("1");
+            expect(airplane.connections[0].multiplicity).toBe("0..*");
         });
 
         it('Verify composition', () => {
