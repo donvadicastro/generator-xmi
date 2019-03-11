@@ -5,15 +5,14 @@ import {xmiPackage} from "../../src/entities/xmiPackage";
 
 describe('xmiParser', () => {
     describe('Classes', () => {
-        const data = readJSONSync('test/data/project2_class.json');
-        const parser = new XmiParser(data);
+        it('Verify custom', () => {
+            const data = readJSONSync('test/data/project2_class.json');
+            const parser = new XmiParser(data);
 
-        parser.parse();
-
-        it('Verify class structure', () => {
+            parser.parse();
             const entities = (<xmiPackage>parser.packge.children[0]).children;
-            const building: xmiClass = <xmiClass>entities[0];
-            const team: xmiClass = <xmiClass>entities[1];
+            const building: xmiClass = <xmiClass>entities[4];
+            const team: xmiClass = <xmiClass>entities[9];
 
             //building
             expect(building.attributes.length).toBe(1);
@@ -42,6 +41,30 @@ describe('xmiParser', () => {
             expect(team.operations[0].parameters[0].type).toBe('number');
             expect(team.operations[0].parameters[1].name).toBe('return');
             expect(team.operations[0].parameters[1].type).toBe('void');
+        });
+
+        it('Verify association', () => {
+            const data = readJSONSync('test/data/project2_class_associations.json');
+            const parser = new XmiParser(data);
+
+            parser.parse();
+
+            const aircraft = <xmiPackage>parser.packge.children[0] as xmiClass;
+            const airplane = <xmiPackage>parser.packge.children[2] as xmiClass;
+
+            expect(aircraft.connections[0].typeRef).toBe(airplane);
+            expect(aircraft.connections[0].multiplicity).toBe("0..*");
+
+            expect(airplane.connections[0].typeRef).toBe(aircraft);
+            expect(airplane.connections[0].multiplicity).toBe("1");
+        });
+
+        it('Verify composition', () => {
+
+        });
+
+        it('Verify generalization', () => {
+
         });
     });
 });

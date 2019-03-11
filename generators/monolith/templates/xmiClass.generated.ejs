@@ -13,6 +13,11 @@ import {<%= entity.name %>Contract} from '../../contracts/<%= entity.name %>';
 <% (entity.required || []).forEach(function (value) { %>
   import {<%= value.name %>Contract} from '../<%= entity.getRelativePath(value.ref) %>/contracts/<%= value.name %>';
 <%})%>
+
+<% (entity.connections || []).forEach(x => { %>
+  import {<%= x.typeRef.name %>Contract} from '../<%= entity.getRelativePath(x.typeRef) %>/contracts/<%= x.typeRef.name %>';
+<% }) %>
+
 import {Promise} from 'es6-promise';
 
 /**
@@ -25,6 +30,16 @@ export abstract class <%= entity.name %>Base extends ComponentBase implements <%
   */
   <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %> = <%- attr.typeDefaultValue %>;
   <% }) %>
+
+  <% (entity.connections || []).forEach(x => { %>
+  /**
+  * <%= x.typeRef.name %> associated reference.
+  */
+  <% if(x.multiplicity === '1') { %>
+    <%= x.typeRef.name %>Ref: <%= x.typeRef.name %>Contract | null = null;
+  <%} else {%>
+    <%= x.typeRef.name %>RefList: <%= x.typeRef.name %>Contract[] = [];
+  <% }}) %>
 
   constructor(
   <% (entity.required || []).map(function (value, i, list) { %>

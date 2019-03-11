@@ -19,7 +19,7 @@ describe('Generators', () => {
                 parser.parse();
 
                 const entities = (<xmiPackage>parser.packge.children[0]).children;
-                const c1: xmiClass = <xmiComponent>entities[0];
+                const c1: xmiClass = <xmiComponent>entities[4];
 
                 it('check generator', async () => {
                     const content = await ejs.renderFile(path.join(dir, 'xmiInterface.ejs'), {entity: c1});
