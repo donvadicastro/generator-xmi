@@ -1,0 +1,27 @@
+import {KafkaClientExt} from '../<%= entity.getRelativeRoot() %>/clients/kafkaClient';
+import {DbClient} from '../<%= entity.getRelativeRoot() %>/clients/dbClient';
+
+<% (entity.lifelines || []).forEach(function (lifeline, index) { %>
+    import <%= lifeline.elementRef.name %> from '<%= entity.getRelativePath(lifeline.elementRef) %>/components/<%= lifeline.elementRef.name %>';
+<% }) %>
+
+DbClient.initialize().then((dbClient: DbClient | null) => {
+    const kafkaClient: KafkaClientExt = new KafkaClientExt();
+    const singleRun: string | boolean = <string>process.argv[2] || false;
+
+    <% (entity.lifelines || []).forEach(function (lifeline, index) { %>
+        const <%= lifeline.elementRef.name %>Process = new <%= lifeline.elementRef.name %>(kafkaClient, dbClient);
+    <% }) %>
+
+    return kafkaClient.initialize().then(() => {
+        <% var msg = null; %>
+        <% (entity.messages || []).forEach(function (message) { %>
+            <% if(message.from) { %>
+                (singleRun === false || singleRun === <%- msg ? `'${message.from.elementRef.name}-${msg}'` : 'null' %>) &&
+                    <%= message.from.elementRef.name %>Process.run(<%- msg ? `['${message.from.elementRef.name}-${msg}']` : 'null' %>, <%- `'${message.to.elementRef.name}-${message.operation.name}'` %>);
+
+                <% msg = message.operation.name; %>
+            <% } %>
+        <% }) %>
+    });
+});

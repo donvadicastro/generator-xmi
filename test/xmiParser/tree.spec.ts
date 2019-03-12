@@ -1,12 +1,17 @@
 import {readJSONSync} from "fs-extra";
 import {XmiParser} from "../../src/xmiParser";
-import {xmiClass} from "../../src/entities/xmiClass";
+
+const assert = require('assert');
+jest.mock('assert');
 
 describe('xmiParser', () => {
+    jest.mock('assert');
+
     describe('Tree', () => {
         const data = readJSONSync('test/data/project1.json');
         const parser = new XmiParser(data);
 
+        assert.mockResolvedValue(true);
         parser.parse();
 
         it('Verify package tree', () => {
@@ -29,9 +34,9 @@ describe('xmiParser', () => {
 
             const entities = pkgTypes[2].children;
             expect(entities[0].name).toBe('building');
-            expect(entities[1].name).toBe('team');
-            expect(entities[2].name).toBe('contracts');
-            expect(entities[2].children[0].name).toBe('iBuild');
+            expect(entities[2].name).toBe('team');
+            expect(entities[3].name).toBe('contracts');
+            expect(entities[3].children[0].name).toBe('iBuild');
         });
     });
 });

@@ -4,6 +4,7 @@ import {xmiPackage} from "./entities/xmiPackage";
 
 export class XmiParser {
     private ELEMENTS_PATH = ['xmi:XMI', 'xmi:Extension', '0', 'elements', '0', 'element'];
+    private CONNECTORS_PATH = ['xmi:XMI', 'xmi:Extension', '0', 'connectors', '0', 'connector'];
     private DIAGRAMS_PATH = ['xmi:XMI', 'xmi:Extension', '0', 'diagrams', '0', 'diagram'];
     private PACKAGE_ROOT = ['xmi:XMI', 'uml:Model', '0', 'packagedElement', '0'];
 
@@ -13,6 +14,7 @@ export class XmiParser {
     private data: any;
 
     elements: any[] = [];
+    connectors: any[] = [];
     diagrams: any;
     packge: xmiPackage | null = null;
 
@@ -21,6 +23,9 @@ export class XmiParser {
     }
 
     parse() {
+        this.connectors = get(this.data, this.CONNECTORS_PATH, [])
+            .map((x: any) => xmiComponentFactory.getConnector(x));
+
         this.elements = get(this.data, this.ELEMENTS_PATH, [])
             .filter((x: any) => x.$.name).map((x: any) => xmiComponentFactory.get(x, null));
 

@@ -8,25 +8,28 @@ import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 const pascal = require('to-pascal-case');
 
 export class xmiInterface extends xmiBase {
-    attributes: xmiAttribute[];
-    operations: xmiOperation[];
+    attributes: xmiAttribute[] = [];
+    operations: xmiOperation[] = [];
 
     constructor(raw: any, parent: xmiPackage | null) {
         super(raw, parent);
+        this.refresh(raw, parent);
+    }
 
-        if(this.raw.ownedAttribute) {
-            this.attributes = this.raw.ownedAttribute
+    refresh(raw: any, parent: xmiPackage | null) {
+        if(raw.ownedAttribute) {
+            this.attributes = raw.ownedAttribute
                 .map((x: any) => <xmiAttribute>xmiComponentFactory.get(x, this));
         } else {
-            this.attributes = get(this.raw, ['attributes', '0', 'attribute'], [])
+            this.attributes = get(raw, ['attributes', '0', 'attribute'], [])
                 .map((x: any) => <xmiAttribute>xmiComponentFactory.get(x, this));
         }
 
-        if(this.raw.ownedOperation) {
-            this.operations = this.raw.ownedOperation
+        if(raw.ownedOperation) {
+            this.operations = raw.ownedOperation
                 .map((x: any) => new xmiOperation(x, this));
         } else {
-            this.operations = get(this.raw, ['operations','0','operation'], [])
+            this.operations = get(raw, ['operations','0','operation'], [])
                 .map((x: any) => new xmiOperation(x, this));
         }
     }

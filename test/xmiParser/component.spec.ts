@@ -52,12 +52,12 @@ describe('xmiParser', () => {
         const parser = new XmiParser(data);
 
         parser.parse();
-        const entities = (<xmiPackage>parser.packge.children[0]).children;
-        const classes = (<xmiPackage>parser.packge.children[1]).children;
+        const entities = ((<xmiPackage>parser.packge).children[0]).children;
+        const classes = ((<xmiPackage>parser.packge).children[1]).children;
 
-        const root: xmiComponent = <xmiComponent>entities[0];
-        const dep1: xmiComponent = <xmiComponent>entities[2];
-        const dep2: xmiComponent = <xmiComponent>entities[1];
+        const root: xmiComponent = <xmiComponent>entities[2];
+        const dep1: xmiComponent = <xmiComponent>entities[4];
+        const dep2: xmiComponent = <xmiComponent>entities[3];
 
         it('Verify component structure', () => {
             expect(root.name).toBe('rootComponent');

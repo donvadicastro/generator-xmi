@@ -1,7 +1,7 @@
 import xmiBase from "../entities/xmiBase";
 import {xmiInterface} from "../entities/xmiInterface";
 import {xmiClass} from "../entities/xmiClass";
-import {xmiLink} from "../entities/xmiLink";
+import {xmiLink} from "../entities/links/xmiLink";
 import {xmiActor} from "../entities/xmiActor";
 // import {xmiComponent} from "../entities/xmiComponent";
 import {xmiPackage} from "../entities/xmiPackage";
@@ -18,13 +18,22 @@ import {xmiLifeline} from "../entities/xmiLifeline";
 import {xmiFragment} from "../entities/collaboration/xmiFragment";
 import {xmiMessage} from "../entities/collaboration/xmiMessage";
 import {xmiComponent} from "../entities/xmiComponent";
+import xmiConnector from "../entities/connectors/xmiConnector";
+import {xmiAssociation} from "../entities/connectors/xmiAssociation";
 const assert = require('assert');
 
+type idHashRef = {source: any, property: string, callback?: (element: xmiBase) => void};
+type idHashFn = (x: xmiBase) => void;
+
 export class xmiComponentFactory {
+
     private _idHash: {[key: string]: xmiBase} = {};
-    private _idHashDeffered: {[key: string]: {source: any, property: string, callback?: (element: xmiBase) => void}} | {[key: string]: (x: xmiBase) => void} = {};
+    private _idHashDeffered: {[key: string]: (idHashRef | idHashFn)[]} = {};
+
     private _dependencyHash: {[key: string]: xmiBase} = {};
     private _classHash: {[name: string]: xmiBase} = {};
+    private _connectorHash: {[name: string]: any} = {};
+
     private _lifelineHash: xmiLifeline[] = [];
     private _initDeffered: any[] = [];
 
@@ -37,6 +46,7 @@ export class xmiComponentFactory {
     get idHash() { return this._idHash; }
     get idHashDeffered() { return this._idHashDeffered; }
     get classHash() { return this._classHash; }
+    get connectorHash() { return this._connectorHash; }
     get lifelineHash(): xmiLifeline[] { return this._lifelineHash; }
     get initDeffered() { return this._initDeffered; }
 
@@ -54,6 +64,10 @@ export class xmiComponentFactory {
                 if (element instanceof xmiScreen || element instanceof xmiGUIElement) {
                     element.parent = parent;
                     element.parseChildren(raw);
+                }
+                // when class already created
+                else if(element instanceof xmiClass) {
+                    element.refresh(raw, <xmiPackage>parent);
                 }
                 // Collaboration as a class can happens when linked to another diagram
                 else if(!(element instanceof xmiCollaboration) && !(element instanceof xmiUMLDiagram)) {
@@ -114,12 +128,17 @@ export class xmiComponentFactory {
                 this.instance.lifelineHash.push(<xmiLifeline>element);
                 break;
 
+            case 'uml:CombinedFragment':
             case 'uml:OccurrenceSpecification':
                 element = new xmiFragment(raw, <xmiBase>parent, options);
                 break;
 
             case 'uml:Message':
                 element = new xmiMessage(raw, <xmiBase>parent, options);
+                break;
+
+            case 'uml:Association':
+                element = new xmiAssociation(raw);
                 break;
 
             default:
@@ -155,6 +174,13 @@ export class xmiComponentFactory {
         return link;
     }
 
+    static getConnector(raw: any) {
+        const connector = new xmiConnector(raw);
+
+        this.instance.connectorHash[raw.$['xmi:idref']] = connector;
+        return connector;
+    }
+
     static registerProvide(raw: any, register: xmiBase) {
         const provide = new xmiInOut(raw, null);
         this.instance._dependencyHash[provide.name] = register;
@@ -181,7 +207,8 @@ export class xmiComponentFactory {
         source[property] = this.getByKey(key);
 
         if (!source[property]) {
-            this.instance.idHashDeffered[key] = {source: source, property: property, callback: callback};
+            this.instance.idHashDeffered[key] || (this.instance.idHashDeffered[key] = []);
+            this.instance.idHashDeffered[key].push({source: source, property: property, callback: callback});
         }
     }
 
@@ -192,7 +219,8 @@ export class xmiComponentFactory {
      * @param {string} key
      */
     static resolveKeyDeffered(key: string, callback: (x: xmiBase) => void) {
-        this.instance.idHashDeffered[key] = callback;
+        this.instance.idHashDeffered[key] || (this.instance.idHashDeffered[key] = []);
+        this.instance.idHashDeffered[key].push(callback);
     }
 
     static initialize() {
@@ -204,33 +232,34 @@ export class xmiComponentFactory {
      */
     static updateRefs() {
         for(let key in this.instance.idHashDeffered) {
-            const ref = this.instance.idHashDeffered[key];
-            const matchClassName = /EAJava_(\w+(__)?)/.exec(key);
-            let link = this.instance.idHash[key];
+            this.instance.idHashDeffered[key].forEach((ref: idHashFn | idHashRef) => {
+                const matchClassName = /EAJava_(\w+(__)?)/.exec(key);
+                let link = this.instance.idHash[key];
 
-            //key can be link to class name
-            if(matchClassName && matchClassName.length > 1) {
-                link = this.instance.classHash[matchClassName[1].replace('__', '')];
-            }
-
-            assert(link, `No link for "${key}"`);
-
-            // this.instance.idHash[key] || console.log(`Null ref for "${ref.property}": ${key}`);
-            // assert(this.instance.idHash[key], `Null ref for "${ref.property}": ${key}`);
-
-            if(typeof ref === 'function') {
-                ref(this.instance.idHash[key]);
-            } else {
-                const element = this.instance.idHash[key];
-
-                if (Array.isArray(ref.source[ref.property])) {
-                    ref.source[ref.property].push(element);
-                } else {
-                    ref.source[ref.property] = element;
+                //key can be link to class name
+                if(matchClassName && matchClassName.length > 1) {
+                    link = this.instance.classHash[matchClassName[1].replace('__', '')];
                 }
 
-                ref.callback && ref.callback(this.instance.idHash[key]);
-            }
+                assert(link, `No link for "${key}"`);
+
+                // this.instance.idHash[key] || console.log(`Null ref for "${ref.property}": ${key}`);
+                // assert(this.instance.idHash[key], `Null ref for "${ref.property}": ${key}`);
+
+                if(typeof ref === 'function') {
+                    ref(this.instance.idHash[key]);
+                } else {
+                    const element = this.instance.idHash[key];
+
+                    if (Array.isArray(ref.source[ref.property])) {
+                        ref.source[ref.property].push(element);
+                    } else {
+                        ref.source[ref.property] = element;
+                    }
+
+                    ref.callback && ref.callback(this.instance.idHash[key]);
+                }
+            });
         }
 
         this.instance._idHashDeffered = {};

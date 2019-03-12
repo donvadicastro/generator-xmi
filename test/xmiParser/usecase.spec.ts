@@ -5,7 +5,7 @@ import {XmiParser} from "../../src/xmiParser";
 import {xmiUseCase} from "../../src/entities/xmiUseCase";
 
 describe('xmiParser', () => {
-    describe('Components', () => {
+    describe('UseCase', () => {
         const data = readJSONSync('test/data/project12_usecase.json');
         const parser = new XmiParser(data);
 

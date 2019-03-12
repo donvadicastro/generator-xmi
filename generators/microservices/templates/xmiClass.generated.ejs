@@ -1,0 +1,15 @@
+import {KafkaClientExt} from "../../<%= entity.getRelativeRoot() %>/clients/kafkaClient";
+import {ExchangeConnectorProcessBase} from "../../<%= entity.getRelativeRoot() %>/process/base/processBase";
+import {IMessageBase} from "../../<%= entity.getRelativeRoot() %>/contracts/messages/baseMessage";
+import {Message} from "kafka-node";
+import {DbClient} from "../../<%= entity.getRelativeRoot() %>/clients/dbClient";
+
+const config = require('../../<%= entity.getRelativeRoot() %>/package.json');
+
+/**
+ * <%= entity.name %> actor implementation.
+ */
+export default class <%= entity.name %>Base extends ExchangeConnectorProcessBase {
+    <%- include('partial/class/constructor', {entity: entity}) -%>
+    <%- include('partial/class/methods', {entity: entity}) -%>
+}

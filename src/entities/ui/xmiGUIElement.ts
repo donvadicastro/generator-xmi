@@ -1,6 +1,6 @@
 import xmiBase from "../xmiBase";
 import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
-import {xmiLink} from "../xmiLink";
+import {xmiLink} from "../links/xmiLink";
 import {xmiUMLDiagram} from "../diagrams/xmiUMLDiagram";
 import {xmiPackage} from "../xmiPackage";
 

@@ -1,0 +1,1167 @@
+{
+  "xmi:XMI": {
+    "$": {
+      "xmi:version": "2.1",
+      "xmlns:uml": "http://schema.omg.org/spec/UML/2.1",
+      "xmlns:xmi": "http://schema.omg.org/spec/XMI/2.1"
+    },
+    "xmi:Documentation": [
+      {
+        "$": {
+          "exporter": "Enterprise Architect",
+          "exporterVersion": "6.5"
+        }
+      }
+    ],
+    "uml:Model": [
+      {
+        "$": {
+          "xmi:type": "uml:Model",
+          "name": "EA_Model",
+          "visibility": "public"
+        },
+        "packagedElement": [
+          {
+            "$": {
+              "xmi:type": "uml:Package",
+              "xmi:id": "EAPK_65A02696_4F13_4014_B347_A4397DCAF1F8",
+              "name": "Basic Class Diagram with Multiplicities",
+              "visibility": "public"
+            },
+            "packagedElement": [
+              {
+                "$": {
+                  "xmi:type": "uml:Class",
+                  "xmi:id": "EAID_C33DD96C_E7BB_4a07_B87A_3007626A2EF7",
+                  "name": "Aircraft",
+                  "visibility": "public"
+                }
+              },
+              {
+                "$": {
+                  "xmi:type": "uml:Association",
+                  "xmi:id": "EAID_A1BF09F8_9D48_42b2_A5BD_C792A296AB35",
+                  "visibility": "public"
+                },
+                "memberEnd": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_dstBF09F8_9D48_42b2_A5BD_C792A296AB35"
+                    }
+                  },
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_srcBF09F8_9D48_42b2_A5BD_C792A296AB35"
+                    }
+                  }
+                ],
+                "ownedEnd": [
+                  {
+                    "$": {
+                      "xmi:type": "uml:Property",
+                      "xmi:id": "EAID_dstBF09F8_9D48_42b2_A5BD_C792A296AB35",
+                      "visibility": "public",
+                      "association": "EAID_A1BF09F8_9D48_42b2_A5BD_C792A296AB35",
+                      "isStatic": "false",
+                      "isReadOnly": "false",
+                      "isDerived": "false",
+                      "isOrdered": "false",
+                      "isUnique": "true",
+                      "isDerivedUnion": "false",
+                      "aggregation": "none"
+                    },
+                    "type": [
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_AB62EB0D_A547_4053_8524_98110CDC0545"
+                        }
+                      }
+                    ],
+                    "lowerValue": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:LiteralInteger",
+                          "xmi:id": "EAID_LI000001__9D48_42b2_A5BD_C792A296AB35",
+                          "value": "1"
+                        }
+                      }
+                    ],
+                    "upperValue": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:LiteralInteger",
+                          "xmi:id": "EAID_LI000002__9D48_42b2_A5BD_C792A296AB35",
+                          "value": "1"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Property",
+                      "xmi:id": "EAID_srcBF09F8_9D48_42b2_A5BD_C792A296AB35",
+                      "visibility": "public",
+                      "association": "EAID_A1BF09F8_9D48_42b2_A5BD_C792A296AB35",
+                      "isStatic": "false",
+                      "isReadOnly": "false",
+                      "isDerived": "false",
+                      "isOrdered": "false",
+                      "isUnique": "true",
+                      "isDerivedUnion": "false",
+                      "aggregation": "none"
+                    },
+                    "type": [
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_C33DD96C_E7BB_4a07_B87A_3007626A2EF7"
+                        }
+                      }
+                    ],
+                    "lowerValue": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:LiteralInteger",
+                          "xmi:id": "EAID_LI000003__9D48_42b2_A5BD_C792A296AB35",
+                          "value": "0"
+                        }
+                      }
+                    ],
+                    "upperValue": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:LiteralUnlimitedNatural",
+                          "xmi:id": "EAID_LI000004__9D48_42b2_A5BD_C792A296AB35",
+                          "value": "-1"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:type": "uml:Class",
+                  "xmi:id": "EAID_AB62EB0D_A547_4053_8524_98110CDC0545",
+                  "name": "Airline",
+                  "visibility": "public"
+                }
+              },
+              {
+                "$": {
+                  "xmi:type": "uml:Association",
+                  "xmi:id": "EAID_CF5F0A12_1B65_4639_8597_883E55A3D1E3",
+                  "visibility": "public"
+                },
+                "memberEnd": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_dst5F0A12_1B65_4639_8597_883E55A3D1E3"
+                    }
+                  },
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_src5F0A12_1B65_4639_8597_883E55A3D1E3"
+                    }
+                  }
+                ],
+                "ownedEnd": [
+                  {
+                    "$": {
+                      "xmi:type": "uml:Property",
+                      "xmi:id": "EAID_src5F0A12_1B65_4639_8597_883E55A3D1E3",
+                      "visibility": "public",
+                      "association": "EAID_CF5F0A12_1B65_4639_8597_883E55A3D1E3",
+                      "isStatic": "false",
+                      "isReadOnly": "false",
+                      "isDerived": "false",
+                      "isOrdered": "false",
+                      "isUnique": "true",
+                      "isDerivedUnion": "false",
+                      "aggregation": "none"
+                    },
+                    "type": [
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_190B6996_C183_40e4_B37B_BBDE21270782"
+                        }
+                      }
+                    ],
+                    "lowerValue": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:LiteralInteger",
+                          "xmi:id": "EAID_LI000005__1B65_4639_8597_883E55A3D1E3",
+                          "value": "1"
+                        }
+                      }
+                    ],
+                    "upperValue": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:LiteralInteger",
+                          "xmi:id": "EAID_LI000006__1B65_4639_8597_883E55A3D1E3",
+                          "value": "1"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Property",
+                      "xmi:id": "EAID_dst5F0A12_1B65_4639_8597_883E55A3D1E3",
+                      "visibility": "public",
+                      "association": "EAID_CF5F0A12_1B65_4639_8597_883E55A3D1E3",
+                      "isStatic": "false",
+                      "isReadOnly": "false",
+                      "isDerived": "false",
+                      "isOrdered": "false",
+                      "isUnique": "true",
+                      "isDerivedUnion": "false",
+                      "aggregation": "none"
+                    },
+                    "type": [
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_AB62EB0D_A547_4053_8524_98110CDC0545"
+                        }
+                      }
+                    ],
+                    "lowerValue": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:LiteralInteger",
+                          "xmi:id": "EAID_LI000007__1B65_4639_8597_883E55A3D1E3",
+                          "value": "0"
+                        }
+                      }
+                    ],
+                    "upperValue": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:LiteralInteger",
+                          "xmi:id": "EAID_LI000008__1B65_4639_8597_883E55A3D1E3",
+                          "value": "1"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:type": "uml:Class",
+                  "xmi:id": "EAID_190B6996_C183_40e4_B37B_BBDE21270782",
+                  "name": "City",
+                  "visibility": "public"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "xmi:Extension": [
+      {
+        "$": {
+          "extender": "Enterprise Architect",
+          "extenderID": "6.5"
+        },
+        "elements": [
+          {
+            "element": [
+              {
+                "$": {
+                  "xmi:idref": "EAPK_65A02696_4F13_4014_B347_A4397DCAF1F8",
+                  "xmi:type": "uml:Package",
+                  "name": "Basic Class Diagram with Multiplicities",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package2": "EAID_65A02696_4F13_4014_B347_A4397DCAF1F8",
+                      "package": "EAPK_7D9C433C_85C7_4de6_A8EA_DCE62A1207B1",
+                      "tpos": "3",
+                      "ea_localid": "2",
+                      "ea_eleType": "package"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Package",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-02-01 18:11:18",
+                      "modified": "2018-01-29 11:06:12",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Model"
+                    }
+                  }
+                ],
+                "packageproperties": [
+                  {
+                    "$": {
+                      "version": "1.0",
+                      "tpos": "3"
+                    }
+                  }
+                ],
+                "paths": [
+                  ""
+                ],
+                "times": [
+                  {
+                    "$": {
+                      "created": "2019-02-01 18:11:18",
+                      "modified": "2019-02-01 18:11:18",
+                      "lastloaddate": "2018-01-29 11:00:20",
+                      "lastsavedate": "2018-01-29 11:00:20"
+                    }
+                  }
+                ],
+                "flags": [
+                  {
+                    "$": {
+                      "iscontrolled": "FALSE",
+                      "isprotected": "FALSE",
+                      "batchsave": "0",
+                      "batchload": "0",
+                      "usedtd": "FALSE",
+                      "logxml": "FALSE"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_C33DD96C_E7BB_4a07_B87A_3007626A2EF7",
+                  "xmi:type": "uml:Class",
+                  "name": "Aircraft",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_65A02696_4F13_4014_B347_A4397DCAF1F8",
+                      "tpos": "0",
+                      "ea_localid": "3",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Class",
+                      "nType": "0",
+                      "scope": "public",
+                      "isRoot": "false",
+                      "isLeaf": "false",
+                      "isAbstract": "false",
+                      "isActive": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-02-01 18:11:18",
+                      "modified": "2019-02-01 18:12:44",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Basic Class Diagram with Multiplicities"
+                    }
+                  }
+                ],
+                "links": [
+                  {
+                    "Association": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_A1BF09F8_9D48_42b2_A5BD_C792A296AB35",
+                          "start": "EAID_C33DD96C_E7BB_4a07_B87A_3007626A2EF7",
+                          "end": "EAID_AB62EB0D_A547_4053_8524_98110CDC0545"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_AB62EB0D_A547_4053_8524_98110CDC0545",
+                  "xmi:type": "uml:Class",
+                  "name": "Airline",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_65A02696_4F13_4014_B347_A4397DCAF1F8",
+                      "tpos": "0",
+                      "ea_localid": "2",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Class",
+                      "nType": "0",
+                      "scope": "public",
+                      "isRoot": "false",
+                      "isLeaf": "false",
+                      "isAbstract": "false",
+                      "isActive": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-02-01 18:11:18",
+                      "modified": "2019-02-01 18:12:57",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "product_name": "<none>",
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Basic Class Diagram with Multiplicities"
+                    }
+                  }
+                ],
+                "links": [
+                  {
+                    "Association": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_A1BF09F8_9D48_42b2_A5BD_C792A296AB35",
+                          "start": "EAID_C33DD96C_E7BB_4a07_B87A_3007626A2EF7",
+                          "end": "EAID_AB62EB0D_A547_4053_8524_98110CDC0545"
+                        }
+                      },
+                      {
+                        "$": {
+                          "xmi:id": "EAID_CF5F0A12_1B65_4639_8597_883E55A3D1E3",
+                          "start": "EAID_190B6996_C183_40e4_B37B_BBDE21270782",
+                          "end": "EAID_AB62EB0D_A547_4053_8524_98110CDC0545"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_190B6996_C183_40e4_B37B_BBDE21270782",
+                  "xmi:type": "uml:Class",
+                  "name": "City",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_65A02696_4F13_4014_B347_A4397DCAF1F8",
+                      "tpos": "0",
+                      "ea_localid": "8",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Class",
+                      "nType": "0",
+                      "scope": "public",
+                      "isRoot": "false",
+                      "isLeaf": "false",
+                      "isAbstract": "false",
+                      "isActive": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-03-11 21:51:20",
+                      "modified": "2019-03-11 21:51:24",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "Java"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Basic Class Diagram with Multiplicities"
+                    }
+                  }
+                ],
+                "links": [
+                  {
+                    "Association": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_CF5F0A12_1B65_4639_8597_883E55A3D1E3",
+                          "start": "EAID_190B6996_C183_40e4_B37B_BBDE21270782",
+                          "end": "EAID_AB62EB0D_A547_4053_8524_98110CDC0545"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "connectors": [
+          {
+            "connector": [
+              {
+                "$": {
+                  "xmi:idref": "EAID_A1BF09F8_9D48_42b2_A5BD_C792A296AB35"
+                },
+                "source": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_C33DD96C_E7BB_4a07_B87A_3007626A2EF7"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "3",
+                          "type": "Class",
+                          "name": "Aircraft"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "multiplicity": "0..*",
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Unspecified;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "target": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_AB62EB0D_A547_4053_8524_98110CDC0545"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "2",
+                          "type": "Class",
+                          "name": "Airline"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "multiplicity": "1",
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Unspecified;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "model": [
+                  {
+                    "$": {
+                      "ea_localid": "1"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "ea_type": "Association",
+                      "direction": "Unspecified"
+                    }
+                  }
+                ],
+                "modifiers": [
+                  {
+                    "$": {
+                      "isRoot": "false",
+                      "isLeaf": "false"
+                    }
+                  }
+                ],
+                "parameterSubstitutions": [
+                  ""
+                ],
+                "documentation": [
+                  ""
+                ],
+                "appearance": [
+                  {
+                    "$": {
+                      "linemode": "3",
+                      "linecolor": "-1",
+                      "linewidth": "0",
+                      "seqno": "0",
+                      "headStyle": "0",
+                      "lineStyle": "0"
+                    }
+                  }
+                ],
+                "labels": [
+                  {
+                    "$": {
+                      "lb": "0..*",
+                      "rb": "1"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "virtualInheritance": "0"
+                    }
+                  }
+                ],
+                "style": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "tags": [
+                  ""
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_CF5F0A12_1B65_4639_8597_883E55A3D1E3"
+                },
+                "source": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_190B6996_C183_40e4_B37B_BBDE21270782"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "8",
+                          "type": "Class",
+                          "name": "City"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "multiplicity": "1",
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Unspecified;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "target": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_AB62EB0D_A547_4053_8524_98110CDC0545"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "2",
+                          "type": "Class",
+                          "name": "Airline"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "multiplicity": "0..1",
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Unspecified;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "model": [
+                  {
+                    "$": {
+                      "ea_localid": "4"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "ea_type": "Association",
+                      "direction": "Unspecified"
+                    }
+                  }
+                ],
+                "modifiers": [
+                  {
+                    "$": {
+                      "isRoot": "false",
+                      "isLeaf": "false"
+                    }
+                  }
+                ],
+                "parameterSubstitutions": [
+                  ""
+                ],
+                "documentation": [
+                  ""
+                ],
+                "appearance": [
+                  {
+                    "$": {
+                      "linemode": "3",
+                      "linecolor": "-1",
+                      "linewidth": "0",
+                      "seqno": "0",
+                      "headStyle": "0",
+                      "lineStyle": "0"
+                    }
+                  }
+                ],
+                "labels": [
+                  {
+                    "$": {
+                      "lb": "1",
+                      "rb": "0..1"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "virtualInheritance": "0"
+                    }
+                  }
+                ],
+                "style": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "tags": [
+                  ""
+                ]
+              }
+            ]
+          }
+        ],
+        "primitivetypes": [
+          {
+            "packagedElement": [
+              {
+                "$": {
+                  "xmi:type": "uml:Package",
+                  "xmi:id": "EAPrimitiveTypesPackage",
+                  "name": "EA_PrimitiveTypes_Package",
+                  "visibility": "public"
+                }
+              }
+            ]
+          }
+        ],
+        "profiles": [
+          ""
+        ],
+        "diagrams": [
+          {
+            "diagram": [
+              {
+                "$": {
+                  "xmi:id": "EAID_B734AF96_49AB_4f2b_A0BE_F29E6D450A1B"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_65A02696_4F13_4014_B347_A4397DCAF1F8",
+                      "localID": "1",
+                      "owner": "EAPK_65A02696_4F13_4014_B347_A4397DCAF1F8"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "Basic Class Diagram with Multiplicities",
+                      "type": "Logical"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "created": "2019-02-01 18:11:18",
+                      "modified": "2019-03-11 21:52:08"
+                    }
+                  }
+                ],
+                "style1": [
+                  {
+                    "$": {
+                      "value": "ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=1;DocSize.cx=826;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AllDockable=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"
+                    }
+                  }
+                ],
+                "style2": [
+                  {
+                    "$": {
+                      "value": "ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=7AAE6A78;"
+                    }
+                  }
+                ],
+                "swimlanes": [
+                  {
+                    "$": {
+                      "value": "locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;hh=0;cls=0;bw=0;hli=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"
+                    }
+                  }
+                ],
+                "matrixitems": [
+                  {
+                    "$": {
+                      "value": "locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  ""
+                ],
+                "elements": [
+                  {
+                    "element": [
+                      {
+                        "$": {
+                          "geometry": "Left=410;Top=270;Right=510;Bottom=350;",
+                          "subject": "EAID_190B6996_C183_40e4_B37B_BBDE21270782",
+                          "seqno": "1",
+                          "style": "DUID=6D0D11A5;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=399;Top=100;Right=516;Bottom=171;",
+                          "subject": "EAID_AB62EB0D_A547_4053_8524_98110CDC0545",
+                          "seqno": "2",
+                          "style": "ImageID=0;DUID=C42C9DEE;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=100;Top=100;Right=217;Bottom=171;",
+                          "subject": "EAID_C33DD96C_E7BB_4a07_B87A_3007626A2EF7",
+                          "seqno": "3",
+                          "style": "ImageID=0;DUID=EDE6882F;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=CX=18:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;",
+                          "subject": "EAID_CF5F0A12_1B65_4639_8597_883E55A3D1E3",
+                          "style": "Mode=3;EOID=C42C9DEE;SOID=6D0D11A5;Color=-1;LWidth=0;Hidden=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "SX=-6;SY=-2;EX=-57;EY=-2;EDGE=2;$LLB=CX=17:CY=13:OX=6:OY=3:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LLT=;LMT=;LMB=;LRT=;LRB=CX=6:CY=13:OX=-6:OY=3:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;IRHS=;ILHS=;Path=;",
+                          "subject": "EAID_A1BF09F8_9D48_42b2_A5BD_C792A296AB35",
+                          "style": "Mode=3;EOID=C42C9DEE;SOID=EDE6882F;Color=-1;LWidth=0;Hidden=0;"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

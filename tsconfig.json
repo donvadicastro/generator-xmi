@@ -59,7 +59,8 @@
   ],
   "exclude": [
     "node_modules",
-    "generators/app/templates/default/bootstrap",
+    "generators/monolith/templates/bootstrap",
+    "generators/microservices/templates/bootstrap",
     "**/*.spec.ts"
   ]
 }

@@ -1,11 +1,10 @@
 import {xmiClass} from "./xmiClass";
-import {xmiLink} from "./xmiLink";
+import {xmiLink} from "./links/xmiLink";
 import {xmiPackage} from "./xmiPackage";
 import {xmiInOut} from "./component/xmiInOut";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 
 export class xmiComponent extends xmiClass {
-    links: {sequence: xmiLink[], usage: xmiLink[]} = {sequence: [], usage: []};
 
     provided: xmiInOut[] | null = null;
     required: xmiInOut[] | null = null;
