@@ -8,11 +8,14 @@ export class TypeConverter {
         EAJava_boolean: 'boolean',
         EAJava_float: 'number',
 
+        EAnone_void: 'void',
+
         int: 'number',
         char: 'string',
         boolean: 'boolean',
 
-        'http://schema.omg.org/spec/UML/2.1/uml.xml#String': 'string'
+        'http://schema.omg.org/spec/UML/2.1/uml.xml#String': 'string',
+        'http://schema.omg.org/spec/UML/2.1/uml.xml#Integer': 'number'
     };
 
     public static isPrimititive(typeName: string): boolean {
