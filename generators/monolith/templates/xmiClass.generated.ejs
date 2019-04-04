@@ -14,7 +14,7 @@ import {<%= entity.name %>Contract} from '../../contracts/<%= entity.name %>';
   import {<%= value.name %>Contract} from '../<%= entity.getRelativePath(value.ref) %>/contracts/<%= value.name %>';
 <%})%>
 
-<% (entity.associations || []).forEach(x => { %>
+<% (entity.associationLinks || []).forEach(x => { %>
   import {<%= x.typeRef.name %>Contract} from '../<%= entity.getRelativePath(x.typeRef) %>/contracts/<%= x.typeRef.name %>';
 <% }) %>
 
@@ -31,7 +31,7 @@ export abstract class <%= entity.name %>Base extends ComponentBase implements <%
   <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %> = <%- attr.typeDefaultValue %>;
   <% }) %>
 
-  <% (entity.associations || []).forEach(x => { %>
+  <% (entity.associationLinks || []).forEach(x => { %>
   /**
   * <%= x.typeRef.name %> associated reference.
   */

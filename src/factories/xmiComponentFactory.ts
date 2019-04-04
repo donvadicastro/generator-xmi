@@ -20,6 +20,7 @@ import {xmiMessage} from "../entities/collaboration/xmiMessage";
 import {xmiComponent} from "../entities/xmiComponent";
 import xmiConnector from "../entities/connectors/xmiConnector";
 import {xmiAssociation} from "../entities/connectors/xmiAssociation";
+import {xmiGeneralization} from "../entities/connectors/xmiGeneralization";
 const assert = require('assert');
 
 type idHashRef = {source: any, property: string, callback?: (element: xmiBase) => void};

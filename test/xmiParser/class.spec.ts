@@ -54,11 +54,11 @@ describe('xmiParser', () => {
             const aircraft = pkg.children[0] as xmiClass;
             const airplane = pkg.children[2] as xmiClass;
 
-            expect(aircraft.associations[0].typeRef).toBe(airplane);
-            expect(aircraft.associations[0].multiplicity).toBe("1");
+            expect(aircraft.associationLinks[0].typeRef).toBe(airplane);
+            expect(aircraft.associationLinks[0].multiplicity).toBe("1");
 
-            expect(airplane.associations[0].typeRef).toBe(aircraft);
-            expect(airplane.associations[0].multiplicity).toBe("0..*");
+            expect(airplane.associationLinks[0].typeRef).toBe(aircraft);
+            expect(airplane.associationLinks[0].multiplicity).toBe("0..*");
         });
 
         it('Verify composition', () => {
@@ -80,18 +80,25 @@ describe('xmiParser', () => {
             const person = pkg.children[5] as xmiClass;
             const student = pkg.children[6] as xmiClass;
 
-            expect(a.generalizations.length).toBe(4);
-            expect(a.generalizations[0].typeRef).toBe(a1);
-            expect(a.generalizations[1].typeRef).toBe(a2);
-            expect(a.generalizations[2].typeRef).toBe(a4);
-            expect(a.generalizations[3].typeRef).toBe(a3);
+            expect(a.generalizationLinks.length).toBe(4);
+            expect(a.generalizationLinks[0].typeRef).toBe(a1);
+            expect(a.generalizationLinks[1].typeRef).toBe(a2);
+            expect(a.generalizationLinks[2].typeRef).toBe(a4);
+            expect(a.generalizationLinks[3].typeRef).toBe(a3);
+            expect(a.generalizationLinksTo).toBeNull();
 
-            expect(a1.generalizations.length).toBe(1);
-            expect(a1.generalizations[0].typeRef).toBe(a);
+            expect(a1.generalizationLinks.length).toBe(1);
+            expect(a1.generalizationLinks[0].typeRef).toBe(a);
+            expect(a1.generalizationLinksTo).toBe(a);
 
-            expect(person.generalizations.length).toBe(1);
-            expect(person.generalizations[0].typeRef).toBe(student);
-            expect(student.generalizations[0].typeRef).toBe(person);
+            expect(a2.generalizationLinks.length).toBe(1);
+            expect(a2.generalizationLinks[0].typeRef).toBe(a);
+            expect(a2.generalizationLinksTo).toBe(a);
+
+            expect(person.generalizationLinks.length).toBe(1);
+            expect(person.generalizationLinks[0].typeRef).toBe(student);
+            expect(student.generalizationLinks[0].typeRef).toBe(person);
+            expect(student.generalizationLinksTo).toBe(person);
         });
     });
 });
