@@ -161,6 +161,38 @@ export abstract class aircraftBase extends ComponentBase implements aircraftCont
 }
 ```
 
+### Class generalization generation
+![class generalization diagrams](./assets/wiki/images/generalization.png)
+
+```typescript
+// person
+export abstract class personBase extends ComponentBase implements personContract {
+    firstName: string = '';
+    lastName: string = '';
+
+    constructor() { super(); }
+
+    getFirstName(state: any): Promise < any > {
+        ...
+    }
+}
+
+// student
+export abstract class studentBase extends personBase implements studentContract {
+    specialization: string = '';
+
+    constructor() { super(); }
+
+    checkExam(state: any): Promise < any > {
+        ...
+    }
+
+    getFirstName(state: any): Promise < any > {
+        ...
+    }
+}
+```
+
 ## Component diagram
 ### Component generation
 ![component generation](./assets/wiki/images/component.png)
