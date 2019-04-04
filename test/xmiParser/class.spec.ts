@@ -10,7 +10,8 @@ describe('xmiParser', () => {
             const parser = new XmiParser(data);
 
             parser.parse();
-            const entities = (<xmiPackage>parser.packge.children[0]).children;
+            const pkg = <xmiPackage>parser.packge;
+            const entities = (<xmiPackage>pkg.children[0]).children;
             const building: xmiClass = <xmiClass>entities[4];
             const team: xmiClass = <xmiClass>entities[9];
 
@@ -49,14 +50,15 @@ describe('xmiParser', () => {
 
             parser.parse();
 
-            const aircraft = <xmiPackage>parser.packge.children[0] as xmiClass;
-            const airplane = <xmiPackage>parser.packge.children[2] as xmiClass;
+            const pkg = <xmiPackage>parser.packge;
+            const aircraft = pkg.children[0] as xmiClass;
+            const airplane = pkg.children[2] as xmiClass;
 
-            expect(aircraft.connections[0].typeRef).toBe(airplane);
-            expect(aircraft.connections[0].multiplicity).toBe("1");
+            expect(aircraft.associationLinks[0].typeRef).toBe(airplane);
+            expect(aircraft.associationLinks[0].multiplicity).toBe("1");
 
-            expect(airplane.connections[0].typeRef).toBe(aircraft);
-            expect(airplane.connections[0].multiplicity).toBe("0..*");
+            expect(airplane.associationLinks[0].typeRef).toBe(aircraft);
+            expect(airplane.associationLinks[0].multiplicity).toBe("0..*");
         });
 
         it('Verify composition', () => {
@@ -64,7 +66,39 @@ describe('xmiParser', () => {
         });
 
         it('Verify generalization', () => {
+            const data = readJSONSync('test/data/project2_class_inheritance.json');
+            const parser = new XmiParser(data);
 
+            parser.parse();
+
+            const pkg = <xmiPackage>(<xmiPackage>parser.packge).children[0];
+            const a = pkg.children[0] as xmiClass;
+            const a1 = pkg.children[1] as xmiClass;
+            const a2 = pkg.children[2] as xmiClass;
+            const a3 = pkg.children[3] as xmiClass;
+            const a4 = pkg.children[4] as xmiClass;
+            const person = pkg.children[5] as xmiClass;
+            const student = pkg.children[6] as xmiClass;
+
+            expect(a.generalizationLinks.length).toBe(4);
+            expect(a.generalizationLinks[0].typeRef).toBe(a1);
+            expect(a.generalizationLinks[1].typeRef).toBe(a2);
+            expect(a.generalizationLinks[2].typeRef).toBe(a4);
+            expect(a.generalizationLinks[3].typeRef).toBe(a3);
+            expect(a.generalizationLinksTo).toBeNull();
+
+            expect(a1.generalizationLinks.length).toBe(1);
+            expect(a1.generalizationLinks[0].typeRef).toBe(a);
+            expect(a1.generalizationLinksTo).toBe(a);
+
+            expect(a2.generalizationLinks.length).toBe(1);
+            expect(a2.generalizationLinks[0].typeRef).toBe(a);
+            expect(a2.generalizationLinksTo).toBe(a);
+
+            expect(person.generalizationLinks.length).toBe(1);
+            expect(person.generalizationLinks[0].typeRef).toBe(student);
+            expect(student.generalizationLinks[0].typeRef).toBe(person);
+            expect(student.generalizationLinksTo).toBe(person);
         });
     });
 });

@@ -1,6 +1,10 @@
 import {ComponentBase} from '../<%= entity.getRelativeRoot() %>/base/componentBase';
 import {<%= entity.name %>Contract} from '../../contracts/<%= entity.name %>';
 
+<% if(entity.generalizationLinksTo) { %>
+    import {<%= entity.generalizationLinksTo.name %>Base} from '../<%= entity.getRelativePath(entity.generalizationLinksTo) %>/components/generated/<%= entity.generalizationLinksTo.name %>.generated';
+<% } %>
+
 <% (entity.provided || []).forEach(function (value) { %>
 <% if(value.name) { %>
   import {<%= value.name %>Contract} from '../<%= entity.getRelativePath(value.ref) %>/contracts/<%= value.name %>';
@@ -14,7 +18,7 @@ import {<%= entity.name %>Contract} from '../../contracts/<%= entity.name %>';
   import {<%= value.name %>Contract} from '../<%= entity.getRelativePath(value.ref) %>/contracts/<%= value.name %>';
 <%})%>
 
-<% (entity.connections || []).forEach(x => { %>
+<% (entity.associationLinks || []).forEach(x => { %>
   import {<%= x.typeRef.name %>Contract} from '../<%= entity.getRelativePath(x.typeRef) %>/contracts/<%= x.typeRef.name %>';
 <% }) %>
 
@@ -23,7 +27,8 @@ import {Promise} from 'es6-promise';
 /**
 * This file is auto-generated. Do not update it's content!
 */
-export abstract class <%= entity.name %>Base extends ComponentBase implements <%= entity.name %>Contract <% if ((entity.provided || []).length) { %>, <%}%><%= (entity.provided || []).map(function(x) { return x.name + 'Contract' }).join(', ') %> {
+export abstract class <%= entity.name %>Base extends <%= entity.generalizationLinksTo ? `${entity.generalizationLinksTo.name}Base` : 'ComponentBase' %> implements <%= entity.name %>Contract <% if ((entity.provided || []).length) { %>, <%}%><%= (entity.provided || []).map(function(x) { return x.name + 'Contract' }).join(', ') %> {
+
   <% (entity.attributes || []).forEach(function (attr) { %>
   /**
   * <%= attr.name %> property
@@ -31,7 +36,7 @@ export abstract class <%= entity.name %>Base extends ComponentBase implements <%
   <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %> = <%- attr.typeDefaultValue %>;
   <% }) %>
 
-  <% (entity.connections || []).forEach(x => { %>
+  <% (entity.associationLinks || []).forEach(x => { %>
   /**
   * <%= x.typeRef.name %> associated reference.
   */
