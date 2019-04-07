@@ -11,7 +11,7 @@ export class xmiLifeline extends xmiBase {
     ref: xmiClass | xmiComponent | xmiActor | xmiInstanceSpecification;
 
     get elementRef(): xmiClass | xmiComponent | xmiActor {
-        return (this.ref instanceof xmiInstanceSpecification) ? <xmiInstanceSpecification>this.ref.elementRef : this.ref;
+        return (this.ref instanceof xmiInstanceSpecification) ? (<xmiInstanceSpecification>this.ref).elementRef : this.ref;
     }
 
     constructor(raw: any, parent: xmiBase, attributes: xmiAttribute[]) {
@@ -24,6 +24,6 @@ export class xmiLifeline extends xmiBase {
     }
 
     toConsole() {
-        return {[this.name]: this.ref.fragments.length };
+        return {[this.name]: (<xmiClass>this.ref).fragments.length };
     }
 }

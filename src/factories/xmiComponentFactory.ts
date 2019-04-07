@@ -169,7 +169,7 @@ export class xmiComponentFactory {
         return element;
     }
 
-    static getDiagram(raw: any, parent: xmiPackage | null) {
+    static getDiagram(raw: any, parent?: xmiPackage) {
         const element = new xmiDiagram(raw, parent);
 
         this.instance.idHash[raw.$['xmi:id']] = element;
@@ -191,7 +191,7 @@ export class xmiComponentFactory {
     }
 
     static registerProvide(raw: any, register: xmiBase) {
-        const provide = new xmiInOut(raw, null);
+        const provide = new xmiInOut(raw);
         this.instance._dependencyHash[provide.name] = register;
 
         return provide;

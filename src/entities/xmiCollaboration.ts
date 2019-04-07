@@ -14,7 +14,7 @@ export class xmiCollaboration extends xmiBase {
     fragments: xmiFragment[] = [];
     messages: xmiMessage[] = [];
 
-    constructor(raw: any, parent: xmiPackage | null) {
+    constructor(raw: any, parent?: xmiPackage) {
         super(raw, parent);
 
         this.attributes = (this.raw.ownedAttribute || [])

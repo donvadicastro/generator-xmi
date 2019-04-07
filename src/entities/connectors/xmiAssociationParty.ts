@@ -7,7 +7,7 @@ export class xmiAssociationParty extends xmiBase {
     value: {lower: number | string, upper: number | string};
 
     constructor(raw: any) {
-        super(raw, null);
+        super(raw);
 
         this.value = {lower: this.getValue(get(raw, 'lowerValue.0.$')), upper: this.getValue(get(raw, 'upperValue.0.$'))};
         xmiComponentFactory.getByKeyDeffered(this, 'typeRef', get(raw, 'type.0.$.xmi:idref'));

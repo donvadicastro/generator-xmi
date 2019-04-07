@@ -12,7 +12,7 @@ export class xmiClass extends xmiInterface {
     links: LinkType = {sequence: [], usage: [], aggregation: [], association: [], generalization: []};
     fragments: xmiFragment[] = [];
 
-    constructor(raw: any, parent: xmiPackage | null) {
+    constructor(raw: any, parent?: xmiPackage) {
         super(raw, parent);
 
         if(raw.links && raw.links.length && raw.links[0].Aggregation) {

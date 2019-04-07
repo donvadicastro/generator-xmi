@@ -9,7 +9,7 @@ export class xmiUMLDiagram extends xmiBase {
             .elementRef;
     }
 
-    constructor(raw: any, parent: xmiPackage | null) {
+    constructor(raw: any, parent?: xmiPackage) {
         super(raw, parent);
     }
 }
