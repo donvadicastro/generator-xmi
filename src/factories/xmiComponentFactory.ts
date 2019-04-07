@@ -21,6 +21,7 @@ import {xmiComponent} from "../entities/xmiComponent";
 import xmiConnector from "../entities/connectors/xmiConnector";
 import {xmiAssociation} from "../entities/connectors/xmiAssociation";
 import {xmiGeneralization} from "../entities/connectors/xmiGeneralization";
+import {xmiInstanceSpecification} from "../entities/xmiInstanceSpecification";
 const assert = require('assert');
 
 type idHashRef = {source: any, property: string, callback?: (element: xmiBase) => void};
@@ -36,6 +37,7 @@ export class xmiComponentFactory {
     private _connectorHash: {[name: string]: any} = {};
 
     private _lifelineHash: xmiLifeline[] = [];
+    private _fragmentHash: xmiFragment[] = [];
     private _initDeffered: any[] = [];
 
     private static _instance = new xmiComponentFactory();
@@ -49,9 +51,10 @@ export class xmiComponentFactory {
     get classHash() { return this._classHash; }
     get connectorHash() { return this._connectorHash; }
     get lifelineHash(): xmiLifeline[] { return this._lifelineHash; }
+    get fragmentHash(): xmiFragment[] { return this._fragmentHash; }
     get initDeffered() { return this._initDeffered; }
 
-    static get(raw: any, parent: xmiPackage | xmiInterface | xmiCollaboration | null, options?: any): xmiBase | null {
+    static get(raw: any, parent?: xmiPackage | xmiInterface | xmiCollaboration, options?: any): xmiBase | null {
         let element = this.getByKey(raw.$['xmi:id']);
 
         //elements collection was parsed without parent applied
@@ -95,6 +98,10 @@ export class xmiComponentFactory {
                 element = new actor.xmiActor(raw, <xmiPackage>parent);
                 break;
 
+            case 'uml:InstanceSpecification':
+                element = new xmiInstanceSpecification(raw, <xmiPackage>parent);
+                break;
+
             case 'uml:Screen':
                 element = new xmiScreen(raw, <xmiPackage>parent);
                 break;
@@ -132,10 +139,11 @@ export class xmiComponentFactory {
             case 'uml:CombinedFragment':
             case 'uml:OccurrenceSpecification':
                 element = new xmiFragment(raw, <xmiBase>parent, options);
+                this.instance.fragmentHash.push(<xmiFragment>element);
                 break;
 
             case 'uml:Message':
-                element = new xmiMessage(raw, <xmiBase>parent, options);
+                element = new xmiMessage(raw, <xmiBase>parent);
                 break;
 
             case 'uml:Association':

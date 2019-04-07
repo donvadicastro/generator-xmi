@@ -2,10 +2,10 @@ import {readJSONSync} from "fs-extra";
 import {XmiParser} from "../../../../src/xmiParser";
 import {xmiPackage} from "../../../../src/entities/xmiPackage";
 import {xmiComponent} from "../../../../src/entities/xmiComponent";
+import '../../../../utils/normilize';
 
 const path = require('path');
 const ejs = require('ejs');
-require('../../../../utils/normilize');
 
 describe('Generators', () => {
     describe('Templates', () => {
@@ -17,7 +17,8 @@ describe('Generators', () => {
 
                 parser.parse();
 
-                const entities = (<xmiPackage>parser.packge.children[0]).children;
+                const pkg = <xmiPackage>parser.packge;
+                const entities = (<xmiPackage>pkg.children[0]).children;
                 const c1: xmiComponent = <xmiComponent>entities[1];
 
                 it('check constructor', async () => {

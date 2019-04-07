@@ -15,7 +15,8 @@ describe('xmiParser', () => {
         parser.parse();
 
         it('Verify package tree', () => {
-            const screen: xmiScreen = <xmiScreen>(<xmiPackage>parser.packge.children[0]).children[0];
+            const pkg = <xmiPackage>parser.packge;
+            const screen: xmiScreen = <xmiScreen>(<xmiPackage>pkg.children[0]).children[0];
 
             expect(screen.name).toBe('admin');
             expect(screen.children.map(x => x.name)).toEqual(['firstName', 'panel', 'save']);
@@ -36,8 +37,9 @@ describe('xmiParser', () => {
         parser.parse();
 
         it('Verify link', () => {
-            const collaboration: xmiCollaboration = <xmiCollaboration>(<xmiPackage>parser.packge.children[0]).children[0];
-            const screen: xmiScreen = <xmiScreen>(<xmiPackage>parser.packge.children[1]).children[0];
+            const pkg = <xmiPackage>parser.packge;
+            const collaboration: xmiCollaboration = <xmiCollaboration>(<xmiPackage>pkg.children[0]).children[0];
+            const screen: xmiScreen = <xmiScreen>(<xmiPackage>pkg.children[1]).children[0];
 
             expect(collaboration).toBeInstanceOf(xmiCollaboration);
             expect(screen).toBeInstanceOf(xmiScreen);

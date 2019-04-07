@@ -4,7 +4,7 @@ import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 export class xmiPackage extends xmiBase {
     children: xmiBase[];
 
-    constructor(raw: any, parent: xmiPackage | null) {
+    constructor(raw: any, parent?: xmiPackage) {
         super(raw, parent);
 
         this.children = (raw.packagedElement || []).reverse()

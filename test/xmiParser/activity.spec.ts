@@ -16,7 +16,8 @@ describe('xmiParser', () => {
         parser.parse();
 
         it('Verify activity diagram', () => {
-            const sequence: xmiCollaboration = <xmiCollaboration>(<xmiPackage>parser.packge.children[0]).children[0];
+            const pkg = <xmiPackage>parser.packge;
+            const sequence: xmiCollaboration = <xmiCollaboration>(<xmiPackage>pkg.children[0]).children[0];
 
             expect(parser.elements.map(x => x.name)).toEqual(["sequence", "actor1", "c1", "c2"]);
             expect(sequence).toBeInstanceOf(xmiCollaboration);
@@ -49,7 +50,8 @@ describe('xmiParser', () => {
         parser.parse();
 
         it('verify activity diagram with loop', () => {
-            const sequence: xmiCollaboration = <xmiCollaboration>(<xmiPackage>parser.packge.children[0]).children[0];
+            const pkg = <xmiPackage>parser.packge;
+            const sequence: xmiCollaboration = <xmiCollaboration>(<xmiPackage>pkg.children[0]).children[0];
 
             expect(parser.elements.filter(x => x).map(x => x.name)).toEqual(["componentModel", "c1", "c2", "start"]);
             expect(sequence).toBeInstanceOf(xmiCollaboration);

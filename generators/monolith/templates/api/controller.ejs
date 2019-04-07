@@ -6,9 +6,9 @@ import {<%= entity.name %>} from '../../../../design/<%= entity.pathFromRoot %>/
 var imports = [];
 
 (entity.lifelines || []).forEach(function (lifeline) {
-    imports.push(lifeline.elementRef);
+    imports.push(lifeline.ref);
 
-    (lifeline.elementRef.required || []).map(x => factory.resolveDependency(x.ref ? x.ref.name : x.name)).forEach(value => {
+    (lifeline.ref.required || []).map(x => factory.resolveDependency(x.ref ? x.ref.name : x.name)).forEach(value => {
         imports.push(value);
     })
 });
@@ -25,7 +25,7 @@ export default class Controller {
     constructor() {
         this.flow = new <%= entity.name %>(<% (entity.lifelines || []).forEach(function (lifeline) { %>
             new <%= lifeline.name %>(
-                <% (lifeline.elementRef.required || []).map(function (value, i, list) { %>
+                <% (lifeline.ref.required || []).map(function (value, i, list) { %>
                     new <%= factory.resolveDependency(value.ref ? value.ref.name : value.name).name %>(),
                 <% }) %>
             ),

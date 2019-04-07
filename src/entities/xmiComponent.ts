@@ -6,8 +6,8 @@ import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 
 export class xmiComponent extends xmiClass {
 
-    provided: xmiInOut[] | null = null;
-    required: xmiInOut[] | null = null;
+    provided: xmiInOut[] = [];
+    required: xmiInOut[] = [];
 
     constructor(raw: any, parent: xmiPackage | null) {
         super(raw, parent);

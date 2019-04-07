@@ -3,7 +3,7 @@ import {xmiPackage} from "./xmiPackage";
 const camel = require('to-camel-case');
 
 export default class xmiBase {
-    parent: xmiPackage | xmiBase | null;
+    parent?: xmiPackage | xmiBase;
     raw: any;
 
     id: string;
@@ -39,7 +39,7 @@ export default class xmiBase {
         return this.path.map(x => '..').join('/');
     }
 
-    constructor(raw: any, parent: xmiPackage | xmiBase | null) {
+    constructor(raw: any, parent?: xmiPackage | xmiBase) {
         this.parent = parent;
         this.raw = raw;
 

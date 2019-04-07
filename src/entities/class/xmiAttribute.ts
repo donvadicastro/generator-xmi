@@ -12,7 +12,7 @@ export class xmiAttribute extends xmiBase {
     typeRef: xmiBase | null = null;
     typeDefaultValue = 'null';
 
-    constructor(raw: any, parent: xmiBase | null) {
+    constructor(raw: any, parent?: xmiBase) {
         super(raw, parent);
         this.name = this.name && camel(this.name);
 

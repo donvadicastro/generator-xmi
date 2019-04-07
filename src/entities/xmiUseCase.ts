@@ -4,7 +4,7 @@ import {get} from "object-path";
 export class xmiUseCase extends xmiBase {
     scenarios: {type: string, steps: string[]}[];
 
-    constructor(raw: any, parent: xmiBase | null) {
+    constructor(raw: any, parent?: xmiBase) {
         super(raw, parent);
 
         this.scenarios = get(raw, ['EAModel.scenario', '0', 'EAScenario'], [])
