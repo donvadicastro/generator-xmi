@@ -22,6 +22,7 @@ import xmiConnector from "../entities/connectors/xmiConnector";
 import {xmiAssociation} from "../entities/connectors/xmiAssociation";
 import {xmiGeneralization} from "../entities/connectors/xmiGeneralization";
 import {xmiInstanceSpecification} from "../entities/xmiInstanceSpecification";
+import {xmiCombinedFragment} from "../entities/collaboration/xmiCombinedFragment";
 const assert = require('assert');
 
 type idHashRef = {source: any, property: string, callback?: (element: xmiBase) => void};
@@ -137,13 +138,17 @@ export class xmiComponentFactory {
                 break;
 
             case 'uml:CombinedFragment':
+                element = new xmiCombinedFragment(raw, <xmiBase>parent, options);
+                this.instance.fragmentHash.push(<xmiFragment>element);
+                break;
+
             case 'uml:OccurrenceSpecification':
                 element = new xmiFragment(raw, <xmiBase>parent, options);
                 this.instance.fragmentHash.push(<xmiFragment>element);
                 break;
 
             case 'uml:Message':
-                element = new xmiMessage(raw, <xmiBase>parent);
+                element = new xmiMessage(raw, <xmiCollaboration>parent);
                 break;
 
             case 'uml:Association':

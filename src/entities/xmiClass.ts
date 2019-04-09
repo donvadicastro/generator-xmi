@@ -10,7 +10,16 @@ const assert = require('assert');
 
 export class xmiClass extends xmiInterface {
     links: LinkType = {sequence: [], usage: [], aggregation: [], association: [], generalization: []};
+
+    /**
+     * Diagram fragments that class associate with.
+     */
     fragments: xmiFragment[] = [];
+
+    /**
+     * Set of conditions that can be defined in diagram to particular operation.
+     */
+    conditions: {[operationName: string]: string[]} = {};
 
     constructor(raw: any, parent?: xmiPackage) {
         super(raw, parent);
@@ -51,6 +60,20 @@ export class xmiClass extends xmiInterface {
 
         assert(links.length <= 1, `Class "${this.nameOrigin}" can have no more than 1 generalization links. Current: ${links.length}`);
         return links.length ? links[0].end : null;
+    }
+
+    /**
+     * Indicates that class has associated loop.
+     */
+    get hasLoop() {
+        return this.fragments.find(x => x.interactionOperator === 'loop');
+    }
+
+    toConsole(): any {
+        const ret = super.toConsole();
+        ret[Object.keys(ret)[0]].conditions = this.conditions;
+
+        return ret;
     }
 
     private getConnections(type: 'association' | 'generalization') {

@@ -1,0 +1,21 @@
+<% let hasLoop = false, loopElement = null; %>
+<% (entity.messages || []).forEach(function (message) { %>
+    // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to && message.to.elementRef.name %>
+
+    <% if(message.from && message.from.elementRef.fragments.find(x => x.interactionOperator === 'loop')) { %>
+        <% hasLoop = true; loopElement = message.from.elementRef; %>
+        while(this.cmp<%= message.from.elementRef.name %>.loopCondition) {
+    <% } %>
+
+    flowAsync = flowAsync.then((state: any) => {
+        <%- include('action', {message: message}) -%>
+    });
+<% }) %>
+
+<% if(hasLoop) { %>
+    // flow delay between loops
+    flowAsync = flowAsync.then((state) => {
+    console.log(`sleep: ${this.cmp<%= loopElement.name %>.loopDelay}ms, replay flow: "<%= loopElement.name %>"`);
+    return new Promise((resolve) => (setTimeout(() => resolve(state), this.cmp<%= loopElement.name %>.loopDelay)));
+    }); }
+<% } %>

@@ -1,0 +1,25 @@
+import {ComponentBase} from '../<%= entity.getRelativeRoot() %>/base/componentBase';
+import {<%= entity.name %>Contract} from '../../contracts/<%= entity.name %>';
+
+<% if(entity.generalizationLinksTo) { %>
+    import {<%= entity.generalizationLinksTo.name %>Base} from '../<%= entity.getRelativePath(entity.generalizationLinksTo) %>/components/generated/<%= entity.generalizationLinksTo.name %>.generated';
+<% } %>
+
+<% (entity.provided || []).forEach(function (value) { %>
+    <% if(value.name) { %>
+        import {<%= value.name %>Contract} from '../<%= entity.getRelativePath(value.ref) %>/contracts/<%= value.name %>';
+
+        <% (value.ref.attributes || []).filter(x => x.typeRef).forEach(function (attribute) { %>
+            import {<%= attribute.typeRef.name %>Contract} from '../<%= entity.getRelativePath(attribute.typeRef) %>/contracts/<%= attribute.typeRef.name %>';
+        <% }) %>
+<%}})%>
+
+<% (entity.required || []).forEach(function (value) { %>
+    import {<%= value.name %>Contract} from '../<%= entity.getRelativePath(value.ref) %>/contracts/<%= value.name %>';
+<%})%>
+
+<% (entity.associationLinks || []).forEach(x => { %>
+    import {<%= x.typeRef.name %>Contract} from '../<%= entity.getRelativePath(x.typeRef) %>/contracts/<%= x.typeRef.name %>';
+<% }) %>
+
+import {Promise} from 'es6-promise';
