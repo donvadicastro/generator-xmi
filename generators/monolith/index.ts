@@ -55,7 +55,7 @@ export class XmiGenerator extends XmiGeneratorBase {
                 this.generatedFiles.push(interfaceFileName);
             }
 
-            if (x instanceof xmiClass || x instanceof xmiComponent) {
+            if (x instanceof xmiClass) {
                 const interfaceFileName = this.destinationPath(`${path}/contracts/${x.name}.ts`);
                 const baseClassFileName = this.destinationPath(`${path}/components/generated/${x.name}.generated.ts`);
                 const classFileName = this.destinationPath(`${path}/components/${x.name}.ts`);

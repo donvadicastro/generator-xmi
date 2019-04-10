@@ -3,7 +3,7 @@
 /**
 * This file is auto-generated. Do not update it's content!
 */
-export abstract class <%= entity.name %>Base extends <%= entity.generalizationLinksTo ? `${entity.generalizationLinksTo.name}Base` : 'ComponentBase' %> implements <%= entity.name %>Contract <% if ((entity.provided || []).length) { %>, <%}%><%= (entity.provided || []).map(function(x) { return x.name + 'Contract' }).join(', ') %> {
+export abstract class <%= entity.name %>Base extends <%- include('partial/class/extend', {entity: entity}) -%> {
   <%- include('partial/class/attributes', {entity: entity}) -%>
 
 

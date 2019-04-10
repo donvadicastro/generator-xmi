@@ -6,7 +6,6 @@ state.start = new Date();
         return this.cmp<%= message.to.elementRef.name %>.<%= message.operation.name %>(state);
     } else {
         console.log('--> <%= message.to.elementRef.name %>::<%= message.operation.name %> -> ignore by condition');
-        this.cmp<%= message.to.elementRef.name %>.notifyComplete('--> <%= message.to.elementRef.name %>::<%= message.operation.name %> -> ignore by condition', state.start);
         return state;
     }
 <% } else { %>

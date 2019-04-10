@@ -18,8 +18,15 @@ import {<%= entity.name %>Contract} from '../../contracts/<%= entity.name %>';
     import {<%= value.name %>Contract} from '../<%= entity.getRelativePath(value.ref) %>/contracts/<%= value.name %>';
 <%})%>
 
+<%# Inject base interface when instance speciaification is used %>
 <% (entity.associationLinks || []).forEach(x => { %>
     import {<%= x.typeRef.name %>Contract} from '../<%= entity.getRelativePath(x.typeRef) %>/contracts/<%= x.typeRef.name %>';
 <% }) %>
+
+
+<%# Inject base class when instance speciaification is used %>
+<% if (entity.elementRef) { %>
+    import {<%= entity.elementRef.name %>} from '../<%= entity.getRelativePath(entity.elementRef) %>/components/<%= entity.elementRef.name %>';
+<%}%>
 
 import {Promise} from 'es6-promise';

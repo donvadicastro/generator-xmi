@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
 
-import {<%= entity.name %>} from '../../../../design/<%= entity.pathFromRoot %>/process/<%= entity.name %>';
+import {<%= entity.name %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= entity.pathFromRoot %>/process/<%= entity.name %>';
 
 <%
 var imports = [];
@@ -33,6 +33,6 @@ export default class Controller {
     }
 
     run(req: Request, res: Response): void {
-        this.flow.run({}).then(ret => res.status(201).json(ret));
+        this.flow.run({}).then((ret: any) => res.status(201).json(ret));
     }
 }
