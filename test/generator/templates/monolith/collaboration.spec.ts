@@ -51,7 +51,6 @@ describe('Generators', () => {
                                 return this.cmpclassB.bfn2(state);
                             } else {
                                 console.log('--> classB::bfn2 -> ignore by condition');
-                                this.cmpclassB.notifyComplete('--> classB::bfn2 -> ignore by condition', state.start);
                                 return state;
                             }
                         });
@@ -65,7 +64,6 @@ describe('Generators', () => {
                                 return this.cmpclassB.bfn3(state);
                             } else {
                                 console.log('--> classB::bfn3 -> ignore by condition');
-                                this.cmpclassB.notifyComplete('--> classB::bfn3 -> ignore by condition', state.start);
                                 return state;
                             }
                         });
