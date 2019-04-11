@@ -11,7 +11,7 @@ export abstract class ComponentBase {
         const duration = Math.abs(+new Date() - +start);
 
         readline.moveCursor(process.stdout, 0, -1);
-        process.stdout.write(`--> ${chalk.bgGreen(message)}: ${duration} ms\n`);
+        process.stdout.write(`--> \x1b[42m${message}: ${duration} ms\x1b[m\n`);
     }
 
     protected saveState(state: any) {

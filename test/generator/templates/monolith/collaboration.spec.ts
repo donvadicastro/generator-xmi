@@ -50,7 +50,7 @@ describe('Generators', () => {
                                 console.log('--> classB::bfn2');
                                 return this.cmpclassB.bfn2(state);
                             } else {
-                                console.log('--> classB::bfn2 -> ignore by condition');
+                                console.log('--> \\x1b[43mclassB::bfn2: 0 ms\\x1b[m <- ignored by condition');
                                 return state;
                             }
                         });
@@ -63,7 +63,7 @@ describe('Generators', () => {
                                 console.log('--> classB::bfn3');
                                 return this.cmpclassB.bfn3(state);
                             } else {
-                                console.log('--> classB::bfn3 -> ignore by condition');
+                                console.log('--> \\x1b[43mclassB::bfn3: 0 ms\\x1b[m <- ignored by condition');
                                 return state;
                             }
                         });

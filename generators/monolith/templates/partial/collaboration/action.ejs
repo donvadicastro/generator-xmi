@@ -5,7 +5,7 @@ state.start = new Date();
         console.log('--> <%= message.to.elementRef.name %>::<%= message.operation.name %>');
         return this.cmp<%= message.to.elementRef.name %>.<%= message.operation.name %>(state);
     } else {
-        console.log('--> <%= message.to.elementRef.name %>::<%= message.operation.name %> -> ignore by condition');
+        console.log('--> \x1b[43m<%= message.to.elementRef.name %>::<%= message.operation.name %>: 0 ms\x1b[m <- ignored by condition');
         return state;
     }
 <% } else { %>
