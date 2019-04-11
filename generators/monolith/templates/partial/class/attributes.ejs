@@ -1,0 +1,16 @@
+<% (entity.attributes || []).forEach(function (attr) { %>
+    /**
+    * <%= attr.name %> property
+    */
+    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %> = <%- attr.typeDefaultValue %>;
+<% }) %>
+
+<% (entity.associationLinks || []).forEach(x => { %>
+    /**
+    * <%= x.typeRef.name %> associated reference.
+    */
+    <% if(x.multiplicity === '1' || x.multiplicity === '0..1') { %>
+        <%= x.typeRef.name %>Ref: <%= x.typeRef.name %>Contract | null = null;
+    <%} else {%>
+        <%= x.typeRef.name %>RefList: <%= x.typeRef.name %>Contract[] = [];
+<% }}) %>

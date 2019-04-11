@@ -1,0 +1,14 @@
+state.start = new Date();
+
+<% if(message.connector.condition) { %>
+    if(this.cmp<%= message.from.elementRef.name %>['<%- message.connector.condition %>'](state)) {
+        console.log('--> <%= message.to.elementRef.name %>::<%= message.operation.name %>');
+        return this.cmp<%= message.to.elementRef.name %>.<%= message.operation.name %>(state);
+    } else {
+        console.log('--> <%= message.to.elementRef.name %>::<%= message.operation.name %> -> ignore by condition');
+        return state;
+    }
+<% } else { %>
+    console.log('--> <%= message.to.elementRef.name %>::<%= message.operation.name %>');
+    return this.cmp<%= message.to.elementRef.name %>.<%= message.operation.name %>(state);
+<% } %>

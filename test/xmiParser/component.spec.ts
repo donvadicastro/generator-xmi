@@ -12,7 +12,8 @@ describe('xmiParser', () => {
         parser.parse();
 
         it('Verify component structure', () => {
-            const entities = (<xmiPackage>parser.packge.children[0]).children;
+            const pkg = <xmiPackage>parser.packge;
+            const entities = (<xmiPackage>pkg.children[0]).children;
             const c1: xmiComponent = <xmiComponent>entities[1];
 
             // attributes
@@ -52,8 +53,9 @@ describe('xmiParser', () => {
         const parser = new XmiParser(data);
 
         parser.parse();
-        const entities = ((<xmiPackage>parser.packge).children[0]).children;
-        const classes = ((<xmiPackage>parser.packge).children[1]).children;
+        const pkg = <xmiPackage>parser.packge;
+        const entities = (<xmiPackage>pkg.children[0]).children;
+        const classes = (<xmiPackage>pkg.children[1]).children;
 
         const root: xmiComponent = <xmiComponent>entities[2];
         const dep1: xmiComponent = <xmiComponent>entities[4];
@@ -76,15 +78,15 @@ describe('xmiParser', () => {
         });
 
         it('Verify component realize', () => {
-            expect(dep1.required).toBeNull();
+            expect(dep1.required).toEqual([]);
             expect(dep1.provided.length).toBe(1);
             expect(dep1.provided[0].ref).toBe(classes[2]);
 
-            expect(dep2.required).toBeNull();
+            expect(dep2.required).toEqual([]);
             expect(dep2.provided.length).toBe(1);
             expect(dep2.provided[0].ref).toBe(classes[1]);
 
-            expect(root.provided).toBeNull();
+            expect(root.provided).toEqual([]);
             expect(root.required.length).toBe(2);
             expect(root.required[0].ref).toBe(classes[1]);
             expect(root.required[1].ref).toBe(classes[2]);

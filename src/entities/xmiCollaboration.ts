@@ -6,15 +6,16 @@ import {xmiMessage} from "./collaboration/xmiMessage";
 import {xmiFragment} from "./collaboration/xmiFragment";
 import {xmiPackage} from "./xmiPackage";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
+import {xmiCombinedFragment} from "./collaboration/xmiCombinedFragment";
 const assert = require('assert');
 
 export class xmiCollaboration extends xmiBase {
     attributes: xmiAttribute[];
     lifelines: xmiLifeline[];
-    fragments: xmiFragment[] = [];
+    fragments: (xmiFragment | xmiCombinedFragment)[] = [];
     messages: xmiMessage[] = [];
 
-    constructor(raw: any, parent: xmiPackage | null) {
+    constructor(raw: any, parent?: xmiPackage) {
         super(raw, parent);
 
         this.attributes = (this.raw.ownedAttribute || [])
@@ -54,6 +55,10 @@ export class xmiCollaboration extends xmiBase {
 
     get loopFragments() {
         return this.fragments.filter(x => x.type === 'uml:CombinedFragment' && x.interactionOperator === 'loop');
+    }
+
+    get conditionFragments(): xmiCombinedFragment[] {
+        return <xmiCombinedFragment[]>this.fragments.filter(x => x.type === 'uml:CombinedFragment' && x.interactionOperator === 'alt');
     }
 
     toConsole() {

@@ -1,4 +1,3 @@
-import {xmiComponent} from "../../src/entities/xmiComponent";
 import {readJSONSync} from "fs-extra";
 import {xmiPackage} from "../../src/entities/xmiPackage";
 import {XmiParser} from "../../src/xmiParser";
@@ -6,13 +5,14 @@ import {xmiUseCase} from "../../src/entities/xmiUseCase";
 
 describe('xmiParser', () => {
     describe('UseCase', () => {
-        const data = readJSONSync('test/data/project12_usecase.json');
-        const parser = new XmiParser(data);
-
-        parser.parse();
-
         it('Verify component structure', () => {
-            const entities = (<xmiPackage>(<xmiPackage>parser.packge.children[0]).children[4]).children;
+            const data = readJSONSync('test/data/project12_usecase.json');
+            const parser = new XmiParser(data);
+
+            parser.parse();
+
+            const pkg = <xmiPackage>parser.packge;
+            const entities = (<xmiPackage>(<xmiPackage>pkg.children[0]).children[4]).children;
 
             const useCase1 = <xmiUseCase>entities[0];
             expect(useCase1.name).toEqual("useCase1");

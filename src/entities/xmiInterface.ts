@@ -13,12 +13,12 @@ export class xmiInterface extends xmiBase {
     operations: xmiOperation[] = [];
     generalization?: xmiGeneralization;
 
-    constructor(raw: any, parent: xmiPackage | null) {
+    constructor(raw: any, parent?: xmiPackage) {
         super(raw, parent);
         this.refresh(raw, parent);
     }
 
-    refresh(raw: any, parent: xmiPackage | null) {
+    refresh(raw: any, parent?: xmiPackage) {
         if(raw.ownedAttribute) {
             this.attributes = raw.ownedAttribute
                 .map((x: any) => <xmiAttribute>xmiComponentFactory.get(x, this));

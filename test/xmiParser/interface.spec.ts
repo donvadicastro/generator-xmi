@@ -2,6 +2,7 @@ import {readJSONSync} from "fs-extra";
 import {XmiParser} from "../../src/xmiParser";
 import {xmiClass} from "../../src/entities/xmiClass";
 import {xmiInterface} from "../../src/entities/xmiInterface";
+import {xmiPackage} from "../../src/entities/xmiPackage";
 
 describe('xmiParser', () => {
     describe('Interfaces', () => {
@@ -11,9 +12,10 @@ describe('xmiParser', () => {
         parser.parse();
 
         it('Verify interface realization', () => {
-            const entities = parser.packge.children[0].children;
-            const a: xmiClass = entities[0];
-            const b: xmiInterface = entities[2];
+            const pkg = <xmiPackage>parser.packge;
+            const entities = (<xmiPackage>pkg.children[0]).children;
+            const a: xmiClass = <xmiClass>entities[0];
+            const b: xmiInterface = <xmiInterface>entities[2];
 
             //A
             expect(a.attributes.length).toBe(0);

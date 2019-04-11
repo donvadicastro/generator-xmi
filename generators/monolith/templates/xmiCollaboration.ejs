@@ -1,22 +1,8 @@
-const chalk = require("chalk");
-const storage = require('node-persist');
-
-import {Promise} from 'es6-promise';
-
-<% (entity.lifelines || []).forEach(function (lifeline, index) { %>
-    import {<%= lifeline.elementRef.name %>Contract} from '<%= entity.getRelativePath(lifeline.elementRef) %>/contracts/<%= lifeline.elementRef.name %>';
-<% }) %>
+<%- include('partial/collaboration/import', {entity: entity}) -%>
 
 
 export class <%= entity.name %> {
-    constructor(
-        <% (entity.lifelines || []).forEach(function (lifeline, index) { %>
-        /**
-        * <%= lifeline.elementRef.name %> component
-        */
-        private cmp<%= lifeline.elementRef.name %>:  <%= lifeline.elementRef.name %>Contract,
-        <% }) %>
-    ) {}
+    <%- include('partial/collaboration/constructor', {entity: entity}) -%>
 
     /**
     /* Execute process
@@ -30,29 +16,8 @@ export class <%= entity.name %> {
             return storage.init(/* options ... */);
         });
 
-        <% let hasLoop = false, loopElement = null; %>
-        <% (entity.messages || []).forEach(function (message) { %>
-            // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to && message.to.elementRef.name %>
-
-            <% if(message.from && message.from.elementRef.fragments.find(x => x.interactionOperator === 'loop')) { %>
-                <% hasLoop = true; loopElement = message.from.elementRef; %>
-                while(this.cmp<%= message.from.elementRef.name %>.loopCondition) {
-            <% } %>
-            flowAsync = flowAsync.then((state: any) => {
-                state.start = new Date();
-                console.log('--> <%= message.to.elementRef.name %>::<%= message.operation.name %>');
-
-                return this.cmp<%= message.to.elementRef.name %>.<%= message.operation.name %>(state);
-            });
-        <% }) %>
-
-        <% if(hasLoop) { %>
-            // flow delay between loops
-            flowAsync = flowAsync.then((state) => {
-                console.log(`sleep: ${this.cmp<%= loopElement.name %>.loopDelay}ms, replay flow: "<%= loopElement.name %>"`);
-                return new Promise((resolve) => (setTimeout(() => resolve(state), this.cmp<%= loopElement.name %>.loopDelay)));
-            }); }
-        <% } %>
+        // define flow
+        <%- include('partial/collaboration/flow', {entity: entity}) -%>
 
         return flowAsync.catch(x => console.log(chalk.red('ERROR: '), x));
     }

@@ -1,10 +1,11 @@
 import {xmiClass} from "../../src/entities/xmiClass";
+import {xmiComponentFactory} from "../../src/factories/xmiComponentFactory";
 
 describe('xmiClass', () => {
     it('constructor', () => {
-        const cls = new xmiClass({$: {'name': 'name1', 'xmi:type': 'type1'}}, null);
+        const cls = <xmiClass>xmiComponentFactory.get({$: {'xmi:type': 'uml:Class', 'name': 'name1'}});
 
         expect('name1').toBe(cls.name);
-        expect('type1').toBe(cls.type);
+        expect('uml:Class').toBe(cls.type);
     });
 });

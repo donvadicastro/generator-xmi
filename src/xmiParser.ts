@@ -27,10 +27,10 @@ export class XmiParser {
             .map((x: any) => xmiComponentFactory.getConnector(x));
 
         this.elements = get(this.data, this.ELEMENTS_PATH, [])
-            .filter((x: any) => x.$.name).map((x: any) => xmiComponentFactory.get(x, null));
+            .filter((x: any) => x.$.name).map((x: any) => xmiComponentFactory.get(x));
 
-        this.packge = <xmiPackage>xmiComponentFactory.get(get(this.data, this.PACKAGE_ROOT), null);
-        this.diagrams = (get(this.data, this.DIAGRAMS_PATH, [])).map(x => xmiComponentFactory.getDiagram(x, null));
+        this.packge = <xmiPackage>xmiComponentFactory.get(get(this.data, this.PACKAGE_ROOT));
+        this.diagrams = (get(this.data, this.DIAGRAMS_PATH, [])).map(x => xmiComponentFactory.getDiagram(x));
 
         //run initializers
         xmiComponentFactory.initialize();

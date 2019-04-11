@@ -6,7 +6,7 @@ export class xmiAggregationLink extends xmiLink {
     connector: xmiConnector;
 
     constructor(raw: any) {
-        super(raw, null);
+        super(raw);
         this.connector = xmiComponentFactory.instance.connectorHash[this.id];
     }
 }

@@ -391,6 +391,84 @@ export abstract class c1Base extends ComponentBase implements c1Contract {
 }
 ```
 
+### Sequence diagram condition generation
+![Sequence condition](./assets/wiki/images/sequence-condition.png)
+
+"Alt condition" is used to choose execution flow based on specific condition(s). 
+Many conditions can be applied to single "alt block", so on solution level condition block
+can be represented using "switch" pattern. 
+
+When generated - component declaration is extended with additional functions to check condition status
+```typescript
+export abstract class classABase extends ComponentBase implements classAContract {
+    constructor() { super(); }
+    
+    //# region Message conditions
+    'a >= b'(state: any) {
+        return true;
+    }
+    
+    'a < b'(state: any) {
+        return true;
+    }
+    //# endregion
+    
+    ...
+}
+```
+
+Sequence flow with check condition state to choose right flow
+```typescript
+export class eaCollaboration1 {
+    constructor() { ... }
+    
+    /**
+    /* Execute process
+    */
+    run(inputState: any) {
+        let flowAsync = Promise.resolve(inputState);
+
+        // define flow
+        // Start call classA
+        flowAsync = flowAsync.then((state: any) => {
+            state.start = new Date();
+            return this.cmpclassA.afn1(state);
+        });
+        
+        // classA call classB
+        flowAsync = flowAsync.then((state: any) => {
+            state.start = new Date();
+            return this.cmpclassB.bfn1(state);
+        });
+        
+        // classA call classB
+        flowAsync = flowAsync.then((state: any) => {
+            state.start = new Date();
+            if (this.cmpclassA['a >= b'](state)) {
+                return this.cmpclassB.bfn2(state);
+            } else {
+                return state;
+            }
+        });
+        
+        // classA call classB
+        flowAsync = flowAsync.then((state: any) => {
+            state.start = new Date();
+            if (this.cmpclassA['a < b'](state)) {
+                return this.cmpclassB.bfn3(state);
+            } else {
+                return state;
+            }
+        });
+        
+        return flowAsync.catch(x => console.log(chalk.red('ERROR: '), x));
+    }
+}
+```
+**!!! Important**
+"Alt condition" should be duplicated in message properties
+![Sequence condition props](./assets/wiki/images/sequence-condition-props.png)
+
 ## User interface diagram
 ### UI iteractions generation
 ![UI generation](./assets/wiki/images/ui.png)

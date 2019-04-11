@@ -6,7 +6,7 @@ const assert = require('assert');
 export class xmiInOut extends xmiBase {
     ref: xmiBase;
 
-    constructor(raw: any, parent: xmiPackage | null) {
+    constructor(raw: any, parent?: xmiPackage) {
         super(raw, parent);
 
         const id = this.raw.$['xmi:idref'] || this.id;

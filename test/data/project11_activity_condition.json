@@ -1,0 +1,3149 @@
+{
+  "xmi:XMI": {
+    "$": {
+      "xmi:version": "2.1",
+      "xmlns:uml": "http://schema.omg.org/spec/UML/2.1",
+      "xmlns:xmi": "http://schema.omg.org/spec/XMI/2.1",
+      "xmlns:thecustomprofile": "http://www.sparxsystems.com/profiles/thecustomprofile/1.0"
+    },
+    "xmi:Documentation": [
+      {
+        "$": {
+          "exporter": "Enterprise Architect",
+          "exporterVersion": "6.5"
+        }
+      }
+    ],
+    "uml:Model": [
+      {
+        "$": {
+          "xmi:type": "uml:Model",
+          "name": "EA_Model",
+          "visibility": "public"
+        },
+        "packagedElement": [
+          {
+            "$": {
+              "xmi:type": "uml:Package",
+              "xmi:id": "EAPK_580DB2DA_3BEC_4c85_A6CD_C2C3883252D6",
+              "name": "Model",
+              "visibility": "public"
+            },
+            "packagedElement": [
+              {
+                "$": {
+                  "xmi:type": "uml:Package",
+                  "xmi:id": "EAPK_DB47E355_57D0_4d35_8702_A5B7D91C6BC0",
+                  "name": "Basic Sequence Diagram with Alternative Fragment",
+                  "visibility": "public"
+                },
+                "packagedElement": [
+                  {
+                    "$": {
+                      "xmi:type": "uml:Collaboration",
+                      "xmi:id": "EAID_CB000000_355_57D0_4d35_8702_A5B7D91C6BC",
+                      "name": "EA_Collaboration1",
+                      "visibility": "public"
+                    },
+                    "ownedBehavior": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:Interaction",
+                          "xmi:id": "EAID_IN000000_355_57D0_4d35_8702_A5B7D91C6BC",
+                          "name": "EA_Interaction1",
+                          "visibility": "public"
+                        },
+                        "lifeline": [
+                          {
+                            "$": {
+                              "xmi:type": "uml:Lifeline",
+                              "xmi:id": "EAID_LL000000_43D6_4fbb_B0DE_925A863A2767",
+                              "name": "Instance a",
+                              "visibility": "public",
+                              "represents": "EAID_AT000000_000_43D6_4fbb_B0DE_925A863A276"
+                            }
+                          },
+                          {
+                            "$": {
+                              "xmi:type": "uml:Lifeline",
+                              "xmi:id": "EAID_LL000000_CC0C_474e_8EEC_C07DBB7EEF09",
+                              "name": "Instance b",
+                              "visibility": "public",
+                              "represents": "EAID_AT000000_000_CC0C_474e_8EEC_C07DBB7EEF0"
+                            }
+                          }
+                        ],
+                        "fragment": [
+                          {
+                            "$": {
+                              "xmi:type": "uml:OccurrenceSpecification",
+                              "xmi:id": "EAID_FR000000_43D6_4fbb_B0DE_925A863A2767",
+                              "covered": "EAID_LL000000_43D6_4fbb_B0DE_925A863A2767"
+                            }
+                          },
+                          {
+                            "$": {
+                              "xmi:type": "uml:OccurrenceSpecification",
+                              "xmi:id": "EAID_FR000001_43D6_4fbb_B0DE_925A863A2767",
+                              "covered": "EAID_LL000000_43D6_4fbb_B0DE_925A863A2767"
+                            }
+                          },
+                          {
+                            "$": {
+                              "xmi:type": "uml:OccurrenceSpecification",
+                              "xmi:id": "EAID_FR000000_CC0C_474e_8EEC_C07DBB7EEF09",
+                              "covered": "EAID_LL000000_CC0C_474e_8EEC_C07DBB7EEF09"
+                            }
+                          }
+                        ],
+                        "message": [
+                          {
+                            "$": {
+                              "xmi:type": "uml:Message",
+                              "xmi:id": "EAID_09FBA738_8B4E_4d26_9C1F_4E41C740EBBE",
+                              "name": "afn1()",
+                              "messageKind": "found",
+                              "messageSort": "synchCall",
+                              "receiveEvent": "EAID_FR000000_43D6_4fbb_B0DE_925A863A2767",
+                              "signature": "EAID_4CE5F9C2_1343_4979_8212_4D1BE2AEA910"
+                            }
+                          },
+                          {
+                            "$": {
+                              "xmi:type": "uml:Message",
+                              "xmi:id": "EAID_448D9331_7C66_4770_B33B_906D77400B70",
+                              "name": "bfn1()",
+                              "messageKind": "complete",
+                              "messageSort": "synchCall",
+                              "sendEvent": "EAID_FR000001_43D6_4fbb_B0DE_925A863A2767",
+                              "receiveEvent": "EAID_FR000000_CC0C_474e_8EEC_C07DBB7EEF09",
+                              "signature": "EAID_BCE8DCA8_4A1B_456e_BC04_B0EFE5D33589"
+                            }
+                          },
+                          {
+                            "$": {
+                              "xmi:type": "uml:Message",
+                              "xmi:id": "EAID_AF17EE06_7694_4afe_8408_8B7C69462A07",
+                              "name": "bfn2()",
+                              "messageKind": "complete",
+                              "messageSort": "synchCall",
+                              "sendEvent": "EAID_FR000002_43D6_4fbb_B0DE_925A863A2767",
+                              "receiveEvent": "EAID_FR000001_CC0C_474e_8EEC_C07DBB7EEF09",
+                              "signature": "EAID_F7268ED0_E5BD_4530_9A33_07E318718F5C"
+                            }
+                          },
+                          {
+                            "$": {
+                              "xmi:type": "uml:Message",
+                              "xmi:id": "EAID_CF14DFA5_F89E_4025_BC6C_F604B5797850",
+                              "name": "bfn3()",
+                              "messageKind": "complete",
+                              "messageSort": "synchCall",
+                              "sendEvent": "EAID_FR000003_43D6_4fbb_B0DE_925A863A2767",
+                              "receiveEvent": "EAID_FR000002_CC0C_474e_8EEC_C07DBB7EEF09",
+                              "signature": "EAID_43A5E18D_4E90_46a5_B481_29FF244AAAA2"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "ownedAttribute": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:Property",
+                          "xmi:id": "EAID_AT000000_000_43D6_4fbb_B0DE_925A863A276"
+                        },
+                        "type": [
+                          {
+                            "$": {
+                              "xmi:idref": "EAID_203374E3_43D6_4fbb_B0DE_925A863A2767"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:Property",
+                          "xmi:id": "EAID_AT000000_000_CC0C_474e_8EEC_C07DBB7EEF0"
+                        },
+                        "type": [
+                          {
+                            "$": {
+                              "xmi:idref": "EAID_618B8144_CC0C_474e_8EEC_C07DBB7EEF09"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Class",
+                      "xmi:id": "EAID_F6B11A42_93B2_403b_A410_F799FD693CBF",
+                      "name": "start",
+                      "visibility": "public"
+                    }
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Package",
+                      "xmi:id": "EAPK_619298A3_2986_45bc_B1F0_01E651DE1E3F",
+                      "name": "Actors",
+                      "visibility": "public"
+                    },
+                    "packagedElement": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:Actor",
+                          "xmi:id": "EAID_74BE0C57_AE62_4a37_84C9_F6E70123790D",
+                          "name": "Actor A",
+                          "visibility": "public"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Package",
+                      "xmi:id": "EAPK_B5DAF01E_C6D9_4b91_80E8_E9CBC1A54F97",
+                      "name": "Classes",
+                      "visibility": "public"
+                    },
+                    "packagedElement": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:Class",
+                          "xmi:id": "EAID_9E28C926_79F7_41a4_9A6F_78A8005291EA",
+                          "name": "Class A",
+                          "visibility": "public"
+                        },
+                        "ownedOperation": [
+                          {
+                            "$": {
+                              "xmi:id": "EAID_4CE5F9C2_1343_4979_8212_4D1BE2AEA910",
+                              "name": "afn1",
+                              "visibility": "public",
+                              "concurrency": "sequential"
+                            },
+                            "ownedParameter": [
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_RT000000_1343_4979_8212_4D1BE2AEA910",
+                                  "name": "return",
+                                  "direction": "return",
+                                  "type": "EAnone_void"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:Class",
+                          "xmi:id": "EAID_92166D34_D46E_48b1_AF29_F2FFE77369EF",
+                          "name": "Class B",
+                          "visibility": "public"
+                        },
+                        "ownedOperation": [
+                          {
+                            "$": {
+                              "xmi:id": "EAID_BCE8DCA8_4A1B_456e_BC04_B0EFE5D33589",
+                              "name": "bfn1",
+                              "visibility": "public",
+                              "concurrency": "sequential"
+                            },
+                            "ownedParameter": [
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_RT000000_4A1B_456e_BC04_B0EFE5D33589",
+                                  "name": "return",
+                                  "direction": "return",
+                                  "type": "EAnone_void"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "$": {
+                              "xmi:id": "EAID_F7268ED0_E5BD_4530_9A33_07E318718F5C",
+                              "name": "bfn2",
+                              "visibility": "public",
+                              "concurrency": "sequential"
+                            },
+                            "ownedParameter": [
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_RT000000_E5BD_4530_9A33_07E318718F5C",
+                                  "name": "return",
+                                  "direction": "return",
+                                  "type": "EAnone_void"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "$": {
+                              "xmi:id": "EAID_43A5E18D_4E90_46a5_B481_29FF244AAAA2",
+                              "name": "bfn3",
+                              "visibility": "public",
+                              "concurrency": "sequential"
+                            },
+                            "ownedParameter": [
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_RT000000_4E90_46a5_B481_29FF244AAAA2",
+                                  "name": "return",
+                                  "direction": "return",
+                                  "type": "EAnone_void"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Package",
+                      "xmi:id": "EAPK_6AD26C6A_811B_417c_98CF_E62989844508",
+                      "name": "Fragments",
+                      "visibility": "public"
+                    },
+                    "packagedElement": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:Collaboration",
+                          "xmi:id": "EAID_CB000000_C6A_811B_417c_98CF_E6298984450",
+                          "name": "EA_Collaboration2",
+                          "visibility": "public"
+                        },
+                        "ownedBehavior": [
+                          {
+                            "$": {
+                              "xmi:type": "uml:Interaction",
+                              "xmi:id": "EAID_IN000000_C6A_811B_417c_98CF_E6298984450",
+                              "name": "EA_Interaction2",
+                              "visibility": "public"
+                            },
+                            "fragment": [
+                              {
+                                "$": {
+                                  "xmi:type": "uml:CombinedFragment",
+                                  "xmi:id": "EAID_81FEAABD_235C_430c_8A11_D7FF7B8DF30E",
+                                  "name": "Alternative A",
+                                  "visibility": "public",
+                                  "interactionOperator": "alt"
+                                },
+                                "covered": [
+                                  {
+                                    "$": {
+                                      "xmi:idref": "EAID_203374E3_43D6_4fbb_B0DE_925A863A2767"
+                                    }
+                                  },
+                                  {
+                                    "$": {
+                                      "xmi:idref": "EAID_618B8144_CC0C_474e_8EEC_C07DBB7EEF09"
+                                    }
+                                  }
+                                ],
+                                "operand": [
+                                  {
+                                    "$": {
+                                      "xmi:type": "uml:InteractionOperand",
+                                      "xmi:id": "EAID_OP000001_235C_430c_8A11_D7FF7B8DF30E"
+                                    },
+                                    "guard": [
+                                      {
+                                        "$": {
+                                          "xmi:type": "uml:InteractionConstraint",
+                                          "xmi:id": "EAID_IC000001_235C_430c_8A11_D7FF7B8DF30E"
+                                        },
+                                        "specification": [
+                                          {
+                                            "$": {
+                                              "xmi:type": "uml:OpaqueExpression",
+                                              "xmi:id": "EAID_OE000001_235C_430c_8A11_D7FF7B8DF30E",
+                                              "body": "a >= b"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "fragment": [
+                                      {
+                                        "$": {
+                                          "xmi:type": "uml:OccurrenceSpecification",
+                                          "xmi:id": "EAID_FR000002_43D6_4fbb_B0DE_925A863A2767",
+                                          "covered": "EAID_LL000000_43D6_4fbb_B0DE_925A863A2767"
+                                        }
+                                      },
+                                      {
+                                        "$": {
+                                          "xmi:type": "uml:OccurrenceSpecification",
+                                          "xmi:id": "EAID_FR000001_CC0C_474e_8EEC_C07DBB7EEF09",
+                                          "covered": "EAID_LL000000_CC0C_474e_8EEC_C07DBB7EEF09"
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "$": {
+                                      "xmi:type": "uml:InteractionOperand",
+                                      "xmi:id": "EAID_OP000000_235C_430c_8A11_D7FF7B8DF30E"
+                                    },
+                                    "guard": [
+                                      {
+                                        "$": {
+                                          "xmi:type": "uml:InteractionConstraint",
+                                          "xmi:id": "EAID_IC000000_235C_430c_8A11_D7FF7B8DF30E"
+                                        },
+                                        "specification": [
+                                          {
+                                            "$": {
+                                              "xmi:type": "uml:OpaqueExpression",
+                                              "xmi:id": "EAID_OE000000_235C_430c_8A11_D7FF7B8DF30E",
+                                              "body": "a < b"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "fragment": [
+                                      {
+                                        "$": {
+                                          "xmi:type": "uml:OccurrenceSpecification",
+                                          "xmi:id": "EAID_FR000003_43D6_4fbb_B0DE_925A863A2767",
+                                          "covered": "EAID_LL000000_43D6_4fbb_B0DE_925A863A2767"
+                                        }
+                                      },
+                                      {
+                                        "$": {
+                                          "xmi:type": "uml:OccurrenceSpecification",
+                                          "xmi:id": "EAID_FR000002_CC0C_474e_8EEC_C07DBB7EEF09",
+                                          "covered": "EAID_LL000000_CC0C_474e_8EEC_C07DBB7EEF09"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Package",
+                      "xmi:id": "EAPK_27DF9574_D305_4305_9C47_E280BEF4E65A",
+                      "name": "Instances",
+                      "visibility": "public"
+                    },
+                    "packagedElement": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:InstanceSpecification",
+                          "xmi:id": "EAID_203374E3_43D6_4fbb_B0DE_925A863A2767",
+                          "name": "Instance a",
+                          "visibility": "public",
+                          "classifier": "EAID_9E28C926_79F7_41a4_9A6F_78A8005291EA"
+                        }
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:InstanceSpecification",
+                          "xmi:id": "EAID_618B8144_CC0C_474e_8EEC_C07DBB7EEF09",
+                          "name": "Instance b",
+                          "visibility": "public",
+                          "classifier": "EAID_92166D34_D46E_48b1_AF29_F2FFE77369EF"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "thecustomprofile:operation_guid": [
+          {
+            "$": {
+              "base_Message": "EAID_09FBA738_8B4E_4d26_9C1F_4E41C740EBBE",
+              "operation_guid": "{4CE5F9C2-1343-4979-8212-4D1BE2AEA910}"
+            }
+          },
+          {
+            "$": {
+              "base_Message": "EAID_448D9331_7C66_4770_B33B_906D77400B70",
+              "operation_guid": "{BCE8DCA8-4A1B-456e-BC04-B0EFE5D33589}"
+            }
+          },
+          {
+            "$": {
+              "base_Message": "EAID_AF17EE06_7694_4afe_8408_8B7C69462A07",
+              "operation_guid": "{F7268ED0-E5BD-4530-9A33-07E318718F5C}"
+            }
+          },
+          {
+            "$": {
+              "base_Message": "EAID_CF14DFA5_F89E_4025_BC6C_F604B5797850",
+              "operation_guid": "{43A5E18D-4E90-46a5-B481-29FF244AAAA2}"
+            }
+          }
+        ]
+      }
+    ],
+    "xmi:Extension": [
+      {
+        "$": {
+          "extender": "Enterprise Architect",
+          "extenderID": "6.5"
+        },
+        "elements": [
+          {
+            "element": [
+              {
+                "$": {
+                  "xmi:idref": "EAPK_580DB2DA_3BEC_4c85_A6CD_C2C3883252D6"
+                },
+                "packageproperties": [
+                  ""
+                ],
+                "paths": [
+                  ""
+                ],
+                "times": [
+                  {
+                    "$": {
+                      "created": "2012-04-17 00:00:00",
+                      "modified": "2012-04-17 00:00:00",
+                      "lastloaddate": "2019-04-05 22:37:32"
+                    }
+                  }
+                ],
+                "flags": [
+                  {
+                    "$": {
+                      "iscontrolled": "FALSE",
+                      "isprotected": "FALSE",
+                      "usedtd": "FALSE",
+                      "logxml": "FALSE",
+                      "packageFlags": "isModel=1;"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAPK_DB47E355_57D0_4d35_8702_A5B7D91C6BC0",
+                  "xmi:type": "uml:Package",
+                  "name": "Basic Sequence Diagram with Alternative Fragment",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package2": "EAID_DB47E355_57D0_4d35_8702_A5B7D91C6BC0",
+                      "package": "EAPK_580DB2DA_3BEC_4c85_A6CD_C2C3883252D6",
+                      "tpos": "5",
+                      "ea_localid": "9",
+                      "ea_eleType": "package"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Package",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-04-05 22:37:32",
+                      "modified": "2018-01-31 15:28:48",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Model"
+                    }
+                  }
+                ],
+                "packageproperties": [
+                  {
+                    "$": {
+                      "version": "1.0",
+                      "tpos": "5"
+                    }
+                  }
+                ],
+                "paths": [
+                  ""
+                ],
+                "times": [
+                  {
+                    "$": {
+                      "created": "2019-04-05 22:37:32",
+                      "modified": "2019-04-05 22:37:32",
+                      "lastloaddate": "2019-04-05 22:37:32",
+                      "lastsavedate": "2019-04-05 22:37:32"
+                    }
+                  }
+                ],
+                "flags": [
+                  {
+                    "$": {
+                      "iscontrolled": "FALSE",
+                      "isprotected": "FALSE",
+                      "batchsave": "0",
+                      "batchload": "0",
+                      "usedtd": "FALSE",
+                      "logxml": "FALSE"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_F6B11A42_93B2_403b_A410_F799FD693CBF",
+                  "xmi:type": "uml:MessageEndpoint",
+                  "name": "start",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_DB47E355_57D0_4d35_8702_A5B7D91C6BC0",
+                      "tpos": "0",
+                      "ea_localid": "33",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "MessageEndpoint",
+                      "nType": "0",
+                      "scope": "public",
+                      "isRoot": "false",
+                      "isLeaf": "false",
+                      "isAbstract": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-04-05 23:23:51",
+                      "modified": "2019-04-05 23:23:56",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=3;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Basic Sequence Diagram with Alternative Fragment"
+                    }
+                  }
+                ],
+                "links": [
+                  {
+                    "Sequence": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_09FBA738_8B4E_4d26_9C1F_4E41C740EBBE",
+                          "start": "EAID_F6B11A42_93B2_403b_A410_F799FD693CBF",
+                          "end": "EAID_203374E3_43D6_4fbb_B0DE_925A863A2767"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAPK_619298A3_2986_45bc_B1F0_01E651DE1E3F",
+                  "xmi:type": "uml:Package",
+                  "name": "Actors",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package2": "EAID_619298A3_2986_45bc_B1F0_01E651DE1E3F",
+                      "package": "EAPK_DB47E355_57D0_4d35_8702_A5B7D91C6BC0",
+                      "tpos": "0",
+                      "ea_localid": "10",
+                      "ea_eleType": "package"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Package",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-04-05 22:37:32",
+                      "modified": "2019-04-05 22:37:32",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Basic Sequence Diagram with Alternative Fragment"
+                    }
+                  }
+                ],
+                "packageproperties": [
+                  {
+                    "$": {
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "paths": [
+                  ""
+                ],
+                "times": [
+                  {
+                    "$": {
+                      "created": "2019-04-05 22:37:32",
+                      "modified": "2018-01-25 13:34:36",
+                      "lastloaddate": "2019-04-05 22:37:32",
+                      "lastsavedate": "2019-04-05 22:37:32"
+                    }
+                  }
+                ],
+                "flags": [
+                  {
+                    "$": {
+                      "iscontrolled": "FALSE",
+                      "isprotected": "FALSE",
+                      "batchsave": "0",
+                      "batchload": "0",
+                      "usedtd": "FALSE",
+                      "logxml": "FALSE"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_74BE0C57_AE62_4a37_84C9_F6E70123790D",
+                  "xmi:type": "uml:Actor",
+                  "name": "Actor A",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_619298A3_2986_45bc_B1F0_01E651DE1E3F",
+                      "tpos": "0",
+                      "ea_localid": "27",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Actor",
+                      "nType": "0",
+                      "scope": "public",
+                      "isRoot": "false",
+                      "isLeaf": "false",
+                      "isAbstract": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-04-05 22:37:32",
+                      "modified": "2019-04-05 22:37:32",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Actors"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAPK_B5DAF01E_C6D9_4b91_80E8_E9CBC1A54F97",
+                  "xmi:type": "uml:Package",
+                  "name": "Classes",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package2": "EAID_B5DAF01E_C6D9_4b91_80E8_E9CBC1A54F97",
+                      "package": "EAPK_DB47E355_57D0_4d35_8702_A5B7D91C6BC0",
+                      "tpos": "0",
+                      "ea_localid": "11",
+                      "ea_eleType": "package"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Package",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-04-05 22:37:32",
+                      "modified": "2019-04-05 22:37:32",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Basic Sequence Diagram with Alternative Fragment"
+                    }
+                  }
+                ],
+                "packageproperties": [
+                  {
+                    "$": {
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "paths": [
+                  ""
+                ],
+                "times": [
+                  {
+                    "$": {
+                      "created": "2019-04-05 22:37:32",
+                      "modified": "2018-01-25 13:35:18",
+                      "lastloaddate": "2019-04-05 22:37:32",
+                      "lastsavedate": "2019-04-05 22:37:32"
+                    }
+                  }
+                ],
+                "flags": [
+                  {
+                    "$": {
+                      "iscontrolled": "FALSE",
+                      "isprotected": "FALSE",
+                      "batchsave": "0",
+                      "batchload": "0",
+                      "usedtd": "FALSE",
+                      "logxml": "FALSE"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_9E28C926_79F7_41a4_9A6F_78A8005291EA",
+                  "xmi:type": "uml:Class",
+                  "name": "Class A",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_B5DAF01E_C6D9_4b91_80E8_E9CBC1A54F97",
+                      "tpos": "0",
+                      "ea_localid": "29",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Class",
+                      "nType": "0",
+                      "scope": "public",
+                      "isRoot": "false",
+                      "isLeaf": "false",
+                      "isAbstract": "false",
+                      "isActive": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-04-05 22:37:32",
+                      "modified": "2019-04-05 22:37:32",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Classes"
+                    }
+                  }
+                ],
+                "operations": [
+                  {
+                    "operation": [
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_4CE5F9C2_1343_4979_8212_4D1BE2AEA910",
+                          "name": "afn1",
+                          "scope": "Public"
+                        },
+                        "properties": [
+                          {
+                            "$": {
+                              "position": "0"
+                            }
+                          }
+                        ],
+                        "stereotype": [
+                          ""
+                        ],
+                        "model": [
+                          {
+                            "$": {
+                              "ea_guid": "{4CE5F9C2-1343-4979-8212-4D1BE2AEA910}",
+                              "ea_localid": "10"
+                            }
+                          }
+                        ],
+                        "type": [
+                          {
+                            "$": {
+                              "type": "void",
+                              "const": "false",
+                              "static": "false",
+                              "isAbstract": "false",
+                              "synchronised": "0",
+                              "concurrency": "Sequential",
+                              "pure": "0",
+                              "isQuery": "false"
+                            }
+                          }
+                        ],
+                        "behaviour": [
+                          ""
+                        ],
+                        "code": [
+                          ""
+                        ],
+                        "style": [
+                          ""
+                        ],
+                        "styleex": [
+                          ""
+                        ],
+                        "documentation": [
+                          ""
+                        ],
+                        "tags": [
+                          {
+                            "tag": [
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_98FC934D_1303_4038_8A23_79ED2B7325CD",
+                                  "name": "ea_guid",
+                                  "value": "{4CE5F9C2-1343-4979-8212-4D1BE2AEA910}"
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "parameters": [
+                          {
+                            "parameter": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_RETURNID_1343_4979_8212_4D1BE2AEA910",
+                                  "visibility": "public"
+                                },
+                                "properties": [
+                                  {
+                                    "$": {
+                                      "pos": "0",
+                                      "type": "void",
+                                      "const": "false",
+                                      "ea_guid": "{RETURNID-1343-4979-8212-4D1BE2AEA910}"
+                                    }
+                                  }
+                                ],
+                                "style": [
+                                  ""
+                                ],
+                                "styleex": [
+                                  ""
+                                ],
+                                "documentation": [
+                                  ""
+                                ],
+                                "tags": [
+                                  ""
+                                ],
+                                "xrefs": [
+                                  ""
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "xrefs": [
+                          ""
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_92166D34_D46E_48b1_AF29_F2FFE77369EF",
+                  "xmi:type": "uml:Class",
+                  "name": "Class B",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_B5DAF01E_C6D9_4b91_80E8_E9CBC1A54F97",
+                      "tpos": "0",
+                      "ea_localid": "28",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Class",
+                      "nType": "0",
+                      "scope": "public",
+                      "isRoot": "false",
+                      "isLeaf": "false",
+                      "isAbstract": "false",
+                      "isActive": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-04-05 22:37:32",
+                      "modified": "2019-04-05 22:37:32",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Classes"
+                    }
+                  }
+                ],
+                "operations": [
+                  {
+                    "operation": [
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_BCE8DCA8_4A1B_456e_BC04_B0EFE5D33589",
+                          "name": "bfn1",
+                          "scope": "Public"
+                        },
+                        "properties": [
+                          {
+                            "$": {
+                              "position": "0"
+                            }
+                          }
+                        ],
+                        "stereotype": [
+                          ""
+                        ],
+                        "model": [
+                          {
+                            "$": {
+                              "ea_guid": "{BCE8DCA8-4A1B-456e-BC04-B0EFE5D33589}",
+                              "ea_localid": "7"
+                            }
+                          }
+                        ],
+                        "type": [
+                          {
+                            "$": {
+                              "type": "void",
+                              "const": "false",
+                              "static": "false",
+                              "isAbstract": "false",
+                              "synchronised": "0",
+                              "concurrency": "Sequential",
+                              "pure": "0",
+                              "isQuery": "false"
+                            }
+                          }
+                        ],
+                        "behaviour": [
+                          ""
+                        ],
+                        "code": [
+                          ""
+                        ],
+                        "style": [
+                          ""
+                        ],
+                        "styleex": [
+                          ""
+                        ],
+                        "documentation": [
+                          ""
+                        ],
+                        "tags": [
+                          {
+                            "tag": [
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_0E34F517_C822_41ec_A5CC_8B7A0EC35D2F",
+                                  "name": "ea_guid",
+                                  "value": "{BCE8DCA8-4A1B-456e-BC04-B0EFE5D33589}"
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "parameters": [
+                          {
+                            "parameter": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_RETURNID_4A1B_456e_BC04_B0EFE5D33589",
+                                  "visibility": "public"
+                                },
+                                "properties": [
+                                  {
+                                    "$": {
+                                      "pos": "0",
+                                      "type": "void",
+                                      "const": "false",
+                                      "ea_guid": "{RETURNID-4A1B-456e-BC04-B0EFE5D33589}"
+                                    }
+                                  }
+                                ],
+                                "style": [
+                                  ""
+                                ],
+                                "styleex": [
+                                  ""
+                                ],
+                                "documentation": [
+                                  ""
+                                ],
+                                "tags": [
+                                  ""
+                                ],
+                                "xrefs": [
+                                  ""
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "xrefs": [
+                          ""
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_F7268ED0_E5BD_4530_9A33_07E318718F5C",
+                          "name": "bfn2",
+                          "scope": "Public"
+                        },
+                        "properties": [
+                          {
+                            "$": {
+                              "position": "1"
+                            }
+                          }
+                        ],
+                        "stereotype": [
+                          ""
+                        ],
+                        "model": [
+                          {
+                            "$": {
+                              "ea_guid": "{F7268ED0-E5BD-4530-9A33-07E318718F5C}",
+                              "ea_localid": "8"
+                            }
+                          }
+                        ],
+                        "type": [
+                          {
+                            "$": {
+                              "type": "void",
+                              "const": "false",
+                              "static": "false",
+                              "isAbstract": "false",
+                              "synchronised": "0",
+                              "concurrency": "Sequential",
+                              "pure": "0",
+                              "isQuery": "false"
+                            }
+                          }
+                        ],
+                        "behaviour": [
+                          ""
+                        ],
+                        "code": [
+                          ""
+                        ],
+                        "style": [
+                          ""
+                        ],
+                        "styleex": [
+                          ""
+                        ],
+                        "documentation": [
+                          ""
+                        ],
+                        "tags": [
+                          {
+                            "tag": [
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_02525BBF_012B_496d_B73D_B753167E5625",
+                                  "name": "ea_guid",
+                                  "value": "{F7268ED0-E5BD-4530-9A33-07E318718F5C}"
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "parameters": [
+                          {
+                            "parameter": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_RETURNID_E5BD_4530_9A33_07E318718F5C",
+                                  "visibility": "public"
+                                },
+                                "properties": [
+                                  {
+                                    "$": {
+                                      "pos": "0",
+                                      "type": "void",
+                                      "const": "false",
+                                      "ea_guid": "{RETURNID-E5BD-4530-9A33-07E318718F5C}"
+                                    }
+                                  }
+                                ],
+                                "style": [
+                                  ""
+                                ],
+                                "styleex": [
+                                  ""
+                                ],
+                                "documentation": [
+                                  ""
+                                ],
+                                "tags": [
+                                  ""
+                                ],
+                                "xrefs": [
+                                  ""
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "xrefs": [
+                          ""
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_43A5E18D_4E90_46a5_B481_29FF244AAAA2",
+                          "name": "bfn3",
+                          "scope": "Public"
+                        },
+                        "properties": [
+                          {
+                            "$": {
+                              "position": "2"
+                            }
+                          }
+                        ],
+                        "stereotype": [
+                          ""
+                        ],
+                        "model": [
+                          {
+                            "$": {
+                              "ea_guid": "{43A5E18D-4E90-46a5-B481-29FF244AAAA2}",
+                              "ea_localid": "9"
+                            }
+                          }
+                        ],
+                        "type": [
+                          {
+                            "$": {
+                              "type": "void",
+                              "const": "false",
+                              "static": "false",
+                              "isAbstract": "false",
+                              "synchronised": "0",
+                              "concurrency": "Sequential",
+                              "pure": "0",
+                              "isQuery": "false"
+                            }
+                          }
+                        ],
+                        "behaviour": [
+                          ""
+                        ],
+                        "code": [
+                          ""
+                        ],
+                        "style": [
+                          ""
+                        ],
+                        "styleex": [
+                          ""
+                        ],
+                        "documentation": [
+                          ""
+                        ],
+                        "tags": [
+                          {
+                            "tag": [
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_CB5F6B99_155B_4903_856C_C7EF98708884",
+                                  "name": "ea_guid",
+                                  "value": "{43A5E18D-4E90-46a5-B481-29FF244AAAA2}"
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "parameters": [
+                          {
+                            "parameter": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_RETURNID_4E90_46a5_B481_29FF244AAAA2",
+                                  "visibility": "public"
+                                },
+                                "properties": [
+                                  {
+                                    "$": {
+                                      "pos": "0",
+                                      "type": "void",
+                                      "const": "false",
+                                      "ea_guid": "{RETURNID-4E90-46a5-B481-29FF244AAAA2}"
+                                    }
+                                  }
+                                ],
+                                "style": [
+                                  ""
+                                ],
+                                "styleex": [
+                                  ""
+                                ],
+                                "documentation": [
+                                  ""
+                                ],
+                                "tags": [
+                                  ""
+                                ],
+                                "xrefs": [
+                                  ""
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "xrefs": [
+                          ""
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAPK_6AD26C6A_811B_417c_98CF_E62989844508",
+                  "xmi:type": "uml:Package",
+                  "name": "Fragments",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package2": "EAID_6AD26C6A_811B_417c_98CF_E62989844508",
+                      "package": "EAPK_DB47E355_57D0_4d35_8702_A5B7D91C6BC0",
+                      "tpos": "0",
+                      "ea_localid": "12",
+                      "ea_eleType": "package"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Package",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-04-05 22:37:32",
+                      "modified": "2019-04-05 22:37:32",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Basic Sequence Diagram with Alternative Fragment"
+                    }
+                  }
+                ],
+                "packageproperties": [
+                  {
+                    "$": {
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "paths": [
+                  ""
+                ],
+                "times": [
+                  {
+                    "$": {
+                      "created": "2019-04-05 22:37:32",
+                      "modified": "2018-01-27 17:27:03",
+                      "lastloaddate": "2019-04-05 22:37:32",
+                      "lastsavedate": "2019-04-05 22:37:32"
+                    }
+                  }
+                ],
+                "flags": [
+                  {
+                    "$": {
+                      "iscontrolled": "FALSE",
+                      "isprotected": "FALSE",
+                      "batchsave": "0",
+                      "batchload": "0",
+                      "usedtd": "FALSE",
+                      "logxml": "FALSE"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_81FEAABD_235C_430c_8A11_D7FF7B8DF30E",
+                  "xmi:type": "uml:InteractionFragment",
+                  "name": "Alternative A",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_6AD26C6A_811B_417c_98CF_E62989844508",
+                      "tpos": "0",
+                      "ea_localid": "30",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "InteractionFragment",
+                      "nType": "0",
+                      "scope": "public",
+                      "isRoot": "false",
+                      "isLeaf": "false",
+                      "isAbstract": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-04-05 22:37:32",
+                      "modified": "2019-04-05 22:37:32",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=3;",
+                      "styleex": "ConstructID=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  {
+                    "$": {
+                      "value": "$XREFPROP=$XID={7F3803D0-A214-4541-B032-F93A85EFF474}$XID;$NAM=Partitions$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PAR;Name=a < b;Size=62;GUID={2DB129A8-0BFE-48bd-9B3B-1B347BE5D1B2};@ENDPAR;@PAR;Name=a >= b;Size=64;GUID={B2B64425-A2C5-47cc-987F-F9735D95E53C};@ENDPAR;$DES;$CLT={81FEAABD-235C-430c-8A11-D7FF7B8DF30E}$CLT;$ENDXREF;"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Fragments",
+                      "diagram": "EAID_CCAE3FCE_E1EA_4e92_A176_CBFDC0A3E086"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAPK_27DF9574_D305_4305_9C47_E280BEF4E65A",
+                  "xmi:type": "uml:Package",
+                  "name": "Instances",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package2": "EAID_27DF9574_D305_4305_9C47_E280BEF4E65A",
+                      "package": "EAPK_DB47E355_57D0_4d35_8702_A5B7D91C6BC0",
+                      "tpos": "0",
+                      "ea_localid": "13",
+                      "ea_eleType": "package"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Package",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-04-05 22:37:32",
+                      "modified": "2019-04-05 22:37:32",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Basic Sequence Diagram with Alternative Fragment"
+                    }
+                  }
+                ],
+                "packageproperties": [
+                  {
+                    "$": {
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "paths": [
+                  ""
+                ],
+                "times": [
+                  {
+                    "$": {
+                      "created": "2019-04-05 22:37:32",
+                      "modified": "2018-01-27 17:27:28",
+                      "lastloaddate": "2019-04-05 22:37:32",
+                      "lastsavedate": "2019-04-05 22:37:32"
+                    }
+                  }
+                ],
+                "flags": [
+                  {
+                    "$": {
+                      "iscontrolled": "FALSE",
+                      "isprotected": "FALSE",
+                      "batchsave": "0",
+                      "batchload": "0",
+                      "usedtd": "FALSE",
+                      "logxml": "FALSE"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_203374E3_43D6_4fbb_B0DE_925A863A2767",
+                  "xmi:type": "uml:Object",
+                  "name": "Instance a",
+                  "scope": "public",
+                  "classifier": "EAID_9E28C926_79F7_41a4_9A6F_78A8005291EA"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_27DF9574_D305_4305_9C47_E280BEF4E65A",
+                      "tpos": "0",
+                      "ea_localid": "31",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Object",
+                      "nType": "0",
+                      "classname": "Class A",
+                      "scope": "public",
+                      "isAbstract": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-04-05 22:37:32",
+                      "modified": "2019-04-05 22:37:32",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Instances"
+                    }
+                  }
+                ],
+                "links": [
+                  {
+                    "Sequence": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_448D9331_7C66_4770_B33B_906D77400B70",
+                          "start": "EAID_203374E3_43D6_4fbb_B0DE_925A863A2767",
+                          "end": "EAID_618B8144_CC0C_474e_8EEC_C07DBB7EEF09"
+                        }
+                      },
+                      {
+                        "$": {
+                          "xmi:id": "EAID_AF17EE06_7694_4afe_8408_8B7C69462A07",
+                          "start": "EAID_203374E3_43D6_4fbb_B0DE_925A863A2767",
+                          "end": "EAID_618B8144_CC0C_474e_8EEC_C07DBB7EEF09"
+                        }
+                      },
+                      {
+                        "$": {
+                          "xmi:id": "EAID_CF14DFA5_F89E_4025_BC6C_F604B5797850",
+                          "start": "EAID_203374E3_43D6_4fbb_B0DE_925A863A2767",
+                          "end": "EAID_618B8144_CC0C_474e_8EEC_C07DBB7EEF09"
+                        }
+                      },
+                      {
+                        "$": {
+                          "xmi:id": "EAID_09FBA738_8B4E_4d26_9C1F_4E41C740EBBE",
+                          "start": "EAID_F6B11A42_93B2_403b_A410_F799FD693CBF",
+                          "end": "EAID_203374E3_43D6_4fbb_B0DE_925A863A2767"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_618B8144_CC0C_474e_8EEC_C07DBB7EEF09",
+                  "xmi:type": "uml:Object",
+                  "name": "Instance b",
+                  "scope": "public",
+                  "classifier": "EAID_92166D34_D46E_48b1_AF29_F2FFE77369EF"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_27DF9574_D305_4305_9C47_E280BEF4E65A",
+                      "tpos": "0",
+                      "ea_localid": "32",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Object",
+                      "nType": "0",
+                      "classname": "Class B",
+                      "scope": "public",
+                      "isAbstract": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-04-05 22:37:32",
+                      "modified": "2019-04-05 22:37:32",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Instances"
+                    }
+                  }
+                ],
+                "links": [
+                  {
+                    "Sequence": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_448D9331_7C66_4770_B33B_906D77400B70",
+                          "start": "EAID_203374E3_43D6_4fbb_B0DE_925A863A2767",
+                          "end": "EAID_618B8144_CC0C_474e_8EEC_C07DBB7EEF09"
+                        }
+                      },
+                      {
+                        "$": {
+                          "xmi:id": "EAID_AF17EE06_7694_4afe_8408_8B7C69462A07",
+                          "start": "EAID_203374E3_43D6_4fbb_B0DE_925A863A2767",
+                          "end": "EAID_618B8144_CC0C_474e_8EEC_C07DBB7EEF09"
+                        }
+                      },
+                      {
+                        "$": {
+                          "xmi:id": "EAID_CF14DFA5_F89E_4025_BC6C_F604B5797850",
+                          "start": "EAID_203374E3_43D6_4fbb_B0DE_925A863A2767",
+                          "end": "EAID_618B8144_CC0C_474e_8EEC_C07DBB7EEF09"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "connectors": [
+          {
+            "connector": [
+              {
+                "$": {
+                  "xmi:idref": "EAID_09FBA738_8B4E_4d26_9C1F_4E41C740EBBE",
+                  "name": "afn1()"
+                },
+                "source": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_F6B11A42_93B2_403b_A410_F799FD693CBF"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "33",
+                          "type": "MessageEndpoint",
+                          "name": "start"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Non-Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "target": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_203374E3_43D6_4fbb_B0DE_925A863A2767"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "31",
+                          "type": "Object",
+                          "name": "Instance a"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "true"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "model": [
+                  {
+                    "$": {
+                      "ea_localid": "21"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "afn1()",
+                      "ea_type": "Sequence",
+                      "direction": "Source -> Destination"
+                    }
+                  }
+                ],
+                "documentation": [
+                  ""
+                ],
+                "appearance": [
+                  {
+                    "$": {
+                      "linemode": "1",
+                      "linecolor": "-1",
+                      "linewidth": "0",
+                      "seqno": "1",
+                      "headStyle": "0",
+                      "lineStyle": "0"
+                    }
+                  }
+                ],
+                "labels": [
+                  {
+                    "$": {
+                      "mt": "afn1()"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "stateflags": "Activation=0;ExtendActivationUp=0;",
+                      "virtualInheritance": "0",
+                      "diagram": "EAID_CCAE3FCE_E1EA_4e92_A176_CBFDC0A3E086",
+                      "privatedata1": "Synchronous",
+                      "privatedata2": "retval=void;",
+                      "privatedata3": "Call",
+                      "privatedata4": "0",
+                      "privatedata5": "SX=0;SY=0;EX=0;EY=0;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;",
+                      "sequence_points": "PtStartX=163;PtStartY=-135;PtEndX=292;PtEndY=-135;"
+                    }
+                  }
+                ],
+                "style": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "tags": [
+                  {
+                    "tag": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_EBA4B78A_4953_4205_B518_9ED80E190FD2",
+                          "name": "operation_guid",
+                          "value": "{4CE5F9C2-1343-4979-8212-4D1BE2AEA910}"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_448D9331_7C66_4770_B33B_906D77400B70",
+                  "name": "bfn1()"
+                },
+                "source": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_203374E3_43D6_4fbb_B0DE_925A863A2767"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "31",
+                          "type": "Object",
+                          "name": "Instance a"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Non-Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "target": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_618B8144_CC0C_474e_8EEC_C07DBB7EEF09"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "32",
+                          "type": "Object",
+                          "name": "Instance b"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "true"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "model": [
+                  {
+                    "$": {
+                      "ea_localid": "17"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "bfn1()",
+                      "ea_type": "Sequence",
+                      "direction": "Source -> Destination"
+                    }
+                  }
+                ],
+                "documentation": [
+                  ""
+                ],
+                "appearance": [
+                  {
+                    "$": {
+                      "linemode": "1",
+                      "linecolor": "-1",
+                      "linewidth": "0",
+                      "seqno": "2",
+                      "headStyle": "0",
+                      "lineStyle": "0"
+                    }
+                  }
+                ],
+                "labels": [
+                  {
+                    "$": {
+                      "mt": "bfn1()"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "stateflags": "Activation=0;ExtendActivationUp=0;",
+                      "virtualInheritance": "0",
+                      "diagram": "EAID_CCAE3FCE_E1EA_4e92_A176_CBFDC0A3E086",
+                      "privatedata1": "Synchronous",
+                      "privatedata2": "retval=void;",
+                      "privatedata3": "Call",
+                      "privatedata4": "0",
+                      "privatedata5": "SX=0;SY=-3;EX=0;EY=0;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;",
+                      "sequence_points": "PtStartX=302;PtStartY=-173;PtEndX=454;PtEndY=-173;"
+                    }
+                  }
+                ],
+                "style": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "tags": [
+                  {
+                    "tag": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_BD31FFC8_D61E_46fd_8297_C5D341C03A9E",
+                          "name": "operation_guid",
+                          "value": "{BCE8DCA8-4A1B-456e-BC04-B0EFE5D33589}"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_AF17EE06_7694_4afe_8408_8B7C69462A07",
+                  "name": "bfn2()"
+                },
+                "source": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_203374E3_43D6_4fbb_B0DE_925A863A2767"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "31",
+                          "type": "Object",
+                          "name": "Instance a"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Non-Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "target": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_618B8144_CC0C_474e_8EEC_C07DBB7EEF09"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "32",
+                          "type": "Object",
+                          "name": "Instance b"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "true"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "model": [
+                  {
+                    "$": {
+                      "ea_localid": "18"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "bfn2()",
+                      "ea_type": "Sequence",
+                      "direction": "Source -> Destination"
+                    }
+                  }
+                ],
+                "documentation": [
+                  ""
+                ],
+                "appearance": [
+                  {
+                    "$": {
+                      "linemode": "1",
+                      "linecolor": "-1",
+                      "linewidth": "0",
+                      "seqno": "3",
+                      "headStyle": "0",
+                      "lineStyle": "0"
+                    }
+                  }
+                ],
+                "labels": [
+                  {
+                    "$": {
+                      "mt": "[a >= b]:bfn2()"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "conditional": "a >= b",
+                      "virtualInheritance": "0",
+                      "diagram": "EAID_CCAE3FCE_E1EA_4e92_A176_CBFDC0A3E086",
+                      "privatedata1": "Synchronous",
+                      "privatedata2": "retval=void;",
+                      "privatedata3": "Call",
+                      "privatedata4": "0",
+                      "privatedata5": "SX=0;SY=-32;EX=0;EY=-32;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;",
+                      "sequence_points": "PtStartX=302;PtStartY=-240;PtEndX=454;PtEndY=-240;"
+                    }
+                  }
+                ],
+                "style": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "tags": [
+                  {
+                    "tag": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_172EBCBC_C30D_4a6f_A59F_1E68653AC35B",
+                          "name": "operation_guid",
+                          "value": "{F7268ED0-E5BD-4530-9A33-07E318718F5C}"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_CF14DFA5_F89E_4025_BC6C_F604B5797850",
+                  "name": "bfn3()"
+                },
+                "source": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_203374E3_43D6_4fbb_B0DE_925A863A2767"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "31",
+                          "type": "Object",
+                          "name": "Instance a"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Non-Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "target": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_618B8144_CC0C_474e_8EEC_C07DBB7EEF09"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "32",
+                          "type": "Object",
+                          "name": "Instance b"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "true"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "model": [
+                  {
+                    "$": {
+                      "ea_localid": "22"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "bfn3()",
+                      "ea_type": "Sequence",
+                      "direction": "Source -> Destination"
+                    }
+                  }
+                ],
+                "documentation": [
+                  ""
+                ],
+                "appearance": [
+                  {
+                    "$": {
+                      "linemode": "1",
+                      "linecolor": "-1",
+                      "linewidth": "0",
+                      "seqno": "4",
+                      "headStyle": "0",
+                      "lineStyle": "0"
+                    }
+                  }
+                ],
+                "labels": [
+                  {
+                    "$": {
+                      "mt": "[a < b]:bfn3()"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "conditional": "a < b",
+                      "virtualInheritance": "0",
+                      "diagram": "EAID_CCAE3FCE_E1EA_4e92_A176_CBFDC0A3E086",
+                      "privatedata1": "Synchronous",
+                      "privatedata2": "retval=void;",
+                      "privatedata3": "Call",
+                      "privatedata4": "0",
+                      "privatedata5": "SX=0;SY=-35;EX=0;EY=0;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;",
+                      "sequence_points": "PtStartX=302;PtStartY=-310;PtEndX=454;PtEndY=-310;"
+                    }
+                  }
+                ],
+                "style": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "tags": [
+                  {
+                    "tag": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_C7B1220C_EFED_47c5_AC48_9D361E55AA28",
+                          "name": "operation_guid",
+                          "value": "{43A5E18D-4E90-46a5-B481-29FF244AAAA2}"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "primitivetypes": [
+          {
+            "packagedElement": [
+              {
+                "$": {
+                  "xmi:type": "uml:Package",
+                  "xmi:id": "EAPrimitiveTypesPackage",
+                  "name": "EA_PrimitiveTypes_Package",
+                  "visibility": "public"
+                },
+                "packagedElement": [
+                  {
+                    "$": {
+                      "xmi:type": "uml:Package",
+                      "xmi:id": "EAnoneTypesPackage",
+                      "name": "EA_none_Types_Package",
+                      "visibility": "public"
+                    },
+                    "packagedElement": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:PrimitiveType",
+                          "xmi:id": "EAnone_void",
+                          "name": "void",
+                          "visibility": "public"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "profiles": [
+          {
+            "uml:Profile": [
+              {
+                "$": {
+                  "xmi:version": "2.1",
+                  "xmlns:uml": "http://schema.omg.org/spec/UML/2.1/",
+                  "xmlns:xmi": "http://schema.omg.org/spec/XMI/2.1",
+                  "xmi:id": "thecustomprofile",
+                  "nsPrefix": "thecustomprofile",
+                  "name": "thecustomprofile",
+                  "metamodelReference": "mmref01"
+                },
+                "ownedComment": [
+                  {
+                    "$": {
+                      "xmi:type": "uml:Comment",
+                      "xmi:id": "comment01",
+                      "annotatedElement": "thecustomprofile"
+                    },
+                    "body": [
+                      " Version:1.0"
+                    ]
+                  }
+                ],
+                "packageImport": [
+                  {
+                    "$": {
+                      "xmi:id": "mmref01"
+                    },
+                    "importedPackage": [
+                      {
+                        "$": {
+                          "href": "http://schema.omg.org/spec/UML/2.1/"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "packagedElement": [
+                  {
+                    "$": {
+                      "xmi:type": "uml:Stereotype",
+                      "xmi:id": "operation_guid",
+                      "name": "operation_guid"
+                    },
+                    "ownedAttribute": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:Property",
+                          "xmi:id": "operation_guid-base_Message",
+                          "name": "base_Message",
+                          "association": "Message_operation_guid"
+                        },
+                        "type": [
+                          {
+                            "$": {
+                              "href": "http://schema.omg.org/spec/UML/2.1/Message"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:Property",
+                          "xmi:id": "operation_guid-operation_guid",
+                          "name": "operation_guid"
+                        },
+                        "type": [
+                          {
+                            "$": {
+                              "href": "http://schema.omg.org/spec/UML/2.1/String"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Extension",
+                      "xmi:id": "Message_operation_guid",
+                      "name": "A_Message_operation_guid",
+                      "memberEnd": "extension_operation_guid operation_guid-base_Message"
+                    },
+                    "ownedEnd": [
+                      {
+                        "$": {
+                          "xmi:id": "extension_operation_guid",
+                          "name": "extension_operation_guid",
+                          "type": "operation_guid",
+                          "isComposite": "true",
+                          "lower": "0",
+                          "upper": "1",
+                          "memberEnd": "extension_operation_guid operation_guid-base_Message"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "diagrams": [
+          {
+            "diagram": [
+              {
+                "$": {
+                  "xmi:id": "EAID_CCAE3FCE_E1EA_4e92_A176_CBFDC0A3E086"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_DB47E355_57D0_4d35_8702_A5B7D91C6BC0",
+                      "localID": "3",
+                      "owner": "EAPK_DB47E355_57D0_4d35_8702_A5B7D91C6BC0"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "Basic Sequence Diagram with Alternative Fragment",
+                      "type": "Sequence"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "created": "2019-04-05 22:37:32",
+                      "modified": "2019-04-09 19:27:34"
+                    }
+                  }
+                ],
+                "style1": [
+                  {
+                    "$": {
+                      "value": "ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=1;DocSize.cx=826;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AllDockable=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"
+                    }
+                  }
+                ],
+                "style2": [
+                  {
+                    "$": {
+                      "value": "ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=0;INT_ARGS=;INT_RET=;INT_ATT=;SeqTopMargin=50;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=43994845;"
+                    }
+                  }
+                ],
+                "swimlanes": [
+                  {
+                    "$": {
+                      "value": "locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;hh=0;cls=0;bw=0;hli=0;SwimlaneFont=lfh:-21,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"
+                    }
+                  }
+                ],
+                "matrixitems": [
+                  {
+                    "$": {
+                      "value": "locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  ""
+                ],
+                "elements": [
+                  {
+                    "element": [
+                      {
+                        "$": {
+                          "geometry": "Left=149;Top=128;Right=163;Bottom=142;",
+                          "subject": "EAID_F6B11A42_93B2_403b_A410_F799FD693CBF",
+                          "seqno": "1",
+                          "style": "DUID=5E06E7E7;LBL=CX=18:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=227;Top=211;Right=498;Bottom=337;",
+                          "subject": "EAID_81FEAABD_235C_430c_8A11_D7FF7B8DF30E",
+                          "seqno": "2",
+                          "style": "DUID=44C4D0D9;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=414;Top=50;Right=504;Bottom=353;",
+                          "subject": "EAID_618B8144_CC0C_474e_8EEC_C07DBB7EEF09",
+                          "seqno": "3",
+                          "style": "DUID=32153B53;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=252;Top=50;Right=342;Bottom=353;",
+                          "subject": "EAID_203374E3_43D6_4fbb_B0DE_925A863A2767",
+                          "seqno": "4",
+                          "style": "DUID=B8CA92C3;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "SX=0;SY=0;EX=0;EY=0;Path=;",
+                          "subject": "EAID_09FBA738_8B4E_4d26_9C1F_4E41C740EBBE",
+                          "style": ";Hidden=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "SX=0;SY=0;EX=0;EY=0;Path=;",
+                          "subject": "EAID_448D9331_7C66_4770_B33B_906D77400B70",
+                          "style": ";Hidden=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "SX=0;SY=0;EX=0;EY=0;Path=;",
+                          "subject": "EAID_AF17EE06_7694_4afe_8408_8B7C69462A07",
+                          "style": ";Hidden=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "SX=0;SY=0;EX=0;EY=0;Path=;",
+                          "subject": "EAID_CF14DFA5_F89E_4025_BC6C_F604B5797850",
+                          "style": ";Hidden=0;"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

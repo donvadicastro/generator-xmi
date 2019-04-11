@@ -6,10 +6,10 @@ import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 
 export class xmiComponent extends xmiClass {
 
-    provided: xmiInOut[] | null = null;
-    required: xmiInOut[] | null = null;
+    provided: xmiInOut[] = [];
+    required: xmiInOut[] = [];
 
-    constructor(raw: any, parent: xmiPackage | null) {
+    constructor(raw: any, parent?: xmiPackage) {
         super(raw, parent);
 
         if(raw.links && raw.links.length && raw.links[0].Sequence) {
@@ -25,7 +25,7 @@ export class xmiComponent extends xmiClass {
         }
 
         if(this.raw.required) {
-            this.required = this.raw.required.map((x: any) => new xmiInOut(x, null));
+            this.required = this.raw.required.map((x: any) => new xmiInOut(x));
         }
     }
 
