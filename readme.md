@@ -1,5 +1,5 @@
 ## Table of Contents
-<!-- to regenerate call "markdown-toc -i readme.md" -->
+<!-- to regenerate call "npm run readme:generate-toc" -->
 
 <!-- toc -->
 
@@ -9,17 +9,24 @@
 - [Class diagram](#class-diagram)
   * [Interface generation](#interface-generation)
   * [Class generation](#class-generation)
+  * [Class association generation](#class-association-generation)
+  * [Class generalization generation](#class-generalization-generation)
 - [Component diagram](#component-diagram)
   * [Component generation](#component-generation)
   * [Components dependency generation](#components-dependency-generation)
 - [Sequence diagram](#sequence-diagram)
   * [Sequence diagram generation](#sequence-diagram-generation)
   * [Sequence diagram loop generation](#sequence-diagram-loop-generation)
+  * [Sequence diagram condition generation](#sequence-diagram-condition-generation)
 - [User interface diagram](#user-interface-diagram)
   * [UI iteractions generation](#ui-iteractions-generation)
-- [Generated project structure](#generated-project-structure)
+- [Generated project](#generated-project)
   * [File and directory structure](#file-and-directory-structure)
-  * [Local web server](#local-web-server)
+  * [Build-in commands](#build-in-commands)
+  * [Start local web server](#start-local-web-server)
+  * ["Design to API" mapping explanation](#design-to-api-mapping-explanation)
+    + [Sequence diagram as REST API endpoint implementation](#sequence-diagram-as-rest-api-endpoint-implementation)
+      - [Example](#example)
 
 <!-- tocstop -->
 
