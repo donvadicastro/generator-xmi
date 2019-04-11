@@ -1,5 +1,7 @@
 import {get} from 'object-path';
 import {xmiPackage} from "./xmiPackage";
+import {xmiComment} from "./xmiComment";
+import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 const camel = require('to-camel-case');
 
 export default class xmiBase {
@@ -13,6 +15,8 @@ export default class xmiBase {
     description: string;
     alias: string;
     stereotype: string;
+
+    comments: xmiComment[] = [];
 
     get path(): xmiBase[] {
         let path = [];
@@ -50,6 +54,8 @@ export default class xmiBase {
         this.description = get(this.raw, ['properties', '0', '$', 'documentation']);
         this.alias = get(this.raw, ['properties', '0', '$', 'alias']);
         this.stereotype = get(this.raw, ['properties', '0', '$', 'stereotype']);
+
+        this.comments = get(raw, 'ownedComment', []).map(x => <xmiComment>xmiComponentFactory.get(x));
     }
 
     toConsole(): any | string {

@@ -1,11 +1,12 @@
 import {xmiActor} from "../../src/entities/xmiActor";
+import {xmiComponentFactory} from "../../src/factories/xmiComponentFactory";
 
 describe('xmiActor', () => {
     it('constructor', () => {
-        const actor = new xmiActor({$: {'xmi:id': 'id1', 'xmi:type': 'type1', 'name': 'name1'}});
+        const actor = <xmiActor>xmiComponentFactory.get({$: {'xmi:type': 'uml:Actor', 'xmi:id': 'id1', 'name': 'name1'}});
 
         expect('id1').toBe(actor.id);
-        expect('type1').toBe(actor.type);
+        expect('uml:Actor').toBe(actor.type);
         expect('name1').toBe(actor.name);
     });
 });

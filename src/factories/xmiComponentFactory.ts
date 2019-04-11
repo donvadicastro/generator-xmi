@@ -2,8 +2,6 @@ import xmiBase from "../entities/xmiBase";
 import {xmiInterface} from "../entities/xmiInterface";
 import {xmiClass} from "../entities/xmiClass";
 import {xmiLink} from "../entities/links/xmiLink";
-import {xmiActor} from "../entities/xmiActor";
-// import {xmiComponent} from "../entities/xmiComponent";
 import {xmiPackage} from "../entities/xmiPackage";
 import {xmiCollaboration} from "../entities/xmiCollaboration";
 import {xmiDiagram} from "../entities/diagrams/xmiDiagram";
@@ -17,12 +15,13 @@ import {xmiUseCase} from "../entities/xmiUseCase";
 import {xmiLifeline} from "../entities/xmiLifeline";
 import {xmiFragment} from "../entities/collaboration/xmiFragment";
 import {xmiMessage} from "../entities/collaboration/xmiMessage";
-import {xmiComponent} from "../entities/xmiComponent";
 import xmiConnector from "../entities/connectors/xmiConnector";
 import {xmiAssociation} from "../entities/connectors/xmiAssociation";
-import {xmiGeneralization} from "../entities/connectors/xmiGeneralization";
 import {xmiInstanceSpecification} from "../entities/xmiInstanceSpecification";
 import {xmiCombinedFragment} from "../entities/collaboration/xmiCombinedFragment";
+import {get} from 'object-path';
+import {xmiComment} from "../entities/xmiComment";
+
 const assert = require('assert');
 
 type idHashRef = {source: any, property: string, callback?: (element: xmiBase) => void};
@@ -155,16 +154,28 @@ export class xmiComponentFactory {
                 element = new xmiAssociation(raw);
                 break;
 
+            case 'uml:Note':
+            case 'uml:Comment':
+                element = new xmiComment(raw, parent);
+                break;
+
             default:
                 element = new xmiBase(raw, parent);
                 break;
 
         }
 
+        //basic mapping
         if (element && raw.$['xmi:id']) {
             this.instance.idHash[raw.$['xmi:id']] = element;
         } else if (element && raw.$['xmi:idref']) {
             this.instance.idHash[raw.$['xmi:idref']] = element;
+        }
+
+        //package extended mapping
+        if(element instanceof xmiPackage) {
+            const package2: string = get(raw, 'model.0.$.package2');
+            package2 && (this.instance.idHash[package2] = element);
         }
 
         if(!element) {

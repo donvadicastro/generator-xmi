@@ -5,12 +5,12 @@ import {xmiUseCase} from "../../src/entities/xmiUseCase";
 
 describe('xmiParser', () => {
     describe('UseCase', () => {
-        const data = readJSONSync('test/data/project12_usecase.json');
-        const parser = new XmiParser(data);
-
-        parser.parse();
-
         it('Verify component structure', () => {
+            const data = readJSONSync('test/data/project12_usecase.json');
+            const parser = new XmiParser(data);
+
+            parser.parse();
+
             const pkg = <xmiPackage>parser.packge;
             const entities = (<xmiPackage>(<xmiPackage>pkg.children[0]).children[4]).children;
 
