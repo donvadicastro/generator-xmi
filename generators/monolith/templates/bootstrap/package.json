@@ -60,6 +60,7 @@
     "pino": "^4.17.5",
     "swagger-express-middleware": "^1.0.0-alpha.12",
     "chalk": "^2.1.0",
+    "express-pino-logger": "^4.0.0",
     "mongodb": "3.0.10",
     "node-persist": "^3.0.1",
     "reflect-metadata": "^0.1.12",

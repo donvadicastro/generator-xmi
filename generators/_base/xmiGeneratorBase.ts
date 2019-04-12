@@ -9,6 +9,7 @@ export class XmiGeneratorBase extends (Generator as { new(args: any, opts: any):
     testFiles: string[] = [];
     generatedFiles: string[] = [];
     collaborationDiagrams: any[] = [];
+    classes: any[] = [];
 
     _bootstrap(extra: string[]) {
         if(!this.fs.exists(this.destinationPath(this.options.destination))) {

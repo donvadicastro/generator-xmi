@@ -3,9 +3,9 @@
 /**
 * This file is auto-generated. Do not update it's content!
 */
+@Entity()
 export abstract class <%= entity.name %>Base extends <%- include('partial/class/extend', {entity: entity}) -%> {
   <%- include('partial/class/attributes', {entity: entity}) -%>
-
 
   constructor(
   <% (entity.required || []).map(function (value, i, list) { %>

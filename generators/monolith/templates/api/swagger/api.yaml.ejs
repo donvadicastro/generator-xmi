@@ -1,0 +1,127 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: api
+  description: REST API
+basePath: /api/v1
+tags:
+  - name: Examples
+    description: Simple example endpoints
+  - name: Specification
+    description: The swagger API specification
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+
+<% classes.forEach((x) => { %>
+  <%= x.url %>/<%= x.entity.name %>:
+    get:
+      tags:
+      - "Entities: <%= x.entity.name %>"
+      description: <%= x.entity.name %>
+
+      responses:
+        200:
+          description: Get all <%= x.entity.name %>
+
+    post:
+      tags:
+      - "Entities: <%= x.entity.name %>"
+      description: <%= x.entity.name %>
+
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "<%= x.entity.name %> object to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/<%= x.entity.name %>"
+
+      responses:
+        200:
+          description: Create <%= x.entity.name %>
+
+  <%= x.url %>/<%= x.entity.name %>:/:id:
+    get:
+      tags:
+      - "Entities: <%= x.entity.name %>"
+      description: <%= x.entity.name %>
+
+      parameters:
+      - in: "path"
+        name: "id"
+        description: "<%= x.entity.name %> id to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+
+      responses:
+        200:
+          description: Get <%= x.entity.nameOrigin %> by id
+    put:
+      tags:
+      - "Entities: <%= x.entity.name %>"
+      description: <%= x.entity.name %>
+
+      parameters:
+      - in: "path"
+        name: "id"
+        description: "<%= x.entity.name %> id to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "<%= x.entity.name %> object to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/<%= x.entity.name %>"
+
+      responses:
+        200:
+          description: Update <%= x.entity.name %> by id
+
+    delete:
+      tags:
+      - "Entities: <%= x.entity.name %>"
+      description: <%= x.entity.name %>
+
+      parameters:
+      - in: "path"
+        name: "id"
+        description: "<%= x.entity.name %> id to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+
+      responses:
+        200:
+          description: Delete <%= x.entity.name %> by id
+<% }) %>
+
+<% diagrams.forEach((x) => { %>
+  <%= x.url %>:
+    post:
+      tags:
+        - "Process: <%= x.entity.name %>"
+      description: <%= x.entity.name %>
+      responses:
+        200:
+          description: Returns execution result
+<% }) %>
+
+definitions:
+<% classes.forEach((x) => { %>
+  <%= x.entity.name %>:
+    type: "object"
+    properties:
+
+  <% (x.entity.attributes || []).forEach((attr) => { %>
+      <%= attr.name %>:
+        type: "<%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %>"
+  <% }) %>
+<% }) %>

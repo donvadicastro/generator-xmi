@@ -59,6 +59,6 @@ export default class xmiBase {
     }
 
     toConsole(): any | string {
-        return `${this.name} (${this.id})`;
+        return `[${this.type}] ${this.name} (${this.id})`;
     }
 }

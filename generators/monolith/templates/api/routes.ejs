@@ -1,11 +1,19 @@
 import { Application } from 'express';
 
-<% value.forEach(x => { %>
-import <%= x.entity.name %>Router from './routes<%= x.path %>/router';
+<% diagrams.forEach(x => { %>
+    import <%= x.entity.name %>Router from './routes<%= x.path %>/router';
+<% }) %>
+
+<% classes.forEach(x => { %>
+    import <%= x.entity.name %>Router from './routes<%= x.path %>/router';
 <% }) %>
 
 export default function routes(app: Application): void {
-<% value.forEach(x => { %>
+<% diagrams.forEach(x => { %>
+    app.use('/api/v1<%= x.url %>', <%= x.entity.name %>Router);
+<% }) %>
+
+<% classes.forEach(x => { %>
     app.use('/api/v1<%= x.url %>', <%= x.entity.name %>Router);
 <% }) %>
 };

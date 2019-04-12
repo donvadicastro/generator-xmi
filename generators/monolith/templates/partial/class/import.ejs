@@ -1,3 +1,7 @@
+import {Entity} from "typeorm";
+import {PrimaryGeneratedColumn} from "typeorm/decorator/columns/PrimaryGeneratedColumn";
+import {Column} from "typeorm/decorator/columns/Column";
+
 import {ComponentBase} from '../<%= entity.getRelativeRoot() %>/base/componentBase';
 import {<%= entity.name %>Contract} from '../../contracts/<%= entity.name %>';
 

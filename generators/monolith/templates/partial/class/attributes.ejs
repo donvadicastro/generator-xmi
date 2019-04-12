@@ -1,7 +1,11 @@
+@PrimaryGeneratedColumn()
+id: number = 0;
+
 <% (entity.attributes || []).forEach(function (attr) { %>
     /**
     * <%= attr.name %> property
     */
+    @Column()
     <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %> = <%- attr.typeDefaultValue %>;
 <% }) %>
 
