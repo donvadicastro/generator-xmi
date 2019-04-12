@@ -21,10 +21,12 @@ export class xmiInterface extends xmiBase {
     refresh(raw: any, parent?: xmiPackage) {
         if(raw.ownedAttribute) {
             this.attributes = raw.ownedAttribute
-                .map((x: any) => <xmiAttribute>xmiComponentFactory.get(x, this));
+                .map((x: any) => <xmiAttribute>xmiComponentFactory.get(x, this))
+                .filter((x: xmiAttribute) => x.name);
         } else {
             this.attributes = get(raw, ['attributes', '0', 'attribute'], [])
-                .map((x: any) => <xmiAttribute>xmiComponentFactory.get(x, this));
+                .map((x: any) => <xmiAttribute>xmiComponentFactory.get(x, this))
+                .filter((x: xmiAttribute) => x.name);
         }
 
         if(raw.ownedOperation) {

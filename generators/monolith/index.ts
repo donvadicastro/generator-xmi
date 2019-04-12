@@ -30,6 +30,12 @@ export class XmiGenerator extends XmiGeneratorBase {
         this.generatedFiles.forEach(x => this._beautify(x));
     }
 
+    end() {
+        this.log('\r\n\r\nProject generated successfully.\r\nUpdate configuration to start using application:');
+        this.log(chalk.green('Mongo connection: ') + `${this.options.destination}/ormconfig.json`);
+        this.log(chalk.green('JIRA credentials: ') + `${this.options.destination}/package.json`);
+    }
+
     _generate(localPath: string | null, pkg: any) {
         const path = this.options.destination + '/design' + localPath;
 
@@ -66,7 +72,7 @@ export class XmiGenerator extends XmiGeneratorBase {
                 const interfaceFileName = this.destinationPath(`${path}/contracts/${x.name}.ts`);
                 const baseClassFileName = this.destinationPath(`${path}/components/generated/${x.name}.generated.ts`);
                 const classFileName = this.destinationPath(`${path}/components/${x.name}.ts`);
-                const apiRouterFileName = this.destinationPath(`${this.options.destination}/api/server/routes/${localPath}/router.ts`);
+                const apiRouterFileName = this.destinationPath(`${this.options.destination}/api/server/routes/${localPath}/${x.name}.router.ts`);
 
                 this.fs.copyTpl(this.templatePath('xmiInterface.ejs'), interfaceFileName, options);
                 this.generatedFiles.push(interfaceFileName);
@@ -144,6 +150,9 @@ export class XmiGenerator extends XmiGeneratorBase {
             this.templatePath('api/swagger/api.yaml.ejs'),
             apiSwaggerConfig, {diagrams: this.collaborationDiagrams, classes: this.classes}
         );
+
+        const ormConfig = this.destinationPath(`${this.options.destination}/ormconfig.json`);
+        this.fs.copyTpl(this.templatePath('config/ormconfig.json.ejs'), ormConfig, {classes: this.classes});
     }
 }
 

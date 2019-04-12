@@ -5,7 +5,7 @@ import { Application } from 'express';
 <% }) %>
 
 <% classes.forEach(x => { %>
-    import <%= x.entity.name %>Router from './routes<%= x.path %>/router';
+    import <%= x.entity.name %>Router from './routes<%= x.path %>/<%= x.entity.name %>.router';
 <% }) %>
 
 export default function routes(app: Application): void {
