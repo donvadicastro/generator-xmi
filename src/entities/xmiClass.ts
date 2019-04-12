@@ -40,6 +40,13 @@ export class xmiClass extends xmiInterface {
     /**
      * Two-way connections between elements, ignoring arrow direction
      */
+    get aggregationLinks(): xmiConnectorParty[] {
+        return this.getConnections('aggregation');
+    }
+
+    /**
+     * Two-way connections between elements, ignoring arrow direction
+     */
     get associationLinks(): xmiConnectorParty[] {
         return this.getConnections('association');
     }
@@ -76,7 +83,7 @@ export class xmiClass extends xmiInterface {
         return ret;
     }
 
-    private getConnections(type: 'association' | 'generalization') {
+    private getConnections(type: 'association' | 'generalization' | 'aggregation') {
         return this.links[type].map((x: xmiAggregationLink) =>
             x.connector.source.typeRef === this ? x.connector.target : x.connector.source);
     }

@@ -20,5 +20,18 @@ id: number = 0;
         @Column()
         <%= x.typeRef.name %>RefId?: string;
     <%} else {%>
-        <%= x.typeRef.name %>RefList: <%= x.typeRef.name %>Contract[] = [];
+        @OneToMany(type => <%= x.typeRef.name %>Base, <%= x.typeRef.name %> => <%= x.typeRef.name %>.<%= entity.name %>Ref)
+        <%= x.typeRef.name %>RefList?: <%= x.typeRef.name %>Contract[];
+<% }}) %>
+
+<% (entity.aggregationLinks || []).forEach(x => { %>
+    /**
+    * <%= x.typeRef.name %> aggregation reference.
+    */
+    <% if(!x.multiplicity || x.multiplicity === '1' || x.multiplicity === '0..1') { %>
+        @OneToOne(type => <%= x.typeRef.name %>Base)
+        <%= x.typeRef.name %>Ref?: <%= x.typeRef.name %>Contract;
+    <%} else {%>
+        @OneToMany(type => <%= x.typeRef.name %>Base, <%= x.typeRef.name %> => <%= x.typeRef.name %>.<%= entity.name %>Ref)
+        <%= x.typeRef.name %>RefList?: <%= x.typeRef.name %>Contract[];
 <% }}) %>

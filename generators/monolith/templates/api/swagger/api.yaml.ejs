@@ -129,5 +129,21 @@ definitions:
     <% if(!link.multiplicity || link.multiplicity === '1' || link.multiplicity === '0..1') { %>
       <%= link.typeRef.name %>RefId:
         type: "string"
-    <%}}) %>
+  <%} else { %>
+      <%= link.typeRef.name %>RefList:
+        type: "array"
+        items:
+          $ref: "#/definitions/<%= link.typeRef.name %>"
+  <% }}) %>
+
+  <% (x.entity.aggregationLinks || []).forEach(link => { %>
+    <% if(!link.multiplicity || link.multiplicity === '1' || link.multiplicity === '0..1') { %>
+      <%= link.typeRef.name %>RefId:
+        type: "string"
+    <%} else { %>
+      <%= link.typeRef.name %>RefList:
+        type: "array"
+        items:
+          $ref: "#/definitions/<%= link.typeRef.name %>"
+  <% }}) %>
 <% }) %>
