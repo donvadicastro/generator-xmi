@@ -120,4 +120,10 @@ definitions:
       <%= attr.name %>:
         type: "<%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %>"
   <% }) %>
+
+  <% (x.entity.associationLinks || []).forEach(link => { %>
+    <% if(!link.multiplicity || link.multiplicity === '1' || link.multiplicity === '0..1') { %>
+      <%= link.typeRef.name %>RefId:
+        type: "string"
+    <%}}) %>
 <% }) %>

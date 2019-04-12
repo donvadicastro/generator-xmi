@@ -1,5 +1,7 @@
 import {Entity, ObjectIdColumn} from "typeorm";
 import {Column} from "typeorm/decorator/columns/Column";
+import {OneToOne} from "typeorm/decorator/relations/OneToOne";
+import {JoinColumn} from "typeorm/decorator/relations/JoinColumn";
 
 import {ComponentBase} from '../<%= entity.getRelativeRoot() %>/base/componentBase';
 import {<%= entity.name %>Contract} from '../../contracts/<%= entity.name %>';
@@ -24,6 +26,7 @@ import {<%= entity.name %>Contract} from '../../contracts/<%= entity.name %>';
 <%# Inject base interface when instance speciaification is used %>
 <% (entity.associationLinks || []).forEach(x => { %>
     import {<%= x.typeRef.name %>Contract} from '../<%= entity.getRelativePath(x.typeRef) %>/contracts/<%= x.typeRef.name %>';
+    import {<%= x.typeRef.name %>Base} from '../<%= entity.getRelativePath(x.typeRef) %>/components/generated/<%= x.typeRef.name %>.generated';
 <% }) %>
 
 

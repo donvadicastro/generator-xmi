@@ -13,8 +13,12 @@ id: number = 0;
     /**
     * <%= x.typeRef.name %> associated reference.
     */
-    <% if(x.multiplicity === '1' || x.multiplicity === '0..1') { %>
-        <%= x.typeRef.name %>Ref: <%= x.typeRef.name %>Contract | null = null;
+    <% if(!x.multiplicity || x.multiplicity === '1' || x.multiplicity === '0..1') { %>
+        @OneToOne(type => <%= x.typeRef.name %>Base)
+        <%= x.typeRef.name %>Ref?: <%= x.typeRef.name %>Contract;
+
+        @Column()
+        <%= x.typeRef.name %>RefId?: string;
     <%} else {%>
         <%= x.typeRef.name %>RefList: <%= x.typeRef.name %>Contract[] = [];
 <% }}) %>
