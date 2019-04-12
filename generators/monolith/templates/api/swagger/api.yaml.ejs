@@ -115,6 +115,10 @@ definitions:
 <% classes.forEach((x) => { %>
   <%= x.entity.name %>:
     type: "object"
+  <% if(x.entity.generalizationLinksTo) { %>
+    allOf:
+    - $ref: "#/definitions/<%= x.entity.generalizationLinksTo.name %>"
+  <% } %>
     properties:
   <% (x.entity.attributes || []).filter(x => x.name).forEach((attr) => { %>
       <%= attr.name %>:
