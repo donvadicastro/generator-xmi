@@ -1,4 +1,4 @@
-<h3>Edit <%= entity.name %></h3>
+<h3>{{data.id ? 'Edit' : 'Create'}} <%= entity.name %></h3>
 <form [formGroup]="form">
 <% (entity.attributes || []).filter(x => x.name).forEach((attr) => { %>
     <div class="form-group">
@@ -9,4 +9,7 @@
 </form>
 
 <a routerLink="../">Return back</a>
-<button class="btn btn-primary float-right" (click)="save()">Save</button>
+<div class="float-right">
+    <button class="btn btn-danger" (click)="delete()" *ngIf="data.id">Delete</button>&nbsp;
+    <button class="btn btn-primary" (click)="save()">Save</button>
+</div>

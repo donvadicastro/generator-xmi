@@ -28,8 +28,19 @@ export class <%= entity.name %>EditComponent {
   }
 
   protected save() {
-    this.http.put(`http://localhost:3000/api/v1/<%= entity.name %>/${this.data.id}`, this.form.getRawValue())
+    const url = 'http://localhost:3000/api/v1/<%= entity.name %>';
+
+    this.http[this.data.id ? 'put' : 'post'](this.data.id ? `${url}/${this.data.id}` : url, this.form.getRawValue())
       .subscribe(() => this.router.navigate(['..'], { relativeTo: this.activatedRoute }));
+  }
+
+  protected delete() {
+    const url = `http://localhost:3000/api/v1/<%= entity.name %>/${this.data.id}`;
+
+    if(window.confirm('Confirm delete')) {
+      this.http.delete(url)
+          .subscribe(() => this.router.navigate(['..'], {relativeTo: this.activatedRoute}));
+    }
   }
 
   private loadData() {

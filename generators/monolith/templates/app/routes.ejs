@@ -11,6 +11,7 @@ const routes: Routes = [
     <% classes.forEach(x => { %>
         { path: '<%= x.entity.name %>',  component: <%= x.entity.name %>ListComponent },
         { path: '<%= x.entity.name %>/:id',  component: <%= x.entity.name %>EditComponent },
+        { path: '<%= x.entity.name %>/new',  component: <%= x.entity.name %>EditComponent },
     <% }) %>
     ] }
 ];
