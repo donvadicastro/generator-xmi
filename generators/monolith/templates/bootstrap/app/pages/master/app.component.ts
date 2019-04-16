@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'keycloak-angular';
+  constructor(protected keycloakAngular: KeycloakService) {};
+
+  protected logout() {
+    this.keycloakAngular.logout();
+  }
 }
