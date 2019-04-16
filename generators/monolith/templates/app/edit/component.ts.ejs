@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./component.sass']
 })
 export class <%= entity.name %>EditComponent {
+  private apiRootUrl = environment.api.url + '/<%= entity.name %>';
+
   public data: any = {};
   public form: FormGroup;
 
@@ -28,14 +30,12 @@ export class <%= entity.name %>EditComponent {
   }
 
   protected save() {
-    const url = 'http://localhost:3000/api/v1/<%= entity.name %>';
-
-    this.http[this.data.id ? 'put' : 'post'](this.data.id ? `${url}/${this.data.id}` : url, this.form.getRawValue())
+    this.http[this.data.id ? 'put' : 'post'](this.data.id ? `${this.apiRootUrl}/${this.data.id}` : this.apiRootUrl, this.form.getRawValue())
       .subscribe(() => this.router.navigate(['..'], { relativeTo: this.activatedRoute }));
   }
 
   protected delete() {
-    const url = `http://localhost:3000/api/v1/<%= entity.name %>/${this.data.id}`;
+const url = `${this.apiRootUrl}/${this.data.id}`;
 
     if(window.confirm('Confirm delete')) {
       this.http.delete(url)
@@ -46,7 +46,7 @@ export class <%= entity.name %>EditComponent {
   private loadData() {
     this.activatedRoute.params.subscribe(params => {
       if (params['id']) {
-        this.http.get(`http://localhost:3000/api/v1/<%= entity.name %>/${params['id']}`)
+        this.http.get(`${this.apiRootUrl}/<%= entity.name %>/${params['id']}`)
           .subscribe(res => {
             this.data = <any>res;
             this.form.patchValue(this.data)
