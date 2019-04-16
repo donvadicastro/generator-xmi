@@ -1,0 +1,40 @@
+import { Component } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-<%= entity.name %>-edit',
+  templateUrl: './component.html',
+  styleUrls: ['./component.sass']
+})
+export class <%= entity.name %>EditComponent {
+  public data: any = {};
+  public form: FormGroup;
+
+  constructor(private fb: FormBuilder,
+              private activatedRoute: ActivatedRoute,
+              private http: HttpClient) {
+  }
+
+  ngOnInit() {
+    this.loadData();
+    this.form = this.fb.group({
+    <% (entity.attributes || []).filter(x => x.name).forEach((attr) => { %>
+      <%= attr.name %>: ['', Validators.required],
+    <% }) %>
+    });
+  }
+
+  private loadData() {
+    this.activatedRoute.params.subscribe(params => {
+      if (params['id']) {
+        this.http.get(`http://localhost:3000/api/v1/<%= entity.name %>/${params['id']}`)
+          .subscribe(res => {
+            this.data = <any>res;
+            this.form.patchValue(this.data)
+          });
+      }
+    });
+  }
+}

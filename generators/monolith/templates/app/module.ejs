@@ -1,0 +1,47 @@
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
+
+import { AppRoutingModule } from './routing.module';
+import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
+import {initializer} from '../init';
+import {AppComponent} from './master/app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TableModule} from 'primeng/table';
+
+<% classes.forEach(x => { %>
+import {<%= x.entity.name %>ListComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/list/component';
+import {<%= x.entity.name %>EditComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/edit/component';
+<% }) %>
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+<% classes.forEach(x => { %>
+    <%= x.entity.name %>ListComponent,
+    <%= x.entity.name %>EditComponent,
+<% }) %>
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    KeycloakAngularModule,
+
+    TableModule,
+    AppRoutingModule
+  ],
+  providers: [{
+    provide: APP_INITIALIZER,
+    useFactory: initializer,
+    multi: true,
+    deps: [KeycloakService]
+  }],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

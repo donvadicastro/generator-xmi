@@ -73,6 +73,7 @@ export class XmiGenerator extends XmiGeneratorBase {
                 const baseClassFileName = this.destinationPath(`${path}/components/generated/${x.name}.generated.ts`);
                 const classFileName = this.destinationPath(`${path}/components/${x.name}.ts`);
                 const apiRouterFileName = this.destinationPath(`${this.options.destination}/api/server/routes/${localPath}/${x.name}.router.ts`);
+                const appComponentRootPath = this.destinationPath(`${this.options.destination}/app/pages/administration/${localPath}`);
 
                 this.fs.copyTpl(this.templatePath('xmiInterface.ejs'), interfaceFileName, options);
                 this.generatedFiles.push(interfaceFileName);
@@ -85,7 +86,17 @@ export class XmiGenerator extends XmiGeneratorBase {
                     this.generatedFiles.push(classFileName);
                 }
 
+                //api
                 this.fs.copyTpl(this.templatePath('api/class/router.ejs'), apiRouterFileName, options);
+
+                //app
+                this.fs.copyTpl(this.templatePath('app/edit/component.ts.ejs'), `${appComponentRootPath}/${x.name}/edit/component.ts`, options);
+                this.fs.copyTpl(this.templatePath('app/edit/component.html.ejs'), `${appComponentRootPath}/${x.name}/edit/component.html`, options);
+                this.fs.write(`${appComponentRootPath}/${x.name}/edit/component.sass`, '');
+
+                this.fs.copyTpl(this.templatePath('app/list/component.ts.ejs'), `${appComponentRootPath}/${x.name}/list/component.ts`, options);
+                this.fs.copyTpl(this.templatePath('app/list/component.html.ejs'), `${appComponentRootPath}/${x.name}/list/component.html`, options);
+                this.fs.write(`${appComponentRootPath}/${x.name}/list/component.sass`, '');
 
                 this.generatedFiles.push(apiRouterFileName);
                 this.classes.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
@@ -153,6 +164,15 @@ export class XmiGenerator extends XmiGeneratorBase {
 
         const ormConfig = this.destinationPath(`${this.options.destination}/ormconfig.json`);
         this.fs.copyTpl(this.templatePath('config/ormconfig.json.ejs'), ormConfig, {classes: this.classes});
+
+        const appModule = this.destinationPath(`${this.options.destination}/app/pages/app.module.ts`);
+        this.fs.copyTpl(this.templatePath('app/module.ejs'), appModule, {classes: this.classes});
+
+        const appRoutes = this.destinationPath(`${this.options.destination}/app/pages/routing.module.ts`);
+        this.fs.copyTpl(this.templatePath('app/routes.ejs'), appRoutes, {classes: this.classes});
+
+        const appMainPage = this.destinationPath(`${this.options.destination}/app/pages/master/app.component.html`);
+        this.fs.copyTpl(this.templatePath('app/master.html.ejs'), appMainPage, {classes: this.classes});
     }
 }
 
