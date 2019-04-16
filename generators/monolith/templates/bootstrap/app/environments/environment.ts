@@ -6,11 +6,7 @@ export const environment = {
   production: false,
 
   keycloak: {
-    config: {
-      url: 'http://192.168.169.170:8080/auth',
-      realm: 'tokenability',
-      clientId: 'PWA_CLIENT'
-    },
+    config: require('../../package.json').keycloak,
     initOptions: {
       onLoad: 'login-required',
       checkLoginIframe: false

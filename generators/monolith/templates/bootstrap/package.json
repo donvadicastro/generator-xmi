@@ -34,6 +34,12 @@
     "project": "<ProjectName>"
   },
 
+  "keycloak": {
+    "url": "http://192.168.169.170:8080/auth",
+    "realm": "tokenability",
+    "clientId": "PWA_CLIENT"
+  },
+
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
     "@angular/cli": "~7.3.8",
