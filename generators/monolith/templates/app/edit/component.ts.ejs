@@ -13,6 +13,7 @@ export class <%= entity.name %>EditComponent {
   public form: FormGroup;
 
   constructor(private fb: FormBuilder,
+              private router: Router,
               private activatedRoute: ActivatedRoute,
               private http: HttpClient) {
   }
@@ -24,6 +25,11 @@ export class <%= entity.name %>EditComponent {
       <%= attr.name %>: ['', Validators.required],
     <% }) %>
     });
+  }
+
+  protected save() {
+    this.http.put(`http://localhost:3000/api/v1/<%= entity.name %>/${this.data.id}`, this.form.getRawValue())
+      .subscribe(() => this.router.navigate(['..'], { relativeTo: this.activatedRoute }));
   }
 
   private loadData() {
