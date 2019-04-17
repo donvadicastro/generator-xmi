@@ -15,8 +15,8 @@ export class TypeConverter {
         char: 'string',
         boolean: 'boolean',
 
-        'http://schema.omg.org/spec/UML/2.1/uml.xml#String': 'string',
-        'http://schema.omg.org/spec/UML/2.1/uml.xml#Integer': 'number'
+        'http://schema.omg.org/spec/uml/2.1/uml.xml#string': 'string',
+        'http://schema.omg.org/spec/uml/2.1/uml.xml#integer': 'number'
     };
 
     public static isPrimititive(typeName: string): boolean {
