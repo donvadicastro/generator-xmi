@@ -15,6 +15,10 @@ export class <%= entity.name %>EditComponent {
   public data: any = {};
   public form: FormGroup;
 
+<% (entity.attributesCombined || []).filter(x => !x.isArray && x.typeRef).forEach(x => { %>
+  public <%= x.name %>All: any[] = [];
+<% }) %>
+
   constructor(private fb: FormBuilder,
               private router: Router,
               private activatedRoute: ActivatedRoute,
@@ -51,6 +55,11 @@ export class <%= entity.name %>EditComponent {
   }
 
   private loadData() {
+  <% (entity.attributesCombined || []).filter(x => !x.isArray && x.typeRef).forEach(x => { %>
+    this.http.get(environment.api.url + '/<%= x.name.substr(0, x.name.length - 3) %>').subscribe(
+        (res: any) => this.<%= x.name %>All = res.map((x: any) => ({...x, ...{label: this.buitifyEntity(x)}})));
+  <% }) %>
+
     this.activatedRoute.params.subscribe(params => {
       if (params['id']) {
         this.http.get(`${this.apiRootUrl}/${params['id']}`)
@@ -61,4 +70,12 @@ export class <%= entity.name %>EditComponent {
       }
     });
   }
+
+  private buitifyEntity(entity: any): string {
+    return Object.keys(entity).map((x: any) => {
+      const value = entity[x].toString();
+      return value.padEnd(30 - value.length, "\xA0");
+    }).join(' | ');
+  }
+
 }

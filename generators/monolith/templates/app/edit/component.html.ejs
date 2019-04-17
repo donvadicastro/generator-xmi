@@ -1,7 +1,12 @@
 <h3>{{data.id ? 'Edit' : 'Create'}} <%= entity.name %></h3>
 <form [formGroup]="form">
 <% (entity.attributesCombined || []).filter(x => x.name && !x.isArray).forEach((attr) => { %>
-    <% if(attr.type === 'boolean') { %>
+    <% if(attr.typeRef) { %>
+        <div class="form-group">
+            <label for="<%= attr.name %>-edit"><%= attr.name %></label>
+            <p-dropdown id="<%= attr.name %>-edit" styleClass="form-control p-0" [options]="<%= attr.name %>All" optionLabel="label" [autoDisplayFirst]="false" formControlName="<%= attr.name %>"></p-dropdown>
+        </div>
+    <% } else if(attr.type === 'boolean') { %>
         <div class="form-check">
             <input class="form-check-input" type="checkbox" id="<%= attr.name %>-edit" formControlName="<%= attr.name %>" />
             <label class="form-check-label" for="<%= attr.name %>-edit"><%= attr.name %></label>

@@ -9,6 +9,7 @@ import {initializer} from '../init';
 import {AppComponent} from './master/app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TableModule} from 'primeng/table';
+import {DropdownModule} from 'primeng/dropdown';
 
 <% classes.forEach(x => { %>
 import {<%= x.entity.name %>ListComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/list/component';
@@ -33,6 +34,7 @@ import {<%= x.entity.name %>EditComponent} from './administration/<%= x.path %>/
     HttpClientModule,
     KeycloakAngularModule,
 
+    DropdownModule,
     TableModule,
     AppRoutingModule
   ],
