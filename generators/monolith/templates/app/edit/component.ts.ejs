@@ -31,12 +31,18 @@ export class <%= entity.name %>EditComponent {
   }
 
   protected save() {
-    this.http[this.data.id ? 'put' : 'post'](this.data.id ? `${this.apiRootUrl}/${this.data.id}` : this.apiRootUrl, this.form.getRawValue())
+    const data = this.form.getRawValue();
+
+  <% (entity.attributesCombined || []).filter(x => x.name && x.type === 'Date').forEach((attr) => { %>
+    data.<%= attr.name %> = new Date(data.<%= attr.name %>).getTime();
+  <% }) %>
+
+    this.http[this.data.id ? 'put' : 'post'](this.data.id ? `${this.apiRootUrl}/${this.data.id}` : this.apiRootUrl, data)
       .subscribe(() => this.router.navigate(['..'], { relativeTo: this.activatedRoute }));
   }
 
   protected delete() {
-const url = `${this.apiRootUrl}/${this.data.id}`;
+    const url = `${this.apiRootUrl}/${this.data.id}`;
 
     if(window.confirm('Confirm delete')) {
       this.http.delete(url)
