@@ -53,13 +53,12 @@ describe('Generators', () => {
                         expect(aircraft.name).toBe('aircraft');
                         expect(content.normalizeSpace()).toBe(`
                         @ObjectIdColumn() 
-                        id: number = 0; 
+                        id: string; 
                         
                         @Column()
-                        number: string = '';
+                        number: string;
                         
                         @ManyToMany(type => pilotBase)
-                        @JoinTable()
                         pilotRefList: pilotContract[];
                         
                         @ManyToOne(type => airlineBase, airline => airline.aircraftRefList)
@@ -74,10 +73,10 @@ describe('Generators', () => {
                         expect(airline.name).toBe('airline');
                         expect(content.normalizeSpace()).toBe(`
                         @ObjectIdColumn() 
-                        id: number = 0; 
+                        id: string; 
                         
                         @Column()
-                        name: string = '';
+                        name: string;
                                            
                         @OneToMany(type => aircraftBase, aircraft => aircraft.airlineRef)
                         aircraftRefList: aircraftContract[];
@@ -94,10 +93,10 @@ describe('Generators', () => {
                         expect(city.name).toBe('city');
                         expect(content.normalizeSpace()).toBe(`
                         @ObjectIdColumn() 
-                        id: number = 0; 
+                        id: string; 
 
                         @Column()
-                        name: string = '';
+                        name: string;
                                                 
                         @OneToOne(type => airlineBase) 
                         airlineRef: airlineContract;

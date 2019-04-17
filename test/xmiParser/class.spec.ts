@@ -50,15 +50,15 @@ describe('xmiParser', () => {
 
             parser.parse();
 
-            const pkg = <xmiPackage>parser.packge;
+            const pkg = <xmiPackage>(<xmiPackage>parser.packge).children[0];
             const aircraft = pkg.children[0] as xmiClass;
-            const airplane = pkg.children[2] as xmiClass;
+            const airline = pkg.children[3] as xmiClass;
 
-            expect(aircraft.associationLinks[0].target.typeRef).toBe(airplane);
-            expect(aircraft.associationLinks[0].target.multiplicity).toBe("1");
+            expect(aircraft.associationLinks[1].target.typeRef).toBe(airline);
+            expect(aircraft.associationLinks[1].target.multiplicity).toBe("1");
 
-            expect(airplane.associationLinks[0].target.typeRef).toBe(aircraft);
-            expect(airplane.associationLinks[0].target.multiplicity).toBe("0..*");
+            expect(airline.associationLinks[0].target.typeRef).toBe(aircraft);
+            expect(airline.associationLinks[0].target.multiplicity).toBe("0..*");
         });
 
         it('Verify composition', () => {
