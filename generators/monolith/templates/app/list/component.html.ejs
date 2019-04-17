@@ -5,7 +5,7 @@
     <ng-template pTemplate="header">
         <tr>
             <th>ID</th>
-            <% (entity.attributes || []).filter(x => x.name).forEach((attr) => { %>
+            <% (entity.attributesCombined || []).filter(x => x.name && !x.isArray).forEach((attr) => { %>
                 <th><%= attr.name %></th>
             <% }) %>
         </tr>
@@ -13,7 +13,7 @@
     <ng-template pTemplate="body" let-entity>
         <tr>
             <td><a [routerLink]="entity.id">{{entity.id}}</a></td>
-            <% (entity.attributes || []).filter(x => x.name).forEach((attr) => { %>
+            <% (entity.attributesCombined || []).filter(x => x.name && !x.isArray).forEach((attr) => { %>
                 <td>{{entity.<%= attr.name %>}}</td>
             <% }) %>
         </tr>

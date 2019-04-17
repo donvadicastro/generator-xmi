@@ -38,6 +38,10 @@ export class TypeConverter {
         return (this.typesMap[typeName.toLowerCase()] || typeName) + (isArray ? '[]' : '');
     }
 
+    public static isArray(typeName: string): boolean {
+        return typeName.endsWith('__');
+    }
+
     public static getTypeDefaultValue(type: string): any {
         let value;
 

@@ -1,37 +1,26 @@
 @ObjectIdColumn()
-id: number = 0;
+id: string;
 
 <% (entity.attributes || []).forEach(function (attr) { %>
-    /**
-    * <%= attr.name %> property
-    */
     @Column()
     <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %> = <%- attr.typeDefaultValue %>;
 <% }) %>
 
-<% (entity.associationLinks || []).forEach(x => { %>
-    /**
-    * <%= x.typeRef.name %> associated reference.
-    */
-    <% if(!x.multiplicity || x.multiplicity === '1' || x.multiplicity === '0..1') { %>
-        @OneToOne(type => <%= x.typeRef.name %>Base)
-        <%= x.typeRef.name %>Ref?: <%= x.typeRef.name %>Contract;
-
-        @Column()
-        <%= x.typeRef.name %>RefId?: string;
+<% [...entity.associationLinks, ...entity.aggregationLinks].forEach(x => { %>
+    <% if(!x.target.multiplicity || x.target.multiplicity === '1' || x.target.multiplicity === '0..1') { %>
+        <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
+            @OneToOne(type => <%= x.target.typeRef.name %>Base)
+            <%= x.target.typeRef.name %>Ref: <%= x.target.typeRef.name %>Contract;
+        <% } else { %>
+            @ManyToOne(type => <%= x.target.typeRef.name %>Base, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>RefList)
+            <%= x.target.typeRef.name %>Ref: <%= x.target.typeRef.name %>Contract;
+        <% } %>
     <%} else {%>
-        @OneToMany(type => <%= x.typeRef.name %>Base, <%= x.typeRef.name %> => <%= x.typeRef.name %>.<%= entity.name %>Ref)
-        <%= x.typeRef.name %>RefList?: <%= x.typeRef.name %>Contract[];
-<% }}) %>
-
-<% (entity.aggregationLinks || []).forEach(x => { %>
-    /**
-    * <%= x.typeRef.name %> aggregation reference.
-    */
-    <% if(!x.multiplicity || x.multiplicity === '1' || x.multiplicity === '0..1') { %>
-        @OneToOne(type => <%= x.typeRef.name %>Base)
-        <%= x.typeRef.name %>Ref?: <%= x.typeRef.name %>Contract;
-    <%} else {%>
-        @OneToMany(type => <%= x.typeRef.name %>Base, <%= x.typeRef.name %> => <%= x.typeRef.name %>.<%= entity.name %>Ref)
-        <%= x.typeRef.name %>RefList?: <%= x.typeRef.name %>Contract[];
+        <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
+            @OneToMany(type => <%= x.target.typeRef.name %>Base, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>Ref)
+            <%= x.target.typeRef.name %>RefList: <%= x.target.typeRef.name %>Contract[];
+        <% } else { %>
+            @ManyToMany(type => <%= x.target.typeRef.name %>Base)
+            <%= x.target.typeRef.name %>RefList: <%= x.target.typeRef.name %>Contract[];
+        <% } %>
 <% }}) %>

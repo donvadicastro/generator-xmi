@@ -120,30 +120,13 @@ definitions:
     - $ref: "#/definitions/<%= x.entity.generalizationLinksTo.name %>"
   <% } %>
     properties:
-  <% (x.entity.attributes || []).filter(x => x.name).forEach((attr) => { %>
-      <%= attr.name %>:
-        type: "<%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %>"
+  <% (x.entity.attributesCombined || []).filter(x => x.name && !x.isArray).forEach((attr) => { %>
+      <% if(attr.typeRef) { %>
+        <%= attr.name %>Id:
+          type: "string"
+      <% } else { %>
+        <%= attr.name %>:
+          type: "<%= attr.type %>"
+      <% } %>
   <% }) %>
-
-  <% (x.entity.associationLinks || []).forEach(link => { %>
-    <% if(!link.multiplicity || link.multiplicity === '1' || link.multiplicity === '0..1') { %>
-      <%= link.typeRef.name %>RefId:
-        type: "string"
-  <%} else { %>
-      <%= link.typeRef.name %>RefList:
-        type: "array"
-        items:
-          $ref: "#/definitions/<%= link.typeRef.name %>"
-  <% }}) %>
-
-  <% (x.entity.aggregationLinks || []).forEach(link => { %>
-    <% if(!link.multiplicity || link.multiplicity === '1' || link.multiplicity === '0..1') { %>
-      <%= link.typeRef.name %>RefId:
-        type: "string"
-    <%} else { %>
-      <%= link.typeRef.name %>RefList:
-        type: "array"
-        items:
-          $ref: "#/definitions/<%= link.typeRef.name %>"
-  <% }}) %>
 <% }) %>

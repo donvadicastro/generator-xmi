@@ -1,6 +1,6 @@
 <h3>{{data.id ? 'Edit' : 'Create'}} <%= entity.name %></h3>
 <form [formGroup]="form">
-<% (entity.attributes || []).filter(x => x.name).forEach((attr) => { %>
+<% (entity.attributesCombined || []).filter(x => x.name && !x.isArray).forEach((attr) => { %>
     <div class="form-group">
         <label for="<%= attr.name %>-edit"><%= attr.name %></label>
         <input class="form-control" id="<%= attr.name %>-edit" formControlName="<%= attr.name %>"/>

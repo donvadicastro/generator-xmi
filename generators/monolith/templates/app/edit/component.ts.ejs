@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import {environment} from "../../../../environments/environment";
+import {environment} from "../../../<%= entity.getRelativeRoot() %>/environments/environment";
 
 @Component({
   selector: 'app-<%= entity.name %>-edit',
@@ -10,7 +10,7 @@ import {environment} from "../../../../environments/environment";
   styleUrls: ['./component.sass']
 })
 export class <%= entity.name %>EditComponent {
-  private apiRootUrl = environment.api.url + '/<%= entity.name %>';
+  private apiRootUrl = environment.api.url + '/<%= utils.kebabCase(entity.pathFromRoot) %>/<%= entity.name %>';
 
   public data: any = {};
   public form: FormGroup;
@@ -24,7 +24,7 @@ export class <%= entity.name %>EditComponent {
   ngOnInit() {
     this.loadData();
     this.form = this.fb.group({
-    <% (entity.attributes || []).filter(x => x.name).forEach((attr) => { %>
+    <% (entity.attributesCombined || []).filter(x => x.name).forEach((attr) => { %>
       <%= attr.name %>: ['', Validators.required],
     <% }) %>
     });
@@ -47,7 +47,7 @@ const url = `${this.apiRootUrl}/${this.data.id}`;
   private loadData() {
     this.activatedRoute.params.subscribe(params => {
       if (params['id']) {
-        this.http.get(`${this.apiRootUrl}/<%= entity.name %>/${params['id']}`)
+        this.http.get(`${this.apiRootUrl}/${params['id']}`)
           .subscribe(res => {
             this.data = <any>res;
             this.form.patchValue(this.data)

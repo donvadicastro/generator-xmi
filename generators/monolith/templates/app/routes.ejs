@@ -9,9 +9,9 @@ import {<%= x.entity.name %>EditComponent} from './administration/<%= x.path %>/
 const routes: Routes = [
   { path: 'administration',  children: [
     <% classes.forEach(x => { %>
-        { path: '<%= x.entity.name %>',  component: <%= x.entity.name %>ListComponent },
-        { path: '<%= x.entity.name %>/:id',  component: <%= x.entity.name %>EditComponent },
-        { path: '<%= x.entity.name %>/new',  component: <%= x.entity.name %>EditComponent },
+        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>',  component: <%= x.entity.name %>ListComponent },
+        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>/:id',  component: <%= x.entity.name %>EditComponent },
+        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>/new',  component: <%= x.entity.name %>EditComponent },
     <% }) %>
     ] }
 ];

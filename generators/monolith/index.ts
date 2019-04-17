@@ -1,7 +1,6 @@
 'use strict';
 
 import {xmiClass} from "../../src/entities/xmiClass";
-import {xmiComponent} from "../../src/entities/xmiComponent";
 import {xmiPackage} from "../../src/entities/xmiPackage";
 import {default as chalk} from "chalk";
 import {xmiCollaboration} from "../../src/entities/xmiCollaboration";
@@ -13,6 +12,7 @@ import {xmiUseCase} from "../../src/entities/xmiUseCase";
 import {XmiGeneratorBase} from "../_base/xmiGeneratorBase";
 import {xmiInstanceSpecification} from "../../src/entities/xmiInstanceSpecification";
 
+const kebabCase = require('just-kebab-case');
 const pascal = require('to-pascal-case');
 
 export class XmiGenerator extends XmiGeneratorBase {
@@ -41,7 +41,10 @@ export class XmiGenerator extends XmiGeneratorBase {
         const path = this.options.destination + '/design' + localPath;
 
         const options: any = {
-            factory: xmiComponentFactory
+            factory: xmiComponentFactory,
+            utils: {
+                kebabCase: kebabCase
+            }
         };
 
         pkg.children.filter((x: any) => x.name).forEach((x: any) => {
