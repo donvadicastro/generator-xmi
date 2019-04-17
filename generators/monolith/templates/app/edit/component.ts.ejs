@@ -10,7 +10,7 @@ import {environment} from "../../../<%= entity.getRelativeRoot() %>/environments
   styleUrls: ['./component.sass']
 })
 export class <%= entity.name %>EditComponent {
-  private apiRootUrl = environment.api.url + '/<%= utils.kebabCase(entity.pathFromRoot) %>/<%= entity.name %>';
+  private apiRootUrl = environment.api.url + '/<%= utils.kebabCase(entity.pathFromRoot) %><%= entity.name %>';
 
   public data: any = {};
   public form: FormGroup;

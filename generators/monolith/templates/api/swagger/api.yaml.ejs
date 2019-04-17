@@ -126,7 +126,7 @@ definitions:
           type: "string"
       <% } else { %>
         <%= attr.name %>:
-          type: "<%= attr.type %>"
+          type: "<%= attr.type === 'Date' ? 'number' : attr.type %>"
       <% } %>
   <% }) %>
 <% }) %>

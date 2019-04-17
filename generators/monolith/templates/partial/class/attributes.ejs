@@ -3,7 +3,7 @@ id: string;
 
 <% (entity.attributes || []).forEach(function (attr) { %>
     @Column()
-    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %> = <%- attr.typeDefaultValue %>;
+    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %>;
 <% }) %>
 
 <% [...entity.associationLinks, ...entity.aggregationLinks].forEach(x => { %>
