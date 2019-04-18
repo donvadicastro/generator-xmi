@@ -73,9 +73,9 @@ export class <%= entity.name %>EditComponent {
 
   private buitifyEntity(entity: any): string {
     return Object.keys(entity).map((x: any) => {
-      const value = entity[x].toString();
-      return value.padEnd(30 - value.length, "\xA0");
-    }).join(' | ');
+      const value = typeof entity[x] === 'string' ? entity[x] : null;
+      return value && value.padEnd(30 - value.length, "\xA0");
+    }).filter(x => x).join(' | ');
   }
 
 }
