@@ -1,0 +1,18 @@
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {environment} from "../../../<%= entity.getRelativeRoot() %>/environments/environment";
+
+@Component({
+  selector: 'app-<%= entity.name %>-list',
+  templateUrl: './component.html',
+  styleUrls: ['./component.sass']
+})
+export class <%= entity.name %>ListComponent {
+  data = [];
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.http.get(environment.api.url + '/<%= utils.kebabCase(entity.pathFromRoot) %><%= entity.name %>').subscribe(res => this.data = <any>res);
+  }
+}

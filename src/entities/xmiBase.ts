@@ -31,7 +31,8 @@ export default class xmiBase {
     }
 
     get pathFromRoot() {
-        return this.path.slice(0, this.path.length - 1).reverse().map(x => x.name).join('/');
+        const pathParts = this.path.slice(0, this.path.length - 1).reverse().map(x => x.name).filter(x => x);
+        return pathParts.length ? (pathParts.join('/') + '/') : '';
     }
 
     getRelativePath(element: xmiBase) {
@@ -59,6 +60,6 @@ export default class xmiBase {
     }
 
     toConsole(): any | string {
-        return `${this.name} (${this.id})`;
+        return `[${this.type}] ${this.name} (${this.id})`;
     }
 }

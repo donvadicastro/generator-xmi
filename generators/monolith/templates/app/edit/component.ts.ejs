@@ -1,0 +1,81 @@
+import { Component } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import {environment} from "../../../<%= entity.getRelativeRoot() %>/environments/environment";
+
+@Component({
+  selector: 'app-<%= entity.name %>-edit',
+  templateUrl: './component.html',
+  styleUrls: ['./component.sass']
+})
+export class <%= entity.name %>EditComponent {
+  private apiRootUrl = environment.api.url + '/<%= utils.kebabCase(entity.pathFromRoot) %><%= entity.name %>';
+
+  public data: any = {};
+  public form: FormGroup;
+
+<% (entity.attributesCombined || []).filter(x => !x.isArray && x.typeRef).forEach(x => { %>
+  public <%= x.name %>All: any[] = [];
+<% }) %>
+
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private http: HttpClient) {
+  }
+
+  ngOnInit() {
+    this.loadData();
+    this.form = this.fb.group({
+    <% (entity.attributesCombined || []).filter(x => x.name).forEach((attr) => { %>
+      <%= attr.name %>: ['', Validators.required],
+    <% }) %>
+    });
+  }
+
+  protected save() {
+    const data = this.form.getRawValue();
+
+  <% (entity.attributesCombined || []).filter(x => x.name && x.type === 'Date').forEach((attr) => { %>
+    data.<%= attr.name %> = new Date(data.<%= attr.name %>).getTime();
+  <% }) %>
+
+    this.http[this.data.id ? 'put' : 'post'](this.data.id ? `${this.apiRootUrl}/${this.data.id}` : this.apiRootUrl, data)
+      .subscribe(() => this.router.navigate(['..'], { relativeTo: this.activatedRoute }));
+  }
+
+  protected delete() {
+    const url = `${this.apiRootUrl}/${this.data.id}`;
+
+    if(window.confirm('Confirm delete')) {
+      this.http.delete(url)
+          .subscribe(() => this.router.navigate(['..'], {relativeTo: this.activatedRoute}));
+    }
+  }
+
+  private loadData() {
+  <% (entity.attributesCombined || []).filter(x => !x.isArray && x.typeRef).forEach(x => { %>
+    this.http.get(environment.api.url + '/<%= x.name.substr(0, x.name.length - 3) %>').subscribe(
+        (res: any) => this.<%= x.name %>All = res.map((x: any) => ({...x, ...{label: this.buitifyEntity(x)}})));
+  <% }) %>
+
+    this.activatedRoute.params.subscribe(params => {
+      if (params['id']) {
+        this.http.get(`${this.apiRootUrl}/${params['id']}`)
+          .subscribe(res => {
+            this.data = <any>res;
+            this.form.patchValue(this.data)
+          });
+      }
+    });
+  }
+
+  private buitifyEntity(entity: any): string {
+    return Object.keys(entity).map((x: any) => {
+      const value = typeof entity[x] === 'string' ? entity[x] : null;
+      return value && value.padEnd(30 - value.length, "\xA0");
+    }).filter(x => x).join(' | ');
+  }
+
+}

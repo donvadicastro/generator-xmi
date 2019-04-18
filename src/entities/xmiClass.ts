@@ -6,6 +6,9 @@ import {LinkType} from "../types/linkType";
 import xmiConnectorParty from "./connectors/xmiConnectorParty";
 import {xmiGeneralization} from "./connectors/xmiGeneralization";
 import xmiBase from "./xmiBase";
+import {IConnector} from "../contracts/connector";
+import {xmiAttribute} from "./class/xmiAttribute";
+import {IAttribute} from "../contracts/attribute";
 const assert = require('assert');
 
 export class xmiClass extends xmiInterface {
@@ -40,14 +43,21 @@ export class xmiClass extends xmiInterface {
     /**
      * Two-way connections between elements, ignoring arrow direction
      */
-    get associationLinks(): xmiConnectorParty[] {
+    get aggregationLinks(): IConnector[] {
+        return this.getConnections('aggregation');
+    }
+
+    /**
+     * Two-way connections between elements, ignoring arrow direction
+     */
+    get associationLinks(): IConnector[] {
         return this.getConnections('association');
     }
 
     /**
      * Two-way connections between elements, ignoring arrow direction
      */
-    get generalizationLinks(): xmiConnectorParty[] {
+    get generalizationLinks(): IConnector[] {
         return this.getConnections('generalization');
     }
 
@@ -69,6 +79,27 @@ export class xmiClass extends xmiInterface {
         return this.fragments.find(x => x.interactionOperator === 'loop');
     }
 
+    /**
+     * Returns all entity attributes including added relation properties
+     */
+    get attributesCombined(): IAttribute[] {
+        let attributes: IAttribute[] = [];
+
+        attributes = attributes.concat(this.attributes);
+        attributes = attributes.concat([...this.getConnections('aggregation'), ...this.getConnections('association')]
+            .map(x => ((!x.target.multiplicity || x.target.multiplicity === '1' || x.target.multiplicity === '0..1') ? {
+                name: (<xmiClass>x.target.typeRef).name + 'Ref',
+                typeRef: x.target.typeRef,
+                isArray: false
+            } : {
+                name: (<xmiClass>x.target.typeRef).name + 'RefList',
+                typeRef: x.target.typeRef,
+                isArray: true
+            })));
+
+        return attributes;
+    }
+
     toConsole(): any {
         const ret = super.toConsole();
         ret[Object.keys(ret)[0]].conditions = this.conditions;
@@ -76,8 +107,7 @@ export class xmiClass extends xmiInterface {
         return ret;
     }
 
-    private getConnections(type: 'association' | 'generalization') {
-        return this.links[type].map((x: xmiAggregationLink) =>
-            x.connector.source.typeRef === this ? x.connector.target : x.connector.source);
+    private getConnections(type: 'association' | 'generalization' | 'aggregation'): IConnector[] {
+        return this.links[type].map((x: xmiAggregationLink) => x.connector.getDirectedFrom(this));
     }
 }

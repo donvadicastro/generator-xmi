@@ -27,6 +27,8 @@
   * ["Design to API" mapping explanation](#design-to-api-mapping-explanation)
     + [Sequence diagram as REST API endpoint implementation](#sequence-diagram-as-rest-api-endpoint-implementation)
       - [Example](#example)
+    + [Class diagram as REST API endpoint implementation](#class-diagram-as-rest-api-endpoint-implementation)
+      - [Example](#example-1)
 
 <!-- tocstop -->
 
@@ -583,3 +585,15 @@ curl -X POST "http://localhost:3000/api/v1/sequence" -H "accept: application/jso
 --> c2::fn2: 0 ms
 --> c1::ret1: 0 ms
 ```
+
+#### Class diagram as REST API endpoint implementation
+Each class in model will be covered with set of API to implement full CRUD support.
+
+##### Example
+Diagram
+
+![Class diagram](./assets/wiki/images/class.png)
+
+Generated REST API
+
+![REST CRUD API](./assets/wiki/images/crud.png)

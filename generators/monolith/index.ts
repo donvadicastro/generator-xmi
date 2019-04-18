@@ -1,7 +1,6 @@
 'use strict';
 
 import {xmiClass} from "../../src/entities/xmiClass";
-import {xmiComponent} from "../../src/entities/xmiComponent";
 import {xmiPackage} from "../../src/entities/xmiPackage";
 import {default as chalk} from "chalk";
 import {xmiCollaboration} from "../../src/entities/xmiCollaboration";
@@ -11,7 +10,9 @@ import {xmiInterface} from "../../src/entities/xmiInterface";
 import {xmiComponentFactory} from "../../src/factories/xmiComponentFactory";
 import {xmiUseCase} from "../../src/entities/xmiUseCase";
 import {XmiGeneratorBase} from "../_base/xmiGeneratorBase";
+import {xmiInstanceSpecification} from "../../src/entities/xmiInstanceSpecification";
 
+const kebabCase = require('just-kebab-case');
 const pascal = require('to-pascal-case');
 
 export class XmiGenerator extends XmiGeneratorBase {
@@ -29,11 +30,21 @@ export class XmiGenerator extends XmiGeneratorBase {
         this.generatedFiles.forEach(x => this._beautify(x));
     }
 
+    end() {
+        this.log('\r\n\r\nProject generated successfully.\r\nUpdate configuration to start using application:');
+        this.log(chalk.green('Mongo connection:         ') + `${this.options.destination}/ormconfig.json`);
+        this.log(chalk.green('JIRA credentials:         ') + `${this.options.destination}/package.json`);
+        this.log(chalk.green('Auth server connection:   ') + `${this.options.destination}/package.json`);
+    }
+
     _generate(localPath: string | null, pkg: any) {
         const path = this.options.destination + '/design' + localPath;
 
         const options: any = {
-            factory: xmiComponentFactory
+            factory: xmiComponentFactory,
+            utils: {
+                kebabCase: kebabCase
+            }
         };
 
         pkg.children.filter((x: any) => x.name).forEach((x: any) => {
@@ -48,17 +59,25 @@ export class XmiGenerator extends XmiGeneratorBase {
                 this.generatedFiles.push(destFileName);
             }
 
-            if (x instanceof xmiInterface) {
-                const interfaceFileName = this.destinationPath(`${path}/contracts/${x.name}.ts`);
+            else if (x instanceof xmiInstanceSpecification) {
+                const baseClassFileName = this.destinationPath(`${path}/components/generated/${x.name}.generated.ts`);
+                const classFileName = this.destinationPath(`${path}/components/${x.name}.ts`);
 
-                this.fs.copyTpl(this.templatePath('xmiInterface.ejs'), interfaceFileName, options);
-                this.generatedFiles.push(interfaceFileName);
+                this.fs.copyTpl(this.templatePath('xmiClass.generated.ejs'), baseClassFileName, options);
+                this.generatedFiles.push(baseClassFileName);
+
+                if(!this.fs.exists(classFileName)) {
+                    this.fs.copyTpl(this.templatePath('xmiClass.ejs'), classFileName, options);
+                    this.generatedFiles.push(classFileName);
+                }
             }
 
-            if (x instanceof xmiClass) {
+            else if (x instanceof xmiClass) {
                 const interfaceFileName = this.destinationPath(`${path}/contracts/${x.name}.ts`);
                 const baseClassFileName = this.destinationPath(`${path}/components/generated/${x.name}.generated.ts`);
                 const classFileName = this.destinationPath(`${path}/components/${x.name}.ts`);
+                const apiRouterFileName = this.destinationPath(`${this.options.destination}/api/server/routes/${localPath}/${x.name}.router.ts`);
+                const appComponentRootPath = this.destinationPath(`${this.options.destination}/app/pages/administration/${localPath}`);
 
                 this.fs.copyTpl(this.templatePath('xmiInterface.ejs'), interfaceFileName, options);
                 this.generatedFiles.push(interfaceFileName);
@@ -70,29 +89,41 @@ export class XmiGenerator extends XmiGeneratorBase {
                     this.fs.copyTpl(this.templatePath('xmiClass.ejs'), classFileName, options);
                     this.generatedFiles.push(classFileName);
                 }
+
+                //api
+                this.fs.copyTpl(this.templatePath('api/class/router.ejs'), apiRouterFileName, options);
+
+                //app
+                this.fs.copyTpl(this.templatePath('app/edit/component.ts.ejs'), `${appComponentRootPath}/${x.name}/edit/component.ts`, options);
+                this.fs.copyTpl(this.templatePath('app/edit/component.html.ejs'), `${appComponentRootPath}/${x.name}/edit/component.html`, options);
+                this.fs.write(`${appComponentRootPath}/${x.name}/edit/component.sass`, '');
+
+                this.fs.copyTpl(this.templatePath('app/list/component.ts.ejs'), `${appComponentRootPath}/${x.name}/list/component.ts`, options);
+                this.fs.copyTpl(this.templatePath('app/list/component.html.ejs'), `${appComponentRootPath}/${x.name}/list/component.html`, options);
+                this.fs.write(`${appComponentRootPath}/${x.name}/list/component.sass`, '');
+
+                this.generatedFiles.push(apiRouterFileName);
+                this.classes.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
             }
 
-            if (x instanceof xmiCollaboration) {
+            else if (x instanceof xmiInterface) {
+                const interfaceFileName = this.destinationPath(`${path}/contracts/${x.name}.ts`);
+
+                this.fs.copyTpl(this.templatePath('xmiInterface.ejs'), interfaceFileName, options);
+                this.generatedFiles.push(interfaceFileName);
+            }
+
+            else if (x instanceof xmiCollaboration) {
                 const testFileDest = `${path}/test/process_${x.name}.ts`;
                 const diagramFileName = this.destinationPath(`${path}/process/${x.name}.ts`);
                 const apiRouterFileName = this.destinationPath(`${this.options.destination}/api/server/routes/${localPath}/router.ts`);
                 const apiControllerFileName = this.destinationPath(`${this.options.destination}/api/server/routes/${localPath}/controller.ts`);
-                const apiSwaggerConfig = this.destinationPath(`${this.options.destination}/api/server/swagger/api.yaml`);
 
                 this.fs.copyTpl(this.templatePath('xmiCollaboration.ejs'), diagramFileName, options);
                 this.fs.copyTpl(this.templatePath('test/xmiComponent.ejs'), this.destinationPath(testFileDest), options);
 
-                this.fs.copyTpl(this.templatePath('api/router.ejs'), apiRouterFileName, options);
-                this.fs.copyTpl(this.templatePath('api/controller.ejs'), apiControllerFileName, options);
-                this.fs.append(apiSwaggerConfig, `  
-  ${this._getLocationFromPath(localPath)}:
-    post:
-      tags:
-        - Process
-      description: ${x.nameOrigin}
-      responses:
-        200:
-          description: Returns execution result`);
+                this.fs.copyTpl(this.templatePath('api/diagram/router.ejs'), apiRouterFileName, options);
+                this.fs.copyTpl(this.templatePath('api/diagram/controller.ejs'), apiControllerFileName, options);
 
                 this.testFiles.push(testFileDest);
                 this.generatedFiles.push(diagramFileName);
@@ -101,7 +132,7 @@ export class XmiGenerator extends XmiGeneratorBase {
                 this.collaborationDiagrams.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
             }
 
-            if (x instanceof xmiScreen) {
+            else if (x instanceof xmiScreen) {
                 const testFileDest = `${path}/test/screen_${x.name}.ts`;
                 const screenFileName = this.destinationPath(`${path}/screens/${x.name}.ts`);
 
@@ -112,20 +143,40 @@ export class XmiGenerator extends XmiGeneratorBase {
                 this.generatedFiles.push(screenFileName);
             }
 
-            if (x instanceof xmiUseCase) {
+            else if (x instanceof xmiUseCase) {
                 this._generateUseCase(x, options);
             }
 
-            if (x instanceof xmiPackage) {
+            else if (x instanceof xmiPackage) {
                 localPath || this.fs.copyTpl(this.templatePath('readme.ejs'), `${this.options.destination}/readme.md`, options);
                 this._generate(`${localPath}/${x.name}`, x);
             }
         });
 
+        const routesFileName = `${this.options.destination}/api/server/routes.ts`;
         this.fs.copyTpl(
             this.templatePath('api/routes.ejs'),
-            this.destinationPath(`${this.options.destination}/api/server/routes.ts`), {value: this.collaborationDiagrams}
+            this.destinationPath(routesFileName), {diagrams: this.collaborationDiagrams, classes: this.classes}
         );
+        this.generatedFiles.push(routesFileName);
+
+        const apiSwaggerConfig = this.destinationPath(`${this.options.destination}/api/server/swagger/api.yaml`);
+        this.fs.copyTpl(
+            this.templatePath('api/swagger/api.yaml.ejs'),
+            apiSwaggerConfig, {diagrams: this.collaborationDiagrams, classes: this.classes}
+        );
+
+        const ormConfig = this.destinationPath(`${this.options.destination}/ormconfig.json`);
+        this.fs.copyTpl(this.templatePath('config/ormconfig.json.ejs'), ormConfig, {classes: this.classes});
+
+        const appModule = this.destinationPath(`${this.options.destination}/app/pages/app.module.ts`);
+        this.fs.copyTpl(this.templatePath('app/module.ejs'), appModule, {classes: this.classes});
+
+        const appRoutes = this.destinationPath(`${this.options.destination}/app/pages/routing.module.ts`);
+        this.fs.copyTpl(this.templatePath('app/routes.ejs'), appRoutes, {classes: this.classes});
+
+        const appMainPage = this.destinationPath(`${this.options.destination}/app/pages/master/app.component.html`);
+        this.fs.copyTpl(this.templatePath('app/master.html.ejs'), appMainPage, {classes: this.classes});
     }
 }
 

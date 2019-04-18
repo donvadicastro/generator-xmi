@@ -1,21 +1,22 @@
 export class TypeConverter {
     private static typesMap: {[key: string]: string} = {
-        EAJava_char: 'string',
-        EAJava_String: 'string',
-        EAJava_date: 'Date',
-        EAJava_int: 'number',
-        EAJava_void: 'void',
-        EAJava_boolean: 'boolean',
-        EAJava_float: 'number',
+        eajava_char: 'string',
+        eajava_String: 'string',
+        eajava_date: 'Date',
+        eajava_int: 'number',
+        eajava_void: 'void',
+        eajava_boolean: 'boolean',
+        eajava_float: 'number',
+        eajava_double: 'number',
 
-        EAnone_void: 'void',
+        eanone_void: 'void',
 
         int: 'number',
         char: 'string',
         boolean: 'boolean',
 
-        'http://schema.omg.org/spec/UML/2.1/uml.xml#String': 'string',
-        'http://schema.omg.org/spec/UML/2.1/uml.xml#Integer': 'number'
+        'http://schema.omg.org/spec/uml/2.1/uml.xml#string': 'string',
+        'http://schema.omg.org/spec/uml/2.1/uml.xml#integer': 'number'
     };
 
     public static isPrimititive(typeName: string): boolean {
@@ -23,7 +24,7 @@ export class TypeConverter {
             typeName = typeName.slice(0, typeName.length - 2);
         }
 
-        return !!this.typesMap[typeName];
+        return !!this.typesMap[typeName.toLowerCase()];
     }
 
     public static convert(typeName: string): string {
@@ -34,7 +35,11 @@ export class TypeConverter {
             typeName = typeName.slice(0, typeName.length - 2);
         }
 
-        return (this.typesMap[typeName] || typeName) + (isArray ? '[]' : '');
+        return (this.typesMap[typeName.toLowerCase()] || typeName) + (isArray ? '[]' : '');
+    }
+
+    public static isArray(typeName: string): boolean {
+        return typeName.endsWith('__');
     }
 
     public static getTypeDefaultValue(type: string): any {

@@ -5,8 +5,8 @@ import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
 export default class xmiConnectorParty {
     raw: any;
     id: string;
-    typeRef: xmiClass | null = null;
     multiplicity: string;
+    typeRef?: xmiClass;
 
     constructor(raw: any) {
         this.raw = raw;

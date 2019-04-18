@@ -1,16 +1,26 @@
+@PrimaryGeneratedColumn()
+id: string;
+
 <% (entity.attributes || []).forEach(function (attr) { %>
-    /**
-    * <%= attr.name %> property
-    */
-    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %> = <%- attr.typeDefaultValue %>;
+    @Column(<% if(attr.type) {%>'<%= attr.dbType %>'<%}%>)
+    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %>;
 <% }) %>
 
-<% (entity.associationLinks || []).forEach(x => { %>
-    /**
-    * <%= x.typeRef.name %> associated reference.
-    */
-    <% if(x.multiplicity === '1' || x.multiplicity === '0..1') { %>
-        <%= x.typeRef.name %>Ref: <%= x.typeRef.name %>Contract | null = null;
+<% [...entity.associationLinks, ...entity.aggregationLinks].forEach(x => { %>
+    <% if(!x.target.multiplicity || x.target.multiplicity === '1' || x.target.multiplicity === '0..1') { %>
+        <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
+            @OneToOne(type => <%= x.target.typeRef.name %>Base)
+            <%= x.target.typeRef.name %>Ref: <%= x.target.typeRef.name %>Contract;
+        <% } else { %>
+            @ManyToOne(type => <%= x.target.typeRef.name %>Base, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>RefList)
+            <%= x.target.typeRef.name %>Ref: <%= x.target.typeRef.name %>Contract;
+        <% } %>
     <%} else {%>
-        <%= x.typeRef.name %>RefList: <%= x.typeRef.name %>Contract[] = [];
+        <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
+            @OneToMany(type => <%= x.target.typeRef.name %>Base, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>Ref)
+            <%= x.target.typeRef.name %>RefList: <%= x.target.typeRef.name %>Contract[];
+        <% } else { %>
+            @ManyToMany(type => <%= x.target.typeRef.name %>Base)
+            <%= x.target.typeRef.name %>RefList: <%= x.target.typeRef.name %>Contract[];
+        <% } %>
 <% }}) %>

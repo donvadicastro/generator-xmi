@@ -1,3 +1,11 @@
+import {Entity, PrimaryGeneratedColumn, OneToMany, ManyToOne, ObjectID, ObjectIdColumn} from "typeorm";
+import {Column} from "typeorm/decorator/columns/Column";
+import {OneToOne} from "typeorm/decorator/relations/OneToOne";
+import {JoinColumn} from "typeorm/decorator/relations/JoinColumn";
+import {ManyToMany} from "typeorm/decorator/relations/ManyToMany";
+import {JoinTable} from "typeorm/decorator/relations/JoinTable";
+import {PrimaryColumn} from "typeorm/decorator/columns/PrimaryColumn";
+
 import {ComponentBase} from '../<%= entity.getRelativeRoot() %>/base/componentBase';
 import {<%= entity.name %>Contract} from '../../contracts/<%= entity.name %>';
 
@@ -20,7 +28,13 @@ import {<%= entity.name %>Contract} from '../../contracts/<%= entity.name %>';
 
 <%# Inject base interface when instance speciaification is used %>
 <% (entity.associationLinks || []).forEach(x => { %>
-    import {<%= x.typeRef.name %>Contract} from '../<%= entity.getRelativePath(x.typeRef) %>/contracts/<%= x.typeRef.name %>';
+    import {<%= x.target.typeRef.name %>Contract} from '../<%= entity.getRelativePath(x.target.typeRef) %>/contracts/<%= x.target.typeRef.name %>';
+    import {<%= x.target.typeRef.name %>Base} from '../<%= entity.getRelativePath(x.target.typeRef) %>/components/generated/<%= x.target.typeRef.name %>.generated';
+<% }) %>
+
+<% (entity.aggregationLinks || []).forEach(x => { %>
+    import {<%= x.target.typeRef.name %>Contract} from '../<%= entity.getRelativePath(x.target.typeRef) %>/contracts/<%= x.target.typeRef.name %>';
+    import {<%= x.target.typeRef.name %>Base} from '../<%= entity.getRelativePath(x.target.typeRef) %>/components/generated/<%= x.target.typeRef.name %>.generated';
 <% }) %>
 
 
