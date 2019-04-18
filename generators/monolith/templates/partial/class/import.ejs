@@ -1,9 +1,10 @@
-import {Entity, ObjectIdColumn, OneToMany, ManyToOne} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, OneToMany, ManyToOne, ObjectID, ObjectIdColumn} from "typeorm";
 import {Column} from "typeorm/decorator/columns/Column";
 import {OneToOne} from "typeorm/decorator/relations/OneToOne";
 import {JoinColumn} from "typeorm/decorator/relations/JoinColumn";
 import {ManyToMany} from "typeorm/decorator/relations/ManyToMany";
 import {JoinTable} from "typeorm/decorator/relations/JoinTable";
+import {PrimaryColumn} from "typeorm/decorator/columns/PrimaryColumn";
 
 import {ComponentBase} from '../<%= entity.getRelativeRoot() %>/base/componentBase';
 import {<%= entity.name %>Contract} from '../../contracts/<%= entity.name %>';

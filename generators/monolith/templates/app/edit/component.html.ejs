@@ -4,7 +4,7 @@
     <% if(attr.typeRef) { %>
         <div class="form-group">
             <label for="<%= attr.name %>-edit"><%= attr.name %></label>
-            <p-dropdown id="<%= attr.name %>-edit" styleClass="form-control p-0" [options]="<%= attr.name %>All" optionLabel="label" [autoDisplayFirst]="false" formControlName="<%= attr.name %>"></p-dropdown>
+            <p-dropdown id="<%= attr.name %>-edit" styleClass="form-control p-0" [options]="<%= attr.name %>All" optionLabel="label" dataKey="id" [autoDisplayFirst]="false" formControlName="<%= attr.name %>"></p-dropdown>
         </div>
     <% } else if(attr.type === 'boolean') { %>
         <div class="form-check">

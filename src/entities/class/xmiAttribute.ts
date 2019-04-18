@@ -34,4 +34,8 @@ export class xmiAttribute extends xmiBase implements IAttribute {
             xmiComponentFactory.getByKeyDeffered(this, 'typeRef', this.type);
         }
     }
+
+    get dbType(): string {
+        return (<any>{string: 'varchar', number: 'float4', boolean: 'boolean', 'Date': 'timestamp'})[this.type];
+    }
 }

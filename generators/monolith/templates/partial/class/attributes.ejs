@@ -1,8 +1,8 @@
-@ObjectIdColumn()
+@PrimaryGeneratedColumn()
 id: string;
 
 <% (entity.attributes || []).forEach(function (attr) { %>
-    @Column()
+    @Column(<% if(attr.type) {%>'<%= attr.dbType %>'<%}%>)
     <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %>;
 <% }) %>
 

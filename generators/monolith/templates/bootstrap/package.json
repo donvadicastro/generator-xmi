@@ -110,6 +110,7 @@
     "express-pino-logger": "^4.0.0",
     "mongodb": "3.0.10",
     "node-persist": "^3.0.1",
+    "pg": "^7.10.0",
     "reflect-metadata": "^0.1.12",
     "tslib": "^1.9.0",
     "twitter": "^1.7.1",

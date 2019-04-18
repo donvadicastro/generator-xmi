@@ -15,7 +15,7 @@ export default express.Router()
      * Request entity by id.
      */
     .get("/<%= entity.name %>/:id", async (req: Request, res: Response) => {
-        res.send(await getRepository(<%= entity.name %>Base).findOne(req.params.id));
+        res.send(await getRepository(<%= entity.name %>Base).findOne(req.params.id, {relations: [<%- entity.attributesCombined.filter(x => x.typeRef).map(x => `"${x.name}"`).join(',') %>]}));
     })
 
     /**
