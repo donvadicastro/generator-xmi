@@ -48,12 +48,12 @@ import {<%= x.entity.name %>ScreenComponent} from './screens/<%= x.path %>/<%= x
     TableModule,
     AppRoutingModule
   ],
-  providers: [/*{
+  providers: [<% if(options.auth) { %>{
     provide: APP_INITIALIZER,
     useFactory: initializer,
     multi: true,
     deps: [KeycloakService]
-  }*/],
+  }<% } %>],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

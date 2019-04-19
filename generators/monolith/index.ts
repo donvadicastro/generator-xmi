@@ -41,6 +41,7 @@ export class XmiGenerator extends XmiGeneratorBase {
         const path = this.options.destination + '/design' + localPath;
 
         const options: any = {
+            auth: this.options.auth,
             factory: xmiComponentFactory,
             utils: {
                 kebabCase: kebabCase
@@ -163,27 +164,27 @@ export class XmiGenerator extends XmiGeneratorBase {
         const routesFileName = `${this.options.destination}/api/server/routes.ts`;
         this.fs.copyTpl(
             this.templatePath('api/routes.ejs'),
-            this.destinationPath(routesFileName), {diagrams: this.collaborationDiagrams, classes: this.classes}
+            this.destinationPath(routesFileName), {diagrams: this.collaborationDiagrams, classes: this.classes, options: options}
         );
         this.generatedFiles.push(routesFileName);
 
         const apiSwaggerConfig = this.destinationPath(`${this.options.destination}/api/server/swagger/api.yaml`);
         this.fs.copyTpl(
             this.templatePath('api/swagger/api.yaml.ejs'),
-            apiSwaggerConfig, {diagrams: this.collaborationDiagrams, classes: this.classes}
+            apiSwaggerConfig, {diagrams: this.collaborationDiagrams, classes: this.classes, options: options}
         );
 
         const ormConfig = this.destinationPath(`${this.options.destination}/ormconfig.json`);
-        this.fs.copyTpl(this.templatePath('config/ormconfig.json.ejs'), ormConfig, {classes: this.classes});
+        this.fs.copyTpl(this.templatePath('config/ormconfig.json.ejs'), ormConfig, {classes: this.classes, options: options});
 
         const appModule = this.destinationPath(`${this.options.destination}/app/pages/app.module.ts`);
-        this.fs.copyTpl(this.templatePath('app/module.ejs'), appModule, {classes: this.classes, screens: this.screens});
+        this.fs.copyTpl(this.templatePath('app/module.ejs'), appModule, {classes: this.classes, screens: this.screens, options: options});
 
         const appRoutes = this.destinationPath(`${this.options.destination}/app/pages/routing.module.ts`);
-        this.fs.copyTpl(this.templatePath('app/routes.ejs'), appRoutes, {classes: this.classes, screens: this.screens});
+        this.fs.copyTpl(this.templatePath('app/routes.ejs'), appRoutes, {classes: this.classes, screens: this.screens, options: options});
 
         const appMainPage = this.destinationPath(`${this.options.destination}/app/pages/master/app.component.html`);
-        this.fs.copyTpl(this.templatePath('app/master.html.ejs'), appMainPage, {classes: this.classes, screens: this.screens});
+        this.fs.copyTpl(this.templatePath('app/master.html.ejs'), appMainPage, {classes: this.classes, screens: this.screens, options: options});
     }
 }
 

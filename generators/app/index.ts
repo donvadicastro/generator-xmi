@@ -21,6 +21,7 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
 
         this.option('destination', { type: String, default: 'dist' });
         this.option('type', { type: String, default: 'monolith' });
+        this.option('auth', { type: Boolean, default: false });
     }
 
     prompting() {
@@ -29,6 +30,7 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
         this.log('file           : ' + this.options.xmiFileName);
         this.log('destination    : ' + this.destinationPath(this.options.destination));
         this.log('type           : ' + this.options.type);
+        this.log('auth           : ' + this.options.auth ? 'yes' : 'no');
     }
 
     clean() {
