@@ -72,10 +72,12 @@ export class <%= entity.name %>EditComponent {
   }
 
   private buitifyEntity(entity: any): string {
-    return Object.keys(entity).map((x: any) => {
+    const data = Object.keys(entity).map((x: any) => {
       const value = typeof entity[x] === 'string' ? entity[x] : null;
-      return value && value.padEnd(30 - value.length, "\xA0");
-    }).filter(x => x).join(' | ');
+      return value && value.substr(0, 30).padEnd(30 - value.length, "\xA0");
+    }).filter(x => x);
+
+    return data.length ? (data.length > 1 ? data.join(' | ') : data[0].trim()) : '';
   }
 
 }
