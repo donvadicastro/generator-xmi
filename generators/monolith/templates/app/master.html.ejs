@@ -15,6 +15,14 @@
                     <% }) %>
                 </div>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true">Screens</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <% screens.forEach(x => { %>
+                        <a class="dropdown-item" routerLink="screen/<%= x.path %>/<%= x.entity.name %>"><%= x.entity.nameOrigin %></a>
+                    <% }) %>
+                </div>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit" (click)="logout()">Log out</button>

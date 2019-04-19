@@ -10,20 +10,29 @@ import {AppComponent} from './master/app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TableModule} from 'primeng/table';
 import {DropdownModule} from 'primeng/dropdown';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 <% classes.forEach(x => { %>
 import {<%= x.entity.name %>ListComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/list/component';
 import {<%= x.entity.name %>EditComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/edit/component';
 <% }) %>
 
+<% screens.forEach(x => { %>
+import {<%= x.entity.name %>ScreenComponent} from './screens/<%= x.path %>/<%= x.entity.name %>/component';
+<% }) %>
+
 
 @NgModule({
   declarations: [
     AppComponent,
-<% classes.forEach(x => { %>
+  <% classes.forEach(x => { %>
     <%= x.entity.name %>ListComponent,
     <%= x.entity.name %>EditComponent,
-<% }) %>
+  <% }) %>
+
+  <% screens.forEach(x => { %>
+    <%= x.entity.name %>ScreenComponent,
+  <% }) %>
   ],
   imports: [
     BrowserModule,
@@ -34,16 +43,17 @@ import {<%= x.entity.name %>EditComponent} from './administration/<%= x.path %>/
     HttpClientModule,
     KeycloakAngularModule,
 
+    MultiSelectModule,
     DropdownModule,
     TableModule,
     AppRoutingModule
   ],
-  providers: [{
+  providers: [/*{
     provide: APP_INITIALIZER,
     useFactory: initializer,
     multi: true,
     deps: [KeycloakService]
-  }],
+  }*/],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

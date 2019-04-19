@@ -1,7 +1,12 @@
 <h3>{{data.id ? 'Edit' : 'Create'}} <%= entity.name %></h3>
 <form [formGroup]="form">
-<% (entity.attributesCombined || []).filter(x => x.name && !x.isArray).forEach((attr) => { %>
-    <% if(attr.typeRef) { %>
+<% (entity.attributesCombined || []).filter(x => x.name).forEach((attr) => { %>
+    <% if(attr.isArray) { %>
+        <div class="form-group">
+            <label for="<%= attr.name %>-edit"><%= attr.name %></label>
+            <div><p-multiSelect id="<%= attr.name %>-edit" [options]="<%= attr.name %>All" optionLabel="label" dataKey="id" formControlName="<%= attr.name %>"></p-multiSelect></div>
+        </div>
+    <% } else if(attr.typeRef) { %>
         <div class="form-group">
             <label for="<%= attr.name %>-edit"><%= attr.name %></label>
             <p-dropdown id="<%= attr.name %>-edit" styleClass="form-control p-0" [options]="<%= attr.name %>All" optionLabel="label" dataKey="id" [autoDisplayFirst]="false" formControlName="<%= attr.name %>"></p-dropdown>

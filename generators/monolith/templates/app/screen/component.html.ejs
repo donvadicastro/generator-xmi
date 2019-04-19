@@ -1,0 +1,20 @@
+<h3>Form <%= entity.name %></h3>
+<form [formGroup]="form">
+<% (entity.children || []).filter(x => x.stereotype !== 'button').forEach(function (child) { %>
+    <% if (child.stereotype === 'checkbox') { %>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="<%= child.alias || child.name %>-edit" formControlName="<%= child.alias || child.name %>"/>
+        <label class="form-check-label" for="<%= child.alias || child.name %>-edit"><%= child.properties.get('label') || child.name %></label>
+    </div>
+    <% } else { %>
+    <div class="form-group">
+        <label for="<%= child.alias || child.name %>-edit"><%= child.properties.get('label') || child.name %></label>
+        <input class="form-control" id="<%= child.alias || child.name %>-edit" formControlName="<%= child.alias || child.name %>"/>
+    </div>
+    <% } %>
+<% }) %>
+</form>
+
+<div class="float-right">
+    <button class="btn btn-primary" (click)="run()">Run</button>
+</div>

@@ -1,4 +1,5 @@
 import {xmiUseCase} from "../../src/entities/xmiUseCase";
+import {xmiScreen} from "../../src/entities/ui/xmiScreen";
 
 const Generator = require('yeoman-generator');
 
@@ -10,6 +11,7 @@ export class XmiGeneratorBase extends (Generator as { new(args: any, opts: any):
     generatedFiles: string[] = [];
     collaborationDiagrams: any[] = [];
     classes: any[] = [];
+    screens: any[] = [];
 
     _bootstrap(extra: string[]) {
         if(!this.fs.exists(this.destinationPath(this.options.destination))) {

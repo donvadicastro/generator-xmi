@@ -6,6 +6,11 @@ import {<%= x.entity.name %>ListComponent} from './administration/<%= x.path %>/
 import {<%= x.entity.name %>EditComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/edit/component';
 <% }) %>
 
+<% screens.forEach(x => { %>
+import {<%= x.entity.name %>ScreenComponent} from './screens/<%= x.path %>/<%= x.entity.name %>/component';
+<% }) %>
+
+
 const routes: Routes = [
   { path: 'administration',  children: [
     <% classes.forEach(x => { %>
@@ -13,7 +18,14 @@ const routes: Routes = [
         { path: '<%= x.entity.pathFromRoot %><%= x.entity.name %>/:id',  component: <%= x.entity.name %>EditComponent },
         { path: '<%= x.entity.pathFromRoot %><%= x.entity.name %>/new',  component: <%= x.entity.name %>EditComponent },
     <% }) %>
-    ] }
+    ]
+  }, {
+    path: 'screen', children: [
+    <% screens.forEach(x => { %>
+      { path: '<%= x.entity.pathFromRoot %><%= x.entity.name %>',  component: <%= x.entity.name %>ScreenComponent },
+    <% }) %>
+    ]
+  }
 ];
 
 @NgModule({

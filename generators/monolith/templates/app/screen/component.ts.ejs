@@ -1,0 +1,40 @@
+import { Component } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import {environment} from "../../<%= entity.getRelativeRoot() %>/environments/environment";
+
+@Component({
+  selector: 'app-<%= entity.name %>-screen',
+  templateUrl: './component.html',
+  styleUrls: ['./component.sass']
+})
+export class <%= entity.name %>ScreenComponent {
+  public data: any = {};
+  public form: FormGroup;
+
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private http: HttpClient) {
+  }
+
+  ngOnInit() {
+    this.form = this.fb.group({
+    <% (entity.children || []).filter(x => x.stereotype !== 'button').forEach(function (child) { %>
+      <%= child.name %>: ['', Validators.required],
+    <% }) %>
+    });
+  }
+
+  protected run() {
+    const data = this.form.getRawValue();
+
+<% (entity.children || []).filter(x => x.stereotype === 'button').forEach(function (child, i) { %>
+  <% if(child.links.informationFLow.length && child.links.informationFLow[0].end) {%>
+    <% var elementRef = child.links.informationFLow[0].end %>
+    //this.http.post(`${environment.api.url}/<%= elementRef.name %>`, data).subscribe((res) => console.log(res));
+  <% } %>
+<% }) %>
+  }
+}

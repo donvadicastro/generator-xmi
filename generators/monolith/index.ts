@@ -135,12 +135,19 @@ export class XmiGenerator extends XmiGeneratorBase {
             else if (x instanceof xmiScreen) {
                 const testFileDest = `${path}/test/screen_${x.name}.ts`;
                 const screenFileName = this.destinationPath(`${path}/screens/${x.name}.ts`);
+                const appComponentRootPath = this.destinationPath(`${this.options.destination}/app/pages/screens/${localPath}`);
 
                 this.fs.copyTpl(this.templatePath('xmiScreen.ejs'), screenFileName, options);
                 this.fs.copyTpl(this.templatePath('test/xmiScreen.ejs'), this.destinationPath(testFileDest), options);
 
+                //edit form
+                this.fs.copyTpl(this.templatePath('app/screen/component.ts.ejs'), `${appComponentRootPath}/${x.name}/component.ts`, options);
+                this.fs.copyTpl(this.templatePath('app/screen/component.html.ejs'), `${appComponentRootPath}/${x.name}/component.html`, options);
+                this.fs.write(`${appComponentRootPath}/${x.name}/component.sass`, '');
+
                 this.testFiles.push(testFileDest);
                 this.generatedFiles.push(screenFileName);
+                this.screens.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
             }
 
             else if (x instanceof xmiUseCase) {
@@ -170,13 +177,13 @@ export class XmiGenerator extends XmiGeneratorBase {
         this.fs.copyTpl(this.templatePath('config/ormconfig.json.ejs'), ormConfig, {classes: this.classes});
 
         const appModule = this.destinationPath(`${this.options.destination}/app/pages/app.module.ts`);
-        this.fs.copyTpl(this.templatePath('app/module.ejs'), appModule, {classes: this.classes});
+        this.fs.copyTpl(this.templatePath('app/module.ejs'), appModule, {classes: this.classes, screens: this.screens});
 
         const appRoutes = this.destinationPath(`${this.options.destination}/app/pages/routing.module.ts`);
-        this.fs.copyTpl(this.templatePath('app/routes.ejs'), appRoutes, {classes: this.classes});
+        this.fs.copyTpl(this.templatePath('app/routes.ejs'), appRoutes, {classes: this.classes, screens: this.screens});
 
         const appMainPage = this.destinationPath(`${this.options.destination}/app/pages/master/app.component.html`);
-        this.fs.copyTpl(this.templatePath('app/master.html.ejs'), appMainPage, {classes: this.classes});
+        this.fs.copyTpl(this.templatePath('app/master.html.ejs'), appMainPage, {classes: this.classes, screens: this.screens});
     }
 }
 
