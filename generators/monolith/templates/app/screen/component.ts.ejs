@@ -12,6 +12,7 @@ import {environment} from "../../<%= entity.getRelativeRoot() %>/environments/en
 export class <%= entity.name %>ScreenComponent {
   public data: any = {};
   public form: FormGroup;
+  public response: any = null;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -32,8 +33,8 @@ export class <%= entity.name %>ScreenComponent {
 
 <% (entity.children || []).filter(x => x.stereotype === 'button').forEach(function (child, i) { %>
   <% if(child.links.informationFLow.length && child.links.informationFLow[0].end) {%>
-    <% var elementRef = child.links.informationFLow[0].end %>
-    //this.http.post(`${environment.api.url}/<%= elementRef.name %>`, data).subscribe((res) => console.log(res));
+    <% var elementRefPath = child.links.informationFLow[0].end.pathFromRoot %>
+    this.http.post(`${environment.api.url}/<%= elementRefPath.length ? utils.kebabCase(elementRefPath.slice(0, -1)) : elementRefPath %>`, data).subscribe((res) => this.response = res);
   <% } %>
 <% }) %>
   }

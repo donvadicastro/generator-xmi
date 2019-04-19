@@ -11,6 +11,7 @@ import {createConnection} from "typeorm";
 
 const pino = require('express-pino-logger')({ logger: logger });
 const app = express();
+const cors = require('cors');
 
 export default class ExpressServer {
   constructor() {
@@ -20,6 +21,7 @@ export default class ExpressServer {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(cookieParser(process.env.SESSION_SECRET));
     app.use(express.static(`${root}/public`));
+    app.use(cors());
     app.use(pino);
   }
 

@@ -106,6 +106,14 @@ paths:
       tags:
         - "Process: <%= x.entity.name %>"
       description: <%= x.entity.name %>
+
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          type: object
+
       responses:
         200:
           description: Returns execution result

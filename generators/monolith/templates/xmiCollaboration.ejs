@@ -13,7 +13,9 @@ export class <%= entity.name %> {
         // Configure state storage
         flowAsync = flowAsync.then((state: any) => {
             console.log('--> initialize local state storage');
-            return storage.init(/* options ... */);
+            storage.init(/* options ... */);
+
+            return state;
         });
 
         // define flow
