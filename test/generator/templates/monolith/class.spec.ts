@@ -52,10 +52,10 @@ describe('Generators', () => {
 
                         expect(aircraft.name).toBe('aircraft');
                         expect(content.normalizeSpace()).toBe(`
-                        @ObjectIdColumn() 
+                        @PrimaryGeneratedColumn()
                         id: string; 
                         
-                        @Column()
+                        @Column('varchar')
                         number: string;
                         
                         @ManyToMany(type => pilotBase)
@@ -72,10 +72,10 @@ describe('Generators', () => {
 
                         expect(airline.name).toBe('airline');
                         expect(content.normalizeSpace()).toBe(`
-                        @ObjectIdColumn() 
+                        @PrimaryGeneratedColumn()
                         id: string; 
                         
-                        @Column()
+                        @Column('varchar')
                         name: string;
                                            
                         @OneToMany(type => aircraftBase, aircraft => aircraft.airlineRef)
@@ -92,10 +92,10 @@ describe('Generators', () => {
 
                         expect(city.name).toBe('city');
                         expect(content.normalizeSpace()).toBe(`
-                        @ObjectIdColumn() 
+                        @PrimaryGeneratedColumn()
                         id: string; 
 
-                        @Column()
+                        @Column('varchar')
                         name: string;
                                                 
                         @OneToOne(type => airlineBase) 
