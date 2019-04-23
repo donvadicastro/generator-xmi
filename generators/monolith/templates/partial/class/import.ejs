@@ -37,10 +37,17 @@ import {<%= entity.name %>Contract} from '../../contracts/<%= entity.name %>';
     import {<%= x.target.typeRef.name %>Base} from '../<%= entity.getRelativePath(x.target.typeRef) %>/components/generated/<%= x.target.typeRef.name %>.generated';
 <% }) %>
 
-
 <%# Inject base class when instance speciaification is used %>
 <% if (entity.elementRef) { %>
     import {<%= entity.elementRef.name %>} from '../<%= entity.getRelativePath(entity.elementRef) %>/components/<%= entity.elementRef.name %>';
 <%}%>
+
+<%# Inject operation parameters and return types %>
+<% (entity.operations || []).forEach(function (operation) { %>
+    <% if(operation.returnParameter.typeRef) { %>
+        import {<%= operation.returnParameter.typeRef.name %>} from '../<%= entity.getRelativePath(operation.returnParameter.typeRef) %>/contracts/<%= operation.returnParameter.typeRef %>';
+    <% } %>
+<% }) %>
+
 
 import {Promise} from 'es6-promise';

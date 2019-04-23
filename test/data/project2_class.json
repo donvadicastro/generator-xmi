@@ -819,6 +819,25 @@
                             }
                           }
                         ]
+                      },
+                      {
+                        "$": {
+                          "xmi:id": "EAID_E56311C9_91AA_492f_B1D6_DEEB4EC6417E",
+                          "name": "getBaseLocation",
+                          "visibility": "public",
+                          "type": "EAID_BA10DEF4_4B12_40a6_9D6E_828771805763",
+                          "concurrency": "sequential"
+                        },
+                        "ownedParameter": [
+                          {
+                            "$": {
+                              "xmi:id": "EAID_RT000000_91AA_492f_B1D6_DEEB4EC6417E",
+                              "name": "return",
+                              "type": "EAID_BA10DEF4_4B12_40a6_9D6E_828771805763",
+                              "direction": "return"
+                            }
+                          }
+                        ]
                       }
                     ]
                   }
@@ -2678,6 +2697,104 @@
                         "xrefs": [
                           ""
                         ]
+                      },
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_E56311C9_91AA_492f_B1D6_DEEB4EC6417E",
+                          "name": "getBaseLocation",
+                          "scope": "Public"
+                        },
+                        "properties": [
+                          {
+                            "$": {
+                              "position": "1"
+                            }
+                          }
+                        ],
+                        "stereotype": [
+                          ""
+                        ],
+                        "model": [
+                          {
+                            "$": {
+                              "ea_guid": "{E56311C9-91AA-492f-B1D6-DEEB4EC6417E}",
+                              "ea_localid": "14"
+                            }
+                          }
+                        ],
+                        "type": [
+                          {
+                            "$": {
+                              "type": "Location",
+                              "const": "false",
+                              "static": "false",
+                              "isAbstract": "false",
+                              "synchronised": "0",
+                              "concurrency": "Sequential",
+                              "pure": "0",
+                              "isQuery": "false"
+                            }
+                          }
+                        ],
+                        "behaviour": [
+                          ""
+                        ],
+                        "code": [
+                          ""
+                        ],
+                        "style": [
+                          ""
+                        ],
+                        "styleex": [
+                          ""
+                        ],
+                        "documentation": [
+                          ""
+                        ],
+                        "tags": [
+                          ""
+                        ],
+                        "parameters": [
+                          {
+                            "parameter": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_RETURNID_91AA_492f_B1D6_DEEB4EC6417E",
+                                  "visibility": "public"
+                                },
+                                "properties": [
+                                  {
+                                    "$": {
+                                      "pos": "0",
+                                      "type": "Location",
+                                      "const": "false",
+                                      "classifier": "EAID_BA10DEF4_4B12_40a6_9D6E_828771805763",
+                                      "ea_guid": "{RETURNID-91AA-492f-B1D6-DEEB4EC6417E}"
+                                    }
+                                  }
+                                ],
+                                "style": [
+                                  ""
+                                ],
+                                "styleex": [
+                                  ""
+                                ],
+                                "documentation": [
+                                  ""
+                                ],
+                                "tags": [
+                                  ""
+                                ],
+                                "xrefs": [
+                                  ""
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "xrefs": [
+                          ""
+                        ]
                       }
                     ]
                   }
@@ -3950,7 +4067,7 @@
                       "author": "vadim",
                       "version": "1.0",
                       "created": "2019-01-15 22:30:57",
-                      "modified": "2019-01-31 13:41:47"
+                      "modified": "2019-01-31 15:00:25"
                     }
                   }
                 ],
@@ -3964,14 +4081,14 @@
                 "style2": [
                   {
                     "$": {
-                      "value": "ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=69DB696D;"
+                      "value": "ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=8E5FAFFF;"
                     }
                   }
                 ],
                 "swimlanes": [
                   {
                     "$": {
-                      "value": "locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;hh=0;cls=0;bw=0;hli=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"
+                      "value": "locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;hh=0;cls=0;bw=0;hli=0;SwimlaneFont=lfh:-21,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"
                     }
                   }
                 ],
@@ -3998,7 +4115,7 @@
                       },
                       {
                         "$": {
-                          "geometry": "Left=270;Top=417;Right=360;Bottom=487;",
+                          "geometry": "Left=270;Top=417;Right=377;Bottom=487;",
                           "subject": "EAID_BF723ABE_1CE9_456c_A4DF_CBCE6829FF9F",
                           "seqno": "2",
                           "style": "DUID=67EB025A;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"
@@ -4006,7 +4123,7 @@
                       },
                       {
                         "$": {
-                          "geometry": "Left=483;Top=417;Right=573;Bottom=487;",
+                          "geometry": "Left=470;Top=420;Right=570;Bottom=490;",
                           "subject": "EAID_FA5EA201_B155_47ea_9174_A77271AAB143",
                           "seqno": "3",
                           "style": "DUID=EF34A671;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"

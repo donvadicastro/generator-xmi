@@ -1,10 +1,19 @@
 <h3>Form <%= entity.name %></h3>
 <form [formGroup]="form">
-<% (entity.children || []).filter(x => x.stereotype !== 'button').forEach(function (child) { %>
+<% (entity.children || []).forEach(function (child) { %>
     <% if (child.stereotype === 'checkbox') { %>
     <div class="form-check">
         <input class="form-check-input" type="checkbox" id="<%= child.alias || child.name %>-edit" formControlName="<%= child.alias || child.name %>"/>
         <label class="form-check-label" for="<%= child.alias || child.name %>-edit"><%= child.properties.get('label') || child.name %></label>
+    </div>
+    <% } else if(child.stereotype === 'button') { %>
+    <div class="form-group">
+        <% if(child.links.informationFLow.length && child.links.informationFLow[0].end) {%>
+            <% var elementRefPath = child.links.informationFLow[0].end.elementRef.pathFromRoot %>
+            <button class="btn btn-primary" (click)="run('<%= elementRefPath.length ? utils.kebabCase(elementRefPath.slice(0, -1)) : elementRefPath %>')"><%= child.properties.get('label') || child.name %></button>
+        <% } else { %>
+            <button class="btn btn-primary" disabled>Run</button>
+        <% } %>
     </div>
     <% } else { %>
     <div class="form-group">
@@ -14,10 +23,6 @@
     <% } %>
 <% }) %>
 </form>
-
-<div class="float-right">
-    <button class="btn btn-primary" (click)="run()">Run</button>
-</div>
 
 <div *ngIf="response">
     <h5>Response</h5>

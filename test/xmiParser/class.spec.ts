@@ -14,6 +14,7 @@ describe('xmiParser', () => {
             const entities = (<xmiPackage>pkg.children[0]).children;
             const building: xmiClass = <xmiClass>entities[4];
             const team: xmiClass = <xmiClass>entities[9];
+            const location: xmiClass = <xmiClass>entities[6];
 
             //building
             expect(building.attributes.length).toBe(1);
@@ -22,11 +23,11 @@ describe('xmiParser', () => {
 
             expect(building.operations.length).toBe(1);
             expect(building.operations[0].name).toBe('build');
-            expect(building.operations[0].parameters.length).toBe(2);
-            expect(building.operations[0].parameters[0].name).toBe('big');
-            expect(building.operations[0].parameters[0].type).toBe('boolean');
-            expect(building.operations[0].parameters[1].name).toBe('return');
-            expect(building.operations[0].parameters[1].type).toBe('void');
+            expect(building.operations[0].inputParameters.length).toBe(1);
+            expect(building.operations[0].inputParameters[0].name).toBe('big');
+            expect(building.operations[0].inputParameters[0].type).toBe('boolean');
+            expect(building.operations[0].returnParameter.name).toBe('return');
+            expect(building.operations[0].returnParameter.type).toBe('void');
 
             //team
             expect(team.attributes.length).toBe(2);
@@ -35,13 +36,18 @@ describe('xmiParser', () => {
             expect(team.attributes[1].name).toBe('name');
             expect(team.attributes[1].type).toBe('string');
 
-            expect(team.operations.length).toBe(1);
+            expect(team.operations.length).toBe(2);
             expect(team.operations[0].name).toBe('create');
-            expect(team.operations[0].parameters.length).toBe(2);
-            expect(team.operations[0].parameters[0].name).toBe('x');
-            expect(team.operations[0].parameters[0].type).toBe('number');
-            expect(team.operations[0].parameters[1].name).toBe('return');
-            expect(team.operations[0].parameters[1].type).toBe('void');
+            expect(team.operations[0].inputParameters.length).toBe(1);
+            expect(team.operations[0].inputParameters[0].name).toBe('x');
+            expect(team.operations[0].inputParameters[0].type).toBe('number');
+            expect(team.operations[0].returnParameter.name).toBe('return');
+            expect(team.operations[0].returnParameter.type).toBe('void');
+
+            expect(team.operations[1].name).toBe('getBaseLocation');
+            expect(team.operations[1].inputParameters.length).toBe(0);
+            expect(team.operations[1].returnParameter.name).toBe('return');
+            expect(team.operations[1].returnParameter.typeRef).toBe(location);
         });
 
         it('Verify association', () => {

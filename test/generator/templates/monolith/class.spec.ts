@@ -104,6 +104,40 @@ describe('Generators', () => {
                     });
                 });
 
+                it('check operation return type', async () => {
+                    const data = readJSONSync('test/data/project2_class.json');
+                    const parser = new XmiParser(data);
+
+                    parser.parse();
+
+                    const pkg = <xmiPackage>parser.packge;
+                    const entities = (<xmiPackage>pkg.children[0]).children;
+                    const team: xmiClass = <xmiClass>entities[9];
+                    const location: xmiClass = <xmiClass>entities[6];
+                    const content = await ejs.renderFile(path.join(dir, 'operations.ejs'), {entity: team});
+
+                    expect(content.normalizeSpace()).toBe(`
+                    /** 
+                    * create description. 
+                    */ 
+                    create(state: any): Promise<void> { 
+                        return new Promise((resolve, reject) => { 
+                            this.notifyComplete('team::create', state.start); 
+                            resolve(state); 
+                        }); 
+                    } 
+                    
+                    /** 
+                    * getBaseLocation description. 
+                    */ 
+                    getBaseLocation(state: any): Promise<locationContract> { 
+                        return new Promise((resolve, reject) => { 
+                            this.notifyComplete('team::getBaseLocation', state.start); 
+                            resolve(state); 
+                        }); 
+                    }
+                    `.normalizeSpace());
+                });
             });
         });
     });

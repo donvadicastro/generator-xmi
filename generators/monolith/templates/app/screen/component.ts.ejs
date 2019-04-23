@@ -21,6 +21,7 @@ export class <%= entity.name %>ScreenComponent {
   }
 
   ngOnInit() {
+    this.loadData();
     this.form = this.fb.group({
     <% (entity.children || []).filter(x => x.stereotype !== 'button').forEach(function (child) { %>
       <%= child.name %>: ['', Validators.required],
@@ -28,13 +29,17 @@ export class <%= entity.name %>ScreenComponent {
     });
   }
 
-  protected run() {
+  protected run(action: string) {
     const data = this.form.getRawValue();
+    this.http.post(`${environment.api.url}/${action}`, data).subscribe((res) => this.response = res);
+  }
 
-<% (entity.children || []).filter(x => x.stereotype === 'button').forEach(function (child, i) { %>
-  <% if(child.links.informationFLow.length && child.links.informationFLow[0].end) {%>
-    <% var elementRefPath = child.links.informationFLow[0].end.pathFromRoot %>
-    this.http.post(`${environment.api.url}/<%= elementRefPath.length ? utils.kebabCase(elementRefPath.slice(0, -1)) : elementRefPath %>`, data).subscribe((res) => this.response = res);
+  private loadData() {
+<% (entity.children || []).filter(x => x.stereotype).forEach(function (child, i) { %>
+  <% if(child.links.informationFLow.length && child.links.informationFLow[0].end === child) {%>
+    <% var elementRefPath = child.links.informationFLow[0].start.pathFromRoot %>
+    this.http.post(`${environment.api.url}/<%= elementRefPath.length ? utils.kebabCase(elementRefPath.slice(0, -1)) : elementRefPath %>`, {})
+      .subscribe((res: any) => this.form.patchValue({ <%= child.name %>: res }));
   <% } %>
 <% }) %>
   }

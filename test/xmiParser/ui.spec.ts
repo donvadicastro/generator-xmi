@@ -36,7 +36,7 @@ describe('xmiParser', () => {
 
         parser.parse();
 
-        it('Verify link', () => {
+        it('Verify outbound link', () => {
             const pkg = <xmiPackage>parser.packge;
             const collaboration: xmiCollaboration = <xmiCollaboration>(<xmiPackage>pkg.children[0]).children[0];
             const screen: xmiScreen = <xmiScreen>(<xmiPackage>pkg.children[1]).children[0];
@@ -44,12 +44,28 @@ describe('xmiParser', () => {
             expect(collaboration).toBeInstanceOf(xmiCollaboration);
             expect(screen).toBeInstanceOf(xmiScreen);
 
-            const button: xmiGUIElement = screen.children[1];
+            const button: xmiGUIElement = screen.children[3];
             expect(button.name).toBe('process');
             expect(button.links.informationFLow.length).toBe(1);
 
             expect(button.links.informationFLow[0].start).toBe(button);
             expect((<xmiUMLDiagram>button.links.informationFLow[0].end).elementRef).toBe(collaboration);
+        });
+
+        it('Verify inbound link', () => {
+            const pkg = <xmiPackage>parser.packge;
+            const collaboration: xmiCollaboration = <xmiCollaboration>(<xmiPackage>pkg.children[0]).children[0];
+            const screen: xmiScreen = <xmiScreen>(<xmiPackage>pkg.children[1]).children[2];
+
+            expect(collaboration).toBeInstanceOf(xmiCollaboration);
+            expect(screen).toBeInstanceOf(xmiScreen);
+
+            const grid: xmiGUIElement = screen.children[0];
+            expect(grid.name).toBe('dataBoundView');
+            expect(grid.links.informationFLow.length).toBe(1);
+
+            expect(grid.links.informationFLow[0].end).toBe(grid);
+            expect((<xmiUMLDiagram>grid.links.informationFLow[0].start).elementRef).toBe(collaboration);
         });
     });
 });
