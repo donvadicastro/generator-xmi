@@ -112,6 +112,9 @@
 						<ownedParameter xmi:id="EAID_39A0C189_02DC_4278_9614_58E311AAACA6" name="x" direction="in" isStream="false" isException="false" isOrdered="false" isUnique="true" type="EAJava_int"/>
 						<ownedParameter xmi:id="EAID_RT000000_0C60_49c2_A675_D4B6E7146ABD" name="return" direction="return" type="EAJava_void"/>
 					</ownedOperation>
+					<ownedOperation xmi:id="EAID_E56311C9_91AA_492f_B1D6_DEEB4EC6417E" name="getBaseLocation" visibility="public" type="EAID_BA10DEF4_4B12_40a6_9D6E_828771805763" concurrency="sequential">
+						<ownedParameter xmi:id="EAID_RT000000_91AA_492f_B1D6_DEEB4EC6417E" name="return" type="EAID_BA10DEF4_4B12_40a6_9D6E_828771805763" direction="return"/>
+					</ownedOperation>
 				</packagedElement>
 			</packagedElement>
 		</packagedElement>
@@ -453,6 +456,29 @@
 						</parameters>
 						<xrefs/>
 					</operation>
+					<operation xmi:idref="EAID_E56311C9_91AA_492f_B1D6_DEEB4EC6417E" name="getBaseLocation" scope="Public">
+						<properties position="1"/>
+						<stereotype/>
+						<model ea_guid="{E56311C9-91AA-492f-B1D6-DEEB4EC6417E}" ea_localid="14"/>
+						<type type="Location" const="false" static="false" isAbstract="false" synchronised="0" concurrency="Sequential" pure="0" isQuery="false"/>
+						<behaviour/>
+						<code/>
+						<style/>
+						<styleex/>
+						<documentation/>
+						<tags/>
+						<parameters>
+							<parameter xmi:idref="EAID_RETURNID_91AA_492f_B1D6_DEEB4EC6417E" visibility="public">
+								<properties pos="0" type="Location" const="false" classifier="EAID_BA10DEF4_4B12_40a6_9D6E_828771805763" ea_guid="{RETURNID-91AA-492f-B1D6-DEEB4EC6417E}"/>
+								<style/>
+								<styleex/>
+								<documentation/>
+								<tags/>
+								<xrefs/>
+							</parameter>
+						</parameters>
+						<xrefs/>
+					</operation>
 				</operations>
 				<links>
 					<Association xmi:id="EAID_DD5B8550_BF00_46dd_8B0A_16671703E13B" start="EAID_1F49E2E2_116F_4a75_A3BA_176EFBA0FDB4" end="EAID_9153BBD2_57A6_46ea_B58D_3D69D6CA8E4F"/>
@@ -686,16 +712,16 @@
 			<diagram xmi:id="EAID_06AE4B59_6935_4a5a_8188_CE8830525F36">
 				<model package="EAPK_F9124A53_CD66_4bed_9059_0069AEDDA4D7" localID="17" owner="EAPK_F9124A53_CD66_4bed_9059_0069AEDDA4D7"/>
 				<properties name="TestModel" type="Logical"/>
-				<project author="vadim" version="1.0" created="2019-01-15 22:30:57" modified="2019-01-31 13:41:47"/>
+				<project author="vadim" version="1.0" created="2019-01-15 22:30:57" modified="2019-01-31 15:00:25"/>
 				<style1 value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=1;DocSize.cx=827;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AllDockable=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
-				<style2 value="ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=69DB696D;"/>
-				<swimlanes value="locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;hh=0;cls=0;bw=0;hli=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"/>
+				<style2 value="ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=8E5FAFFF;"/>
+				<swimlanes value="locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;hh=0;cls=0;bw=0;hli=0;SwimlaneFont=lfh:-21,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"/>
 				<matrixitems value="locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"/>
 				<extendedProperties/>
 				<elements>
 					<element geometry="Left=22;Top=425;Right=137;Bottom=480;" subject="EAID_CF959517_DB70_481b_A470_7DF9EB256A9C" seqno="1" style="DUID=777E07D3;"/>
-					<element geometry="Left=270;Top=417;Right=360;Bottom=487;" subject="EAID_BF723ABE_1CE9_456c_A4DF_CBCE6829FF9F" seqno="2" style="DUID=67EB025A;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"/>
-					<element geometry="Left=483;Top=417;Right=573;Bottom=487;" subject="EAID_FA5EA201_B155_47ea_9174_A77271AAB143" seqno="3" style="DUID=EF34A671;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"/>
+					<element geometry="Left=270;Top=417;Right=377;Bottom=487;" subject="EAID_BF723ABE_1CE9_456c_A4DF_CBCE6829FF9F" seqno="2" style="DUID=67EB025A;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"/>
+					<element geometry="Left=470;Top=420;Right=570;Bottom=490;" subject="EAID_FA5EA201_B155_47ea_9174_A77271AAB143" seqno="3" style="DUID=EF34A671;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"/>
 					<element geometry="Left=474;Top=302;Right=564;Bottom=372;" subject="EAID_0D574726_07E5_48a4_8E86_605947FCC3A6" seqno="4" style="DUID=74ABA9CB;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"/>
 					<element geometry="Left=22;Top=206;Right=137;Bottom=257;" subject="EAID_AA092257_F8BA_486b_ADAB_E243658ECE69" seqno="5" style="DUID=CE690023;"/>
 					<element geometry="Left=474;Top=196;Right=564;Bottom=266;" subject="EAID_BA10DEF4_4B12_40a6_9D6E_828771805763" seqno="6" style="DUID=4D78AD89;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"/>
