@@ -21,6 +21,7 @@ import {xmiInstanceSpecification} from "../entities/xmiInstanceSpecification";
 import {xmiCombinedFragment} from "../entities/collaboration/xmiCombinedFragment";
 import {get} from 'object-path';
 import {xmiComment} from "../entities/xmiComment";
+import {xmiComponent} from "../entities/xmiComponent";
 
 const assert = require('assert');
 
@@ -123,8 +124,12 @@ export class xmiComponentFactory {
                 break;
 
             case 'uml:Component':
-                const c = require('../entities/xmiComponent');
-                element = new c.xmiComponent(raw, <xmiPackage>parent);
+                if(element instanceof xmiComponent) {
+                    element.refreshComponent(raw);
+                } else {
+                    const c = require('../entities/xmiComponent');
+                    element = new c.xmiComponent(raw, <xmiPackage>parent);
+                }
                 break;
 
             case 'uml:UseCase':

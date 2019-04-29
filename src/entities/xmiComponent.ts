@@ -1,16 +1,19 @@
 import {xmiClass} from "./xmiClass";
-import {xmiLink} from "./links/xmiLink";
 import {xmiPackage} from "./xmiPackage";
 import {xmiInOut} from "./component/xmiInOut";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 
 export class xmiComponent extends xmiClass {
-
     provided: xmiInOut[] = [];
     required: xmiInOut[] = [];
 
     constructor(raw: any, parent?: xmiPackage) {
         super(raw, parent);
+        this.refreshComponent(raw);
+    }
+
+    refreshComponent(raw: any, parent?: xmiPackage) {
+        super.refresh(raw, parent);
 
         if(raw.links && raw.links.length && raw.links[0].Sequence) {
             this.links.sequence = raw.links[0].Sequence.map((x: any) => xmiComponentFactory.getLink(x, this));
@@ -20,12 +23,12 @@ export class xmiComponent extends xmiClass {
             this.links.usage = raw.links[0].Usage.map((x: any) => xmiComponentFactory.getLink(x, this));
         }
 
-        if(this.raw.provided) {
-            this.provided = this.raw.provided.map((x: any) => xmiComponentFactory.registerProvide(x, this));
+        if(raw.provided) {
+            this.provided = raw.provided.map((x: any) => xmiComponentFactory.registerProvide(x, this));
         }
 
-        if(this.raw.required) {
-            this.required = this.raw.required.map((x: any) => new xmiInOut(x));
+        if(raw.required) {
+            this.required = raw.required.map((x: any) => new xmiInOut(x));
         }
     }
 

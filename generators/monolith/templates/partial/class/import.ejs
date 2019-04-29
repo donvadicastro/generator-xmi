@@ -7,47 +7,61 @@ import {JoinTable} from "typeorm/decorator/relations/JoinTable";
 import {PrimaryColumn} from "typeorm/decorator/columns/PrimaryColumn";
 
 import {ComponentBase} from '../<%= entity.getRelativeRoot() %>/base/componentBase';
-import {<%= entity.name %>Contract} from '../../contracts/<%= entity.name %>';
 
-<% if(entity.generalizationLinksTo) { %>
-    import {<%= entity.generalizationLinksTo.name %>Base} from '../<%= entity.getRelativePath(entity.generalizationLinksTo) %>/components/generated/<%= entity.generalizationLinksTo.name %>.generated';
-<% } %>
+<%
+    var imports = {};
+    imports['../../contracts/' + entity.name] = entity.name + 'Contract';
 
-<% (entity.provided || []).forEach(function (value) { %>
-    <% if(value.name) { %>
-        import {<%= value.name %>Contract} from '../<%= entity.getRelativePath(value.ref) %>/contracts/<%= value.name %>';
+    if(entity.generalizationLinksTo) {
+        imports[entity.generalizationLinksTo.name + 'Base'] = '../' + entity.getRelativePath(entity.generalizationLinksTo) + '/components/generated/' + entity.generalizationLinksTo.name + '.generated';
+    }
 
-        <% (value.ref.attributes || []).filter(x => x.typeRef).forEach(function (attribute) { %>
-            import {<%= attribute.typeRef.name %>Contract} from '../<%= entity.getRelativePath(attribute.typeRef) %>/contracts/<%= attribute.typeRef.name %>';
-        <% }) %>
-<%}})%>
+    (entity.provided || []).forEach(value => {
+        if(value.name) {
+            imports['../' + entity.getRelativePath(value.ref) + '/contracts/' + value.name] = value.name + 'Contract';
 
-<% (entity.required || []).forEach(function (value) { %>
-    import {<%= value.name %>Contract} from '../<%= entity.getRelativePath(value.ref) %>/contracts/<%= value.name %>';
-<%})%>
+            (value.ref.attributes || []).filter(x => x.typeRef).forEach(function (attribute) {
+                imports['../' + entity.getRelativePath(attribute.typeRef) + '/contracts/' + attribute.typeRef.name] = attribute.typeRef.name  + 'Contract';
+            });
+        }
+    });
 
-<%# Inject base interface when instance speciaification is used %>
-<% (entity.associationLinks || []).forEach(x => { %>
-    import {<%= x.target.typeRef.name %>Contract} from '../<%= entity.getRelativePath(x.target.typeRef) %>/contracts/<%= x.target.typeRef.name %>';
-    import {<%= x.target.typeRef.name %>Base} from '../<%= entity.getRelativePath(x.target.typeRef) %>/components/generated/<%= x.target.typeRef.name %>.generated';
+    (entity.required || []).forEach(value => {
+        imports['../' + entity.getRelativePath(value.ref) + '/contracts/' + value.name] = value.name + 'Contract';
+    });
+
+    //Inject base interface when instance speciaification is used
+    (entity.associationLinks || []).forEach(x => {
+        imports['../' + entity.getRelativePath(x.target.typeRef) + '/contracts/' + x.target.typeRef.name] = x.target.typeRef.name  + 'Contract';
+        imports['../' + entity.getRelativePath(x.target.typeRef) + '/components/generated/' + x.target.typeRef.name + '.generated'] = x.target.typeRef.name  + 'Base';
+    });
+
+    (entity.aggregationLinks || []).forEach(x => {
+        imports['../' + entity.getRelativePath(x.target.typeRef) + '/contracts/' + x.target.typeRef.name] = x.target.typeRef.name + 'Contract';
+        imports['../' + entity.getRelativePath(x.target.typeRef) + '/components/generated/' + x.target.typeRef.name + '.generated'] = x.target.typeRef.name + 'Base';
+    });
+
+    //Inject base class when instance speciaification is used
+    if (entity.elementRef) {
+        imports['../' + entity.getRelativePath(entity.elementRef) + '/components/' + entity.elementRef.name] = entity.elementRef.name;
+    }
+
+    //Inject attributes type
+    (entity.attributes || []).forEach(attribute => {
+        if(attribute.typeRef) {
+            imports['../' + entity.getRelativePath(attribute.typeRef) + '/contracts/' + attribute.typeRef.name] = attribute.typeRef.name + 'Contract';
+        }
+    });
+
+    //Inject operation parameters and return types
+    (entity.operations || []).forEach(operation => {
+        if(operation.returnParameter.typeRef) {
+            imports['../' + entity.getRelativePath(operation.returnParameter.typeRef) + '/contracts/' + operation.returnParameter.typeRef.name] = operation.returnParameter.typeRef.name + 'Contract';
+        }
+    });
+%>
+
+<% Object.keys(imports).sort((a, b) => imports[a] > imports[b] ? 1 : -1).forEach(key => {%>
+    import {<%= imports[key] %>} from '<%= key %>';
 <% }) %>
-
-<% (entity.aggregationLinks || []).forEach(x => { %>
-    import {<%= x.target.typeRef.name %>Contract} from '../<%= entity.getRelativePath(x.target.typeRef) %>/contracts/<%= x.target.typeRef.name %>';
-    import {<%= x.target.typeRef.name %>Base} from '../<%= entity.getRelativePath(x.target.typeRef) %>/components/generated/<%= x.target.typeRef.name %>.generated';
-<% }) %>
-
-<%# Inject base class when instance speciaification is used %>
-<% if (entity.elementRef) { %>
-    import {<%= entity.elementRef.name %>} from '../<%= entity.getRelativePath(entity.elementRef) %>/components/<%= entity.elementRef.name %>';
-<%}%>
-
-<%# Inject operation parameters and return types %>
-<% (entity.operations || []).forEach(function (operation) { %>
-    <% if(operation.returnParameter.typeRef) { %>
-        import {<%= operation.returnParameter.typeRef.name %>} from '../<%= entity.getRelativePath(operation.returnParameter.typeRef) %>/contracts/<%= operation.returnParameter.typeRef %>';
-    <% } %>
-<% }) %>
-
-
 import {Promise} from 'es6-promise';

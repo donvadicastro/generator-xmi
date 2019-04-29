@@ -48,7 +48,7 @@ export default class xmiBase {
         this.parent = parent;
         this.raw = raw;
 
-        this.id = this.raw.$['xmi:id'] || this.raw.$['xmi:ifrefs'];
+        this.id = this.raw.$['xmi:id'] || this.raw.$['xmi:ifrefs']   || this.raw.$['xmi:idref'];
         this.type = this.raw.$['xmi:type'];
         this.nameOrigin = this.raw.$.name;
         this.name = this.nameOrigin && camel(this.nameOrigin);

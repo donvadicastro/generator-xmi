@@ -1,4 +1,21 @@
 <label for="<%= entity.alias || entity.name %>-edit"><%= entity.properties.get('label') || entity.name %></label>
-<table>
-    NOT IMPLEMENTED
+<table class="table" formControlName="<%= entity.alias || entity.name %>">
+    <thead class="thead-dark">
+        <tr>
+        <% (entity.children || []).forEach(x => { %>
+            <th><%= x.properties.get('label') || x.name %></th>
+        <% }) %>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <% (entity.children || []).forEach(x => { %>
+            <td>
+            <% build(x, (controlName, childEntity) => { %>
+                <%- include(controlName, {entity: childEntity, build: build}) -%>
+            <% }) %>
+            </td>
+        <% }) %>
+        </tr>
+    </tbody>
 </table>

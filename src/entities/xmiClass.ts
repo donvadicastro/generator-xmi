@@ -3,12 +3,10 @@ import {xmiFragment} from "./collaboration/xmiFragment";
 import {xmiPackage} from "./xmiPackage";
 import {xmiAggregationLink} from "./links/xmiAggregationLink";
 import {LinkType} from "../types/linkType";
-import xmiConnectorParty from "./connectors/xmiConnectorParty";
-import {xmiGeneralization} from "./connectors/xmiGeneralization";
 import xmiBase from "./xmiBase";
 import {IConnector} from "../contracts/connector";
-import {xmiAttribute} from "./class/xmiAttribute";
 import {IAttribute} from "../contracts/attribute";
+
 const assert = require('assert');
 
 export class xmiClass extends xmiInterface {

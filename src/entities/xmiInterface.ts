@@ -31,10 +31,10 @@ export class xmiInterface extends xmiBase {
 
         if(raw.ownedOperation) {
             this.operations = raw.ownedOperation
-                .map((x: any) => new xmiOperation(x, this));
+                .map((x: any, i: number) => this.operations[i] ? this.operations[i].refresh(x) : new xmiOperation(x, this));
         } else {
             this.operations = get(raw, ['operations','0','operation'], [])
-                .map((x: any) => new xmiOperation(x, this));
+                .map((x: any, i: number) => this.operations[i] ? this.operations[i].refresh(x) : new xmiOperation(x, this));
         }
 
         if(raw.generalization) {
@@ -47,7 +47,14 @@ export class xmiInterface extends xmiBase {
         const ret: any = {[key]: {}};
 
         this.attributes.length && (ret[key].attributes = this.attributes.map(x => ({[x.name]: x.type})));
-        this.operations.length && (ret[key].operations = this.operations.map(x => ({[x.name]: x.parameters.map(x => x.name).join(',')})));
+        this.operations.length && (ret[key].operations = this.operations
+            .reduce((prev: any, x) => {
+                const returnParameter = x.parameters.find(x => x.name === 'return');
+                prev[`${x.name}(${x.parameters.filter(x => x.name !== 'return').map(x => x.name).join(',')})`] =
+                    returnParameter ? `${returnParameter.typeRef ? returnParameter.typeRef.name : returnParameter.type}${x.isReturnArray ? '[]' : ''}` : 'void';
+
+                return prev;
+            }, {}));
 
         return ret;
     }

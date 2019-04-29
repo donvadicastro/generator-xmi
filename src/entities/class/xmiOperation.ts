@@ -1,17 +1,18 @@
 import {xmiInterface} from "../xmiInterface";
 import xmiBase from "../xmiBase";
 import {xmiParameter} from "./xmiParameter";
+import {get} from "object-path";
 
 const camel = require('to-camel-case');
 const assert = require('assert');
 
 export class xmiOperation extends xmiBase {
-    parameters: xmiParameter[];
+    parameters: xmiParameter[] = [];
+    isReturnArray: boolean = false;
 
     constructor(raw: any, parent: xmiInterface) {
         super(raw, parent);
-        this.name = this.name && camel(this.name);
-        this.parameters = (raw.ownedParameter || []).map((x: any) => new xmiParameter(x, this));
+        this.refresh(raw);
     }
 
     get returnParameter(): xmiParameter {
@@ -24,5 +25,16 @@ export class xmiOperation extends xmiBase {
 
     get inputParameters(): xmiParameter[] {
         return this.parameters.filter(x => x.name !== 'return');
+    }
+
+    refresh(raw: any): this {
+        this.name = this.name && camel(this.name);
+        this.parameters = (raw.ownedParameter || []).map((x: any) => new xmiParameter(x, this));
+
+        if(get(raw, ['type','0','$', 'returnarray']) === '1') {
+            this.isReturnArray = true;
+        }
+
+        return this;
     }
 }

@@ -15,7 +15,7 @@ var imports = [];
 %>
 
 <% imports.filter((x, i, arr) => arr.indexOf(x) === i).forEach(x => { %>
-import {<%= x.name %>} from '../../../../design/<%= x.pathFromRoot %>/components/<%= x.name %>';
+import {<%= x.name %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= x.pathFromRoot %>/components/<%= x.name %>';
 <% }) %>
 
 
