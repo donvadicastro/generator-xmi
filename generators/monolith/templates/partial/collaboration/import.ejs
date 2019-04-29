@@ -3,6 +3,6 @@ const storage = require('node-persist');
 
 import {Promise} from 'es6-promise';
 
-<% (entity.lifelines || []).forEach(function (lifeline, index) { %>
-    import {<%= lifeline.elementRef.name %>Contract} from '<%= entity.getRelativePath(lifeline.elementRef) %>/contracts/<%= lifeline.elementRef.name %>';
+<% entity.referencesAsList.forEach(reference => {%>
+    import {<%= reference.name %>} from '<%= reference.path %>';
 <% }) %>

@@ -3,12 +3,34 @@ import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
 import {xmiLink} from "../links/xmiLink";
 import {xmiUMLDiagram} from "../diagrams/xmiUMLDiagram";
 import {xmiPackage} from "../xmiPackage";
+import {Reference} from "../../types/reference";
+import {xmiMessage} from "../collaboration/xmiMessage";
+import {xmiCollaboration} from "../xmiCollaboration";
+import {xmiLifeline} from "../xmiLifeline";
+import {xmiComponent} from "../xmiComponent";
+import {xmiDiagram} from "../diagrams/xmiDiagram";
 
 export class xmiGUIElement extends xmiBase {
     links: {informationFLow: xmiLink[]} = {informationFLow: []};
     properties: Map<string, string>;
 
     children: xmiGUIElement[] = [];
+
+    get references(): Reference {
+        const imports = super.references;
+
+        this.children.forEach((child, i) => {
+            if(child.links.informationFLow.length && child.links.informationFLow[0].end) {
+                const elementRef = <xmiCollaboration>(<xmiDiagram>child.links.informationFLow[0].end).elementRef;
+                imports[this.getRelativePath(elementRef) + '/process/' + elementRef.name] = elementRef.name;
+
+                elementRef.lifelines.forEach(lifeline => {
+                    imports[this.getRelativePath(lifeline.elementRef) + '/components/' + lifeline.elementRef.name] = lifeline.elementRef.name;
+                });
+        }});
+
+        return imports;
+    }
 
     constructor(raw: any, parent: xmiPackage) {
         super(raw, parent);

@@ -11,6 +11,7 @@ import {xmiComponentFactory} from "../../src/factories/xmiComponentFactory";
 import {xmiUseCase} from "../../src/entities/xmiUseCase";
 import {XmiGeneratorBase} from "../_base/xmiGeneratorBase";
 import {xmiInstanceSpecification} from "../../src/entities/xmiInstanceSpecification";
+import {xmiComponent} from "../../src/entities/xmiComponent";
 
 const kebabCase = require('just-kebab-case');
 const pascal = require('to-pascal-case');
@@ -63,6 +64,23 @@ export class XmiGenerator extends XmiGeneratorBase {
             else if (x instanceof xmiInstanceSpecification) {
                 const baseClassFileName = this.destinationPath(`${path}/components/generated/${x.name}.generated.ts`);
                 const classFileName = this.destinationPath(`${path}/components/${x.name}.ts`);
+
+                this.fs.copyTpl(this.templatePath('xmiClass.generated.ejs'), baseClassFileName, options);
+                this.generatedFiles.push(baseClassFileName);
+
+                if(!this.fs.exists(classFileName)) {
+                    this.fs.copyTpl(this.templatePath('xmiClass.ejs'), classFileName, options);
+                    this.generatedFiles.push(classFileName);
+                }
+            }
+
+            else if (x instanceof xmiComponent) {
+                const interfaceFileName = this.destinationPath(`${path}/contracts/${x.name}.ts`);
+                const baseClassFileName = this.destinationPath(`${path}/components/generated/${x.name}.generated.ts`);
+                const classFileName = this.destinationPath(`${path}/components/${x.name}.ts`);
+
+                this.fs.copyTpl(this.templatePath('xmiInterface.ejs'), interfaceFileName, options);
+                this.generatedFiles.push(interfaceFileName);
 
                 this.fs.copyTpl(this.templatePath('xmiClass.generated.ejs'), baseClassFileName, options);
                 this.generatedFiles.push(baseClassFileName);

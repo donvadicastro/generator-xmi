@@ -7,6 +7,7 @@ import {xmiFragment} from "./collaboration/xmiFragment";
 import {xmiPackage} from "./xmiPackage";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {xmiCombinedFragment} from "./collaboration/xmiCombinedFragment";
+import {Reference} from "../types/reference";
 const assert = require('assert');
 
 export class xmiCollaboration extends xmiBase {
@@ -59,6 +60,16 @@ export class xmiCollaboration extends xmiBase {
 
     get conditionFragments(): xmiCombinedFragment[] {
         return <xmiCombinedFragment[]>this.fragments.filter(x => x.type === 'uml:CombinedFragment' && x.interactionOperator === 'alt');
+    }
+
+    get references(): Reference {
+        const imports = super.references;
+
+        this.lifelines.forEach((lifeline, index) => {
+            imports[this.getRelativePath(lifeline.elementRef) + '/contracts/' + lifeline.elementRef.name] = lifeline.elementRef.name + 'Contract';
+        });
+
+        return imports;
     }
 
     toConsole() {

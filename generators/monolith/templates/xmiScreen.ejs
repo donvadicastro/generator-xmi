@@ -1,14 +1,8 @@
 const inquirer = require('inquirer');
 
-<% (entity.children || []).filter(x => x.stereotype === 'button').forEach(function (child, i) { %>
-<% if(child.links.informationFLow.length && child.links.informationFLow[0].end) {%>
-    <% var elementRef = child.links.informationFLow[0].end.elementRef %>
-        import {<%= elementRef.name %>} from '<%= entity.getRelativePath(elementRef) %>/process/<%= elementRef.name %>';
-
-    <% (elementRef.lifelines || []).forEach(function (lifeline) { %>
-        import {<%= lifeline.elementRef.name %>} from '<%= entity.getRelativePath(lifeline.elementRef) %>/components/<%= lifeline.elementRef.name %>';
-    <% }) %>
-<% }}) %>
+<% entity.referencesAsList.forEach(reference => {%>
+    import {<%= reference.name %>} from '<%= reference.path %>';
+<% }) %>
 
 /**
 * Terminal screen class.

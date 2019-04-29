@@ -2,6 +2,9 @@ import {xmiClass} from "./xmiClass";
 import {xmiPackage} from "./xmiPackage";
 import {xmiInOut} from "./component/xmiInOut";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
+import {Reference} from "../types/reference";
+import {xmiInterface} from "./xmiInterface";
+import xmiBase from "./xmiBase";
 
 export class xmiComponent extends xmiClass {
     provided: xmiInOut[] = [];
@@ -30,6 +33,28 @@ export class xmiComponent extends xmiClass {
         if(raw.required) {
             this.required = raw.required.map((x: any) => new xmiInOut(x));
         }
+    }
+
+    get references(): Reference {
+        const imports = super.references;
+
+        this.provided.forEach(value => {
+            if(value.name) {
+                imports['../' + this.getRelativePath(value.ref) + '/contracts/' + value.name] = value.name + 'Contract';
+
+                const ref = <xmiInterface>value.ref;
+                (ref.attributes || []).filter(x => x.typeRef).forEach(attribute => {
+                    const typeRef = <xmiBase>attribute.typeRef;
+                    imports['../' + this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.name  + 'Contract';
+                });
+            }
+        });
+
+        this.required.forEach(value => {
+            imports['../' + this.getRelativePath(value.ref) + '/contracts/' + value.name] = value.name + 'Contract';
+        });
+
+        return imports;
     }
 
     toConsole() {

@@ -2,6 +2,7 @@ import {get} from 'object-path';
 import {xmiPackage} from "./xmiPackage";
 import {xmiComment} from "./xmiComment";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
+import {Reference} from "../types/reference";
 const camel = require('to-camel-case');
 
 export default class xmiBase {
@@ -42,6 +43,23 @@ export default class xmiBase {
 
     getRelativeRoot() {
         return this.path.map(x => '..').join('/');
+    }
+
+    /**
+     * Get all referenced entities for particular instance.
+     */
+    get references(): Reference {
+        return {};
+    }
+
+    /**
+     * Get all referenced entities for particular instance.
+     */
+    get referencesAsList(): {name: string, path: string}[] {
+        const imports = this.references;
+
+        return Object.keys(imports).sort((a, b) => imports[a] > imports[b] ? 1 : -1)
+            .map(key => ({name: imports[key], path: key}));
     }
 
     constructor(raw: any, parent?: xmiPackage | xmiBase) {

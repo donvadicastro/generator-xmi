@@ -74,6 +74,9 @@ export class xmiComponentFactory {
                 else if(element instanceof xmiClass) {
                     element.refresh(raw, <xmiPackage>parent);
                 }
+                else if(element instanceof xmiMessageEndpoint) {
+                    //no actions
+                }
                 // Collaboration as a class can happens when linked to another diagram
                 else if(!(element instanceof xmiCollaboration) && !(element instanceof xmiUMLDiagram)) {
                     element = new xmiClass(raw, <xmiPackage>parent);

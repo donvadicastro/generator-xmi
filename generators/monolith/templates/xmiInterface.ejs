@@ -1,7 +1,7 @@
 import {Promise} from 'es6-promise';
 
-<% (entity.attributes || []).filter(x => x.typeRef).forEach(function (attribute) { %>
-  import {<%= attribute.typeRef.name %>Contract} from '<%= entity.getRelativePath(attribute.typeRef) %>/contracts/<%= attribute.typeRef.name %>';
+<% entity.referencesAsList.forEach(reference => {%>
+  import {<%= reference.name %>} from '<%= reference.path.substr(3) %>';
 <% }) %>
 
 /**

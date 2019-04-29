@@ -5,6 +5,7 @@ import {xmiAttribute} from "./class/xmiAttribute";
 import {xmiPackage} from "./xmiPackage";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {xmiGeneralization} from "./connectors/xmiGeneralization";
+import {Reference} from "../types/reference";
 
 const pascal = require('to-pascal-case');
 
@@ -12,6 +13,27 @@ export class xmiInterface extends xmiBase {
     attributes: xmiAttribute[] = [];
     operations: xmiOperation[] = [];
     generalization?: xmiGeneralization;
+
+    get references(): Reference {
+        const imports = super.references;
+
+        //Inject attributes type
+        this.attributes.forEach(attribute => {
+            if(attribute.typeRef) {
+                imports['../' + this.getRelativePath(attribute.typeRef) + '/contracts/' + attribute.typeRef.name] = attribute.typeRef.name + 'Contract';
+            }
+        });
+
+        //Inject operation parameters and return types
+        this.operations.forEach(operation => {
+            if(operation.returnParameter.typeRef) {
+                imports['../' + this.getRelativePath(operation.returnParameter.typeRef) + '/contracts/' + operation.returnParameter.typeRef.name] =
+                    operation.returnParameter.typeRef.name + 'Contract';
+            }
+        });
+
+        return imports;
+    }
 
     constructor(raw: any, parent?: xmiPackage) {
         super(raw, parent);
