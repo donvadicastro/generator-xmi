@@ -14,15 +14,15 @@ import {<%= x.entity.name %>ScreenComponent} from './screens/<%= x.path %>/<%= x
 const routes: Routes = [
   { path: 'administration',  children: [
     <% classes.forEach(x => { %>
-        { path: '<%= x.entity.pathFromRoot %><%= x.entity.name %>',  component: <%= x.entity.name %>ListComponent },
-        { path: '<%= x.entity.pathFromRoot %><%= x.entity.name %>/:id',  component: <%= x.entity.name %>EditComponent },
-        { path: '<%= x.entity.pathFromRoot %><%= x.entity.name %>/new',  component: <%= x.entity.name %>EditComponent },
+        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>',  component: <%= x.entity.name %>ListComponent },
+        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>/:id',  component: <%= x.entity.name %>EditComponent },
+        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>/new',  component: <%= x.entity.name %>EditComponent },
     <% }) %>
     ]
   }, {
     path: 'screen', children: [
     <% screens.forEach(x => { %>
-      { path: '<%= x.entity.pathFromRoot %><%= x.entity.name %>',  component: <%= x.entity.name %>ScreenComponent },
+      { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>',  component: <%= x.entity.name %>ScreenComponent },
     <% }) %>
     ]
   }

@@ -10,7 +10,7 @@ import {environment} from "../../../<%= entity.getRelativeRoot() %>/environments
   styleUrls: ['./component.sass']
 })
 export class <%= entity.name %>EditComponent {
-  private apiRootUrl = environment.api.url + '/<%= utils.kebabCase(entity.pathFromRoot) %><%= entity.name %>';
+  private apiRootUrl = environment.api.url + '/<%= utils.kebabCase(entity.pathFromRoot) %>/<%= entity.name %>';
 
   public data: any = {};
   public form: FormGroup;
@@ -56,7 +56,7 @@ export class <%= entity.name %>EditComponent {
 
   private loadData() {
   <% (entity.attributesCombined || []).filter(x => x.typeRef).forEach(x => { %>
-    this.http.get(environment.api.url + '/<%= x.name.substr(0, x.name.length - (x.isArray ? 7 : 3)) %>').subscribe(
+    this.http.get(environment.api.url + '/<%= utils.kebabCase(x.typeRef ? x.typeRef.pathFromRoot : x.pathFromRoot) %>/<%= x.name.substr(0, x.name.length - (x.isArray ? 7 : 3)) %>').subscribe(
         (res: any) => this.<%= x.name %>All = res.map((x: any) => ({...x, ...{label: this.buitifyEntity(x)}})));
   <% }) %>
 
