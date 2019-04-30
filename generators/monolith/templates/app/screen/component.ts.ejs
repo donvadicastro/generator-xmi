@@ -1,3 +1,5 @@
+<% const build = (parent, callback) => (parent.children || []).forEach(x => { callback(x); build(x, callback); }) %>
+
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -23,23 +25,27 @@ export class <%= entity.name %>ScreenComponent {
   ngOnInit() {
     this.loadData();
     this.form = this.fb.group({
-    <% (entity.children || []).filter(x => x.stereotype !== 'button').forEach(function (child) { %>
-      <%= child.name %>: ['', Validators.required],
+    <% (entity.children || []).filter(x => x.stereotype !== 'button').forEach(child => { %>
+    <% if(child.stereotype === 'table') { %>
+      <%= child.name %>: this.fb.array([]),
+    <% } else { %>
+      '<%= child.name %>': ['', Validators.required],
+    <% } %>
     <% }) %>
     });
   }
 
   protected run(action: string) {
     const data = this.form.getRawValue();
-    this.http.post(`${environment.api.url}/${action}`, data).subscribe((res) => this.response = res);
+    this.http.post(`${environment.api.url}/${action}`, data).subscribe((res: any) => this.response = res);
   }
 
   private loadData() {
 <% (entity.children || []).filter(x => x.stereotype).forEach(function (child, i) { %>
   <% if(child.links.informationFLow.length && child.links.informationFLow[0].end === child) {%>
     <% var elementRefPath = child.links.informationFLow[0].start.pathFromRoot %>
-    this.http.post(`${environment.api.url}/<%= elementRefPath.length ? utils.kebabCase(elementRefPath.slice(0, -1)) : elementRefPath %>`, {})
-      .subscribe((res: any) => this.form.patchValue({ <%= child.name %>: res }));
+    this.http.post(`${environment.api.url}/<%= elementRefPath.length ? utils.kebabCase(elementRefPath) : elementRefPath %>`, {})
+      .subscribe((res: any) => <% if(child.stereotype === 'table') { %>this.form.setControl('<%= child.name %>', this.fb.array(res.map((x: any) => this.fb.group(x))))<% } else { %>this.form.patchValue({ <%= child.name %>: res })<% } %>);
   <% } %>
 <% }) %>
   }

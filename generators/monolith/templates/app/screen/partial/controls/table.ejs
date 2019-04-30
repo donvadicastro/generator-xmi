@@ -1,5 +1,5 @@
-<label for="<%= entity.alias || entity.name %>-edit"><%= entity.properties.get('label') || entity.name %></label>
-<table class="table" formControlName="<%= entity.alias || entity.name %>">
+<label><%= entity.properties.get('label') || entity.name %></label>
+<table class="table">
     <thead class="thead-dark">
         <tr>
         <% (entity.children || []).forEach(x => { %>
@@ -7,14 +7,14 @@
         <% }) %>
         </tr>
     </thead>
-    <tbody>
-        <tr>
+    <tbody formArrayName="<%= entity.name %>">
+        <tr *ngFor="let item of form.get('<%= entity.name %>').controls; let i = index;" [formGroupName]="i">
         <% (entity.children || []).forEach(x => { %>
-            <td>
-            <% build(x, (controlName, childEntity) => { %>
-                <%- include(controlName, {entity: childEntity, build: build}) -%>
-            <% }) %>
-            </td>
+        <% if(x.stereotype === 'label') { %>
+            <td>{{ form.get('<%= entity.name %>').value[i].<%= x.name %> }}</td>
+        <% } else { %>
+            <td><input formControlName="<%= x.name %>"/></td>
+        <%} %>
         <% }) %>
         </tr>
     </tbody>
