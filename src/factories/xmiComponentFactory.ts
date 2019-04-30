@@ -23,6 +23,7 @@ import {get} from 'object-path';
 import {xmiComment} from "../entities/xmiComment";
 import {xmiComponent} from "../entities/xmiComponent";
 import {xmiActor} from "../entities/xmiActor";
+import {xmiBoundary} from "../entities/useCases/xmiBoundary";
 
 const assert = require('assert');
 
@@ -75,7 +76,7 @@ export class xmiComponentFactory {
                 else if(element instanceof xmiClass) {
                     element.refresh(raw, <xmiPackage>parent);
                 }
-                else if(element instanceof xmiMessageEndpoint || element instanceof xmiActor) {
+                else if(element instanceof xmiMessageEndpoint || element instanceof xmiActor || element instanceof xmiBoundary) {
                     //no actions
                 }
                 // Collaboration as a class can happens when linked to another diagram
@@ -138,6 +139,10 @@ export class xmiComponentFactory {
 
             case 'uml:UseCase':
                 element = element || new xmiUseCase(raw, parent);
+                break;
+
+            case 'uml:Boundary':
+                element = new xmiBoundary(raw, <xmiPackage>parent);
                 break;
 
             case 'uml:Lifeline':
