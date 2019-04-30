@@ -12,9 +12,11 @@
         <% (entity.children || []).forEach(x => { %>
         <% if(x.stereotype === 'label') { %>
             <td>{{ form.get('<%= entity.name %>').value[i].<%= x.name %> }}</td>
-        <% } else { %>
-            <td><input formControlName="<%= x.name %>"/></td>
-        <%} %>
+        <% } else if(x.stereotype === 'button') { %>
+                <td><button class="btn btn-primary"><%= x.properties.get('label') || x.name %></button></td>
+        <%} else { %>
+                <td><input formControlName="<%= x.name %>"/></td>
+        <% } %>
         <% }) %>
         </tr>
     </tbody>

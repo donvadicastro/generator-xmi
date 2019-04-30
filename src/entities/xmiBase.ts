@@ -36,6 +36,10 @@ export default class xmiBase {
         return pathParts.length ? pathParts.join('/') : '';
     }
 
+    getPathFromRootWithModifier(modifier: (input: string) => string) {
+        return this.pathFromRoot.split('/').map(x => modifier(x)).join('/');
+    }
+
     getRelativePath(element: xmiBase) {
         return this.path.map(x => '..').join('/') + '/' +
             element.path.slice(0, element.path.length - 1).reverse().map(x => x.name).join('/');

@@ -43,8 +43,8 @@ export class <%= entity.name %>ScreenComponent {
   private loadData() {
 <% (entity.children || []).filter(x => x.stereotype).forEach(function (child, i) { %>
   <% if(child.links.informationFLow.length && child.links.informationFLow[0].end === child) {%>
-    <% var elementRefPath = child.links.informationFLow[0].start.pathFromRoot %>
-    this.http.post(`${environment.api.url}/<%= elementRefPath.length ? utils.kebabCase(elementRefPath) : elementRefPath %>`, {})
+    <% var elementRefPath = child.links.informationFLow[0].start.elementRef.getPathFromRootWithModifier(utils.kebabCase) %>
+    this.http.post(`${environment.api.url}/<%= elementRefPath %>`, {})
       .subscribe((res: any) => <% if(child.stereotype === 'table') { %>this.form.setControl('<%= child.name %>', this.fb.array(res.map((x: any) => this.fb.group(x))))<% } else { %>this.form.patchValue({ <%= child.name %>: res })<% } %>);
   <% } %>
 <% }) %>
