@@ -1,7 +1,7 @@
 <% (entity.provided || []).forEach(function (value) { %>
     //#region <%= value.name %>Contract implementation
 
-    <% (value.ref.attributes || []).forEach(function (attribute) { %>
+    <% (value.ref.attributes || []).filter(x => (entity.attributes || []).map(y => y.name).indexOf(x.name) === -1).forEach(function (attribute) { %>
     /**
     * <%= attribute.name %> description.
     */
@@ -11,7 +11,7 @@
     <% }) %>
 
 
-    <% (value.ref.operations || []).forEach(function (operation) { %>
+    <% (value.ref.operations || []).filter(x => (entity.operations || []).map(y => y.name).indexOf(x.name) === -1).forEach(function (operation) { %>
     /**
     * <%= operation.name %> description.
     */

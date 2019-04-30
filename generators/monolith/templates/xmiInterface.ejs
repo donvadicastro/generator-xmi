@@ -37,7 +37,7 @@ export interface <%= entity.name %>Contract {
   <% } %>
 
   //# region Message conditions
-  <% Object.keys(entity.conditions).forEach(x => entity.conditions[x].forEach(y => { %>
+  <% entity.conditions && Object.keys(entity.conditions).forEach(x => entity.conditions[x].forEach(y => { %>
     '<%- y %>'(state: any): boolean;
   <% })) %>
   //# endregion
