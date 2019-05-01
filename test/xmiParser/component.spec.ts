@@ -30,21 +30,14 @@ describe('xmiParser', () => {
 
             // in
             expect(c1.required).not.toBeNull();
-
-            if(c1.required != null) {
-                expect(c1.required.length).toBe(1);
-                expect(c1.required[0].name).toBe('in');
-                expect(c1.required[0].ref).toBe((<xmiPackage>entities[3]).children[0]); //Contracts -> In
-            }
+            expect(c1.required.length).toBe(1);
+            expect(c1.required[0].name).toBe('in');
+            expect(c1.required[0].typeRef).toBe((<xmiPackage>entities[5]).children[0]); //Contracts -> In
 
             // out
-            expect(c1.provided).not.toBeNull();
-
-            if(c1.provided != null) {
-                expect(c1.provided.length).toBe(2);
-                expect(c1.provided[0].name).toBe('out');
-                expect(c1.provided[0].ref).toBe((<xmiPackage>entities[3]).children[1]); //Contracts -> Out
-            }
+            expect(c1.provided.length).toBe(1);
+            expect(c1.provided[0].name).toBe('out');
+            expect(c1.provided[0].typeRef).toBe((<xmiPackage>entities[5]).children[1]); //Contracts -> Out
         });
     });
 
@@ -80,16 +73,18 @@ describe('xmiParser', () => {
         it('Verify component realize', () => {
             expect(dep1.required).toEqual([]);
             expect(dep1.provided.length).toBe(1);
-            expect(dep1.provided[0].ref).toBe(classes[2]);
+            expect(dep1.provided[0].typeRef).toBe(classes[2]);
+            expect(dep1.provided[0].linkRef.owner).toBe(dep1);
 
             expect(dep2.required).toEqual([]);
             expect(dep2.provided.length).toBe(1);
-            expect(dep2.provided[0].ref).toBe(classes[1]);
+            expect(dep2.provided[0].typeRef).toBe(classes[1]);
+            expect(dep2.provided[0].linkRef.owner).toBe(dep2);
 
             expect(root.provided).toEqual([]);
             expect(root.required.length).toBe(2);
-            expect(root.required[0].ref).toBe(classes[1]);
-            expect(root.required[1].ref).toBe(classes[2]);
+            expect(root.required[0].typeRef).toBe(classes[1]);
+            expect(root.required[1].typeRef).toBe(classes[2]);
         });
     });
 });

@@ -24,6 +24,7 @@ import {xmiComment} from "../entities/xmiComment";
 import {xmiComponent} from "../entities/xmiComponent";
 import {xmiActor} from "../entities/xmiActor";
 import {xmiBoundary} from "../entities/useCases/xmiBoundary";
+import {xmiProvided} from "../entities/component/xmiProvided";
 
 const assert = require('assert');
 
@@ -87,7 +88,7 @@ export class xmiComponentFactory {
                 break;
 
             case 'uml:Interface':
-                element = new xmiInterface(raw, <xmiPackage>parent);
+                element = element ? (<xmiInterface>element).refresh(raw, <xmiPackage>parent) : new xmiInterface(raw, <xmiPackage>parent);
                 break;
 
             case 'uml:Package':
@@ -173,8 +174,13 @@ export class xmiComponentFactory {
                 element = new xmiComment(raw, parent);
                 break;
 
+            case 'uml:ProvidedInterface':
+            case 'uml:RequiredInterface':
+                element = element ? (<xmiInOut>element).refresh(raw, <xmiPackage>parent) : new xmiInOut(raw, <xmiPackage>parent);
+                break;
+
             default:
-                element = new xmiBase(raw, parent);
+                element = element || new xmiBase(raw, parent);
                 break;
 
         }
@@ -220,9 +226,9 @@ export class xmiComponentFactory {
         return connector;
     }
 
-    static registerProvide(raw: any, register: xmiBase) {
-        const provide = new xmiInOut(raw);
-        this.instance._dependencyHash[provide.name] = register;
+    static registerProvide(raw: any, register: xmiComponent) {
+        const provide = new xmiProvided(raw, register);
+        this.instance._dependencyHash[(<xmiInOut>provide.linkRef).name] = register;
 
         return provide;
     }
@@ -243,12 +249,8 @@ export class xmiComponentFactory {
      * @param {(element: xmiBase) => {}} callback executing when key resolved
      */
     static getByKeyDeffered(source: any, property: string, key: string, callback?: (element: xmiBase) => void) {
-        source[property] = this.getByKey(key);
-
-        if (!source[property]) {
-            this.instance.idHashDeffered[key] || (this.instance.idHashDeffered[key] = []);
-            this.instance.idHashDeffered[key].push({source: source, property: property, callback: callback});
-        }
+        this.instance.idHashDeffered[key] || (this.instance.idHashDeffered[key] = []);
+        this.instance.idHashDeffered[key].push({source: source, property: property, callback: callback});
     }
 
     /**

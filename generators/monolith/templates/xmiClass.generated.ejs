@@ -9,7 +9,7 @@ export abstract class <%= entity.name %>Base extends <%- include('partial/class/
 
   constructor(
   <% (entity.required || []).map(function (value, i, list) { %>
-    protected <%= value.ref.name %>: <%= value.ref.name %>Contract <% if(i < list.length) { %>,<% } %>
+    protected <%= value.typeRef.name %>: <%= value.typeRef.name %>Contract <% if(i < list.length) { %>,<% } %>
   <% }) %>) {
     super();
   }

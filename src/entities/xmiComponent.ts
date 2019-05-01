@@ -1,14 +1,15 @@
 import {xmiClass} from "./xmiClass";
 import {xmiPackage} from "./xmiPackage";
-import {xmiInOut} from "./component/xmiInOut";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {Reference} from "../types/reference";
 import {xmiInterface} from "./xmiInterface";
 import xmiBase from "./xmiBase";
+import {xmiProvided} from "./component/xmiProvided";
+import {xmiRequired} from "./component/xmiRequired";
 
 export class xmiComponent extends xmiClass {
-    provided: xmiInOut[] = [];
-    required: xmiInOut[] = [];
+    provided: xmiProvided[] = [];
+    required: xmiRequired[] = [];
 
     constructor(raw: any, parent?: xmiPackage) {
         super(raw, parent);
@@ -31,7 +32,7 @@ export class xmiComponent extends xmiClass {
         }
 
         if(raw.required) {
-            this.required = raw.required.map((x: any) => new xmiInOut(x));
+            this.required = raw.required.map((x: any) => new xmiRequired(x, this));
         }
     }
 
@@ -40,9 +41,9 @@ export class xmiComponent extends xmiClass {
 
         this.provided.forEach(value => {
             if(value.name) {
-                imports['../' + this.getRelativePath(value.ref) + '/contracts/' + value.name] = value.name + 'Contract';
+                imports['../' + this.getRelativePath(<xmiInterface>value.typeRef) + '/contracts/' + value.name] = value.name + 'Contract';
 
-                const ref = <xmiInterface>value.ref;
+                const ref = <xmiInterface>value.typeRef;
                 (ref.attributes || []).filter(x => x.typeRef).forEach(attribute => {
                     const typeRef = <xmiBase>attribute.typeRef;
                     imports['../' + this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.name  + 'Contract';
@@ -51,7 +52,7 @@ export class xmiComponent extends xmiClass {
         });
 
         this.required.forEach(value => {
-            imports['../' + this.getRelativePath(value.ref) + '/contracts/' + value.name] = value.name + 'Contract';
+            imports['../' + this.getRelativePath(<xmiInterface>value.typeRef) + '/contracts/' + value.name] = value.name + 'Contract';
         });
 
         return imports;

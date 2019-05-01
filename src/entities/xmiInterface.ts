@@ -46,7 +46,9 @@ export class xmiInterface extends xmiBase {
         this.refresh(raw, parent);
     }
 
-    refresh(raw: any, parent?: xmiPackage) {
+    refresh(raw: any, parent?: xmiPackage): this {
+        super.refreshBase(raw, parent);
+
         if(raw.ownedAttribute) {
             this.attributes = raw.ownedAttribute
                 .map((x: any) => <xmiAttribute>xmiComponentFactory.get(x, this))
@@ -68,6 +70,8 @@ export class xmiInterface extends xmiBase {
         if(raw.generalization) {
             this.generalization = new xmiGeneralization(get(raw, 'generalization.0'), this);
         }
+
+        return this;
     }
 
     toConsole() {

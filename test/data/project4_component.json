@@ -36,6 +36,15 @@
                   "name": "Components",
                   "visibility": "public"
                 },
+                "ownedComment": [
+                  {
+                    "$": {
+                      "xmi:type": "uml:Comment",
+                      "xmi:id": "EAID_2129EC14_9A0D_4216_ADA1_CF6B3E0DEC00",
+                      "body": "Interfaces"
+                    }
+                  }
+                ],
                 "packagedElement": [
                   {
                     "$": {
@@ -68,12 +77,6 @@
                           "xmi:id": "EAID_D73BCA68_EA3B_47bf_8E31_138C6D9942CA",
                           "xmi:idref": "EAID_9145DC28_1CD5_411e_AA15_205E3EB310F5",
                           "name": "Out"
-                        }
-                      },
-                      {
-                        "$": {
-                          "xmi:id": "EAID_316563C3_6B0D_4342_BA49_FDAC948B08DD",
-                          "name": "Out2"
                         }
                       }
                     ],
@@ -171,6 +174,52 @@
                           "xmi:idref": "EAID_9145DC28_1CD5_411e_AA15_205E3EB310F5",
                           "name": "Out"
                         }
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Activity",
+                      "xmi:id": "EAID_05E82D6A_1DC2_4b75_B6E3_71BF447D8CF3",
+                      "name": "Activity1",
+                      "visibility": "public",
+                      "isReadOnly": "false",
+                      "isSingleExecution": "false"
+                    }
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Activity",
+                      "xmi:id": "EAID_AC000001_E394_4112_BBAB_BCB78D2E527B",
+                      "name": "EA_Activity1",
+                      "visibility": "public"
+                    },
+                    "node": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:CallOperationAction",
+                          "xmi:id": "EAID_9B7DFC85_9676_4266_9E6E_33B90CAE8B93",
+                          "name": "out_fn",
+                          "visibility": "public"
+                        },
+                        "operation": [
+                          {
+                            "$": {
+                              "xmi:idref": "EAID_1917CBB1_8101_4a7b_AE1E_79DAD4F21B8A"
+                            }
+                          }
+                        ],
+                        "target": [
+                          {
+                            "$": {
+                              "xmi:type": "uml:InputPin",
+                              "xmi:id": "EAID_66554BB9_276F_4be6_A31A_992AB48EEAFF",
+                              "name": "target",
+                              "visibility": "public",
+                              "ordering": "FIFO"
+                            }
+                          }
+                        ]
                       }
                     ]
                   },
@@ -486,6 +535,7 @@
                             "$": {
                               "type": "int",
                               "collection": "false",
+                              "static": "0",
                               "duplicates": "0",
                               "changeability": "changeable"
                             }
@@ -790,76 +840,6 @@
               },
               {
                 "$": {
-                  "xmi:idref": "EAID_316563C3_6B0D_4342_BA49_FDAC948B08DD",
-                  "xmi:type": "uml:ProvidedInterface",
-                  "name": "Out2",
-                  "scope": "public"
-                },
-                "model": [
-                  {
-                    "$": {
-                      "package": "EAPK_A50ED4E6_E394_4112_BBAB_BCB78D2E527B",
-                      "owner": "EAID_5A617DAC_FD5A_474f_ACA5_12329F9347EF",
-                      "tpos": "0",
-                      "ea_localid": "36",
-                      "ea_eleType": "element"
-                    }
-                  }
-                ],
-                "properties": [
-                  {
-                    "$": {
-                      "isSpecification": "false",
-                      "sType": "ProvidedInterface",
-                      "nType": "0",
-                      "scope": "public"
-                    }
-                  }
-                ],
-                "project": [
-                  {
-                    "$": {
-                      "author": "vadim",
-                      "version": "1.0",
-                      "phase": "1.0",
-                      "created": "2018-04-30 20:43:16",
-                      "modified": "2018-04-30 20:43:56",
-                      "complexity": "1",
-                      "status": "Proposed"
-                    }
-                  }
-                ],
-                "code": [
-                  {
-                    "$": {
-                      "gentype": "<none>"
-                    }
-                  }
-                ],
-                "style": [
-                  {
-                    "$": {
-                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
-                    }
-                  }
-                ],
-                "tags": [
-                  ""
-                ],
-                "xrefs": [
-                  ""
-                ],
-                "extendedProperties": [
-                  {
-                    "$": {
-                      "tagged": "0",
-                      "package_name": "Components"
-                    }
-                  }
-                ]
-              },
-              {
-                "$": {
                   "xmi:idref": "EAID_BAB9B6C0_751A_41dc_B0EF_5A2D6ED5F5C9",
                   "xmi:type": "uml:Component",
                   "name": "C2",
@@ -1076,6 +1056,289 @@
               },
               {
                 "$": {
+                  "xmi:idref": "EAID_05E82D6A_1DC2_4b75_B6E3_71BF447D8CF3",
+                  "xmi:type": "uml:Activity",
+                  "name": "Activity1",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_A50ED4E6_E394_4112_BBAB_BCB78D2E527B",
+                      "tpos": "0",
+                      "ea_localid": "40",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Activity",
+                      "nType": "0",
+                      "scope": "public",
+                      "isAbstract": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-05-01 23:11:01",
+                      "modified": "2018-05-01 23:11:01",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Components"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_9B7DFC85_9676_4266_9E6E_33B90CAE8B93",
+                  "xmi:type": "uml:Action",
+                  "name": "out_fn",
+                  "scope": "public",
+                  "opClassifier": "{1917CBB1-8101-4a7b-AE1E-79DAD4F21B8A}"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_A50ED4E6_E394_4112_BBAB_BCB78D2E527B",
+                      "tpos": "0",
+                      "ea_localid": "42",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Action",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-01-28 13:09:55",
+                      "modified": "2019-01-28 13:09:55",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  {
+                    "$": {
+                      "value": "$XREFPROP=$XID={6481E7E1-749D-4498-A49F-910BEAFE66F8}$XID;$NAM=MOFProps$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$BEH=target$BEH;$PAR=0$PAR;$DES={66554BB9-276F-4be6-A31A-992AB48EEAFF}$DES;$CLT={9B7DFC85-9676-4266-9E6E-33B90CAE8B93}$CLT;$SUP=<none>$SUP;$ENDXREF;$XREFPROP=$XID={9D7F3F64-3F02-4eb8-B541-5755D9A53AF1}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=kind@ENDNAME;@TYPE=ActionKind@ENDTYPE;@VALU=CallOperation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={9B7DFC85-9676-4266-9E6E-33B90CAE8B93}$CLT;$SUP=<none>$SUP;$ENDXREF;"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Components"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_66554BB9_276F_4be6_A31A_992AB48EEAFF",
+                  "xmi:type": "uml:ActionPin",
+                  "name": "target",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_A50ED4E6_E394_4112_BBAB_BCB78D2E527B",
+                      "owner": "EAID_9B7DFC85_9676_4266_9E6E_33B90CAE8B93",
+                      "tpos": "0",
+                      "ea_localid": "43",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "ActionPin",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-01-28 13:09:55",
+                      "modified": "2019-01-28 13:09:55",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Components"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_2129EC14_9A0D_4216_ADA1_CF6B3E0DEC00",
+                  "xmi:type": "uml:Note",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_A50ED4E6_E394_4112_BBAB_BCB78D2E527B",
+                      "tpos": "0",
+                      "ea_localid": "46",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "documentation": "Interfaces",
+                      "isSpecification": "false",
+                      "sType": "Note",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2019-01-28 13:15:33",
+                      "modified": "2019-01-28 13:15:44",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "<none>"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Components"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
                   "xmi:idref": "EAPK_CBE88321_EAD7_49fa_94C2_735F7F5AE3D9",
                   "xmi:type": "uml:Package",
                   "name": "Contracts",
@@ -1239,8 +1502,7 @@
                   {
                     "$": {
                       "tagged": "0",
-                      "package_name": "Contracts",
-                      "ea_classified": "{7A7FA9AE-C1F5-47c0-A442-B909C0029E4F},{AC6F760F-98ED-4db0-8AF5-9B7DCF1D81CF}"
+                      "package_name": "Contracts"
                     }
                   }
                 ],
@@ -1415,8 +1677,7 @@
                   {
                     "$": {
                       "tagged": "0",
-                      "package_name": "Contracts",
-                      "ea_classified": "{D73BCA68-EA3B-47bf-8E31-138C6D9942CA},{3996D3A4-6714-4533-9C4E-860F272769C5}"
+                      "package_name": "Contracts"
                     }
                   }
                 ],
@@ -1620,28 +1881,28 @@
                       "author": "vadim",
                       "version": "1.0",
                       "created": "2018-04-30 12:08:04",
-                      "modified": "2018-04-30 22:09:05"
+                      "modified": "2019-05-01 23:44:53"
                     }
                   }
                 ],
                 "style1": [
                   {
                     "$": {
-                      "value": "ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=1;DocSize.cx=827;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"
+                      "value": "ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=1;DocSize.cx=827;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AllDockable=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"
                     }
                   }
                 ],
                 "style2": [
                   {
                     "$": {
-                      "value": "ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=9036C3F1;"
+                      "value": "ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;MDGDgm=;STBLDgm=;ShowNotes=0;OPTIONS_84830896=InfoView=7:;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=5B0A4F89;"
                     }
                   }
                 ],
                 "swimlanes": [
                   {
                     "$": {
-                      "value": "locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;cls=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"
+                      "value": "locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;hh=0;cls=0;bw=0;hli=0;SwimlaneFont=lfh:-21,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"
                     }
                   }
                 ],
@@ -1660,57 +1921,73 @@
                     "element": [
                       {
                         "$": {
-                          "geometry": "Left=560;Top=132;Right=600;Bottom=145;",
-                          "subject": "EAID_AC6F760F_98ED_4db0_8AF5_9B7DCF1D81CF",
+                          "geometry": "Left=432;Top=344;Right=522;Bottom=434;",
+                          "subject": "EAID_9145DC28_1CD5_411e_AA15_205E3EB310F5",
                           "seqno": "1",
-                          "style": "DUID=AC239DE2;LBL=CX=9:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"
+                          "style": "DUID=A3A47650;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=314;Top=343;Right=404;Bottom=433;",
+                          "subject": "EAID_D065E890_BEA6_4c68_8B61_F3252E92E587",
+                          "seqno": "2",
+                          "style": "DUID=84830896;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=194;Top=321;Right=544;Bottom=454;",
+                          "subject": "EAID_2129EC14_9A0D_4216_ADA1_CF6B3E0DEC00",
+                          "seqno": "3",
+                          "style": "DUID=A916BF72;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=613;Top=132;Right=653;Bottom=145;",
+                          "subject": "EAID_AC6F760F_98ED_4db0_8AF5_9B7DCF1D81CF",
+                          "seqno": "4",
+                          "style": "DUID=AC239DE2;LBL=CX=8:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"
                         }
                       },
                       {
                         "$": {
                           "geometry": "Left=412;Top=135;Right=452;Bottom=148;",
                           "subject": "EAID_3996D3A4_6714_4533_9C4E_860F272769C5",
-                          "seqno": "2",
-                          "style": "DUID=EA4C28B8;LBL=CX=17:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"
+                          "seqno": "5",
+                          "style": "DUID=EA4C28B8;LBL=CX=15:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"
                         }
                       },
                       {
                         "$": {
-                          "geometry": "Left=451;Top=112;Right=561;Bottom=172;",
+                          "geometry": "Left=451;Top=112;Right=614;Bottom=251;",
                           "subject": "EAID_BAB9B6C0_751A_41dc_B0EF_5A2D6ED5F5C9",
-                          "seqno": "3",
+                          "seqno": "6",
                           "style": "DUID=8E09CE2F;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"
                         }
                       },
                       {
                         "$": {
-                          "geometry": "Left=219;Top=151;Right=259;Bottom=164;",
-                          "subject": "EAID_316563C3_6B0D_4342_BA49_FDAC948B08DD",
-                          "seqno": "4",
-                          "style": "DUID=A4D24597;LBL=CX=23:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"
-                        }
-                      },
-                      {
-                        "$": {
-                          "geometry": "Left=219;Top=114;Right=259;Bottom=127;",
+                          "geometry": "Left=300;Top=114;Right=340;Bottom=127;",
                           "subject": "EAID_D73BCA68_EA3B_47bf_8E31_138C6D9942CA",
-                          "seqno": "5",
-                          "style": "DUID=77B2A92C;LBL=CX=23:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"
-                        }
-                      },
-                      {
-                        "$": {
-                          "geometry": "Left=71;Top=125;Right=111;Bottom=138;",
-                          "subject": "EAID_7A7FA9AE_C1F5_47c0_A442_B909C0029E4F",
-                          "seqno": "6",
-                          "style": "DUID=B6AF5CA4;LBL=CX=9:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"
-                        }
-                      },
-                      {
-                        "$": {
-                          "geometry": "Left=110;Top=107;Right=220;Bottom=177;",
-                          "subject": "EAID_5A617DAC_FD5A_474f_ACA5_12329F9347EF",
                           "seqno": "7",
+                          "style": "DUID=77B2A92C;LBL=CX=15:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=71;Top=122;Right=111;Bottom=135;",
+                          "subject": "EAID_7A7FA9AE_C1F5_47c0_A442_B909C0029E4F",
+                          "seqno": "8",
+                          "style": "DUID=B6AF5CA4;LBL=CX=8:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=110;Top=107;Right=301;Bottom=253;",
+                          "subject": "EAID_5A617DAC_FD5A_474f_ACA5_12329F9347EF",
+                          "seqno": "9",
                           "style": "DUID=16E47982;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"
                         }
                       }
@@ -1752,7 +2029,7 @@
                 "style1": [
                   {
                     "$": {
-                      "value": "ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=1;DocSize.cx=827;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"
+                      "value": "ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=1;DocSize.cx=827;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AllDockable=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"
                     }
                   }
                 ],
@@ -1766,7 +2043,7 @@
                 "swimlanes": [
                   {
                     "$": {
-                      "value": "locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;cls=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"
+                      "value": "locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;hh=0;cls=0;bw=0;hli=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"
                     }
                   }
                 ],
@@ -1779,6 +2056,154 @@
                 ],
                 "extendedProperties": [
                   ""
+                ]
+              },
+              {
+                "$": {
+                  "xmi:id": "EAID_A746FCC7_33A2_4c93_8D47_B4A60B76E145"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_A50ED4E6_E394_4112_BBAB_BCB78D2E527B",
+                      "localID": "8",
+                      "owner": "EAPK_A50ED4E6_E394_4112_BBAB_BCB78D2E527B"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "Activities",
+                      "type": "Activity"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "created": "2018-05-01 23:10:09",
+                      "modified": "2018-05-01 23:12:22"
+                    }
+                  }
+                ],
+                "style1": [
+                  {
+                    "$": {
+                      "value": "ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=1;DocSize.cx=827;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AllDockable=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"
+                    }
+                  }
+                ],
+                "style2": [
+                  {
+                    "$": {
+                      "value": "ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=B2CF2172;"
+                    }
+                  }
+                ],
+                "swimlanes": [
+                  {
+                    "$": {
+                      "value": "locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;hh=0;cls=0;bw=0;hli=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"
+                    }
+                  }
+                ],
+                "matrixitems": [
+                  {
+                    "$": {
+                      "value": "locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  ""
+                ]
+              },
+              {
+                "$": {
+                  "xmi:id": "EAID_A99FC49C_A000_44c9_9147_0FEE1CD1D399"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_A50ED4E6_E394_4112_BBAB_BCB78D2E527B",
+                      "localID": "9",
+                      "owner": "EAPK_A50ED4E6_E394_4112_BBAB_BCB78D2E527B"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "ClassDiagram",
+                      "type": "Logical"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "created": "2019-01-28 13:09:25",
+                      "modified": "2019-01-28 13:09:55"
+                    }
+                  }
+                ],
+                "style1": [
+                  {
+                    "$": {
+                      "value": "ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=1;DocSize.cx=827;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AllDockable=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"
+                    }
+                  }
+                ],
+                "style2": [
+                  {
+                    "$": {
+                      "value": "ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=3A23AEE0;"
+                    }
+                  }
+                ],
+                "swimlanes": [
+                  {
+                    "$": {
+                      "value": "locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;hh=0;cls=0;bw=0;hli=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"
+                    }
+                  }
+                ],
+                "matrixitems": [
+                  {
+                    "$": {
+                      "value": "locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  ""
+                ],
+                "elements": [
+                  {
+                    "element": [
+                      {
+                        "$": {
+                          "geometry": "Left=388;Top=112;Right=458;Bottom=147;",
+                          "subject": "EAID_9B7DFC85_9676_4266_9E6E_33B90CAE8B93",
+                          "seqno": "1",
+                          "style": "DUID=0D25193B;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=10;Top=10;Right=100;Bottom=100;",
+                          "subject": "EAID_D065E890_BEA6_4c68_8B61_F3252E92E587",
+                          "seqno": "2",
+                          "style": "DUID=E553C698;"
+                        }
+                      }
+                    ]
+                  }
                 ]
               }
             ]

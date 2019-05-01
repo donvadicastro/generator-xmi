@@ -81,6 +81,10 @@ export default class xmiBase {
         this.comments = get(raw, 'ownedComment', []).map(x => <xmiComment>xmiComponentFactory.get(x));
     }
 
+    refreshBase(raw: any, parent?: xmiPackage | xmiBase) {
+        this.parent = this.parent || parent;
+    }
+
     toConsole(): any | string {
         return `[${this.type}] ${this.name} (${this.id})`;
     }
