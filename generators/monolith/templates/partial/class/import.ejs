@@ -8,6 +8,8 @@ import {JoinTable} from "typeorm/decorator/relations/JoinTable";
 import {PrimaryColumn} from "typeorm/decorator/columns/PrimaryColumn";
 
 import {ComponentBase} from '../<%= entity.getRelativeRoot() %>/base/componentBase';
+import {FlowStateType} from '../<%= entity.getRelativeRoot() %>/types/flowStateType';
+
 import {<%= entity.name %>Contract} from '../../contracts/<%= entity.name %>';
 
 <% entity.referencesAsList.forEach(reference => {%>

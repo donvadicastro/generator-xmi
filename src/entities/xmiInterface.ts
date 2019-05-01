@@ -30,6 +30,12 @@ export class xmiInterface extends xmiBase {
                 imports['../' + this.getRelativePath(operation.returnParameter.typeRef) + '/contracts/' + operation.returnParameter.typeRef.name] =
                     operation.returnParameter.typeRef.name + 'Contract';
             }
+
+            //Inject operation input parameter types
+            operation.inputParameters.forEach(param => {
+                param.typeRef && (imports['../' + this.getRelativePath(param.typeRef) + '/contracts/' + param.typeRef.name] =
+                        param.typeRef.name + 'Contract');
+            });
         });
 
         return imports;

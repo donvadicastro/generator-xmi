@@ -34,9 +34,9 @@ export class XmiGenerator extends XmiGeneratorBase {
 
     end() {
         this.log('\r\n\r\nProject generated successfully.\r\nUpdate configuration to start using application:');
-        this.log(chalk.green('Mongo connection:         ') + `${this.options.destination}/ormconfig.json`);
-        this.log(chalk.green('JIRA credentials:         ') + `${this.options.destination}/package.json`);
-        this.log(chalk.green('Auth server connection:   ') + `${this.options.destination}/package.json`);
+        this.log(chalk.green('DB connection:            ') + `${this.options.destination}/package.json -> "db" section`);
+        this.log(chalk.green('JIRA credentials:         ') + `${this.options.destination}/package.json -> "jira" section`);
+        this.log(chalk.green('Auth server connection:   ') + `${this.options.destination}/package.json -> "keycloak" section`);
     }
 
     _generate(localPath: string | null, pkg: any) {
@@ -104,6 +104,9 @@ export class XmiGenerator extends XmiGeneratorBase {
                 const apiRouterFileName = this.destinationPath(`${this.options.destination}/api/server/routes/${localPath}/${x.name}.router.ts`);
                 const appComponentRootPath = this.destinationPath(`${this.options.destination}/app/pages/administration/${localPath}`);
 
+                const editComponentFileName = `${appComponentRootPath}/${x.name}/edit/component.ts`;
+                const listComponentFileName = `${appComponentRootPath}/${x.name}/list/component.ts`;
+
                 this.fs.copyTpl(this.templatePath('xmiInterface.ejs'), interfaceFileName, options);
                 this.generatedFiles.push(interfaceFileName);
 
@@ -119,15 +122,18 @@ export class XmiGenerator extends XmiGeneratorBase {
                 this.fs.copyTpl(this.templatePath('api/class/router.ejs'), apiRouterFileName, options);
 
                 //app
-                this.fs.copyTpl(this.templatePath('app/edit/component.ts.ejs'), `${appComponentRootPath}/${x.name}/edit/component.ts`, options);
+                this.fs.copyTpl(this.templatePath('app/edit/component.ts.ejs'), editComponentFileName, options);
                 this.fs.copyTpl(this.templatePath('app/edit/component.html.ejs'), `${appComponentRootPath}/${x.name}/edit/component.html`, options);
                 this.fs.write(`${appComponentRootPath}/${x.name}/edit/component.sass`, '');
 
-                this.fs.copyTpl(this.templatePath('app/list/component.ts.ejs'), `${appComponentRootPath}/${x.name}/list/component.ts`, options);
+                this.fs.copyTpl(this.templatePath('app/list/component.ts.ejs'), listComponentFileName, options);
                 this.fs.copyTpl(this.templatePath('app/list/component.html.ejs'), `${appComponentRootPath}/${x.name}/list/component.html`, options);
                 this.fs.write(`${appComponentRootPath}/${x.name}/list/component.sass`, '');
 
                 this.generatedFiles.push(apiRouterFileName);
+                this.generatedFiles.push(editComponentFileName);
+                this.generatedFiles.push(listComponentFileName);
+
                 this.classes.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
             }
 
@@ -161,17 +167,20 @@ export class XmiGenerator extends XmiGeneratorBase {
                 const testFileDest = `${path}/test/screen_${x.name}.ts`;
                 const screenFileName = this.destinationPath(`${path}/screens/${x.name}.ts`);
                 const appComponentRootPath = this.destinationPath(`${this.options.destination}/app/pages/screens/${localPath}`);
+                const screenComponentFileName = `${appComponentRootPath}/${x.name}/component.ts`;
 
                 this.fs.copyTpl(this.templatePath('xmiScreen.ejs'), screenFileName, options);
                 this.fs.copyTpl(this.templatePath('test/xmiScreen.ejs'), this.destinationPath(testFileDest), options);
 
                 //edit form
-                this.fs.copyTpl(this.templatePath('app/screen/component.ts.ejs'), `${appComponentRootPath}/${x.name}/component.ts`, options);
+                this.fs.copyTpl(this.templatePath('app/screen/component.ts.ejs'), screenComponentFileName, options);
                 this.fs.copyTpl(this.templatePath('app/screen/component.html.ejs'), `${appComponentRootPath}/${x.name}/component.html`, options);
                 this.fs.write(`${appComponentRootPath}/${x.name}/component.sass`, '');
 
-                this.testFiles.push(testFileDest);
                 this.generatedFiles.push(screenFileName);
+                this.generatedFiles.push(screenComponentFileName);
+
+                this.testFiles.push(testFileDest);
                 this.screens.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
             }
 
