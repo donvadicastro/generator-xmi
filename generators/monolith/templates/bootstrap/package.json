@@ -19,7 +19,7 @@
 
     "app:ng": "ng",
     "app:start": "ng serve",
-    "app:build": "ng build",
+    "app:build": "ng build --outputPath=dist/app_compiled",
     "app:test": "ng test",
 
     "lint": "ng lint",
