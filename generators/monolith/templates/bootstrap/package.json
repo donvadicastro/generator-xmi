@@ -20,6 +20,7 @@
     "app:ng": "ng",
     "app:start": "ng serve",
     "app:build": "ng build --outputPath=dist/app_compiled",
+    "app:build:prod": "ng build --outputPath=dist/app_compiled --prod",
     "app:test": "ng test",
 
     "lint": "ng lint",
