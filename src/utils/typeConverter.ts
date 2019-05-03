@@ -56,4 +56,15 @@ export class TypeConverter {
 
         return value;
     }
+
+    public static getTypeAllowedValues(type: string): any[] {
+        let value: any[] = [];
+
+        switch(type) {
+            case 'boolean': value = [true, false]; break;
+            default: value = [];
+        }
+
+        return value;
+    }
 }

@@ -33,6 +33,6 @@ export default class Controller {
     }
 
     run(req: Request, res: Response): void {
-        this.flow.run(req.body).then((ret: any) => res.status(201).json(ret));
+        this.flow.run(req.body || {}).then((ret: any) => res.status(201).json(ret));
     }
 }

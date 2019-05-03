@@ -2,7 +2,7 @@
 id: string;
 
 <% (entity.attributes || []).forEach(function (attr) { %>
-    @Column('<%= attr.typeRef ? 'json' : attr.dbType %>')
+    @Column('<%= attr.typeRef ? (attr.isEnum ? 'smallint' : 'json') : attr.dbType %>')
     <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %>;
 <% }) %>
 

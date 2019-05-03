@@ -120,21 +120,17 @@ describe('Generators', () => {
                     /** 
                     * create description. 
                     */ 
-                    create(state: FlowStateType & { x: number, }): Promise<FlowStateType & {returns: void | null}> { 
-                        return new Promise((resolve, reject) => { 
-                            this.notifyComplete('team::create', state.start); 
-                            resolve({...<FlowStateType>state, ...{returns: null}}); 
-                        }); 
+                    async create(state: FlowStateType & { x: number, }, returns?: any): Promise<FlowStateType & {returns: void | null}> { 
+                        this.notifyComplete('team::create', state.start); 
+                        return {...<FlowStateType>state, ...{returns: returns}}; 
                     } 
                     
                     /** 
                     * getBaseLocation description. 
                     */ 
-                    getBaseLocation(state: FlowStateType & { }): Promise<FlowStateType & {returns: locationContract | null}> { 
-                        return new Promise((resolve, reject) => { 
-                            this.notifyComplete('team::getBaseLocation', state.start); 
-                            resolve({...<FlowStateType>state, ...{returns: null}}); 
-                        }); 
+                    async getBaseLocation(state: FlowStateType & { }, returns?: any): Promise<FlowStateType & {returns: locationContract | null}> { 
+                        this.notifyComplete('team::getBaseLocation', state.start); 
+                        return {...<FlowStateType>state, ...{returns: returns}}; 
                     }
                     `.normalizeSpace());
                 });

@@ -6,6 +6,7 @@ import {xmiPackage} from "./xmiPackage";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {xmiGeneralization} from "./connectors/xmiGeneralization";
 import {Reference} from "../types/reference";
+import {xmiEnumeration} from "./xmiEnumeration";
 
 const pascal = require('to-pascal-case');
 
@@ -20,7 +21,8 @@ export class xmiInterface extends xmiBase {
         //Inject attributes type
         this.attributes.forEach(attribute => {
             if(attribute.typeRef) {
-                imports['../' + this.getRelativePath(attribute.typeRef) + '/contracts/' + attribute.typeRef.name] = attribute.typeRef.name + 'Contract';
+                imports['../' + this.getRelativePath(attribute.typeRef) +
+                    (attribute.isEnum ? '/enums/' : '/contracts/') + attribute.typeRef.name] = attribute.typeRef.name + 'Contract';
             }
         });
 
@@ -78,7 +80,7 @@ export class xmiInterface extends xmiBase {
         const key: string = super.toConsole();
         const ret: any = {[key]: {}};
 
-        this.attributes.length && (ret[key].attributes = this.attributes.map(x => ({[x.name]: x.type})));
+        this.attributes.length && (ret[key].attributes = this.attributes.map(x => ({[x.name]: (x.typeRef ? `${x.typeRef.name}(${x.type})` : x.type)})));
         this.operations.length && (ret[key].operations = this.operations
             .reduce((prev: any, x) => {
                 const returnParameter = x.parameters.find(x => x.name === 'return');

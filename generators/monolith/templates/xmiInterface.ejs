@@ -1,5 +1,3 @@
-import {Promise} from 'es6-promise';
-
 <% entity.referencesAsList.forEach(reference => {%>
   import {<%= reference.name %>} from '<%= reference.path.substr(3) %>';
 <% }) %>
@@ -19,7 +17,7 @@ export interface <%= entity.name %>Contract {
     /**
     * <%= operation.name %> description.
     */
-    <%= operation.name %>(state: any): Promise<any>;
+    <%= operation.name %>(state: any, returns ? : any): Promise<any>;
   <% }) %>
 
   <% if(entity.hasLoop) { %>

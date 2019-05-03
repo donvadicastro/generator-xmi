@@ -12,6 +12,7 @@ export class XmiGeneratorBase extends (Generator as { new(args: any, opts: any):
     collaborationDiagrams: any[] = [];
     classes: any[] = [];
     screens: any[] = [];
+    enums: any[] = [];
 
     _bootstrap(extra: string[]) {
         if(!this.fs.exists(this.destinationPath(this.options.destination))) {

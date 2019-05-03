@@ -25,6 +25,7 @@ import {xmiComponent} from "../entities/xmiComponent";
 import {xmiActor} from "../entities/xmiActor";
 import {xmiBoundary} from "../entities/useCases/xmiBoundary";
 import {xmiProvided} from "../entities/component/xmiProvided";
+import {xmiEnumeration} from "../entities/xmiEnumeration";
 
 const assert = require('assert');
 
@@ -89,6 +90,10 @@ export class xmiComponentFactory {
 
             case 'uml:Interface':
                 element = element ? (<xmiInterface>element).refresh(raw, <xmiPackage>parent) : new xmiInterface(raw, <xmiPackage>parent);
+                break;
+
+            case 'uml:Enumeration':
+                element = new xmiEnumeration(raw, <xmiPackage>parent);
                 break;
 
             case 'uml:Package':
