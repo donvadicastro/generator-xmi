@@ -14,7 +14,7 @@ export class xmiParameter extends xmiBase {
     constructor(raw: any, parent: xmiBase) {
         super(raw, parent);
         this.type = raw.$.type;
-        this.isArray = TypeConverter.isArray(this.type);
+        this.isArray = TypeConverter.isArray(this.type) || this.name.endsWith('List');
 
         if(TypeConverter.isPrimititive(this.type)) {
             this.type = TypeConverter.convert(this.type)

@@ -38,9 +38,6 @@ export class XmiGenerator extends XmiGeneratorBase {
         this.log(chalk.green('DB connection:            ') + `${this.options.destination}/package.json -> "db" section`);
         this.log(chalk.green('JIRA credentials:         ') + `${this.options.destination}/package.json -> "jira" section`);
         this.log(chalk.green('Auth server connection:   ') + `${this.options.destination}/package.json -> "keycloak" section`);
-        this.log('');
-        this.log(chalk.green('Types:'));
-        this.enums.forEach(x => this.log(' - ' + x));
     }
 
     _generate(localPath: string | null, pkg: any) {
@@ -76,12 +73,8 @@ export class XmiGenerator extends XmiGeneratorBase {
                 const fileName = `${path}/enums/${x.name}.ts`;
                 const destFileName = this.destinationPath(fileName);
 
-                if(!this.fs.exists(destFileName)) {
-                    this.fs.copyTpl(this.templatePath('xmiEnumeration.ejs'), destFileName, options);
-                    this.generatedFiles.push(destFileName);
-                }
-
-                this.enums.push(fileName);
+                this.fs.copyTpl(this.templatePath('xmiEnumeration.ejs'), destFileName, options);
+                this.generatedFiles.push(destFileName);
             }
 
             else if (x instanceof xmiInstanceSpecification) {

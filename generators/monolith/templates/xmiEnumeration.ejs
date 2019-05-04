@@ -1,3 +1,3 @@
 export enum <%= entity.name %>Contract {
-
+    <%= entity.literals.map(literal => literal.toUpperCase() ).join(', ') %>
 }

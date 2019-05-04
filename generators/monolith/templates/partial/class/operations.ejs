@@ -4,7 +4,7 @@
     */
     async <%= operation.name %>(state: FlowStateType & {
             <% operation.inputParameters.forEach(x => { %>
-                <%= x.name %>: <%= x.typeRef ? `${x.typeRef.name}Contract` : x.type %>,
+                <%= x.name %>: <%= x.typeRef ? `${x.typeRef.name}Contract${x.isArray ? '[]' : ''}` : x.type %>,
             <% }) %>
         }, returns?: any): Promise<FlowStateType & {returns: <%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.name}Contract` : operation.returnParameter.type %><%= operation.isReturnArray ? '[]' : '' %> | null}> {
 
