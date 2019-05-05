@@ -1,6 +1,6 @@
 <% (entity.operations || []).forEach(function (operation) { %>
     /**
-    * <%= operation.name %> description.
+    * <%= (operation.description || `${operation.name} description`).replace(/\n/g, '\n* ') %>.
     */
     async <%= operation.name %>(state: FlowStateType & {
             <% operation.inputParameters.forEach(x => { %>

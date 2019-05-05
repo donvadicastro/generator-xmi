@@ -29,6 +29,7 @@ export class xmiOperation extends xmiBase {
 
     refresh(raw: any): this {
         this.name = this.name && camel(this.name);
+        this.description = this.description || get(raw, 'documentation.0.$.value');
         this.parameters = (raw.ownedParameter || []).map((x: any) => new xmiParameter(x, this));
 
         if(get(raw, ['type','0','$', 'returnarray']) === '1') {

@@ -1,8 +1,9 @@
 <%- include('partial/class/import', {entity: entity}) -%>
 
 /**
-* This file is auto-generated. Do not update it's content!
-*/
+ * This file is auto-generated. Do not update it's content!
+* <%= (entity.description || `${entity.name} description`).replace(/\n/g, '\n* ') %>.
+ */
 @Entity()
 export abstract class <%= entity.name %>Base extends <%- include('partial/class/extend', {entity: entity}) -%> {
   <%- include('partial/class/attributes', {entity: entity, orm: true}) -%>
