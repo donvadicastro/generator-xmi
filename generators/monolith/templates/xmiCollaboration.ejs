@@ -1,5 +1,9 @@
+<% const firstCmp = entity.messages && entity.messages.length && entity.messages[0].to.elementRef; %>
+<% const firstOperation = firstCmp && firstCmp.operations.find(x => x.name === entity.messages[0].operation.name); %>
 <%- include('partial/collaboration/import', {entity: entity}) -%>
-
+<% firstOperation && firstOperation.inputParameters.filter(x => x.typeRef).forEach(x => { %>
+    import {<%= x.typeRef.name %>Base} from '<%= entity.getRelativePath(x.typeRef) %>/components/generated/<%= x.typeRef.name %>.generated';
+<% }) %>
 
 export class <%= entity.name %> {
     <%- include('partial/collaboration/constructor', {entity: entity}) -%>
@@ -7,7 +11,11 @@ export class <%= entity.name %> {
     /**
     /* Execute process
     */
-    run(inputState: any) {
+    run(inputState: FlowStateType & {
+    <% firstOperation && firstOperation.inputParameters.forEach(x => { %>
+        <%= x.name %>: <%= x.typeRef ? `${x.typeRef.name}Base${x.isArray ? '[]' : ''}` : x.type %>,
+    <% }) %>
+    }, returns?: any) {
         let flowAsync = Promise.resolve(inputState);
 
         // Configure state storage

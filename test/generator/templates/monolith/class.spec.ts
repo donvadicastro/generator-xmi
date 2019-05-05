@@ -48,7 +48,7 @@ describe('Generators', () => {
 
                     it('check many to one relation', async () => {
                         const aircraft = <xmiClass>classes.children[0];
-                        const content = await ejs.renderFile(path.join(dir, 'attributes.ejs'), {entity: aircraft});
+                        let content = await ejs.renderFile(path.join(dir, 'attributes.ejs'), {entity: aircraft, orm: true});
 
                         expect(aircraft.name).toBe('aircraft');
                         expect(content.normalizeSpace()).toBe(`
@@ -57,49 +57,45 @@ describe('Generators', () => {
                         
                         @Column('varchar')
                         number: string;
+                    `.normalizeSpace());
+
+                        content = await ejs.renderFile(path.join(dir, 'links.ejs'), {entity: aircraft, orm: true});
+
+                        expect(aircraft.name).toBe('aircraft');
+                        expect(content.normalizeSpace()).toBe(`
                         
                         @ManyToMany(type => pilotBase)
-                        pilotRefList: pilotContract[];
+                        pilotRefList: pilotBase[];
                         
                         @ManyToOne(type => airlineBase, airline => airline.aircraftRefList)
-                        airlineRef: airlineContract;
+                        airlineRef: airlineBase;
                     `.normalizeSpace());
                     });
 
                     it('check one to many relation', async () => {
                         const airline = <xmiClass>classes.children[3];
-                        const content = await ejs.renderFile(path.join(dir, 'attributes.ejs'), {entity: airline});
+                        const content = await ejs.renderFile(path.join(dir, 'links.ejs'), {entity: airline, orm: true});
 
                         expect(airline.name).toBe('airline');
                         expect(content.normalizeSpace()).toBe(`
-                        @PrimaryGeneratedColumn()
-                        id: string; 
-                        
-                        @Column('varchar')
-                        name: string;
-                                           
+
                         @OneToMany(type => aircraftBase, aircraft => aircraft.airlineRef)
-                        aircraftRefList: aircraftContract[];
+                        aircraftRefList: aircraftBase[];
                         
                         @OneToOne(type => cityBase) 
-                        cityRef: cityContract;
+                        cityRef: cityBase;
                     `.normalizeSpace());
                     });
 
                     it('check one to one relation', async () => {
                         const city = <xmiClass>classes.children[5];
-                        const content = await ejs.renderFile(path.join(dir, 'attributes.ejs'), {entity: city});
+                        const content = await ejs.renderFile(path.join(dir, 'links.ejs'), {entity: city, orm: true});
 
                         expect(city.name).toBe('city');
                         expect(content.normalizeSpace()).toBe(`
-                        @PrimaryGeneratedColumn()
-                        id: string; 
-
-                        @Column('varchar')
-                        name: string;
                                                 
                         @OneToOne(type => airlineBase) 
-                        airlineRef: airlineContract;
+                        airlineRef: airlineBase;
                     `.normalizeSpace());
                     });
                 });
@@ -114,7 +110,7 @@ describe('Generators', () => {
                     const entities = (<xmiPackage>pkg.children[0]).children;
                     const team: xmiClass = <xmiClass>entities[9];
                     const location: xmiClass = <xmiClass>entities[6];
-                    const content = await ejs.renderFile(path.join(dir, 'operations.ejs'), {entity: team});
+                    const content = await ejs.renderFile(path.join(dir, 'operations.ejs'), {entity: team, orm: true});
 
                     expect(content.normalizeSpace()).toBe(`
                     /** 
@@ -128,7 +124,7 @@ describe('Generators', () => {
                     /** 
                     * getBaseLocation description. 
                     */ 
-                    async getBaseLocation(state: FlowStateType & { }, returns?: any): Promise<FlowStateType & {returns: locationContract | null}> { 
+                    async getBaseLocation(state: FlowStateType & { }, returns?: any): Promise<FlowStateType & {returns: locationBase | null}> { 
                         this.notifyComplete('team::getBaseLocation', state.start); 
                         return {...<FlowStateType>state, ...{returns: returns}}; 
                     }

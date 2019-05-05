@@ -26,6 +26,7 @@ import {xmiActor} from "../entities/xmiActor";
 import {xmiBoundary} from "../entities/useCases/xmiBoundary";
 import {xmiProvided} from "../entities/component/xmiProvided";
 import {xmiEnumeration} from "../entities/xmiEnumeration";
+import {xmiDataType} from "../entities/xmiDataType";
 
 const assert = require('assert');
 
@@ -86,6 +87,10 @@ export class xmiComponentFactory {
                     element = new xmiClass(raw, <xmiPackage>parent);
                     this.instance.classHash[element.nameOrigin] = element;
                 }
+                break;
+
+            case 'uml:DataType':
+                element = new xmiDataType(raw, <xmiPackage>parent);
                 break;
 
             case 'uml:Interface':

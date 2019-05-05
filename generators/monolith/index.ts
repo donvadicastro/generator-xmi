@@ -14,6 +14,7 @@ import {xmiInstanceSpecification} from "../../src/entities/xmiInstanceSpecificat
 import {xmiComponent} from "../../src/entities/xmiComponent";
 import {xmiBoundary} from "../../src/entities/useCases/xmiBoundary";
 import {xmiEnumeration} from "../../src/entities/xmiEnumeration";
+import {xmiDataType} from "../../src/entities/xmiDataType";
 
 const kebabCase = require('just-kebab-case');
 const pascal = require('to-pascal-case');
@@ -105,6 +106,13 @@ export class XmiGenerator extends XmiGeneratorBase {
                     this.fs.copyTpl(this.templatePath('xmiClass.ejs'), classFileName, options);
                     this.generatedFiles.push(classFileName);
                 }
+            }
+
+            else if (x instanceof xmiDataType) {
+                const baseClassFileName = this.destinationPath(`${path}/components/generated/${x.name}.generated.ts`);
+
+                this.fs.copyTpl(this.templatePath('xmiDataType.ejs'), baseClassFileName, options);
+                this.generatedFiles.push(baseClassFileName);
             }
 
             else if (x instanceof xmiClass) {

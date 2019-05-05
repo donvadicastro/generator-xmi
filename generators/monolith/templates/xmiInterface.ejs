@@ -10,7 +10,7 @@ export interface <%= entity.name %>Contract {
     /**
     * <%= attr.name %> property
     */
-    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %>;
+    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + (attr.isEnum ? '' : 'Base') : attr.type %>;
   <% }) %>
 
   <% (entity.operations || []).forEach(function (operation) { %>

@@ -1,26 +1,11 @@
-@PrimaryGeneratedColumn()
-id: string;
+<% if (orm) { %>
+    @PrimaryGeneratedColumn()
+    id: string;
+<% } %>
 
 <% (entity.attributes || []).forEach(function (attr) { %>
+    <% if (orm) { %>
     @Column('<%= attr.typeRef ? (attr.isEnum ? 'smallint' : 'json') : attr.dbType %>')
-    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %>;
+    <% } %>
+    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + (attr.isEnum ? '': 'Base') : attr.type %>;
 <% }) %>
-
-<% [...entity.associationLinks, ...entity.aggregationLinks].forEach(x => { %>
-    <% if(!x.target.multiplicity || x.target.multiplicity === '1' || x.target.multiplicity === '0..1') { %>
-        <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
-            @OneToOne(type => <%= x.target.typeRef.name %>Base)
-            <%= x.target.typeRef.name %>Ref: <%= x.target.typeRef.name %>Contract;
-        <% } else { %>
-            @ManyToOne(type => <%= x.target.typeRef.name %>Base, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>RefList)
-            <%= x.target.typeRef.name %>Ref: <%= x.target.typeRef.name %>Contract;
-        <% } %>
-    <%} else {%>
-        <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
-            @OneToMany(type => <%= x.target.typeRef.name %>Base, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>Ref)
-            <%= x.target.typeRef.name %>RefList: <%= x.target.typeRef.name %>Contract[];
-        <% } else { %>
-            @ManyToMany(type => <%= x.target.typeRef.name %>Base)
-            <%= x.target.typeRef.name %>RefList: <%= x.target.typeRef.name %>Contract[];
-        <% } %>
-<% }}) %>
