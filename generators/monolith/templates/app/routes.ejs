@@ -2,27 +2,27 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 <% classes.forEach(x => { %>
-import {<%= x.entity.name %>ListComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/list/component';
-import {<%= x.entity.name %>EditComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/edit/component';
+import {<%= x.entity.namePascal %>ListComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/list/component';
+import {<%= x.entity.namePascal %>EditComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/edit/component';
 <% }) %>
 
 <% screens.forEach(x => { %>
-import {<%= x.entity.name %>ScreenComponent} from './screens/<%= x.path %>/<%= x.entity.name %>/component';
+import {<%= x.entity.namePascal %>ScreenComponent} from './screens/<%= x.path %>/<%= x.entity.name %>/component';
 <% }) %>
 
 
 const routes: Routes = [
   { path: 'administration',  children: [
     <% classes.forEach(x => { %>
-        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>',  component: <%= x.entity.name %>ListComponent },
-        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>/:id',  component: <%= x.entity.name %>EditComponent },
-        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>/new',  component: <%= x.entity.name %>EditComponent },
+        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>',  component: <%= x.entity.namePascal %>ListComponent },
+        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>/:id',  component: <%= x.entity.namePascal %>EditComponent },
+        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>/new',  component: <%= x.entity.namePascal %>EditComponent },
     <% }) %>
     ]
   }, {
     path: 'screen', children: [
     <% screens.forEach(x => { %>
-      { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>',  component: <%= x.entity.name %>ScreenComponent },
+      { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>',  component: <%= x.entity.namePascal %>ScreenComponent },
     <% }) %>
     ]
   }

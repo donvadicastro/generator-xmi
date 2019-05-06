@@ -23,7 +23,7 @@ export class xmiInterface extends xmiBase {
             if(attribute.typeRef) {
                 imports['../' + this.getRelativePath(attribute.typeRef) +
                     (attribute.isEnum ? '/enums/' : '/components/generated/') + attribute.typeRef.name + (attribute.isEnum ? '' : '.generated')] =
-                        attribute.typeRef.name + (attribute.isEnum ? '' : 'Base');
+                        attribute.typeRef.namePascal + (attribute.isEnum ? '' : 'Base');
             }
         });
 
@@ -31,13 +31,13 @@ export class xmiInterface extends xmiBase {
         this.operations.forEach(operation => {
             if(operation.returnParameter.typeRef) {
                 imports['../' + this.getRelativePath(operation.returnParameter.typeRef) + '/components/generated/' + operation.returnParameter.typeRef.name + '.generated'] =
-                    operation.returnParameter.typeRef.name + 'Base';
+                    operation.returnParameter.typeRef.namePascal + 'Base';
             }
 
             //Inject operation input parameter types
             operation.inputParameters.forEach(param => {
                 param.typeRef && (imports['../' + this.getRelativePath(param.typeRef) + '/components/generated/' + param.typeRef.name + '.generated'] =
-                        param.typeRef.name + 'Base');
+                        param.typeRef.namePascal + 'Base');
             });
         });
 

@@ -8,7 +8,7 @@ const inquirer = require('inquirer');
 * Terminal screen class.
 * Allows to get user data using terminal with user friendly notifiers using interactive command line user interfaces.
 */
-export class <%= entity.name %> {
+export class <%= entity.namePascal %> {
     run() {
         const answers = inquirer.prompt([
             <% (entity.children || []).filter(x => x.stereotype !== 'button').forEach(function (child) { %>
@@ -22,7 +22,7 @@ export class <%= entity.name %> {
         <% (entity.children || []).filter(x => x.stereotype === 'button').forEach(function (child, i) { %>
             <% if(child.links.informationFLow.length && child.links.informationFLow[0].end) {%>
                 <% var elementRef = child.links.informationFLow[0].end.elementRef %>
-                const collaboration<%= i %> = new <%= elementRef.name %>(<% (elementRef.lifelines || []).forEach(function (lifeline) { %> new <%= lifeline.name %>(), <% }) %>);
+                const collaboration<%= i %> = new <%= elementRef.namePascal %>(<% (elementRef.lifelines || []).forEach(function (lifeline) { %> new <%= lifeline.namePascal %>(), <% }) %>);
                 collaboration<%= i %>.run(answers);
             <% } %>
         <% }) %>

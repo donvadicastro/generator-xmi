@@ -7,7 +7,7 @@ import {environment} from "../../../<%= entity.getRelativeRoot() %>/environments
   templateUrl: './component.html',
   styleUrls: ['./component.sass']
 })
-export class <%= entity.name %>ListComponent {
+export class <%= entity.namePascal %>ListComponent {
   data = [];
 
   constructor(private http: HttpClient) {}

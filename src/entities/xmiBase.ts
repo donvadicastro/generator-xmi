@@ -4,6 +4,7 @@ import {xmiComment} from "./xmiComment";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {Reference} from "../types/reference";
 const camel = require('to-camel-case');
+const pascal = require('to-pascal-case')
 
 export default class xmiBase {
     parent?: xmiPackage | xmiBase;
@@ -13,6 +14,7 @@ export default class xmiBase {
     type: string;
     name: string;
     nameOrigin: string;
+    namePascal: string;
     description: string;
     alias: string;
     stereotype: string;
@@ -74,6 +76,7 @@ export default class xmiBase {
         this.type = this.raw.$['xmi:type'];
         this.nameOrigin = this.raw.$.name;
         this.name = this.nameOrigin && camel(this.nameOrigin);
+        this.namePascal = this.nameOrigin && pascal(this.nameOrigin);
         this.description = get(this.raw, ['properties', '0', '$', 'documentation']);
         this.alias = get(this.raw, ['properties', '0', '$', 'alias']);
         this.stereotype = get(this.raw, ['properties', '0', '$', 'stereotype']);

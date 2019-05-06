@@ -1,28 +1,28 @@
 import express from 'express';
 import {Request, Response} from "express";
 import {getRepository} from "typeorm";
-import {<%= entity.name %>Base} from '../../<%= entity.getRelativeRoot() %>/design/<%= entity.pathFromRoot %>/components/generated/<%= entity.name %>.generated';
+import {<%= entity.namePascal %>Base} from '../../<%= entity.getRelativeRoot() %>/design/<%= entity.pathFromRoot %>/components/generated/<%= entity.name %>.generated';
 
 export default express.Router()
     /**
      * Request all entities.
      */
     .get("/<%= entity.name %>", async (req: Request, res: Response) => {
-        res.send(await getRepository(<%= entity.name %>Base).find());
+        res.send(await getRepository(<%= entity.namePascal %>Base).find());
     })
 
     /**
      * Request entity by id.
      */
     .get("/<%= entity.name %>/:id", async (req: Request, res: Response) => {
-        res.send(await getRepository(<%= entity.name %>Base).findOne(req.params.id, {relations: [<%- entity.attributesCombined.filter(x => x.typeRef).map(x => `"${x.name}"`).join(',') %>]}));
+        res.send(await getRepository(<%= entity.namePascal %>Base).findOne(req.params.id, {relations: [<%- entity.attributesCombined.filter(x => x.typeRef).map(x => `"${x.name}"`).join(',') %>]}));
     })
 
     /**
      * Create new entity.
      */
     .post("/<%= entity.name %>", async (req: Request, res: Response) => {
-        const repository = getRepository(<%= entity.name %>Base);
+        const repository = getRepository(<%= entity.namePascal %>Base);
         const entity = repository.create(req.body);
         res.send(await repository.save(entity));
     })
@@ -31,7 +31,7 @@ export default express.Router()
      * Update existing entity.
      */
     .put("/<%= entity.name %>/:id", async (req: Request, res: Response) => {
-        const repository = getRepository(<%= entity.name %>Base);
+        const repository = getRepository(<%= entity.namePascal %>Base);
         const entity = await repository.findOne(req.params.id);
 
         if(entity) {
@@ -46,7 +46,7 @@ export default express.Router()
      * Delete entity.
      */
     .delete("/<%= entity.name %>/:id", async (req: Request, res: Response) => {
-        const repository = getRepository(<%= entity.name %>Base);
+        const repository = getRepository(<%= entity.namePascal %>Base);
         const entityToDelete = await repository.findOne(req.params.id);
 
         if(entityToDelete) {

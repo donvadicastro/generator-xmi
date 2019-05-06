@@ -66,7 +66,7 @@ export class xmiCollaboration extends xmiBase {
         const imports = super.references;
 
         this.lifelines.forEach((lifeline, index) => {
-            imports[this.getRelativePath(lifeline.elementRef) + '/contracts/' + lifeline.elementRef.name] = lifeline.elementRef.name + 'Contract';
+            imports[this.getRelativePath(lifeline.elementRef) + '/contracts/' + lifeline.elementRef.name] = lifeline.elementRef.namePascal + 'Contract';
         });
 
         return imports;

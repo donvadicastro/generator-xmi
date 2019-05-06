@@ -4,14 +4,14 @@
 
 /**
 * This file is auto-generated. Do not update it's content!
-* <%= (entity.description || `${entity.name} description`).replace(/\n/g, '\n* ') %>.
+* <%= (entity.description || `${entity.namePascal} description`).replace(/\n/g, '\n* ') %>.
 */
-export interface <%= entity.name %>Contract {
+export interface <%= entity.namePascal %>Contract {
   <% (entity.attributes || []).forEach(function (attr) { %>
     /**
     * <%= attr.name %> property
     */
-    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + (attr.isEnum ? '' : 'Base') : attr.type %>;
+    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.namePascal + (attr.isEnum ? '' : 'Base') : attr.type %>;
   <% }) %>
 
   <% (entity.operations || []).forEach(function (operation) { %>

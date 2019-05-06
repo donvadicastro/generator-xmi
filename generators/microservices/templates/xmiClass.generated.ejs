@@ -7,9 +7,9 @@ import {DbClient} from "../../<%= entity.getRelativeRoot() %>/clients/dbClient";
 const config = require('../../<%= entity.getRelativeRoot() %>/package.json');
 
 /**
- * <%= entity.name %> actor implementation.
+ * <%= entity.namePascal %> actor implementation.
  */
-export default class <%= entity.name %>Base extends ExchangeConnectorProcessBase {
+export default class <%= entity.namePascal %>Base extends ExchangeConnectorProcessBase {
     <%- include('partial/class/constructor', {entity: entity}) -%>
     <%- include('partial/class/methods', {entity: entity}) -%>
 }

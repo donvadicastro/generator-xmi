@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
 
-import {<%= entity.name %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= entity.pathFromRoot %>/process/<%= entity.name %>';
+import {<%= entity.namePascal %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= entity.pathFromRoot %>/process/<%= entity.name %>';
 
 <%
 var imports = [];
@@ -15,18 +15,18 @@ var imports = [];
 %>
 
 <% imports.filter((x, i, arr) => arr.indexOf(x) === i).forEach(x => { %>
-import {<%= x.name %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= x.pathFromRoot %>/components/<%= x.name %>';
+import {<%= x.namePascal %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= x.pathFromRoot %>/components/<%= x.name %>';
 <% }) %>
 
 
 export default class Controller {
-    private flow: <%= entity.name %>;
+    private flow: <%= entity.namePascal %>;
 
     constructor() {
-        this.flow = new <%= entity.name %>(<% (entity.lifelines || []).forEach(function (lifeline) { %>
-            new <%= lifeline.name %>(
+        this.flow = new <%= entity.namePascal %>(<% (entity.lifelines || []).forEach(function (lifeline) { %>
+            new <%= lifeline.namePascal %>(
                 <% (lifeline.ref.required || []).map(function (value, i, list) { %>
-                    new <%= factory.resolveDependency(value.ref ? value.ref.name : value.name).name %>(),
+                    new <%= factory.resolveDependency(value.ref ? value.ref.name : value.name).namePascal %>(),
                 <% }) %>
             ),
         <% }) %>);

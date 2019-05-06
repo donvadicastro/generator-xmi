@@ -21,8 +21,8 @@ paths:
   <%= x.url %>/<%= x.entity.name %>:
     get:
       tags:
-      - "Entities: <%= x.entity.name %>"
-      description: <%= x.entity.name %>
+      - "Entities: <%= x.entity.namePascal %>"
+      description: <%= x.entity.namePascal %>
 
       responses:
         200:
@@ -30,16 +30,16 @@ paths:
 
     post:
       tags:
-      - "Entities: <%= x.entity.name %>"
-      description: <%= x.entity.name %>
+      - "Entities: <%= x.entity.namePascal %>"
+      description: <%= x.entity.namePascal %>
 
       parameters:
       - in: "body"
         name: "body"
-        description: "<%= x.entity.name %> object to be added"
+        description: "<%= x.entity.namePascal %> object to be added"
         required: true
         schema:
-          $ref: "#/definitions/<%= x.entity.name %>"
+          $ref: "#/definitions/<%= x.entity.namePascal %>"
 
       responses:
         200:
@@ -48,7 +48,7 @@ paths:
   <%= x.url %>/<%= x.entity.name %>/{id}:
     get:
       tags:
-      - "Entities: <%= x.entity.name %>"
+      - "Entities: <%= x.entity.namePascal %>"
       description: <%= x.entity.name %>
 
       parameters:
@@ -63,7 +63,7 @@ paths:
           description: Get <%= x.entity.nameOrigin %> by id
     put:
       tags:
-      - "Entities: <%= x.entity.name %>"
+      - "Entities: <%= x.entity.namePascal %>"
       description: <%= x.entity.name %>
 
       parameters:
@@ -77,7 +77,7 @@ paths:
         description: "<%= x.entity.name %> object to be added"
         required: true
         schema:
-          $ref: "#/definitions/<%= x.entity.name %>"
+          $ref: "#/definitions/<%= x.entity.namePascal %>"
 
       responses:
         200:
@@ -85,7 +85,7 @@ paths:
 
     delete:
       tags:
-      - "Entities: <%= x.entity.name %>"
+      - "Entities: <%= x.entity.namePascal %>"
       description: <%= x.entity.name %>
 
       parameters:
@@ -104,7 +104,7 @@ paths:
   <%= x.url %>:
     post:
       tags:
-        - "Process: <%= x.entity.name %>"
+        - "Process: <%= x.entity.namePascal %>"
       description: <%= x.entity.name %>
 
       parameters:
@@ -121,11 +121,11 @@ paths:
 
 definitions:
 <% classes.forEach((x) => { %>
-  <%= x.entity.name %>:
+  <%= x.entity.namePascal %>:
     type: "object"
   <% if(x.entity.generalizationLinksTo) { %>
     allOf:
-    - $ref: "#/definitions/<%= x.entity.generalizationLinksTo.name %>"
+    - $ref: "#/definitions/<%= x.entity.generalizationLinksTo.namePascal %>"
   <% } %>
     properties:
   <% (x.entity.attributesCombined || []).filter(x => x.name && !x.isArray).forEach((attr) => { %>

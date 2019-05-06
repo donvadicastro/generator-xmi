@@ -1,2 +1,2 @@
 <%= entity.generalizationLinksTo ? `${entity.generalizationLinksTo.name}Base` : (entity.elementRef ? entity.elementRef.name : 'ComponentBase') %>
-    implements <%= entity.name %>Contract<% if ((entity.provided || []).length) { %>, <%= (entity.provided || []).map(function(x) { return x.name + 'Contract' }).join(', ') %><%}%>
+    implements <%= entity.namePascal %>Contract<% if ((entity.provided || []).length) { %>, <%= (entity.provided || []).map(function(x) { return x.namePascal + 'Contract' }).join(', ') %><%}%>

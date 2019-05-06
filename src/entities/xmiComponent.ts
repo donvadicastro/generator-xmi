@@ -41,18 +41,18 @@ export class xmiComponent extends xmiClass {
 
         this.provided.forEach(value => {
             if(value.name) {
-                imports['../' + this.getRelativePath(<xmiInterface>value.typeRef) + '/contracts/' + value.name] = value.name + 'Contract';
+                imports['../' + this.getRelativePath(<xmiInterface>value.typeRef) + '/contracts/' + value.name] = value.namePascal + 'Contract';
 
                 const ref = <xmiInterface>value.typeRef;
                 (ref.attributes || []).filter(x => x.typeRef).forEach(attribute => {
                     const typeRef = <xmiBase>attribute.typeRef;
-                    imports['../' + this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.name  + 'Contract';
+                    imports['../' + this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.namePascal  + 'Contract';
                 });
             }
         });
 
         this.required.forEach(value => {
-            imports['../' + this.getRelativePath(<xmiInterface>value.typeRef) + '/contracts/' + value.name] = value.name + 'Contract';
+            imports['../' + this.getRelativePath(<xmiInterface>value.typeRef) + '/contracts/' + value.name] = value.namePascal + 'Contract';
         });
 
         return imports;

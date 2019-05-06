@@ -26,10 +26,10 @@ export class xmiGUIElement extends xmiBase {
 
             if(elementRef) {
                 const elementRef = <xmiCollaboration>(<xmiDiagram>child.links.informationFLow[0].end).elementRef;
-                imports[this.getRelativePath(elementRef) + '/process/' + elementRef.name] = elementRef.name;
+                imports[this.getRelativePath(elementRef) + '/process/' + elementRef.name] = elementRef.namePascal;
 
                 elementRef.lifelines.forEach(lifeline => {
-                    imports[this.getRelativePath(lifeline.elementRef) + '/components/' + lifeline.elementRef.name] = lifeline.elementRef.name;
+                    imports[this.getRelativePath(lifeline.elementRef) + '/components/' + lifeline.elementRef.name] = lifeline.elementRef.namePascal;
                 });
         }});
 

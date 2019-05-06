@@ -13,12 +13,12 @@ import {DropdownModule} from 'primeng/dropdown';
 import {MultiSelectModule} from 'primeng/multiselect';
 
 <% classes.forEach(x => { %>
-import {<%= x.entity.name %>ListComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/list/component';
-import {<%= x.entity.name %>EditComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/edit/component';
+import {<%= x.entity.namePascal %>ListComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/list/component';
+import {<%= x.entity.namePascal %>EditComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/edit/component';
 <% }) %>
 
 <% screens.forEach(x => { %>
-import {<%= x.entity.name %>ScreenComponent} from './screens/<%= x.path %>/<%= x.entity.name %>/component';
+import {<%= x.entity.namePascal %>ScreenComponent} from './screens/<%= x.path %>/<%= x.entity.name %>/component';
 <% }) %>
 
 
@@ -26,12 +26,12 @@ import {<%= x.entity.name %>ScreenComponent} from './screens/<%= x.path %>/<%= x
   declarations: [
     AppComponent,
   <% classes.forEach(x => { %>
-    <%= x.entity.name %>ListComponent,
-    <%= x.entity.name %>EditComponent,
+    <%= x.entity.namePascal %>ListComponent,
+    <%= x.entity.namePascal %>EditComponent,
   <% }) %>
 
   <% screens.forEach(x => { %>
-    <%= x.entity.name %>ScreenComponent,
+    <%= x.entity.namePascal %>ScreenComponent,
   <% }) %>
   ],
   imports: [

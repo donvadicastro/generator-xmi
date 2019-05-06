@@ -2,7 +2,7 @@ import {Promise} from 'es6-promise';
 import {pubnub} from 'client';
 
 <% (lifelines || []).forEach(function (lifeline, index) { %>
-import {<%= lifeline.elementRef.name %>} from '../components/<%= lifeline.elementRef.name %>'; <% }) %>
+import {<%= lifeline.elementRef.namePascal %>} from '../components/<%= lifeline.elementRef.name %>'; <% }) %>
 
 export class <%= name %> {
     private pub_channel: string;
@@ -12,7 +12,7 @@ export class <%= name %> {
         /**
         * <%= lifeline.elementRef.name %> component
         */
-        private cmp<%= lifeline.elementRef.name %>:  <%= lifeline.elementRef.name %>,
+        private cmp<%= lifeline.elementRef.name %>:  <%= lifeline.elementRef.namePascal %>,
         <% }) %>
     ) {
         this.pub_channel = (lifelines || []).length ? lifelines[0].elementRef.name;

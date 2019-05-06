@@ -12,7 +12,7 @@ export class xmiInstanceSpecification extends xmiClass {
 
         //Inject base class when instance speciaification is used
         if (this.elementRef) {
-            imports['../' + this.getRelativePath(this.elementRef) + '/components/' + this.elementRef.name] = this.elementRef.name;
+            imports['../' + this.getRelativePath(this.elementRef) + '/components/' + this.elementRef.name] = this.elementRef.namePascal;
         }
 
         return imports;

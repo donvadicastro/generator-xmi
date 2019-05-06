@@ -7,5 +7,5 @@
     <% if (orm) { %>
     @Column('<%= attr.typeRef ? (attr.isEnum ? 'smallint' : 'json') : attr.dbType %>')
     <% } %>
-    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + (attr.isEnum ? '': 'Base') : attr.type %>;
+    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.namePascal + (attr.isEnum ? '': 'Base') : attr.type %>;
 <% }) %>

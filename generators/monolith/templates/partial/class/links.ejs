@@ -1,18 +1,18 @@
 <% [...entity.associationLinks, ...entity.aggregationLinks].forEach(x => { %>
     <% if(!x.target.multiplicity || x.target.multiplicity === '1' || x.target.multiplicity === '0..1') { %>
         <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
-            @OneToOne(type => <%= x.target.typeRef.name %>Base)
-            <%= x.target.typeRef.name %>Ref: <%= x.target.typeRef.name %>Base;
+            @OneToOne(type => <%= x.target.typeRef.namePascal %>Base)
+            <%= x.target.typeRef.name %>Ref: <%= x.target.typeRef.namePascal %>Base;
         <% } else { %>
-            @ManyToOne(type => <%= x.target.typeRef.name %>Base, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>RefList)
-            <%= x.target.typeRef.name %>Ref: <%= x.target.typeRef.name %>Base;
+            @ManyToOne(type => <%= x.target.typeRef.namePascal %>Base, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>RefList)
+            <%= x.target.typeRef.name %>Ref: <%= x.target.typeRef.namePascal %>Base;
         <% } %>
     <%} else {%>
         <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
-            @OneToMany(type => <%= x.target.typeRef.name %>Base, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>Ref)
-            <%= x.target.typeRef.name %>RefList: <%= x.target.typeRef.name %>Base[];
+            @OneToMany(type => <%= x.target.typeRef.namePascal %>Base, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>Ref)
+            <%= x.target.typeRef.name %>RefList: <%= x.target.typeRef.namePascal %>Base[];
         <% } else { %>
-            @ManyToMany(type => <%= x.target.typeRef.name %>Base)
-            <%= x.target.typeRef.name %>RefList: <%= x.target.typeRef.name %>Base[];
+            @ManyToMany(type => <%= x.target.typeRef.namePascal %>Base)
+            <%= x.target.typeRef.name %>RefList: <%= x.target.typeRef.namePascal %>Base[];
         <% } %>
 <% }}) %>

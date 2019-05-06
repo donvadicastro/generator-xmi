@@ -2,7 +2,7 @@
   var impl = provided || [];
 %>
 
-import {<%= name %>Contract} from '../contracts/<%= name %>';
+import {<%= namePascal %>Contract} from '../contracts/<%= name %>';
 import {pubnub} from 'client';
 
 <% impl.forEach(function (value) { %>
