@@ -9,6 +9,7 @@ import {xmiCollaboration} from "../xmiCollaboration";
 import {xmiLifeline} from "../xmiLifeline";
 import {xmiComponent} from "../xmiComponent";
 import {xmiDiagram} from "../diagrams/xmiDiagram";
+const assert = require('assert');
 
 export class xmiGUIElement extends xmiBase {
     links: {informationFLow: xmiLink[]} = {informationFLow: []};
@@ -59,7 +60,17 @@ export class xmiGUIElement extends xmiBase {
 
 
         if(this.links.informationFLow.length) {
-            ret[key].flow = this.links.informationFLow.map(x => `-> ${x.end && x.end.name}(${<xmiUMLDiagram>x.end && ((<xmiUMLDiagram>x.end).elementRef || {name: ''}).name})`);
+            ret[key].flow = this.links.informationFLow.map(x => {
+                if(x.start === this) {
+                    assert(x.end && (<xmiDiagram>x.end).elementRef, `End for control "${this.name}" in diagram "${(<xmiBase>this.parent).path.map(x => x.name).join(' -> ')}" not specified`);
+                }
+
+                if(x.end === this) {
+                    assert(x.start && (<xmiDiagram>x.start).elementRef, `Start for control "${this.name}" in diagram "${(<xmiBase>this.parent).path.map(x => x.name).join(' -> ')}" not specified`);
+                }
+
+                return `-> ${x.end && x.end.name}(${<xmiUMLDiagram>x.end && ((<xmiUMLDiagram>x.end).elementRef || {name: ''}).name})`;
+            });
         }
 
         return ret;

@@ -5,8 +5,8 @@ import {xmiPackage} from "../xmiPackage";
 
 export class xmiUMLDiagram extends xmiBase {
     get elementRef() {
-        return (<xmiDiagram>xmiComponentFactory.getByKey(this.raw.extendedProperties[0].$.diagram))
-            .elementRef;
+        const diagram = <xmiDiagram>xmiComponentFactory.getByKey(this.raw.extendedProperties[0].$.diagram);
+        return diagram && diagram.elementRef;
     }
 
     constructor(raw: any, parent?: xmiPackage) {
