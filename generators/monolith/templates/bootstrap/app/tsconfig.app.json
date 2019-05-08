@@ -3,7 +3,7 @@
   "compilerOptions": {
     "strictPropertyInitialization": false,
     "outDir": "../out-tsc/app",
-    "types": []
+    "types": ["jest", "node"]
   },
   "exclude": [
     "test.ts",
