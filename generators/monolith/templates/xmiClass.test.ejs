@@ -1,0 +1,30 @@
+import {<%= entity.namePascal %>} from "./<%= entity.name %>";
+import {FlowStateType} from "<%= entity.getRelativeRoot() %>/types/flowStateType";
+<%
+    const imports = (entity.operations || []).reduce((memo, operation) => {
+        operation.inputParameters.filter(x => x.typeRef).forEach(x => memo[entity.getRelativePath(x.typeRef) + '/components/' + x.typeRef.name] = x.typeRef);
+        operation.returnParameter.typeRef && (memo[entity.getRelativePath(operation.returnParameter.typeRef) + '/components/' + operation.returnParameter.typeRef.name] = operation.returnParameter.typeRef);
+
+        return memo;
+    }, {});
+
+    (entity.required || []).forEach(value => {
+        const ref = factory.resolveDependency(value.ref ? value.ref.name : value.name);
+        imports[entity.getRelativePath(ref) + '/components/' + ref.name] = ref;
+    });
+%>
+<% Object.keys(imports).forEach(key => {%>
+import {<%= imports[key].namePascal %>} from '<%= key %>';<%})%>
+
+describe('<%= entity.name %> specification check', () => {
+    const instance = new <%= entity.namePascal %>(<% (entity.required || []).map((value) => { %>new <%= factory.resolveDependency(value.ref ? value.ref.name : value.name).namePascal %>(), <% }) %>);
+    const state: FlowStateType = { start: new Date() };
+<% (entity.operations || []).forEach(operation => { %>
+    it('verify "<%= operation.name %>"', async () => {<% operation.inputParameters.forEach(x => { %>
+        const <%= x.name %> = <%= x.isArray ? '[' : '' %><%= x.typeRef ? `new ${x.typeRef.namePascal}()` : x.typeDefaultValue %><%= x.isArray ? ']' : '' %>;<% }) %>
+        const returns = {...state, ...{returns: <%= operation.isReturnArray ? '[]' : operation.returnParameter.typeRef ? `new ${operation.returnParameter.typeRef.namePascal}()` : operation.returnParameter.typeDefaultValue %>}};
+
+        expect(await instance.<%= operation.name %>({...state, ...{<%= operation.inputParameters.map(x => `${x.name} : ${x.name}` )%>}})).toEqual(returns);
+    });
+<% }) %>
+});
