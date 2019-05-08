@@ -137,7 +137,7 @@ definitions:
       <% } else if(attr.typeRef && attr.isDataType) { %>
           $ref: "#/definitions/<%= attr.typeRef.namePascal %>"
       <% } else if(attr.typeRef) { %>
-          type: "string"
+          type: "number"
       <% } else { %>
           type: "<%= attr.type === 'Date' ? 'number' : attr.type %>"
       <% } %>
@@ -157,7 +157,7 @@ definitions:
       <% } else if(attr.typeRef && attr.isDataType) { %>
         $ref: "#/definitions/<%= attr.typeRef.namePascal %>"
       <% } else if(attr.typeRef) { %>
-        type: "string"
+        type: "number"
       <% } else { %>
         type: "<%= attr.type === 'Date' ? 'number' : attr.type %>"
       <% } %>
