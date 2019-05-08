@@ -129,12 +129,37 @@ definitions:
   <% } %>
     properties:
   <% (x.entity.attributesCombined || []).filter(x => x.name && !x.isArray).forEach((attr) => { %>
-      <% if(attr.typeRef) { %>
-        <%= attr.name %>Id:
+        <%= attr.name %>:
+      <% if(attr.typeRef && attr.isEnum) { %>
+          type: "string"
+          enum: <% attr.typeRef.literals.forEach(x => { %>
+            - <%= x %><% }) %>
+      <% } else if(attr.typeRef && attr.isDataType) { %>
+          $ref: "#/definitions/<%= attr.typeRef.namePascal %>"
+      <% } else if(attr.typeRef) { %>
           type: "string"
       <% } else { %>
-        <%= attr.name %>:
           type: "<%= attr.type === 'Date' ? 'number' : attr.type %>"
+      <% } %>
+  <% }) %>
+<% }) %>
+
+<% dataTypes.forEach((x) => { %>
+  <%= x.entity.namePascal %>:
+    type: "object"
+    properties:
+  <% (x.entity.attributes || []).filter(x => x.name && !x.isArray).forEach((attr) => { %>
+      <%= attr.name %>:
+      <% if(attr.typeRef && attr.isEnum) { %>
+        type: "string"
+        enum: <% attr.typeRef.literals.forEach(x => { %>
+          - <%= x %><% }) %>
+      <% } else if(attr.typeRef && attr.isDataType) { %>
+        $ref: "#/definitions/<%= attr.typeRef.namePascal %>"
+      <% } else if(attr.typeRef) { %>
+        type: "string"
+      <% } else { %>
+        type: "<%= attr.type === 'Date' ? 'number' : attr.type %>"
       <% } %>
   <% }) %>
 <% }) %>

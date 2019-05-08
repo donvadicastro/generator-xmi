@@ -5,7 +5,7 @@
 
 <% (entity.attributes || []).forEach(function (attr) { %>
     <% if (orm) { %>
-    @Column('<%= attr.typeRef ? (attr.isEnum ? 'smallint' : 'json') : attr.dbType %>')
+    @Column('<%= attr.typeRef ? (attr.isEnum ? 'varchar' : 'json') : attr.dbType %>')
     <% } %>
     <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.namePascal + (attr.isEnum ? '': 'Base') : attr.type %>;
 <% }) %>

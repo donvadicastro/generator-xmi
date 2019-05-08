@@ -8,6 +8,7 @@ import xmiBase from "../xmiBase";
 import {TypeConverter} from "../../utils/typeConverter";
 import {IAttribute} from "../../contracts/attribute";
 import {xmiEnumeration} from "../xmiEnumeration";
+import {xmiDataType} from "../xmiDataType";
 
 export class xmiAttribute extends xmiBase implements IAttribute {
     type: string;
@@ -16,6 +17,7 @@ export class xmiAttribute extends xmiBase implements IAttribute {
     typeAllowedValues: any[] = [];
     isArray = false;
     isEnum = false;
+    isDataType = false;
 
     constructor(raw: any, parent?: xmiBase) {
         super(raw, parent);
@@ -36,7 +38,10 @@ export class xmiAttribute extends xmiBase implements IAttribute {
             this.typeAllowedValues = TypeConverter.getTypeAllowedValues(this.type);
         } else {
             xmiComponentFactory.getByKeyDeffered(this, 'typeRef', this.type,
-                (x) => this.isEnum = (x instanceof xmiEnumeration));
+                (x) => {
+                    this.isEnum = (x instanceof xmiEnumeration);
+                    this.isDataType = (x instanceof xmiDataType);
+                });
         }
     }
 
