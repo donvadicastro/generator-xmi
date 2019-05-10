@@ -6,6 +6,8 @@
             <label for="<%= attr.name %>-edit"><%= attr.name %></label>
             <div><p-multiSelect id="<%= attr.name %>-edit" [options]="<%= attr.name %>All" optionLabel="label" dataKey="id" formControlName="<%= attr.name %>"></p-multiSelect></div>
         </div>
+    <% } else if(attr.typeRef && attr.isDataType) { %>
+    <% } else if(attr.typeRef && attr.isEnum) { %>
     <% } else if(attr.typeRef) { %>
         <div class="form-group">
             <label for="<%= attr.name %>-edit"><%= attr.name %></label>

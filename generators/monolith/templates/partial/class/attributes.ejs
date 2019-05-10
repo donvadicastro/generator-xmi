@@ -1,6 +1,6 @@
 <% if (orm) { %>
     @PrimaryGeneratedColumn()
-    id: string;
+    id?: string;
 <% } %>
 
 <% (entity.attributes || []).forEach(function (attr) { %>

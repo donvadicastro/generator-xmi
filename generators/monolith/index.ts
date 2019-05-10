@@ -100,7 +100,7 @@ export class XmiGenerator extends XmiGeneratorBase {
                 this.fs.copyTpl(this.templatePath('xmiInterface.ejs'), interfaceFileName, options);
                 this.generatedFiles.push(interfaceFileName);
 
-                this.fs.copyTpl(this.templatePath('xmiClass.generated.ejs'), baseClassFileName, options);
+                this.fs.copyTpl(this.templatePath('xmiComponent.generated.ejs'), baseClassFileName, options);
                 this.generatedFiles.push(baseClassFileName);
 
                 if(!this.fs.exists(classFileName)) {
@@ -109,7 +109,7 @@ export class XmiGenerator extends XmiGeneratorBase {
                 }
 
                 if(!this.fs.exists(classTestFileName)) {
-                    this.fs.copyTpl(this.templatePath('xmiClass.test.ejs'), classTestFileName, options);
+                    this.fs.copyTpl(this.templatePath('xmiComponent.test.ejs'), classTestFileName, options);
                     // this.generatedFiles.push(classTestFileName);
                 }
             }
