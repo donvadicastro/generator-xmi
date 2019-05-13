@@ -9,7 +9,7 @@
         <% } %>
     <%} else {%>
         <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
-            @OneToMany(type => <%= x.target.typeRef.namePascal %>Base, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>Ref)
+            @OneToMany(type => <%= x.target.typeRef.namePascal %>Base, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>Ref, {cascade: true})
             <%= x.target.typeRef.name %>RefList?: <%= x.target.typeRef.namePascal %>Base[];
         <% } else { %>
             @ManyToMany(type => <%= x.target.typeRef.namePascal %>Base)

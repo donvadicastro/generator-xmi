@@ -15,7 +15,7 @@
 <% if(hasLoop) { %>
     // flow delay between loops
     flowAsync = flowAsync.then((state) => {
-    console.log(`sleep: ${this.cmp<%= loopElement.name %>.loopDelay}ms, replay flow: "<%= loopElement.name %>"`);
-    return new Promise((resolve) => (setTimeout(() => resolve(state), this.cmp<%= loopElement.name %>.loopDelay)));
+        console.log(`sleep: ${this.cmp<%= loopElement.name %>.loopDelay}ms, replay flow: "<%= loopElement.name %>"`);
+        return new Promise((resolve) => (setTimeout(() => resolve(state), this.cmp<%= loopElement.name %>.loopDelay)));
     }); }
 <% } %>

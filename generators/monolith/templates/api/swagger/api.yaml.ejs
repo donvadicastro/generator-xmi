@@ -101,6 +101,8 @@ paths:
 <% }) %>
 
 <% diagrams.forEach((x) => { %>
+  <% const firstCmp = x.entity.messages && x.entity.messages.length && x.entity.messages[0].to.elementRef; %>
+  <% const firstOperation = firstCmp && firstCmp.operations.find(y => y.name === x.entity.messages[0].operation.name); %>
   <%= x.url %>:
     post:
       tags:
@@ -113,6 +115,11 @@ paths:
         required: false
         schema:
           type: object
+          properties:
+          <% firstOperation && firstOperation.inputParameters.forEach(x => { %>
+            <%= x.name %>:
+              <%- x.typeRef ? `$ref: "#/definitions/${x.typeRef.namePascal}"` : `type: ${x.type}` %>
+          <% }) %>
 
       responses:
         200:
