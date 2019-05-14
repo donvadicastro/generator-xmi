@@ -1,0 +1,41 @@
+<% if(field.isArray) { %>
+    <div class="form-group">
+        <label for="<%= field.name %>-edit"><%= field.name %></label>
+        <div><p-multiSelect id="<%= field.name %>-edit" [options]="<%= field.name %>All" optionLabel="label" dataKey="id" formControlName="<%= field.name %>"></p-multiSelect></div>
+    </div>
+<% } else if(field.typeRef && field.isDataType) { %>
+    <div class="card">
+        <div class="card-header">
+            <%= field.name %>
+        </div>
+        <div class="card-body" formGroupName="<%= field.name %>">
+            <% (field.typeRef.attributes || []).filter(x => x.name).forEach((attr) => { %>
+                <%- include('field.html.ejs', {field: attr, parent: field}) -%>
+            <% }) %>
+        </div>
+    </div>
+    <br/>
+<% } else if(field.typeRef && field.isEnum) { %>
+    <label><%= field.name %></label>
+    <% field.typeRef.literals.forEach((x, i) => { %>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" id="<%= parent.name + i %>" value="<%= x %>" formControlName="<%= field.name %>">
+            <label class="form-check-label" for="<%= parent.name + i %>"><%= x %></label>
+        </div>
+    <% }) %>
+<% } else if(field.typeRef) { %>
+    <div class="form-group">
+        <label for="<%= field.name %>-edit"><%= field.name %></label>
+        <p-dropdown id="<%= field.name %>-edit" styleClass="form-control p-0" [options]="<%= field.name %>All" optionLabel="label" dataKey="id" [autoDisplayFirst]="false" formControlName="<%= field.name %>"></p-dropdown>
+    </div>
+<% } else if(field.type === 'boolean') { %>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="<%= field.name %>-edit" formControlName="<%= field.name %>" />
+        <label class="form-check-label" for="<%= field.name %>-edit"><%= field.name %></label>
+    </div>
+<% } else { %>
+    <div class="form-group">
+        <label for="<%= field.name %>-edit"><%= field.name %></label>
+        <input class="form-control" type="<%= field.type %>" id="<%= field.name %>-edit" formControlName="<%= field.name %>"<% if(field.typeRef) " disabled" %>/>
+    </div>
+<% } %>

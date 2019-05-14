@@ -37,10 +37,13 @@ export class <%= entity.namePascal %>EditComponent {
   ngOnInit() {
     this.loadData();
     this.form = this.fb.group({
-    <% (entity.attributesCombined || []).filter(x => x.name).forEach((attr) => { %>
-      <%= attr.name %>: [<%- attr.typeDefaultValue %>, Validators.required],
-    <% }) %>
-    });
+    <% const formBuilder = (entity, containerCallback, callback) => (entity.attributesCombined || entity.attributes).filter(x => x.name)
+            .map(x => (x.typeRef && x.isDataType) ? containerCallback(x, formBuilder(x.typeRef, containerCallback, callback)) : callback(x)).join('') %>
+
+    <%- formBuilder(entity,
+            (attr, content) => `${attr.name}: this.fb.group({ ${content} }),`,
+            (attr) => `${attr.name}: [${attr.typeDefaultValue}, Validators.required],`) %>
+  });
   }
 
   protected save() {
