@@ -5,9 +5,9 @@
     */
     async <%= operation.name %>(state: FlowStateType & {
             <% operation.inputParameters.forEach(x => { %>
-                <%= x.name %>: <%= x.typeRef ? `${x.typeRef.namePascal}Base${x.isArray ? '[]' : ''}` : x.type %>,
+                <%= x.name %>: <%= x.typeRef ? `${x.typeRef.namePascal}${x.isArray ? '[]' : ''}` : x.type %>,
             <% }) %>
-        }, returns?: any): Promise<FlowStateType & {returns: <%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.namePascal}Base` : operation.returnParameter.type %><%= operation.isReturnArray ? '[]' : '' %> | null}> {
+        }, returns?: any): Promise<FlowStateType & {returns: <%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.namePascal}` : operation.returnParameter.type %><%= operation.isReturnArray ? '[]' : '' %> | null}> {
 
         this.notifyComplete('<%= entity.name %>::<%= operation.name %>', state.start);
         return {...<FlowStateType>state, ...{returns: returns}};

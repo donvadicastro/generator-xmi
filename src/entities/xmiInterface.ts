@@ -22,22 +22,22 @@ export class xmiInterface extends xmiBase {
         this.attributes.forEach(attribute => {
             if(attribute.typeRef) {
                 imports['../' + this.getRelativePath(attribute.typeRef) +
-                    (attribute.isEnum ? '/enums/' : '/components/generated/') + attribute.typeRef.name + (attribute.isEnum ? '' : '.generated')] =
-                        attribute.typeRef.namePascal + (attribute.isEnum ? '' : 'Base');
+                    (attribute.isEnum ? '/enums/' : (attribute.isDataType ? '/types/' : '/components/')) + attribute.typeRef.name] =
+                        attribute.typeRef.namePascal;
             }
         });
 
         //Inject operation parameters and return types
         this.operations.forEach(operation => {
             if(operation.returnParameter.typeRef) {
-                imports['../' + this.getRelativePath(operation.returnParameter.typeRef) + '/components/generated/' + operation.returnParameter.typeRef.name + '.generated'] =
-                    operation.returnParameter.typeRef.namePascal + 'Base';
+                imports['../' + this.getRelativePath(operation.returnParameter.typeRef) + '/components/' + operation.returnParameter.typeRef.name] =
+                    operation.returnParameter.typeRef.namePascal;
             }
 
             //Inject operation input parameter types
             operation.inputParameters.forEach(param => {
-                param.typeRef && (imports['../' + this.getRelativePath(param.typeRef) + '/components/generated/' + param.typeRef.name + '.generated'] =
-                        param.typeRef.namePascal + 'Base');
+                param.typeRef && (imports['../' + this.getRelativePath(param.typeRef) + '/components/' + param.typeRef.name] =
+                        param.typeRef.namePascal);
             });
         });
 

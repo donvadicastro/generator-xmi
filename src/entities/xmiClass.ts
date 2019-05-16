@@ -104,20 +104,20 @@ export class xmiClass extends xmiInterface {
 
         //Inject generalization references
         if(this.generalizationLinksTo) {
-            imports['../' + this.getRelativePath(this.generalizationLinksTo) + '/components/generated/' + this.generalizationLinksTo.name + '.generated'] = this.generalizationLinksTo.namePascal + 'Base';
+            imports['../' + this.getRelativePath(this.generalizationLinksTo) + '/components/' + this.generalizationLinksTo.name] = this.generalizationLinksTo.namePascal;
         }
 
         //Inject base interface when instance speciaification is used
         this.associationLinks.forEach(x => {
             const typeRef = <xmiClass>x.target.typeRef;
             imports['../' + this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.namePascal  + 'Contract';
-            imports['../' + this.getRelativePath(typeRef) + '/components/generated/' + typeRef.name + '.generated'] = typeRef.namePascal  + 'Base';
+            imports['../' + this.getRelativePath(typeRef) + '/components/' + typeRef.name] = typeRef.namePascal;
         });
 
         this.aggregationLinks.forEach(x => {
             const typeRef = <xmiClass>x.target.typeRef;
             imports['../' + this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.namePascal + 'Contract';
-            imports['../' + this.getRelativePath(typeRef) + '/components/generated/' + typeRef.name + '.generated'] = typeRef.namePascal + 'Base';
+            imports['../' + this.getRelativePath(typeRef) + '/components/' + typeRef.name] = typeRef.namePascal;
         });
 
         return imports;

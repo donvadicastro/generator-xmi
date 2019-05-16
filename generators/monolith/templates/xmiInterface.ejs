@@ -11,7 +11,7 @@ export interface <%= entity.namePascal %>Contract {
     /**
     * <%= attr.name %> property
     */
-    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.namePascal + (attr.isEnum ? '' : 'Base') : attr.type %>;
+    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.namePascal : attr.type %>;
   <% }) %>
 
   <% (entity.operations || []).forEach(function (operation) { %>

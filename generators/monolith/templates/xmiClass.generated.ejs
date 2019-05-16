@@ -4,7 +4,6 @@
  * This file is auto-generated. Do not update it's content!
 * <%- (entity.description || `${entity.namePascal} description`).replace(/\n/g, '\n* ') %>.
  */
-@Entity()
 export abstract class <%= entity.namePascal %>Base <%- include('partial/class/extend', {entity: entity}) -%> {
   constructor(params?: <%= entity.namePascal %>Contract) { params && Object.assign(this, params); }
   <%- include('partial/class/attributes', {entity: entity, orm: true}) -%>

@@ -115,7 +115,7 @@ export class XmiGenerator extends XmiGeneratorBase {
             }
 
             else if (x instanceof xmiDataType) {
-                const baseClassFileName = this.destinationPath(`${path}/components/generated/${x.name}.generated.ts`);
+                const baseClassFileName = this.destinationPath(`${path}/types/${x.name}.ts`);
 
                 this.fs.copyTpl(this.templatePath('xmiDataType.ejs'), baseClassFileName, options);
                 this.generatedFiles.push(baseClassFileName);
