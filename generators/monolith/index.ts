@@ -189,23 +189,23 @@ export class XmiGenerator extends XmiGeneratorBase {
             }
 
             else if (x instanceof xmiScreen) {
-                const testFileDest = `${path}/test/screen_${x.name}.ts`;
-                const screenFileName = this.destinationPath(`${path}/screens/${x.name}.ts`);
+                //const testFileDest = `${path}/test/screen_${x.name}.ts`;
+                //const screenFileName = this.destinationPath(`${path}/screens/${x.name}.ts`);
                 const appComponentRootPath = this.destinationPath(`${this.options.destination}/app/pages/screens/${localPath}`);
                 const screenComponentFileName = `${appComponentRootPath}/${x.name}/component.ts`;
 
-                this.fs.copyTpl(this.templatePath('xmiScreen.ejs'), screenFileName, options);
-                this.fs.copyTpl(this.templatePath('test/xmiScreen.ejs'), this.destinationPath(testFileDest), options);
+                //this.fs.copyTpl(this.templatePath('xmiScreen.ejs'), screenFileName, options);
+                //this.fs.copyTpl(this.templatePath('test/xmiScreen.ejs'), this.destinationPath(testFileDest), options);
 
                 //edit form
                 this.fs.copyTpl(this.templatePath('app/screen/component.ts.ejs'), screenComponentFileName, options);
                 this.fs.copyTpl(this.templatePath('app/screen/component.html.ejs'), `${appComponentRootPath}/${x.name}/component.html`, options);
                 this.fs.write(`${appComponentRootPath}/${x.name}/component.sass`, '');
 
-                this.generatedFiles.push(screenFileName);
+                //this.generatedFiles.push(screenFileName);
                 this.generatedFiles.push(screenComponentFileName);
 
-                this.testFiles.push(testFileDest);
+                //this.testFiles.push(testFileDest);
                 this.screens.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
             }
 
