@@ -35,6 +35,10 @@ export class <%= entity.namePascal %>ScreenComponent {
     });
   }
 
+  protected getGroupControls(formControlName: string) {
+    return (<FormGroup>this.form.get(formControlName)).controls;
+  }
+
   protected run(action: string) {
     const data = this.form.getRawValue();
     this.http.post(`${environment.api.url}/${action}`, data).subscribe((res: any) => this.response = res);
