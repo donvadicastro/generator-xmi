@@ -1,7 +1,7 @@
 <% const build = (parent, callback) => (parent.children || []).forEach(x => { callback(x); build(x, callback); }) %>
 
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import {environment} from "../../<%= entity.getRelativeRoot() %>/environments/environment";
@@ -35,7 +35,7 @@ export class <%= entity.namePascal %>ScreenComponent {
     });
   }
 
-  protected getGroupControls(formControlName: string) {
+  protected getGroupControls(formControlName: string): { [key: string]: AbstractControl } {
     return (<FormGroup>this.form.get(formControlName)).controls;
   }
 
