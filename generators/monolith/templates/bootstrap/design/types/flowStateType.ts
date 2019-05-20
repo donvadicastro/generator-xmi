@@ -1,5 +1,6 @@
 export interface FlowStateType {
+    flowStart?: Date;
     start: Date;
-    end?: Date;
+    flowEnd?: Date;
     returns?: any;
 }

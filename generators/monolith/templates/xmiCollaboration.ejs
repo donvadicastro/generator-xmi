@@ -22,8 +22,7 @@ export class <%= entity.namePascal %> {
         flowAsync = flowAsync.then((state: any) => {
             console.log('--> initialize local state storage');
             storage.init(/* options ... */);
-
-            state.start = new Date();
+            state.flowStart = new Date();
             return state;
         });
 
@@ -31,7 +30,9 @@ export class <%= entity.namePascal %> {
         <%- include('partial/collaboration/flow', {entity: entity}) -%>
 
         return flowAsync.then((state: any) => {
-            state.end = new Date();
+            delete state.start;
+            state.flowEnd = new Date();
+
             return state;
         }).catch(x => console.log(chalk.red('ERROR: '), x));
     }
