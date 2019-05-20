@@ -1,5 +1,3 @@
-state.start = new Date();
-
 <% if(message.connector.condition) { %>
     if(this.cmp<%= message.from.elementRef.name %>['<%- message.connector.condition %>'](state)) {
         console.log('--> <%= message.to.elementRef.name %>::<%= message.operation.name %>');

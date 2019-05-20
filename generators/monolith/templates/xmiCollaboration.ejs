@@ -23,12 +23,16 @@ export class <%= entity.namePascal %> {
             console.log('--> initialize local state storage');
             storage.init(/* options ... */);
 
+            state.start = new Date();
             return state;
         });
 
         // define flow
         <%- include('partial/collaboration/flow', {entity: entity}) -%>
 
-        return flowAsync.catch(x => console.log(chalk.red('ERROR: '), x));
+        return flowAsync.then((state: any) => {
+            state.end = new Date();
+            return state;
+        }).catch(x => console.log(chalk.red('ERROR: '), x));
     }
 }
