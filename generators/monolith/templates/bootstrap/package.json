@@ -18,7 +18,7 @@
     "api:test:debug": "mocha --inspect-brk api/test/**/*.ts --exit",
 
     "app:ng": "ng",
-    "app:start": "ng serve",
+    "app:start": "ng serve --host 0.0.0.0",
     "app:build": "ng build --outputPath=dist/app_compiled",
     "app:build:prod": "ng build --outputPath=dist/app_compiled --prod",
     "app:test": "ng test",
