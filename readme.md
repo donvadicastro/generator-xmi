@@ -29,6 +29,15 @@
       - [Example](#example)
     + [Class diagram as REST API endpoint implementation](#class-diagram-as-rest-api-endpoint-implementation)
       - [Example](#example-1)
+  * ["Design to App" mapping explanation](#design-to-app-mapping-explanation)
+    + [Class diagram to CRUD UI](#class-diagram-to-crud-ui)
+      - [Example](#example-2)
+    + ["User interface" diagram to UI](#user-interface-diagram-to-ui)
+      - [Example](#example-3)
+    + ["User interface" diagram supported controls](#user-interface-diagram-supported-controls)
+    + [Bind data to controls from business process models](#bind-data-to-controls-from-business-process-models)
+      - [Example](#example-4)
+    + [Bind data to controls from domain entities](#bind-data-to-controls-from-domain-entities)
 
 <!-- tocstop -->
 
