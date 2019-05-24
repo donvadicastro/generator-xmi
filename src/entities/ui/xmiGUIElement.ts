@@ -4,16 +4,16 @@ import {xmiLink} from "../links/xmiLink";
 import {xmiUMLDiagram} from "../diagrams/xmiUMLDiagram";
 import {xmiPackage} from "../xmiPackage";
 import {Reference} from "../../types/reference";
-import {xmiMessage} from "../collaboration/xmiMessage";
 import {xmiCollaboration} from "../xmiCollaboration";
-import {xmiLifeline} from "../xmiLifeline";
-import {xmiComponent} from "../xmiComponent";
 import {xmiDiagram} from "../diagrams/xmiDiagram";
+import {xmiClass} from "../xmiClass";
+
 const assert = require('assert');
 
 export class xmiGUIElement extends xmiBase {
     links: {informationFLow: xmiLink[]} = {informationFLow: []};
     properties: Map<string, string>;
+    typeRef?: xmiClass;
 
     children: xmiGUIElement[] = [];
 
@@ -23,6 +23,7 @@ export class xmiGUIElement extends xmiBase {
         this.children.forEach((child, i) => {
             const elementRef = child.links.informationFLow.length && child.links.informationFLow[0].end &&
                 <xmiCollaboration>(<xmiDiagram>child.links.informationFLow[0].end).elementRef;
+
 
             if(elementRef) {
                 const elementRef = <xmiCollaboration>(<xmiDiagram>child.links.informationFLow[0].end).elementRef;
@@ -45,6 +46,10 @@ export class xmiGUIElement extends xmiBase {
 
         this.properties = new Map((raw.tags[0].tag || []).map((x: any) => [x.$.name, x.$.value]));
         this.properties.set('label', raw.$.name);
+
+        if(this.raw.$['classifier']) {
+            xmiComponentFactory.getByKeyDeffered(this, 'typeRef', this.raw.$['classifier']);
+        }
 
         this.parseChildren(raw);
     }

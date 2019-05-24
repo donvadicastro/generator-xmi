@@ -597,3 +597,72 @@ Diagram
 Generated REST API
 
 ![REST CRUD API](./assets/wiki/images/crud.png)
+
+### "Design to App" mapping explanation
+#### Class diagram to CRUD UI
+Each class in class diagram is represented as set of user forms to perform all set of CRUD operations.
+
+##### Example
+Class in class diagram 
+![Class diagram](./assets/wiki/images/class-ui.png)
+
+Generated forms:
+1) List all entities with support to add new
+![List diagram](./assets/wiki/images/class-ui-list.png)
+When list is populated - first row represents link to navigate to edit form.
+
+2) Create/Edit entity
+![List diagram](./assets/wiki/images/class-ui-edit.png)
+
+#### "User interface" diagram to UI
+Each "User Interface" diagram is represented as separated screen in application.
+
+##### Example
+User interface diagram 
+![User interface diagram](./assets/wiki/images/ui-diagram.png)
+
+Generated screen
+![User interface diagram](./assets/wiki/images/ui-diagram-generated.png)
+
+#### "User interface" diagram supported controls
+| Conrol | Description |  Example |
+|----------|-------------|------|
+| Text | Represents simple editbox | ![Text](./assets/wiki/images/ui-diagram-text.png) |
+| Button | Action control represented as clickable button | ![Button](./assets/wiki/images/ui-diagram-button.png) |
+| Checkbox | Allows to confirm user intention | ![Button](./assets/wiki/images/ui-diagram-checkbox.png) |
+| Combobox | Allows to select single value from list of proposals | ![Button](./assets/wiki/images/ui-diagram-select.png) |
+| Panel | Allows to group controls into single container |  |
+| Table | Allows to represent list data | ![Button](./assets/wiki/images/ui-diagram-table.png) |
+
+#### Bind data to controls from business process models
+To be able to populate data into specific controls - this controls need to be linked with diagrams that defines business process to collect data.
+This linkage can be implemented with using "Information flow" link connector.
+
+As data comes from business process to controls - flow should be properly directed: from process to control.
+
+##### Example
+In this example grid control is linked with diagram, defined some business process. Diagram can be dragged to UI form.
+![Bind data](./assets/wiki/images/ui-diagram-bind.png)
+
+After generation - grid will trigger process execution to bind data. As process is represented with separate API endpoint - 
+result of API call will be used as grid data.
+
+Similar implementation with binding combo list
+![Bind data](./assets/wiki/images/ui-diagram-bind-combo.png)
+
+#### Bind data to controls from domain entities
+As each class in class diagrams will be represented with own form to manage data - it's expected that user custom forms also need access to this data.
+The most common example - allow to select single item from all available items for particular domain entity type.
+
+To add this sort of component into user interface form to get automatic data linkage to domain entity values - class element need to be added to user interface form.
+How to do:
+1) Drop any class into user interface model and specify "drop as" parameter to "instance"
+![Drop class](./assets/wiki/images/ui-diagram-bind-class-1.png)
+2) In property window change type of this control to "GUIElement"
+![Change type](./assets/wiki/images/ui-diagram-bind-class-2.png)
+3) Specify all required attributes (name and alias) and set stereotype to "combobox"
+![Set attributes](./assets/wiki/images/ui-diagram-bind-class-3.png)
+
+After this actions class element will be represented as native "combobox" and will be linked to defined class entity.
+After form generation - control will be bound to data for this class entity.
+![Diaplay](./assets/wiki/images/ui-diagram-bind-class-4.png)

@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label for="<%= entity.alias || entity.name %>-edit"><%= entity.properties.get('label') || entity.name %></label>
+    <select class="form-control" id="<%= entity.alias || entity.name %>-edit" formControlName="<%= entity.alias || entity.name %>">
+        <option [ngValue]="null" value="">Select...</option>
+        <option *ngFor="let item of <%= entity.name %>All" [ngValue]="item">{{item | json}}</option>
+    </select>
+</div>
