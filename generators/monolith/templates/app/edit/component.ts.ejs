@@ -53,7 +53,7 @@ export class <%= entity.namePascal %>EditComponent {
     data.<%= attr.name %> = new Date(data.<%= attr.name %>).getTime();
   <% }) %>
 
-  <% (entity.attributesCombined || []).filter(x => x.name && x.isEnum).forEach((attr) => { %>
+  <% (entity.attributesCombined || []).filter(x => x.isEnum || x.typeRef).forEach((attr) => { %>
     data.<%= attr.name %> = data.<%= attr.name %> && data.<%= attr.name %>.id;
   <% }) %>
 
@@ -101,5 +101,4 @@ export class <%= entity.namePascal %>EditComponent {
 
     return data.length ? (data.length > 1 ? data.join(' | ') : data[0].trim()) : '';
   }
-
 }
