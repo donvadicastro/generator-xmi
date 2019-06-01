@@ -1,3 +1,3 @@
-import {xmiClass} from "../xmiClass";
+import {xmiAbstractClass} from "../../base/xmiAbstractClass";
 
-export class xmiBoundary extends xmiClass {}
+export class xmiBoundary extends xmiAbstractClass {}

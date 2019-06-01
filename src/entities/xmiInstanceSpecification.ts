@@ -1,8 +1,9 @@
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
-import {xmiClass} from "./xmiClass";
 import {Reference} from "../types/reference";
+import {xmiAbstractClass} from "../base/xmiAbstractClass";
+import {xmiClass} from "./xmiClass";
 
-export class xmiInstanceSpecification extends xmiClass {
+export class xmiInstanceSpecification extends xmiAbstractClass {
     get elementRef(): xmiClass {
         return <xmiClass>xmiComponentFactory.getByKey(this.raw.$.classifier);
     }

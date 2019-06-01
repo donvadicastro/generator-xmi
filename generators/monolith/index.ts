@@ -1,6 +1,5 @@
 'use strict';
 
-import {xmiClass} from "../../src/entities/xmiClass";
 import {xmiPackage} from "../../src/entities/xmiPackage";
 import {default as chalk} from "chalk";
 import {xmiCollaboration} from "../../src/entities/xmiCollaboration";
@@ -15,6 +14,7 @@ import {xmiComponent} from "../../src/entities/xmiComponent";
 import {xmiBoundary} from "../../src/entities/useCases/xmiBoundary";
 import {xmiEnumeration} from "../../src/entities/xmiEnumeration";
 import {xmiDataType} from "../../src/entities/xmiDataType";
+import {xmiClass} from "../../src/entities/xmiClass";
 
 const kebabCase = require('just-kebab-case');
 const pascal = require('to-pascal-case');

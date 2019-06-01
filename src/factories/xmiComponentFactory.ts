@@ -1,6 +1,5 @@
 import xmiBase from "../entities/xmiBase";
 import {xmiInterface} from "../entities/xmiInterface";
-import {xmiClass} from "../entities/xmiClass";
 import {xmiLink} from "../entities/links/xmiLink";
 import {xmiPackage} from "../entities/xmiPackage";
 import {xmiCollaboration} from "../entities/xmiCollaboration";
@@ -27,6 +26,7 @@ import {xmiBoundary} from "../entities/useCases/xmiBoundary";
 import {xmiProvided} from "../entities/component/xmiProvided";
 import {xmiEnumeration} from "../entities/xmiEnumeration";
 import {xmiDataType} from "../entities/xmiDataType";
+import {xmiClass} from "../entities/xmiClass";
 
 const assert = require('assert');
 
@@ -46,6 +46,8 @@ export class xmiComponentFactory {
     private _fragmentHash: xmiFragment[] = [];
     private _initDeffered: any[] = [];
 
+    private _errors: string[] = [];
+
     private static _instance = new xmiComponentFactory();
 
     static get instance(): xmiComponentFactory {
@@ -59,6 +61,7 @@ export class xmiComponentFactory {
     get lifelineHash(): xmiLifeline[] { return this._lifelineHash; }
     get fragmentHash(): xmiFragment[] { return this._fragmentHash; }
     get initDeffered() { return this._initDeffered; }
+    get errors() { return this._errors; };
 
     static get(raw: any, parent?: xmiPackage | xmiInterface | xmiCollaboration, options?: any): xmiBase | null {
         let element = this.getByKey(raw.$['xmi:id']);
@@ -314,5 +317,9 @@ export class xmiComponentFactory {
         }
 
         this.instance._idHashDeffered = {};
+    }
+
+    static logError(error: string) {
+        this.instance.errors.push(error);
     }
 }

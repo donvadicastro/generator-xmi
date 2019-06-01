@@ -22,12 +22,12 @@ export class XmiParser {
         this.data = data;
     }
 
-    parse() {
+    parse(): boolean {
         this.connectors = get(this.data, this.CONNECTORS_PATH, [])
             .map((x: any) => xmiComponentFactory.getConnector(x));
 
         this.elements = get(this.data, this.ELEMENTS_PATH, [])
-            .filter((x: any) => x.$.name).map((x: any) => xmiComponentFactory.get(x));
+            .map((x: any) => xmiComponentFactory.get(x));
 
         this.packge = <xmiPackage>xmiComponentFactory.get(get(this.data, this.PACKAGE_ROOT));
         this.diagrams = (get(this.data, this.DIAGRAMS_PATH, [])).map(x => xmiComponentFactory.getDiagram(x));
@@ -37,11 +37,21 @@ export class XmiParser {
 
         // update references
         xmiComponentFactory.updateRefs();
+
+        return !!xmiComponentFactory.instance.errors.length;
     }
 
     toConsole() {
+        const output: any = {};
+
         if (this.packge) {
-            return {Package: this.packge.toConsole()};
+            output.Package = this.packge.toConsole();
         }
+
+        if(xmiComponentFactory.instance.errors.length) {
+            output.Errors = xmiComponentFactory.instance.errors;
+        }
+
+        return output;
     }
 }

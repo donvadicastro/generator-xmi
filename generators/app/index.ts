@@ -43,12 +43,18 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
 
         this._readData((result: any) => {
             const parser = new XmiParser(result);
-            parser.parse();
+            const success = parser.parse();
 
             this.log(chalk.green('Model'));
             this.log(treeify.asTree(parser.toConsole(), true, true));
 
-            this.composeWith(require.resolve('../../generators/' + this.options.type), {...this.options, parser: parser });
+            if(success) {
+                this.composeWith(require.resolve('../../generators/' + this.options.type), {
+                    ...this.options,
+                    parser: parser
+                });
+            }
+
             done();
         });
     }

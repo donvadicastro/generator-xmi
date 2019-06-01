@@ -1,6 +1,5 @@
 'use strict';
 
-import {xmiClass} from "../../src/entities/xmiClass";
 import {xmiComponent} from "../../src/entities/xmiComponent";
 import {xmiPackage} from "../../src/entities/xmiPackage";
 import {default as chalk} from "chalk";
@@ -11,6 +10,7 @@ import {xmiInterface} from "../../src/entities/xmiInterface";
 import {xmiComponentFactory} from "../../src/factories/xmiComponentFactory";
 import {xmiUseCase} from "../../src/entities/xmiUseCase";
 import {XmiGeneratorBase} from "../_base/xmiGeneratorBase";
+import {xmiClass} from "../../src/entities/xmiClass";
 
 const pascal = require('to-pascal-case');
 

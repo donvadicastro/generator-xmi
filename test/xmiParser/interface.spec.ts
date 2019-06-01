@@ -1,8 +1,8 @@
 import {readJSONSync} from "fs-extra";
 import {XmiParser} from "../../src/xmiParser";
-import {xmiClass} from "../../src/entities/xmiClass";
 import {xmiInterface} from "../../src/entities/xmiInterface";
 import {xmiPackage} from "../../src/entities/xmiPackage";
+import {xmiClass} from "../../src/entities/xmiClass";
 
 describe('xmiParser', () => {
     describe('Interfaces', () => {

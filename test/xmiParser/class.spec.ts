@@ -1,12 +1,12 @@
 import {readJSONSync} from "fs-extra";
 import {XmiParser} from "../../src/xmiParser";
-import {xmiClass} from "../../src/entities/xmiClass";
 import {xmiPackage} from "../../src/entities/xmiPackage";
+import {xmiClass} from "../../src/entities/xmiClass";
 
 describe('xmiParser', () => {
     describe('Classes', () => {
         it('Verify custom', () => {
-            const data = readJSONSync('test/data/project2_class.json');
+            const data = readJSONSync('test/data/_tokenability.json');
             const parser = new XmiParser(data);
 
             parser.parse();

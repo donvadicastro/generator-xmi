@@ -1,4 +1,3 @@
-import {xmiClass} from "./xmiClass";
 import {xmiPackage} from "./xmiPackage";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {Reference} from "../types/reference";
@@ -6,8 +5,9 @@ import {xmiInterface} from "./xmiInterface";
 import xmiBase from "./xmiBase";
 import {xmiProvided} from "./component/xmiProvided";
 import {xmiRequired} from "./component/xmiRequired";
+import {xmiAbstractClass} from "../base/xmiAbstractClass";
 
-export class xmiComponent extends xmiClass {
+export class xmiComponent extends xmiAbstractClass {
     provided: xmiProvided[] = [];
     required: xmiRequired[] = [];
 

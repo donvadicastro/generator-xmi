@@ -1,12 +1,12 @@
 import xmiBase from "../xmiBase";
 import {xmiFragment} from "./xmiFragment";
 import {xmiOperation} from "../class/xmiOperation";
-import {xmiClass} from "../xmiClass";
 import {xmiLifeline} from "../xmiLifeline";
 import {xmiComponent} from "../xmiComponent";
 import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
 import xmiConnector from "../connectors/xmiConnector";
 import {xmiCollaboration} from "../xmiCollaboration";
+import {xmiClass} from "../xmiClass";
 
 const assert = require('assert');
 

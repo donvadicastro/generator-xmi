@@ -1,3 +1,5 @@
+import {xmiClass} from "../../src/entities/xmiClass";
+
 const parseString = require('xml2js').parseString;
 
 import {readJSONSync} from "fs-extra";
@@ -5,7 +7,6 @@ import {XmiParser} from "../../src/xmiParser";
 import {xmiComponent} from "../../src/entities/xmiComponent";
 import {xmiCollaboration} from "../../src/entities/xmiCollaboration";
 import {xmiActor} from "../../src/entities/xmiActor";
-import {xmiClass} from "../../src/entities/xmiClass";
 import {xmiPackage} from "../../src/entities/xmiPackage";
 
 describe('xmiParser', () => {

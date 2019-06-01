@@ -2,8 +2,8 @@ import {readJSONSync} from "fs-extra";
 import {XmiParser} from "../../../../src/xmiParser";
 import {xmiPackage} from "../../../../src/entities/xmiPackage";
 import {xmiComponent} from "../../../../src/entities/xmiComponent";
-import {xmiClass} from "../../../../src/entities/xmiClass";
 import '../../../../utils/normilize';
+import {xmiClass} from "../../../../src/entities/xmiClass";
 
 const path = require('path');
 const ejs = require('ejs');

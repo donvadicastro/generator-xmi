@@ -1,10 +1,10 @@
 import xmiBase from "./xmiBase";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {xmiAttribute} from "./class/xmiAttribute";
-import {xmiClass} from "./xmiClass";
 import {xmiComponent} from "./xmiComponent";
 import {xmiActor} from "./xmiActor";
 import {xmiInstanceSpecification} from "./xmiInstanceSpecification";
+import {xmiClass} from "./xmiClass";
 
 export class xmiLifeline extends xmiBase {
     attribute: string;

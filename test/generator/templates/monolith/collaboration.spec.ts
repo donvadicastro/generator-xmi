@@ -3,7 +3,6 @@ import {XmiParser} from "../../../../src/xmiParser";
 import {xmiPackage} from "../../../../src/entities/xmiPackage";
 import {xmiComponent} from "../../../../src/entities/xmiComponent";
 import '../../../../utils/normilize';
-import {xmiClass} from "../../../../src/entities/xmiClass";
 import {xmiCollaboration} from "../../../../src/entities/xmiCollaboration";
 
 const path = require('path');
