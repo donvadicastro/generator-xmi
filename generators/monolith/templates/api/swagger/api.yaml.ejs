@@ -18,7 +18,7 @@ produces:
 paths:
 
 <% classes.forEach((x) => { %>
-  <%= x.url %>/<%= x.entity.name %>:
+  <%= x.url %>/<%= options.utils.kebabCase(x.entity.name) %>:
     get:
       tags:
       - "Entities: <%= x.entity.namePascal %>"
@@ -45,7 +45,7 @@ paths:
         200:
           description: Create <%= x.entity.name %>
 
-  <%= x.url %>/<%= x.entity.name %>/{id}:
+  <%= x.url %>/<%= options.utils.kebabCase(x.entity.name) %>/{id}:
     get:
       tags:
       - "Entities: <%= x.entity.namePascal %>"

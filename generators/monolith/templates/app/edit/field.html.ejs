@@ -1,7 +1,7 @@
 <% if(field.isArray) { %>
     <div class="form-group">
         <label for="<%= field.name %>-edit"><%= field.name %></label>
-        <div><p-multiSelect id="<%= field.name %>-edit" [options]="<%= field.name %>All" optionLabel="label" dataKey="id" formControlName="<%= field.name %>"></p-multiSelect></div>
+        <div><p-multiSelect id="<%= field.name %>-edit" [options]="<%= field.name %>All" optionLabel="<%= field.typeRef.tags.displayName || 'name'%>" dataKey="id" formControlName="<%= field.name %>"></p-multiSelect></div>
     </div>
 <% } else if(field.typeRef && field.isDataType) { %>
     <div class="card">
@@ -26,7 +26,7 @@
 <% } else if(field.typeRef) { %>
     <div class="form-group">
         <label for="<%= field.name %>-edit"><%= field.name %></label>
-        <p-dropdown id="<%= field.name %>-edit" styleClass="form-control p-0" [options]="<%= field.name %>All" optionLabel="label" dataKey="id" [autoDisplayFirst]="false" formControlName="<%= field.name %>"></p-dropdown>
+        <p-dropdown id="<%= field.name %>-edit" styleClass="form-control p-0" [options]="<%= field.name %>All" optionLabel="<%= field.typeRef.tags.displayName || 'name'%>" dataKey="id" [autoDisplayFirst]="false" formControlName="<%= field.name %>"></p-dropdown>
     </div>
 <% } else if(field.type === 'boolean') { %>
     <div class="form-check">

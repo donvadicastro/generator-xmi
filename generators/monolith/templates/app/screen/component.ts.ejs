@@ -36,9 +36,9 @@ export class <%= entity.namePascal %>ScreenComponent {
     this.form = this.fb.group({
     <% (entity.children || []).filter(x => x.stereotype !== 'button').forEach(child => { %>
     <% if(child.stereotype === 'table') { %>
-      '<%= child.name %>': this.fb.array([]),
+      '<%= child.alias || child.name %>': this.fb.array([]),
     <% } else { %>
-      '<%= child.name %>': ['', Validators.required],
+      '<%= child.alias || child.name %>': ['', Validators.required],
     <% } %>
     <% }) %>
     });

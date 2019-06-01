@@ -20,6 +20,7 @@ export default class xmiBase {
     stereotype: string;
 
     comments: xmiComment[] = [];
+    tags: {[key: string]: string} = {};
 
     get path(): xmiBase[] {
         let path = [];
@@ -81,7 +82,15 @@ export default class xmiBase {
         this.alias = get(this.raw, ['properties', '0', '$', 'alias']);
         this.stereotype = get(this.raw, ['properties', '0', '$', 'stereotype']);
 
+        //parse comments
         this.comments = get(raw, 'ownedComment', []).map(x => <xmiComment>xmiComponentFactory.get(x));
+
+        //parse tags
+        this.tags = (raw.tags || []).reduce((prev: any, current: any) => {
+            const tag: {name: string, value: string} = get(current, 'tag.0.$');
+            tag && (prev[tag.name] = tag.value);
+            return prev;
+        }, {});
     }
 
     refreshBase(raw: any, parent?: xmiPackage | xmiBase) {
