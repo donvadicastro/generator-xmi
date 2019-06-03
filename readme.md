@@ -615,6 +615,25 @@ Each class in class diagram is represented as set of user forms to perform all s
 Class in class diagram 
 ![Class diagram](./assets/wiki/images/class-ui.png)
 
+# A collapsible section with markdown
+<details>
+  <summary>How to display references?</summary>
+  
+> Referenced entities are displayed in dropdowns to simplify linking. 
+> Example: `UserExchange` entity has reference to `Exchange` entity, so while creating new `UserExchange`
+> entity user will be able to select linked `Exchange` from dropdown on edit form.
+> 
+> ![Class reference edit](./assets/wiki/images/ref.png)
+>
+> Reference control (`ExchangeRef`) by default uses "`name`" property to display in popup data. If "`name`"
+> property not exists in entity - uses `displayName` tag to properly map to property that need to be shown in popup.
+>
+> ![Class displayName](./assets/wiki/images/displayname.png)
+>
+> In this example `User` entity don't have "`name`" field, so "`username`" field will be displayed when
+> will be mapped to user controls.
+</details>
+
 Generated forms:
 1) List all entities with support to add new
 ![List diagram](./assets/wiki/images/class-ui-list.png)
