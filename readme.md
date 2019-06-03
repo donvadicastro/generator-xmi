@@ -612,10 +612,27 @@ Generated REST API
 Each class in class diagram is represented as set of user forms to perform all set of CRUD operations.
 
 ##### Example
-Class in class diagram 
+Class in class diagram
+
 ![Class diagram](./assets/wiki/images/class-ui.png)
 
-# A collapsible section with markdown
+Generated forms:
+1) List all entities with support to add new
+![List diagram](./assets/wiki/images/class-ui-list.png)
+When list is populated - first row represents link to navigate to edit form.
+
+2) Create/Edit entity
+![List diagram](./assets/wiki/images/class-ui-edit.png)
+sented as separated screen in application.
+
+##### Example
+User interface diagram 
+![User interface diagram](./assets/wiki/images/ui-diagram.png)
+
+Generated screen
+![User interface diagram](./assets/wiki/images/ui-diagram-generated.png)
+
+##### How to display references?
 <details>
   <summary>How to display references?</summary>
   
@@ -634,25 +651,10 @@ Class in class diagram
 > will be mapped to user controls.
 </details>
 
-Generated forms:
-1) List all entities with support to add new
-![List diagram](./assets/wiki/images/class-ui-list.png)
-When list is populated - first row represents link to navigate to edit form.
-
-2) Create/Edit entity
-![List diagram](./assets/wiki/images/class-ui-edit.png)
-
-#### "User interface" diagram to UI
-Each "User Interface" diagram is represented as separated screen in application.
-
-##### Example
-User interface diagram 
-![User interface diagram](./assets/wiki/images/ui-diagram.png)
-
-Generated screen
-![User interface diagram](./assets/wiki/images/ui-diagram-generated.png)
 
 #### "User interface" diagram supported controls
+#### "User interface" diagram to UI
+Each "User Interface" diagram is repre
 | Conrol | Description |  Example |
 |----------|-------------|------|
 | Text | Represents simple editbox | ![Text](./assets/wiki/images/ui-diagram-text.png) |
