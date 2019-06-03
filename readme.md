@@ -32,12 +32,13 @@
   * ["Design to App" mapping explanation](#design-to-app-mapping-explanation)
     + [Class diagram to CRUD UI](#class-diagram-to-crud-ui)
       - [Example](#example-2)
-    + ["User interface" diagram to UI](#user-interface-diagram-to-ui)
       - [Example](#example-3)
     + ["User interface" diagram supported controls](#user-interface-diagram-supported-controls)
+    + ["User interface" diagram to UI](#user-interface-diagram-to-ui)
     + [Bind data to controls from business process models](#bind-data-to-controls-from-business-process-models)
       - [Example](#example-4)
     + [Bind data to controls from domain entities](#bind-data-to-controls-from-domain-entities)
+    + [How to display references?](#how-to-display-references)
 
 <!-- tocstop -->
 
@@ -632,26 +633,6 @@ User interface diagram
 Generated screen
 ![User interface diagram](./assets/wiki/images/ui-diagram-generated.png)
 
-##### How to display references?
-<details>
-  <summary>How to display references?</summary>
-  
-> Referenced entities are displayed in dropdowns to simplify linking. 
-> Example: `UserExchange` entity has reference to `Exchange` entity, so while creating new `UserExchange`
-> entity user will be able to select linked `Exchange` from dropdown on edit form.
-> 
-> ![Class reference edit](./assets/wiki/images/ref.png)
->
-> Reference control (`ExchangeRef`) by default uses "`name`" property to display in popup data. If "`name`"
-> property not exists in entity - uses `displayName` tag to properly map to property that need to be shown in popup.
->
-> ![Class displayName](./assets/wiki/images/displayname.png)
->
-> In this example `User` entity don't have "`name`" field, so "`username`" field will be displayed when
-> will be mapped to user controls.
-</details>
-
-
 #### "User interface" diagram supported controls
 #### "User interface" diagram to UI
 Each "User Interface" diagram is repre
@@ -696,3 +677,18 @@ How to do:
 After this actions class element will be represented as native "combobox" and will be linked to defined class entity.
 After form generation - control will be bound to data for this class entity.
 ![Diaplay](./assets/wiki/images/ui-diagram-bind-class-4.png)
+
+#### How to display references?
+Referenced entities are displayed in dropdowns to simplify linking. 
+Example: `UserExchange` entity has reference to `Exchange` entity, so while creating new `UserExchange`
+entity user will be able to select linked `Exchange` from dropdown on edit form.
+ 
+![Class reference edit](./assets/wiki/images/ref.png)
+
+Reference control (`ExchangeRef`) by default uses "`name`" property to display in popup window. If "`name`"
+property not exists in entity - uses `displayName` tag to properly map to property that need to be shown in popup.
+
+![Class displayName](./assets/wiki/images/displayname.png)
+
+In this example `User` entity don't have "`name`" field, so "`username`" field will be displayed when
+will be mapped to user controls.
