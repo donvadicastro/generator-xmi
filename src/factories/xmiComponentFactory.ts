@@ -27,6 +27,7 @@ import {xmiProvided} from "../entities/component/xmiProvided";
 import {xmiEnumeration} from "../entities/xmiEnumeration";
 import {xmiDataType} from "../entities/xmiDataType";
 import {xmiClass} from "../entities/xmiClass";
+import {xmiText} from "../xmiText";
 
 const assert = require('assert');
 
@@ -82,7 +83,7 @@ export class xmiComponentFactory {
                 else if(element instanceof xmiClass) {
                     element.refresh(raw, <xmiPackage>parent);
                 }
-                else if(element instanceof xmiMessageEndpoint || element instanceof xmiActor || element instanceof xmiBoundary) {
+                else if(element instanceof xmiMessageEndpoint || element instanceof xmiActor || element instanceof xmiBoundary || element instanceof xmiText) {
                     //no actions
                 }
                 // Collaboration as a class can happens when linked to another diagram
@@ -190,6 +191,10 @@ export class xmiComponentFactory {
             case 'uml:ProvidedInterface':
             case 'uml:RequiredInterface':
                 element = element ? (<xmiInOut>element).refresh(raw, <xmiPackage>parent) : new xmiInOut(raw, <xmiPackage>parent);
+                break;
+
+            case 'uml:Text':
+                element = new xmiText(raw, parent);
                 break;
 
             default:

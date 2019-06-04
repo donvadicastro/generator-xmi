@@ -38,7 +38,7 @@ export class XmiParser {
         // update references
         xmiComponentFactory.updateRefs();
 
-        return !!xmiComponentFactory.instance.errors.length;
+        return xmiComponentFactory.instance.errors.length === 0;
     }
 
     toConsole() {
