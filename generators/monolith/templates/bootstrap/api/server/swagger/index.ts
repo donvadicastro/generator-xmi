@@ -10,7 +10,10 @@ export default function (app: Application, routes: (app: Application) => void) {
     app.enable('case sensitive routing');
     app.enable('strict routing');
 
-    app.use(middleware.metadata());
+    //Annotates each request with all the relevant information from the Swagger definition.
+    //The path, the operation, the parameters, the security requirements - they’re all easily accessible at req.swagger.
+    //app.use(middleware.metadata());
+
     app.use(middleware.files(app, {
       apiPath: process.env.SWAGGER_API_SPEC,
     }));
