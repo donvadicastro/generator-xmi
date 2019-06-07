@@ -62,7 +62,7 @@ export class <%= entity.namePascal %>ScreenComponent {
   <% if(child.links.informationFLow.length && child.links.informationFLow[0].end === child) {%>
     <% var elementRefPath = child.links.informationFLow[0].start.elementRef.getPathFromRootWithModifier(utils.kebabCase) %>
     this.http.post(`${environment.api.url}/<%= elementRefPath %>`, {})
-      .subscribe((res: any) => <% if(child.stereotype === 'table') { %>this.form.setControl('<%= child.name %>', this.fb.array((res.returns || []).map((x: any) => this.fb.group(x))))<% } else if(['combo', 'combobox'].indexOf(child.stereotype) >= 0) { %>this.<%= child.name %>All = res.returns<% } else {%>this.form.patchValue({ <%= child.name %>: res.returns })<% } %>);
+      .subscribe((res: any) => <% if(child.stereotype === 'table') { %>this.form.setControl('<%= child.name %>', this.fb.array((res.returns ? (res.returns.length ? res.returns : [res.returns]) : []).map((x: any) => this.fb.group(x))))<% } else if(['combo', 'combobox'].indexOf(child.stereotype) >= 0) { %>this.<%= child.name %>All = res.returns<% } else {%>this.form.patchValue({ <%= child.name %>: res.returns })<% } %>);
   <% } %>
 <% }) %>
 
