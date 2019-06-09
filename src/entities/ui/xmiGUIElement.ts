@@ -37,6 +37,18 @@ export class xmiGUIElement extends xmiBase {
         return imports;
     }
 
+    getInformationFlows(direction: 'in' | 'out') {
+        return this.links.informationFLow
+            .filter(x => (direction === 'in' ? x.end : x.start) === this)
+            .filter(x => (direction === 'in' ? x.start : x.end) instanceof xmiUMLDiagram);
+    }
+
+    getCascadeFlows(direction: 'in' | 'out') {
+        return this.links.informationFLow
+            .filter(x => (direction === 'in' ? x.end : x.start) === this)
+            .filter(x => (direction === 'in' ? x.start : x.end) instanceof xmiGUIElement);
+    }
+
     constructor(raw: any, parent: xmiPackage) {
         super(raw, parent);
 
@@ -65,15 +77,13 @@ export class xmiGUIElement extends xmiBase {
 
 
         if(this.links.informationFLow.length) {
-            ret[key].flow = this.links.informationFLow.map(x => {
-                if(x.start === this) {
-                    assert(x.end && (<xmiDiagram>x.end).elementRef, `End for control "${this.name}" in diagram "${(<xmiBase>this.parent).path.map(x => x.name).join(' -> ')}" not specified`);
-                }
+            ret[key].flowIn = this.getInformationFlows('in').map(x => {
+                assert(x.start && (<xmiDiagram>x.start).elementRef, `Start for control "${this.name}" in diagram "${(<xmiBase>this.parent).path.map(x => x.name).join(' -> ')}" not specified`);
+                return `-> ${x.start && x.start.name}(${<xmiUMLDiagram>x.end && ((<xmiUMLDiagram>x.end).elementRef || {name: ''}).name})`;
+            });
 
-                if(x.end === this) {
-                    assert(x.start && (<xmiDiagram>x.start).elementRef, `Start for control "${this.name}" in diagram "${(<xmiBase>this.parent).path.map(x => x.name).join(' -> ')}" not specified`);
-                }
-
+            ret[key].flowOut = this.getInformationFlows('out').map(x => {
+                assert(x.end && (<xmiDiagram>x.end).elementRef, `End for control "${this.name}" in diagram "${(<xmiBase>this.parent).path.map(x => x.name).join(' -> ')}" not specified`);
                 return `-> ${x.end && x.end.name}(${<xmiUMLDiagram>x.end && ((<xmiUMLDiagram>x.end).elementRef || {name: ''}).name})`;
             });
         }

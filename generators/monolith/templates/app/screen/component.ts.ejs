@@ -57,18 +57,40 @@ export class <%= entity.namePascal %>ScreenComponent {
     return false;
   }
 
-  private loadData() {
-<% (entity.children || []).filter(x => x.stereotype).forEach(function (child, i) { %>
-  <% if(child.links.informationFLow.length && child.links.informationFLow[0].end === child) {%>
-    <% var elementRefPath = child.links.informationFLow[0].start.elementRef.getPathFromRootWithModifier(utils.kebabCase) %>
-    this.http.post(`${environment.api.url}/<%= elementRefPath %>`, {})
-      .subscribe((res: any) => <% if(child.stereotype === 'table') { %>this.form.setControl('<%= child.name %>', this.fb.array((res.returns ? (res.returns.length ? res.returns : [res.returns]) : []).map((x: any) => this.fb.group(x))))<% } else if(['combo', 'combobox'].indexOf(child.stereotype) >= 0) { %>this.<%= child.name %>All = res.returns<% } else {%>this.form.patchValue({ <%= child.name %>: res.returns })<% } %>);
-  <% } %>
-<% }) %>
+  <% (entity.children || []).filter(x => x.stereotype).forEach(function (child, i) { %>
+    <% child.getInformationFlows('in').forEach(x => { %>
+      protected loadData_<%= child.namePascal %>(data?: any) {
+        <% var elementRefPath = x.start.elementRef.getPathFromRootWithModifier(utils.kebabCase) %>
+        this.http.post(`${environment.api.url}/<%= elementRefPath %>`, data)
+        .subscribe((res: any) => <% if(child.stereotype === 'table') { %>this.form.setControl('<%= child.name %>', this.fb.array((res.returns ? (res.returns.length ? res.returns : [res.returns]) : []).map((x: any) => this.fb.group(x))))<% } else if(['combo', 'combobox'].indexOf(child.stereotype) >= 0) { %>this.<%= child.name %>All = res.returns<% } else {%>this.form.patchValue({ <%= child.name %>: res.returns })<% } %>);
+      }
+    <% }) %>
 
-<% objectControls.forEach(x => { %>
-    this.http.get(`${environment.api.url}/<%= x.typeRef.getPathFromRootWithModifier(utils.kebabCase) %>/<%= utils.kebabCase(x.typeRef.name) %>`, {})
+    <% if(['combo', 'combobox'].indexOf(child.stereotype) >= 0) { %>
+      protected change_<%= child.namePascal %>($event: KeyboardEvent) {
+        <% child.getCascadeFlows('out').forEach(x => { %>
+          this.loadData_<%= x.end.namePascal %>(this.form.controls['<%= child.alias || child.name %>'].value);
+        <% }) %>
+      }
+    <% } %>
+  <% }) %>
+
+  <% objectControls.forEach(x => { %>
+    protected loadData_<%= x.namePascal %>() {
+      this.http.get(`${environment.api.url}/<%= x.typeRef.getPathFromRootWithModifier(utils.kebabCase) %>/<%= utils.kebabCase(x.typeRef.name) %>`, {})
       .subscribe((res: any) =>  this.<%= x.name %>All = res);
-<% }) %>
+    }
+  <% }) %>
+
+  private loadData() {
+  <% (entity.children || []).filter(x => x.stereotype).forEach(function (child, i) { %>
+    <% child.getInformationFlows('in').forEach(x => { %>
+      this.loadData_<%= child.namePascal %>();
+    <% }) %>
+  <% }) %>
+
+  <% objectControls.forEach(x => { %>
+    this.loadData_<%= x.namePascal %>();
+  <% }) %>
   }
 }

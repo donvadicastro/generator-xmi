@@ -6,10 +6,11 @@ import {xmiClass} from "../../src/entities/xmiClass";
 describe('xmiParser', () => {
     describe('Classes', () => {
         it('Verify custom', () => {
-            const data = readJSONSync('test/data/_tokenability.json');
+            const data = readJSONSync('test/data/project2_class.json');
             const parser = new XmiParser(data);
 
             parser.parse();
+
             const pkg = <xmiPackage>parser.packge;
             const entities = (<xmiPackage>pkg.children[0]).children;
             const building: xmiClass = <xmiClass>entities[4];
