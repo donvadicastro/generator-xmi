@@ -1,7 +1,7 @@
 <% [...entity.associationLinks, ...entity.aggregationLinks].forEach(x => { %>
     <% if(!x.target.multiplicity || x.target.multiplicity === '1' || x.target.multiplicity === '0..1') { %>
         <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
-            @OneToOne(type => <%= x.target.typeRef.namePascal %>)
+            @OneToOne(type => <%= x.target.typeRef.namePascal %>, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>Ref)
             <% if(x.source.multiplicity === '0..1') { %>@JoinColumn()<% } %>
             <%= x.target.typeRef.name %>Ref: <%= x.target.typeRef.namePascal %>;
         <% } else { %>
