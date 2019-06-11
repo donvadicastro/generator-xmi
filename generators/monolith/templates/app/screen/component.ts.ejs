@@ -69,7 +69,7 @@ export class <%= entity.namePascal %>ScreenComponent {
     <% if(['combo', 'combobox'].indexOf(child.stereotype) >= 0) { %>
       protected change_<%= child.namePascal %>($event: KeyboardEvent) {
         <% child.getCascadeFlows('out').forEach(x => { %>
-          this.loadData_<%= x.end.namePascal %>(this.form.controls['<%= child.alias || child.name %>'].value);
+          this.loadData_<%= x.end.namePascal %>({'<%= child.alias || child.name%>': this.form.controls['<%= child.alias || child.name %>'].value});
         <% }) %>
       }
     <% } %>

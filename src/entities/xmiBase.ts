@@ -79,7 +79,10 @@ export default class xmiBase {
         this.name = this.nameOrigin && camel(this.nameOrigin);
         this.namePascal = this.nameOrigin && pascal(this.nameOrigin);
         this.description = get(this.raw, ['properties', '0', '$', 'documentation']);
+
         this.alias = get(this.raw, ['properties', '0', '$', 'alias']);
+        this.alias && (this.alias = camel(this.alias));
+
         this.stereotype = get(this.raw, ['properties', '0', '$', 'stereotype']);
 
         //parse comments
