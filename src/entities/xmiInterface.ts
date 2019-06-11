@@ -74,6 +74,9 @@ export class xmiInterface extends xmiBase {
             this.generalization = new xmiGeneralization(get(raw, 'generalization.0'), this);
         }
 
+        this.attributes.sort((a, b) => a.name > b.name ? 1 : -1);
+        this.operations.sort((a, b) => a.name > b.name ? 1 : -1);
+
         return this;
     }
 
