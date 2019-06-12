@@ -53,7 +53,8 @@ export class <%= entity.namePascal %>ScreenComponent {
     this.http.post(`${environment.api.url}/${action}`, data).subscribe((res: any) => {
       this.response = res;
       this.loadData();
-    });
+    }, error => this.response = error.error);
+
     return false;
   }
 

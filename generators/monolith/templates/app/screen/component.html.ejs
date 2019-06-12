@@ -9,7 +9,9 @@
     <% }) %>
 </form>
 
-<div *ngIf="response">
-    <h5>Response</h5>
-    {{response | json}}
+<div *ngIf="response" class="card">
+    <div class="card-body">
+        <h5 class="card-title">Response</h5>
+        <pre>{{response | json}}</pre>
+    </div>
 </div>

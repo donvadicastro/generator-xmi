@@ -34,6 +34,9 @@ export class <%= entity.namePascal %> {
             state.flowEnd = new Date();
 
             return state;
-        }).catch(x => console.log(chalk.red('ERROR: '), x));
+        }).catch(error => {
+            console.log(chalk.red('ERROR: '), error);
+            throw error;
+        });
     }
 }
