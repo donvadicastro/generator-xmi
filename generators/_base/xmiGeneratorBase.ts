@@ -12,6 +12,7 @@ export class XmiGeneratorBase extends (Generator as { new(args: any, opts: any):
     collaborationDiagrams: any[] = [];
     classes: any[] = [];
     dataTypes: any[] = [];
+    enums: any[] = [];
     screens: any[] = [];
 
     _bootstrap(extra: string[]) {

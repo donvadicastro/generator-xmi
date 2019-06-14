@@ -73,9 +73,15 @@ export class XmiGenerator extends XmiGeneratorBase {
             else if (x instanceof xmiEnumeration) {
                 const fileName = `${path}/enums/${x.name}.ts`;
                 const destFileName = this.destinationPath(fileName);
+                const apiRouterFileName = this.destinationPath(`${this.options.destination}/api/server/routes/${localPath}/${x.name}.router.ts`);
 
                 this.fs.copyTpl(this.templatePath('xmiEnumeration.ejs'), destFileName, options);
                 this.generatedFiles.push(destFileName);
+
+                //api
+                this.fs.copyTpl(this.templatePath('api/enum/router.ejs'), apiRouterFileName, options);
+
+                this.enums.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
             }
 
             else if (x instanceof xmiInstanceSpecification) {
@@ -120,6 +126,7 @@ export class XmiGenerator extends XmiGeneratorBase {
                 this.fs.copyTpl(this.templatePath('xmiDataType.ejs'), baseClassFileName, options);
                 this.generatedFiles.push(baseClassFileName);
                 this.dataTypes.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
+
             }
 
             else if (x instanceof xmiClass) {
@@ -222,7 +229,7 @@ export class XmiGenerator extends XmiGeneratorBase {
         const routesFileName = `${this.options.destination}/api/server/routes.ts`;
         this.fs.copyTpl(
             this.templatePath('api/routes.ejs'),
-            this.destinationPath(routesFileName), {diagrams: this.collaborationDiagrams, classes: this.classes, options: options}
+            this.destinationPath(routesFileName), {diagrams: this.collaborationDiagrams, classes: this.classes, enums: this.enums, options: options}
         );
         this.generatedFiles.push(routesFileName);
 

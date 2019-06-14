@@ -8,12 +8,20 @@ import { Application } from 'express';
     import <%= x.entity.namePascal %>Router<%= i %> from './routes<%= x.path %>/<%= x.entity.name %>.router';
 <% }) %>
 
+<% enums.forEach((x, i) => { %>
+    import <%= x.entity.namePascal %>Router<%= i %> from './routes<%= x.path %>/<%= x.entity.name %>.router';
+<% }) %>
+
 export default function routes(app: Application): void {
 <% diagrams.forEach((x, i) => { %>
     app.use('/api/v1<%= x.url %>', <%= x.entity.namePascal %>Router<%= i %>);
 <% }) %>
 
 <% classes.forEach((x, i) => { %>
+    app.use('/api/v1<%= x.url %>', <%= x.entity.namePascal %>Router<%= i %>);
+<% }) %>
+
+<% enums.forEach((x, i) => { %>
     app.use('/api/v1<%= x.url %>', <%= x.entity.namePascal %>Router<%= i %>);
 <% }) %>
 };
