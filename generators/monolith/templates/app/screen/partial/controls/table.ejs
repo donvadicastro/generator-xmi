@@ -2,6 +2,7 @@
 <table class="table">
     <thead class="thead-dark">
         <tr>
+            <th><input type="checkbox" disabled></th>
         <% (entity.children || []).forEach(x => { %>
             <th><%= x.properties.get('label') || x.name %></th>
         <% }) %>
@@ -9,13 +10,14 @@
     </thead>
     <tbody formArrayName="<%= entity.name %>">
         <tr *ngFor="let item of getGroupControls('<%= entity.name %>'); let i = index;" [formGroupName]="i">
+            <td><input type="checkbox" formControlName="_checked"></td>
         <% (entity.children || []).forEach(x => { %>
         <% if(x.stereotype === 'label') { %>
-            <td>{{ form.get('<%= entity.name %>').value[i].<%= x.name %> }}</td>
+            <td>{{ form.get('<%= entity.name %>').value[i].<%= x.alias || x.name %> }}</td>
         <% } else if(x.stereotype === 'button') { %>
                 <td><button class="btn btn-primary"><%= x.properties.get('label') || x.name %></button></td>
         <%} else { %>
-                <td><input formControlName="<%= x.name %>"/></td>
+                <td><input formControlName="<%= x.alias || x.name %>"/></td>
         <% } %>
         <% }) %>
         </tr>

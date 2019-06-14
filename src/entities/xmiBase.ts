@@ -81,7 +81,7 @@ export default class xmiBase {
         this.description = get(this.raw, ['properties', '0', '$', 'documentation']);
 
         this.alias = get(this.raw, ['properties', '0', '$', 'alias']);
-        this.alias && (this.alias = camel(this.alias));
+        this.alias && (this.alias = this.alias.split('.').map(x => camel(x)).join('.'));
 
         this.stereotype = get(this.raw, ['properties', '0', '$', 'stereotype']);
 
