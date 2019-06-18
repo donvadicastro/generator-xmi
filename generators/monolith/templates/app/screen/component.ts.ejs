@@ -38,7 +38,7 @@ export class <%= entity.namePascal %>ScreenComponent {
     data.<%= child.alias || child.name %> = data.<%= child.alias || child.name %>.filter((x: any) => x._checked);
   <% }) %>
 
-    return data;
+    return Object.keys(data).reduce((prev: any, current: string) => this.setByPath(prev, current, data[current]), {});
   }
 
   ngOnInit() {
@@ -104,5 +104,17 @@ export class <%= entity.namePascal %>ScreenComponent {
   <% objectControls.forEach(x => { %>
     this.loadData_<%= x.namePascal %>();
   <% }) %>
+  }
+
+  private setByPath(to: any, path: string, what: any): any {
+      return path.split('.').reduce((prev: any, current: string, index: number, array: string[]) => {
+          if(index < array.length -1) {
+              prev[current] || (prev[current] = {});
+              return prev[current];
+          }
+
+          prev[current] = what;
+          return to;
+      }, to);
   }
 }
