@@ -634,11 +634,10 @@ Generated screen
 ![User interface diagram](./assets/wiki/images/ui-diagram-generated.png)
 
 #### "User interface" diagram supported controls
-#### "User interface" diagram to UI
-Each "User Interface" diagram is repre
 | Conrol | Description |  Example |
 |----------|-------------|------|
 | Text | Represents simple editbox | ![Text](./assets/wiki/images/ui-diagram-text.png) |
+| Text<br/>Stereotype="<b>date</b>" | Represents simple editbox | ![Text](./assets/wiki/images/ui-diagram-date.png) |
 | Button | Action control represented as clickable button | ![Button](./assets/wiki/images/ui-diagram-button.png) |
 | Checkbox | Allows to confirm user intention | ![Button](./assets/wiki/images/ui-diagram-checkbox.png) |
 | Combobox | Allows to select single value from list of proposals | ![Button](./assets/wiki/images/ui-diagram-select.png) |
