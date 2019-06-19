@@ -642,7 +642,7 @@ Generated screen
 | Checkbox | Allows to confirm user intention | ![Button](./assets/wiki/images/ui-diagram-checkbox.png) |
 | Combobox | Allows to select single value from list of proposals | ![Button](./assets/wiki/images/ui-diagram-select.png) |
 | Panel | Allows to group controls into single container |  |
-| Table | Allows to represent list data | ![Button](./assets/wiki/images/ui-diagram-table.png) |
+| Table with selection | Allows to represent list data | ![Button](./assets/wiki/images/ui-diagram-table.png) |
 
 #### Bind data to controls from business process models
 To be able to populate data into specific controls - this controls need to be linked with diagrams that defines business process to collect data.
