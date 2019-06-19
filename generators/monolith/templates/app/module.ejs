@@ -11,6 +11,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TableModule} from 'primeng/table';
 import {DropdownModule} from 'primeng/dropdown';
 import {MultiSelectModule} from 'primeng/multiselect';
+import {CalendarModule} from 'primeng/calendar';
 
 <% classes.forEach(x => { %>
 import {<%= x.entity.namePascal %>ListComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/list/component';
@@ -43,6 +44,7 @@ import {<%= x.entity.namePascal %>ScreenComponent} from './screens/<%= x.path %>
     HttpClientModule,
     KeycloakAngularModule,
 
+    CalendarModule,
     MultiSelectModule,
     DropdownModule,
     TableModule,

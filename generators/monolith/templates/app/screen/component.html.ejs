@@ -1,5 +1,5 @@
 <% const build = (parent, callback) => (parent.children || []).forEach(x => {
-    callback({button: true, checkbox: true, table: true, panel: true, combo: true, combobox: true}[x.stereotype] ? x.stereotype : 'default', x);
+    callback({button: true, checkbox: true, table: true, panel: true, combo: true, combobox: true, date: true}[x.stereotype] ? x.stereotype : 'default', x);
 }) %>
 
 <h3>Form <%= entity.name %></h3>
