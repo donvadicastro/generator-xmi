@@ -14,6 +14,19 @@ export interface <%= entity.namePascal %>Contract {
     <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.namePascal : attr.type %>;
   <% }) %>
 
+  <% [...entity.associationLinks || [], ...entity.aggregationLinks || []].forEach(x => { %>
+    <% if(!x.target.multiplicity || x.target.multiplicity === '1' || x.target.multiplicity === '0..1') { %>
+        /**
+        *  <%= x.target.typeRef.name %> reference
+        */
+        <%= x.target.typeRef.name %>Ref?: <%= x.target.typeRef.namePascal %>;
+    <%} else {%>
+      /**
+      *  <%= x.target.typeRef.name %> reference
+      */
+      <%= x.target.typeRef.name %>RefList?: <%= x.target.typeRef.namePascal %>[];
+  <% }}) %>
+
   <% (entity.operations || []).forEach(function (operation) { %>
     /**
     * <%= operation.name %> description.

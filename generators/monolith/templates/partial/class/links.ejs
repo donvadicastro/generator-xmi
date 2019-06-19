@@ -1,5 +1,8 @@
+<% const refLinkNames = []; %>
+
 <% [...entity.associationLinks, ...entity.aggregationLinks].forEach(x => { %>
     <% if(!x.target.multiplicity || x.target.multiplicity === '1' || x.target.multiplicity === '0..1') { %>
+        <% refLinkNames.push(x.target.typeRef.name) %>
         <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
             @OneToOne(type => <%= x.target.typeRef.namePascal %>, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>Ref)
             <% if(x.source.multiplicity === '0..1') { %>@JoinColumn()<% } %>
@@ -17,3 +20,10 @@
             <%= x.target.typeRef.name %>RefList?: <%= x.target.typeRef.namePascal %>[];
         <% } %>
 <% }}) %>
+
+/**
+ * Refresh current entity.
+ */
+async refreshEntity(<% if(refLinkNames.length) { %>references?: (<%- refLinkNames.map(x => `'${x}Ref'`).join(' | ') %>)[]<% }%>): Promise<this> {
+    return Object.assign(this, await getRepository(<%= entity.namePascal %>).findOne({id: this.id}<% if(refLinkNames.length) { %>, {relations: references}<% } %>));
+}
