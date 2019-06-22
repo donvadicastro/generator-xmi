@@ -72,11 +72,11 @@ where "type" can be next:
 
 ```typescript
 // A
-export class a extends aBase {
+export class A extends ABase {
 }
 
 // A.generated
-export abstract class aBase extends ComponentBase implements aContract {
+export abstract class ABase extends ComponentBase implements AContract {
     ...
     
     fn1(state: any): Promise < any > {
@@ -89,7 +89,7 @@ export abstract class aBase extends ComponentBase implements aContract {
 }
 
 // A.contract
-export interface aContract {
+export interface AContract {
     fn1(state: any): Promise < any > ;
     fn2(state: any): Promise < any > ;
 }
@@ -98,7 +98,7 @@ export interface aContract {
 /**
  * This file is auto-generated. Do not update it's content!
  */
-export interface bContract {
+export interface BContract {
     attr1: number;
     attr2: boolean;
     
@@ -112,7 +112,7 @@ export interface bContract {
 
 ```typescript
 // bulding
-export class building extends buildingBase {
+export class Building extends BuildingBase {
     //override base actions to implement own business behaviors
     build(state: any): Promise < any > {
         return super.build(state);
@@ -120,7 +120,7 @@ export class building extends buildingBase {
 }
 
 // building.generated
-export abstract class buildingBase extends ComponentBase implements buildingContract {
+export abstract class BuildingBase extends ComponentBase implements BuildingContract {
     code: number = 0;
 
     constructor() {
@@ -133,7 +133,7 @@ export abstract class buildingBase extends ComponentBase implements buildingCont
 }
 
 // building.contract
-export interface buildingContract {
+export interface BuildingContract {
     code: number;
 
     build(state: any): Promise < any > ;
@@ -145,7 +145,7 @@ export interface buildingContract {
 
 ```typescript
 // city
-export abstract class cityBase extends ComponentBase implements cityContract {
+export abstract class CityBase extends ComponentBase implements CityContract {
     name: string = '';
 
     airlineRef: airlineContract | null = null;
@@ -156,7 +156,7 @@ export abstract class cityBase extends ComponentBase implements cityContract {
 }
 
 // airline
-export abstract class airlineBase extends ComponentBase implements airlineContract {
+export abstract class AirlineBase extends ComponentBase implements AirlineContract {
     name: string = '';
 
     aircraftRefList: aircraftContract[] = [];
@@ -169,7 +169,7 @@ export abstract class airlineBase extends ComponentBase implements airlineContra
 }
 
 // aircraft
-export abstract class aircraftBase extends ComponentBase implements aircraftContract {
+export abstract class AircraftBase extends ComponentBase implements AircraftContract {
     number: string = '';
 
     airlineRef: airlineContract | null = null;
@@ -185,7 +185,7 @@ export abstract class aircraftBase extends ComponentBase implements aircraftCont
 
 ```typescript
 // person
-export abstract class personBase extends ComponentBase implements personContract {
+export abstract class PersonBase extends ComponentBase implements PersonContract {
     firstName: string = '';
     lastName: string = '';
 
@@ -197,7 +197,7 @@ export abstract class personBase extends ComponentBase implements personContract
 }
 
 // student
-export abstract class studentBase extends personBase implements studentContract {
+export abstract class StudentBase extends PersonBase implements StudentContract {
     specialization: string = '';
 
     constructor() { super(); }
@@ -237,15 +237,15 @@ over generated code by adding specific class annotation to custom methods.
 
 ```typescript
 // C1
-export class c1 extends c1Base {}
+export class C1 extends C1Base {}
 
 // C1.generated
-export abstract class c1Base extends ComponentBase implements ... {
+export abstract class C1Base extends ComponentBase implements ... {
     // component own property
     attr1: number = 0;
 
     // constructor injected IN interface
-    constructor(protected in: inContract) {
+    constructor(protected in: InContract) {
         super();
     }
     
@@ -261,7 +261,7 @@ export abstract class c1Base extends ComponentBase implements ... {
 }
 
 // C2.generated
-export abstract class c2Base extends ComponentBase implements c2Contract, inContract {
+export abstract class C2Base extends ComponentBase implements C2Contract, InContract {
     constructor(protected out: outContract) {
         super();
     }
@@ -272,12 +272,12 @@ export abstract class c2Base extends ComponentBase implements c2Contract, inCont
 }
 
 // In.interface
-export interface inContract {
+export interface InContract {
     inFn(state: any): Promise < any > ;
 }
 
 // Out.interface
-export interface outContract {
+export interface OutContract {
     outFn(state: any): Promise < any > ;
 }
 ```
@@ -292,15 +292,15 @@ export interface outContract {
 ConfigurationService.generated
 ```typescript
 // ConfigurationService.generated
-export abstract class configurationServiceBase extends ComponentBase implements ... {
+export abstract class ConfigurationServiceBase extends ComponentBase implements ... {
     constructor() { super(); }
 
     getConfig(state: any): Promise < any > { ... }
 }
 
 // StorageService.generated
-export abstract class storageServiceBase extends ComponentBase implements ... {
-    constructor(protected configure: configureContract) {
+export abstract class StorageServiceBase extends ComponentBase implements ... {
+    constructor(protected configure: ConfigureContract) {
         super();
     }
 
@@ -310,8 +310,8 @@ export abstract class storageServiceBase extends ComponentBase implements ... {
 }
 
 // TelegramBot.generated
-export abstract class telegramBotBase extends ComponentBase implements ... {
-    constructor(protected configure: configureContract) {
+export abstract class TelegramBotBase extends ComponentBase implements ... {
+    constructor(protected configure: ConfigureContract) {
         super();
     }
 
@@ -321,17 +321,17 @@ export abstract class telegramBotBase extends ComponentBase implements ... {
 }
 
 // Configure.interface
-export interface configureContract {
+export interface ConfigureContract {
     getConfig(state: any): Promise < any > ;
 }
 
 // Persistense.interface
-export interface persistenseContract {
+export interface PersistenseContract {
     save(state: any): Promise < any > ;
 }
 
 // Notification.interface
-export interface notificationContract {
+export interface NotificationContract {
     onMessage(state: any): Promise < any > ;
 }
 ```
@@ -345,16 +345,16 @@ export interface notificationContract {
 * Actions considered as async operations and returned `Promise`
 
 ```typescript
-export class eaCollaboration1 {
+export class EaCollaboration1 {
     constructor(
         // Actor1
-        private cmpactor1: actor1Contract,
+        private cmpactor1: Actor1Contract,
 
         // C1
-        private cmpc1: c1Contract,
+        private cmpc1: C1Contract,
 
         // C2
-        private cmpc2: c2Contract) {}
+        private cmpc2: C2Contract) {}
 
     /**
     /* Execute process
@@ -397,7 +397,7 @@ When generated - component declaration is extended with additional properties:
 * `loopDelay` - timeout between loop executions.
 
 ```typescript
-export abstract class c1Base extends ComponentBase implements c1Contract {
+export abstract class C1Base extends ComponentBase implements C1Contract {
     constructor() { super(); }
 
     /**
@@ -435,7 +435,7 @@ can be represented using "switch" pattern.
 
 When generated - component declaration is extended with additional functions to check condition status
 ```typescript
-export abstract class classABase extends ComponentBase implements classAContract {
+export abstract class ClassABase extends ComponentBase implements ClassAContract {
     constructor() { super(); }
     
     //# region Message conditions
@@ -454,7 +454,7 @@ export abstract class classABase extends ComponentBase implements classAContract
 
 Sequence flow with check condition state to choose right flow
 ```typescript
-export class eaCollaboration1 {
+export class EaCollaboration1 {
     constructor() { ... }
     
     /**
@@ -513,7 +513,7 @@ export class eaCollaboration1 {
 
 ```typescript
 //process.generated
-export class iteraction {
+export class Iteraction {
     run() {
         const answers = inquirer.prompt([{
             type: 'checkbox',
@@ -536,7 +536,7 @@ export class iteraction {
 }
 
 //sequence.generated
-export class eaCollaboration1 {
+export class EaCollaboration1 {
     constructor(
         // Comp1
         private cmpcomp1: comp1Contract,
