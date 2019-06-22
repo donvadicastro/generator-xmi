@@ -221,7 +221,7 @@ over generated code by adding specific class annotation to custom methods.
 
 | Event         |  Listener example  |
 | ------------- |------|
-| Before entity creation | <code>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@BeforeInsert  <br>&nbsp;&nbsp;&nbsp;&nbsp;beforeInsertFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</code>
+| Before entity creation | <pre>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@BeforeInsert  <br>&nbsp;&nbsp;&nbsp;&nbsp;beforeInsertFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</pre>
 | After entity creation | <code>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@AfterInsert  <br>&nbsp;&nbsp;&nbsp;&nbsp;afterInsertFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</code>
 | Before entity updating | <code>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@BeforeUpdate  <br>&nbsp;&nbsp;&nbsp;&nbsp;beforeUpdateFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</code>
 | After entity updating | <code>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@AfterUpdate  <br>&nbsp;&nbsp;&nbsp;&nbsp;afterUpdateFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</code>
