@@ -222,11 +222,11 @@ over generated code by adding specific class annotation to custom methods.
 | Event         |  Listener example  |
 | ------------- |------|
 | Before entity creation | <pre>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@BeforeInsert  <br>&nbsp;&nbsp;&nbsp;&nbsp;beforeInsertFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</pre>
-| After entity creation | <code>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@AfterInsert  <br>&nbsp;&nbsp;&nbsp;&nbsp;afterInsertFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</code>
-| Before entity updating | <code>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@BeforeUpdate  <br>&nbsp;&nbsp;&nbsp;&nbsp;beforeUpdateFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</code>
-| After entity updating | <code>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@AfterUpdate  <br>&nbsp;&nbsp;&nbsp;&nbsp;afterUpdateFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</code>
-| Before entity deletion | <code>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@BeforeRemove  <br>&nbsp;&nbsp;&nbsp;&nbsp;beforeRemoveFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</code>
-| After entity deletion | <code>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@AfterRemove  <br>&nbsp;&nbsp;&nbsp;&nbsp;afterRemoveFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</code>
+| After entity creation | <pre>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@AfterInsert  <br>&nbsp;&nbsp;&nbsp;&nbsp;afterInsertFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</pre>
+| Before entity updating | <pre>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@BeforeUpdate  <br>&nbsp;&nbsp;&nbsp;&nbsp;beforeUpdateFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</pre>
+| After entity updating | <pre>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@AfterUpdate  <br>&nbsp;&nbsp;&nbsp;&nbsp;afterUpdateFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</pre>
+| Before entity deletion | <pre>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@BeforeRemove  <br>&nbsp;&nbsp;&nbsp;&nbsp;beforeRemoveFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</pre>
+| After entity deletion | <pre>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@AfterRemove  <br>&nbsp;&nbsp;&nbsp;&nbsp;afterRemoveFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</pre>
 
 ## Component diagram
 ### Component generation
