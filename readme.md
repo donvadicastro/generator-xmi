@@ -11,6 +11,7 @@
   * [Class generation](#class-generation)
   * [Class association generation](#class-association-generation)
   * [Class generalization generation](#class-generalization-generation)
+  * [Listen and react to class events](#listen-and-react-to-class-events)
 - [Component diagram](#component-diagram)
   * [Component generation](#component-generation)
   * [Components dependency generation](#components-dependency-generation)
@@ -34,7 +35,6 @@
       - [Example](#example-2)
       - [Example](#example-3)
     + ["User interface" diagram supported controls](#user-interface-diagram-supported-controls)
-    + ["User interface" diagram to UI](#user-interface-diagram-to-ui)
     + [Bind data to controls from business process models](#bind-data-to-controls-from-business-process-models)
       - [Example](#example-4)
     + [Bind data to controls from domain entities](#bind-data-to-controls-from-domain-entities)
@@ -211,6 +211,22 @@ export abstract class studentBase extends personBase implements studentContract 
     }
 }
 ```
+
+### Listen and react to class events
+After project generation each class in class diagram will be presented as set of UI forms to support full set of CRUD operations
+over defined entity (Create/Read/Update/Delete).
+
+At the same time there is a possibility to listen entity events and react to it by introducing custom business behaviors
+over generated code by adding specific class annotation to custom methods.
+
+| Event         |  Listener example  |
+| ------------- |------|
+| Before entity creation | <code>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@BeforeInsert  <br>&nbsp;&nbsp;&nbsp;&nbsp;beforeInsertFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</code>
+| After entity creation | <code>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@AfterInsert  <br>&nbsp;&nbsp;&nbsp;&nbsp;afterInsertFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</code>
+| Before entity updating | <code>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@BeforeUpdate  <br>&nbsp;&nbsp;&nbsp;&nbsp;beforeUpdateFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</code>
+| After entity updating | <code>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@AfterUpdate  <br>&nbsp;&nbsp;&nbsp;&nbsp;afterUpdateFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</code>
+| Before entity deletion | <code>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@BeforeRemove  <br>&nbsp;&nbsp;&nbsp;&nbsp;beforeRemoveFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</code>
+| After entity deletion | <code>export class Building extends BuildingBase {<br>&nbsp;&nbsp;&nbsp;&nbsp;@AfterRemove  <br>&nbsp;&nbsp;&nbsp;&nbsp;afterRemoveFn() { &nbsp;&nbsp;...&nbsp;&nbsp;}<br>}</code>
 
 ## Component diagram
 ### Component generation
