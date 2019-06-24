@@ -1,4 +1,4 @@
-import {Entity} from "typeorm";
+import {Entity, EntitySubscriberInterface, EventSubscriber} from "typeorm";
 import {<%= entity.namePascal %>Base} from './generated/<%= entity.name %>.generated';
 
 /**
@@ -6,4 +6,9 @@ import {<%= entity.namePascal %>Base} from './generated/<%= entity.name %>.gener
  */
 @Entity()
 export class <%= entity.namePascal %> extends <%= entity.namePascal %>Base {
+}
+
+@EventSubscriber()
+export class <%= entity.namePascal %>Subscriber implements EntitySubscriberInterface<<%= entity.namePascal %>> {
+    listenTo() { return <%= entity.namePascal %>; }
 }
