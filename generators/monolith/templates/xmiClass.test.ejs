@@ -1,5 +1,6 @@
 import {<%= entity.namePascal %>} from "./<%= entity.name %>";
 import {createConnection, getRepository, In} from "typeorm";
+import {DatabaseUtils} from "../<%= entity.getRelativeRoot() %>/utils/database";
 
 const pkg = require('../<%= entity.getRelativeRoot() %>/package.json');
 const ormConfig = require('../<%= entity.getRelativeRoot() %>/ormconfig.json');
@@ -13,6 +14,12 @@ describe('<%= entity.name %> specification check', () => {
 
         createConnection({...pkg.db, ...ormConfig}).then(connection => done())
             .catch(error => { console.log("CREATE CONNECTION ERROR", error); done(); });
+    });
+
+    beforeEach(async (done) => {
+        await DatabaseUtils.cleanAll();
+        await DatabaseUtils.loadAll();
+        done();
     });
 
     it('verify create', async () => {
