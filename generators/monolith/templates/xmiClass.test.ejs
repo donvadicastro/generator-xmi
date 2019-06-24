@@ -1,0 +1,22 @@
+import {<%= entity.namePascal %>} from "./<%= entity.name %>";
+import {createConnection, getRepository, In} from "typeorm";
+
+const pkg = require('../<%= entity.getRelativeRoot() %>/package.json');
+const ormConfig = require('../<%= entity.getRelativeRoot() %>/ormconfig.json');
+
+describe('<%= entity.name %> specification check', () => {
+    beforeAll((done) => {
+        process.env.db_user && (pkg.db.username = process.env.db_user);
+        process.env.db_password && (pkg.db.password = process.env.db_password);
+        process.env.db_name && (pkg.db.database = process.env.db_name);
+        process.env.db_url && (pkg.db.host = process.env.db_url);
+
+        createConnection({...pkg.db, ...ormConfig}).then(connection => done())
+            .catch(error => { console.log("CREATE CONNECTION ERROR", error); done(); });
+    });
+
+    it('verify create', async () => {
+        const entity = new <%= entity.namePascal %>();
+        await getRepository(<%= entity.namePascal %>).save(entity);
+    });
+});
