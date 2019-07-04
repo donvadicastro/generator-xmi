@@ -49,14 +49,6 @@ export class <%= entity.namePascal %>EditComponent {
   protected save() {
     const data = this.form.getRawValue();
 
-  <% (entity.attributesCombined || []).filter(x => x.name && x.type === 'Date').forEach((attr) => { %>
-    data.<%= attr.name %> = new Date(data.<%= attr.name %>).getTime();
-  <% }) %>
-
-  <% (entity.attributesCombined || []).filter(x => x.isEnum || (x.typeRef && !x.isDataType)).forEach((attr) => { %>
-    data.<%= attr.name %> = data.<%= attr.name %> && data.<%= attr.name %>.id;
-  <% }) %>
-
     this.http[this.data.id ? 'put' : 'post'](this.data.id ? `${this.apiRootUrl}/${this.data.id}` : this.apiRootUrl, data)
       .subscribe(() => this.router.navigate(['..'], { relativeTo: this.activatedRoute }));
   }
@@ -76,7 +68,7 @@ export class <%= entity.namePascal %>EditComponent {
     this.<%= x.name %>All = Object.keys(<%= x.typeRef.namePascal + (x.isEnum ? '' : 'Contract') %>)
       .filter((key: string) => isNaN(parseInt(key)))
       .map((key: string) => ({ id: <%= x.typeRef.namePascal + (x.isEnum ? '' : 'Contract')%>[key as keyof typeof <%= x.typeRef.namePascal + (x.isEnum ? '' : 'Contract')%>], label: key }));
-    <% } else { %>
+    <% } else if(!x.isDataType) { %>
     this.http.get(environment.api.url + '/<%= (x.typeRef ? x.typeRef : x).getPathFromRootWithModifier(utils.kebabCase) %>/<%= utils.kebabCase(x.name.substr(0, x.name.length - (x.isArray ? 7 : 3))) %>').subscribe(
       (res: any) => this.<%= x.name %>All = res);
     <% } %>
@@ -87,6 +79,11 @@ export class <%= entity.namePascal %>EditComponent {
         this.http.get(`${this.apiRootUrl}/${params['id']}`)
           .subscribe(res => {
             this.data = <any>res;
+
+          <% (entity.attributesCombined || []).filter(x => x.name && x.type === 'Date').forEach((attr) => { %>
+            this.data.<%= attr.name %> && (this.data.<%= attr.name %> = new Date(this.data.<%= attr.name %>));
+          <% }) %>
+
             this.form.patchValue(this.data)
           });
       }

@@ -14,7 +14,7 @@
         <tr>
             <td><a [routerLink]="entity.id">{{entity.id}}</a></td>
             <% (entity.attributesCombined || []).filter(x => x.name && !x.isArray).forEach((attr) => { %>
-                <td>{{entity.<%= attr.name %><% if(attr.typeRef) { %>.<%= attr.typeRef.tags.displayName || 'name' %><% } %>}}</td>
+                <td>{{entity.<%= attr.name %><% if(attr.typeRef && !attr.isEnum) { %>?.<%= attr.typeRef.tags.displayName || 'name' %><% } %>}}</td>
             <% }) %>
         </tr>
     </ng-template>

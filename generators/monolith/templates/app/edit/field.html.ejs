@@ -1,7 +1,9 @@
+<% const date = new Date().getTime() %>
+
 <% if(field.isArray) { %>
     <div class="form-group">
-        <label for="<%= field.name %>-edit"><%= field.name %></label>
-        <div><p-multiSelect id="<%= field.name %>-edit" [options]="<%= field.name %>All" optionLabel="<%= field.typeRef.tags.displayName || 'name'%>" dataKey="id" formControlName="<%= field.name %>"></p-multiSelect></div>
+        <label for="<%= field.name %>-edit-<%= date %>"><%= field.name %></label>
+        <div><p-multiSelect id="<%= field.name %>-edit-<%= date %>" [options]="<%= field.name %>All" optionLabel="<%= field.typeRef.tags.displayName || 'name'%>" dataKey="id" formControlName="<%= field.name %>"></p-multiSelect></div>
     </div>
 <% } else if(field.typeRef && field.isDataType) { %>
     <div class="card">
@@ -19,23 +21,28 @@
     <label><%= field.name %></label>
     <% field.typeRef.literals.forEach((x, i) => { %>
         <div class="form-check">
-            <input class="form-check-input" type="radio" id="<%= parent.name + i %>" value="<%= x %>" formControlName="<%= field.name %>">
-            <label class="form-check-label" for="<%= parent.name + i %>"><%= x %></label>
+            <input class="form-check-input" type="radio" id="<%= field.name + i %>-<%= date %>" [value]="<%= i %>" formControlName="<%= field.name %>">
+            <label class="form-check-label" for="<%= field.name + i %>-<%= date %>"><%= x %></label>
         </div>
     <% }) %>
 <% } else if(field.typeRef) { %>
     <div class="form-group">
-        <label for="<%= field.name %>-edit"><%= field.name %></label>
-        <p-dropdown id="<%= field.name %>-edit" styleClass="form-control p-0" [options]="<%= field.name %>All" optionLabel="<%= field.typeRef.tags.displayName || 'name'%>" dataKey="id" [autoDisplayFirst]="false" formControlName="<%= field.name %>"></p-dropdown>
+        <label for="<%= field.name %>-edit-<%= date %>"><%= field.name %></label>
+        <p-dropdown id="<%= field.name %>-edit-<%= date %>" styleClass="form-control p-0" [options]="<%= field.name %>All" optionLabel="<%= field.typeRef.tags.displayName || 'name'%>" dataKey="id" [autoDisplayFirst]="false" formControlName="<%= field.name %>"></p-dropdown>
     </div>
 <% } else if(field.type === 'boolean') { %>
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="<%= field.name %>-edit" formControlName="<%= field.name %>" />
-        <label class="form-check-label" for="<%= field.name %>-edit"><%= field.name %></label>
+        <input class="form-check-input" type="checkbox" id="<%= field.name %>-edit-<%= date %>" formControlName="<%= field.name %>" />
+        <label class="form-check-label" for="<%= field.name %>-edit-<%= date %>"><%= field.name %></label>
+    </div>
+<% } else if(field.type === 'Date') { %>
+    <div class="form-group">
+        <label for="<%= field.name %>-edit-<%= date %>"><%= field.name %></label>
+        <div><p-calendar id="<%= field.name %>-edit-<%= date %>" [showIcon]="true" showTime="true" formControlName="<%= field.name %>"></p-calendar></div>
     </div>
 <% } else { %>
     <div class="form-group">
-        <label for="<%= field.name %>-edit"><%= field.name %></label>
-        <input class="form-control" type="<%= field.type %>" id="<%= field.name %>-edit" formControlName="<%= field.name %>"<% if(field.typeRef) " disabled" %>/>
+        <label for="<%= field.name %>-edit-<%= date %>"><%= field.name %></label>
+        <input class="form-control" type="<%= field.type %>" id="<%= field.name %>-edit-<%= date %>" formControlName="<%= field.name %>"<% if(field.typeRef) " disabled" %>/>
     </div>
 <% } %>
