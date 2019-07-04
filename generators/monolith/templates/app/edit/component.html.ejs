@@ -1,4 +1,4 @@
-<h3>{{data.id ? 'Edit' : 'Create'}} <%= entity.name %></h3>
+<h3>{{data.id ? 'Edit' : 'Create'}} <%= entity.nameOrigin %></h3>
 <form [formGroup]="form">
 <% (entity.attributesCombined || []).filter(x => x.name).forEach((attr) => { %>
     <%- include('field.html.ejs', {field: attr, parent: entity}) -%>

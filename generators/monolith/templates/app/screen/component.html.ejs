@@ -2,7 +2,7 @@
     callback({button: true, checkbox: true, table: true, panel: true, combo: true, combobox: true, date: true}[x.stereotype] ? x.stereotype : 'default', x);
 }) %>
 
-<h3>Form <%= entity.name %></h3>
+<h3><%= entity.nameOrigin %></h3>
 <form [formGroup]="form">
     <% build(entity, (controlName, childEntity) => { %>
         <%- include(`partial/controls/${controlName}`, {entity: childEntity, build: build}) -%>
