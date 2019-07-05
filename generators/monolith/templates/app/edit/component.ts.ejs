@@ -23,6 +23,7 @@ export class <%= entity.namePascal %>EditComponent {
 
   public data: any = {};
   public form: FormGroup;
+  public errorMessage = '';
 
 <% (entity.attributesCombined || []).filter(x => x.typeRef).forEach(x => { %>
   public <%= x.name %>All: any[] = [];
@@ -49,8 +50,14 @@ export class <%= entity.namePascal %>EditComponent {
   protected save() {
     const data = this.form.getRawValue();
 
+  <% (entity.attributesCombined || []).filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).forEach((attr) => { %>
+    if(data.<%= attr.name %> && data.<%= attr.name %>.id) {
+      data.<%= attr.name %> = {id: data.<%= attr.name %>.id};
+    }
+  <% }) %>
+
     this.http[this.data.id ? 'put' : 'post'](this.data.id ? `${this.apiRootUrl}/${this.data.id}` : this.apiRootUrl, data)
-      .subscribe(() => this.router.navigate(['..'], { relativeTo: this.activatedRoute }));
+      .subscribe(() => this.router.navigate(['..'], { relativeTo: this.activatedRoute }), (ex) => this.errorMessage = ex.error.error);
   }
 
   protected delete() {
