@@ -1,3 +1,11 @@
+<%
+var groupedClasses = classes.reduce((g, entity) => {
+    g[entity.path] = g[entity.path] || []; //Check the value exists, if not assign a new array
+    g[entity.path].push(entity); //Push the new value to the array
+
+    return g; //Very important! you need to return the value of g or it will become undefined on the next pass
+}, {});
+%>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="#">Generated application</a>
@@ -7,14 +15,16 @@
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true">Administration</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <% classes.forEach(x => { %>
-                        <a class="dropdown-item" routerLink="administration/<%= x.path %>/<%= x.entity.name %>"><%= x.entity.nameOrigin %></a>
-                    <% }) %>
-                </div>
-            </li>
+            <% Object.keys(groupedClasses).forEach(x => { %>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"><%= x %></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <% groupedClasses[x].forEach(x => { %>
+                            <a class="dropdown-item" routerLink="administration/<%= x.path %>/<%= x.entity.name %>"><%= x.entity.nameOrigin %></a>
+                        <% }) %>
+                    </div>
+                </li>
+            <% }) %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true">Screens</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
