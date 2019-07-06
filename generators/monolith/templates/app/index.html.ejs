@@ -6,7 +6,12 @@
             copyX = {name: x.nameOrigin, entity: x};
         } else if (x.children) {
             copyX = { name: x.nameOrigin, children: x.children.map(y => buildTree(y)).filter(y => y)};
-            copyX.children.length || (copyX = null);
+
+            if(copyX.children.length) {
+                copyX.isLeaf = !copyX.children.some(x => x.children);
+            } else {
+                copyX = null;
+            }
         }
 
         return copyX;
@@ -25,10 +30,15 @@
 <% render(buildTree(pkg), (x) => { %>
     <a routerLink="screen/<%= x.entity.pathFromRoot %>/<%= x.entity.name %>"><%= x.name %></a>
 <%}, (x, callback) => { %>
+    <% if(x.isLeaf) { %>
+        <% callback() %>
+    <% } else { %>
+    <br>
     <div class="card">
         <div class="card-header"><%= x.name %></div>
         <div class="card-body"><% callback() %></div>
     </div>
+    <% } %>
     <br>
 <% }) %>
 </div>
