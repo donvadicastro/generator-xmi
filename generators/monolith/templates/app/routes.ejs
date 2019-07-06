@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { IndexComponent } from "./master/index.component";
 
 <% classes.forEach(x => { %>
 import {<%= x.entity.namePascal %>ListComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/list/component';
@@ -12,6 +13,7 @@ import {<%= x.entity.namePascal %>ScreenComponent} from './screens/<%= x.path %>
 
 
 const routes: Routes = [
+  { path: '', component: IndexComponent },
   { path: 'administration',  children: [
     <% classes.forEach(x => { %>
         { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>',  component: <%= x.entity.namePascal %>ListComponent },

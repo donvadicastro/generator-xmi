@@ -1,0 +1,34 @@
+<%
+    const buildTree = (x) => {
+        let copyX = null;
+
+        if('xmiScreen' === x.constructor.name) {
+            copyX = {name: x.nameOrigin, entity: x};
+        } else if (x.children) {
+            copyX = { name: x.nameOrigin, children: x.children.map(y => buildTree(y)).filter(y => y)};
+            copyX.children.length || (copyX = null);
+        }
+
+        return copyX;
+    }
+
+    const render = (x, callback, parentCallback) => {
+        if(x.children) {
+            parentCallback(x, () => x.children.forEach(y => render(y, callback, parentCallback)));
+        } else {
+            callback(x);
+        }
+    }
+%>
+
+<div class="tree">
+<% render(buildTree(pkg), (x) => { %>
+    <a routerLink="screen/<%= x.entity.pathFromRoot %>/<%= x.entity.name %>"><%= x.name %></a>
+<%}, (x, callback) => { %>
+    <div class="card">
+        <div class="card-header"><%= x.name %></div>
+        <div class="card-body"><% callback() %></div>
+    </div>
+    <br>
+<% }) %>
+</div>

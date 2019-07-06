@@ -255,6 +255,9 @@ export class XmiGenerator extends XmiGeneratorBase {
 
         const appMainPage = this.destinationPath(`${this.options.destination}/app/pages/master/app.component.html`);
         this.fs.copyTpl(this.templatePath('app/master.html.ejs'), appMainPage, {classes: this.classes, screens: this.screens, options: options});
+
+        const appIndexPage = this.destinationPath(`${this.options.destination}/app/pages/master/index.component.html`);
+        this.fs.copyTpl(this.templatePath('app/index.html.ejs'), appIndexPage, {classes: this.classes, screens: this.screens, pkg: this.options.parser.packge, options: options});
     }
 }
 

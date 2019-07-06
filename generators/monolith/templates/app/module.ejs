@@ -7,6 +7,7 @@ import { AppRoutingModule } from './routing.module';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import {initializer} from '../init';
 import {AppComponent} from './master/app.component';
+import {IndexComponent} from './master/index.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TableModule} from 'primeng/table';
 import {DropdownModule} from 'primeng/dropdown';
@@ -26,6 +27,7 @@ import {<%= x.entity.namePascal %>ScreenComponent} from './screens/<%= x.path %>
 @NgModule({
   declarations: [
     AppComponent,
+    IndexComponent,
   <% classes.forEach(x => { %>
     <%= x.entity.namePascal %>ListComponent,
     <%= x.entity.namePascal %>EditComponent,
