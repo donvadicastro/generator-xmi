@@ -1,0 +1,39 @@
+Feature: <%= entity.namePascal %>
+
+  Scenario: <%= entity.namePascal %> list
+    Given I am on the <%= entity.namePascal %> page
+    Then I should see <%= entity.namePascal %> list title "<%= entity.namePascal %> list"
+    And I should see <%= entity.namePascal %> list with data
+      | # | <%= (entity.attributesCombined || []).filter(x => x.name && !x.isArray).map(x => x.name).join(' | ') %> |
+
+  Scenario: Create new <%= entity.namePascal %>
+    Given I am on the <%= entity.namePascal %> page
+    When I add new <%= entity.namePascal %>
+    Then I should see <%= entity.namePascal %> editor title "Create <%= entity.namePascal %>"
+    When I fill <%= entity.namePascal %> form<% (entity.attributesCombined || []).filter(x => x.name && !x.isArray).forEach(x => {%>
+      | <%= x.name %>  | <%= x.name %> |<% }) %>
+
+    And Press "Save" button on <%= entity.namePascal %> form
+    Then I should see <%= entity.namePascal %> list title "<%= entity.namePascal %> list"
+    And I should see item in <%= entity.namePascal %> list<% (entity.attributesCombined || []).filter(x => x.name && !x.isArray).forEach(x => {%>
+      | <%= x.name %>  | <%= x.name %> |<% }) %>
+
+  Scenario: Edit existing <%= entity.namePascal %>
+    Given I am on the <%= entity.namePascal %> page
+    When I open <%= entity.namePascal %> to edit with ID "3"
+    When I fill <%= entity.namePascal %> form<% (entity.attributesCombined || []).filter(x => x.name && !x.isArray).forEach(x => {%>
+      | <%= x.name %>  | <%= x.name %> update |<% }) %>
+
+    And Press "Save" button on <%= entity.namePascal %> form
+    Then I should see <%= entity.namePascal %> list title "<%= entity.namePascal %> list"
+    And I should see item in <%= entity.namePascal %> list<% (entity.attributesCombined || []).filter(x => x.name && !x.isArray).forEach(x => {%>
+      | <%= x.name %>  | <%= x.name %> update |<% }) %>
+
+  Scenario: Delete existing <%= entity.namePascal %>
+    Given I am on the <%= entity.namePascal %> page
+    When I open <%= entity.namePascal %> to edit with ID "2"
+    And I delete <%= entity.namePascal %>
+    Then I should see <%= entity.namePascal %> list title "<%= entity.namePascal %> list"
+    And I should not see item in <%= entity.namePascal %> list
+      | ID | # |<% (entity.attributesCombined || []).filter(x => x.name && !x.isArray).forEach(x => {%>
+      | <%= x.name %>  | <%= x.name %> |<% }) %>
