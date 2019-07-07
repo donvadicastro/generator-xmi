@@ -1,12 +1,16 @@
 import {EditorPageObject} from "../../<%= entity.getRelativeRoot() %>/base/administration/editor.po";
 import {InputControl} from "../../<%= entity.getRelativeRoot() %>/controls/input";
 import {DropdownControl} from "../../<%= entity.getRelativeRoot() %>/controls/dropdown";
+import {CheckboxControl} from "../../<%= entity.getRelativeRoot() %>/controls/checkbox";
 import {$} from "protractor";
 
 export class <%= entity.namePascal %>EditorPage extends EditorPageObject {
 <% (entity.attributesCombined || []).filter(x => x.name).forEach(x => { %><% if(x.typeRef && !x.isArray && !x.isEnum && !x.isDataType) { %>
-    get <%= x.name %>(): SelectControl {
+    get <%= x.name %>(): DropdownControl {
         return new DropdownControl($('[formControlName="<%= x.name %>"]'));
+    }<% } else if(x.type === 'boolean') { %>
+    get <%= x.name %>(): CheckboxControl {
+    return new CheckboxControl($('[formControlName="<%= x.name %>"]'));
     }<% } else { %>
     get <%= x.name %>(): InputControl {
         return new InputControl($('[formControlName="<%= x.name %>"]'));
