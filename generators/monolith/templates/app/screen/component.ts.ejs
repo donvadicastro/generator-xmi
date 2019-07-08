@@ -58,8 +58,8 @@ export class <%= entity.namePascal %>ScreenComponent {
     return (<FormGroup>this.form.get(formControlName)).controls;
   }
 
-  protected run(action: string) {
-    const data = this.formRawValue;
+  protected run(action: string, data?: any) {
+    data = data || this.formRawValue;
 
     this.http.post(`${environment.api.url}/${action}`, data).subscribe((res: any) => {
       this.response = res;
