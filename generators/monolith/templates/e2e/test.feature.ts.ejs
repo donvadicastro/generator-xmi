@@ -1,7 +1,7 @@
 import {BeforeAll, Given, Then, When} from 'cucumber';
 import {expect} from 'chai';
-import {<%= entity.namePascal %>ListPage} from "./<%= entity.name %>/list.po";
-import {<%= entity.namePascal %>EditorPage} from "./<%= entity.name %>/editor.po";
+import {<%= entity.namePascal %>ListPage} from "./list.po";
+import {<%= entity.namePascal %>EditorPage} from "./editor.po";
 import {browser, protractor} from "protractor";
 
 const listPage: <%= entity.namePascal %>ListPage = new <%= entity.namePascal %>ListPage();

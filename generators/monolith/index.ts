@@ -171,8 +171,8 @@ export class XmiGenerator extends XmiGeneratorBase {
                 //e2e
                 this.fs.copyTpl(this.templatePath('e2e/list.po.ts.ejs'), `${e2eRootPath}/${x.name}/list.po.ts`, options);
                 this.fs.copyTpl(this.templatePath('e2e/editor.po.ts.ejs'), `${e2eRootPath}/${x.name}/editor.po.ts`, options);
+                this.fs.copyTpl(this.templatePath('e2e/test.feature.ts.ejs'), `${e2eRootPath}/${x.name}/feature.ts`, options);
                 this.fs.copyTpl(this.templatePath('e2e/test.feature.ejs'), `${e2eRootPath}/${x.name}.feature`, options);
-                this.fs.copyTpl(this.templatePath('e2e/test.feature.ts.ejs'), `${e2eRootPath}/${x.name}.feature.ts`, options);
 
                 this.generatedFiles.push(apiRouterFileName);
                 this.generatedFiles.push(editComponentFileName);
