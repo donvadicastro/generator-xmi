@@ -137,6 +137,7 @@ export class XmiGenerator extends XmiGeneratorBase {
                 const apiRouterFileName = this.destinationPath(`${this.options.destination}/api/server/routes/${localPath}/${x.name}.router.ts`);
                 const appComponentRootPath = this.destinationPath(`${this.options.destination}/app/pages/administration/${localPath}`);
                 const e2eRootPath = this.destinationPath(`${this.options.destination}/e2e/features/administration/${localPath}`);
+                const e2eFeatuePath = this.destinationPath(`${e2eRootPath}/${x.name}.feature`);
 
                 const editComponentFileName = `${appComponentRootPath}/${x.name}/edit/component.ts`;
                 const listComponentFileName = `${appComponentRootPath}/${x.name}/list/component.ts`;
@@ -172,7 +173,10 @@ export class XmiGenerator extends XmiGeneratorBase {
                 this.fs.copyTpl(this.templatePath('e2e/list.po.ts.ejs'), `${e2eRootPath}/${x.name}/list.po.ts`, options);
                 this.fs.copyTpl(this.templatePath('e2e/editor.po.ts.ejs'), `${e2eRootPath}/${x.name}/editor.po.ts`, options);
                 this.fs.copyTpl(this.templatePath('e2e/test.feature.ts.ejs'), `${e2eRootPath}/${x.name}/feature.ts`, options);
-                this.fs.copyTpl(this.templatePath('e2e/test.feature.ejs'), `${e2eRootPath}/${x.name}.feature`, options);
+
+                if(!this.fs.exists(e2eFeatuePath)) {
+                    this.fs.copyTpl(this.templatePath('e2e/test.feature.ejs'), e2eFeatuePath, options);
+                }
 
                 this.generatedFiles.push(apiRouterFileName);
                 this.generatedFiles.push(editComponentFileName);

@@ -16,8 +16,17 @@
             <td>{{ form.get('<%= entity.name %>').value[i].<%= x.alias || x.name %> }}</td>
         <% } else if(x.stereotype === 'button') { %>
                 <% if(x.links.informationFLow.length && x.links.informationFLow[0].end) {%>
-                    <% var elementRefPath = x.links.informationFLow[0].end.elementRef.getPathFromRootWithModifier(utils.kebabCase) %>
-                    <td><button class="btn btn-primary" (click)="run('<%= elementRefPath %>', form.get('<%= entity.name %>').value[i])"><%= x.properties.get('label') || x.name %></button></td>
+                    <% const elementRef = x.links.informationFLow[0].end.elementRef; %>
+                    <% const elementRefPath = elementRef.getPathFromRootWithModifier(utils.kebabCase); %>
+                    <% const firstCmp = elementRef.messages && elementRef.messages.length && elementRef.messages[0].to.elementRef; %>
+                    <% const firstOperation = firstCmp && firstCmp.operations.find(y => y.name === elementRef.messages[0].operation.name); %>
+                    <% const firstParam = firstOperation && firstOperation.inputParameters && firstOperation.inputParameters[0]; %>
+
+                    <% if(firstParam && firstOperation.inputParameters.length === 1) {%>
+                        <td><button class="btn btn-primary" (click)="run('<%= elementRefPath %>', {<%= firstParam.name %>: form.get('<%= entity.name %>').value[i]})"><%= x.properties.get('label') || x.name %></button></td>
+                    <% } else { %>
+                        <td><button class="btn btn-primary" (click)="run('<%= elementRefPath %>', form.get('<%= entity.name %>').value[i])"><%= x.properties.get('label') || x.name %></button></td>
+                    <% } %>
                 <% } else { %>
                     <td><button class="btn btn-primary" disabled><%= x.properties.get('label') || x.name %></button></td>
                 <% } %>
