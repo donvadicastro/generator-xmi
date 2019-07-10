@@ -6,9 +6,6 @@ import {ManyToMany} from "typeorm/decorator/relations/ManyToMany";
 import {JoinTable} from "typeorm/decorator/relations/JoinTable";
 import {PrimaryColumn} from "typeorm/decorator/columns/PrimaryColumn";
 
-import {ComponentBase} from '../<%= entity.getRelativeRoot() %>/base/componentBase';
-import {FlowStateType} from '../<%= entity.getRelativeRoot() %>/types/flowStateType';
-
 import {<%= entity.namePascal %>Contract} from '../../contracts/<%= entity.name %>';
 import {<%= entity.namePascal %>} from "../<%= entity.name %>";
 

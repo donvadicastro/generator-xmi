@@ -1,0 +1,13 @@
+import { inject, injectable } from "inversify";
+import "reflect-metadata";
+
+import {ComponentBase} from '../<%= entity.getRelativeRoot() %>/base/componentBase';
+import {FlowStateType} from '../<%= entity.getRelativeRoot() %>/types/flowStateType';
+import {DITypes} from "../<%= entity.getRelativeRoot() %>/types/diTypes";
+
+import {<%= entity.namePascal %>Contract} from '../../contracts/<%= entity.name %>';
+import {<%= entity.namePascal %>} from "../<%= entity.name %>";
+
+<% entity.referencesAsList.forEach(reference => {%>
+    import {<%= reference.name %>} from '<%= reference.path %>';
+<% }) %>

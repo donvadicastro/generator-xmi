@@ -1,0 +1,26 @@
+<%
+    const refs = {};
+
+    components.forEach(x => {
+        refs[`./design/${x.entity.pathFromRoot}/contracts/${x.entity.name}`] = `${x.entity.namePascal}Contract`;
+        refs[`./design/${x.entity.pathFromRoot}/components/${x.entity.name}`] = x.entity.namePascal;
+
+        x.entity.provided.forEach(y => {
+            refs[`./design/${y.typeRef.pathFromRoot}/contracts/${y.typeRef.name}`] = `${y.typeRef.namePascal}Contract`;
+        });
+    });
+%>
+
+import { Container } from "inversify";
+import { DITypes } from "./design/types/diTypes";
+<% Object.keys(refs).forEach(x => { %>
+import {<%= refs[x] %>} from '<%= x %>';
+<% }) %>
+
+const DIContainer = new Container();
+<% components.forEach(x => { %>
+DIContainer.bind<<%= x.entity.namePascal %>Contract>(DITypes.<%= x.entity.namePascal %>Contract).to(<%= x.entity.namePascal %>);
+<% x.entity.provided.forEach(y => { %>
+DIContainer.bind<<%= y.namePascal %>Contract>(DITypes.<%= y.namePascal %>Contract).to(<%= x.entity.namePascal %>);<% })}) %>
+
+export { DIContainer };

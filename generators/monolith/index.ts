@@ -106,16 +106,16 @@ export class XmiGenerator extends XmiGeneratorBase {
                 this.fs.copyTpl(this.templatePath('xmiInterface.ejs'), interfaceFileName, options);
                 this.generatedFiles.push(interfaceFileName);
 
-                this.fs.copyTpl(this.templatePath('xmiComponent.generated.ejs'), baseClassFileName, options);
+                this.fs.copyTpl(this.templatePath('components/component.generated.ejs'), baseClassFileName, options);
                 this.generatedFiles.push(baseClassFileName);
+                this.components.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
 
                 if(!this.fs.exists(classFileName)) {
-                    this.fs.copyTpl(this.templatePath('xmiClass.ejs'), classFileName, options);
-                    this.generatedFiles.push(classFileName);
+                    this.fs.copyTpl(this.templatePath('components/component.ejs'), classFileName, options);
                 }
 
                 if(!this.fs.exists(classTestFileName)) {
-                    this.fs.copyTpl(this.templatePath('xmiComponent.test.ejs'), classTestFileName, options);
+                    this.fs.copyTpl(this.templatePath('components/component.test.ejs'), classTestFileName, options);
                     // this.generatedFiles.push(classTestFileName);
                 }
             }
@@ -150,7 +150,6 @@ export class XmiGenerator extends XmiGeneratorBase {
 
                 if(!this.fs.exists(classFileName)) {
                     this.fs.copyTpl(this.templatePath('xmiClass.ejs'), classFileName, options);
-                    this.generatedFiles.push(classFileName);
                 }
 
                 if(!this.fs.exists(classTestFileName)) {
@@ -269,6 +268,14 @@ export class XmiGenerator extends XmiGeneratorBase {
 
         const appIndexPage = this.destinationPath(`${this.options.destination}/app/pages/master/index.component.html`);
         this.fs.copyTpl(this.templatePath('app/index.html.ejs'), appIndexPage, {classes: this.classes, screens: this.screens, pkg: this.options.parser.packge, options: options});
+
+        const diTypesPage = this.destinationPath(`${this.options.destination}/design/types/diTypes.ts`);
+        this.fs.copyTpl(this.templatePath('components/registerTypes.ejs'), diTypesPage, {components: this.components, pkg: this.options.parser.packge, options: options});
+        this.generatedFiles.push(diTypesPage);
+
+        const diBindingConfigPath = this.destinationPath(`${this.options.destination}/inversify.config.ts`);
+        this.fs.copyTpl(this.templatePath('components/bindingConfig.ejs'), diBindingConfigPath, {components: this.components, pkg: this.options.parser.packge, options: options});
+        this.generatedFiles.push(diBindingConfigPath);
     }
 }
 
