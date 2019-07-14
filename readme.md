@@ -693,6 +693,15 @@ After this actions class element will be represented as native "combobox" and wi
 After form generation - control will be bound to data for this class entity.
 ![Diaplay](./assets/wiki/images/ui-diagram-bind-class-4.png)
 
+#### Data flow between controls
+When you want to link two controls with parent-child relation, so child control will use selected
+data from parent to update it's content - you need to link dependent controls with "Information flow" link.
+
+![Data flo](./assets/wiki/images/ui-diagram-data-flow.png)
+
+The most common use case for this relation - cascading dropdowns (select state after selecting country).
+
+
 #### How to display references?
 Referenced entities are displayed in dropdowns to simplify linking. 
 Example: `UserExchange` entity has reference to `Exchange` entity, so while creating new `UserExchange`
