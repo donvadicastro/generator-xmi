@@ -4,7 +4,7 @@ import {xmiComment} from "./xmiComment";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {Reference} from "../types/reference";
 const camel = require('to-camel-case');
-const pascal = require('to-pascal-case')
+const pascal = require('to-pascal-case');
 
 export default class xmiBase {
     parent?: xmiPackage | xmiBase;

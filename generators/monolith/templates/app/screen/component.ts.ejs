@@ -1,10 +1,11 @@
 <% const build = (parent, callback) => (parent.children || []).forEach(x => { callback(x); build(x, callback); }) %>
 <% const objectControls = (entity.children || []).filter(x => x.typeRef) %>
 
-import { Component } from '@angular/core';
+import {get, set} from 'object-path';
+import {Component} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {environment} from "../../<%= entity.getRelativeRoot() %>/environments/environment";
 
 @Component({
@@ -38,7 +39,7 @@ export class <%= entity.namePascal %>ScreenComponent {
     data.<%= child.alias || child.name %> = data.<%= child.alias || child.name %>.filter((x: any) => x._checked);
   <% }) %>
 
-    return Object.keys(data).reduce((prev: any, current: string) => this.setByPath(prev, current, data[current]), {});
+    return Object.keys(data).reduce((prev: any, current: string) => { set(prev, current, data[current]); return prev; }, {});
   }
 
   ngOnInit() {
@@ -71,7 +72,7 @@ export class <%= entity.namePascal %>ScreenComponent {
 
   <% (entity.children || []).filter(x => x.stereotype).forEach(function (child, i) { %>
     <% child.getInformationFlows('in').forEach(x => { %>
-      protected loadData_<%= child.namePascal %>(data?: any, changedData?: any) {
+      protected loadData_<%= child.namePascal %>(data?: any, changePath?: string) {
         <% var elementRefPath = x.start.elementRef.getPathFromRootWithModifier(utils.kebabCase) %>
         this.http.post(`${environment.api.url}/<%= elementRefPath %>`, data)
         .subscribe((res: any) => <% if(child.stereotype === 'table') { %>this.form.setControl('<%= child.name %>', this.fb.array((res.returns ? (res.returns.length >= 0 ? res.returns : [res.returns]) : []).map((x: any) => this.fb.group({...x, ...{_checked: false}}))))<% } else if(['combo', 'combobox'].indexOf(child.stereotype) >= 0) { %>this.<%= child.name %>All = res.returns<% } else {%>this.form.patchValue({ <%= child.name %>: res.returns })<% } %>);
@@ -81,16 +82,15 @@ export class <%= entity.namePascal %>ScreenComponent {
     <% if(['combo', 'combobox'].indexOf(child.stereotype) >= 0) { %>
       protected change_<%= child.namePascal %>($event: KeyboardEvent) {
         <% child.getCascadeFlows('out').forEach(x => { %>
-          this.loadData_<%= x.end.namePascal %>(this.formRawValue, {'<%= child.alias || child.name%>': this.form.controls['<%= child.alias || child.name %>'].value});
+          this.loadData_<%= x.end.namePascal %>(this.formRawValue, '<%= child.alias || child.name%>');
         <% }) %>
       }
     <% } %>
   <% }) %>
 
   <% objectControls.forEach(x => { %>
-    protected loadData_<%= x.namePascal %>(data?: any, changedData?: any) {
-      const queryName = changedData && Object.keys(changedData)[0];
-      const query = queryName ? `?${queryName}=${changedData[queryName].id}` : '';
+    protected loadData_<%= x.namePascal %>(data?: any, changePath?: string) {
+      const query = changePath ? `?${changePath}=${get(data, changePath + '.id')}` : '';
 
       this.http.get(`${environment.api.url}/<%= x.typeRef.getPathFromRootWithModifier(utils.kebabCase) %>/<%= utils.kebabCase(x.typeRef.name) %>` + query, {})
         .subscribe((res: any) =>  this.<%= x.name %>All = res);
@@ -107,17 +107,5 @@ export class <%= entity.namePascal %>ScreenComponent {
   <% objectControls.forEach(x => { %>
     this.loadData_<%= x.namePascal %>();
   <% }) %>
-  }
-
-  private setByPath(to: any, path: string, what: any): any {
-      return path.split('.').reduce((prev: any, current: string, index: number, array: string[]) => {
-          if(index < array.length -1) {
-              prev[current] || (prev[current] = {});
-              return prev[current];
-          }
-
-          prev[current] = what;
-          return to;
-      }, to);
   }
 }
