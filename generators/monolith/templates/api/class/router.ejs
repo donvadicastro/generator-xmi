@@ -8,7 +8,14 @@ export default express.Router()
      * Request all entities.
      */
     .get("/<%= utils.kebabCase(entity.name) %>", async (req: Request, res: Response) => {
-        res.send(await getRepository(<%= entity.namePascal %>).find({relations: [<%- entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>], order: {id: "ASC"}}));
+        const whereStatement: any = {};
+
+        <% entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).forEach(x => {%>
+            <% const param = x.name.slice(0, -3) //remove 'Ref' ending part %>
+            req.query.<%= param %> && (whereStatement.<%= x.name %> = req.query.<%= param %>);
+        <% }) %>
+
+        res.send(await getRepository(<%= entity.namePascal %>).find({where: whereStatement, relations: [<%- entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>], order: {id: "ASC"}}));
     })
 
     /**

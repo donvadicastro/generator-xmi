@@ -20,7 +20,7 @@ export class <%= entity.namePascal %>ScreenComponent {
   public <%= x.name %>All: any[] = [];
 <% }) %>
 <% (entity.children || []).filter(x => ['combo', 'combobox'].indexOf(x.stereotype) >= 0).forEach((child, i) => { %>
-  <% if(child.links.informationFLow.length && child.links.informationFLow[0].end === child) {%>
+  <% if((child.links.informationFLow.length && child.links.informationFLow[0].end === child) && !objectControls.some(y => y.name === child.name)) {%>
     public <%= child.name %>All: any[] = [];
   <% } %>
 <% }) %>
@@ -71,7 +71,7 @@ export class <%= entity.namePascal %>ScreenComponent {
 
   <% (entity.children || []).filter(x => x.stereotype).forEach(function (child, i) { %>
     <% child.getInformationFlows('in').forEach(x => { %>
-      protected loadData_<%= child.namePascal %>(data?: any) {
+      protected loadData_<%= child.namePascal %>(data?: any, changedData?: any) {
         <% var elementRefPath = x.start.elementRef.getPathFromRootWithModifier(utils.kebabCase) %>
         this.http.post(`${environment.api.url}/<%= elementRefPath %>`, data)
         .subscribe((res: any) => <% if(child.stereotype === 'table') { %>this.form.setControl('<%= child.name %>', this.fb.array((res.returns ? (res.returns.length >= 0 ? res.returns : [res.returns]) : []).map((x: any) => this.fb.group({...x, ...{_checked: false}}))))<% } else if(['combo', 'combobox'].indexOf(child.stereotype) >= 0) { %>this.<%= child.name %>All = res.returns<% } else {%>this.form.patchValue({ <%= child.name %>: res.returns })<% } %>);
@@ -81,16 +81,19 @@ export class <%= entity.namePascal %>ScreenComponent {
     <% if(['combo', 'combobox'].indexOf(child.stereotype) >= 0) { %>
       protected change_<%= child.namePascal %>($event: KeyboardEvent) {
         <% child.getCascadeFlows('out').forEach(x => { %>
-          this.loadData_<%= x.end.namePascal %>(this.formRawValue);
+          this.loadData_<%= x.end.namePascal %>(this.formRawValue, {'<%= child.alias || child.name%>': this.form.controls['<%= child.alias || child.name %>'].value});
         <% }) %>
       }
     <% } %>
   <% }) %>
 
   <% objectControls.forEach(x => { %>
-    protected loadData_<%= x.namePascal %>() {
-      this.http.get(`${environment.api.url}/<%= x.typeRef.getPathFromRootWithModifier(utils.kebabCase) %>/<%= utils.kebabCase(x.typeRef.name) %>`, {})
-      .subscribe((res: any) =>  this.<%= x.name %>All = res);
+    protected loadData_<%= x.namePascal %>(data?: any, changedData?: any) {
+      const queryName = changedData && Object.keys(changedData)[0];
+      const query = queryName ? `?${queryName}=${changedData[queryName].id}` : '';
+
+      this.http.get(`${environment.api.url}/<%= x.typeRef.getPathFromRootWithModifier(utils.kebabCase) %>/<%= utils.kebabCase(x.typeRef.name) %>` + query, {})
+        .subscribe((res: any) =>  this.<%= x.name %>All = res);
     }
   <% }) %>
 
