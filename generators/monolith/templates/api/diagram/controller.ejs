@@ -4,7 +4,6 @@ import {DITypes} from "../../<%= entity.getRelativeRoot() %>/design/types/diType
 import {<%= entity.namePascal %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= entity.pathFromRoot %>/process/<%= entity.name %>';
 
 <% entity.lifelines.forEach(x => { %>
-    import {<%= x.ref.namePascal %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= x.ref.pathFromRoot %>/components/<%= x.ref.name %>';
     import {<%= x.ref.namePascal %>Contract} from '../../<%= entity.getRelativeRoot() %>/design/<%= x.ref.pathFromRoot %>/contracts/<%= x.ref.name %>';
 <% }) %>
 
