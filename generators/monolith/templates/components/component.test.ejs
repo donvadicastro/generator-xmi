@@ -1,5 +1,8 @@
-import {<%= entity.namePascal %>} from "./<%= entity.name %>";
+import {<%= entity.namePascal %>Contract} from "../contracts/<%= entity.name %>";
 import {FlowStateType} from "<%= entity.getRelativeRoot() %>/types/flowStateType";
+
+import {DIContainer} from "../<%= entity.getRelativeRoot() %>/inversify.config";
+import {DITypes} from "<%= entity.getRelativeRoot() %>/types/diTypes";
 <%
     const imports = (entity.operations || []).reduce((memo, operation) => {
         operation.inputParameters.filter(x => x.typeRef).forEach(x => memo[entity.getRelativePath(x.typeRef) + '/components/' + x.typeRef.name] = x.typeRef);
@@ -7,17 +10,12 @@ import {FlowStateType} from "<%= entity.getRelativeRoot() %>/types/flowStateType
 
         return memo;
     }, {});
-
-    (entity.required || []).forEach(value => {
-        const ref = factory.resolveDependency(value.ref ? value.ref.name : value.name);
-        imports[entity.getRelativePath(ref) + '/components/' + ref.name] = ref;
-    });
 %>
 <% Object.keys(imports).forEach(key => {%>
 import {<%= imports[key].namePascal %>} from '<%= key %>';<%})%>
 
 describe('<%= entity.name %> specification check', () => {
-    const instance = new <%= entity.namePascal %>(<% (entity.required || []).map((value) => { %>new <%= factory.resolveDependency(value.ref ? value.ref.name : value.name).namePascal %>(), <% }) %>);
+    const instance = DIContainer.get<<%= entity.namePascal %>Contract>(DITypes.<%= entity.namePascal %>Contract);
     const state: FlowStateType = { start: new Date() };
 <% (entity.operations || []).forEach(operation => { %>
     it('verify "<%= operation.name %>"', async () => {<% operation.inputParameters.forEach(x => { %>

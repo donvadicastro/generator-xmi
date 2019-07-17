@@ -3,21 +3,9 @@ import {DIContainer} from "../../<%= entity.getRelativeRoot() %>/inversify.confi
 import {DITypes} from "../../<%= entity.getRelativeRoot() %>/design/types/diTypes";
 import {<%= entity.namePascal %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= entity.pathFromRoot %>/process/<%= entity.name %>';
 
-<%
-var imports = [];
-
-(entity.lifelines || []).forEach(function (lifeline) {
-    imports.push(lifeline.ref);
-
-    (lifeline.ref.required || []).map(x => factory.resolveDependency(x.ref ? x.ref.name : x.name)).forEach(value => {
-        imports.push(value);
-    })
-});
-%>
-
-<% imports.filter((x, i, arr) => arr.indexOf(x) === i).forEach(x => { %>
-    import {<%= x.namePascal %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= x.pathFromRoot %>/components/<%= x.name %>';
-    import {<%= x.namePascal %>Contract} from '../../<%= entity.getRelativeRoot() %>/design/<%= x.pathFromRoot %>/contracts/<%= x.name %>';
+<% entity.lifelines.forEach(x => { %>
+    import {<%= x.ref.namePascal %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= x.ref.pathFromRoot %>/components/<%= x.ref.name %>';
+    import {<%= x.ref.namePascal %>Contract} from '../../<%= entity.getRelativeRoot() %>/design/<%= x.ref.pathFromRoot %>/contracts/<%= x.ref.name %>';
 <% }) %>
 
 
@@ -26,12 +14,7 @@ export default class Controller {
 
     constructor() {
         this.flow = new <%= entity.namePascal %>(<% (entity.lifelines || []).forEach(function (lifeline) { %>
-            new <%= lifeline.namePascal %>(
-                <% (lifeline.ref.required || []).map(function (value, i, list) { %>
-                    <% const depName = factory.resolveDependency(value.ref ? value.ref.name : value.name).namePascal %>
-                    DIContainer.get<<%= depName %>Contract>(DITypes.<%= depName %>Contract),
-                <% }) %>
-            ),
+            DIContainer.get<<%= lifeline.namePascal %>Contract>(DITypes.<%= lifeline.namePascal %>Contract),
         <% }) %>);
     }
 
