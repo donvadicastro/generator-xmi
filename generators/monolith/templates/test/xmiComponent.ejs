@@ -19,7 +19,6 @@ import {DITypes} from "../<%= entity.getRelativeRoot() %>/design/types/diTypes";
 %>
 
 <% imports.filter((x, i, arr) => arr.indexOf(x) === i).forEach(x => { %>
-    import {<%= x.namePascal %>} from '<%= entity.getRelativePath(x) %>/components/<%= x.name %>';
     import {<%= x.namePascal %>Contract} from '<%= entity.getRelativePath(x) %>/contracts/<%= x.name %>';
 <% }) %>
 

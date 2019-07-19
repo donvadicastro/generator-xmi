@@ -15,11 +15,15 @@ import {xmiBoundary} from "../../src/entities/useCases/xmiBoundary";
 import {xmiEnumeration} from "../../src/entities/xmiEnumeration";
 import {xmiDataType} from "../../src/entities/xmiDataType";
 import {xmiClass} from "../../src/entities/xmiClass";
+import {readdirSync, statSync, existsSync} from 'fs';
+import {join} from 'path';
 
 const kebabCase = require('just-kebab-case');
 const pascal = require('to-pascal-case');
 
 export class XmiGenerator extends XmiGeneratorBase {
+    staleContent: string[] = [];
+
     generate() {
         this._bootstrap(['.cfignore', '.env', '.yo-rc.json']);
 
@@ -39,10 +43,17 @@ export class XmiGenerator extends XmiGeneratorBase {
         this.log(chalk.green('DB connection:            ') + `${this.options.destination}/package.json -> "db" section`);
         this.log(chalk.green('JIRA credentials:         ') + `${this.options.destination}/package.json -> "jira" section`);
         this.log(chalk.green('Auth server connection:   ') + `${this.options.destination}/package.json -> "keycloak" section`);
+
+        if(this.staleContent.length) {
+            this.log(chalk.yellow('\r\nStale content: '));
+            this.staleContent.forEach(x => this.log(x));
+        }
     }
 
     _generate(localPath: string | null, pkg: any) {
         const path = this.options.destination + '/design' + localPath;
+        const childPackages: string[] = ['components', 'contracts', 'enums', 'types', 'process', 'test'];
+        const childComponents: string[] = [];
 
         const options: any = {
             auth: this.options.auth,
@@ -57,6 +68,7 @@ export class XmiGenerator extends XmiGeneratorBase {
 
             options.className = pascal(x.name);
             options.entity = x;
+
 
             if (x instanceof xmiActor) {
                 const destFileName = this.destinationPath(`${path}/components/generated/${x.name}.generated.ts`);
@@ -95,6 +107,9 @@ export class XmiGenerator extends XmiGeneratorBase {
                     this.fs.copyTpl(this.templatePath('xmiClass.ejs'), classFileName, options);
                     this.generatedFiles.push(classFileName);
                 }
+
+                //store all non-generated content
+                childComponents.push(classFileName);
             }
 
             else if (x instanceof xmiComponent) {
@@ -118,6 +133,10 @@ export class XmiGenerator extends XmiGeneratorBase {
                     this.fs.copyTpl(this.templatePath('components/component.test.ejs'), classTestFileName, options);
                     // this.generatedFiles.push(classTestFileName);
                 }
+
+                //store all non-generated content
+                childComponents.push(classFileName);
+                childComponents.push(classTestFileName);
             }
 
             else if (x instanceof xmiDataType) {
@@ -181,6 +200,10 @@ export class XmiGenerator extends XmiGeneratorBase {
                 this.generatedFiles.push(editComponentFileName);
                 this.generatedFiles.push(listComponentFileName);
 
+                //store all non-generated content
+                childComponents.push(classFileName);
+                childComponents.push(classTestFileName);
+
                 this.classes.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
             }
 
@@ -237,7 +260,16 @@ export class XmiGenerator extends XmiGeneratorBase {
 
             else if (x instanceof xmiPackage) {
                 localPath || this.fs.copyTpl(this.templatePath('readme.ejs'), `${this.options.destination}/readme.md`, options);
+
+                //clean generated content
+                existsSync(`${localPath}/${x.name}/components/generated`) && this.spawnCommandSync('rimraf', [`${localPath}/${x.name}/components/generated`]);
+                existsSync(`${localPath}/${x.name}/contracts`) && this.spawnCommandSync('rimraf', [`${localPath}/${x.name}/contracts`]);
+                existsSync(`${localPath}/${x.name}/enums`) && this.spawnCommandSync('rimraf', [`${localPath}/${x.name}/enums`]);
+                existsSync(`${localPath}/${x.name}/types`) && this.spawnCommandSync('rimraf', [`${localPath}/${x.name}/types`]);
+
                 this._generate(`${localPath}/${x.name}`, x);
+
+                childPackages.push(x.name);
             }
         });
 
@@ -276,6 +308,21 @@ export class XmiGenerator extends XmiGeneratorBase {
         const diBindingConfigPath = this.destinationPath(`${this.options.destination}/inversify.config.ts`);
         this.fs.copyTpl(this.templatePath('components/bindingConfig.ejs'), diBindingConfigPath, {components: this.components, pkg: this.options.parser.packge, options: options});
         this.generatedFiles.push(diBindingConfigPath);
+
+        localPath && this._calculateDiff(path, childPackages, childComponents);
+    }
+
+    _calculateDiff(localPath: string, folders: string[], componentFiles: string[]) {
+        if(existsSync(localPath)) {
+            const dirs = readdirSync(this.destinationPath(localPath)).filter(f => statSync(join(localPath, f)).isDirectory());
+            this.staleContent = this.staleContent.concat(dirs.filter(x => folders.indexOf(x) === -1).map(x => `(D) ${localPath}/${x}`));
+        }
+
+        const cmpFolder = join(localPath, 'components');
+        if(existsSync(cmpFolder)) {
+            const files = readdirSync(this.destinationPath(cmpFolder)).filter(f => statSync(join(cmpFolder, f)).isFile());
+            this.staleContent = this.staleContent.concat(files.filter(x => componentFiles.indexOf(this.destinationPath(join(cmpFolder, x))) === -1).map(x => `(F) ${localPath}/components/${x}`));
+        }
     }
 }
 
