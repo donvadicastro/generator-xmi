@@ -2,10 +2,16 @@ import xmiBase from "../xmiBase";
 import {xmiLifeline} from "../xmiLifeline";
 import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
 import {xmiComponent} from "../xmiComponent";
+import {xmiOperand} from "./xmiOperand";
 
 export class xmiFragment extends xmiBase {
     lifelines: (xmiLifeline | {elementRef: xmiComponent})[];
     interactionOperator: string;
+
+    /**
+     * Links to operands in combined fragments when this entity belongs to.
+     */
+    operands: xmiOperand[] = [];
 
     constructor(raw: any, parent: xmiBase, lifelines: xmiLifeline[]) {
         super(raw, parent);

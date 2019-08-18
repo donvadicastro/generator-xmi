@@ -16,7 +16,7 @@ export abstract class <%= entity.namePascal %>Base extends <%- include('../parti
   }
 
 <% if(entity.hasLoop) { %>
-  <%- include('../partial/class/loop', {entity: entity}) -%>
+  <%- include('../partial/component/loop', {entity: entity}) -%>
 <% } %>
 
   <%- include('../partial/component/conditions', {entity: entity}) -%>

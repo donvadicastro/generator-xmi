@@ -18,9 +18,9 @@
     }
 
     const render = (x, callback, parentCallback) => {
-        if(x.children) {
+        if(x && x.children) {
             parentCallback(x, () => x.children.forEach(y => render(y, callback, parentCallback)));
-        } else {
+        } else if(x) {
             callback(x);
         }
     }

@@ -54,8 +54,8 @@ export class xmiCollaboration extends xmiBase {
             });
     }
 
-    get loopFragments() {
-        return this.fragments.filter(x => x.type === 'uml:CombinedFragment' && x.interactionOperator === 'loop');
+    get loopFragments(): xmiCombinedFragment[] {
+        return <xmiCombinedFragment[]>this.fragments.filter(x => x.type === 'uml:CombinedFragment' && x.interactionOperator === 'loop');
     }
 
     get conditionFragments(): xmiCombinedFragment[] {

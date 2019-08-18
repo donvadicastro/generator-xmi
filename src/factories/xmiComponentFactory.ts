@@ -64,7 +64,7 @@ export class xmiComponentFactory {
     get initDeffered() { return this._initDeffered; }
     get errors() { return this._errors; };
 
-    static get(raw: any, parent?: xmiPackage | xmiInterface | xmiCollaboration, options?: any): xmiBase | null {
+    static get(raw: any, parent?: xmiPackage | xmiInterface | xmiCollaboration | xmiGUIElement, options?: any): xmiBase | null {
         let element = this.getByKey(raw.$['xmi:id']);
 
         //elements collection was parsed without parent applied

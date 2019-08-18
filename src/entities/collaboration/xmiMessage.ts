@@ -7,6 +7,7 @@ import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
 import xmiConnector from "../connectors/xmiConnector";
 import {xmiCollaboration} from "../xmiCollaboration";
 import {xmiClass} from "../xmiClass";
+import {xmiOperand} from "./xmiOperand";
 
 const assert = require('assert');
 
@@ -20,9 +21,25 @@ export class xmiMessage extends xmiBase {
         return f && f.lifelines[0];
     }
 
+    /**
+     * Get operand in combined fragment where this start message belongs to (e.g. loop)
+     */
+    get fromOperand(): xmiOperand | null {
+        const f = xmiComponentFactory.instance.fragmentHash.filter(x => x.id === this.raw.$.sendEvent)[0];
+        return (f && f.operands.length) ? f.operands[0] : null;
+    }
+
     get to(): xmiLifeline | {elementRef: xmiComponent} {
         const f = xmiComponentFactory.instance.fragmentHash.filter(x => x.id === this.raw.$.receiveEvent)[0];
         return f && f.lifelines[0];
+    }
+
+    /**
+     * Get operand in combined fragment where this end message belongs to (e.g. loop)
+     */
+    get toOperand(): xmiOperand | null {
+        const f = xmiComponentFactory.instance.fragmentHash.filter(x => x.id === this.raw.$.receiveEvent)[0];
+        return (f && f.operands.length) ? f.operands[0] : null;
     }
 
     get connector(): xmiConnector {

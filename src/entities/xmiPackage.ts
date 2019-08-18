@@ -4,6 +4,16 @@ import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 export class xmiPackage extends xmiBase {
     children: xmiBase[];
 
+    getNode(path: string): xmiBase {
+        let node: any = this;
+
+        path.split('.').forEach(x => {
+            node = node && node.children.find((child: xmiBase) => child.name === x);
+        });
+
+        return node;
+    }
+
     constructor(raw: any, parent?: xmiPackage) {
         super(raw, parent);
 

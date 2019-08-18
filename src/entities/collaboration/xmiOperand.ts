@@ -12,6 +12,11 @@ export class xmiOperand extends xmiBase {
 
         this.description = get(this.raw, ['guard', '0', 'specification', '0', '$', 'body']);
         this.fragments = get(this.raw, 'fragment', [])
-            .map((x: any) => <xmiFragment>xmiComponentFactory.get(x, undefined, lifelines));
+            .map((x: any) => {
+                const fragment = <xmiFragment>xmiComponentFactory.get(x, undefined, lifelines);
+                fragment.operands.push(this);
+
+                return fragment;
+            });
     }
 }
