@@ -2,10 +2,15 @@
 <% (entity.messages || []).forEach(message => { %>
     // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to && message.to.elementRef.name %>
 
-    <% const loop = message.from && message.fromOperand && message.from.elementRef.fragments.find(x => x.interactionOperator === 'loop') %>
+    <% const loopFrom = message.from && message.fromOperand && message.from.elementRef.fragments.find(x => x.interactionOperator === 'loop') %>
+    <% const loopTo = message.to && message.toOperand && message.to.elementRef.fragments.find(x => x.interactionOperator === 'loop') %>
+    <% const loop = loopFrom || loopTo %>
     <% if(loop && !loops[loop.id]) { %>
         <% loops[loop.id] = message.from.elementRef; currentLoopId = loop.id; %>
-        while(this.cmp<%= message.from.elementRef.name %>.loopCondition) {
+        flowAsync = flowAsync.then((state: any) => {
+            return Promise.resolve(state).then(state => {
+                return Promise.all(state.returns.map(x => {
+                    let flowAsync = Promise.resolve({...state, ...{returns: x}});
     <% } %>
 
     flowAsync = flowAsync.then((state: any) => {
@@ -13,24 +18,21 @@
     });
 
     <% if(currentLoopId && (!loop || loop.id !== currentLoopId)) { %>
-        // flow delay between loops
-        flowAsync = flowAsync.then((state) => {
-            console.log(`sleep: ${this.cmp<%= loops[currentLoopId].name %>.loopDelay}ms, replay flow: "<%= loops[currentLoopId].name %>"`);
-            return new Promise((resolve) => (setTimeout(() => resolve(state), this.cmp<%= loops[currentLoopId].name %>.loopDelay)));
-        }); }
         <% //when loop completed - activate parent loop of skip
             delete loop[currentLoopId];
             const loopIds = Object.keys(loop);
 
             currentLoopId = loopIds.length ? loop[loopIds[loopIds.length-1]] : null;
         %>
+                    return flowAsync;
+                }));
+            }).then(states => state);
+        });
     <% } %>
 <% }) %>
-
 <% Object.keys(loops).reverse().forEach(x => { %>
-    // flow delay between loops
-    flowAsync = flowAsync.then((state) => {
-        console.log(`sleep: ${this.cmp<%= loops[x].name %>.loopDelay}ms, replay flow: "<%= loops[x].name %>"`);
-        return new Promise((resolve) => (setTimeout(() => resolve(state), this.cmp<%= loops[x].name %>.loopDelay)));
-    }); }
+            return flowAsync;
+        }));
+    }).then(states => state);
+});
 <% }) %>
