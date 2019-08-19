@@ -1,26 +1,13 @@
 <% let loops = {}; currentLoopId = null; %>
 <% (entity.messages || []).forEach(message => { %>
-    // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to && message.to.elementRef.name %>
-
     <% const loopFrom = message.from && message.fromOperand && message.from.elementRef.fragments.find(x => x.interactionOperator === 'loop') %>
     <% const loopTo = message.to && message.toOperand && message.to.elementRef.fragments.find(x => x.interactionOperator === 'loop') %>
     <% const loop = loopFrom || loopTo %>
-    <% if(loop && !loops[loop.id]) { %>
-        <% loops[loop.id] = message.from.elementRef; currentLoopId = loop.id; %>
-        flowAsync = flowAsync.then((state: any) => {
-            return Promise.resolve(state).then(state => {
-                return Promise.all(state.returns.map(x => {
-                    let flowAsync = Promise.resolve({...state, ...{returns: x}});
-    <% } %>
-
-    flowAsync = flowAsync.then((state: any) => {
-        <%- include('action', {message: message}) -%>
-    });
 
     <% if(currentLoopId && (!loop || loop.id !== currentLoopId)) { %>
-        <% //when loop completed - activate parent loop of skip
-            delete loop[currentLoopId];
-            const loopIds = Object.keys(loop);
+        <% //when loop completed - activate parent loop or skip
+            delete loops[currentLoopId];
+            const loopIds = Object.keys(loops);
 
             currentLoopId = loopIds.length ? loop[loopIds[loopIds.length-1]] : null;
         %>
@@ -29,6 +16,20 @@
             }).then(states => state);
         });
     <% } %>
+
+    <% if(loop && !loops[loop.id]) { %>
+        <% loops[loop.id] = message.from.elementRef; currentLoopId = loop.id; %>
+        // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to && message.to.elementRef.name %>
+        flowAsync = flowAsync.then((state: any) => {
+            return Promise.resolve(state).then(state => {
+                return Promise.all(state.returns.map(x => {
+                    let flowAsync = Promise.resolve({...state, ...{returns: x}});
+    <% } %>
+
+    // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to && message.to.elementRef.name %>
+    flowAsync = flowAsync.then((state: any) => {
+        <%- include('action', {message: message}) -%>
+    });
 <% }) %>
 <% Object.keys(loops).reverse().forEach(x => { %>
             return flowAsync;

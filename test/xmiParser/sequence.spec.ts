@@ -1,10 +1,8 @@
 import {XmiParser} from "../../src/xmiParser";
 import {xmiPackage} from "../../src/entities/xmiPackage";
 import {xmiCollaboration} from "../../src/entities/xmiCollaboration";
-import {xmiActor} from "../../src/entities/xmiActor";
 import {xmiComponent} from "../../src/entities/xmiComponent";
 import {xmiClass} from "../../src/entities/xmiClass";
-import {xmiOperand} from "../../src/entities/collaboration/xmiOperand";
 
 const parseString = require('xml2js').parseString;
 const fs = require('fs');

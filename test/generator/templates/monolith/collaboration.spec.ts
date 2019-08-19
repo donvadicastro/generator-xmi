@@ -1,10 +1,11 @@
 import {readJSONSync} from "fs-extra";
 import {XmiParser} from "../../../../src/xmiParser";
 import {xmiPackage} from "../../../../src/entities/xmiPackage";
-import {xmiComponent} from "../../../../src/entities/xmiComponent";
 import '../../../../utils/normilize';
 import {xmiCollaboration} from "../../../../src/entities/xmiCollaboration";
 
+const parseString = require('xml2js').parseString;
+const fs = require('fs');
 const path = require('path');
 const ejs = require('ejs');
 
@@ -67,6 +68,104 @@ describe('Generators', () => {
                             }
                         });
                     `.normalizeSpace());
+                });
+            });
+
+            describe('Collaboration with loop', () => {
+                let data: any, parser: XmiParser;
+                const dir = path.join(__dirname, '../../../../generators/monolith/templates/partial/collaboration');
+
+                beforeEach((done) => {
+                    parseString(fs.readFileSync('test/data/fixtures.xml'), (err: any, result: any) => { data = result; done(); });
+                });
+
+                beforeEach(() => {
+                    parser = new XmiParser(data);
+                    parser.parse();
+                });
+
+                it('check loop', async () => {
+                    const pkg = <xmiPackage>parser.packge;
+                    const sequence: xmiCollaboration = <xmiCollaboration>(pkg.getNode('sequenceDiagrams.1SimpleLoop.eaCollaboration1'));
+                    const content = await ejs.renderFile(path.join(dir, 'flow.ejs'), {entity: sequence});
+
+                    expect(content.normalizeSpace()).toBe(`
+                        // Start call componentA 
+                        flowAsync = flowAsync.then((state: any) => { 
+                            state.start = new Date(); 
+                            console.log('--> componentA::actionA1'); 
+                            
+                            return this.cmpcomponentA.actionA1(state); 
+                        }); 
+                        
+                        // componentA call componentB 
+                        flowAsync = flowAsync.then((state: any) => { 
+                            state.start = new Date(); 
+                            console.log('--> componentB::actionB1'); 
+                            
+                            return this.cmpcomponentB.actionB1(state); 
+                        }); 
+                        
+                        // componentA call componentB 
+                        flowAsync = flowAsync.then((state: any) => { 
+                            return Promise.resolve(state).then(state => { 
+                                return Promise.all(state.returns.map(x => { 
+                                    let flowAsync = Promise.resolve({...state, ...{returns: x}}); 
+                                    
+                                    // componentA call componentB 
+                                    flowAsync = flowAsync.then((state: any) => { 
+                                        state.start = new Date(); 
+                                        console.log('--> componentB::actionB2'); 
+                                        
+                                        return this.cmpcomponentB.actionB2(state); 
+                                    }); 
+                                
+                                    return flowAsync; 
+                                })); 
+                            }).then(states => state); 
+                        });`.normalizeSpace());
+                });
+
+                it('check loop with final call', async () => {
+                    const pkg = <xmiPackage>parser.packge;
+                    const sequence: xmiCollaboration = <xmiCollaboration>(pkg.getNode('sequenceDiagrams.2SimpleLoopWithFinalCall.eaCollaboration2'));
+                    const content = await ejs.renderFile(path.join(dir, 'flow.ejs'), {entity: sequence});
+
+                    expect(content.normalizeSpace()).toBe(`
+                        // Start call componentA 
+                        flowAsync = flowAsync.then((state: any) => { 
+                            state.start = new Date(); 
+                            console.log('--> componentA::actionA1'); 
+                            
+                            return this.cmpcomponentA.actionA1(state); 
+                        }); 
+                        
+                        // componentA call componentB 
+                        flowAsync = flowAsync.then((state: any) => { 
+                            return Promise.resolve(state).then(state => { 
+                                return Promise.all(state.returns.map(x => { 
+                                    let flowAsync = Promise.resolve({...state, ...{returns: x}}); 
+                                    
+                                    // componentA call componentB 
+                                    flowAsync = flowAsync.then((state: any) => { 
+                                        state.start = new Date(); 
+                                        console.log('--> componentB::actionB1'); 
+                                        
+                                        return this.cmpcomponentB.actionB1(state); 
+                                    }); 
+                                
+                                    return flowAsync; 
+                                })); 
+                            }).then(states => state);
+                        });
+                        
+                        // componentA call componentB 
+                        flowAsync = flowAsync.then((state: any) => { 
+                            state.start = new Date(); 
+                            console.log('--> componentB::actionB2'); 
+                            
+                            return this.cmpcomponentB.actionB2(state); 
+                        });`.normalizeSpace());
                 });
             });
         });
