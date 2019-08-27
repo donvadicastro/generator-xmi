@@ -29,28 +29,6 @@
     "jira:sync": "node cmd/jira_sync.js"
   },
 
-  "jira": {
-    "url": "<company>.atlassian.net",
-    "username": "username",
-    "password": "password",
-    "project": "<ProjectName>"
-  },
-
-  "db": {
-    "type": "postgres",
-    "host": "localhost",
-    "port": 5432,
-    "username": "test",
-    "password": "test",
-    "database": "test"
-  },
-
-  "keycloak": {
-    "url": "http://192.168.169.170:8080/auth",
-    "realm": "tokenability",
-    "clientId": "PWA_CLIENT"
-  },
-
   "jest": {
     "testEnvironment": "node",
     "verbose": false,
