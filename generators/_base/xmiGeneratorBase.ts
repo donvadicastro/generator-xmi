@@ -17,14 +17,13 @@ export class XmiGeneratorBase extends (Generator as { new(args: any, opts: any):
     screens: any[] = [];
     components: any[] = [];
 
-    _bootstrap(extra: string[]) {
-        if(!this.fs.exists(this.destinationPath(this.options.destination))) {
-            const from = this.templatePath('bootstrap');
-            const to = this.destinationPath(this.options.destination);
+    _bootstrap(extra: string[], skipIfExists: string[]) {
+        const from = this.templatePath('bootstrap');
+        const to = this.destinationPath(this.options.destination);
 
-            this.fs.copy(from, to);
-            extra.forEach(x => this.fs.copy(`${from}/${x}`, `${to}/${x}`));
-        }
+        this.fs.copy(from, to, {ignore: skipIfExists});
+        extra.forEach(x => this.fs.copy(`${from}/${x}`, `${to}/${x}`));
+        skipIfExists.forEach(x => this.fs.exists(`${to}/${x}`) || this.fs.copy(`${from}/${x}`, `${to}/${x}`))
     }
 
     _beautify(filename: string) {

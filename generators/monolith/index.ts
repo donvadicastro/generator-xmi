@@ -25,7 +25,7 @@ export class XmiGenerator extends XmiGeneratorBase {
     staleContent: string[] = [];
 
     generate() {
-        this._bootstrap(['.cfignore', '.env', '.yo-rc.json']);
+        this._bootstrap(['.cfignore', '.yo-rc.json'], ['.env', 'app/environments']);
 
         this.log(chalk.green('Generate'));
         this._generate('', this.options.parser.packge);

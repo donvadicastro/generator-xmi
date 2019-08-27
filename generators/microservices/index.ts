@@ -16,7 +16,7 @@ const pascal = require('to-pascal-case');
 
 export class XmiGenerator extends XmiGeneratorBase {
     generate() {
-        this._bootstrap(['.editorconfig', '.eslintignore', '.gitignore', '.yo-rc.json']);
+        this._bootstrap(['.editorconfig', '.eslintignore', '.gitignore', '.yo-rc.json'], []);
 
         this.log(chalk.green('Generate'));
         this._generate('', this.options.parser.packge);
