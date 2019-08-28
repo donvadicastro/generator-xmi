@@ -13,5 +13,5 @@
 <a routerLink="../">Return back</a>
 <div class="float-right">
     <button class="btn btn-danger" (click)="delete()" *ngIf="data.id">Delete</button>&nbsp;
-    <button class="btn btn-primary" (click)="save()">Save</button>
+    <button class="btn btn-primary" (click)="save()" [disabled]="!form.valid">Save</button>
 </div>
