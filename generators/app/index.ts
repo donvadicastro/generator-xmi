@@ -63,7 +63,7 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
         const file = this.fs.read(this.options.xmiFileName);
 
         parseString(file, (err: any, result: any) => {
-            this.fs.writeJSON(this.templatePath('../files/test.json'), result);
+            // this.fs.writeJSON(this.templatePath('../files/test.json'), result);
             callback(result);
         });
     }
