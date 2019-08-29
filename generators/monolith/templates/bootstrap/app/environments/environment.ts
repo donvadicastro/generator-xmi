@@ -2,11 +2,15 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const config: any = require('!!raw-loader!../../.env').split('\n')
+    .map((x: string) => x.split('='))
+    .reduce((prev: any, x: string[]) => { prev[x[0]] = x[1]; return prev; }, {});
+
 export const environment = {
   production: false,
 
   keycloak: {
-    config: require('../../package.json').keycloak,
+    config: {url: config.KEYCLOAK_URL, realm: config.KEYCLOAK_REALM, clientId: config.KEYCLOAK_CLIENTID},
     initOptions: {
       onLoad: 'login-required',
       checkLoginIframe: false
@@ -15,7 +19,7 @@ export const environment = {
   },
 
   api: {
-    url: 'http://localhost:3000/api/v1'
+    url: config.API_URL
   }
 };
 

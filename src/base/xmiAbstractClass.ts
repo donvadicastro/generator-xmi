@@ -91,7 +91,9 @@ export class xmiAbstractClass extends xmiInterface {
             .map(x => ((!x.target.multiplicity || x.target.multiplicity === '1' || x.target.multiplicity === '0..1') ? {
                 name: (<xmiClass>x.target.typeRef).name + 'Ref',
                 typeRef: x.target.typeRef,
-                isArray: false
+                isArray: false,
+                isOptional: x.target.multiplicity === '0..1',
+                typeDefaultValue: 'null'
             } : {
                 name: (<xmiClass>x.target.typeRef).name + 'RefList',
                 typeRef: x.target.typeRef,
