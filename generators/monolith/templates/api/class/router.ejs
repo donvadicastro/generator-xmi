@@ -15,14 +15,16 @@ export default express.Router()
             req.query.<%= param %> && (whereStatement.<%= x.name %> = req.query.<%= param %>);
         <% }) %>
 
-        res.send(await getRepository(<%= entity.namePascal %>).find({where: whereStatement, relations: [<%- entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>], order: {id: "ASC"}}));
+        getRepository(<%= entity.namePascal %>).find({where: whereStatement, relations: [<%- entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>], order: {id: "ASC"}})
+            .then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
     })
 
     /**
      * Request entity by id.
      */
     .get("/<%= utils.kebabCase(entity.name) %>/:id", async (req: Request, res: Response) => {
-        res.send(await getRepository(<%= entity.namePascal %>).findOne(req.params.id, {relations: [<%- entity.attributesCombined.filter(x => x.typeRef && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>]}));
+        getRepository(<%= entity.namePascal %>).findOne(req.params.id, {relations: [<%- entity.attributesCombined.filter(x => x.typeRef && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>]})
+            .then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
     })
 
     /**
@@ -31,7 +33,9 @@ export default express.Router()
     .post("/<%= utils.kebabCase(entity.name) %>", async (req: Request, res: Response) => {
         const repository = getRepository(<%= entity.namePascal %>);
         const entity = repository.create(req.body);
-        res.send(await repository.save(entity));
+
+        repository.save(entity)
+            .then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
     })
 
     /**
@@ -43,7 +47,7 @@ export default express.Router()
 
         if(entity) {
             repository.merge(entity, req.body);
-            res.send(await repository.save(entity));
+            repository.save(entity).then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
         } else {
             res.sendStatus(404);
         }
@@ -57,7 +61,7 @@ export default express.Router()
         const entityToDelete = await repository.findOne(req.params.id);
 
         if(entityToDelete) {
-            res.send(await repository.remove(entityToDelete));
+            repository.remove(entityToDelete).then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
         } else {
             res.sendStatus(404);
         }
