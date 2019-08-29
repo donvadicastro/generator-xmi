@@ -26,7 +26,7 @@
 <% } else if(field.typeRef) { %>
     <div class="form-group">
         <label for="<%= prefix %>-edit"><%= field.name %></label>
-        <p-dropdown id="<%= prefix %>-edit" styleClass="form-control p-0" [options]="<%= field.name %>All" optionLabel="<%= field.typeRef.tags.displayName || 'name'%>" dataKey="id" [autoDisplayFirst]="false" formControlName="<%= field.name %>"<% if(!field.isOptional) " required"%>></p-dropdown>
+        <p-dropdown id="<%= prefix %>-edit" styleClass="form-control p-0" [options]="<%= field.name %>All" optionLabel="<%= field.typeRef.tags.displayName || 'name'%>" dataKey="id" [autoDisplayFirst]="false" formControlName="<%= field.name %>"<%= field.isOptional ? "" : " required"%>></p-dropdown>
     </div>
 <% } else if(field.type === 'boolean') { %>
     <div class="form-check">
@@ -36,11 +36,11 @@
 <% } else if(field.type === 'Date') { %>
     <div class="form-group">
         <label for="<%= prefix %>-edit"><%= field.name %></label>
-        <div><p-calendar id="<%= prefix %>-edit" [showIcon]="true" showTime="true" formControlName="<%= field.name %>" <% if(!field.isOptional) " required" %>></p-calendar></div>
+        <div><p-calendar id="<%= prefix %>-edit" [showIcon]="true" showTime="true" formControlName="<%= field.name %>" <%= field.isOptional ? "" : " required" %>></p-calendar></div>
     </div>
 <% } else { %>
     <div class="form-group">
         <label for="<%= prefix %>-edit"><%= field.name %></label>
-        <input class="form-control" type="<%= field.type %>" id="<%= prefix %>-edit" formControlName="<%= field.name %>"<% if(field.typeRef) " disabled" %><% if(!field.isOptional) " required" %>/>
+        <input class="form-control" type="<%= field.type %>" id="<%= prefix %>-edit" formControlName="<%= field.name %>"<%= field.typeRef ? " disabled" : "" %><%= field.isOptional ? "" : " required" %>/>
     </div>
 <% } %>
