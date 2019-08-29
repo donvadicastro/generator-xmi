@@ -17,8 +17,8 @@ const routes: Routes = [
   { path: 'administration',  children: [
     <% classes.forEach(x => { %>
         { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>',  component: <%= x.entity.namePascal %>ListComponent },
-        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>/:id',  component: <%= x.entity.namePascal %>EditComponent },
         { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>/new',  component: <%= x.entity.namePascal %>EditComponent },
+        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>/:id',  component: <%= x.entity.namePascal %>EditComponent },
     <% }) %>
     ]
   }, {
