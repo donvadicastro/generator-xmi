@@ -1,11 +1,16 @@
+import {DITypes} from "../types/DITypes";
+
 const storage = require('node-persist');
 
 import * as readline from "readline";
-import chalk from "chalk";
-import { injectable } from "inversify";
+import {inject, injectable} from "inversify";
+import {DbManagerCommon} from "../common/DbManagerCommon";
 
 @injectable()
 export abstract class ComponentBase {
+    @inject(DITypes.ICommonDbManagerContract)
+    protected dbManager: DbManagerCommon;
+
     public initialize(): void {
     }
 

@@ -5,7 +5,10 @@
 * <%- (entity.description || `${entity.namePascal} description`).replace(/\n/g, '\n* ') %>.
  */
 export abstract class <%= entity.namePascal %>Base <%- include('partial/class/extend', {entity: entity}) -%> {
-  constructor(params?: <%= entity.namePascal %>Contract) { params && Object.assign(this, params); }
+  constructor(params?: <%= entity.namePascal %>Contract) {
+    <% if(entity.generalizationLinksTo) { %>super();<%}%>
+    params && Object.assign(this, params);
+  }
   <%- include('partial/class/attributes', {entity: entity, orm: true}) -%>
   <%- include('partial/class/links', {entity: entity}) -%>
 

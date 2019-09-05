@@ -13,11 +13,15 @@
 
 import { Container } from "inversify";
 import { DITypes } from "./design/types/diTypes";
+import { DbManagerCommon } from "./design/common/dbManagerCommon";
+
 <% Object.keys(refs).forEach(x => { %>
 import {<%= refs[x] %>} from '<%= x %>';
 <% }) %>
 
 const DIContainer = new Container();
+DIContainer.bind(DITypes.ICommonDbManagerContract).to(DbManagerCommon);
+
 <% components.forEach(x => { %>
 DIContainer.bind<<%= x.entity.namePascal %>Contract>(DITypes.<%= x.entity.namePascal %>Contract).to(<%= x.entity.namePascal %>);
 <% x.entity.provided.forEach(y => { %>
