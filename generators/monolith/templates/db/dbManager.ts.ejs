@@ -1,9 +1,12 @@
 import {getRepository, Repository, DeleteResult, FindManyOptions} from "typeorm";
+import {injectable} from "inversify";
+
 <% classes.forEach((x, i) => { %>
 import {<%= x.entity.namePascal %>} from '..<%= x.path %>/components/<%= x.entity.name %>';<% }) %>
 
 type crudType<T> = {repository: Repository<T>, loadAll: () => Promise<T[]>, load: (id: number) => Promise<T | undefined>, save: (entity: T) => Promise<T>, delete: (id: number) => Promise<DeleteResult> };
 
+@injectable()
 export class DbManagerCommon {
 <% classes.forEach((x, i) => { %>
     private <%= x.entity.name %>Repository: Repository<<%= x.entity.namePascal %>>;<% }) %>

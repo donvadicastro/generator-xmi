@@ -19,8 +19,13 @@ import { DbManagerCommon } from "./design/common/dbManagerCommon";
 import {<%= refs[x] %>} from '<%= x %>';
 <% }) %>
 
+import {createConnection} from "typeorm";
+const ormConfig = require('./ormconfig.json');
 const DIContainer = new Container();
-DIContainer.bind(DITypes.ICommonDbManagerContract).to(DbManagerCommon);
+const env = process.env;
+const db = { type: env.DB_TYPE, host: env.DB_HOST, port: env.DB_PORT, username: env.DB_USERNAME, password: env.DB_PASSWORD, database: env.DB_NAME };
+
+DIContainer.bind(DITypes.ICommonDbManagerContract).toProvider(context => () => createConnection({...db, ...ormConfig}).then(() => DbManagerCommon));
 
 <% components.forEach(x => { %>
 DIContainer.bind<<%= x.entity.namePascal %>Contract>(DITypes.<%= x.entity.namePascal %>Contract).to(<%= x.entity.namePascal %>);

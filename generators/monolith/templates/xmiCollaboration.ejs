@@ -1,8 +1,17 @@
 <% const firstCmp = entity.messages && entity.messages.length && entity.messages[0].to.elementRef; %>
 <% const firstOperation = firstCmp && firstCmp.operations.find(x => x.name === entity.messages[0].operation.name); %>
 <%- include('partial/collaboration/import', {entity: entity}) -%>
-<% firstOperation && firstOperation.inputParameters.filter(x => x.typeRef).forEach(x => { %>
-    import {<%= x.typeRef.namePascal %>} from '<%= entity.getRelativePath(x.typeRef) %>/components/<%= x.typeRef.name %>';
+
+<%
+    var componentImports = [];
+
+    firstOperation && firstOperation.inputParameters.filter(x => x.typeRef).forEach(x => {
+        componentImports.some(y => y === x.typeRef) || componentImports.push(x.typeRef);
+    });
+%>
+
+<% componentImports.forEach(x => { %>
+    import {<%= x.namePascal %>} from '<%= entity.getRelativePath(x) %>/components/<%= x.name %>';
 <% }) %>
 
 export class <%= entity.namePascal %> {
