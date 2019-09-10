@@ -5,8 +5,10 @@ import {<%= x.entity.namePascal %>} from '..<%= x.path %>/components/<%= x.entit
 type crudType<T> = {repository: Repository<T>, loadAll: () => Promise<T[]>, load: (id: number) => Promise<T | undefined>, save: (entity: T) => Promise<T>, delete: (id: number) => Promise<DeleteResult> };
 
 export class DbManagerCommon {
-    constructor(<% classes.forEach((x, i) => { %>
-        private <%= x.entity.name %>Repository: Repository<<%= x.entity.namePascal %>>,<% }) %>) {
+<% classes.forEach((x, i) => { %>
+    private <%= x.entity.name %>Repository: Repository<<%= x.entity.namePascal %>>;<% }) %>
+
+    constructor() {
     <% classes.forEach((x, i) => { %>
         this.<%= x.entity.name %>Repository = getRepository(<%= x.entity.namePascal %>);<% }) %>
     }
