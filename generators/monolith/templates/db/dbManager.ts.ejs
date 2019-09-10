@@ -2,7 +2,7 @@ import {getRepository, Repository, DeleteResult} from "typeorm";
 <% classes.forEach((x, i) => { %>
 import {<%= x.entity.namePascal %>} from '..<%= x.path %>/components/<%= x.entity.name %>';<% }) %>
 
-type crudType<T> = {loadAll: () => Promise<T[]>, load: (id: number) => Promise<T | undefined>, save: (entity: T) => Promise<T>, delete: (id: number) => Promise<DeleteResult> };
+type crudType<T> = {repository: Repository<T>, loadAll: () => Promise<T[]>, load: (id: number) => Promise<T | undefined>, save: (entity: T) => Promise<T>, delete: (id: number) => Promise<DeleteResult> };
 
 export class DbManagerCommon {
     constructor(<% classes.forEach((x, i) => { %>
@@ -14,6 +14,8 @@ export class DbManagerCommon {
 <% classes.forEach((x, i) => { %>
     public get <%= x.entity.name %>(): crudType<<%= x.entity.namePascal %>> {
         return {
+            repository: this.<%= x.entity.name %>Repository,
+
             loadAll: async (): Promise<<%= x.entity.namePascal %>[]> => await this.<%= x.entity.name %>Repository.find(),
             load: async (id: number): Promise<<%= x.entity.namePascal %> | undefined> => await this.<%= x.entity.name %>Repository.findOne(id),
             save: async (entity: <%= x.entity.namePascal %>) => await this.<%= x.entity.name %>Repository.save(entity),
