@@ -4,11 +4,11 @@
     <% if(!x.target.multiplicity || x.target.multiplicity === '1' || x.target.multiplicity === '0..1') { %>
         <% refLinkNames.push(x.target.typeRef.name) %>
         <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
-            @OneToOne(type => <%= x.target.typeRef.namePascal %>, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>Ref, {onDelete: 'CASCADE'})
+            @OneToOne(type => <%= x.target.typeRef.namePascal %>, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>Ref, {onDelete: 'CASCADE', nullable: <%= x.target.multiplicity === '0..1' %>})
             <% if(x.source.multiplicity === '0..1') { %>@JoinColumn()<% } %>
             <%= x.target.typeRef.name %>Ref<% if(x.target.multiplicity === '0..1') { %>?<% } %>: <%= x.target.typeRef.namePascal %>;
         <% } else { %>
-            @ManyToOne(type => <%= x.target.typeRef.namePascal %>, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>RefList, {onDelete: 'CASCADE'})
+            @ManyToOne(type => <%= x.target.typeRef.namePascal %>, <%= x.target.typeRef.name %> => <%= x.target.typeRef.name %>.<%= entity.name %>RefList, {onDelete: 'CASCADE', nullable: false})
             <%= x.target.typeRef.name %>Ref<% if(x.target.multiplicity === '0..1') { %>?<% } %>: <%= x.target.typeRef.namePascal %>;
         <% } %>
     <%} else {%>

@@ -1,5 +1,6 @@
 import {createConnection, EntityMetadata, getConnection, getRepository} from "typeorm";
 import {camelCase} from "typeorm/util/StringUtils";
+import {RelationMetadata} from "typeorm/metadata/RelationMetadata";
 
 const pkg = require('../package.json');
 const ormConfig = require('../ormconfig.json');
@@ -27,7 +28,8 @@ export class DatabaseUtils {
      * Returns the entites of the database
      */
     static async getEntities() {
-        const metadatas = (await getConnection()).entityMetadatas;
+        const connection = await getConnection();
+        const metadatas = connection.entityMetadatas;
         const entities = this.sort(metadatas).map((x: EntityMetadata) => ({name: x.name, tableName: x.tableName}));
 
         return entities;
@@ -90,7 +92,7 @@ export class DatabaseUtils {
 
             // extract with existing references
             metadatas = metadatas.filter(x => {
-                if(x.columns.map(x => x.propertyName).filter(x => x.endsWith('Ref'))
+                if(x.columns.filter(x => x.propertyName.endsWith('Ref') && !(<RelationMetadata>x.relationMetadata).isNullable).map(x => x.propertyName)
                     .every(x => returns.map(y => camelCase(y.name + 'Ref')).some(y => y === x))) {
 
                     returns.push(x);

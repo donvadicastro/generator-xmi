@@ -1,0 +1,18 @@
+<%
+    const getValue = (attr) => {
+        if(attr.typeRef && attr.isDataType)
+            return `{${getAttributes(attr.typeRef).map(x => `"${x.name}": ${getValue(x)}`).join(", ")}}`;
+        else if(attr.typeRef && attr.isEnum)
+            return 0;
+        else if(attr.typeRef)
+            return '{"id": 2}';
+        else
+            return {varchar: `"${attr.name}"`, float4: 0, boolean: true, timestamp: `"${new Date().toISOString()}"`}[attr.dbType];
+    }
+
+    const getAttributes = (entity) =>  [...(entity.attributesCombined || entity.attributes), ...(entity.generalizationLinksTo ? getAttributes(entity.generalizationLinksTo) : [])];
+%>
+
+[{
+    <%- getAttributes(entity).filter(x => !(x.isArray || x.isOptional)).map(attr => `"${attr.name}": ${getValue(attr)}`).join(", ") %>
+}]
