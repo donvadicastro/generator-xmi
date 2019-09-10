@@ -1,4 +1,4 @@
-import {getRepository, Repository, DeleteResult} from "typeorm";
+import {getRepository, Repository, DeleteResult, FindManyOptions} from "typeorm";
 <% classes.forEach((x, i) => { %>
 import {<%= x.entity.namePascal %>} from '..<%= x.path %>/components/<%= x.entity.name %>';<% }) %>
 
@@ -16,7 +16,7 @@ export class DbManagerCommon {
         return {
             repository: this.<%= x.entity.name %>Repository,
 
-            loadAll: async (): Promise<<%= x.entity.namePascal %>[]> => await this.<%= x.entity.name %>Repository.find(),
+            loadAll: async (options?: FindManyOptions<<%= x.entity.namePascal %>>): Promise<<%= x.entity.namePascal %>[]> => await this.<%= x.entity.name %>Repository.find(options),
             load: async (id: number): Promise<<%= x.entity.namePascal %> | undefined> => await this.<%= x.entity.name %>Repository.findOne(id),
             save: async (entity: <%= x.entity.namePascal %>) => await this.<%= x.entity.name %>Repository.save(entity),
             delete: async (id: number) => await this.<%= x.entity.name %>Repository.delete(id)
