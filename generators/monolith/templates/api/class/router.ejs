@@ -2,67 +2,86 @@ import express from 'express';
 import {Request, Response} from "express";
 import {getRepository} from "typeorm";
 import {<%= entity.namePascal %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= entity.pathFromRoot %>/components/<%= entity.name %>';
+import {DITypes} from "../../<%= entity.getRelativeRoot() %>/design/types/diTypes";
+import {DbManagerCommon} from "../../<%= entity.getRelativeRoot() %>/design/common/dbManagerCommon";
+import {DIContainer} from "../../<%= entity.getRelativeRoot() %>/inversify.config";
 
-export default express.Router()
-    /**
-     * Request all entities.
-     */
-    .get("/<%= utils.kebabCase(entity.name) %>", async (req: Request, res: Response) => {
-        const whereStatement: any = {};
+export default class <%= entity.namePascal %>Router {
+    private dbProvider: () => Promise<DbManagerCommon>;
 
-        <% entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).forEach(x => {%>
-            <% const param = x.name.slice(0, -3) //remove 'Ref' ending part %>
-            req.query.<%= param %> && (whereStatement.<%= x.name %> = req.query.<%= param %>);
-        <% }) %>
+    constructor() {
+        this.dbProvider = (DIContainer.get < () => Promise<DbManagerCommon> > (DITypes.ICommonDbManagerContract));
+    }
 
-        getRepository(<%= entity.namePascal %>).find({where: whereStatement, relations: [<%- entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>], order: {id: "ASC"}})
-            .then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
-    })
+    public get routes() {
+        return express.Router()
+            /**
+             * Request all entities.
+             */
+            .get("/<%= utils.kebabCase(entity.name) %>", async (req: Request, res: Response) => {
+                const whereStatement: any = {};
+                const repository = await this.getRepository();
 
-    /**
-     * Request entity by id.
-     */
-    .get("/<%= utils.kebabCase(entity.name) %>/:id", async (req: Request, res: Response) => {
-        getRepository(<%= entity.namePascal %>).findOne(req.params.id, {relations: [<%- entity.attributesCombined.filter(x => x.typeRef && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>]})
-            .then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
-    })
+                <% entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).forEach(x => {%>
+                    <% const param = x.name.slice(0, -3) //remove 'Ref' ending part %>
+                    req.query.<%= param %> && (whereStatement.<%= x.name %> = req.query.<%= param %>);
+                <% }) %>
 
-    /**
-     * Create new entity.
-     */
-    .post("/<%= utils.kebabCase(entity.name) %>", async (req: Request, res: Response) => {
-        const repository = getRepository(<%= entity.namePascal %>);
-        const entity = repository.create(req.body);
+                repository.find({where: whereStatement, relations: [<%- entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>], order: {id: "ASC"}})
+                    .then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
+            })
 
-        repository.save(entity)
-            .then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
-    })
+            /**
+             * Request entity by id.
+             */
+            .get("/<%= utils.kebabCase(entity.name) %>/:id", async (req: Request, res: Response) => {
+                const repository = await this.getRepository();
+                repository.findOne(req.params.id, {relations: [<%- entity.attributesCombined.filter(x => x.typeRef && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>]})
+                    .then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
+            })
 
-    /**
-     * Update existing entity.
-     */
-    .put("/<%= utils.kebabCase(entity.name) %>/:id", async (req: Request, res: Response) => {
-        const repository = getRepository(<%= entity.namePascal %>);
-        const entity = await repository.findOne(req.params.id);
+            /**
+             * Create new entity.
+             */
+            .post("/<%= utils.kebabCase(entity.name) %>", async (req: Request, res: Response) => {
+                const repository = await this.getRepository();
+                const entity = repository.create(req.body);
 
-        if(entity) {
-            repository.merge(entity, req.body);
-            repository.save(entity).then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
-        } else {
-            res.sendStatus(404);
-        }
-    })
+                repository.save(entity)
+                    .then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
+            })
 
-    /**
-     * Delete entity.
-     */
-    .delete("/<%= utils.kebabCase(entity.name) %>/:id", async (req: Request, res: Response) => {
-        const repository = getRepository(<%= entity.namePascal %>);
-        const entityToDelete = await repository.findOne(req.params.id);
+            /**
+             * Update existing entity.
+             */
+            .put("/<%= utils.kebabCase(entity.name) %>/:id", async (req: Request, res: Response) => {
+                const repository = await this.getRepository();
+                const entity = await repository.findOne(req.params.id);
 
-        if(entityToDelete) {
-            repository.remove(entityToDelete).then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
-        } else {
-            res.sendStatus(404);
-        }
-    });
+                if(entity) {
+                    repository.merge(entity, req.body);
+                    repository.save(entity).then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
+                } else {
+                    res.sendStatus(404);
+                }
+            })
+
+            /**
+             * Delete entity.
+             */
+            .delete("/<%= utils.kebabCase(entity.name) %>/:id", async (req: Request, res: Response) => {
+                const repository = await this.getRepository();
+                const entityToDelete = await repository.findOne(req.params.id);
+
+                if(entityToDelete) {
+                    repository.remove(entityToDelete).then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
+                } else {
+                    res.sendStatus(404);
+                }
+            });
+    }
+
+    private async getRepository() {
+        return (await this.dbProvider()).<%= entity.name %>.repository;
+    }
+}

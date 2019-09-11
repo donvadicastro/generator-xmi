@@ -18,7 +18,7 @@ export default function routes(app: Application): void {
 <% }) %>
 
 <% classes.forEach((x, i) => { %>
-    app.use('/api/v1<%= x.url %>', <%= x.entity.namePascal %>Router<%= i %>);
+    app.use('/api/v1<%= x.url %>', new <%= x.entity.namePascal %>Router<%= i %>().routes);
 <% }) %>
 
 <% enums.forEach((x, i) => { %>

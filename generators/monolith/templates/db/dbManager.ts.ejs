@@ -1,17 +1,27 @@
-import {getRepository, Repository, DeleteResult, FindManyOptions} from "typeorm";
+import {getRepository, Repository, DeleteResult, FindManyOptions, createConnection, Connection} from "typeorm";
 import {injectable} from "inversify";
 
 <% classes.forEach((x, i) => { %>
 import {<%= x.entity.namePascal %>} from '..<%= x.path %>/components/<%= x.entity.name %>';<% }) %>
+const ormConfig = require('../../ormconfig.json');
 
 type crudType<T> = {repository: Repository<T>, loadAll: () => Promise<T[]>, load: (id: number) => Promise<T | undefined>, save: (entity: T) => Promise<T>, delete: (id: number) => Promise<DeleteResult> };
 
 @injectable()
 export class DbManagerCommon {
+private static _instance: DbManagerCommon | null = null;
+    public static async getInstance() {
+        const connectionInfo = {
+            type: process.env.DB_TYPE, host: process.env.DB_HOST, port: process.env.DB_PORT,
+            username: process.env.DB_USERNAME, password: process.env.DB_PASSWORD, database: process.env.DB_NAME };
+
+        return this._instance || (this._instance = new DbManagerCommon(await createConnection({ ...connectionInfo, ...ormConfig})));
+    }
+
 <% classes.forEach((x, i) => { %>
     private <%= x.entity.name %>Repository: Repository<<%= x.entity.namePascal %>>;<% }) %>
 
-    constructor() {
+    constructor(private connection: Connection) {
     <% classes.forEach((x, i) => { %>
         this.<%= x.entity.name %>Repository = getRepository(<%= x.entity.namePascal %>);<% }) %>
     }

@@ -39,8 +39,6 @@ export default class ExpressServer {
     ormConfig.subscribers = ormConfig.subscribers.map((x: string) => `${solutionRoot}/${x}`);
 
     const welcome = (port: number) => () => logger.info(`up and running in ${env.NODE_ENV || 'development'} @: ${os.hostname() } on port: ${port}}`);
-    const db = { type: env.DB_TYPE, host: env.DB_HOST, port: env.DB_PORT, username: env.DB_USERNAME, password: env.DB_PASSWORD, database: env.DB_NAME };
-    const connection = await createConnection({...db, ...ormConfig});
 
     http.createServer(app).listen(port, welcome(port));
     return app;
