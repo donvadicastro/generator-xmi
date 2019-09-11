@@ -22,8 +22,9 @@ import {<%= refs[x] %>} from '<%= x %>';
 
 const DIContainer = new Container();
 const env = process.env;
+type DbManagerProvider = () => Promise < DbManagerCommon >;
 
-DIContainer.bind<() => Promise<DbManagerCommon>>(DITypes.ICommonDbManagerContract)
+DIContainer.bind<DbManagerProvider>(DITypes.ICommonDbManagerContract)
     .toDynamicValue((context: Context) => () => DbManagerCommon.getInstance());
 
 <% components.forEach(x => { %>
@@ -31,4 +32,4 @@ DIContainer.bind<<%= x.entity.namePascal %>Contract>(DITypes.<%= x.entity.namePa
 <% x.entity.provided.forEach(y => { %>
 DIContainer.bind<<%= y.namePascal %>Contract>(DITypes.<%= y.namePascal %>Contract).to(<%= x.entity.namePascal %>);<% })}) %>
 
-export { DIContainer };
+export { DIContainer, DbManagerProvider };

@@ -4,13 +4,13 @@ import {getRepository} from "typeorm";
 import {<%= entity.namePascal %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= entity.pathFromRoot %>/components/<%= entity.name %>';
 import {DITypes} from "../../<%= entity.getRelativeRoot() %>/design/types/diTypes";
 import {DbManagerCommon} from "../../<%= entity.getRelativeRoot() %>/design/common/dbManagerCommon";
-import {DIContainer} from "../../<%= entity.getRelativeRoot() %>/inversify.config";
+import {DIContainer, DbManagerProvider} from "../../<%= entity.getRelativeRoot() %>/inversify.config";
 
 export default class <%= entity.namePascal %>Router {
-    private dbProvider: () => Promise<DbManagerCommon>;
+    private dbProvider: DbManagerProvider;
 
     constructor() {
-        this.dbProvider = (DIContainer.get < () => Promise<DbManagerCommon> > (DITypes.ICommonDbManagerContract));
+        this.dbProvider = DIContainer.get < DbManagerProvider > (DITypes.ICommonDbManagerContract);
     }
 
     public get routes() {
