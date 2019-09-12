@@ -194,7 +194,9 @@ export class XmiGenerator extends XmiGeneratorBase {
                 this.fs.copyTpl(this.templatePath('e2e/test.feature.ts.ejs'), `${e2eRootPath}/${x.name}/feature.ts`, options);
 
                 //fixtures
-                this.fs.copyTpl(this.templatePath('db/fixture.json.ejs'), dbFixturePath, options);
+                if(!this.fs.exists(dbFixturePath)) {
+                    this.fs.copyTpl(this.templatePath('db/fixture.json.ejs'), dbFixturePath, options);
+                }
 
                 if(!this.fs.exists(e2eFeatuePath)) {
                     this.fs.copyTpl(this.templatePath('e2e/test.feature.ejs'), e2eFeatuePath, options);
