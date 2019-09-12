@@ -26,7 +26,7 @@
 <% } else if(field.typeRef) { %>
     <div class="form-group">
         <label for="<%= prefix %>-edit"><%= field.name %><% if(!field.isOptional) { %><span class="text-danger"> *</span><%}%></label>
-        <p-dropdown id="<%= prefix %>-edit" styleClass="form-control p-0" [options]="<%= field.name %>All" optionLabel="<%= field.typeRef.tags.displayName || 'name'%>" dataKey="id" [autoDisplayFirst]="false" formControlName="<%= field.name %>"<%= field.isOptional ? "" : " required"%>></p-dropdown>
+        <p-dropdown id="<%= prefix %>-edit" styleClass="form-control p-0" [showClear]="true" [options]="<%= field.name %>All" optionLabel="<%= field.typeRef.tags.displayName || 'name'%>" dataKey="id" [autoDisplayFirst]="false" formControlName="<%= field.name %>"<%= field.isOptional ? "" : " required"%>></p-dropdown>
     </div>
 <% } else if(field.type === 'boolean') { %>
     <div class="form-check">
