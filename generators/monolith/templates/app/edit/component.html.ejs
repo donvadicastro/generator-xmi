@@ -5,7 +5,7 @@
 </div>
 
 <form [formGroup]="form">
-<% (entity.attributesCombined || []).filter(x => x.name).forEach((attr) => { %>
+<% [...(entity.attributesCombined || entity.attributes), ...(entity.generalizationLinksTo ? entity.generalizationLinksTo.attributesCombined : [])].filter(x => x.name).forEach((attr) => { %>
     <%- include('field.html.ejs', {field: attr, parent: entity, prefix: attr.name}) -%>
 <% }) %>
 </form>
