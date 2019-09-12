@@ -7,7 +7,7 @@
         else if(attr.typeRef)
             return '{"id": 2}';
         else
-            return {varchar: `"${attr.name}"`, float4: 0, boolean: true, timestamp: `"${new Date().toISOString()}"`}[attr.dbType];
+            return {varchar: `"${entity.name} ${attr.name}"`, float4: 0, boolean: true, timestamp: `"${new Date().toISOString()}"`}[attr.dbType];
     }
 
     const getAttributes = (entity) =>  [...(entity.attributesCombined || entity.attributes), ...(entity.generalizationLinksTo ? getAttributes(entity.generalizationLinksTo) : [])];
