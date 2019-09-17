@@ -5,7 +5,7 @@
     <ng-template pTemplate="header">
         <tr>
             <th>ID</th>
-            <% (entity.attributesCombined || []).filter(x => x.name && !x.isArray).forEach((attr) => { %>
+            <% [...(entity.attributesCombined || entity.attributes), ...(entity.generalizationLinksTo ? entity.generalizationLinksTo.attributesCombined : [])].filter(x => x.name && !x.isArray).forEach((attr) => { %>
                 <th><%= attr.name %></th>
             <% }) %>
         </tr>
@@ -13,7 +13,7 @@
     <ng-template pTemplate="body" let-entity>
         <tr>
             <td><a [routerLink]="entity.id">{{entity.id}}</a></td>
-            <% (entity.attributesCombined || []).filter(x => x.name && !x.isArray).forEach((attr) => { %>
+            <% [...(entity.attributesCombined || entity.attributes), ...(entity.generalizationLinksTo ? entity.generalizationLinksTo.attributesCombined : [])].filter(x => x.name && !x.isArray).forEach((attr) => { %>
                 <td>{{entity.<%= attr.name %><% if(attr.typeRef && !attr.isEnum) { %>?.<%= attr.typeRef.tags.displayName || 'name' %><% } %>}}</td>
             <% }) %>
         </tr>
