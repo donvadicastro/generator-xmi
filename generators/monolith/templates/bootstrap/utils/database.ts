@@ -82,7 +82,10 @@ export class DatabaseUtils {
         while (metadatas.length) {
             // extract with no references
             metadatas = metadatas.filter(x => {
-                if(!x.columns.some(y => y.propertyName.endsWith('Ref'))) {
+                if(!x.columns.some(y => {
+                    const meta = <RelationMetadata>y.relationMetadata;
+                    return meta && (meta.isOneToOne || meta.isManyToOne);
+                })) {
                     returns.push(x);
                     return false;
                 }
@@ -92,9 +95,10 @@ export class DatabaseUtils {
 
             // extract with existing references
             metadatas = metadatas.filter(x => {
-                if(x.columns.filter(x => x.propertyName.endsWith('Ref') && !(<RelationMetadata>x.relationMetadata).isNullable).map(x => x.propertyName)
-                    .every(x => returns.map(y => camelCase(y.name + 'Ref')).some(y => y === x))) {
-
+                if(x.columns.filter(x => {
+                    const meta = (<RelationMetadata>x.relationMetadata);
+                    return meta && (meta.isOneToOne || meta.isManyToOne) && !meta.isNullable;
+                }).every(x => returns.some(y => y.target === (<RelationMetadata>x.relationMetadata).type))) {
                     returns.push(x);
                     return false;
                 }

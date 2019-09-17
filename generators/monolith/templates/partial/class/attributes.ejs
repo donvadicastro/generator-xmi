@@ -5,7 +5,16 @@
 
 <% (entity.attributes || []).forEach(function (attr) { %>
     <% if (orm) { %>
-    @Column('<%= attr.typeRef ? (attr.isEnum ? 'float4' : 'json') : attr.dbType %>')
+        <% if(attr.isEnum) { %>
+            @Column('float4')
+        <% } else if(attr.isDataType) { %>
+            @Column('json')
+        <% } else if(attr.typeRef) { %>
+            @ManyToOne(type => <%= attr.typeRef.namePascal %>, {nullable: false})
+            @JoinColumn()
+        <% } else { %>
+            @Column('<%= attr.dbType %>')
+        <% }%>
     <% } %>
     <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.namePascal : attr.type %>;
 <% }) %>

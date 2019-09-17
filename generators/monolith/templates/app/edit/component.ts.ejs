@@ -76,7 +76,7 @@ export class <%= entity.namePascal %>EditComponent {
       .filter((key: string) => isNaN(parseInt(key)))
       .map((key: string) => ({ id: <%= x.typeRef.namePascal + (x.isEnum ? '' : 'Contract')%>[key as keyof typeof <%= x.typeRef.namePascal + (x.isEnum ? '' : 'Contract')%>], label: key }));
     <% } else if(!x.isDataType) { %>
-    this.http.get(environment.api.url + '/<%= (x.typeRef ? x.typeRef : x).getPathFromRootWithModifier(utils.kebabCase) %>/<%= utils.kebabCase(x.name.substr(0, x.name.length - (x.isArray ? 7 : 3))) %>').subscribe(
+    this.http.get(environment.api.url + '/<%= (x.typeRef ? x.typeRef : x).getPathFromRootWithModifier(utils.kebabCase) %>/<%= utils.kebabCase(x.typeRef.name) %>').subscribe(
       (res: any) => this.<%= x.name %>All = res);
     <% } %>
   <% }) %>
