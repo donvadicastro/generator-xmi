@@ -46,6 +46,6 @@ export class xmiAttribute extends xmiBase implements IAttribute {
     }
 
     get dbType(): string {
-        return (<any>{string: 'varchar', number: 'float4', boolean: 'boolean', 'Date': 'timestamp'})[this.type];
+        return (<any>{string: 'varchar', number: 'int', boolean: 'boolean', 'Date': 'timestamp'})[this.type];
     }
 }

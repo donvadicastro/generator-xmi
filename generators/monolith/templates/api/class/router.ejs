@@ -23,8 +23,7 @@ export default class <%= entity.namePascal %>Router {
                 const repository = await this.getRepository();
 
                 <% entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).forEach(x => {%>
-                    <% const param = x.name.slice(0, -3) //remove 'Ref' ending part %>
-                    req.query.<%= param %> && (whereStatement.<%= x.name %> = req.query.<%= param %>);
+                    req.query.<%= x.name %> && (whereStatement.<%= x.name %> = req.query.<%= x.name %>);
                 <% }) %>
 
                 repository.find({where: whereStatement, relations: [<%- entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>], order: {id: "ASC"}})

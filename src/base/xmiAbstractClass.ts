@@ -63,6 +63,13 @@ export class xmiAbstractClass extends xmiInterface {
     }
 
     /**
+     * Generalization links, when arrow to current element
+     */
+    get generalizationLinksFrom(): xmiBase[] {
+        return this.links.generalization.filter(x => x.end === this).map(x => <xmiBase>x.start);
+    }
+
+    /**
      * Generalization link, when arrow from current element
      */
     get generalizationLinksTo(): xmiBase | null {
@@ -108,20 +115,20 @@ export class xmiAbstractClass extends xmiInterface {
 
         //Inject generalization references
         if(this.generalizationLinksTo) {
-            imports['../' + this.getRelativePath(this.generalizationLinksTo) + '/components/' + this.generalizationLinksTo.name] = this.generalizationLinksTo.namePascal;
+            imports[this.getRelativePath(this.generalizationLinksTo) + '/components/' + this.generalizationLinksTo.name] = this.generalizationLinksTo.namePascal;
         }
 
         //Inject base interface when instance speciaification is used
         this.associationLinks.forEach(x => {
             const typeRef = <xmiClass>x.target.typeRef;
-            imports['../' + this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.namePascal  + 'Contract';
-            imports['../' + this.getRelativePath(typeRef) + '/components/' + typeRef.name] = typeRef.namePascal;
+            imports[this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.namePascal  + 'Contract';
+            imports[this.getRelativePath(typeRef) + '/components/' + typeRef.name] = typeRef.namePascal;
         });
 
         this.aggregationLinks.forEach(x => {
             const typeRef = <xmiClass>x.target.typeRef;
-            imports['../' + this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.namePascal + 'Contract';
-            imports['../' + this.getRelativePath(typeRef) + '/components/' + typeRef.name] = typeRef.namePascal;
+            imports[this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.namePascal + 'Contract';
+            imports[this.getRelativePath(typeRef) + '/components/' + typeRef.name] = typeRef.namePascal;
         });
 
         return imports;

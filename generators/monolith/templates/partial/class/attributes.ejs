@@ -1,4 +1,4 @@
-<% if (orm) { %>
+<% if (orm && !entity.generalizationLinksTo) { %>
     @PrimaryGeneratedColumn()
     id?: number;
 <% } %>
@@ -6,7 +6,7 @@
 <% (entity.attributes || []).forEach(function (attr) { %>
     <% if (orm) { %>
         <% if(attr.isEnum) { %>
-            @Column('float4')
+            @Column('int')
         <% } else if(attr.isDataType) { %>
             @Column('json')
         <% } else if(attr.typeRef) { %>

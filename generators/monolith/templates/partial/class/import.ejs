@@ -6,8 +6,7 @@ import {ManyToMany} from "typeorm/decorator/relations/ManyToMany";
 import {JoinTable} from "typeorm/decorator/relations/JoinTable";
 import {PrimaryColumn} from "typeorm/decorator/columns/PrimaryColumn";
 
-import {<%= entity.namePascal %>Contract} from '../../contracts/<%= entity.name %>';
-import {<%= entity.namePascal %>} from "../<%= entity.name %>";
+import {<%= entity.namePascal %>Contract} from '../contracts/<%= entity.name %>';
 
 <% entity.referencesAsList.forEach(reference => {%>
     import {<%= reference.name %>} from '<%= reference.path %>';

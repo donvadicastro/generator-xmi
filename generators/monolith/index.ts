@@ -165,12 +165,13 @@ export class XmiGenerator extends XmiGeneratorBase {
                 this.fs.copyTpl(this.templatePath('xmiInterface.ejs'), interfaceFileName, options);
                 this.generatedFiles.push(interfaceFileName);
 
-                this.fs.copyTpl(this.templatePath('xmiClass.generated.ejs'), baseClassFileName, options);
-                this.generatedFiles.push(baseClassFileName);
+                // this.fs.copyTpl(this.templatePath('xmiClass.generated.ejs'), baseClassFileName, options);
+                // this.generatedFiles.push(baseClassFileName);
 
-                if(!this.fs.exists(classFileName)) {
+                //if(!this.fs.exists(classFileName)) {
                     this.fs.copyTpl(this.templatePath('xmiClass.ejs'), classFileName, options);
-                }
+                    this.generatedFiles.push(classFileName);
+                //}
 
                 if(!this.fs.exists(classTestFileName)) {
                     this.fs.copyTpl(this.templatePath('xmiClass.test.ejs'), classTestFileName, options);
@@ -317,6 +318,9 @@ export class XmiGenerator extends XmiGeneratorBase {
 
         const dbManagerCommonPath = this.destinationPath(`${this.options.destination}/design/common/dbManagerCommon.ts`);
         this.fs.copyTpl(this.templatePath('db/dbManager.ts.ejs'), dbManagerCommonPath, {classes: this.classes, pkg: this.options.parser.packge, options: options});
+
+        const dbUtilsCommonPath = this.destinationPath(`${this.options.destination}/utils/database.ts`);
+        this.fs.copyTpl(this.templatePath('db/dbUtils.ts.ejs'), dbUtilsCommonPath, {classes: this.classes, pkg: this.options.parser.packge, options: options});
 
         localPath && this._calculateDiff(path, childPackages, childComponents);
     }

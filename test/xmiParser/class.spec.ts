@@ -93,10 +93,12 @@ describe('xmiParser', () => {
             expect(a.generalizationLinks[2].target.typeRef).toBe(a4);
             expect(a.generalizationLinks[3].target.typeRef).toBe(a3);
             expect(a.generalizationLinksTo).toBeNull();
+            expect(a.generalizationLinksFrom).toEqual([a1, a2, a4, a3]);
 
             expect(a1.generalizationLinks.length).toBe(1);
             expect(a1.generalizationLinks[0].target.typeRef).toBe(a);
             expect(a1.generalizationLinksTo).toBe(a);
+            expect(a1.generalizationLinksFrom).toEqual([]);
 
             expect(a2.generalizationLinks.length).toBe(1);
             expect(a2.generalizationLinks[0].target.typeRef).toBe(a);
