@@ -13,4 +13,8 @@ export abstract class <%= entity.namePascal %>Base <%- include('partial/class/ex
   <%- include('partial/class/links', {entity: entity}) -%>
 
   <%- include('partial/class/operations', {entity: entity}) -%>
+
+  <% if(entity.generalizationLinksTo) { %>
+      <%- include('partial/class/generalizationSync', {entity: entity}) -%>
+  <%}%>
 }

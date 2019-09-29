@@ -18,3 +18,11 @@
     <% } %>
     <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.namePascal : attr.type %>;
 <% }) %>
+
+<% if(orm && entity.generalizationLinksFrom.length) { %>
+    @Column('varchar', {nullable: true})
+    _generalizationLinkType?: string;
+
+    @Column('int', {nullable: true})
+    _generalizationLinkId?: number;
+<% } %>

@@ -63,6 +63,13 @@ export class xmiAbstractClass extends xmiInterface {
     }
 
     /**
+     * Generalization links, when arrow to current element
+     */
+    get generalizationLinksFrom(): xmiBase[] {
+        return this.links.generalization.filter(x => x.end === this).map(x => <xmiBase>x.start);
+    }
+
+    /**
      * Generalization link, when arrow from current element
      */
     get generalizationLinksTo(): xmiBase | null {

@@ -1,4 +1,4 @@
-import {PrimaryGeneratedColumn, OneToMany, ManyToOne, ObjectID, ObjectIdColumn, getRepository} from "typeorm";
+import {PrimaryGeneratedColumn, OneToMany, ManyToOne, ObjectID, ObjectIdColumn, getRepository, AfterInsert, BeforeRemove} from "typeorm";
 import {Column} from "typeorm/decorator/columns/Column";
 import {OneToOne} from "typeorm/decorator/relations/OneToOne";
 import {JoinColumn} from "typeorm/decorator/relations/JoinColumn";

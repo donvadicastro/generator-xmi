@@ -318,6 +318,9 @@ export class XmiGenerator extends XmiGeneratorBase {
         const dbManagerCommonPath = this.destinationPath(`${this.options.destination}/design/common/dbManagerCommon.ts`);
         this.fs.copyTpl(this.templatePath('db/dbManager.ts.ejs'), dbManagerCommonPath, {classes: this.classes, pkg: this.options.parser.packge, options: options});
 
+        const dbUtilsCommonPath = this.destinationPath(`${this.options.destination}/utils/database.ts`);
+        this.fs.copyTpl(this.templatePath('db/dbUtils.ts.ejs'), dbUtilsCommonPath, {classes: this.classes, pkg: this.options.parser.packge, options: options});
+
         localPath && this._calculateDiff(path, childPackages, childComponents);
     }
 

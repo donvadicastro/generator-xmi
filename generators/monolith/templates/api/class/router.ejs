@@ -1,9 +1,8 @@
 import express from 'express';
 import {Request, Response} from "express";
-import {getRepository} from "typeorm";
 import {<%= entity.namePascal %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= entity.pathFromRoot %>/components/<%= entity.name %>';
+
 import {DITypes} from "../../<%= entity.getRelativeRoot() %>/design/types/diTypes";
-import {DbManagerCommon} from "../../<%= entity.getRelativeRoot() %>/design/common/dbManagerCommon";
 import {DIContainer, DbManagerProvider} from "../../<%= entity.getRelativeRoot() %>/inversify.config";
 
 export default class <%= entity.namePascal %>Router {
@@ -23,8 +22,7 @@ export default class <%= entity.namePascal %>Router {
                 const repository = await this.getRepository();
 
                 <% entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).forEach(x => {%>
-                    <% const param = x.name.slice(0, -3) //remove 'Ref' ending part %>
-                    req.query.<%= param %> && (whereStatement.<%= x.name %> = req.query.<%= param %>);
+                    req.query.<%= x.name %> && (whereStatement.<%= x.name %> = req.query.<%= x.name %>);
                 <% }) %>
 
                 repository.find({where: whereStatement, relations: [<%- entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>], order: {id: "ASC"}})
@@ -45,10 +43,11 @@ export default class <%= entity.namePascal %>Router {
              */
             .post("/<%= utils.kebabCase(entity.name) %>", async (req: Request, res: Response) => {
                 const repository = await this.getRepository();
-                const entity = repository.create(req.body);
+                const entity = repository.create(<<%= entity.namePascal %>>req.body);
 
                 repository.save(entity)
-                    .then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
+                    .then(result => res.send(result))
+                    .catch(error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
             })
 
             /**
@@ -74,7 +73,9 @@ export default class <%= entity.namePascal %>Router {
                 const entityToDelete = await repository.findOne(req.params.id);
 
                 if(entityToDelete) {
-                    repository.remove(entityToDelete).then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
+                    repository.remove(entityToDelete)
+                        .then(result => res.send(result))
+                        .catch(error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
                 } else {
                     res.sendStatus(404);
                 }
