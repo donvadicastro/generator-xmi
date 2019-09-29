@@ -35,7 +35,18 @@ export default class <%= entity.namePascal %>Router {
             .get("/<%= utils.kebabCase(entity.name) %>/:id", async (req: Request, res: Response) => {
                 const repository = await this.getRepository();
                 repository.findOne(req.params.id, {relations: [<%- entity.attributesCombined.filter(x => x.typeRef && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>]})
-                    .then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
+                    <% if(entity.generalizationLinksFrom.length) { %>
+                    .then(result => {
+                        if(result) {
+                            result._generalizationLinkType === null ? res.send(result) : res.redirect(`/${result._generalizationLinkType}/${result._generalizationLinkId}`)
+                        } else {
+                            res.sendStatus(404);
+                        }
+                    })
+                    <% } else { %>
+                    .then(result => result ? res.send(result) : res.sendStatus(404))
+                    <% } %>
+                    .catch(error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
             })
 
             /**
