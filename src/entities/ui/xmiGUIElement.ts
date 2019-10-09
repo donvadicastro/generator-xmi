@@ -69,6 +69,10 @@ export class xmiGUIElement extends xmiBase {
     parseChildren(raw: any) {
         this.children = (raw.nestedClassifier || [])
             .map((x: any) => xmiComponentFactory.get(x, this)).filter((x: any) => x);
+
+        assert(this.children.map(x => x.name)
+            .every((x: string, index: number, arr: string[]) => arr.indexOf(x) === index),
+            `Control names on the "${this.name}" UI form should be unique: "${this.children.map(x => x.name)}"`);
     }
 
     toConsole() {
