@@ -1,7 +1,7 @@
 @AfterInsert()
 async addGeneralizationLink() {
     const repo = await getRepository(<%= entity.generalizationLinksTo.namePascal %>);
-    repo.save(repo.create({ ...<<%= entity.generalizationLinksTo.namePascal %>>this, ...{ _generalizationLinkType: '<%= entity.name %>', _generalizationLinkId: this.id } }));
+    repo.save(repo.create({ ...<<%= entity.generalizationLinksTo.namePascal %>>this, ...{ id: undefined, _generalizationLinkType: '<%= entity.name %>', _generalizationLinkId: this.id } }));
 }
 
 @BeforeRemove()

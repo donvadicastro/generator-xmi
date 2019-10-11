@@ -68,7 +68,7 @@ export class DatabaseUtils {
         const metadatas = connection.entityMetadatas;
 
         return this.entitiesOrdered.map((x: string): EntityMetadata => <EntityMetadata>metadatas.find(y => y.name === x))
-            .map((x: EntityMetadata) => ({name: x.name, tableName: x.tableName}));
+            .map((x: EntityMetadata) => ({name: x.name, tableName: x.tableName, target: x.target}));
     }
 
     /**
@@ -92,7 +92,7 @@ export class DatabaseUtils {
     static async loadAll() {
         for (const entity of await this.getEntities()) {
             try {
-                const repository = await getRepository(entity.name);
+                const repository = await getRepository(entity.target);
                 const fixtureFile = path.join(__dirname, `../test/fixtures/${entity.name}.json`);
 
                 if (fs.existsSync(fixtureFile)) {
@@ -103,7 +103,7 @@ export class DatabaseUtils {
                         //created in scope of single insert on parent entity too.
 
                         console.log(`Loading "${entity.name}"`);
-                        await repository.createQueryBuilder(entity.name).insert().values(items[i]).execute();
+                        await repository.save(repository.create(items[i]));
                     }
                 }
             } catch (error) {
