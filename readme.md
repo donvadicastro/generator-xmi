@@ -2,7 +2,7 @@ Bootstrap complete solution from your UML diagram created in "Enterprise Archite
 
 Once bootstrapped - implement required business behaviors for defined actions and that's it. As an results - you will receive complete web application with attached REST API server and Postgres DB storage with created scheme.
 
-The fastest solution to prototype architecture design. Build with TypeScript, NodeJs and Express.
+The fastest solution to prototype architecture design. Build with TypeScript, NodeJs and Express. Follow [WIKI for more details](https://github.com/donvadicastro/generator-xmi/wiki).
 
 ## Usage
 Install yo and generator-xmi:
