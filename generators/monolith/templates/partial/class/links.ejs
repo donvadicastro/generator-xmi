@@ -21,9 +21,4 @@
         <% } %>
 <% }}) %>
 
-/**
- * Refresh current entity.
- */
-async refreshEntity(<% if(refLinkNames.length) { %>references?: (<%- refLinkNames.map(x => `'${x}Ref'`).join(' | ') %>)[]<% }%>): Promise<this> {
-    return Object.assign(this, await getRepository(<%= entity.namePascal %>).findOne({id: this.id}<% if(refLinkNames.length) { %>, {relations: references}<% } %>));
-}
+<%- include('links_refresh', {refLinkNames: refLinkNames}) -%>

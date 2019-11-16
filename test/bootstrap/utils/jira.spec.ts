@@ -15,7 +15,7 @@ describe('JIRA utils', () => {
         jira = new JiraClient(config);
     });
 
-    it('should sync correct', (done) => {
+    xit('should sync correct', (done) => {
         jira.syncFile = jasmine.createSpy('jira.syncFile');
         jira.sync(path.dirname(__dirname) + '\\data').then(() => {
             expect(jira.syncFile).toHaveBeenCalledTimes(2);
