@@ -1,7 +1,7 @@
 <% (entity.operations || []).forEach(function (operation) { %>
     /**
     * <%= operation.nameOrigin %> action.
-    * <%- (operation.description || '').replace(/\n/g, '\n* ') %>.
+    <% if(operation.description) { %>* <%- operation.description.replace(/\n/g, '\n* ') %>. <% } %>
     */
     <%= operation.name %>(<% operation.inputParameters.forEach(x => { %><%= x.name %>: <%= x.typeRef ? `${x.typeRef.namePascal}${x.isArray ? '[]' : ''}` : x.type %>,<% }) %>): Promise<<%= operation.returnParameter.typeRef ? operation.returnParameter.typeRef.namePascal : operation.returnParameter.type %><%= operation.isReturnArray ? '[]' : '' %> | null> {
         return Promise.resolve(null);

@@ -10,33 +10,9 @@ const ejs = require('ejs');
 
 describe('Generators', () => {
     describe('Templates', () => {
-        describe('Microservices', () => {
+        describe('Monolith', () => {
             describe('Class (input)', () => {
                 const dir = path.join(__dirname, '../../../../generators/monolith/templates/partial/class');
-
-                it('check conditions', async () => {
-                    const data = readJSONSync('test/data/project11_activity_condition.json');
-                    const parser = new XmiParser(data);
-
-                    parser.parse();
-
-                    const pkg = <xmiPackage>parser.packge;
-                    const classes: xmiPackage = <xmiPackage>(<xmiPackage>pkg.children[0]).children[3];
-                    const classA = <xmiClass>classes.children[0];
-                    const content = await ejs.renderFile(path.join(dir, 'conditions.ejs'), {entity: classA});
-
-                    expect(content.normalizeSpace()).toBe(`
-                        //# region Message conditions
-                        'a >= b'(state: any) {
-                            return true;
-                        }
-                        
-                        'a < b'(state: any) {
-                            return true;
-                        }
-                        //# endregion
-                    `.normalizeSpace());
-                });
 
                 describe('check attribute references', () => {
                     const data = readJSONSync('test/data/project2_class_associations.json');
@@ -53,7 +29,7 @@ describe('Generators', () => {
                         expect(aircraft.name).toBe('aircraft');
                         expect(content.normalizeSpace()).toBe(`
                         @PrimaryGeneratedColumn()
-                        id: string; 
+                        id?: number; 
                         
                         @Column('varchar')
                         number: string;
@@ -64,11 +40,18 @@ describe('Generators', () => {
                         expect(aircraft.name).toBe('aircraft');
                         expect(content.normalizeSpace()).toBe(`
                         
-                        @ManyToMany(type => pilotBase)
-                        pilotRefList: pilotBase[];
+                        @ManyToMany(type => Pilot)
+                        pilotRefList?: Pilot[];
                         
-                        @ManyToOne(type => airlineBase, airline => airline.aircraftRefList)
-                        airlineRef: airlineBase;
+                        @ManyToOne(type => Airline, airline => airline.aircraftRefList, {onDelete: 'CASCADE', nullable: false})
+                        airlineRef: Airline;
+                        
+                        /** 
+                         * Refresh current entity. 
+                         */ 
+                        async refreshEntity(references?: ('airlineRef')[]): Promise<this> { 
+                            return Object.assign(this, await getRepository(Aircraft).findOne({id: this.id}, {relations: references})); 
+                        }
                     `.normalizeSpace());
                     });
 
@@ -79,11 +62,19 @@ describe('Generators', () => {
                         expect(airline.name).toBe('airline');
                         expect(content.normalizeSpace()).toBe(`
 
-                        @OneToMany(type => aircraftBase, aircraft => aircraft.airlineRef)
-                        aircraftRefList: aircraftBase[];
+                        @OneToMany(type => Aircraft, aircraft => aircraft.airlineRef, {onDelete: 'CASCADE'})
+                        aircraftRefList?: Aircraft[];
                         
-                        @OneToOne(type => cityBase) 
-                        cityRef: cityBase;
+                        @OneToOne(type => City, city => city.airlineRef, {onDelete: 'CASCADE', nullable: false})
+                        @JoinColumn()
+                        cityRef: City;
+                        
+                        /** 
+                         * Refresh current entity. 
+                         */ 
+                        async refreshEntity(references?: ('cityRef')[]): Promise<this> { 
+                            return Object.assign(this, await getRepository(Airline).findOne({id: this.id}, {relations: references})); 
+                        }
                     `.normalizeSpace());
                     });
 
@@ -94,8 +85,13 @@ describe('Generators', () => {
                         expect(city.name).toBe('city');
                         expect(content.normalizeSpace()).toBe(`
                                                 
-                        @OneToOne(type => airlineBase) 
-                        airlineRef: airlineBase;
+                        @OneToOne(type => Airline, airline => airline.cityRef, {onDelete: 'CASCADE', nullable: true}) 
+                        airlineRef?: Airline;
+                        
+                        /** * Refresh current entity. */ 
+                        async refreshEntity(references?: ('airlineRef')[]): Promise<this> { 
+                            return Object.assign(this, await getRepository(City).findOne({id: this.id}, {relations: references})); 
+                        }
                     `.normalizeSpace());
                     });
                 });
@@ -114,19 +110,17 @@ describe('Generators', () => {
 
                     expect(content.normalizeSpace()).toBe(`
                     /** 
-                    * create description. 
+                    * create action.
                     */ 
-                    async create(state: FlowStateType & { x: number, }, returns?: any): Promise<FlowStateType & {returns: void | null}> { 
-                        this.notifyComplete('team::create', state.start); 
-                        return {...<FlowStateType>state, ...{returns: returns}}; 
-                    } 
+                    create(x: number,): Promise<void | null> { 
+                        return Promise.resolve(null); 
+                    }
                     
                     /** 
-                    * getBaseLocation description. 
+                    * getBaseLocation action. 
                     */ 
-                    async getBaseLocation(state: FlowStateType & { }, returns?: any): Promise<FlowStateType & {returns: locationBase | null}> { 
-                        this.notifyComplete('team::getBaseLocation', state.start); 
-                        return {...<FlowStateType>state, ...{returns: returns}}; 
+                    getBaseLocation(): Promise<Location | null> { 
+                        return Promise.resolve(null); 
                     }
                     `.normalizeSpace());
                 });

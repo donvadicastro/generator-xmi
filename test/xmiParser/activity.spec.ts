@@ -19,7 +19,7 @@ describe('xmiParser', () => {
             const pkg = <xmiPackage>parser.packge;
             const sequence: xmiCollaboration = <xmiCollaboration>(<xmiPackage>pkg.children[0]).children[0];
 
-            expect(parser.elements.map(x => x.name)).toEqual(["sequence", "actor1", "c1", "c2"]);
+            expect(parser.elements.map(x => x.name).filter(x => x)).toEqual(["sequence", "actor1", "c1", "c2"]);
             expect(sequence).toBeInstanceOf(xmiCollaboration);
 
             expect(sequence.lifelines.map(x => x.name)).toEqual(["actor1", "c1", "c2"]);
@@ -53,7 +53,7 @@ describe('xmiParser', () => {
             const pkg = <xmiPackage>parser.packge;
             const sequence: xmiCollaboration = <xmiCollaboration>(<xmiPackage>pkg.children[0]).children[0];
 
-            expect(parser.elements.filter(x => x).map(x => x.name)).toEqual(["componentModel", "c1", "c2", "start"]);
+            expect(parser.elements.filter(x => x).map(x => x.name).filter(x => x)).toEqual(["componentModel", "c1", "c2", "start"]);
             expect(sequence).toBeInstanceOf(xmiCollaboration);
 
             expect(sequence.lifelines.map(x => x.name)).toEqual(["c1", "c2"]);

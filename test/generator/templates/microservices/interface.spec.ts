@@ -28,7 +28,7 @@ describe('Generators', () => {
                     expect(content.normalizeSpace()).toBe(`
                         import {IMessageBase} from '../../../contracts/messages/baseMessage'; 
                         
-                        export interface buildingMessage extends IMessageBase { 
+                        export interface BuildingMessage extends IMessageBase { 
                             /** 
                             * code property 
                             */ 

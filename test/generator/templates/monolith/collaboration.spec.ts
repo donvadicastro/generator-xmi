@@ -11,7 +11,7 @@ const ejs = require('ejs');
 
 describe('Generators', () => {
     describe('Templates', () => {
-        describe('Microservices', () => {
+        describe('Monolith', () => {
             describe('Collaboration with condition', () => {
                 const dir = path.join(__dirname, '../../../../generators/monolith/templates/partial/collaboration');
                 const data = readJSONSync('test/data/project11_activity_condition.json');
