@@ -5,11 +5,9 @@ jobs:
       - image: circleci/node:11.10.1 # the primary container, where your job's commands are run
     steps:
       - checkout # check out the code in the project directory
-
       - run:
         name: INSTALL
         command: npm install
-
       - run:
         name: TEST
         command: npm test
