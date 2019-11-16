@@ -10,6 +10,6 @@ jobs:
         name: INSTALL
         command: npm install
 
-      -run:
+      - run:
         name: TEST
         command: npm test
