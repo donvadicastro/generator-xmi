@@ -26,7 +26,8 @@
     "winston": "^3.0.0",
     "xml2js": "^0.4.19",
     "yeoman-generator": "^2.0.5",
-    "yosay": "^2.0.1"
+    "yosay": "^2.0.1",
+    "snyk": "^1.230.5"
   },
   "devDependencies": {
     "@types/es6-promise": "^3.3.0",
@@ -46,7 +47,9 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "readme:generate-toc": "markdown-toc -i readme.md"
+    "readme:generate-toc": "markdown-toc -i readme.md",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "jest": {
     "testEnvironment": "node",
@@ -65,5 +68,6 @@
     ]
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "snyk": true
 }
