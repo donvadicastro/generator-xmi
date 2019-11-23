@@ -90,34 +90,34 @@ describe('Generators', () => {
                     const content = await ejs.renderFile(path.join(dir, 'flow.ejs'), {entity: sequence});
 
                     expect(content.normalizeSpace()).toBe(`
-                        // Start call componentA 
+                        // Start call componentA1 
                         flowAsync = flowAsync.then((state: any) => { 
                             state.start = new Date(); 
-                            console.log('--> componentA::actionA1'); 
+                            console.log('--> componentA1::actionA1'); 
                             
-                            return this.cmpcomponentA.actionA1(state); 
+                            return this.cmpcomponentA1.actionA1(state); 
                         }); 
                         
-                        // componentA call componentB 
+                        // componentA1 call componentB1
                         flowAsync = flowAsync.then((state: any) => { 
                             state.start = new Date(); 
-                            console.log('--> componentB::actionB1'); 
+                            console.log('--> componentB1::actionB1'); 
                             
-                            return this.cmpcomponentB.actionB1(state); 
+                            return this.cmpcomponentB1.actionB1(state); 
                         }); 
                         
-                        // componentA call componentB 
+                        // componentA1 call componentB1
                         flowAsync = flowAsync.then((state: any) => { 
                             return Promise.resolve(state).then(state => { 
-                                return Promise.all(state.returns.map(x => { 
+                                return Promise.all(state.returns.map((x: any) => { 
                                     let flowAsync = Promise.resolve({...state, ...{returns: x}}); 
                                     
-                                    // componentA call componentB 
+                                    // componentA1 call componentB1 
                                     flowAsync = flowAsync.then((state: any) => { 
                                         state.start = new Date(); 
-                                        console.log('--> componentB::actionB2'); 
+                                        console.log('--> componentB1::actionB2'); 
                                         
-                                        return this.cmpcomponentB.actionB2(state); 
+                                        return this.cmpcomponentB1.actionB2(state); 
                                     }); 
                                 
                                     return flowAsync; 
