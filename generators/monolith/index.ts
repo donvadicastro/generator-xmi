@@ -40,9 +40,9 @@ export class XmiGenerator extends XmiGeneratorBase {
 
     end() {
         this.log('\r\n\r\nProject generated successfully.\r\nUpdate configuration to start using application:');
-        this.log(chalk.green('DB connection:            ') + `${this.options.destination}/package.json -> "db" section`);
-        this.log(chalk.green('JIRA credentials:         ') + `${this.options.destination}/package.json -> "jira" section`);
-        this.log(chalk.green('Auth server connection:   ') + `${this.options.destination}/package.json -> "keycloak" section`);
+        this.log(chalk.green('DB connection:            ') + `${this.options.destination}/.env -> "db" section`);
+        this.log(chalk.green('JIRA credentials:         ') + `${this.options.destination}/.env -> "jira" section`);
+        this.log(chalk.green('Auth server connection:   ') + `${this.options.destination}/.env -> "keycloak" section`);
 
         if(this.staleContent.length) {
             this.log(chalk.yellow('\r\nStale content: '));

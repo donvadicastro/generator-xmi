@@ -21,7 +21,7 @@ export class <%= entity.namePascal %>ScreenComponent {
   public <%= x.name %>All: any[] = [];
 <% }) %>
 <% (entity.children || []).filter(x => ['combo', 'combobox'].indexOf(x.stereotype) >= 0).forEach((child, i) => { %>
-  <% if((child.links.informationFLow.length && child.links.informationFLow[0].end === child) && !objectControls.some(y => y.name === child.name)) {%>
+  <% if((child.getInformationFlows('in').length && child.getInformationFlows('in')[0].end === child) && !objectControls.some(y => y.name === child.name)) {%>
     public <%= child.name %>All: any[] = [];
   <% } %>
 <% }) %>

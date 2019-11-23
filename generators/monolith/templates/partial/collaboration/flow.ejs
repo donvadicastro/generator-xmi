@@ -22,7 +22,7 @@
         // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to && message.to.elementRef.name %>
         flowAsync = flowAsync.then((state: any) => {
             return Promise.resolve(state).then(state => {
-                return Promise.all(state.returns.map(x => {
+                return Promise.all(state.returns.map((x: any) => {
                     let flowAsync = Promise.resolve({...state, ...{returns: x}});
     <% } %>
 

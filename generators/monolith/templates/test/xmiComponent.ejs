@@ -32,7 +32,7 @@ const flow = new <%= entity.namePascal %>(<% (entity.lifelines || []).forEach(fu
 console.log('Flow execution:');
 flow.run({start: new Date(),
 <% first && first.operations.find(x => x.name === entity.messages[0].operation.name).inputParameters.forEach(x => { %>
-    <%= x.name %>: <%= x.isArray ? '[]' : (x.typeRef ? `new ${x.typeRef.namePascal}()` : x.typeDefaultValue) %>,
+    <%= x.name %>: <%- x.isArray ? '[]' : (x.typeRef ? `new ${x.typeRef.namePascal}()` : x.typeDefaultValue) %>,
 <% }) %>
 }).then((ret: any) => {
     console.log('--> Completed');

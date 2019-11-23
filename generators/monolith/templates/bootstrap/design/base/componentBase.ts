@@ -4,12 +4,12 @@ const storage = require('node-persist');
 
 import * as readline from "readline";
 import {inject, injectable} from "inversify";
-import {DbManagerCommon} from "../common/DbManagerCommon";
+import {DbManagerProvider} from "../../inversify.config";
 
 @injectable()
 export abstract class ComponentBase {
     @inject(DITypes.ICommonDbManagerContract)
-    protected dbManager: DbManagerCommon;
+    protected dbManager: DbManagerProvider;
 
     public initialize(): void {
     }

@@ -47,7 +47,7 @@ export class TypeConverter {
 
         switch(type) {
             case 'string': value = '\'\''; break;
-            case 'Date': value = '0'; break;
+            case 'Date': value = 'new Date()'; break;
             case 'number': value = '0'; break;
             case 'boolean': value = 'false'; break;
 
