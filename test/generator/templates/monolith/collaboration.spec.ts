@@ -132,26 +132,26 @@ describe('Generators', () => {
                     const content = await ejs.renderFile(path.join(dir, 'flow.ejs'), {entity: sequence});
 
                     expect(content.normalizeSpace()).toBe(`
-                        // Start call componentA 
+                        // Start call componentA2 
                         flowAsync = flowAsync.then((state: any) => { 
                             state.start = new Date(); 
-                            console.log('--> componentA::actionA1'); 
+                            console.log('--> componentA2::actionA1'); 
                             
-                            return this.cmpcomponentA.actionA1(state); 
+                            return this.cmpcomponentA2.actionA1(state); 
                         }); 
                         
-                        // componentA call componentB 
+                        // componentA2 call componentB2 
                         flowAsync = flowAsync.then((state: any) => { 
                             return Promise.resolve(state).then(state => { 
-                                return Promise.all(state.returns.map(x => { 
+                                return Promise.all(state.returns.map((x: any) => { 
                                     let flowAsync = Promise.resolve({...state, ...{returns: x}}); 
                                     
-                                    // componentA call componentB 
+                                    // componentA2 call componentB2 
                                     flowAsync = flowAsync.then((state: any) => { 
                                         state.start = new Date(); 
-                                        console.log('--> componentB::actionB1'); 
+                                        console.log('--> componentB2::actionB1'); 
                                         
-                                        return this.cmpcomponentB.actionB1(state); 
+                                        return this.cmpcomponentB2.actionB1(state); 
                                     }); 
                                 
                                     return flowAsync; 
@@ -159,12 +159,12 @@ describe('Generators', () => {
                             }).then(states => state);
                         });
                         
-                        // componentA call componentB 
+                        // componentA2 call componentB2 
                         flowAsync = flowAsync.then((state: any) => { 
                             state.start = new Date(); 
-                            console.log('--> componentB::actionB2'); 
+                            console.log('--> componentB2::actionB2'); 
                             
-                            return this.cmpcomponentB.actionB2(state); 
+                            return this.cmpcomponentB2.actionB2(state); 
                         });`.normalizeSpace());
                 });
             });
