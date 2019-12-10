@@ -3,20 +3,21 @@ const pkg = require('../package.json');
 const path = require('path');
 const _ = require('underscore');
 const chalk = require('chalk');
+
 import fs = require('fs');
+import dotenv from 'dotenv';
+dotenv.config();
 
 export class JiraClient {
     jira: any;
     config: any;
 
-    constructor(config?: any) {
-        this.config = config || pkg;
-
+    constructor() {
         this.jira = new client({
-            host: this.config.jira.url,
+            host: process.env.JIRA_URL,
             basic_auth: {
-                username: this.config.jira.username,
-                password: this.config.jira.password
+                email: process.env.JIRA_EMAIL,
+                api_token: process.env.JIRA_TOKEN
             }
         });
     }
@@ -24,7 +25,7 @@ export class JiraClient {
     public sync(docDir: string) {
         return new Promise((resolve =>
             fs.readdir(docDir, (err: any, files: string[]) => {
-                files.forEach(x => this.syncFile(path.join(docDir, x)));
+                files.forEach(x => this.syncFile(path.join(docDir, x)).catch(err => console.log(err)));
                 resolve(files);
             })));
     }
@@ -34,7 +35,7 @@ export class JiraClient {
             fs.readFile(fileName, 'utf-8', (err, data) => {
                 let json: {key?: string, name: string, basicPathScenarios: string[]} = JSON.parse(data);
                 let issue = {fields: {
-                        project: { key: this.config.jira.project },
+                        project: { key: process.env.JIRA_PROJECT },
                         summary: json.name,
                         description: this.jiraTemplate({data: json}),
                         issuetype: { name: "Story" }
