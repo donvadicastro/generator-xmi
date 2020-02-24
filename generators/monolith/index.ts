@@ -221,18 +221,18 @@ export class XmiGenerator extends XmiGeneratorBase {
             }
 
             else if (x instanceof xmiCollaboration) {
-                const testFileDest = `${path}/test/process_${x.name}.ts`;
+                //const testFileDest = `${path}/test/process_${x.name}.ts`;
                 const diagramFileName = this.destinationPath(`${path}/process/${x.name}.ts`);
                 const apiRouterFileName = this.destinationPath(`${this.options.destination}/api/server/routes/${localPath}/router.ts`);
                 const apiControllerFileName = this.destinationPath(`${this.options.destination}/api/server/routes/${localPath}/controller.ts`);
 
                 this.fs.copyTpl(this.templatePath('xmiCollaboration.ejs'), diagramFileName, options);
-                this.fs.copyTpl(this.templatePath('test/xmiComponent.ejs'), this.destinationPath(testFileDest), options);
+                //this.fs.copyTpl(this.templatePath('test/xmiComponent.ejs'), this.destinationPath(testFileDest), options);
 
                 this.fs.copyTpl(this.templatePath('api/diagram/router.ejs'), apiRouterFileName, options);
                 this.fs.copyTpl(this.templatePath('api/diagram/controller.ejs'), apiControllerFileName, options);
 
-                this.testFiles.push(testFileDest);
+                //this.testFiles.push(testFileDest);
                 this.generatedFiles.push(diagramFileName);
                 this.generatedFiles.push(apiRouterFileName);
                 this.generatedFiles.push(apiControllerFileName);

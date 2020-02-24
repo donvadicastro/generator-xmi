@@ -2,6 +2,7 @@ import {Request, Response} from 'express';
 import {DIContainer} from "../../<%= entity.getRelativeRoot() %>/inversify.config";
 import {DITypes} from "../../<%= entity.getRelativeRoot() %>/design/types/diTypes";
 import {<%= entity.namePascal %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= entity.pathFromRoot %>/process/<%= entity.name %>';
+import {FlowState} from "../../<%= entity.getRelativeRoot() %>/design/types/flowState";
 
 <% entity.lifelines.forEach(x => { %>
     import {<%= x.ref.namePascal %>Contract} from '../../<%= entity.getRelativeRoot() %>/design/<%= x.ref.pathFromRoot %>/contracts/<%= x.ref.name %>';
@@ -18,7 +19,7 @@ export default class Controller {
     }
 
     run(req: Request, res: Response): void {
-        this.flow.run(req.body || {})
+        this.flow.run(new FlowState(req.body))
             .then((ret: any) => res.status(201).json(ret))
             .catch(error => res.status(500).json({error: error.message, name: error.name, stack: error.stack}));
     }

@@ -31,7 +31,7 @@ export interface <%= entity.namePascal %>Contract {
     /**
     * <%= operation.name %> description.
     */
-    <%= operation.name %>(state: any, returns ? : any): Promise<any>;
+    <%= operation.name %>(state: any): Promise<any>;
   <% }) %>
 
   <% if(entity.hasLoop) { %>

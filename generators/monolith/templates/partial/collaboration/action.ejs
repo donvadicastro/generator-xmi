@@ -1,14 +1,12 @@
-state.start = new Date();
-
 <% if(message.connector.condition) { %>
-    if(this.cmp<%= message.from.elementRef.name %>['<%- message.connector.condition %>'](state)) {
+    if(this.cmp<%= message.from.elementRef.namePascal %>['<%- message.connector.condition %>'](state)) {
         console.log('--> <%= message.to.elementRef.name %>::<%= message.operation.name %>');
-        return this.cmp<%= message.to.elementRef.name %>.<%= message.operation.name %>(state);
+        return this.cmp<%= message.to.elementRef.namePascal %>.<%= message.operation.name %>(state.resetActionStart());
     } else {
         console.log('--> \x1b[43m<%= message.to.elementRef.name %>::<%= message.operation.name %>: 0 ms\x1b[m <- ignored by condition');
         return state;
     }
 <% } else { %>
     console.log('--> <%= message.to.elementRef.name %>::<%= message.operation.name %>');
-    return this.cmp<%= message.to.elementRef.name %>.<%= message.operation.name %>(state);
+    return this.cmp<%= message.to.elementRef.namePascal %>.<%= message.operation.name %>(state.resetActionStart());
 <% } %>

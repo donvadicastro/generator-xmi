@@ -20,30 +20,20 @@ export class <%= entity.namePascal %> {
     /**
     /* Execute process
     */
-    run(inputState: FlowStateType & {
-    <% firstOperation && firstOperation.inputParameters.forEach(x => { %>
-        <%= x.name %>: <%= x.typeRef ? `${x.typeRef.namePascal}${x.isArray ? '[]' : ''}` : x.type %>,
-    <% }) %>
-    }, returns?: any) {
+    run(inputState: FlowState) {
         let flowAsync = Promise.resolve(inputState);
 
         // Configure state storage
-        flowAsync = flowAsync.then((state: any) => {
+        flowAsync = flowAsync.then((state: FlowState) => {
             console.log('--> initialize local state storage');
             storage.init(/* options ... */);
-            state.flowStart = new Date();
-            return state;
+            return state.resetFlowStart();
         });
 
         // define flow
         <%- include('partial/collaboration/flow', {entity: entity}) -%>
 
-        return flowAsync.then((state: any) => {
-            delete state.start;
-            state.flowEnd = new Date();
-
-            return state;
-        }).catch(error => {
+        return flowAsync.then((state: any) => state).catch(error => {
             console.log(chalk.red('ERROR: '), error);
             throw error;
         });

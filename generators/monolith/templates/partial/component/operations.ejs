@@ -3,13 +3,13 @@
     * <%= operation.nameOrigin %> action.
     * <%- (operation.description || '').replace(/\n/g, '\n* ') %>.
     */
-    async <%= operation.name %>(state: FlowStateType & {
+    async <%= operation.name %>(state: FlowState & {
             <% operation.inputParameters.forEach(x => { %>
                 <%= x.name %>: <%= x.typeRef ? `${x.typeRef.namePascal}${x.isArray ? '[]' : ''}` : x.type %>,
             <% }) %>
-        }, returns?: any): Promise<FlowStateType & {returns: <%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.namePascal}` : operation.returnParameter.type %><%= operation.isReturnArray ? '[]' : '' %> | null}> {
+        }): Promise<<%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.namePascal}` : operation.returnParameter.type %><%= operation.isReturnArray ? '[]' : '' %> | null> {
 
-        this.notifyComplete('<%= entity.name %>::<%= operation.name %>', state.start);
-        return {...<FlowStateType>state, ...{returns: returns}};
+        this.notifyComplete('<%= entity.name %>::<%= operation.name %>', state.actionStart);
+        return Promise.resolve(null);
     }
 <% }) %>
