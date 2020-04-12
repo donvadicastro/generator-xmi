@@ -20,7 +20,7 @@ describe('<%= entity.name %> specification check', () => {
 <% (entity.operations || []).forEach(operation => { %>
     it('verify "<%= operation.name %>"', async () => {<% operation.inputParameters.forEach(x => { %>
         const <%= x.name %> = <%= x.isArray ? '[' : '' %><%- x.typeRef ? `new ${x.typeRef.namePascal}()` : x.typeDefaultValue %><%= x.isArray ? ']' : '' %>;<% }) %>
-        const expected <% if(operation.isReturnArray) { %>: <%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.namePascal}` : operation.returnParameter.type %>[]<% } %> = <%= operation.isReturnArray ? '[]' : operation.returnParameter.typeRef ? `new ${operation.returnParameter.typeRef.namePascal}()` : operation.returnParameter.typeDefaultValue %>;
+        const expected <% if(operation.isReturnArray) { %>: <%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.namePascal}` : operation.returnParameter.type %>[]<% } %> = <%- operation.isReturnArray ? '[]' : operation.returnParameter.typeRef ? `new ${operation.returnParameter.typeRef.namePascal}()` : operation.returnParameter.typeDefaultValue %>;
         const actual = await instance.<%= operation.name %>({...state, ...{<%= operation.inputParameters.map(x => `${x.name} : ${x.name}` )%>}});
 
         expect(actual).toEqual(expected);
