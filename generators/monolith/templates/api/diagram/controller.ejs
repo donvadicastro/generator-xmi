@@ -1,26 +1,22 @@
-import {Request, Response} from 'express';
-import {DIContainer} from "../../<%= entity.getRelativeRoot() %>/inversify.config";
-import {DITypes} from "../../<%= entity.getRelativeRoot() %>/design/types/diTypes";
-import {<%= entity.namePascal %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= entity.pathFromRoot %>/process/<%= entity.name %>';
-import {FlowState} from "../../<%= entity.getRelativeRoot() %>/design/types/flowState";
+import { Request, Response } from 'express';
+import {ActorRef, ActorSystem} from "comedy";
+import Actor from "./actor";
 
-<% entity.lifelines.forEach(x => { %>
-    import {<%= x.ref.namePascal %>Contract} from '../../<%= entity.getRelativeRoot() %>/design/<%= x.ref.pathFromRoot %>/contracts/<%= x.ref.name %>';
-<% }) %>
-
+const actors = require('comedy');
+const actorSystem: ActorSystem = actors();
 
 export default class Controller {
-    private flow: <%= entity.namePascal %>;
+    private actor: Promise<ActorRef>;
 
     constructor() {
-        this.flow = new <%= entity.namePascal %>(<% (entity.lifelines || []).forEach(function (lifeline) { %>
-            DIContainer.get<<%= lifeline.namePascal %>Contract>(DITypes.<%= lifeline.namePascal %>Contract),
-        <% }) %>);
+        this.actor = actorSystem.rootActor().then(x => x.createChild(Actor));
     }
 
     run(req: Request, res: Response): void {
-        this.flow.run(new FlowState(req.body))
-            .then((ret: any) => res.status(201).json(ret))
-            .catch(error => res.status(500).json({error: error.message, name: error.name, stack: error.stack}));
+        this.actor.then(x => x.sendAndReceive('run', req.body)).then((ret: any) => res.status(201).json(ret)).catch(error => res.status(500).json({
+            error: error.message,
+            name: error.name,
+            stack: error.stack
+        }));
     }
 }
