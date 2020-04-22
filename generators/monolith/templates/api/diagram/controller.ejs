@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import {ActorRef, ActorSystem} from "comedy";
 
 const actors = require('comedy');
-const actorSystem: ActorSystem = actors();
+const actorSystem: ActorSystem = actors({mode: 'in-memory'}); //in-memory, forked
 const actorPath = require.resolve('./actor');
 
 export default class Controller {
