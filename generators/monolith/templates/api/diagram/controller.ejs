@@ -7,7 +7,7 @@ export default class Controller {
     private actor: Promise<ActorRef>;
 
     constructor(actorSystem: ActorSystem) {
-        this.actor = actorSystem.rootActor().then(x => x.createChild(actorPath));
+        this.actor = actorSystem.rootActor().then((x: ActorRef) => x.createChild(actorPath));
     }
 
     run(req: Request, res: Response): void {
