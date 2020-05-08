@@ -7,7 +7,6 @@ import os from 'os';
 import cookieParser from 'cookie-parser';
 import swaggerify from './swagger';
 import logger from './logger';
-import {createConnection} from "typeorm";
 
 const root = path.normalize(__dirname + '/..');
 const solutionRoot = path.normalize(root + '/..');

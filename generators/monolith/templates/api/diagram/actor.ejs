@@ -8,7 +8,7 @@ import {FlowState} from "../../<%= entity.getRelativeRoot() %>/design/types/flow
 <% }) %>
 
 
-export default class Controller {
+export default class Actor {
     private flow: <%= entity.namePascal %>;
 
     constructor() {
@@ -17,7 +17,7 @@ export default class Controller {
         <% }) %>);
     }
 
-    run(body: any): Promise<any> {
+    run(input: any): Promise<any> {
         return this.flow.run(new FlowState(input));
     }
 }

@@ -202,7 +202,6 @@ export class XmiGenerator extends XmiGeneratorBase {
                     this.fs.copyTpl(this.templatePath('e2e/test.feature.ejs'), e2eFeatuePath, options);
                 }
 
-                this.generatedFiles.push(apiRouterFileName);
                 this.generatedFiles.push(editComponentFileName);
                 this.generatedFiles.push(listComponentFileName);
 

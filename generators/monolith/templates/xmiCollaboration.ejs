@@ -20,7 +20,7 @@ export class <%= entity.namePascal %> {
     /**
     /* Execute process
     */
-    run(inputState: FlowState) {
+    run(inputState: FlowState): Promise<any> {
         let flowAsync = Promise.resolve(inputState);
 
         // Configure state storage
