@@ -26,47 +26,29 @@ describe('Generators', () => {
                     const content = await ejs.renderFile(path.join(dir, 'flow.ejs'), {entity: sequence});
 
                     expect(content.normalizeSpace()).toBe(`
-                        // Start call classA
-                        flowAsync = flowAsync.then((state: any) => {
-                            state.start = new Date();
-                            console.log('--> classA::afn1');
+                        // Start call classA 
+                        console.log('--> classA::afn1'); 
+                        inputState.value = await this.cmpClassA.afn1(state.resetActionStart().value); 
                         
-                            return this.cmpclassA.afn1(state);
-                        });
+                        // classA call classB 
+                        console.log('--> classB::bfn1'); 
+                        inputState.value = await this.cmpClassB.bfn1(state.resetActionStart().value);
                     
                         // classA call classB
-                        flowAsync = flowAsync.then((state: any) => {
-                            state.start = new Date();
-                            console.log('--> classB::bfn1');
-                        
-                            return this.cmpclassB.bfn1(state);
-                        });
+                        if(this.cmpClassA['a >= b'](state)) { 
+                            console.log('--> classB::bfn2');
+                            inputState.value = await this.cmpClassB.bfn2(state.resetActionStart().value);
+                        } else {
+                            console.log('--> \\x1b[43mclassB::bfn2: 0 ms\\x1b[m <- ignored by condition');
+                        }
                     
                         // classA call classB
-                        flowAsync = flowAsync.then((state: any) => {
-                            state.start = new Date();
-                            
-                            if(this.cmpclassA['a >= b'](state)) { 
-                                console.log('--> classB::bfn2');
-                                return this.cmpclassB.bfn2(state);
-                            } else {
-                                console.log('--> \\x1b[43mclassB::bfn2: 0 ms\\x1b[m <- ignored by condition');
-                                return state;
-                            }
-                        });
-                    
-                        // classA call classB
-                        flowAsync = flowAsync.then((state: any) => {
-                            state.start = new Date();
-                            
-                            if(this.cmpclassA['a < b'](state)) { 
-                                console.log('--> classB::bfn3');
-                                return this.cmpclassB.bfn3(state);
-                            } else {
-                                console.log('--> \\x1b[43mclassB::bfn3: 0 ms\\x1b[m <- ignored by condition');
-                                return state;
-                            }
-                        });
+                        if(this.cmpClassA['a < b'](state)) { 
+                            console.log('--> classB::bfn3');
+                            inputState.value = await this.cmpClassB.bfn3(state.resetActionStart().value);
+                        } else {
+                            console.log('--> \\x1b[43mclassB::bfn3: 0 ms\\x1b[m <- ignored by condition');
+                        }
                     `.normalizeSpace());
                 });
             });
@@ -90,40 +72,20 @@ describe('Generators', () => {
                     const content = await ejs.renderFile(path.join(dir, 'flow.ejs'), {entity: sequence});
 
                     expect(content.normalizeSpace()).toBe(`
-                        // Start call componentA1 
-                        flowAsync = flowAsync.then((state: any) => { 
-                            state.start = new Date(); 
-                            console.log('--> componentA1::actionA1'); 
-                            
-                            return this.cmpcomponentA1.actionA1(state); 
-                        }); 
-                        
-                        // componentA1 call componentB1
-                        flowAsync = flowAsync.then((state: any) => { 
-                            state.start = new Date(); 
-                            console.log('--> componentB1::actionB1'); 
-                            
-                            return this.cmpcomponentB1.actionB1(state); 
-                        }); 
-                        
-                        // componentA1 call componentB1
-                        flowAsync = flowAsync.then((state: any) => { 
-                            return Promise.resolve(state).then(state => { 
-                                return Promise.all(state.returns.map((x: any) => { 
-                                    let flowAsync = Promise.resolve({...state, ...{returns: x}}); 
-                                    
-                                    // componentA1 call componentB1 
-                                    flowAsync = flowAsync.then((state: any) => { 
-                                        state.start = new Date(); 
-                                        console.log('--> componentB1::actionB2'); 
-                                        
-                                        return this.cmpcomponentB1.actionB2(state); 
-                                    }); 
-                                
-                                    return flowAsync; 
-                                })); 
-                            }).then(states => state); 
-                        });`.normalizeSpace());
+                        // Start call componentA 
+                        console.log('--> componentA::actionA1'); 
+                        inputState.value = await this.cmpComponentA.actionA1(state.resetActionStart().value);
+                    
+                        // componentA call componentB 
+                        console.log('--> componentB::actionB1'); 
+                        inputState.value = await this.cmpComponentB.actionB1(state.resetActionStart().value);
+                    
+                        // componentA call componentB
+                        inputState.value = await Promise.all(state.resetActionStart().value.map(async (x: any): Promise<any> => { 
+                            // componentA call componentB
+                            console.log('--> componentB::actionB2'); 
+                            return await this.cmpComponentB.actionB2(x); 
+                        }));`.normalizeSpace());
                 });
 
                 it('check loop with final call', async () => {
@@ -132,40 +94,21 @@ describe('Generators', () => {
                     const content = await ejs.renderFile(path.join(dir, 'flow.ejs'), {entity: sequence});
 
                     expect(content.normalizeSpace()).toBe(`
-                        // Start call componentA2 
-                        flowAsync = flowAsync.then((state: any) => { 
-                            state.start = new Date(); 
-                            console.log('--> componentA2::actionA1'); 
-                            
-                            return this.cmpcomponentA2.actionA1(state); 
-                        }); 
+                        // Start call componentA
+                        console.log('--> componentA::actionA1'); 
+                        inputState.value = await this.cmpComponentA.actionA1(state.resetActionStart().value); 
                         
-                        // componentA2 call componentB2 
-                        flowAsync = flowAsync.then((state: any) => { 
-                            return Promise.resolve(state).then(state => { 
-                                return Promise.all(state.returns.map((x: any) => { 
-                                    let flowAsync = Promise.resolve({...state, ...{returns: x}}); 
-                                    
-                                    // componentA2 call componentB2 
-                                    flowAsync = flowAsync.then((state: any) => { 
-                                        state.start = new Date(); 
-                                        console.log('--> componentB2::actionB1'); 
-                                        
-                                        return this.cmpcomponentB2.actionB1(state); 
-                                    }); 
-                                
-                                    return flowAsync; 
-                                })); 
-                            }).then(states => state);
-                        });
+                        // componentA call componentB
+                        inputState.value = await Promise.all(state.resetActionStart().value.map(async (x: any): Promise<any> => { 
+                            // componentA call componentB 
+                            console.log('--> componentB::actionB1'); 
+                            return await this.cmpComponentB.actionB1(x); 
+                        }));
                         
-                        // componentA2 call componentB2 
-                        flowAsync = flowAsync.then((state: any) => { 
-                            state.start = new Date(); 
-                            console.log('--> componentB2::actionB2'); 
-                            
-                            return this.cmpcomponentB2.actionB2(state); 
-                        });`.normalizeSpace());
+                        // componentA call componentB 
+                        console.log('--> componentB::actionB2'); 
+                        inputState.value = await this.cmpComponentB.actionB2(state.resetActionStart().value);
+                    `.normalizeSpace());
                 });
             });
         });

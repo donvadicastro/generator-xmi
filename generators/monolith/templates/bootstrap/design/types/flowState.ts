@@ -1,5 +1,5 @@
 export class FlowState {
-    initialData: any;
+    stack: any[];
 
     flowStart?: Date;
     flowEnd?: Date;
@@ -18,6 +18,14 @@ export class FlowState {
     }
 
     constructor(initialData: any = null) {
-        this.initialData = initialData;
+        this.stack = [initialData];
+    }
+
+    get value(): any {
+        return this.stack.pop();
+    }
+
+    set value(value: any) {
+        this.stack.push(value);
     }
 }

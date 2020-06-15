@@ -20,22 +20,13 @@ export class <%= entity.namePascal %> {
     /**
     /* Execute process
     */
-    run(inputState: FlowState): Promise<any> {
-        let flowAsync = Promise.resolve(inputState);
-
-        // Configure state storage
-        flowAsync = flowAsync.then((state: FlowState) => {
-            console.log('--> initialize local state storage');
-            storage.init(/* options ... */);
-            return state.resetFlowStart();
-        });
+    async run(inputState: FlowState): Promise<any> {
+        console.log('--> initialize local state storage');
+        storage.init(/* options ... */);
 
         // define flow
         <%- include('partial/collaboration/flow', {entity: entity}) -%>
 
-        return flowAsync.then((state: any) => state).catch(error => {
-            console.log(chalk.red('ERROR: '), error);
-            throw error;
-        });
+        return inputState.value;
     }
 }
