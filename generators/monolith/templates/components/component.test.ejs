@@ -15,7 +15,7 @@ import {DITypes} from "<%= entity.getRelativeRoot() %>/types/diTypes";
 import {<%= imports[key].namePascal %>} from '<%= key %>';<%})%>
 
 describe('<%= entity.name %> specification check', () => {
-    const instance = DIContainer.get<<%= entity.namePascal %>Contract>(DITypes.<%= entity.namePascal %>Contract);
+    const instance = DIContainer.get<<%= entity.namePascal %>Contract>(DITypes.<%= entity.elementId %>);
     const state: FlowState = new FlowState();
 <% (entity.operations || []).forEach(operation => { %>
     it('verify "<%= operation.name %>"', async () => {<% operation.inputParameters.forEach(x => { %>

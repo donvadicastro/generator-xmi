@@ -13,7 +13,7 @@ export default class Actor {
 
     constructor() {
         this.flow = new <%= entity.namePascal %>(<% (entity.lifelines || []).forEach(function (lifeline) { %>
-            DIContainer.get<<%= lifeline.namePascal %>Contract>(DITypes.<%= lifeline.namePascal %>Contract),
+            DIContainer.get<<%= lifeline.ref.namePascal %>Contract>(DITypes.<%= lifeline.ref.elementId %>),
         <% }) %>);
     }
 

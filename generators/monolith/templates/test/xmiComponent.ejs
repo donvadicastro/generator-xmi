@@ -26,7 +26,7 @@ import {DITypes} from "../<%= entity.getRelativeRoot() %>/design/types/diTypes";
 <% }) %>
 
 const flow = new <%= entity.namePascal %>(<% (entity.lifelines || []).forEach(function (lifeline) { %>
-    DIContainer.get<<%= lifeline.namePascal %>Contract>(DITypes.<%= lifeline.namePascal %>Contract),
+    DIContainer.get<<%= lifeline.namePascal %>>(DITypes.<%= lifeline.elementId %>Contract),
 <% }) %>);
 
 console.log('Flow execution:');
