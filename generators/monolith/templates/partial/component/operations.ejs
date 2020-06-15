@@ -1,13 +1,12 @@
 <% (entity.operations || []).forEach(function (operation) { %>
     /**
-    * <%= operation.nameOrigin %> action.
-    * <%- (operation.description || '').replace(/\n/g, '\n* ') %>.
+    * <%= operation.nameOrigin %> action.<% if(operation.description) { %>
+    * <%- operation.description.replace(/\n/g, '\n* ') %>.<% } %>
     */
     async <%= operation.name %>(<% operation.inputParameters.forEach(x => { %>
                 <%= x.name %>: <%= x.typeRef ? `${x.typeRef.namePascal}${x.isArray ? '[]' : ''}` : x.type %>,
-            <% }) %>): Promise<<%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.namePascal}` : operation.returnParameter.type %><%= operation.isReturnArray ? '[]' : '' %> | null> {
+            <% }) %>): <%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.namePascal}` : operation.returnParameter.type %><%= operation.isReturnArray ? '[]' : '' %> | null {
 
-        //this.notifyComplete('<%= entity.name %>::<%= operation.name %>', state.actionStart);
-        return Promise.resolve(null);
+        return await null;
     }
 <% }) %>
