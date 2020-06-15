@@ -1,0 +1,3 @@
+<%= operation.name %>(<% operation.inputParameters.forEach(x => { %>
+    <%= x.name %>: <%= x.typeRef ? `${x.typeRef.namePascal}${x.isArray ? '[]' : ''}` : x.type %>,
+<% }) %>): Promise<<%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.namePascal}` : operation.returnParameter.type %><%= operation.isReturnArray ? '[]' : '' %> | null>
