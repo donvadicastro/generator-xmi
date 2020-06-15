@@ -28,8 +28,8 @@ describe('Generators', () => {
                         /** 
                          * afn1 action. 
                         */ 
-                        async afn1(): void | null { 
-                            return await null; 
+                        async afn1(): Promise<void | null> { 
+                            return null; 
                         }
                     `.normalizeSpace());
 

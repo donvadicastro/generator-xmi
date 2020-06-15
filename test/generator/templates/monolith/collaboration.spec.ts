@@ -28,16 +28,16 @@ describe('Generators', () => {
                     expect(content.normalizeSpace()).toBe(`
                         // Start call classA 
                         console.log('--> classA::afn1'); 
-                        inputState.value = await this.cmpClassA.afn1(state.resetActionStart().value); 
+                        inputState.value = await this.cmpClassA.afn1(); 
                         
                         // classA call classB 
                         console.log('--> classB::bfn1'); 
-                        inputState.value = await this.cmpClassB.bfn1(state.resetActionStart().value);
+                        inputState.value = await this.cmpClassB.bfn1();
                     
                         // classA call classB
                         if(this.cmpClassA['a >= b'](state)) { 
                             console.log('--> classB::bfn2');
-                            inputState.value = await this.cmpClassB.bfn2(state.resetActionStart().value);
+                            inputState.value = await this.cmpClassB.bfn2();
                         } else {
                             console.log('--> \\x1b[43mclassB::bfn2: 0 ms\\x1b[m <- ignored by condition');
                         }
@@ -45,7 +45,7 @@ describe('Generators', () => {
                         // classA call classB
                         if(this.cmpClassA['a < b'](state)) { 
                             console.log('--> classB::bfn3');
-                            inputState.value = await this.cmpClassB.bfn3(state.resetActionStart().value);
+                            inputState.value = await this.cmpClassB.bfn3();
                         } else {
                             console.log('--> \\x1b[43mclassB::bfn3: 0 ms\\x1b[m <- ignored by condition');
                         }
@@ -74,17 +74,17 @@ describe('Generators', () => {
                     expect(content.normalizeSpace()).toBe(`
                         // Start call componentA 
                         console.log('--> componentA::actionA1'); 
-                        inputState.value = await this.cmpComponentA.actionA1(state.resetActionStart().value);
+                        inputState.value = await this.cmpComponentA.actionA1();
                     
                         // componentA call componentB 
                         console.log('--> componentB::actionB1'); 
-                        inputState.value = await this.cmpComponentB.actionB1(state.resetActionStart().value);
+                        inputState.value = await this.cmpComponentB.actionB1();
                     
                         // componentA call componentB
-                        inputState.value = await Promise.all(state.resetActionStart().value.map(async (x: any): Promise<any> => { 
+                        inputState.value = await Promise.all(inputState.resetActionStart().value.map(async (x: any): Promise<any> => { 
                             // componentA call componentB
                             console.log('--> componentB::actionB2'); 
-                            return await this.cmpComponentB.actionB2(x); 
+                            return await this.cmpComponentB.actionB2(); 
                         }));`.normalizeSpace());
                 });
 
@@ -96,18 +96,18 @@ describe('Generators', () => {
                     expect(content.normalizeSpace()).toBe(`
                         // Start call componentA
                         console.log('--> componentA::actionA1'); 
-                        inputState.value = await this.cmpComponentA.actionA1(state.resetActionStart().value); 
+                        inputState.value = await this.cmpComponentA.actionA1(); 
                         
                         // componentA call componentB
-                        inputState.value = await Promise.all(state.resetActionStart().value.map(async (x: any): Promise<any> => { 
+                        inputState.value = await Promise.all(inputState.resetActionStart().value.map(async (x: any): Promise<any> => { 
                             // componentA call componentB 
                             console.log('--> componentB::actionB1'); 
-                            return await this.cmpComponentB.actionB1(x); 
+                            return await this.cmpComponentB.actionB1(); 
                         }));
                         
                         // componentA call componentB 
                         console.log('--> componentB::actionB2'); 
-                        inputState.value = await this.cmpComponentB.actionB2(state.resetActionStart().value);
+                        inputState.value = await this.cmpComponentB.actionB2();
                     `.normalizeSpace());
                 });
             });
