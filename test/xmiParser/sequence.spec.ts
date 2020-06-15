@@ -26,8 +26,8 @@ describe('xmiParser', () => {
                 const sequence: xmiCollaboration = <xmiCollaboration>(pkg.getNode('sequenceDiagrams.1SimpleLoop.eaCollaboration1'));
 
                 expect(sequence).toBeInstanceOf(xmiCollaboration);
-                expect(sequence.lifelines.map(x => x.name)).toEqual(["componentA1", "componentB1"]);
-                expect(sequence.lifelines.map(x => x.elementRef.name)).toEqual(["componentA1", "componentB1"]);
+                expect(sequence.lifelines.map(x => x.name)).toEqual(["componentA", "componentB"]);
+                expect(sequence.lifelines.map(x => x.elementRef.name)).toEqual(["componentA", "componentB"]);
                 expect(sequence.lifelines[0].elementRef).toBeInstanceOf(xmiComponent);
                 expect(sequence.lifelines[1].elementRef).toBeInstanceOf(xmiComponent);
 

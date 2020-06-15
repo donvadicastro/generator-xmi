@@ -11,29 +11,18 @@
 
             currentLoopId = loopIds.length ? loop[loopIds[loopIds.length-1]] : null;
         %>
-                    return flowAsync;
-                }));
-            }).then(states => state);
-        });
+        }));
     <% } %>
 
     <% if(loop && !loops[loop.id]) { %>
         <% loops[loop.id] = message.from.elementRef; currentLoopId = loop.id; %>
         // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to && message.to.elementRef.name %>
-        flowAsync = flowAsync.then((state: any) => {
-            return Promise.resolve(state).then(state => {
-                return Promise.all(state.returns.map((x: any) => {
-                    let flowAsync = Promise.resolve({...state, ...{returns: x}});
+        inputState.value = await Promise.all(inputState.resetActionStart().value.map(async (x: any): Promise<any> => {
     <% } %>
 
     // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to && message.to.elementRef.name %>
-    flowAsync = flowAsync.then((state: any) => {
-        <%- include('action', {message: message}) -%>
-    });
+    <%- include('action', {message: message, isLoop: currentLoopId}) -%>
 <% }) %>
 <% Object.keys(loops).reverse().forEach(x => { %>
-            return flowAsync;
-        }));
-    }).then(states => state);
-});
+}));
 <% }) %>

@@ -1,5 +1,5 @@
 import {<%= entity.namePascal %>Contract} from "../contracts/<%= entity.name %>";
-import {FlowStateType} from "<%= entity.getRelativeRoot() %>/types/flowStateType";
+import {FlowState} from "<%= entity.getRelativeRoot() %>/types/flowState";
 
 import {DIContainer} from "../<%= entity.getRelativeRoot() %>/inversify.config";
 import {DITypes} from "<%= entity.getRelativeRoot() %>/types/diTypes";
@@ -15,15 +15,15 @@ import {DITypes} from "<%= entity.getRelativeRoot() %>/types/diTypes";
 import {<%= imports[key].namePascal %>} from '<%= key %>';<%})%>
 
 describe('<%= entity.name %> specification check', () => {
-    const instance = DIContainer.get<<%= entity.namePascal %>Contract>(DITypes.<%= entity.namePascal %>Contract);
-    const state: FlowStateType = { start: new Date() };
+    const instance = DIContainer.get<<%= entity.namePascal %>Contract>(DITypes.<%= entity.elementId %>);
+    const state: FlowState = new FlowState();
 <% (entity.operations || []).forEach(operation => { %>
     it('verify "<%= operation.name %>"', async () => {<% operation.inputParameters.forEach(x => { %>
         const <%= x.name %> = <%= x.isArray ? '[' : '' %><%- x.typeRef ? `new ${x.typeRef.namePascal}()` : x.typeDefaultValue %><%= x.isArray ? ']' : '' %>;<% }) %>
-        const expected <% if(operation.isReturnArray) { %>: <%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.namePascal}` : operation.returnParameter.type %>[]<% } %> = <%= operation.isReturnArray ? '[]' : operation.returnParameter.typeRef ? `new ${operation.returnParameter.typeRef.namePascal}()` : operation.returnParameter.typeDefaultValue %>;
-        const actual = await instance.<%= operation.name %>({...state, ...{<%= operation.inputParameters.map(x => `${x.name} : ${x.name}` )%>}});
+        const expected <% if(operation.isReturnArray) { %>: <%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.namePascal}` : operation.returnParameter.type %>[]<% } %> = <%- operation.isReturnArray ? '[]' : operation.returnParameter.typeRef ? `new ${operation.returnParameter.typeRef.namePascal}()` : operation.returnParameter.typeDefaultValue %>;
+        const actual = await instance.<%= operation.name %>(<%= operation.inputParameters.map(x => x.name).join(', ')%>);
 
-        expect(actual.returns).toEqual(expected);
+        expect(actual).toEqual(expected);
     });
 <% }) %>
 });

@@ -1,8 +1,7 @@
 const chalk = require("chalk");
 const storage = require('node-persist');
 
-import {Promise} from 'es6-promise';
-import {FlowStateType} from '<%= entity.getRelativeRoot() %>/types/flowStateType';
+import {FlowState} from '<%= entity.getRelativeRoot() %>/types/flowState';
 
 <% entity.referencesAsList.forEach(reference => {%>
     import {<%= reference.name %>} from '<%= reference.path %>';

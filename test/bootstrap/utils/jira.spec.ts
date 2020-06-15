@@ -12,7 +12,7 @@ describe('JIRA utils', () => {
     }};
 
     beforeEach(() => {
-        jira = new JiraClient(config);
+        jira = new JiraClient();
     });
 
     xit('should sync correct', (done) => {

@@ -1,15 +1,9 @@
 <% (entity.operations || []).forEach(function (operation) { %>
     /**
-    * <%= operation.nameOrigin %> action.
-    * <%- (operation.description || '').replace(/\n/g, '\n* ') %>.
+    * <%= operation.nameOrigin %> action.<% if(operation.description) { %>
+    * <%- operation.description.replace(/\n/g, '\n* ') %>.<% } %>
     */
-    async <%= operation.name %>(state: FlowStateType & {
-            <% operation.inputParameters.forEach(x => { %>
-                <%= x.name %>: <%= x.typeRef ? `${x.typeRef.namePascal}${x.isArray ? '[]' : ''}` : x.type %>,
-            <% }) %>
-        }, returns?: any): Promise<FlowStateType & {returns: <%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.namePascal}` : operation.returnParameter.type %><%= operation.isReturnArray ? '[]' : '' %> | null}> {
-
-        this.notifyComplete('<%= entity.name %>::<%= operation.name %>', state.start);
-        return {...<FlowStateType>state, ...{returns: returns}};
+    async <%- include('../interface/operation', {operation: operation}) -%> {
+        return null;
     }
 <% }) %>

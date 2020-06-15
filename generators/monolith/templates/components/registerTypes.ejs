@@ -1,9 +1,9 @@
 const DITypes = {
     ICommonDbManagerContract: Symbol.for('ICommonDbManager'),
 
-<% components.forEach(x => { %>
-    <%= x.entity.namePascal %>Contract: Symbol.for('<%= x.entity.namePascal %>Contract'),
-    <% x.entity.provided.forEach(y => { %><%= y.namePascal %>Contract: Symbol.for('<%= y.namePascal %>'),<% })}) %>
+<% components.filter((x, i, list) => list.indexOf(x) === i).forEach(x => { %>
+    <%= x.entity.elementId %>: Symbol.for('<%= x.entity.elementId %>'),
+    <% x.entity.provided.forEach(y => { %><%= y.elementId %>: Symbol.for('<%= y.elementId %>'),<% })}) %>
 };
 
 export {DITypes};
