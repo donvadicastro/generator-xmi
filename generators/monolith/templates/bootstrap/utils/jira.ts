@@ -5,8 +5,6 @@ const _ = require('underscore');
 const chalk = require('chalk');
 
 import fs = require('fs');
-import dotenv from 'dotenv';
-dotenv.config();
 
 export class JiraClient {
     jira: any;

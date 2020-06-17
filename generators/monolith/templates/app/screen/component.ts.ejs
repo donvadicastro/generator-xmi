@@ -75,7 +75,7 @@ export class <%= entity.namePascal %>ScreenComponent {
       protected loadData_<%= child.namePascal %>(data?: any, changePath?: string) {
         <% var elementRefPath = x.start.elementRef.getPathFromRootWithModifier(utils.kebabCase) %>
         this.http.post(`${environment.api.url}/<%= elementRefPath %>`, data)
-        .subscribe((res: any) => <% if(child.stereotype === 'table') { %>this.form.setControl('<%= child.name %>', this.fb.array((res.returns ? (res.returns.length >= 0 ? res.returns : [res.returns]) : []).map((x: any) => this.fb.group({...x, ...{_checked: false}}))))<% } else if(['combo', 'combobox'].indexOf(child.stereotype) >= 0) { %>this.<%= child.name %>All = res.returns<% } else {%>this.form.patchValue({ <%= child.name %>: res.returns })<% } %>);
+        .subscribe((res: any) => <% if(child.stereotype === 'table') { %>this.form.setControl('<%= child.name %>', this.fb.array((res ? (res.length >= 0 ? res : [res]) : []).map((x: any) => this.fb.group({...x, ...{_checked: false}}))))<% } else if(['combo', 'combobox'].indexOf(child.stereotype) >= 0) { %>this.<%= child.name %>All = res<% } else {%>this.form.patchValue({ <%= child.name %>: res })<% } %>);
       }
     <% }) %>
 

@@ -2,11 +2,11 @@
     const refs = {};
 
     components.forEach(x => {
-        refs[`./design/${x.entity.pathFromRoot}/contracts/${x.entity.name}`] = `${x.entity.namePascal}Contract`;
-        refs[`./design/${x.entity.pathFromRoot}/components/${x.entity.name}`] = x.entity.namePascal;
+        refs[`./design/${x.entity.pathFromRoot}/contracts/${x.entity.name}`] = {key: `${x.entity.namePascal}Contract`, id: `${x.entity.elementId}Contract`};
+        refs[`./design/${x.entity.pathFromRoot}/components/${x.entity.name}`] = {key: x.entity.namePascal, id: x.entity.elementId};
 
         x.entity.provided.forEach(y => {
-            refs[`./design/${y.typeRef.pathFromRoot}/contracts/${y.typeRef.name}`] = `${y.typeRef.namePascal}Contract`;
+            refs[`./design/${y.typeRef.pathFromRoot}/contracts/${y.typeRef.name}`] = {key: `${y.typeRef.namePascal}Contract`, id: `${y.typeRef.elementId}Contract` };
         });
     });
 %>
@@ -17,7 +17,7 @@ import { DbManagerCommon } from "./design/common/dbManagerCommon";
 import {Context} from "inversify/dts/planning/context";
 
 <% Object.keys(refs).forEach(x => { %>
-import {<%= refs[x] %>} from '<%= x %>';
+import {<%= refs[x].key %> as <%= refs[x].id %> } from '<%= x %>';
 <% }) %>
 
 const DIContainer = new Container();
@@ -28,8 +28,8 @@ DIContainer.bind<DbManagerProvider>(DITypes.ICommonDbManagerContract)
     .toDynamicValue((context: Context) => () => DbManagerCommon.getInstance());
 
 <% components.forEach(x => { %>
-DIContainer.bind<<%= x.entity.namePascal %>Contract>(DITypes.<%= x.entity.namePascal %>Contract).to(<%= x.entity.namePascal %>);
+DIContainer.bind<<%= x.entity.elementId %>Contract>(DITypes.<%= x.entity.elementId %>).to(<%= x.entity.elementId %>);
 <% x.entity.provided.forEach(y => { %>
-DIContainer.bind<<%= y.namePascal %>Contract>(DITypes.<%= y.namePascal %>Contract).to(<%= x.entity.namePascal %>);<% })}) %>
+DIContainer.bind<<%= y.elementId %>Contract>(DITypes.<%= y.elementId %>).to(<%= x.entity.elementId %>);<% })}) %>
 
 export { DIContainer, DbManagerProvider };

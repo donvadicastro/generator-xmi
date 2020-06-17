@@ -1,8 +1,5 @@
 constructor(
 <% (entity.lifelines || []).forEach(function (lifeline, index) { %>
-    /**
-    * <%= lifeline.elementRef.name %> component
-    */
-    private cmp<%= lifeline.elementRef.name %>:  <%= lifeline.elementRef.namePascal %>Contract,
+    private cmp<%= lifeline.elementRef.namePascal %>:  <%= lifeline.elementRef.namePascal %>Contract,
 <% }) %>
 ) {}

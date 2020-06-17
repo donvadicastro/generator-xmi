@@ -27,7 +27,7 @@ export class ListPageObject {
         const actual = await this.listData;
         const keys = Object.keys(item);
 
-        return  actual.find(x => keys.reduce((res, y) => {
+        return  actual.find(x => keys.reduce((res: any, y) => {
             if(x[y] !== item[y]) {
                 res = false;
             }
