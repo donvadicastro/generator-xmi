@@ -8,6 +8,7 @@ export class TypeConverter {
         eajava_boolean: 'boolean',
         eajava_float: 'number',
         eajava_double: 'number',
+        eajava_byte: 'number',
 
         eanone_void: 'void',
 
