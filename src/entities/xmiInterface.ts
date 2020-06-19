@@ -8,8 +8,6 @@ import {xmiGeneralization} from "./connectors/xmiGeneralization";
 import {Reference} from "../types/reference";
 import {xmiEnumeration} from "./xmiEnumeration";
 
-const pascal = require('to-pascal-case');
-
 export class xmiInterface extends xmiBase {
     attributes: xmiAttribute[] = [];
     operations: xmiOperation[] = [];

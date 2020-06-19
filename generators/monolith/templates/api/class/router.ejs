@@ -20,13 +20,11 @@ export default class <%= entity.namePascal %>Router {
             .get("/<%= utils.kebabCase(entity.name) %>", async (req: Request, res: Response) => {
                 const whereStatement: any = {};
                 const repository = await this.getRepository();
-
-                <% entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).forEach(x => {%>
-                    req.query.<%= x.name %> && (whereStatement.<%= x.name %> = req.query.<%= x.name %>);
-                <% }) %>
-
+            <% entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).forEach(x => {%>
+                req.query.<%= x.name %> && (whereStatement.<%= x.name %> = req.query.<%= x.name %>);
+            <% }) %>
                 repository.find({where: whereStatement, relations: [<%- entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>], order: {id: "ASC"}})
-                    .then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
+                    .then((result: any) => res.send(result), (error: any) => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
             })
 
             /**
@@ -34,6 +32,7 @@ export default class <%= entity.namePascal %>Router {
              */
             .get("/<%= utils.kebabCase(entity.name) %>/:id", async (req: Request, res: Response) => {
                 const repository = await this.getRepository();
+
                 repository.findOne(req.params.id, {relations: [<%- entity.attributesCombined.filter(x => x.typeRef && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>]})
                     <% if(entity.generalizationLinksFrom.length) { %>
                     .then(result => {
@@ -43,10 +42,8 @@ export default class <%= entity.namePascal %>Router {
                             res.sendStatus(404);
                         }
                     })
-                    <% } else { %>
-                    .then(result => result ? res.send(result) : res.sendStatus(404))
-                    <% } %>
-                    .catch(error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
+                    <% } else { %>.then((result: any) => result ? res.send(result) : res.sendStatus(404))
+                    <% } %>.catch((error: any) => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
             })
 
             /**
@@ -57,8 +54,8 @@ export default class <%= entity.namePascal %>Router {
                 const entity = repository.create(<<%= entity.namePascal %>>req.body);
 
                 repository.save(entity)
-                    .then(result => res.send(result))
-                    .catch(error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
+                    .then((result: any) => res.send(result))
+                    .catch((error: any) => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
             })
 
             /**
@@ -70,7 +67,7 @@ export default class <%= entity.namePascal %>Router {
 
                 if(entity) {
                     repository.merge(entity, req.body);
-                    repository.save(entity).then(result => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
+                    repository.save(entity).then((result: any) => res.send(result), error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
                 } else {
                     res.sendStatus(404);
                 }
@@ -85,8 +82,8 @@ export default class <%= entity.namePascal %>Router {
 
                 if(entityToDelete) {
                     repository.remove(entityToDelete)
-                        .then(result => res.send(result))
-                        .catch(error => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
+                        .then((result: any) => res.send(result))
+                        .catch((error: any) => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
                 } else {
                     res.sendStatus(404);
                 }
@@ -94,6 +91,6 @@ export default class <%= entity.namePascal %>Router {
     }
 
     private async getRepository() {
-        return (await this.dbProvider()).<%= entity.name %>.repository;
+        return (await this.dbProvider()).<%= entity.elementId %>.repository;
     }
 }

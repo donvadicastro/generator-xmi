@@ -95,6 +95,8 @@ export class xmiAbstractClass extends xmiInterface {
 
         attributes = attributes.concat(this.attributes);
         attributes = attributes.concat([...this.getConnections('aggregation'), ...this.getConnections('association')]
+            //do not expose parent in one-way link (composite relation) to avoid changing
+            .filter(x => x.source.typeRef === this && x.source.aggregation !== 'none')
             .map(x => ((!x.target.multiplicity || x.target.multiplicity === '1' || x.target.multiplicity === '0..1') ? {
                 name: (<xmiClass>x.target.typeRef).name + 'Ref',
                 typeRef: x.target.typeRef,

@@ -5,11 +5,14 @@ import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
 export class xmiAssociationParty extends xmiBase {
     typeRef: xmiBase | null = null;
     value: {lower: number | string, upper: number | string};
+    aggregation: 'composite' | 'none';
 
     constructor(raw: any) {
         super(raw);
 
         this.value = {lower: this.getValue(get(raw, 'lowerValue.0.$')), upper: this.getValue(get(raw, 'upperValue.0.$'))};
+        this.aggregation = raw.$['aggregation'];
+
         xmiComponentFactory.getByKeyDeffered(this, 'typeRef', get(raw, 'type.0.$.xmi:idref'));
     }
 

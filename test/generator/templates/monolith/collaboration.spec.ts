@@ -72,19 +72,19 @@ describe('Generators', () => {
                     const content = await ejs.renderFile(path.join(dir, 'flow.ejs'), {entity: sequence});
 
                     expect(content.normalizeSpace()).toBe(`
-                        // Start call componentA 
-                        console.log('--> componentA::actionA1'); 
-                        inputState.value = await this.cmpComponentA.actionA1();
+                        // Start call componentA1 
+                        console.log('--> componentA1::actionA1'); 
+                        inputState.value = await this.cmpComponentA1.actionA1();
                     
-                        // componentA call componentB 
-                        console.log('--> componentB::actionB1'); 
-                        inputState.value = await this.cmpComponentB.actionB1();
+                        // componentA1 call componentB1 
+                        console.log('--> componentB1::actionB1'); 
+                        inputState.value = await this.cmpComponentB1.actionB1();
                     
-                        // componentA call componentB
+                        // componentA1 call componentB1
                         inputState.value = await Promise.all(inputState.resetActionStart().value.map(async (x: any): Promise<any> => { 
-                            // componentA call componentB
-                            console.log('--> componentB::actionB2'); 
-                            return await this.cmpComponentB.actionB2(); 
+                            // componentA1 call componentB1
+                            console.log('--> componentB1::actionB2'); 
+                            return await this.cmpComponentB1.actionB2(); 
                         }));`.normalizeSpace());
                 });
 
@@ -94,20 +94,20 @@ describe('Generators', () => {
                     const content = await ejs.renderFile(path.join(dir, 'flow.ejs'), {entity: sequence});
 
                     expect(content.normalizeSpace()).toBe(`
-                        // Start call componentA
-                        console.log('--> componentA::actionA1'); 
-                        inputState.value = await this.cmpComponentA.actionA1(); 
+                        // Start call componentA2
+                        console.log('--> componentA2::actionA1'); 
+                        inputState.value = await this.cmpComponentA2.actionA1(); 
                         
-                        // componentA call componentB
+                        // componentA2 call componentB2
                         inputState.value = await Promise.all(inputState.resetActionStart().value.map(async (x: any): Promise<any> => { 
-                            // componentA call componentB 
-                            console.log('--> componentB::actionB1'); 
-                            return await this.cmpComponentB.actionB1(); 
+                            // componentA2 call componentB2 
+                            console.log('--> componentB2::actionB1'); 
+                            return await this.cmpComponentB2.actionB1(); 
                         }));
                         
-                        // componentA call componentB 
-                        console.log('--> componentB::actionB2'); 
-                        inputState.value = await this.cmpComponentB.actionB2();
+                        // componentA2 call componentB2
+                        console.log('--> componentB2::actionB2'); 
+                        inputState.value = await this.cmpComponentB2.actionB2();
                     `.normalizeSpace());
                 });
             });

@@ -2,7 +2,7 @@ import {getRepository, Repository, DeleteResult, FindManyOptions, createConnecti
 import {injectable} from "inversify";
 
 <% classes.forEach((x, i) => { %>
-import {<%= x.entity.namePascal %>} from '..<%= x.path %>/components/<%= x.entity.name %>';<% }) %>
+import {<%= x.entity.namePascal %> as <%= x.entity.elementId %>} from '..<%= x.path %>/components/<%= x.entity.name %>';<% }) %>
 const ormConfig = require('../../ormconfig.json');
 
 type crudType<T> = {repository: Repository<T>, loadAll: () => Promise<T[]>, load: (id: number) => Promise<T | undefined>, save: (entity: T) => Promise<T>, delete: (id: number) => Promise<DeleteResult> };
@@ -19,22 +19,22 @@ private static _instance: DbManagerCommon | null = null;
     }
 
 <% classes.forEach((x, i) => { %>
-    private <%= x.entity.name %>Repository: Repository<<%= x.entity.namePascal %>>;<% }) %>
+    private <%= x.entity.elementId %>Repository: Repository<<%= x.entity.elementId %>>;<% }) %>
 
     constructor(private connection: Connection) {
     <% classes.forEach((x, i) => { %>
-        this.<%= x.entity.name %>Repository = getRepository(<%= x.entity.namePascal %>);<% }) %>
+        this.<%= x.entity.elementId %>Repository = getRepository(<%= x.entity.elementId %>);<% }) %>
     }
 
 <% classes.forEach((x, i) => { %>
-    public get <%= x.entity.name %>(): crudType<<%= x.entity.namePascal %>> {
+    public get <%= x.entity.elementId %>(): crudType<<%= x.entity.elementId %>> {
         return {
-            repository: this.<%= x.entity.name %>Repository,
+            repository: this.<%= x.entity.elementId %>Repository,
 
-            loadAll: async (options?: FindManyOptions<<%= x.entity.namePascal %>>): Promise<<%= x.entity.namePascal %>[]> => await this.<%= x.entity.name %>Repository.find(options),
-            load: async (id: number): Promise<<%= x.entity.namePascal %> | undefined> => await this.<%= x.entity.name %>Repository.findOne(id),
-            save: async (entity: <%= x.entity.namePascal %>) => await this.<%= x.entity.name %>Repository.save(entity),
-            delete: async (id: number) => await this.<%= x.entity.name %>Repository.delete(id)
+            loadAll: async (options?: FindManyOptions<<%= x.entity.elementId %>>): Promise<<%= x.entity.elementId %>[]> => await this.<%= x.entity.elementId %>Repository.find(options),
+            load: async (id: number): Promise<<%= x.entity.elementId %> | undefined> => await this.<%= x.entity.elementId %>Repository.findOne(id),
+            save: async (entity: <%= x.entity.elementId %>) => await this.<%= x.entity.elementId %>Repository.save(entity),
+            delete: async (id: number) => await this.<%= x.entity.elementId %>Repository.delete(id)
         };
     }
 <% }) %>

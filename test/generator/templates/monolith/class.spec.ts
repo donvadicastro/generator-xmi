@@ -4,6 +4,8 @@ import {xmiPackage} from "../../../../src/entities/xmiPackage";
 import {xmiComponent} from "../../../../src/entities/xmiComponent";
 import '../../../../utils/normilize';
 import {xmiClass} from "../../../../src/entities/xmiClass";
+import * as fs from "fs";
+import {parseString} from "xml2js";
 
 const path = require('path');
 const ejs = require('ejs');
@@ -55,7 +57,7 @@ describe('Generators', () => {
                     `.normalizeSpace());
                     });
 
-                    it('check one to many relation', async () => {
+                    it('check one to many association', async () => {
                         const airline = <xmiClass>classes.children[3];
                         const content = await ejs.renderFile(path.join(dir, 'links.ejs'), {entity: airline, orm: true});
 
@@ -78,7 +80,7 @@ describe('Generators', () => {
                     `.normalizeSpace());
                     });
 
-                    it('check one to one relation', async () => {
+                    it('check one to one association', async () => {
                         const city = <xmiClass>classes.children[5];
                         const content = await ejs.renderFile(path.join(dir, 'links.ejs'), {entity: city, orm: true});
 
@@ -123,6 +125,50 @@ describe('Generators', () => {
                         return Promise.resolve(null); 
                     }
                     `.normalizeSpace());
+                });
+
+                describe('check links', () => {
+                    let entities: any[];
+
+                    beforeAll((done) => {
+                        parseString(fs.readFileSync(path.resolve(__dirname, '../../../data/fixtures.xml')), (err: any, result: any) => {
+                            const parser = new XmiParser(result);
+                            parser.parse();
+
+                            const pkg = <xmiPackage>parser.packge;
+                            entities = (<xmiPackage>pkg.children[2]).children;
+
+                            done();
+                        });
+                    });
+
+                    it('composition', async () => {
+                        const addressClass: xmiClass = <xmiClass>entities[2].children[0];
+                        const personClass: xmiClass = <xmiClass>entities[2].children[2];
+                        const addressContent = await ejs.renderFile(path.join(dir, 'links.ejs'), {entity: addressClass, orm: true});
+                        const personContent = await ejs.renderFile(path.join(dir, 'links.ejs'), {entity: personClass, orm: true});
+
+                        expect(addressContent.normalizeSpace()).toBe(`
+                           /**
+                            * Refresh current entity.
+                            */
+                            async refreshEntity(): Promise<this> {
+                                return Object.assign(this, await getRepository(Address).findOne({id: this.id}));
+                            }`.normalizeSpace());
+
+                        expect(personContent.normalizeSpace()).toBe(`
+                            @OneToOne(type => Address, {cascade: true})
+                            @JoinColumn() 
+                            addressRef: Address;
+                            
+                            /** 
+                             * Refresh current entity. 
+                             */ 
+                             async refreshEntity(references?: ('addressRef')[]): Promise<this> { 
+                                return Object.assign(this, await getRepository(Person).findOne({id: this.id}, {relations: references})); 
+                             }
+                        `.normalizeSpace());
+                    });
                 });
             });
         });

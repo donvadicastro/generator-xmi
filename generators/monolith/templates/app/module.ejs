@@ -15,8 +15,8 @@ import {MultiSelectModule} from 'primeng/multiselect';
 import {CalendarModule} from 'primeng/calendar';
 
 <% classes.forEach(x => { %>
-import {<%= x.entity.namePascal %>ListComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/list/component';
-import {<%= x.entity.namePascal %>EditComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/edit/component';
+import {<%= x.entity.namePascal %>ListComponent as <%= x.entity.elementId %>ListComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/list/component';
+import {<%= x.entity.namePascal %>EditComponent as <%= x.entity.elementId %>EditComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/edit/component';
 <% }) %>
 
 <% screens.forEach(x => { %>
@@ -29,8 +29,8 @@ import {<%= x.entity.namePascal %>ScreenComponent} from './screens/<%= x.path %>
     AppComponent,
     IndexComponent,
   <% classes.forEach(x => { %>
-    <%= x.entity.namePascal %>ListComponent,
-    <%= x.entity.namePascal %>EditComponent,
+    <%= x.entity.elementId %>ListComponent,
+    <%= x.entity.elementId %>EditComponent,
   <% }) %>
 
   <% screens.forEach(x => { %>

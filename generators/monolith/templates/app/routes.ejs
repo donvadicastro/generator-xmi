@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IndexComponent } from "./master/index.component";
 
 <% classes.forEach(x => { %>
-import {<%= x.entity.namePascal %>ListComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/list/component';
-import {<%= x.entity.namePascal %>EditComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/edit/component';
+import {<%= x.entity.namePascal %>ListComponent as <%= x.entity.elementId %>ListComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/list/component';
+import {<%= x.entity.namePascal %>EditComponent as <%= x.entity.elementId %>EditComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/edit/component';
 <% }) %>
 
 <% screens.forEach(x => { %>
@@ -16,9 +16,9 @@ const routes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'administration',  children: [
     <% classes.forEach(x => { %>
-        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>',  component: <%= x.entity.namePascal %>ListComponent },
-        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>/new',  component: <%= x.entity.namePascal %>EditComponent },
-        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>/:id',  component: <%= x.entity.namePascal %>EditComponent },
+        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>',  component: <%= x.entity.elementId %>ListComponent },
+        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>/new',  component: <%= x.entity.elementId %>EditComponent },
+        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>/:id',  component: <%= x.entity.elementId %>EditComponent },
     <% }) %>
     ]
   }, {

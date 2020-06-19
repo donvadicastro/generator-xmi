@@ -4,7 +4,7 @@ import {<%= entity.namePascal %>Base} from './generated/<%= entity.name %>.gener
 /**
 * <%- (entity.description || `${entity.namePascal} description`).replace(/\n/g, '\n* ') %>.
  */
-@Entity()
+@Entity({ name: '<%= entity.entityId %>' })
 export class <%= entity.namePascal %> extends <%= entity.namePascal %>Base {
 }
 

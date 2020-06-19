@@ -1,7 +1,7 @@
 export class TypeConverter {
     private static typesMap: {[key: string]: string} = {
         eajava_char: 'string',
-        eajava_String: 'string',
+        eajava_string: 'string',
         eajava_date: 'Date',
         eajava_int: 'number',
         eajava_void: 'void',

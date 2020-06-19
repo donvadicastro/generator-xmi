@@ -1,6 +1,6 @@
 <% const refLinkNames = []; %>
 
-<% [...entity.associationLinks, ...entity.aggregationLinks].forEach(x => { %>
+<% entity.associationLinks.forEach(x => { %>
     <% if(!x.target.multiplicity || x.target.multiplicity === '1' || x.target.multiplicity === '0..1') { %>
         <% refLinkNames.push(x.target.typeRef.name) %>
         <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
@@ -20,5 +20,13 @@
             <%= x.target.typeRef.name %>RefList?: <%= x.target.typeRef.namePascal %>[];
         <% } %>
 <% }}) %>
+
+<% entity.aggregationLinks.filter(x => x.source.typeRef === entity && x.source.aggregation !== 'none').forEach(x => { %>
+    <% refLinkNames.push(x.target.typeRef.name) %>
+
+    @OneToOne(type => <%= x.target.typeRef.namePascal %>,  {cascade: true})
+    @JoinColumn()
+    <%= x.target.typeRef.name %>Ref: <%= x.target.typeRef.namePascal %>;
+<% }) %>
 
 <%- include('links_refresh', {refLinkNames: refLinkNames}) -%>

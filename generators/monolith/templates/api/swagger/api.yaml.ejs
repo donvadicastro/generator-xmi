@@ -16,157 +16,19 @@ produces:
   - application/json
 
 paths:
-
-<% classes.forEach((x) => { %>
-  <%= x.url %>/<%= options.utils.kebabCase(x.entity.name) %>:
-    get:
-      tags:
-      - "Entities: <%= x.entity.namePascal %>"
-      description: <%= x.entity.namePascal %>
-
-      responses:
-        200:
-          description: Get all <%= x.entity.name %>
-
-    post:
-      tags:
-      - "Entities: <%= x.entity.namePascal %>"
-      description: <%= x.entity.namePascal %>
-
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "<%= x.entity.namePascal %> object to be added"
-        required: true
-        schema:
-          $ref: "#/definitions/<%= x.entity.namePascal %>"
-
-      responses:
-        200:
-          description: Create <%= x.entity.name %>
-
-  <%= x.url %>/<%= options.utils.kebabCase(x.entity.name) %>/{id}:
-    get:
-      tags:
-      - "Entities: <%= x.entity.namePascal %>"
-      description: <%= x.entity.name %>
-
-      parameters:
-      - in: "path"
-        name: "id"
-        description: "<%= x.entity.name %> id to request entity"
-        required: true
-        type: "string"
-
-      responses:
-        200:
-          description: Get <%= x.entity.nameOrigin %> by id
-    put:
-      tags:
-      - "Entities: <%= x.entity.namePascal %>"
-      description: <%= x.entity.name %>
-
-      parameters:
-      - in: "path"
-        name: "id"
-        description: "<%= x.entity.name %> id to update entity"
-        required: true
-        type: "string"
-      - in: "body"
-        name: "body"
-        description: "<%= x.entity.name %> object to be added"
-        required: true
-        schema:
-          $ref: "#/definitions/<%= x.entity.namePascal %>"
-
-      responses:
-        200:
-          description: Update <%= x.entity.name %> by id
-
-    delete:
-      tags:
-      - "Entities: <%= x.entity.namePascal %>"
-      description: <%= x.entity.name %>
-
-      parameters:
-      - in: "path"
-        name: "id"
-        description: "<%= x.entity.name %> id to delete entity"
-        required: true
-        type: "string"
-
-      responses:
-        200:
-          description: Delete <%= x.entity.name %> by id
+<% classes.forEach(x => { %>
+<%- include('../../partial/swagger/class.ejs', {context: x, options: options}) %>
 <% }) %>
 
-<% diagrams.forEach((x) => { %>
-  <% const firstCmp = x.entity.messages && x.entity.messages.length && x.entity.messages[0].to.elementRef; %>
-  <% const firstOperation = firstCmp && firstCmp.operations.find(y => y.name === x.entity.messages[0].operation.name); %>
-  <%= x.url %>:
-    post:
-      tags:
-        - "Process: <%= x.entity.namePascal %>"
-      description: <%= x.entity.name %>
-
-      parameters:
-      - in: body
-        name: body
-        required: false
-        schema:
-          type: object
-          properties:
-          <% firstOperation && firstOperation.inputParameters.forEach(x => { %>
-            <%= x.name %>:
-              <%- x.typeRef ? `$ref: "#/definitions/${x.typeRef.namePascal}"` : `type: ${x.type}` %>
-          <% }) %>
-
-      responses:
-        200:
-          description: Returns execution result
+<% diagrams.forEach(x => { %>
+<%- include('../../partial/swagger/diagram.ejs', {context: x, options: options}) %>
 <% }) %>
 
 definitions:
-<% classes.forEach((x) => { %>
-  <%= x.entity.namePascal %>:
-    type: "object"
-  <% if(x.entity.generalizationLinksTo) { %>
-    allOf:
-    - $ref: "#/definitions/<%= x.entity.generalizationLinksTo.namePascal %>"
-  <% } %>
-    properties:
-  <% (x.entity.attributesCombined || []).filter(x => x.name && !x.isArray).forEach((attr) => { %>
-        <%= attr.name %>:
-      <% if(attr.typeRef && attr.isEnum) { %>
-          type: "string"
-          enum: <% attr.typeRef.literals.forEach(x => { %>
-            - <%= x %><% }) %>
-      <% } else if(attr.typeRef && attr.isDataType) { %>
-          $ref: "#/definitions/<%= attr.typeRef.namePascal %>"
-      <% } else if(attr.typeRef) { %>
-          type: "number"
-      <% } else { %>
-          type: "<%= attr.type === 'Date' ? 'number' : attr.type %>"
-      <% } %>
-  <% }) %>
+<% classes.forEach(x => { %>
+<%- include('../../partial/swagger/definition.ejs', {context: x, options: options}) %>
 <% }) %>
 
-<% dataTypes.forEach((x) => { %>
-  <%= x.entity.namePascal %>:
-    type: "object"
-    properties:
-  <% (x.entity.attributes || []).filter(x => x.name && !x.isArray).forEach((attr) => { %>
-      <%= attr.name %>:
-      <% if(attr.typeRef && attr.isEnum) { %>
-        type: "string"
-        enum: <% attr.typeRef.literals.forEach(x => { %>
-          - <%= x %><% }) %>
-      <% } else if(attr.typeRef && attr.isDataType) { %>
-        $ref: "#/definitions/<%= attr.typeRef.namePascal %>"
-      <% } else if(attr.typeRef) { %>
-        type: "number"
-      <% } else { %>
-        type: "<%= attr.type === 'Date' ? 'number' : attr.type %>"
-      <% } %>
-  <% }) %>
+<% dataTypes.forEach(x => { %>
+<%- include('../../partial/swagger/definition.ejs', {context: x, options: options}) %>
 <% }) %>
