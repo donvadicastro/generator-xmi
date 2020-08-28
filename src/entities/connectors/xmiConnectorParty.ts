@@ -6,7 +6,7 @@ export default class xmiConnectorParty {
     raw: any;
     id: string;
     multiplicity: string;
-    aggregation: 'none' | 'composite';
+    aggregation: 'none' | 'composite' | 'shared';
     typeRef?: xmiClass;
 
     constructor(raw: any) {

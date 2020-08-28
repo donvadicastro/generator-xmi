@@ -6,4 +6,5 @@ export interface IAttribute {
     typeRef?: xmiBase;
     typeDefaultValue?: string;
     isArray: boolean;
+    isParent?: boolean;
 }

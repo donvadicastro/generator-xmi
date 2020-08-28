@@ -22,6 +22,7 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
         this.option('destination', { type: String, default: 'dist' });
         this.option('type', { type: String, default: 'monolith' });
         this.option('auth', { type: Boolean, default: false });
+        this.option('dryRun', { type: Boolean, default: false });
     }
 
     prompting() {
@@ -31,6 +32,7 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
         this.log('destination    : ' + this.destinationPath(this.options.destination));
         this.log('type           : ' + this.options.type);
         this.log('auth           : ' + this.options.auth ? 'yes' : 'no');
+        this.log('dryRun         : ' + this.options.dryRun ? 'yes' : 'no');
     }
 
     clean() {
@@ -48,7 +50,7 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
             this.log(chalk.green('Model'));
             this.log(treeify.asTree(parser.toConsole(), true, true));
 
-            if(success) {
+            if(success && !this.options.dryRun) {
                 this.composeWith(require.resolve('../../generators/' + this.options.type), {
                     ...this.options,
                     parser: parser
