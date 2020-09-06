@@ -1,11 +1,3 @@
-<%
-var groupedClasses = classes.reduce((g, entity) => {
-    g[entity.path] = g[entity.path] || []; //Check the value exists, if not assign a new array
-    g[entity.path].push(entity); //Push the new value to the array
-
-    return g; //Very important! you need to return the value of g or it will become undefined on the next pass
-}, {});
-%>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" routerLink="">Generated application</a>
@@ -14,18 +6,6 @@ var groupedClasses = classes.reduce((g, entity) => {
     </button>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-            <% Object.keys(groupedClasses).forEach(x => { %>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"><%= x %></a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <% groupedClasses[x].forEach(x => { %>
-                            <a class="dropdown-item" routerLink="administration/<%= x.path %>/<%= x.entity.name %>"><%= x.entity.nameOrigin %></a>
-                        <% }) %>
-                    </div>
-                </li>
-            <% }) %>
-        </ul>
         <% if(options.auth) { %>
         <form class="form-inline my-2 my-lg-0">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit" (click)="logout()">Log out</button>

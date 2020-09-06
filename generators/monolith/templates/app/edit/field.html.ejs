@@ -3,7 +3,7 @@
         <label for="<%= prefix %>-edit"><%= field.name %></label>
         <div><p-multiSelect id="<%= prefix %>-edit" [options]="<%= field.name %>All" optionLabel="<%= field.typeRef.tags.displayName || 'name'%>" dataKey="id" formControlName="<%= field.name %>"></p-multiSelect></div>
     </div>
-<% } else if(field.typeRef && field.isDataType) { %>
+<% } else if(field.typeRef && (field.isDataType || field.linkType === 'composite')) { %>
     <div class="card">
         <div class="card-header">
             <%= field.name %><% if(!field.isOptional) { %><span class="text-danger"> *</span><%}%>

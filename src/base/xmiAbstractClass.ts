@@ -13,7 +13,7 @@ import {xmiClass} from "../entities/xmiClass";
 const assert = require('assert');
 
 export class xmiAbstractClass extends xmiInterface {
-    links: LinkType = {sequence: [], usage: [], aggregation: [], association: [], generalization: []};
+    links: LinkType = {sequence: [], usage: [], aggregation: [], association: [], generalization: [], realization: []};
 
     /**
      * Diagram fragments that class associate with.
@@ -39,6 +39,10 @@ export class xmiAbstractClass extends xmiInterface {
         if(raw.links && raw.links.length && raw.links[0].Generalization) {
             this.links.generalization = raw.links[0].Generalization.map((x: any) => new xmiAggregationLink(x));
         }
+
+        if(raw.links && raw.links.length && raw.links[0].Realisation) {
+            this.links.realization = raw.links[0].Realisation.map((x: any) => new xmiAggregationLink(x));
+        }
     }
 
     /**
@@ -63,6 +67,13 @@ export class xmiAbstractClass extends xmiInterface {
     }
 
     /**
+     * Realization one-way connection
+     */
+    get realizationLinks(): IConnector[] {
+        return this.getConnections('realization');
+    }
+
+    /**
      * Generalization links, when arrow to current element
      */
     get generalizationLinksFrom(): xmiBase[] {
@@ -78,6 +89,13 @@ export class xmiAbstractClass extends xmiInterface {
 
         assert(links.length <= 1, `Class "${this.nameOrigin}" can have no more than 1 generalization links. Current: ${links.length}`);
         return links.length ? links[0].end : null;
+    }
+
+    /**
+     * Generalization links, when arrow to current element
+     */
+    get implements(): xmiBase[] {
+        return this.links.realization.filter(x => x.end === this).map(x => <xmiBase>x.start);
     }
 
     /**
@@ -103,6 +121,7 @@ export class xmiAbstractClass extends xmiInterface {
 
                 //indicate if link to the parent in relation (composition, aggregation)
                 isParent: x.source.typeRef === this && x.target.aggregation !== 'none',
+                linkType: x[x.target.aggregation === 'none' ? 'source' : 'target'].aggregation,
 
                 typeDefaultValue: 'null'
             } : {
@@ -112,6 +131,19 @@ export class xmiAbstractClass extends xmiInterface {
             })));
 
         return attributes;
+    }
+
+    /**
+     * Get all attributes that are used to edit entity content (main usage is form editing).
+     */
+    get attributesCombinedToEdit(): IAttribute[] {
+        let attrs = this.attributesCombined;
+
+        if(this.generalizationLinksTo) {
+            attrs = attrs.concat((<xmiAbstractClass>this.generalizationLinksTo).attributesCombinedToEdit);
+        }
+
+        return attrs.filter(x => x.name && !x.isParent);
     }
 
     get references(): Reference {
@@ -145,7 +177,7 @@ export class xmiAbstractClass extends xmiInterface {
         return ret;
     }
 
-    private getConnections(type: 'association' | 'generalization' | 'aggregation'): IConnector[] {
+    private getConnections(type: 'association' | 'generalization' | 'aggregation' | 'realization'): IConnector[] {
         return this.links[type].map((x: xmiAggregationLink) => x.connector.getDirectedFrom(this));
     }
 }

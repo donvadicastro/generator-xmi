@@ -46,8 +46,13 @@ describe('xmiParser', () => {
                 expect(personClass.links.aggregation[0].end).toEqual(personClass);
 
                 // address has composition relation, so avoid to use/change parent through attributes
-                expect((<IAttribute>addressClass.attributesCombined.find(x => x.name === 'personRef')).isParent).toBeTruthy();
-                expect((<IAttribute>personClass.attributesCombined.find(x => x.name === 'addressRef')).isParent).toBeFalsy();
+                const personRefAttr = (<IAttribute>addressClass.attributesCombined.find(x => x.name === 'personRef'));
+                expect(personRefAttr.isParent).toBeTruthy();
+                expect(personRefAttr.linkType).toBe('composite');
+
+                const addressRefAttr = (<IAttribute>personClass.attributesCombined.find(x => x.name === 'addressRef'));
+                expect(addressRefAttr.isParent).toBeFalsy();
+                expect(addressRefAttr.linkType).toBe('composite');
             });
         });
 
@@ -74,8 +79,13 @@ describe('xmiParser', () => {
                 expect(personClass.links.association[0].end).toEqual(personClass);
 
                 // address has association relation, so both left and right classes are equivalent, no parent
-                expect((<IAttribute>addressClass.attributesCombined.find(x => x.name === 'personRef')).isParent).toBeFalsy();
-                expect((<IAttribute>personClass.attributesCombined.find(x => x.name === 'addressRef')).isParent).toBeFalsy();
+                const personRefAttr = (<IAttribute>addressClass.attributesCombined.find(x => x.name === 'personRef'));
+                expect(personRefAttr.isParent).toBeFalsy();
+                expect(personRefAttr.linkType).toBe('none');
+
+                const addressRefAttr = (<IAttribute>personClass.attributesCombined.find(x => x.name === 'addressRef'));
+                expect(addressRefAttr.isParent).toBeFalsy();
+                expect(addressRefAttr.linkType).toBe('none');
             });
         });
 
@@ -102,8 +112,57 @@ describe('xmiParser', () => {
                 expect(personClass.links.aggregation[0].end).toEqual(personClass);
 
                 // address has association relation, so both left and right classes are equivalent, no parent
-                expect((<IAttribute>carClass.attributesCombined.find(x => x.name === 'personRef')).isParent).toBeTruthy();
-                expect((<IAttribute>personClass.attributesCombined.find(x => x.name === 'carRef')).isParent).toBeFalsy();
+                const personRefAttr = (<IAttribute>carClass.attributesCombined.find(x => x.name === 'personRef'));
+                expect(personRefAttr.isParent).toBeTruthy();
+                expect(personRefAttr.linkType).toBe('shared');
+
+                const carRefAttr = (<IAttribute>personClass.attributesCombined.find(x => x.name === 'carRef'));
+                expect(carRefAttr.isParent).toBeFalsy();
+                expect(carRefAttr.linkType).toBe('shared');
+            });
+        });
+
+        describe('Generalization relation (inheritance)', () => {
+            let classDiagramPackage: xmiPackage;
+            beforeAll(() => { classDiagramPackage = entities[4]; }); //select appropriate package
+
+            it('Verify reference', () => {
+                const studentClass: xmiClass = <xmiClass>classDiagramPackage.children[1];
+                const personClass: xmiClass = <xmiClass>classDiagramPackage.children[0];
+
+                expect(studentClass.links.generalization.length).toBe(1);
+                expect(personClass.links.generalization.length).toBe(1);
+
+                expect(studentClass.links.generalization[0].start).toEqual(studentClass);
+                expect(studentClass.links.generalization[0].end).toEqual(personClass);
+
+                expect(personClass.links.generalization[0].start).toEqual(studentClass);
+                expect(personClass.links.generalization[0].end).toEqual(personClass);
+
+                expect(personClass.generalizationLinksFrom).toEqual([studentClass]);
+                expect(personClass.generalizationLinksTo).toBeNull();
+                expect(studentClass.generalizationLinksFrom).toEqual([]);
+                expect(studentClass.generalizationLinksTo).toEqual(personClass);
+
+                // address has association relation, so both left and right classes are equivalent, no parent
+                expect(studentClass.attributesCombined.map(x => x.name)).toEqual(['cource']);
+                expect(personClass.attributesCombined.map(x => x.name)).toEqual(['firstName', 'lastName']);
+            });
+        });
+
+        describe('Relization relation (interface implementation)', () => {
+            let classDiagramPackage: xmiPackage;
+            beforeAll(() => { classDiagramPackage = entities[5]; }); //select appropriate package
+
+            it('Verify reference', () => {
+                const printerClass: xmiClass = <xmiClass>classDiagramPackage.children[0];
+                const setupInterface: xmiClass = <xmiClass>classDiagramPackage.children[1];
+
+                expect(printerClass.links.realization.length).toBe(1);
+                expect(printerClass.links.realization[0].start).toEqual(setupInterface);
+                expect(printerClass.links.realization[0].end).toEqual(printerClass);
+
+                expect(printerClass.implements).toEqual([setupInterface]);
             });
         });
     });

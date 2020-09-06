@@ -24,7 +24,35 @@
             callback(x);
         }
     }
+
+    var groupedClasses = classes.reduce((g, entity) => {
+        g[entity.path] = g[entity.path] || []; //Check the value exists, if not assign a new array
+        g[entity.path].push(entity); //Push the new value to the array
+
+        return g; //Very important! you need to return the value of g or it will become undefined on the next pass
+    }, {});
 %>
+
+<div class="tree">
+    <div class="card">
+        <div class="card-header">Entities</div>
+        <div class="card-body">
+            <% Object.keys(groupedClasses).forEach(x => { %>
+            <div class="card">
+                <div class="card-header"><%= x %></div>
+                <div class="card-body">
+                    <ul>
+                        <% groupedClasses[x].forEach(x => { %>
+                            <li><a routerLink="administration/<%= x.path %>/<%= x.entity.name %>"><%= x.entity.nameOrigin %></a></li>
+                        <% }) %>
+                    </ul>
+                </div>
+            </div>
+            <br>
+            <% }) %>
+        </div>
+    </div>
+</div>
 
 <div class="tree">
 <% render(buildTree(pkg), (x) => { %>

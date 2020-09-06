@@ -7,4 +7,5 @@ export interface IAttribute {
     typeDefaultValue?: string;
     isArray: boolean;
     isParent?: boolean;
+    linkType?: 'none' | 'composite' | 'shared';
 }

@@ -20,10 +20,10 @@ export default class <%= entity.namePascal %>Router {
             .get("/<%= utils.kebabCase(entity.name) %>", async (req: Request, res: Response) => {
                 const whereStatement: any = {};
                 const repository = await this.getRepository();
-            <% entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).forEach(x => {%>
+            <% entity.attributesCombinedToEdit.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).forEach(x => {%>
                 req.query.<%= x.name %> && (whereStatement.<%= x.name %> = req.query.<%= x.name %>);
             <% }) %>
-                repository.find({where: whereStatement, relations: [<%- entity.attributesCombined.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>], order: {id: "ASC"}})
+                repository.find({where: whereStatement, relations: [<%- entity.attributesCombinedToEdit.filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>], order: {id: "ASC"}})
                     .then((result: any) => res.send(result), (error: any) => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
             })
 
@@ -33,7 +33,7 @@ export default class <%= entity.namePascal %>Router {
             .get("/<%= utils.kebabCase(entity.name) %>/:id", async (req: Request, res: Response) => {
                 const repository = await this.getRepository();
 
-                repository.findOne(req.params.id, {relations: [<%- entity.attributesCombined.filter(x => x.typeRef && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>]})
+                repository.findOne(req.params.id, {relations: [<%- entity.attributesCombinedToEdit.filter(x => x.typeRef && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>]})
                     <% if(entity.generalizationLinksFrom.length) { %>
                     .then(result => {
                         if(result) {
@@ -77,12 +77,18 @@ export default class <%= entity.namePascal %>Router {
              * Delete entity.
              */
             .delete("/<%= utils.kebabCase(entity.name) %>/:id", async (req: Request, res: Response) => {
-                const repository = await this.getRepository();
-                const entityToDelete = await repository.findOne(req.params.id);
+                const repository = await this.getRepository();<% entity.attributesCombinedToEdit.filter(x => x.typeRef && x.linkType === "composite").forEach(x => { %>
+                const <%= x.name %>Repository = (await this.dbProvider()).<%= x.typeRef.elementId %>.repository;
+            <% }) %>
+                const entityToDelete = await repository.findOne(req.params.id, {relations: [<%- entity.attributesCombinedToEdit.filter(x => x.typeRef && !x.isEnum && !x.isDataType).map(x => `"${x.name}"`).join(',') %>]});
 
                 if(entityToDelete) {
                     repository.remove(entityToDelete)
-                        .then((result: any) => res.send(result))
+                    <% entity.attributesCombinedToEdit.filter(x => x.typeRef && x.linkType === "composite").forEach(x => { %>
+                        // emulating composite reference behavior - delete child property "<%= x.name %>" when parent is deleted
+                        .then((result: any) => <%= x.name %>Repository.remove(entityToDelete.<%= x.name %>))
+                    <% }) %>
+                        .then((result: any) => res.send(entityToDelete))
                         .catch((error: any) => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
                 } else {
                     res.sendStatus(404);

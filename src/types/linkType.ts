@@ -7,5 +7,6 @@ export type LinkType = {
 
     aggregation: xmiAggregationLink[],
     association: xmiAggregationLink[],
-    generalization: xmiAggregationLink[]
+    generalization: xmiAggregationLink[],
+    realization: xmiAggregationLink[]
 }
