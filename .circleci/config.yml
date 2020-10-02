@@ -19,5 +19,4 @@ jobs:
       - run: npx yo ./generators/app/index.js test/data/fixtures.xml
 
       #check generated project
-      - run: cd dist && npm install
-      - run: npm run build
+      - run: cd dist && npm install && npm run build
