@@ -15,3 +15,4 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: npx yo ./generators/app/index.js test/data/fixtures.xml --dryRun
+      - run: npx yo ./generators/app/index.js test/data/fixtures.xml
