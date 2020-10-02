@@ -13,3 +13,6 @@ jobs:
           paths:
             - ./node_modules
       - run: npm test
+      - run: npx tsc
+      - run: npm link
+      - run: yo xmi test/data/fixtures.xml --destination=dist
