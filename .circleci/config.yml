@@ -12,11 +12,12 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
+
+      #check generator
       - run: npm test
       - run: npm run build
       - run: npx yo ./generators/app/index.js test/data/fixtures.xml
-      - run: 
-        command: |
-          cd dist
-          npm install
-          npm run build
+
+      #check generated project
+      - run: cd dist && npm install
+      - run: npm run build
