@@ -1,5 +1,6 @@
 import {xmiInterface} from "./xmiInterface";
 import {Reference} from "../types/reference";
+import {IAttribute} from "../contracts/attribute";
 
 export class xmiDataType extends xmiInterface {
     get references(): Reference {
@@ -15,5 +16,12 @@ export class xmiDataType extends xmiInterface {
         });
 
         return imports;
+    }
+
+    /**
+     * Get all attributes that are used to edit entity content (main usage is form editing).
+     */
+    get attributesCombinedToEdit(): IAttribute[] {
+        return this.attributes;
     }
 }

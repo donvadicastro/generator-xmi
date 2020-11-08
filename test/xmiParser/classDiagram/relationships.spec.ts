@@ -1,4 +1,3 @@
-import {readJSONSync} from "fs-extra";
 import {XmiParser} from "../../../src/xmiParser";
 import {xmiPackage} from "../../../src/entities/xmiPackage";
 import * as fs from "fs";
