@@ -42,19 +42,13 @@ export class <%= entity.namePascal %>EditComponent {
             .map(x => (x.typeRef && (x.isDataType || x.linkType === 'composite')) ? containerCallback(x, formBuilder(x.typeRef, containerCallback, callback)) : callback(x)).join('') %>
 
     <%- formBuilder(entity,
-            (attr, content) => `${attr.name}: this.fb.group({ ${content} }),`,
+            (attr, content) => `${attr.name}: this.fb.group({ id:0, ${content} }),`,
             (attr) => attr.isArray ? `${attr.name}: [],` : `${attr.name}: [${attr.typeDefaultValue}${!attr.isOptional ? ', Validators.required' : ''}],`) %>
   });
   }
 
   protected save() {
     const data = this.form.getRawValue();
-
-  <% (entity.attributesCombined || []).filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).forEach((attr) => { %>
-    if(this.data.<%= attr.name %> && this.data.<%= attr.name %>.id) {
-      data.<%= attr.name %>.id = this.data.<%= attr.name %>.id;
-    }
-  <% }) %>
 
     this.http[this.data.id ? 'put' : 'post'](this.data.id ? `${this.apiRootUrl}/${this.data.id}` : this.apiRootUrl, data)
       .subscribe(() => this.router.navigate(['..'], { relativeTo: this.activatedRoute }), (ex) => this.errorMessage = ex.error.error);
