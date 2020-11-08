@@ -51,8 +51,8 @@ export class <%= entity.namePascal %>EditComponent {
     const data = this.form.getRawValue();
 
   <% (entity.attributesCombined || []).filter(x => x.typeRef && !x.isArray && !x.isEnum && !x.isDataType).forEach((attr) => { %>
-    if(data.<%= attr.name %> && data.<%= attr.name %>.id) {
-      data.<%= attr.name %> = {id: data.<%= attr.name %>.id};
+    if(this.data.<%= attr.name %> && this.data.<%= attr.name %>.id) {
+      data.<%= attr.name %>.id = this.data.<%= attr.name %>.id;
     }
   <% }) %>
 
