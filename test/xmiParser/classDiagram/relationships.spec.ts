@@ -111,7 +111,7 @@ describe('xmiParser', () => {
                 expect(personClass.links.aggregation[0].start).toEqual(carClass);
                 expect(personClass.links.aggregation[0].end).toEqual(personClass);
 
-                // address has association relation, so both left and right classes are equivalent, no parent
+                // address has aggregation relation, so child is a link to existing
                 const personRefAttr = (<IAttribute>carClass.attributesCombined.find(x => x.name === 'personRef'));
                 expect(personRefAttr.isParent).toBeTruthy();
                 expect(personRefAttr.linkType).toBe('shared');

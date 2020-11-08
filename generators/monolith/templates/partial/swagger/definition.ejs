@@ -11,7 +11,7 @@
           type: "string"
           enum: <% attr.typeRef.literals.forEach(x => { %>
             - <%= x %><% }) %>
-      <% } else if(attr.typeRef && (attr.isParent || attr.linkType === 'none')) { %>
+      <% } else if(attr.typeRef && (attr.isParent || attr.linkType === 'none' || attr.linkType === 'shared')) { %>
           type: "number"
         <% } else if(attr.typeRef) { %>
           $ref: "#/definitions/<%= attr.typeRef.elementId %>"
