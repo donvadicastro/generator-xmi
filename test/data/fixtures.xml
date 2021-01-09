@@ -629,6 +629,7 @@
 					</packagedElement>
 				</packagedElement>
 				<packagedElement xmi:type="uml:Package" xmi:id="EAPK_B7AAA7ED_4AF5_4086_886D_FFFDBDD7047B" name="2. Component require/provide API" visibility="public">
+					<ownedComment xmi:type="uml:Comment" xmi:id="EAID_87DAF6CC_3617_445b_81B0_54C1DAE87DA5" body="&quot;DomainService&quot; requires ILocalize and ILog dependencies to operate properly. It exposes 2 &quot;required&quot; ports outside.&#xA;&#xA;&quot;ResourceService&quot; implements ILocalize interface and expose &quot;provided&quot; API outside  to external use. &#xA;&quot;NotificationService&quot; implements ILog interface and expose &quot;provided&quot; API  to external use. &#xA;&#xA;&quot;DomainService&quot; link with both &quot;ResourceService&quot; and &quot;NotificationService&quot; as API provided by this services meet &quot;required&quot; for &quot;DomainService&quot;."/>
 					<packagedElement xmi:type="uml:Interface" xmi:id="EAID_F883E635_9A00_4239_99E3_2FA14577996F" name="ILocalize" visibility="public" isAbstract="true">
 						<ownedOperation xmi:id="EAID_945276A4_5F36_4d21_823B_802575B6E8B9" name="localize" visibility="public" concurrency="sequential">
 							<ownedParameter xmi:id="EAID_027E47A4_EBD6_4943_A436_3FD6D8E88E5D" name="message" direction="in" isStream="false" isException="false" isOrdered="false" isUnique="true" type="EAJava_string"/>
@@ -3469,6 +3470,16 @@
 					<Usage xmi:id="EAID_547392B9_2143_4170_AB95_6398A09A332C" start="EAID_B2F3F83B_A457_4e0c_824E_E823900A4A19" end="EAID_462BF0C9_068B_4f90_9D9C_FD9FBB9C1760"/>
 				</links>
 			</element>
+			<element xmi:idref="EAID_87DAF6CC_3617_445b_81B0_54C1DAE87DA5" xmi:type="uml:Note" scope="public">
+				<model package="EAPK_B7AAA7ED_4AF5_4086_886D_FFFDBDD7047B" tpos="0" ea_localid="122" ea_eleType="element"/>
+				<properties documentation="&quot;DomainService&quot; requires ILocalize and ILog dependencies to operate properly. It exposes 2 &quot;required&quot; ports outside.&#xA;&#xA;&quot;ResourceService&quot; implements ILocalize interface and expose &quot;provided&quot; API outside  to external use. &#xA;&quot;NotificationService&quot; implements ILog interface and expose &quot;provided&quot; API  to external use. &#xA;&#xA;&quot;DomainService&quot; link with both &quot;ResourceService&quot; and &quot;NotificationService&quot; as API provided by this services meet &quot;required&quot; for &quot;DomainService&quot;." isSpecification="false" sType="Note" nType="0" scope="public"/>
+				<project author="vadim" version="1.0" phase="1.0" created="2021-01-09 22:51:35" modified="2021-01-09 22:58:33" complexity="1" status="Proposed"/>
+				<code gentype="&lt;none&gt;"/>
+				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+				<tags/>
+				<xrefs/>
+				<extendedProperties tagged="0" package_name="2. Component require/provide API"/>
+			</element>
 			<element xmi:idref="EAPK_F1A55476_613E_4678_A557_EB46277871E1" xmi:type="uml:Package" name="Use Case diagrams" scope="public">
 				<model package2="EAID_F1A55476_613E_4678_A557_EB46277871E1" package="EAPK_76A08283_2557_4bdc_A46D_72D99251FA11" tpos="5" ea_localid="15" ea_eleType="package"/>
 				<properties isSpecification="false" sType="Package" nType="0" scope="public"/>
@@ -5619,22 +5630,23 @@
 			<diagram xmi:id="EAID_E1769B66_980B_4117_B047_2FA6E58904CC">
 				<model package="EAPK_B7AAA7ED_4AF5_4086_886D_FFFDBDD7047B" localID="26" owner="EAPK_B7AAA7ED_4AF5_4086_886D_FFFDBDD7047B"/>
 				<properties name="Component diagram" type="Component"/>
-				<project author="vadim" version="1.0" created="2021-01-09 21:10:43" modified="2021-01-09 21:30:42"/>
+				<project author="vadim" version="1.0" created="2021-01-09 21:10:43" modified="2021-01-09 22:57:25"/>
 				<style1 value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=0;PPgs.cy=0;DocSize.cx=850;DocSize.cy=1098;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=1;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AllDockable=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
-				<style2 value="ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=02023EA1;"/>
+				<style2 value="ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=B1C49C25;"/>
 				<swimlanes value="locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;hh=0;cls=0;bw=0;hli=0;SwimlaneFont=lfh:-21,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"/>
 				<matrixitems value="locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"/>
 				<extendedProperties/>
 				<elements>
-					<element geometry="Left=40;Top=73;Right=179;Bottom=136;" subject="EAID_F883E635_9A00_4239_99E3_2FA14577996F" seqno="1" style="DUID=C29A0EE2;"/>
-					<element geometry="Left=650;Top=71;Right=746;Bottom=154;" subject="EAID_09CB7D8C_454E_4a9c_8F05_2D00C8AD4638" seqno="2" style="DUID=8C57D9E2;"/>
-					<element geometry="Left=424;Top=256;Right=437;Bottom=296;" subject="EAID_A8E67D4A_F33D_4b08_BB0B_B268066335F1" seqno="3" style="DUID=614F7CAB;LBL=CX=17:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
-					<element geometry="Left=372;Top=256;Right=385;Bottom=296;" subject="EAID_B2F3F83B_A457_4e0c_824E_E823900A4A19" seqno="4" style="DUID=0187F007;LBL=CX=34:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
-					<element geometry="Left=350;Top=295;Right=460;Bottom=355;" subject="EAID_E628E5CE_C5DE_4d5b_AAB4_BAC7A0E22B24" seqno="5" style="DUID=9D10E35B;"/>
-					<element geometry="Left=508;Top=148;Right=521;Bottom=188;" subject="EAID_FE926F72_F514_4931_86AB_323053713BA4" seqno="6" style="DUID=96C443E0;LBL=CX=17:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
-					<element geometry="Left=441;Top=76;Right=579;Bottom=149;" subject="EAID_970F683C_3AFD_4ae8_B5C5_85A9B65983B5" seqno="7" style="DUID=B098255D;"/>
-					<element geometry="Left=287;Top=140;Right=300;Bottom=180;" subject="EAID_462BF0C9_068B_4f90_9D9C_FD9FBB9C1760" seqno="8" style="DUID=5FE2C652;LBL=CX=34:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
-					<element geometry="Left=241;Top=69;Right=374;Bottom=141;" subject="EAID_1B8CA30C_EC48_409b_A6DD_9696ED8AD142" seqno="9" style="DUID=E10C39D5;"/>
+					<element geometry="Left=598;Top=249;Right=798;Bottom=396;" subject="EAID_87DAF6CC_3617_445b_81B0_54C1DAE87DA5" seqno="1" style="DUID=8C67493D;"/>
+					<element geometry="Left=40;Top=73;Right=179;Bottom=136;" subject="EAID_F883E635_9A00_4239_99E3_2FA14577996F" seqno="2" style="DUID=C29A0EE2;"/>
+					<element geometry="Left=650;Top=71;Right=746;Bottom=154;" subject="EAID_09CB7D8C_454E_4a9c_8F05_2D00C8AD4638" seqno="3" style="DUID=8C57D9E2;"/>
+					<element geometry="Left=424;Top=256;Right=437;Bottom=296;" subject="EAID_A8E67D4A_F33D_4b08_BB0B_B268066335F1" seqno="4" style="DUID=614F7CAB;LBL=CX=17:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
+					<element geometry="Left=372;Top=256;Right=385;Bottom=296;" subject="EAID_B2F3F83B_A457_4e0c_824E_E823900A4A19" seqno="5" style="DUID=0187F007;LBL=CX=34:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
+					<element geometry="Left=350;Top=295;Right=460;Bottom=355;" subject="EAID_E628E5CE_C5DE_4d5b_AAB4_BAC7A0E22B24" seqno="6" style="DUID=9D10E35B;"/>
+					<element geometry="Left=508;Top=148;Right=521;Bottom=188;" subject="EAID_FE926F72_F514_4931_86AB_323053713BA4" seqno="7" style="DUID=96C443E0;LBL=CX=17:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
+					<element geometry="Left=441;Top=76;Right=579;Bottom=149;" subject="EAID_970F683C_3AFD_4ae8_B5C5_85A9B65983B5" seqno="8" style="DUID=B098255D;"/>
+					<element geometry="Left=287;Top=140;Right=300;Bottom=180;" subject="EAID_462BF0C9_068B_4f90_9D9C_FD9FBB9C1760" seqno="9" style="DUID=5FE2C652;LBL=CX=34:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
+					<element geometry="Left=241;Top=69;Right=374;Bottom=141;" subject="EAID_1B8CA30C_EC48_409b_A6DD_9696ED8AD142" seqno="10" style="DUID=E10C39D5;"/>
 					<element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=CX=24:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_D595856B_245C_40a8_B9F0_87B048646093" style="Mode=3;EOID=96C443E0;SOID=614F7CAB;Color=-1;LWidth=0;Hidden=0;"/>
 					<element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=CX=24:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_547392B9_2143_4170_AB95_6398A09A332C" style="Mode=3;EOID=5FE2C652;SOID=0187F007;Color=-1;LWidth=0;Hidden=0;"/>
 					<element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=4;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_3744C4B3_EDC9_4df0_9AAF_EBADDCAB98F7" style="Mode=3;EOID=C29A0EE2;SOID=E10C39D5;Color=-1;LWidth=0;Hidden=0;"/>
