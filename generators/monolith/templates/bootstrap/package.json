@@ -122,7 +122,7 @@
     "chalk": "^2.1.0",
     "express-pino-logger": "^4.0.0",
     "inversify": "^5.0.1",
-    "mongodb": "3.0.10",
+    "mongodb": "3.6.1",
     "node-persist": "^3.0.1",
     "pg": "^7.10.0",
     "reflect-metadata": "^0.1.13",
