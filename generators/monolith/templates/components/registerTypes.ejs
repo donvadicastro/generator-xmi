@@ -3,7 +3,7 @@ const DITypes = {
 
 <% components.filter((x, i, list) => list.indexOf(x) === i).forEach(x => { %>
     <%= x.entity.elementId %>: Symbol.for('<%= x.entity.elementId %>'),
-    <% x.entity.provided.forEach(y => { %><%= y.elementId %>: Symbol.for('<%= y.elementId %>'),<% })}) %>
+    <% x.entity.provided.forEach(y => { %><%= y.typeRef.elementId %>: Symbol.for('<%= y.typeRef.elementId %>'),<% })}) %>
 };
 
 export {DITypes};

@@ -30,6 +30,6 @@ DIContainer.bind<DbManagerProvider>(DITypes.ICommonDbManagerContract)
 <% components.forEach(x => { %>
 DIContainer.bind<<%= x.entity.elementId %>Contract>(DITypes.<%= x.entity.elementId %>).to(<%= x.entity.elementId %>);
 <% x.entity.provided.forEach(y => { %>
-DIContainer.bind<<%= y.elementId %>Contract>(DITypes.<%= y.elementId %>).to(<%= x.entity.elementId %>);<% })}) %>
+DIContainer.bind<<%= y.typeRef.elementId %>Contract>(DITypes.<%= y.typeRef.elementId %>).to(<%= x.entity.elementId %>);<% })}) %>
 
 export { DIContainer, DbManagerProvider };
