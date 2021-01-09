@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.5
+version: v1.14.1
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -46,3 +46,28 @@ patch:
         patched: '2019-10-04T05:52:39.055Z'
     - npm > libnpm > libnpmsearch > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
         patched: '2019-10-04T05:52:39.055Z'
+  SNYK-JS-LODASH-567746:
+    - yeoman-generator > lodash:
+        patched: '2020-05-01T05:53:04.288Z'
+    - winston > async > lodash:
+        patched: '2020-05-01T05:53:04.288Z'
+    - yeoman-generator > async > lodash:
+        patched: '2020-05-01T05:53:04.288Z'
+    - yeoman-generator > yeoman-environment > lodash:
+        patched: '2020-05-01T05:53:04.288Z'
+    - yeoman-generator > yeoman-environment > grouped-queue > lodash:
+        patched: '2020-05-01T05:53:04.288Z'
+    - yeoman-generator > yeoman-environment > inquirer > lodash:
+        patched: '2020-05-01T05:53:04.288Z'
+    - yeoman-generator > yeoman-environment > yeoman-generator > lodash:
+        patched: '2020-05-01T05:53:04.288Z'
+    - yeoman-generator > yeoman-environment > yeoman-generator > async > lodash:
+        patched: '2020-05-01T05:53:04.288Z'
+    - yeoman-generator > yeoman-environment > yeoman-generator > grouped-queue > lodash:
+        patched: '2020-05-01T05:53:04.288Z'
+    - yeoman-generator > yeoman-environment > yeoman-generator > yeoman-environment > lodash:
+        patched: '2020-05-01T05:53:04.288Z'
+    - yeoman-generator > yeoman-environment > yeoman-generator > yeoman-environment > grouped-queue > lodash:
+        patched: '2020-05-01T05:53:04.288Z'
+    - yeoman-generator > yeoman-environment > yeoman-generator > yeoman-environment > inquirer > lodash:
+        patched: '2020-05-01T05:53:04.288Z'
