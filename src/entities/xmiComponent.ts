@@ -6,10 +6,15 @@ import xmiBase from "./xmiBase";
 import {xmiProvided} from "./component/xmiProvided";
 import {xmiRequired} from "./component/xmiRequired";
 import {xmiAbstractClass} from "../base/xmiAbstractClass";
+import {xmiAggregationLink} from "./links/xmiAggregationLink";
+import xmiConnector from "./connectors/xmiConnector";
+import {xmiInOut} from "./component/xmiInOut";
+import {xmiClass} from "./xmiClass";
 
 export class xmiComponent extends xmiAbstractClass {
     provided: xmiProvided[] = [];
     required: xmiRequired[] = [];
+    connectors: xmiConnector[] = [];
 
     constructor(raw: any, parent?: xmiPackage) {
         super(raw, parent);
@@ -34,6 +39,18 @@ export class xmiComponent extends xmiAbstractClass {
         if(raw.required) {
             this.required = raw.required.map((x: any) => new xmiRequired(x, this));
         }
+
+        if(raw.ownedConnector) {
+            this.connectors = raw.ownedConnector.map((x: any) => xmiComponentFactory.getConnectorByKey(x.$['xmi:id']));
+
+            // connector source/target not yet fully initialized
+            xmiComponentFactory.registerPostCallback(() => {
+                this.connectors.forEach(x => {
+                    this.required.push(this.createDependencyLinkByConnector(x, parent));
+                    (<xmiComponent>x.target.typeRef).provided.push(this.createDependencyLinkByConnector(x, parent));
+                });
+            });
+        }
     }
 
     get references(): Reference {
@@ -52,7 +69,8 @@ export class xmiComponent extends xmiAbstractClass {
         });
 
         this.required.forEach(value => {
-            imports['../' + this.getRelativePath(<xmiInterface>value.typeRef) + '/contracts/' + value.name] = value.namePascal + 'Contract';
+            const typeRef = <xmiInterface>value.typeRef;
+            imports['../' + this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.namePascal + 'Contract';
         });
 
         return imports;
@@ -64,7 +82,21 @@ export class xmiComponent extends xmiAbstractClass {
 
         this.required && (ret[key].required = this.required.map(x => x.name));
         this.provided && (ret[key].provided = this.provided.map(x => x.name));
+        this.connectors && (ret[key].connectors = this.connectors.map(x => x.id));
 
         return ret;
+    }
+
+    private createDependencyLinkByConnector(connector: xmiConnector, parent: xmiPackage | undefined): xmiRequired {
+        const typeRef = <xmiClass>connector.target.typeRef;
+        const identifiers = {$: { 'xmi:id': typeRef.id, 'xmi:idref': typeRef.id }};
+        const dep = new xmiRequired(identifiers, this);
+
+        dep.typeRef = <xmiInterface>connector.target.typeRef;
+        dep.linkRef = new xmiInOut(identifiers, parent);
+        dep.linkRef.owner = this;
+        dep.linkRef.ref = <xmiBase>connector.target.typeRef;
+
+        return dep;
     }
 }

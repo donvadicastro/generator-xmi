@@ -1,6 +1,7 @@
 import {get} from 'object-path';
 import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
 import {xmiClass} from "../xmiClass";
+import xmiBase from "../xmiBase";
 
 export default class xmiConnectorParty {
     raw: any;

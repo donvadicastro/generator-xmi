@@ -1,9 +1,19 @@
+<%
+const types = {};
+
+components.filter((x, i, list) => list.indexOf(x) === i).forEach(x => {
+    types[x.entity.elementId] = x.entity;
+    x.entity.provided.forEach(y => types[y.typeRef.elementId] = y.typeRef);
+});
+
+%>
+
 const DITypes = {
     ICommonDbManagerContract: Symbol.for('ICommonDbManager'),
 
-<% components.filter((x, i, list) => list.indexOf(x) === i).forEach(x => { %>
-    <%= x.entity.elementId %>: Symbol.for('<%= x.entity.elementId %>'),
-    <% x.entity.provided.forEach(y => { %><%= y.typeRef.elementId %>: Symbol.for('<%= y.typeRef.elementId %>'),<% })}) %>
-};
+    <% Object.keys(types).forEach(x => { %>
+        <%= x %>: Symbol.for('<%= x %>'),
+    <% }) %>
+}
 
 export {DITypes};

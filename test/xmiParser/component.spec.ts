@@ -54,6 +54,10 @@ describe('xmiParser', () => {
         const dep1: xmiComponent = <xmiComponent>entities[4];
         const dep2: xmiComponent = <xmiComponent>entities[3];
 
+        const config: xmiInterface = <xmiComponent>classes[2];
+        const http: xmiInterface = <xmiComponent>classes[1];
+        const httpOptions: xmiInterface = <xmiComponent>classes[0];
+
         it('Verify component structure', () => {
             expect(root.name).toBe('rootComponent');
             expect(dep1.name).toBe('dep1Component');
@@ -61,10 +65,6 @@ describe('xmiParser', () => {
         });
 
         it('Verify class structure', () => {
-            const config: xmiInterface = <xmiComponent>classes[2];
-            const http: xmiInterface = <xmiComponent>classes[1];
-            const httpOptions: xmiInterface = <xmiComponent>classes[0];
-
             expect(config.name).toBe('iConfig');
             expect(http.name).toBe('iHttp');
             expect(httpOptions.name).toBe('iHttpOptions');

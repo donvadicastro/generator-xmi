@@ -48,6 +48,7 @@ export class xmiComponentFactory {
     private _initDeffered: any[] = [];
 
     private _errors: string[] = [];
+    private _afterParseCallbacks: (() => void)[] = [];
 
     private static _instance = new xmiComponentFactory();
 
@@ -63,6 +64,7 @@ export class xmiComponentFactory {
     get fragmentHash(): xmiFragment[] { return this._fragmentHash; }
     get initDeffered() { return this._initDeffered; }
     get errors() { return this._errors; };
+    get afterParseCallbacks() { return this._afterParseCallbacks; };
 
     static get(raw: any, parent?: xmiPackage | xmiInterface | xmiCollaboration | xmiGUIElement, options?: any): xmiBase | null {
         let element = this.getByKey(raw.$['xmi:id']);
@@ -193,6 +195,9 @@ export class xmiComponentFactory {
                 element = element ? (<xmiInOut>element).refresh(raw, <xmiPackage>parent) : new xmiInOut(raw, <xmiPackage>parent);
                 break;
 
+            case 'uml:Connector':
+                break;
+
             case 'uml:Text':
                 element = new xmiText(raw, parent);
                 break;
@@ -242,6 +247,10 @@ export class xmiComponentFactory {
 
         this.instance.connectorHash[raw.$['xmi:idref']] = connector;
         return connector;
+    }
+
+    static getConnectorByKey(key: string): xmiBase {
+        return this.instance.connectorHash[key];
     }
 
     static registerProvide(raw: any, register: xmiComponent) {
@@ -322,6 +331,14 @@ export class xmiComponentFactory {
         }
 
         this.instance._idHashDeffered = {};
+
+        // post construct
+        this.instance.afterParseCallbacks.forEach(x => x());
+        this.instance.afterParseCallbacks.length = 0;
+    }
+
+    static registerPostCallback(callback: () => void) {
+        this.instance.afterParseCallbacks.push(callback);
     }
 
     static logError(error: string) {

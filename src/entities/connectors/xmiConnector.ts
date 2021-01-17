@@ -1,6 +1,7 @@
 import xmiConnectorParty from "./xmiConnectorParty";
 import {IConnector} from "../../contracts/connector";
 import {xmiClass} from "../xmiClass";
+import {get} from "object-path";
 
 export default class xmiConnector implements IConnector {
     id: string;
@@ -14,7 +15,7 @@ export default class xmiConnector implements IConnector {
         this.raw = raw;
         this.id = raw.$['xmi:idref'];
 
-        this.condition = raw.extendedProperties[0].$.conditional;
+        this.condition = get(raw, 'extendedProperties.0.$.conditional');
         this.source = new xmiConnectorParty(raw.source[0]);
         this.target = new xmiConnectorParty(raw.target[0]);
     }
