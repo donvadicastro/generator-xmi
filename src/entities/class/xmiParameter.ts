@@ -1,11 +1,13 @@
 import xmiBase from "../xmiBase";
 import {TypeConverter} from "../../utils/typeConverter";
+import {xmiInterface} from "../xmiInterface";
 import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
+
 const assert = require('assert');
 
 export class xmiParameter extends xmiBase {
     type: string;
-    typeRef: xmiBase | null = null;
+    typeRef: xmiBase | undefined = undefined;
     typeDefaultValue = 'null';
 
     /**
@@ -13,8 +15,9 @@ export class xmiParameter extends xmiBase {
      */
     isArray = false;
 
-    constructor(raw: any, parent: xmiBase) {
-        super(raw, parent);
+    constructor(raw: any, parent: xmiBase, factory: xmiComponentFactory) {
+        super(raw, parent, factory);
+
         this.type = raw.$.type;
         assert(this.type, `Type is not specified for parameter "${this.name}" in operation "${parent.name} -> ${parent.path.map(x => x.name).join(' -> ')}"`);
 
@@ -24,7 +27,7 @@ export class xmiParameter extends xmiBase {
             this.type = TypeConverter.convert(this.type);
             this.typeDefaultValue = this.isArray ? [] : TypeConverter.getTypeDefaultValue(this.type);
         } else {
-            xmiComponentFactory.getByKeyDeffered(this, 'typeRef', this.type);
+            this._factory.resolveById(this.type).subscribe(x => this.typeRef = x);
         }
     }
 }

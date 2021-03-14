@@ -15,7 +15,7 @@ import {xmiBoundary} from "../../src/entities/useCases/xmiBoundary";
 import {xmiEnumeration} from "../../src/entities/xmiEnumeration";
 import {xmiDataType} from "../../src/entities/xmiDataType";
 import {xmiClass} from "../../src/entities/xmiClass";
-import {readdirSync, statSync, existsSync} from 'fs';
+import {existsSync, readdirSync, statSync} from 'fs';
 import {join} from 'path';
 
 const kebabCase = require('just-kebab-case');

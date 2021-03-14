@@ -16,13 +16,12 @@ describe('Generators', () => {
                 const data = readJSONSync('test/data/project2_class.json');
                 const parser = new XmiParser(data);
 
-                parser.parse();
-
-                const pkg = <xmiPackage>parser.packge;
-                const entities = (<xmiPackage>pkg.children[0]).children;
-                const c1: xmiClass = <xmiComponent>entities[4];
+                beforeEach(async () => await parser.parse());
 
                 it('check generator', async () => {
+                    const pkg = <xmiPackage>parser.packge;
+                    const entities = (<xmiPackage>pkg.children[0]).children;
+                    const c1: xmiClass = <xmiComponent>entities[4];
                     const content = await ejs.renderFile(path.join(dir, 'xmiInterface.ejs'), {entity: c1});
 
                     expect(content.normalizeSpace()).toBe(`

@@ -3,6 +3,7 @@ import {xmiPackage} from "../../../src/entities/xmiPackage";
 import * as fs from "fs";
 import {xmiClass} from "../../../src/entities/xmiClass";
 import {IAttribute} from "../../../src/contracts/attribute";
+
 const parseString = require('xml2js').parseString;
 const path = require('path');
 
@@ -10,15 +11,16 @@ describe('xmiParser', () => {
     describe('Classes', () => {
         let entities: any[];
 
-        beforeAll((done) => {
+        beforeAll(async (done) => {
             parseString(fs.readFileSync(path.resolve(__dirname, '../../data/fixtures.xml')), (err: any, result: any) => {
                 const parser = new XmiParser(result);
-                parser.parse();
 
-                const pkg = <xmiPackage>parser.packge;
-                entities = (<xmiPackage>pkg.children[2]).children;
+                parser.parse().then(() => {
+                    const pkg = <xmiPackage>parser.packge;
+                    entities = (<xmiPackage>pkg.children[2]).children;
 
-                done();
+                    done();
+                });
             });
         });
 

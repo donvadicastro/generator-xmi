@@ -6,7 +6,7 @@ import {xmiPackage} from "./xmiPackage";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {xmiGeneralization} from "./connectors/xmiGeneralization";
 import {Reference} from "../types/reference";
-import {xmiEnumeration} from "./xmiEnumeration";
+import {forkJoin} from "rxjs";
 
 export class xmiInterface extends xmiBase {
     attributes: xmiAttribute[] = [];
@@ -42,8 +42,8 @@ export class xmiInterface extends xmiBase {
         return imports;
     }
 
-    constructor(raw: any, parent?: xmiPackage) {
-        super(raw, parent);
+    constructor(raw: any, parent: xmiPackage, factory: xmiComponentFactory) {
+        super(raw, parent, factory);
         this.refresh(raw, parent);
     }
 
@@ -52,28 +52,31 @@ export class xmiInterface extends xmiBase {
 
         if(raw.ownedAttribute) {
             this.attributes = raw.ownedAttribute
-                .map((x: any) => <xmiAttribute>xmiComponentFactory.get(x, this))
+                .map((x: any) => <xmiAttribute>this._factory.get(x, this))
                 .filter((x: xmiAttribute) => x.name);
         } else {
             this.attributes = get(raw, ['attributes', '0', 'attribute'], [])
-                .map((x: any) => <xmiAttribute>xmiComponentFactory.get(x, this))
+                .map((x: any) => <xmiAttribute>this._factory.get(x, this))
                 .filter((x: xmiAttribute) => x.name);
         }
 
         if(raw.ownedOperation) {
             this.operations = raw.ownedOperation
-                .map((x: any, i: number) => this.operations[i] ? this.operations[i].refresh(x) : new xmiOperation(x, this));
+                .map((x: any, i: number) => this.operations[i] ? this.operations[i].refresh(x) : new xmiOperation(x, this, this._factory));
         } else {
             this.operations = get(raw, ['operations','0','operation'], [])
-                .map((x: any, i: number) => this.operations[i] ? this.operations[i].refresh(x) : new xmiOperation(x, this));
+                .map((x: any, i: number) => this.operations[i] ? this.operations[i].refresh(x) : new xmiOperation(x, this, this._factory));
         }
 
         if(raw.generalization) {
-            this.generalization = new xmiGeneralization(get(raw, 'generalization.0'), this);
+            this.generalization = new xmiGeneralization(get(raw, 'generalization.0'), this, this._factory);
         }
 
         this.attributes.sort((a, b) => a.name > b.name ? 1 : -1);
         this.operations.sort((a, b) => a.name > b.name ? 1 : -1);
+
+        forkJoin(this.attributes.map(x => x.onAfterInit))
+            .subscribe(() => this.initialized());
 
         return this;
     }

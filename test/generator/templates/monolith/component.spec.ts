@@ -12,14 +12,17 @@ describe('Generators', () => {
         describe('Monolith', () => {
             describe('Component', () => {
                 const dir = path.join(__dirname, '../../../../generators/monolith/templates/partial/component');
-                const data = readJSONSync('test/data/project11_activity_condition.json');
-                const parser = new XmiParser(data);
+                let pkg, classes, classA: any;
 
-                parser.parse();
+                beforeEach(async () => {
+                    const data = readJSONSync('test/data/project11_activity_condition.json');
+                    const parser = new XmiParser(data);
+                    await parser.parse();
 
-                const pkg = <xmiPackage>parser.packge;
-                const classes: xmiPackage = <xmiPackage>(<xmiPackage>pkg.children[0]).children[3];
-                const classA = <xmiClass>classes.children[0];
+                    pkg = <xmiPackage>parser.packge;
+                    classes = <xmiPackage>(<xmiPackage>pkg.children[0]).children[3];
+                    classA = <xmiClass>classes.children[0];
+                });
 
                 it('check methods', async () => {
                     const content = await ejs.renderFile(path.join(dir, 'operations.ejs'), {entity: classA});

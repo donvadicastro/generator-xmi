@@ -13,6 +13,7 @@ export class XmiParser {
      */
     private data: any;
 
+    factory: xmiComponentFactory = new xmiComponentFactory();
     elements: any[] = [];
     connectors: any[] = [];
     diagrams: any;
@@ -22,23 +23,26 @@ export class XmiParser {
         this.data = data;
     }
 
-    parse(): boolean {
+    async parse(): Promise<boolean> {
+        //clean factory
+        this.factory = new xmiComponentFactory();
+
         this.connectors = get(this.data, this.CONNECTORS_PATH, [])
-            .map((x: any) => xmiComponentFactory.getConnector(x));
+            .map((x: any) => this.factory.getConnector(x));
 
         this.elements = get(this.data, this.ELEMENTS_PATH, [])
-            .map((x: any) => xmiComponentFactory.get(x));
+            .map((x: any) => this.factory.get(x));
 
-        this.packge = <xmiPackage>xmiComponentFactory.get(get(this.data, this.PACKAGE_ROOT));
-        this.diagrams = (get(this.data, this.DIAGRAMS_PATH, [])).map(x => xmiComponentFactory.getDiagram(x));
+        this.packge = <xmiPackage>this.factory.get(get(this.data, this.PACKAGE_ROOT));
+        this.diagrams = (get(this.data, this.DIAGRAMS_PATH, [])).map(x => this.factory.getDiagram(x));
 
         //run initializers
-        xmiComponentFactory.initialize();
+        this.factory.initialize();
 
         // update references
-        xmiComponentFactory.updateRefs();
+        await this.factory.updateRefs();
 
-        return xmiComponentFactory.instance.errors.length === 0;
+        return this.factory.errors.length === 0;
     }
 
     toConsole() {
@@ -48,8 +52,8 @@ export class XmiParser {
             output.Package = this.packge.toConsole();
         }
 
-        if(xmiComponentFactory.instance.errors.length) {
-            output.Errors = xmiComponentFactory.instance.errors;
+        if(this.factory.errors.length) {
+            output.Errors = this.factory.errors;
         }
 
         return output;

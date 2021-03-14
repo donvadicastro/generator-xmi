@@ -43,9 +43,9 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
     generate() {
         const done = this.async();
 
-        this._readData((result: any) => {
+        this._readData(async (result: any) => {
             const parser = new XmiParser(result);
-            const success = parser.parse();
+            const success = await parser.parse();
 
             this.log(chalk.green('Model'));
             this.log(treeify.asTree(parser.toConsole(), true, true));

@@ -3,17 +3,17 @@ import xmiBase from "../xmiBase";
 import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
 
 export class xmiAssociationParty extends xmiBase {
-    typeRef: xmiBase | null = null;
+    typeRef: xmiBase | undefined = undefined;
     value: {lower: number | string, upper: number | string};
     aggregation: 'composite' | 'none';
 
-    constructor(raw: any) {
-        super(raw);
+    constructor(raw: any, factory: xmiComponentFactory) {
+        super(raw, null, factory);
 
         this.value = {lower: this.getValue(get(raw, 'lowerValue.0.$')), upper: this.getValue(get(raw, 'upperValue.0.$'))};
         this.aggregation = raw.$['aggregation'];
 
-        xmiComponentFactory.getByKeyDeffered(this, 'typeRef', get(raw, 'type.0.$.xmi:idref'));
+        this._factory.resolveById(get(raw, 'type.0.$.xmi:idref')).subscribe(x => this.typeRef = x);
     }
 
     getValue(value: any): number | string {

@@ -16,9 +16,9 @@ describe('xmiParser', () => {
                 parseString(fs.readFileSync('test/data/fixtures.xml'), (err: any, result: any) => { data = result; done(); });
             });
 
-            beforeEach(() => {
+            beforeEach(async () => {
                 parser = new XmiParser(data);
-                parser.parse();
+                await parser.parse();
             });
 
             test('Check loop condition', () => {

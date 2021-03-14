@@ -1,5 +1,4 @@
 import xmiBase from "../xmiBase";
-import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
 import {xmiLink} from "../links/xmiLink";
 import {xmiUMLDiagram} from "../diagrams/xmiUMLDiagram";
 import {xmiPackage} from "../xmiPackage";
@@ -7,6 +6,7 @@ import {Reference} from "../../types/reference";
 import {xmiCollaboration} from "../xmiCollaboration";
 import {xmiDiagram} from "../diagrams/xmiDiagram";
 import {xmiClass} from "../xmiClass";
+import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
 
 const assert = require('assert');
 
@@ -49,18 +49,18 @@ export class xmiGUIElement extends xmiBase {
             .filter(x => (direction === 'in' ? x.start : x.end) instanceof xmiGUIElement);
     }
 
-    constructor(raw: any, parent: xmiPackage) {
-        super(raw, parent);
+    constructor(raw: any, parent: xmiPackage, factory: xmiComponentFactory) {
+        super(raw, parent, factory);
 
         if(raw.links && raw.links.length && raw.links[0].InformationFlow) {
-            this.links.informationFLow = raw.links[0].InformationFlow.map((x: any) => xmiComponentFactory.getLink(x, this));
+            this.links.informationFLow = raw.links[0].InformationFlow.map((x: any) => this._factory.getLink(x, this));
         }
 
         this.properties = new Map((raw.tags[0].tag || []).map((x: any) => [x.$.name, x.$.value]));
         this.properties.set('label', raw.$.name);
 
-        if(this.raw.$['classifier']) {
-            xmiComponentFactory.getByKeyDeffered(this, 'typeRef', this.raw.$['classifier']);
+        if(this._raw.$['classifier']) {
+            this._factory.resolveById(this._raw.$['classifier']).subscribe(x => this.typeRef = <xmiClass>x);
         }
 
         this.parseChildren(raw);
@@ -68,7 +68,7 @@ export class xmiGUIElement extends xmiBase {
 
     parseChildren(raw: any) {
         this.children = (raw.nestedClassifier || [])
-            .map((x: any) => xmiComponentFactory.get(x, this)).filter((x: any) => x);
+            .map((x: any) => this._factory.get(x, this)).filter((x: any) => x);
 
         assert(this.children.map(x => x.name)
             .every((x: string, index: number, arr: string[]) => arr.indexOf(x) === index),
