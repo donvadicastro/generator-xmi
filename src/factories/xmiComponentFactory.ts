@@ -18,8 +18,7 @@ import xmiConnector from "../entities/connectors/xmiConnector";
 import {xmiAssociation} from "../entities/connectors/xmiAssociation";
 import {xmiInstanceSpecification} from "../entities/xmiInstanceSpecification";
 import {xmiCombinedFragment} from "../entities/collaboration/xmiCombinedFragment";
-import {get} from 'object-path';
-import {xmiComment} from "../entities/xmiComment";
+import {get} from 'object-path';import {xmiComment} from "../entities/xmiComment";
 import {xmiComponent} from "../entities/xmiComponent";
 import {xmiActor} from "../entities/xmiActor";
 import {xmiBoundary} from "../entities/useCases/xmiBoundary";
@@ -30,11 +29,6 @@ import {xmiClass} from "../entities/xmiClass";
 import {xmiText} from "../xmiText";
 import {forkJoin, Observable, ReplaySubject} from "rxjs";
 import {last, tap} from "rxjs/operators";
-
-const assert = require('assert');
-
-type idHashRef = {source: any, property: string, callback?: (element: xmiBase) => void};
-type idHashFn = (x: xmiBase) => void;
 
 export class xmiComponentFactory {
     /**
