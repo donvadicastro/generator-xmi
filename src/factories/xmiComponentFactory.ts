@@ -36,24 +36,15 @@ export class xmiComponentFactory {
      * Resolved elements stream.
      * @private
      */
-    private _resolvedElements = new ReplaySubject<xmiBase>();
-    private _allSubscriptions: Observable<any>[] = [];
+    resolvedElements = new ReplaySubject<xmiBase>();
+    allSubscriptions: Observable<any>[] = [];
 
-    private _idHash: {[key: string]: xmiBase} = {};
-    private _classHash: {[name: string]: xmiBase} = {};
-    private _connectorHash: {[name: string]: any} = {};
-    private _lifelineHash: xmiLifeline[] = [];
-    private _fragmentHash: xmiFragment[] = [];
-
-    private _errors: string[] = [];
-
-    get resolvedElements() { return this._resolvedElements; }
-    get idHash() { return this._idHash; }
-    get classHash() { return this._classHash; }
-    get connectorHash() { return this._connectorHash; }
-    get lifelineHash(): xmiLifeline[] { return this._lifelineHash; }
-    get fragmentHash(): xmiFragment[] { return this._fragmentHash; }
-    get errors() { return this._errors; };
+    idHash: {[key: string]: xmiBase} = {};
+    classHash: {[name: string]: xmiBase} = {};
+    connectorHash: {[name: string]: any} = {};
+    lifelineHash: xmiLifeline[] = [];
+    fragmentHash: xmiFragment[] = [];
+    errors: string[] = [];
 
     /**
      * Resolve dependency.
@@ -61,14 +52,14 @@ export class xmiComponentFactory {
      */
     resolveById(id: string): Observable<xmiBase | undefined> {
         // console.log('RESOLVING ', id);
-        const subscription = this._resolvedElements.pipe(
+        const subscription = this.resolvedElements.pipe(
             last((x, i) => {
                 return x.id === id;
             }), tap(x => {
                 // console.log('RESOLVED ', x?.id);
             }));
 
-        this._allSubscriptions.push(subscription);
+        this.allSubscriptions.push(subscription);
         return subscription;
     }
 
@@ -79,7 +70,7 @@ export class xmiComponentFactory {
      */
     resolveByIdAndChangeState(element: xmiBase, id: string): Observable<xmiBase | undefined> {
         // console.log('RESOLVING ', id);
-        const subscription = this._resolvedElements.pipe(
+        const subscription = this.resolvedElements.pipe(
             last(x => {
                 return x.id === id;
             }), tap(x => {
@@ -87,7 +78,7 @@ export class xmiComponentFactory {
                 element.initialized();
             }));
 
-        this._allSubscriptions.push(subscription);
+        this.allSubscriptions.push(subscription);
         return subscription;
     }
 
@@ -287,8 +278,8 @@ export class xmiComponentFactory {
     }
 
     initialize() {
-        this._resolvedElements.complete();
-        return forkJoin(this._allSubscriptions).toPromise();
+        this.resolvedElements.complete();
+        return forkJoin(this.allSubscriptions).toPromise();
     }
 
     logError(error: string) {
