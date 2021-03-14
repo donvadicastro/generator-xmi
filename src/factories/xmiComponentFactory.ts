@@ -44,11 +44,7 @@ export class xmiComponentFactory {
     private _resolvedElements = new ReplaySubject<xmiBase>();
     private _allSubscriptions: Observable<any>[] = [];
 
-    //private _source = publish<xmiBase>()(this._resolvedElements.pipe() as ConnectableObservable<xmiBase>);
-
     private _idHash: {[key: string]: xmiBase} = {};
-    private _idHashDeffered: {[key: string]: (idHashRef | idHashFn)[]} = {};
-
     private _classHash: {[name: string]: xmiBase} = {};
     private _connectorHash: {[name: string]: any} = {};
 
@@ -61,7 +57,6 @@ export class xmiComponentFactory {
 
     get resolvedElements() { return this._resolvedElements; }
     get idHash() { return this._idHash; }
-    get idHashDeffered() { return this._idHashDeffered; }
     get classHash() { return this._classHash; }
     get connectorHash() { return this._connectorHash; }
     get lifelineHash(): xmiLifeline[] { return this._lifelineHash; }
@@ -302,17 +297,6 @@ export class xmiComponentFactory {
         return this.idHash[key];
     }
 
-    /**
-     * Deffered reference linking
-     * @param source
-     * @param {string} property
-     * @param {string} key
-     */
-    resolveKeyDeffered(key: string, callback: (x: xmiBase) => void) {
-        this.idHashDeffered[key] || (this.idHashDeffered[key] = []);
-        this.idHashDeffered[key].push(callback);
-    }
-
     initialize(): void {
         // console.log('CONNECT to subscribers');
         // this._source.connect();
@@ -323,39 +307,6 @@ export class xmiComponentFactory {
      * Update deffered references
      */
     updateRefs() {
-        for(let key in this.idHashDeffered) {
-            this.idHashDeffered[key].forEach((ref: idHashFn | idHashRef) => {
-                const matchClassName = /EAJava_(\w+(__)?)/.exec(key);
-                let link = this.idHash[key];
-
-                //key can be link to class name
-                if(matchClassName && matchClassName.length > 1) {
-                    link = this.classHash[matchClassName[1].replace('__', '')];
-                }
-
-                assert(link, `No link for "${key}"`);
-
-                // this.idHash[key] || console.log(`Null ref for "${ref.property}": ${key}`);
-                // assert(this.idHash[key], `Null ref for "${ref.property}": ${key}`);
-
-                if(typeof ref === 'function') {
-                    ref(this.idHash[key]);
-                } else {
-                    const element = this.idHash[key];
-
-                    if (Array.isArray(ref.source[ref.property])) {
-                        ref.source[ref.property].push(element);
-                    } else {
-                        ref.source[ref.property] = element;
-                    }
-
-                    ref.callback && ref.callback(this.idHash[key]);
-                }
-            });
-        }
-
-        this._idHashDeffered = {};
-
         // post construct
         this.afterParseCallbacks.forEach(x => x());
         this.afterParseCallbacks.length = 0;
