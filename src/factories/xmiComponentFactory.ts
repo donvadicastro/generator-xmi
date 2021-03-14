@@ -18,7 +18,8 @@ import xmiConnector from "../entities/connectors/xmiConnector";
 import {xmiAssociation} from "../entities/connectors/xmiAssociation";
 import {xmiInstanceSpecification} from "../entities/xmiInstanceSpecification";
 import {xmiCombinedFragment} from "../entities/collaboration/xmiCombinedFragment";
-import {get} from 'object-path';import {xmiComment} from "../entities/xmiComment";
+import {get} from 'object-path';
+import {xmiComment} from "../entities/xmiComment";
 import {xmiComponent} from "../entities/xmiComponent";
 import {xmiActor} from "../entities/xmiActor";
 import {xmiBoundary} from "../entities/useCases/xmiBoundary";
@@ -41,13 +42,10 @@ export class xmiComponentFactory {
     private _idHash: {[key: string]: xmiBase} = {};
     private _classHash: {[name: string]: xmiBase} = {};
     private _connectorHash: {[name: string]: any} = {};
-
     private _lifelineHash: xmiLifeline[] = [];
     private _fragmentHash: xmiFragment[] = [];
-    private _initDeffered: any[] = [];
 
     private _errors: string[] = [];
-    private _afterParseCallbacks: (() => void)[] = [];
 
     get resolvedElements() { return this._resolvedElements; }
     get idHash() { return this._idHash; }
@@ -55,9 +53,7 @@ export class xmiComponentFactory {
     get connectorHash() { return this._connectorHash; }
     get lifelineHash(): xmiLifeline[] { return this._lifelineHash; }
     get fragmentHash(): xmiFragment[] { return this._fragmentHash; }
-    get initDeffered() { return this._initDeffered; }
     get errors() { return this._errors; };
-    get afterParseCallbacks() { return this._afterParseCallbacks; };
 
     /**
      * Resolve dependency.
@@ -142,7 +138,6 @@ export class xmiComponentFactory {
 
             case 'uml:Collaboration':
                 element = new xmiCollaboration(raw, <xmiPackage>parent, this);
-                this.initDeffered.push(element);
                 break;
 
             case 'uml:Actor':
@@ -291,26 +286,9 @@ export class xmiComponentFactory {
         return this.idHash[key];
     }
 
-    initialize(): void {
-        // console.log('CONNECT to subscribers');
-        // this._source.connect();
-        this.initDeffered.forEach(x => x.initialize());
-    }
-
-    /**
-     * Update deffered references
-     */
-    updateRefs() {
-        // post construct
-        this.afterParseCallbacks.forEach(x => x());
-        this.afterParseCallbacks.length = 0;
-
+    initialize() {
         this._resolvedElements.complete();
         return forkJoin(this._allSubscriptions).toPromise();
-    }
-
-    registerPostCallback(callback: () => void) {
-        this.afterParseCallbacks.push(callback);
     }
 
     logError(error: string) {
