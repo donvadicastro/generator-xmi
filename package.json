@@ -21,7 +21,7 @@
     "just-kebab-case": "^1.1.0",
     "lodash": "^4.17.20",
     "node-persist": "^3.0.1",
-    "npm": "^6.4.1",
+    "npm": "^7.0.0",
     "object-path": "^0.11.4",
     "rxjs": "^6.6.3",
     "snyk": "^1.316.1",
