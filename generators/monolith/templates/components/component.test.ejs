@@ -22,9 +22,9 @@ describe('<%= entity.name %> specification check', () => {
         const <%= x.name %> = <%= x.isArray ? '[' : '' %><%- x.typeRef ? `new ${x.typeRef.namePascal}()` : x.typeDefaultValue %><%= x.isArray ? ']' : '' %>;<% }) %>
         const expected <% if(operation.isReturnArray) { %>: <%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.namePascal}` : operation.returnParameter.type %>[]<% } %> = <%- operation.isReturnArray ? '[]' : operation.returnParameter.typeRef ? `new ${operation.returnParameter.typeRef.namePascal}()` : operation.returnParameter.typeDefaultValue %>;
         <% if(operation.inputParameters.length > 0) { %>
-        const value = <% if(operation.inputParameters.length > 1) { %>{ <%= operation.inputParameters.map(x => `${x.name}: ${x.name}`).join(', ')%> }<% } else { %><%= operation.inputParameters[0].name %><% } %>;
+        const params = <% if(operation.inputParameters.length > 1) { %>{ <%= operation.inputParameters.map(x => `${x.name}: ${x.name}`).join(', ')%> }<% } else { %><%= operation.inputParameters[0].name %><% } %>;
         <% } %>
-        const actual = await instance.<%= operation.name %>(<%= operation.inputParameters.length ? 'value' : '' %>);
+        const actual = await instance.<%= operation.name %>(<%= operation.inputParameters.length ? 'params' : '' %>);
         expect(actual).toEqual(expected);
     });
 <% }) %>
