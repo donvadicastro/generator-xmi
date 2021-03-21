@@ -5,11 +5,9 @@
   "main": "index.js",
   "author": "",
   "license": "ISC",
-
   "scripts": {
     "build": "tsc",
     "test": "jest",
-
     "api:start": "npm run api:compile && node dist/api/server/index.js",
     "api:start:prod": "NODE_ENV=production npm run api:compile && pm2 start dist/api/server/index.js",
     "api:compile": "ts-node build.ts",
@@ -17,19 +15,15 @@
     "api:dev:debug": "nodemon --exec 'node -r ts-node/register --inspect-brk' api/server/index.ts  | pino -o 'short'",
     "api:test": "mocha api/test/**/*.ts --exit",
     "api:test:debug": "mocha --inspect-brk api/test/**/*.ts --exit",
-
     "app:ng": "ng",
     "app:start": "ng serve --host 0.0.0.0",
     "app:build": "ng build --outputPath=dist/app_compiled",
     "app:build:prod": "ng build --outputPath=dist/app_compiled --prod",
     "app:test": "ng test",
-
     "lint": "ng lint",
     "e2e": "protractor e2e/protractor.conf.js",
-
     "jira:sync": "ts-node cmd/jira_sync.ts"
   },
-
   "jest": {
     "testEnvironment": "node",
     "verbose": false,
@@ -46,7 +40,6 @@
       "node"
     ]
   },
-
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
     "@angular/cli": "~7.3.8",
@@ -88,7 +81,6 @@
     "typescript": "~3.2.2",
     "webpack-dev-server": "^3.4.1"
   },
-
   "dependencies": {
     "@angular/animations": "^7.2.13",
     "@angular/cdk": "^7.3.7",
@@ -124,7 +116,7 @@
     "inversify": "^5.0.1",
     "mongodb": "3.6.1",
     "node-persist": "^3.0.1",
-    "pg": "^7.10.0",
+    "pg": "^8.2.1",
     "reflect-metadata": "^0.1.13",
     "tslib": "^1.9.0",
     "twitter": "^1.7.1",
