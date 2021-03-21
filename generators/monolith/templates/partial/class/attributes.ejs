@@ -20,9 +20,9 @@
 <% }) %>
 
 <% if(orm && entity.generalizationLinksFrom.length) { %>
-    @Column('varchar', {nullable: true})
+    @Column('varchar', {nullable: true, select: false})
     _generalizationLinkType?: string;
 
-    @Column('int', {nullable: true})
+    @Column('int', {nullable: true, select: false})
     _generalizationLinkId?: number;
 <% } %>
