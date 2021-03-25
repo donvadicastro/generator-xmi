@@ -12,14 +12,14 @@ describe('xmiParser', () => {
         let entities: any[];
 
         beforeAll((done) => {
-            parseString(fs.readFileSync(path.resolve(__dirname, '../../data/fixtures.xml')), (err: any, result: any) => {
+            parseString(fs.readFileSync(path.resolve(__dirname, '../../data/fixtures.xml')), async (err: any, result: any) => {
                 const parser = new XmiParser(result);
-                parser.parse();
+                parser.parse().then(() => {
+                    const pkg = <xmiPackage>parser.packge;
+                    entities = (<xmiPackage>pkg.children[3]).children;
 
-                const pkg = <xmiPackage>parser.packge;
-                entities = (<xmiPackage>pkg.children[3]).children;
-
-                done();
+                    done();
+                })
             });
         });
 

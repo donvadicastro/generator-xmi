@@ -15,13 +15,12 @@ describe('Generators', () => {
                 const data = readJSONSync('test/data/project6_activity.json');
                 const parser = new XmiParser(data);
 
-                parser.parse();
-
-                const pkg = <xmiPackage>parser.packge;
-                const entities = (<xmiPackage>pkg.children[0]).children;
-                const c1 = <xmiComponent>entities[0];
+                beforeEach(async () => await parser.parse());
 
                 it('check template generation', async () => {
+                    const pkg = <xmiPackage>parser.packge;
+                    const entities = (<xmiPackage>pkg.children[0]).children;
+                    const c1 = <xmiComponent>entities[0];
                     const content = await ejs.renderFile(path.join(dir, 'xmiCollaboration.ejs'), {entity: c1});
 
                     expect(content.normalizeSpace()).toBe(`

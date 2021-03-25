@@ -2,13 +2,13 @@ import xmiBase from "../xmiBase";
 import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
 
 export class xmiLink extends xmiBase {
-    start: xmiBase | null = null;
-    end: xmiBase | null = null;
+    start?: xmiBase;
+    end?: xmiBase;
 
-    constructor(raw: any, parent?: xmiBase) {
-        super(raw, parent);
+    constructor(raw: any, parent: xmiBase, factory: xmiComponentFactory) {
+        super(raw, parent, factory);
 
-        xmiComponentFactory.getByKeyDeffered(this, 'start', raw.$.start);
-        xmiComponentFactory.getByKeyDeffered(this, 'end', raw.$.end);
+        this._factory.resolveById(raw.$.start).subscribe(x => this.start = x);
+        this._factory.resolveById(raw.$.end).subscribe(x => this.end = x);
     }
 }

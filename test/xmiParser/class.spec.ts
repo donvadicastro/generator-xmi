@@ -5,11 +5,11 @@ import {xmiClass} from "../../src/entities/xmiClass";
 
 describe('xmiParser', () => {
     describe('Classes', () => {
-        it('Verify custom', () => {
+        it('Verify custom', async () => {
             const data = readJSONSync('test/data/project2_class.json');
             const parser = new XmiParser(data);
 
-            parser.parse();
+            await parser.parse();
 
             const pkg = <xmiPackage>parser.packge;
             const entities = (<xmiPackage>pkg.children[0]).children;
@@ -51,11 +51,11 @@ describe('xmiParser', () => {
             expect(team.operations[1].returnParameter.typeRef).toBe(location);
         });
 
-        it('Verify association', () => {
+        it('Verify association', async () => {
             const data = readJSONSync('test/data/project2_class_associations.json');
             const parser = new XmiParser(data);
 
-            parser.parse();
+            await parser.parse();
 
             const pkg = <xmiPackage>(<xmiPackage>parser.packge).children[0];
             const aircraft = pkg.children[0] as xmiClass;
@@ -68,15 +68,11 @@ describe('xmiParser', () => {
             expect(airline.associationLinks[0].target.multiplicity).toBe("0..*");
         });
 
-        it('Verify composition', () => {
-
-        });
-
-        it('Verify generalization', () => {
+        it('Verify generalization', async () => {
             const data = readJSONSync('test/data/project2_class_inheritance.json');
             const parser = new XmiParser(data);
 
-            parser.parse();
+            await parser.parse();
 
             const pkg = <xmiPackage>(<xmiPackage>parser.packge).children[0];
             const a = pkg.children[0] as xmiClass;

@@ -10,14 +10,14 @@ describe('xmiParser', () => {
         let entities: any[];
 
         beforeAll((done) => {
-            parseString(fs.readFileSync(path.resolve(__dirname, '../../data/fixtures.xml')), (err: any, result: any) => {
+            parseString(fs.readFileSync(path.resolve(__dirname, '../../data/fixtures.xml')), async (err: any, result: any) => {
                 const parser = new XmiParser(result);
-                parser.parse();
+                parser.parse().then(() => {
+                    const pkg = <xmiPackage>parser.packge;
+                    entities = (<xmiPackage>pkg.children[4]).children;
 
-                const pkg = <xmiPackage>parser.packge;
-                entities = (<xmiPackage>pkg.children[4]).children;
-
-                done();
+                    done();
+                });
             });
         });
 
@@ -39,12 +39,12 @@ describe('xmiParser', () => {
                 expect(logger.required).toEqual([]);
                 expect(logger.provided.length).toBe(1);
                 expect(logger.provided[0].typeRef).toBe(logger);
-                expect(logger.provided[0].linkRef.ref).toBe(logger);
+                expect(logger.provided[0].linkRef).toBe(logger);
 
                 expect(storage.required).toEqual([]);
                 expect(storage.provided.length).toBe(1);
                 expect(storage.provided[0].typeRef).toBe(storage);
-                expect(storage.provided[0].linkRef.ref).toBe(storage);
+                expect(storage.provided[0].linkRef).toBe(storage);
 
                 expect(domainService.provided).toEqual([]);
                 expect(domainService.required.length).toBe(2);

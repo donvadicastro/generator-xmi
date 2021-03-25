@@ -19,8 +19,8 @@ export class xmiAttribute extends xmiBase implements IAttribute {
     isEnum = false;
     isDataType = false;
 
-    constructor(raw: any, parent?: xmiBase) {
-        super(raw, parent);
+    constructor(raw: any, parent: xmiBase | null, factory: xmiComponentFactory) {
+        super(raw, parent, factory);
         this.name = this.name && camel(this.name);
 
         this.type = /*this.raw.$['xmi:idref'] || */
@@ -37,11 +37,11 @@ export class xmiAttribute extends xmiBase implements IAttribute {
             this.typeDefaultValue = this.isArray ? [] : TypeConverter.getTypeDefaultValue(this.type);
             this.typeAllowedValues = TypeConverter.getTypeAllowedValues(this.type);
         } else {
-            xmiComponentFactory.getByKeyDeffered(this, 'typeRef', this.type,
-                (x) => {
-                    this.isEnum = (x instanceof xmiEnumeration);
-                    this.isDataType = (x instanceof xmiDataType);
-                });
+            this._factory.resolveById(this.type).subscribe(x => {
+                this.typeRef = x;
+                this.isEnum = (x instanceof xmiEnumeration);
+                this.isDataType = (x instanceof xmiDataType);
+            });
         }
     }
 

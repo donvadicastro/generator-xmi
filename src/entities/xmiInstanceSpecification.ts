@@ -1,11 +1,10 @@
-import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {Reference} from "../types/reference";
 import {xmiAbstractClass} from "../base/xmiAbstractClass";
 import {xmiClass} from "./xmiClass";
 
 export class xmiInstanceSpecification extends xmiAbstractClass {
     get elementRef(): xmiClass {
-        return <xmiClass>xmiComponentFactory.getByKey(this.raw.$.classifier);
+        return <xmiClass>this._factory.getByKey(this._raw.$.classifier);
     }
 
     get references(): Reference {

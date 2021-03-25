@@ -3,12 +3,16 @@ import {xmiPackage} from "./xmiPackage";
 import {xmiComment} from "./xmiComment";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {Reference} from "../types/reference";
+import {ReplaySubject} from "rxjs";
+
 const camel = require('to-camel-case');
 const pascal = require('to-pascal-case');
 
 export default class xmiBase {
-    parent?: xmiPackage | xmiBase;
-    raw: any;
+    protected readonly _raw: any;
+    protected readonly _factory: xmiComponentFactory;
+
+    parent: xmiPackage | xmiBase | null;
 
     id: string;
     type: string;
@@ -21,6 +25,20 @@ export default class xmiBase {
 
     comments: xmiComment[] = [];
     tags: {[key: string]: string} = {};
+
+    /**
+     * Trigger event when element is resolved
+     * @param x resolved element
+     */
+    onAfterInit = new ReplaySubject<xmiBase>();
+
+    /**
+     * Notify element fully initialized.
+     */
+    initialized() {
+        this.onAfterInit.next(this);
+        this.onAfterInit.complete();
+    }
 
     get path(): xmiBase[] {
         let path = [];
@@ -73,24 +91,25 @@ export default class xmiBase {
             .map(key => ({name: imports[key], path: key}));
     }
 
-    constructor(raw: any, parent?: xmiPackage | xmiBase) {
+    constructor(raw: any, parent: xmiPackage | xmiBase | null, factory: xmiComponentFactory) {
+        this._factory = factory;
         this.parent = parent;
-        this.raw = raw;
+        this._raw = raw;
 
-        this.id = this.raw.$['xmi:id'] || this.raw.$['xmi:ifrefs'] || this.raw.$['xmi:idref'];
-        this.type = this.raw.$['xmi:type'];
-        this.nameOrigin = this.raw.$.name;
+        this.id = this._raw.$['xmi:id'] || this._raw.$['xmi:ifrefs'] || this._raw.$['xmi:idref'];
+        this.type = this._raw.$['xmi:type'];
+        this.nameOrigin = this._raw.$.name;
         this.name = this.nameOrigin && camel(this.nameOrigin);
         this.namePascal = this.nameOrigin && pascal(this.nameOrigin);
-        this.description = get(this.raw, ['properties', '0', '$', 'documentation']);
+        this.description = get(this._raw, ['properties', '0', '$', 'documentation']);
 
-        this.alias = get(this.raw, ['properties', '0', '$', 'alias']);
+        this.alias = get(this._raw, ['properties', '0', '$', 'alias']);
         this.alias && (this.alias = this.alias.split('.').map(x => camel(x)).join('.'));
 
-        this.stereotype = get(this.raw, ['properties', '0', '$', 'stereotype']);
+        this.stereotype = get(this._raw, ['properties', '0', '$', 'stereotype']);
 
         //parse comments
-        this.comments = get(raw, 'ownedComment', []).map(x => <xmiComment>xmiComponentFactory.get(x));
+        this.comments = get(raw, 'ownedComment', []).map(x => <xmiComment>this._factory.get(x));
 
         //parse tags
         this.tags = (raw.tags || []).reduce((prev: any, current: any) => {
@@ -101,7 +120,9 @@ export default class xmiBase {
     }
 
     refreshBase(raw: any, parent?: xmiPackage | xmiBase) {
-        this.parent = this.parent || parent;
+        if(parent) {
+            this.parent = this.parent || parent;
+        }
     }
 
     toConsole(): any | string {

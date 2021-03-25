@@ -25,23 +25,23 @@ export class xmiAbstractClass extends xmiInterface {
      */
     conditions: {[operationName: string]: string[]} = {};
 
-    constructor(raw: any, parent?: xmiPackage) {
-        super(raw, parent);
+    constructor(raw: any, parent: xmiPackage, factory: xmiComponentFactory) {
+        super(raw, parent, factory);
 
         if(raw.links && raw.links.length && raw.links[0].Aggregation) {
-            this.links.aggregation = raw.links[0].Aggregation.map((x: any) => new xmiAggregationLink(x));
+            this.links.aggregation = raw.links[0].Aggregation.map((x: any) => new xmiAggregationLink(x, this, factory));
         }
 
         if(raw.links && raw.links.length && raw.links[0].Association) {
-            this.links.association = raw.links[0].Association.map((x: any) => new xmiAggregationLink(x));
+            this.links.association = raw.links[0].Association.map((x: any) => new xmiAggregationLink(x, this, factory));
         }
 
         if(raw.links && raw.links.length && raw.links[0].Generalization) {
-            this.links.generalization = raw.links[0].Generalization.map((x: any) => new xmiAggregationLink(x));
+            this.links.generalization = raw.links[0].Generalization.map((x: any) => new xmiAggregationLink(x, this, factory));
         }
 
         if(raw.links && raw.links.length && raw.links[0].Realisation) {
-            this.links.realization = raw.links[0].Realisation.map((x: any) => new xmiAggregationLink(x));
+            this.links.realization = raw.links[0].Realisation.map((x: any) => new xmiAggregationLink(x, this, factory));
         }
     }
 
@@ -88,7 +88,7 @@ export class xmiAbstractClass extends xmiInterface {
             this.links.generalization.filter(x => x.start === this) : [];
 
         assert(links.length <= 1, `Class "${this.nameOrigin}" can have no more than 1 generalization links. Current: ${links.length}`);
-        return links.length ? links[0].end : null;
+        return links.length ? <xmiBase>links[0].end : null;
     }
 
     /**

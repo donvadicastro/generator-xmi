@@ -4,7 +4,6 @@ import {xmiScreen} from "../../src/entities/ui/xmiScreen";
 import {xmiPackage} from "../../src/entities/xmiPackage";
 import {xmiGUIElement} from "../../src/entities/ui/xmiGUIElement";
 import {xmiCollaboration} from "../../src/entities/xmiCollaboration";
-import xmiBase from "../../src/entities/xmiBase";
 import {xmiUMLDiagram} from "../../src/entities/diagrams/xmiUMLDiagram";
 
 describe('xmiParser', () => {
@@ -12,7 +11,7 @@ describe('xmiParser', () => {
         const data = readJSONSync('test/data/project8_ui.json');
         const parser = new XmiParser(data);
 
-        parser.parse();
+        beforeEach(async () => await parser.parse());
 
         it('Verify package tree', () => {
             const pkg = <xmiPackage>parser.packge;
@@ -31,13 +30,17 @@ describe('xmiParser', () => {
     });
 
     describe('UI iteractions', () => {
-        const data = readJSONSync('test/data/project8_ui_iteraction.json');
-        const parser = new XmiParser(data);
+        let pkg: any;
 
-        parser.parse();
+        beforeEach(async () => {
+            const data = readJSONSync('test/data/project8_ui_iteraction.json');
+            const parser = new XmiParser(data);
+
+            await parser.parse();
+            pkg = <xmiPackage>parser.packge;
+        });
 
         it('Verify outbound link', () => {
-            const pkg = <xmiPackage>parser.packge;
             const collaboration: xmiCollaboration = <xmiCollaboration>(<xmiPackage>pkg.children[0]).children[0];
             const screen: xmiScreen = <xmiScreen>(<xmiPackage>pkg.children[1]).children[0];
 
@@ -53,7 +56,6 @@ describe('xmiParser', () => {
         });
 
         it('Verify inbound link', () => {
-            const pkg = <xmiPackage>parser.packge;
             const collaboration: xmiCollaboration = <xmiCollaboration>(<xmiPackage>pkg.children[0]).children[0];
             const screen: xmiScreen = <xmiScreen>(<xmiPackage>pkg.children[1]).children[2];
 

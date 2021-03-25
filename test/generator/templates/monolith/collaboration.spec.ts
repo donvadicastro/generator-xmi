@@ -1,11 +1,11 @@
-import {readJSONSync} from "fs-extra";
 import {XmiParser} from "../../../../src/xmiParser";
 import {xmiPackage} from "../../../../src/entities/xmiPackage";
 import '../../../../utils/normilize';
 import {xmiCollaboration} from "../../../../src/entities/xmiCollaboration";
+import {readJSONSync} from "fs-extra";
+import {parseString} from "xml2js";
+import * as fs from "fs";
 
-const parseString = require('xml2js').parseString;
-const fs = require('fs');
 const path = require('path');
 const ejs = require('ejs');
 
@@ -17,12 +17,11 @@ describe('Generators', () => {
                 const data = readJSONSync('test/data/project11_activity_condition.json');
                 const parser = new XmiParser(data);
 
-                parser.parse();
-
-                const pkg = <xmiPackage>parser.packge;
-                const sequence: xmiCollaboration = <xmiCollaboration>(<xmiPackage>pkg.children[0]).children[0];
+                beforeAll(async () => await parser.parse());
 
                 it('check conditions', async () => {
+                    const pkg = <xmiPackage>parser.packge;
+                    const sequence: xmiCollaboration = <xmiCollaboration>(<xmiPackage>pkg.children[0]).children[0];
                     const content = await ejs.renderFile(path.join(dir, 'flow.ejs'), {entity: sequence});
 
                     expect(content.normalizeSpace()).toBe(`
@@ -61,9 +60,9 @@ describe('Generators', () => {
                     parseString(fs.readFileSync('test/data/fixtures.xml'), (err: any, result: any) => { data = result; done(); });
                 });
 
-                beforeEach(() => {
+                beforeEach(async () => {
                     parser = new XmiParser(data);
-                    parser.parse();
+                    await parser.parse();
                 });
 
                 it('check loop', async () => {
