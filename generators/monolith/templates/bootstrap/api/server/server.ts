@@ -37,7 +37,7 @@ export default class ExpressServer {
     ormConfig.entities = ormConfig.entities.map((x: string) => `${solutionRoot}/${x}`);
     ormConfig.subscribers = ormConfig.subscribers.map((x: string) => `${solutionRoot}/${x}`);
 
-    const welcome = (port: number) => () => logger.info(`up and running in ${env.NODE_ENV || 'development'} @: ${os.hostname() } on port: ${port}}`);
+    const welcome = (port: number) => () => logger.info(`API service up and running in ${env.NODE_ENV || 'development'} @: ${os.hostname() } on port: ${port}}`);
 
     http.createServer(app).listen(port, welcome(port));
     return app;
