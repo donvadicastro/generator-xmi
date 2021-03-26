@@ -1,0 +1,22 @@
+version: '3'
+services:
+  api:
+    image: "generator-xmi/api"
+    depends_on:
+      - database
+    ports:
+      - "3000:3000"
+  app:
+    image: "generator-xmi/app"
+    depends_on:
+      - api
+    ports:
+      - "4200:80"
+  database:
+    image: "postgres" # use latest official postgres version
+    env_file:
+      - .env # configure postgres
+    ports:
+      - "5432:5432"
+volumes:
+  database-data: # named volumes can be managed easier using docker-compose

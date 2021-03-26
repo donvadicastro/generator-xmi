@@ -1,4 +1,4 @@
-import {DITypes} from "../types/DITypes";
+import {DITypes} from "../types/diTypes";
 
 const storage = require('node-persist');
 

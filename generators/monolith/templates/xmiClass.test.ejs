@@ -4,7 +4,7 @@ import {DatabaseUtils} from "../<%= entity.getRelativeRoot() %>/utils/database";
 import '../<%= entity.getRelativeRoot() %>/api/server/env';
 
 const ormConfig = require('../<%= entity.getRelativeRoot() %>/ormconfig.json');
-const db = { type: process.env.DB_TYPE, host: process.env.DB_HOST, port: process.env.DB_PORT, username: process.env.DB_USERNAME, password: process.env.DB_PASSWORD, database: process.env.DB_NAME };
+const db = { type: process.env.DB_TYPE, host: process.env.DB_HOST, port: process.env.DB_PORT, username: process.env.POSTGRES_USER, password: process.env.POSTGRES_PASSWORD, database: process.env.POSTGRES_DB };
 
 describe('<%= entity.name %> specification check', () => {
     beforeAll((done) => {
