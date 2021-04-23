@@ -15,7 +15,7 @@ describe('Generators', () => {
     describe('Templates', () => {
         describe('Monolith', () => {
             describe('Component', () => {
-                const dir = path.join(__dirname, '../../../../generators/monolith/templates/partial/component');
+                const dir = path.join(__dirname, '../../../../generators/nodejs/templates/partial/component');
 
                 describe('Methods and conditions', () => {
                     let pkg, classes, classA: any;

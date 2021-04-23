@@ -14,7 +14,7 @@ describe('Generators', () => {
     describe('Templates', () => {
         describe('Monolith', () => {
             describe('Class (input)', () => {
-                const dir = path.join(__dirname, '../../../../generators/monolith/templates/partial/class');
+                const dir = path.join(__dirname, '../../../../generators/nodejs/templates/partial/class');
 
                 describe('check attribute references', () => {
                     let pkg, classes: any;

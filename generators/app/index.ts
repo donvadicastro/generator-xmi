@@ -20,7 +20,7 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
         this.argument('xmiFileName', { type: String, required: true });
 
         this.option('destination', { type: String, default: 'dist' });
-        this.option('type', { type: String, default: 'monolith' });
+        this.option('type', { type: String, default: 'nodejs' });
         this.option('auth', { type: Boolean, default: false });
         this.option('dryRun', { type: Boolean, default: false });
     }
