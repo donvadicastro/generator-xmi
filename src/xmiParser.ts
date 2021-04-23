@@ -1,6 +1,7 @@
 import {get} from 'object-path';
 import {xmiComponentFactory} from "./factories/xmiComponentFactory";
 import {xmiPackage} from "./entities/xmiPackage";
+import {DialectType} from "./types/dialectType";
 
 export class XmiParser {
     private ELEMENTS_PATH = ['xmi:XMI', 'xmi:Extension', '0', 'elements', '0', 'element'];
@@ -13,33 +14,34 @@ export class XmiParser {
      */
     private data: any;
 
-    factory: xmiComponentFactory = new xmiComponentFactory();
     elements: any[] = [];
     connectors: any[] = [];
     diagrams: any;
     packge: xmiPackage | null = null;
+    errors: string[] = [];
 
     constructor(data: any) {
         this.data = data;
     }
 
-    async parse(): Promise<boolean> {
+    async parse(dialect: DialectType = 'js'): Promise<boolean> {
         //clean factory
-        this.factory = new xmiComponentFactory();
+        const factory = new xmiComponentFactory(dialect);
 
         this.connectors = get(this.data, this.CONNECTORS_PATH, [])
-            .map((x: any) => this.factory.getConnector(x));
+            .map((x: any) => factory.getConnector(x));
 
         this.elements = get(this.data, this.ELEMENTS_PATH, [])
-            .map((x: any) => this.factory.get(x));
+            .map((x: any) => factory.get(x));
 
-        this.packge = <xmiPackage>this.factory.get(get(this.data, this.PACKAGE_ROOT));
-        this.diagrams = (get(this.data, this.DIAGRAMS_PATH, [])).map(x => this.factory.getDiagram(x));
+        this.packge = <xmiPackage>factory.get(get(this.data, this.PACKAGE_ROOT));
+        this.diagrams = (get(this.data, this.DIAGRAMS_PATH, [])).map(x => factory.getDiagram(x));
 
         // update references
-        await this.factory.initialize();
+        await factory.initialize();
 
-        return this.factory.errors.length === 0;
+        this.errors = factory.errors;
+        return this.errors.length === 0;
     }
 
     toConsole() {
@@ -49,8 +51,8 @@ export class XmiParser {
             output.Package = this.packge.toConsole();
         }
 
-        if(this.factory.errors.length) {
-            output.Errors = this.factory.errors;
+        if(this.errors.length) {
+            output.Errors = this.errors;
         }
 
         return output;

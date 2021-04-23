@@ -4,6 +4,7 @@ import {xmiComment} from "./xmiComment";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {Reference} from "../types/reference";
 import {ReplaySubject} from "rxjs";
+import {TypeConverter} from "../utils/typeConverter";
 
 const camel = require('to-camel-case');
 const pascal = require('to-pascal-case');
@@ -15,10 +16,12 @@ export default class xmiBase {
     parent: xmiPackage | xmiBase | null;
 
     id: string;
-    type: string;
+    typeId: string;
+
     name: string;
     nameOrigin: string;
     namePascal: string;
+
     description: string;
     alias: string;
     stereotype: string;
@@ -52,6 +55,10 @@ export default class xmiBase {
         return path;
     }
 
+    get className() {
+        return this.constructor.name;
+    }
+
     get pathFromRoot() {
         const pathParts = this.path.slice(0, this.path.length - 1).reverse().map(x => x.name).filter(x => x);
         return pathParts.length ? pathParts.join('/') : '';
@@ -74,11 +81,23 @@ export default class xmiBase {
         return `${this.getPathFromRootWithModifier(input => input, '_')}_${this.name}`;
     }
 
+    get type() {
+        return TypeConverter.getType(this.typeId, this._factory.dialect);
+    }
+
     /**
      * Get all referenced entities for particular instance.
+     * @deprecated
      */
     get references(): Reference {
         return {};
+    }
+
+    /**
+     * Get all referenced entities for particular instance.
+     */
+    get references2(): xmiBase[] {
+        return [];
     }
 
     /**
@@ -93,11 +112,13 @@ export default class xmiBase {
 
     constructor(raw: any, parent: xmiPackage | xmiBase | null, factory: xmiComponentFactory) {
         this._factory = factory;
-        this.parent = parent;
         this._raw = raw;
 
+        this.parent = parent;
+
         this.id = this._raw.$['xmi:id'] || this._raw.$['xmi:ifrefs'] || this._raw.$['xmi:idref'];
-        this.type = this._raw.$['xmi:type'];
+        this.typeId = this._raw.$['xmi:type'];
+
         this.nameOrigin = this._raw.$.name;
         this.name = this.nameOrigin && camel(this.nameOrigin);
         this.namePascal = this.nameOrigin && pascal(this.nameOrigin);
@@ -126,6 +147,6 @@ export default class xmiBase {
     }
 
     toConsole(): any | string {
-        return `[${this.type}] ${this.name} (${this.id})`;
+        return `[${this.typeId}] ${this.name} (${this.id})`;
     }
 }

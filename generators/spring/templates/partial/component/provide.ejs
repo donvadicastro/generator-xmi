@@ -1,0 +1,26 @@
+<% (entity.provided || []).forEach(function (value) { %>
+    //#region <%= value.name %>Contract implementation
+
+    <% (value.typeRef.attributes || []).filter(x => (entity.attributes || []).map(y => y.name).indexOf(x.name) === -1).forEach(function (attribute) { %>
+    /**
+    * <%= attribute.name %> description.
+    */
+    get <%= attribute.name %>(): <%= attribute.typeRef ? attribute.typeRef.name + 'Contract' : (attribute.type || 'any') %> {
+      throw new Error('Not implemented');
+    }
+    <% }) %>
+
+
+    <% (value.typeRef.operations || []).filter(x => (entity.operations || []).map(y => y.name).indexOf(x.name) === -1).forEach(function (operation) { %>
+    /**
+    * <%= operation.name %> description.
+    */
+    <%= operation.name %>(state: any): Promise<any> {
+      return new Promise((resolve, reject) => {
+        reject(new Error('Not implemented'));
+      });
+    }
+    <% }) %>
+
+    //#endregion
+<%})%>

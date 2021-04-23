@@ -12,7 +12,7 @@ export class xmiDiagram extends xmiBase {
   constructor(raw: any, parent: xmiPackage | null, factory: xmiComponentFactory) {
     super(raw, parent, factory);
 
-    this.type = this._raw.properties[0].$.type;
+    this.typeId = this._raw.properties[0].$.type;
     this.name = this._raw.properties[0].$.name;
   }
 }

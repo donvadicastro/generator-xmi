@@ -18,7 +18,7 @@ export class xmiLifeline extends xmiBase {
     constructor(raw: any, parent: xmiBase, factory: xmiComponentFactory, attributes: xmiAttribute[]) {
         super(raw, parent, factory);
 
-        this.attribute = attributes.filter(x => x.id === raw.$.represents)[0].type;
+        this.attribute = attributes.filter(x => x.id === raw.$.represents)[0].typeId;
         this._factory.resolveById(this.attribute).subscribe(x => {
             this.ref = <any>x;
             this.initialized();

@@ -2,10 +2,8 @@
   import {<%= reference.name %>} from '<%= reference.path.substr(3) %>';
 <% }) %>
 
-/**
-* This file is auto-generated. Do not update it's content!
-* <%= (entity.description || `${entity.namePascal} description`).replace(/\n/g, '\n* ') %>.
-*/
+<%- include('partial/common/classDescription', {entity: entity, system: true}) -%>
+
 export interface <%= entity.namePascal %>Contract {
   <% (entity.attributes || []).forEach(function (attr) { %>
     /**

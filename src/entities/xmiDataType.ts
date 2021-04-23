@@ -1,6 +1,8 @@
 import {xmiInterface} from "./xmiInterface";
 import {Reference} from "../types/reference";
 import {IAttribute} from "../contracts/attribute";
+import {ArrayUtils} from "../utils/arrayUtils";
+import xmiBase from "./xmiBase";
 
 export class xmiDataType extends xmiInterface {
     get references(): Reference {
@@ -14,6 +16,15 @@ export class xmiDataType extends xmiInterface {
                     attribute.typeRef.namePascal;
             }
         });
+
+        return imports;
+    }
+
+    get references2(): xmiBase[] {
+        const imports: any = {};
+
+        //Inject attributes type
+        this.attributes.forEach(attribute => attribute.typeRef && ArrayUtils.insertIfNotExists(attribute, imports));
 
         return imports;
     }

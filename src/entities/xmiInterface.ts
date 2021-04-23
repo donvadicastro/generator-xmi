@@ -7,6 +7,7 @@ import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {xmiGeneralization} from "./connectors/xmiGeneralization";
 import {Reference} from "../types/reference";
 import {forkJoin} from "rxjs";
+import {ArrayUtils} from "../utils/arrayUtils";
 
 export class xmiInterface extends xmiBase {
     attributes: xmiAttribute[] = [];
@@ -37,6 +38,32 @@ export class xmiInterface extends xmiBase {
                 param.typeRef && (imports['../' + this.getRelativePath(param.typeRef) + '/components/' + param.typeRef.name] =
                         param.typeRef.namePascal);
             });
+        });
+
+        return imports;
+    }
+
+    /**
+     * Get all referenced entities for particular instance.
+     */
+    get references2(): xmiBase[] {
+        const imports = super.references2;
+
+        //Inject attributes type
+        this.attributes.forEach(attribute => {
+            if(attribute.typeRef) {
+                ArrayUtils.insertIfNotExists(attribute.typeRef, imports);
+            }
+        });
+
+        //Inject operation parameters and return types
+        this.operations.forEach(operation => {
+            operation.returnParameter.typeRef &&
+                ArrayUtils.insertIfNotExists(operation.returnParameter.typeRef, imports);
+
+            //Inject operation input parameter types
+            operation.inputParameters
+                .forEach(param => param.typeRef && ArrayUtils.insertIfNotExists(param.typeRef, imports));
         });
 
         return imports;
@@ -85,7 +112,7 @@ export class xmiInterface extends xmiBase {
         const key: string = super.toConsole();
         const ret: any = {[key]: {}};
 
-        this.attributes.length && (ret[key].attributes = this.attributes.map(x => ({[x.name]: (x.typeRef ? `${x.typeRef.name}(${x.type})` : x.type)})));
+        this.attributes.length && (ret[key].attributes = this.attributes.map(x => ({[x.name]: (x.typeRef ? `${x.typeRef.name}(${x.typeId})` : x.typeId)})));
         this.operations.length && (ret[key].operations = this.operations
             .reduce((prev: any, x) => {
                 const returnParameter = x.parameters.find(x => x.name === 'return');

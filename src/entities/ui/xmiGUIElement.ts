@@ -24,7 +24,6 @@ export class xmiGUIElement extends xmiBase {
             const elementRef = child.links.informationFLow.length && child.links.informationFLow[0].end &&
                 <xmiCollaboration>(<xmiDiagram>child.links.informationFLow[0].end).elementRef;
 
-
             if(elementRef) {
                 const elementRef = <xmiCollaboration>(<xmiDiagram>child.links.informationFLow[0].end).elementRef;
                 imports[this.getRelativePath(elementRef) + '/process/' + elementRef.name] = elementRef.namePascal;

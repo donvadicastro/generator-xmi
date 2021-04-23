@@ -1,6 +1,8 @@
 import {Reference} from "../types/reference";
 import {xmiAbstractClass} from "../base/xmiAbstractClass";
 import {xmiClass} from "./xmiClass";
+import xmiBase from "./xmiBase";
+import {ArrayUtils} from "../utils/arrayUtils";
 
 export class xmiInstanceSpecification extends xmiAbstractClass {
     get elementRef(): xmiClass {
@@ -13,6 +15,17 @@ export class xmiInstanceSpecification extends xmiAbstractClass {
         //Inject base class when instance speciaification is used
         if (this.elementRef) {
             imports['../' + this.getRelativePath(this.elementRef) + '/components/' + this.elementRef.name] = this.elementRef.namePascal;
+        }
+
+        return imports;
+    }
+
+    get references2(): xmiBase[] {
+        const imports = super.references2;
+
+        //Inject base class when instance specification is used
+        if (this.elementRef) {
+            ArrayUtils.insertIfNotExists(this.elementRef, imports)
         }
 
         return imports;

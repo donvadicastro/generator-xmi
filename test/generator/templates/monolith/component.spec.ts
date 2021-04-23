@@ -5,7 +5,6 @@ import {xmiClass} from "../../../../src/entities/xmiClass";
 import '../../../../utils/normilize';
 import {parseString} from "xml2js";
 import fs from "fs";
-import {xmiCollaboration} from "../../../../src/entities/xmiCollaboration";
 import {xmiComponent} from "../../../../src/entities/xmiComponent";
 
 const path = require('path');
@@ -74,7 +73,7 @@ describe('Generators', () => {
 
                     it('check method with single parameters', async () => {
                         const pkg = <xmiPackage>parser.packge;
-                        const component: xmiComponent = <xmiComponent>(pkg.getNode('componentDiagrams.1BasicComponents.notificationService'));
+                        const component: xmiComponent = <xmiComponent>(pkg.getNode('componentDiagrams.x1BasicComponents.notificationService'));
                         const content = await ejs.renderFile(path.join(dir, 'operations.ejs'), {entity: component});
 
                         expect(content.normalizeSpace()).toBe(`
@@ -96,7 +95,7 @@ describe('Generators', () => {
 
                     it('check method with multiple parameters', async () => {
                         const pkg = <xmiPackage>parser.packge;
-                        const component: xmiComponent = <xmiComponent>(pkg.getNode('componentDiagrams.1BasicComponents.authService'));
+                        const component: xmiComponent = <xmiComponent>(pkg.getNode('componentDiagrams.x1BasicComponents.authService'));
                         const content = await ejs.renderFile(path.join(dir, 'operations.ejs'), {entity: component});
 
                         expect(content.normalizeSpace()).toBe(`

@@ -10,6 +10,7 @@ import xmiConnector from "./connectors/xmiConnector";
 import {xmiInOut} from "./component/xmiInOut";
 import {xmiClass} from "./xmiClass";
 import {forkJoin} from "rxjs";
+import {ArrayUtils} from "../utils/arrayUtils";
 
 export class xmiComponent extends xmiAbstractClass {
     provided: xmiProvided[] = [];
@@ -73,6 +74,29 @@ export class xmiComponent extends xmiAbstractClass {
         this.required.forEach(value => {
             const typeRef = <xmiInterface>value.typeRef;
             imports['../' + this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.namePascal + 'Contract';
+        });
+
+        return imports;
+    }
+
+    get references2(): xmiBase[] {
+        const imports = super.references2;
+
+        this.provided.forEach(value => {
+            if(value.name) {
+                ArrayUtils.insertIfNotExists(value, imports)
+
+                const ref = <xmiInterface>value.typeRef;
+                (ref.attributes || []).filter(x => x.typeRef).forEach(attribute => {
+                    const typeRef = <xmiBase>attribute.typeRef;
+                    ArrayUtils.insertIfNotExists(typeRef, imports)
+                });
+            }
+        });
+
+        this.required.forEach(value => {
+            const typeRef = <xmiInterface>value.typeRef;
+            ArrayUtils.insertIfNotExists(typeRef, imports)
         });
 
         return imports;

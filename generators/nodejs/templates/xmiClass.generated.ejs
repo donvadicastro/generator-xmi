@@ -1,9 +1,7 @@
 <%- include('partial/class/import', {entity: entity}) -%>
 
-/**
- * This file is auto-generated. Do not update it's content!
-* <%- (entity.description || `${entity.namePascal} description`).replace(/\n/g, '\n* ') %>.
- */
+<%- include('partial/common/classDescription', {entity: entity, system: true}) -%>
+
 export abstract class <%= entity.namePascal %>Base <%- include('partial/class/extend', {entity: entity}) -%> {
   constructor(params?: <%= entity.namePascal %>Contract) {
     <% if(entity.generalizationLinksTo) { %>super();<%}%>

@@ -2,6 +2,7 @@
 
 import {XmiParser} from "../../src/xmiParser";
 import {default as chalk} from "chalk";
+import {DialectType} from "../../src/types/dialectType";
 
 const Generator = require('yeoman-generator');
 const yosay = require('yosay');
@@ -45,7 +46,7 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
 
         this._readData(async (result: any) => {
             const parser = new XmiParser(result);
-            const success = await parser.parse();
+            const success = await parser.parse((<{[key: string]: DialectType}>{'nodejs': 'js', 'spring': 'java'})[this.options.type]);
 
             this.log(chalk.green('Model'));
             this.log(treeify.asTree(parser.toConsole(), true, true));

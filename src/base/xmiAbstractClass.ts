@@ -9,6 +9,7 @@ import {IAttribute} from "../contracts/attribute";
 import {Reference} from "../types/reference";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {xmiClass} from "../entities/xmiClass";
+import {ArrayUtils} from "../utils/arrayUtils";
 
 const assert = require('assert');
 
@@ -166,6 +167,21 @@ export class xmiAbstractClass extends xmiInterface {
             imports['../' + this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.namePascal + 'Contract';
             imports['../' + this.getRelativePath(typeRef) + '/components/' + typeRef.name] = typeRef.namePascal;
         });
+
+        return imports;
+    }
+
+    get references2(): xmiBase[] {
+        const imports = super.references2;
+
+        //Inject generalization references
+        if(this.generalizationLinksTo) {
+            ArrayUtils.insertIfNotExists(this.generalizationLinksTo, imports)
+        }
+
+        //Inject base interface when instance specification is used
+        this.associationLinks.forEach(x => ArrayUtils.insertIfNotExists(<xmiClass>x.target.typeRef, imports));
+        this.aggregationLinks.forEach(x => ArrayUtils.insertIfNotExists(<xmiClass>x.target.typeRef, imports));
 
         return imports;
     }

@@ -11,7 +11,6 @@ import {xmiEnumeration} from "../xmiEnumeration";
 import {xmiDataType} from "../xmiDataType";
 
 export class xmiAttribute extends xmiBase implements IAttribute {
-    type: string;
     typeRef?: xmiBase;
     typeDefaultValue = 'null';
     typeAllowedValues: any[] = [];
@@ -23,21 +22,21 @@ export class xmiAttribute extends xmiBase implements IAttribute {
         super(raw, parent, factory);
         this.name = this.name && camel(this.name);
 
-        this.type = /*this.raw.$['xmi:idref'] || */
+        this.typeId = /*this.raw.$['xmi:idref'] || */
             get(raw, ['type', '0', '$', 'xmi:idref']) ||
             get(raw, ['type', '0', '$', 'href']) ||
             get(raw, ['properties', '0', '$', 'type']);
 
-        assert(this.type, `Type should be specified for attribute "${this.name}" in class "${parent && parent.name}"`);
+        assert(this.typeId, `Type should be specified for attribute "${this.name}" in class "${parent && parent.name}"`);
 
-        this.isArray = TypeConverter.isArray(this.type);
+        this.isArray = TypeConverter.isArray(this.typeId);
 
-        if(TypeConverter.isPrimititive(this.type)) {
-            this.type = TypeConverter.convert(this.type);
+        if(TypeConverter.isPrimitive(this.typeId)) {
+            this.typeId = TypeConverter.convert(this.typeId);
             this.typeDefaultValue = this.isArray ? [] : TypeConverter.getTypeDefaultValue(this.type);
             this.typeAllowedValues = TypeConverter.getTypeAllowedValues(this.type);
         } else {
-            this._factory.resolveById(this.type).subscribe(x => {
+            this._factory.resolveById(this.typeId).subscribe(x => {
                 this.typeRef = x;
                 this.isEnum = (x instanceof xmiEnumeration);
                 this.isDataType = (x instanceof xmiDataType);

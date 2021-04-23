@@ -1,0 +1,12 @@
+package com.generator.design.<%= entity.getPathFromRootWithModifier(utils.self, '.') %>.components;
+
+import lombok.AllArgsConstructor;
+import javax.persistence.Entity;
+import com.generator.design.<%= entity.getPathFromRootWithModifier(utils.self, '.') %>.components.generated.<%= entity.namePascal %>Base;
+
+<%- include('partial/common/classDescription', {entity: entity, system: false}) -%>
+
+@AllArgsConstructor
+@Entity(name = "<%= entity.elementId %>")
+public class <%= entity.namePascal %> extends <%= entity.namePascal %>Base {
+}

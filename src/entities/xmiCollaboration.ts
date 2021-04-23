@@ -9,6 +9,7 @@ import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {xmiCombinedFragment} from "./collaboration/xmiCombinedFragment";
 import {Reference} from "../types/reference";
 import {forkJoin, of} from "rxjs";
+import {ArrayUtils} from "../utils/arrayUtils";
 
 const assert = require('assert');
 
@@ -76,6 +77,15 @@ export class xmiCollaboration extends xmiBase {
         this.lifelines.forEach((lifeline, index) => {
             imports[this.getRelativePath(lifeline.elementRef) + '/contracts/' + lifeline.elementRef.name] = lifeline.elementRef.namePascal + 'Contract';
         });
+
+        return imports;
+    }
+
+    get references2(): xmiBase[] {
+        const imports = super.references2;
+
+        this.lifelines.forEach((lifeline, index) =>
+            ArrayUtils.insertIfNotExists(lifeline.elementRef, imports));
 
         return imports;
     }

@@ -67,7 +67,7 @@ describe('Generators', () => {
 
                 it('check loop', async () => {
                     const pkg = <xmiPackage>parser.packge;
-                    const sequence: xmiCollaboration = <xmiCollaboration>(pkg.getNode('sequenceDiagrams.1SimpleLoop.eaCollaboration1'));
+                    const sequence: xmiCollaboration = <xmiCollaboration>(pkg.getNode('sequenceDiagrams.x1SimpleLoop.eaCollaboration1'));
                     const content = await ejs.renderFile(path.join(dir, 'flow.ejs'), {entity: sequence});
 
                     expect(content.normalizeSpace()).toBe(`
@@ -89,7 +89,7 @@ describe('Generators', () => {
 
                 it('check loop with final call', async () => {
                     const pkg = <xmiPackage>parser.packge;
-                    const sequence: xmiCollaboration = <xmiCollaboration>(pkg.getNode('sequenceDiagrams.2SimpleLoopWithFinalCall.eaCollaboration2'));
+                    const sequence: xmiCollaboration = <xmiCollaboration>(pkg.getNode('sequenceDiagrams.x2SimpleLoopWithFinalCall.eaCollaboration2'));
                     const content = await ejs.renderFile(path.join(dir, 'flow.ejs'), {entity: sequence});
 
                     expect(content.normalizeSpace()).toBe(`

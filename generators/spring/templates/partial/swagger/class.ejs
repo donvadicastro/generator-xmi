@@ -1,0 +1,80 @@
+  <%= context.url %>/<%= options.utils.kebabCase(context.entity.name) %>:
+    get:
+      tags:
+      - "Entities: <%= context.entity.name %> (<%= context.url %>)"
+      description: <%= context.entity.namePascal %>
+
+      responses:
+        200:
+          description: Get all <%= context.entity.name %>
+
+    post:
+      tags:
+      - "Entities: <%= context.entity.name %> (<%= context.url %>)"
+      description: <%= context.entity.namePascal %>
+
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "<%= context.entity.namePascal %> object to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/<%= context.entity.elementId %>"
+
+      responses:
+        200:
+          description: Create <%= context.entity.name %>
+
+  <%= context.url %>/<%= options.utils.kebabCase(context.entity.name) %>/{id}:
+    get:
+      tags:
+      - "Entities: <%= context.entity.name %> (<%= context.url %>)"
+      description: <%= context.entity.name %>
+
+      parameters:
+      - in: "path"
+        name: "id"
+        description: "<%= context.entity.name %> id to request entity"
+        required: true
+        type: "string"
+
+      responses:
+        200:
+          description: Get <%= context.entity.nameOrigin %> by id
+    put:
+      tags:
+      - "Entities: <%= context.entity.name %> (<%= context.url %>)"
+      description: <%= context.entity.name %>
+
+      parameters:
+      - in: "path"
+        name: "id"
+        description: "<%= context.entity.name %> id to update entity"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "<%= context.entity.name %> object to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/<%= context.entity.elementId %>"
+
+      responses:
+        200:
+          description: Update <%= context.entity.name %> by id
+
+    delete:
+      tags:
+      - "Entities: <%= context.entity.name %> (<%= context.url %>)"
+      description: <%= context.entity.name %>
+
+      parameters:
+      - in: "path"
+        name: "id"
+        description: "<%= context.entity.name %> id to delete entity"
+        required: true
+        type: "string"
+
+      responses:
+        200:
+          description: Delete <%= context.entity.name %> by id

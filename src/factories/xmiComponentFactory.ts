@@ -30,8 +30,12 @@ import {xmiClass} from "../entities/xmiClass";
 import {xmiText} from "../xmiText";
 import {forkJoin, Observable, ReplaySubject} from "rxjs";
 import {last, tap} from "rxjs/operators";
+import {DialectType} from "../types/dialectType";
 
 export class xmiComponentFactory {
+    constructor(public dialect: DialectType) {
+    }
+
     /**
      * Resolved elements stream.
      * @private
@@ -57,25 +61,6 @@ export class xmiComponentFactory {
                 return x.id === id;
             }), tap(x => {
                 // console.log('RESOLVED ', x?.id);
-            }));
-
-        this.allSubscriptions.push(subscription);
-        return subscription;
-    }
-
-    /**
-     * Resolve dependency and mark element as fully initialized.
-     * @param element
-     * @param id
-     */
-    resolveByIdAndChangeState(element: xmiBase, id: string): Observable<xmiBase | undefined> {
-        // console.log('RESOLVING ', id);
-        const subscription = this.resolvedElements.pipe(
-            last(x => {
-                return x.id === id;
-            }), tap(x => {
-                // console.log('RESOLVED ', x?.id);
-                element.initialized();
             }));
 
         this.allSubscriptions.push(subscription);

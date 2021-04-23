@@ -1,7 +1,7 @@
 import {xmiComponentFactory} from "../../src/factories/xmiComponentFactory";
 
 describe('xmiComponentFactory', () => {
-    const factory = new xmiComponentFactory();
+    const factory = new xmiComponentFactory('js');
 
     it('Singleton', () => {
         expect(factory).toBeInstanceOf(xmiComponentFactory);
