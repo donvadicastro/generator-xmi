@@ -8,7 +8,7 @@ export abstract class <%= entity.namePascal %>Base extends <%- include('../parti
 
   constructor(
   <% (entity.required || []).map(function (value, i, list) { %>
-    @inject(DITypes.<%= value.typeRef.elementId %>) protected <%= value.typeRef.name %>: <%= value.typeRef.namePascal %>Contract <% if(i < list.length) { %>,<% } %>
+    @inject(DITypes.<%= value.typeRef.elementId %>) protected <%= value.typeRef.name %>: <%= value.typeRef.elementId %> <% if(i < list.length) { %>,<% } %>
   <% }) %>) {
     super();
   }
