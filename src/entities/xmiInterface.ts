@@ -5,7 +5,6 @@ import {xmiAttribute} from "./class/xmiAttribute";
 import {xmiPackage} from "./xmiPackage";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {xmiGeneralization} from "./connectors/xmiGeneralization";
-import {Reference} from "../types/reference";
 import {forkJoin} from "rxjs";
 import {ArrayUtils} from "../utils/arrayUtils";
 

@@ -7,7 +7,6 @@ import {xmiFragment} from "./collaboration/xmiFragment";
 import {xmiPackage} from "./xmiPackage";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {xmiCombinedFragment} from "./collaboration/xmiCombinedFragment";
-import {Reference} from "../types/reference";
 import {forkJoin, of} from "rxjs";
 import {ArrayUtils} from "../utils/arrayUtils";
 

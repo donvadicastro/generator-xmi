@@ -2,7 +2,6 @@ import {get} from 'object-path';
 import {xmiPackage} from "./xmiPackage";
 import {xmiComment} from "./xmiComment";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
-import {Reference} from "../types/reference";
 import {ReplaySubject} from "rxjs";
 import {TypeConverter} from "../utils/typeConverter";
 

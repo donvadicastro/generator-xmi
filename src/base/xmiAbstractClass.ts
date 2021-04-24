@@ -6,7 +6,6 @@ import {LinkType} from "../types/linkType";
 import xmiBase from "../entities/xmiBase";
 import {IConnector} from "../contracts/connector";
 import {IAttribute} from "../contracts/attribute";
-import {Reference} from "../types/reference";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {xmiClass} from "../entities/xmiClass";
 import {ArrayUtils} from "../utils/arrayUtils";

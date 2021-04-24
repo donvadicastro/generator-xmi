@@ -1,4 +1,3 @@
-import {Reference} from "../types/reference";
 import {xmiAbstractClass} from "../base/xmiAbstractClass";
 import {xmiClass} from "./xmiClass";
 import xmiBase from "./xmiBase";

@@ -1,5 +1,4 @@
 import {xmiInterface} from "./xmiInterface";
-import {Reference} from "../types/reference";
 import {IAttribute} from "../contracts/attribute";
 import {ArrayUtils} from "../utils/arrayUtils";
 import xmiBase from "./xmiBase";

@@ -2,7 +2,6 @@ import xmiBase from "../xmiBase";
 import {xmiLink} from "../links/xmiLink";
 import {xmiUMLDiagram} from "../diagrams/xmiUMLDiagram";
 import {xmiPackage} from "../xmiPackage";
-import {Reference} from "../../types/reference";
 import {xmiCollaboration} from "../xmiCollaboration";
 import {xmiDiagram} from "../diagrams/xmiDiagram";
 import {xmiClass} from "../xmiClass";
