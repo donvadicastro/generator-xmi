@@ -1,3 +1,3 @@
 <%= operation.name %>(<%= operation.inputParameters.length > 1 ? 'value: { ' : '' %><% operation.inputParameters.forEach(x => { %>
-    <%= x.name %>: <%= x.typeRef ? `${x.typeRef.namePascal}${x.isArray ? '[]' : ''}` : x.type %>,
-<% }) %><%= operation.inputParameters.length > 1 ? ' }' : '' %>): Promise<<%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.namePascal}` : operation.returnParameter.type %><%= operation.isReturnArray ? '[]' : '' %> | null>
+    <%= x.name %>: <%= x.typeRef ? `${x.typeRef.elementId}${x.isArray ? '[]' : ''}` : x.type %>,
+<% }) %><%= operation.inputParameters.length > 1 ? ' }' : '' %>): Promise<<%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.elementId}` : operation.returnParameter.type %><%= operation.isReturnArray ? '[]' : '' %> | null>

@@ -6,7 +6,6 @@ import {LinkType} from "../types/linkType";
 import xmiBase from "../entities/xmiBase";
 import {IConnector} from "../contracts/connector";
 import {IAttribute} from "../contracts/attribute";
-import {Reference} from "../types/reference";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {xmiClass} from "../entities/xmiClass";
 import {ArrayUtils} from "../utils/arrayUtils";
@@ -147,32 +146,8 @@ export class xmiAbstractClass extends xmiInterface {
         return attrs.filter(x => x.name && !x.isParent);
     }
 
-    get references(): Reference {
+    get references(): xmiBase[] {
         const imports = super.references;
-
-        //Inject generalization references
-        if(this.generalizationLinksTo) {
-            imports['../' + this.getRelativePath(this.generalizationLinksTo) + '/components/' + this.generalizationLinksTo.name] = this.generalizationLinksTo.namePascal;
-        }
-
-        //Inject base interface when instance speciaification is used
-        this.associationLinks.forEach(x => {
-            const typeRef = <xmiClass>x.target.typeRef;
-            imports['../' + this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.namePascal  + 'Contract';
-            imports['../' + this.getRelativePath(typeRef) + '/components/' + typeRef.name] = typeRef.namePascal;
-        });
-
-        this.aggregationLinks.forEach(x => {
-            const typeRef = <xmiClass>x.target.typeRef;
-            imports['../' + this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.namePascal + 'Contract';
-            imports['../' + this.getRelativePath(typeRef) + '/components/' + typeRef.name] = typeRef.namePascal;
-        });
-
-        return imports;
-    }
-
-    get references2(): xmiBase[] {
-        const imports = super.references2;
 
         //Inject generalization references
         if(this.generalizationLinksTo) {

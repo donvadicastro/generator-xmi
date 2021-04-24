@@ -1,16 +1,14 @@
 <%- include('../partial/component/import', {entity: entity}) -%>
 
-/**
- * This file is auto-generated. Do not update it's content!
-* <%- (entity.description || `${entity.namePascal} description`).replace(/\n/g, '\n* ') %>.
- */
+<%- include('../partial/common/classDescription', {entity: entity, system: true}) -%>
+
 @injectable()
 export abstract class <%= entity.namePascal %>Base extends <%- include('../partial/component/extend', {entity: entity}) -%> {
   <%- include('../partial/component/attributes', {entity: entity, orm: true}) -%>
 
   constructor(
   <% (entity.required || []).map(function (value, i, list) { %>
-    @inject(DITypes.<%= value.typeRef.elementId %>) protected <%= value.typeRef.name %>: <%= value.typeRef.namePascal %>Contract <% if(i < list.length) { %>,<% } %>
+    @inject(DITypes.<%= value.typeRef.elementId %>) protected <%= value.typeRef.name %>: <%= value.typeRef.elementId %> <% if(i < list.length) { %>,<% } %>
   <% }) %>) {
     super();
   }

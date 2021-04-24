@@ -7,7 +7,6 @@ import {xmiFragment} from "./collaboration/xmiFragment";
 import {xmiPackage} from "./xmiPackage";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {xmiCombinedFragment} from "./collaboration/xmiCombinedFragment";
-import {Reference} from "../types/reference";
 import {forkJoin, of} from "rxjs";
 import {ArrayUtils} from "../utils/arrayUtils";
 
@@ -71,18 +70,8 @@ export class xmiCollaboration extends xmiBase {
         return <xmiCombinedFragment[]>this.fragments.filter(x => x.type === 'uml:CombinedFragment' && x.interactionOperator === 'alt');
     }
 
-    get references(): Reference {
+    get references(): xmiBase[] {
         const imports = super.references;
-
-        this.lifelines.forEach((lifeline, index) => {
-            imports[this.getRelativePath(lifeline.elementRef) + '/contracts/' + lifeline.elementRef.name] = lifeline.elementRef.namePascal + 'Contract';
-        });
-
-        return imports;
-    }
-
-    get references2(): xmiBase[] {
-        const imports = super.references2;
 
         this.lifelines.forEach((lifeline, index) =>
             ArrayUtils.insertIfNotExists(lifeline.elementRef, imports));

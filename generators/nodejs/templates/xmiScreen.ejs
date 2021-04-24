@@ -1,8 +1,6 @@
 const inquirer = require('inquirer');
 
-<% entity.referencesAsList.forEach(reference => {%>
-    import {<%= reference.name %>} from '<%= reference.path %>';
-<% }) %>
+<%- include('partial/common/importReferences', {entity: entity, deepLevel: ''}) -%>
 
 /**
 * Terminal screen class.

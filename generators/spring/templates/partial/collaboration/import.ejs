@@ -3,6 +3,4 @@ const storage = require('node-persist');
 
 import {FlowState} from '<%= entity.getRelativeRoot() %>/types/flowState';
 
-<% entity.referencesAsList.forEach(reference => {%>
-    import {<%= reference.name %>} from '<%= reference.path %>';
-<% }) %>
+<%- include('../common/importReferences', {entity: entity, deepLevel: '../'}) -%>
