@@ -9,19 +9,8 @@ export class xmiInstanceSpecification extends xmiAbstractClass {
         return <xmiClass>this._factory.getByKey(this._raw.$.classifier);
     }
 
-    get references(): Reference {
+    get references(): xmiBase[] {
         const imports = super.references;
-
-        //Inject base class when instance speciaification is used
-        if (this.elementRef) {
-            imports['../' + this.getRelativePath(this.elementRef) + '/components/' + this.elementRef.name] = this.elementRef.namePascal;
-        }
-
-        return imports;
-    }
-
-    get references2(): xmiBase[] {
-        const imports = super.references2;
 
         //Inject base class when instance specification is used
         if (this.elementRef) {

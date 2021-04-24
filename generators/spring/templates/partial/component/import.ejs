@@ -8,6 +8,4 @@ import {DITypes} from "../<%= entity.getRelativeRoot() %>/types/diTypes";
 import {<%= entity.namePascal %>Contract} from '../../contracts/<%= entity.name %>';
 import {<%= entity.namePascal %>} from "../<%= entity.name %>";
 
-<% entity.referencesAsList.forEach(reference => {%>
-    import {<%= reference.name %>} from '<%= reference.path %>';
-<% }) %>
+<%- include('../common/importReferences', {entity: entity, deepLevel: ''}) -%>

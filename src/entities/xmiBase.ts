@@ -87,27 +87,9 @@ export default class xmiBase {
 
     /**
      * Get all referenced entities for particular instance.
-     * @deprecated
      */
-    get references(): Reference {
-        return {};
-    }
-
-    /**
-     * Get all referenced entities for particular instance.
-     */
-    get references2(): xmiBase[] {
+    get references(): xmiBase[] {
         return [];
-    }
-
-    /**
-     * Get all referenced entities for particular instance.
-     */
-    get referencesAsList(): {name: string, path: string}[] {
-        const imports = this.references;
-
-        return Object.keys(imports).sort((a, b) => imports[a] > imports[b] ? 1 : -1)
-            .map(key => ({name: imports[key], path: key}));
     }
 
     constructor(raw: any, parent: xmiPackage | xmiBase | null, factory: xmiComponentFactory) {

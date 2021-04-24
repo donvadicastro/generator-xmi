@@ -14,47 +14,15 @@ export class xmiInterface extends xmiBase {
     operations: xmiOperation[] = [];
     generalization?: xmiGeneralization;
 
-    get references(): Reference {
-        const imports = super.references;
-
-        //Inject attributes type
-        this.attributes.forEach(attribute => {
-            if(attribute.typeRef) {
-                imports['../' + this.getRelativePath(attribute.typeRef) +
-                    (attribute.isEnum ? '/enums/' : (attribute.isDataType ? '/types/' : '/components/')) + attribute.typeRef.name] =
-                        attribute.typeRef.namePascal;
-            }
-        });
-
-        //Inject operation parameters and return types
-        this.operations.forEach(operation => {
-            if(operation.returnParameter.typeRef) {
-                imports['../' + this.getRelativePath(operation.returnParameter.typeRef) + '/components/' + operation.returnParameter.typeRef.name] =
-                    operation.returnParameter.typeRef.namePascal;
-            }
-
-            //Inject operation input parameter types
-            operation.inputParameters.forEach(param => {
-                param.typeRef && (imports['../' + this.getRelativePath(param.typeRef) + '/components/' + param.typeRef.name] =
-                        param.typeRef.namePascal);
-            });
-        });
-
-        return imports;
-    }
-
     /**
      * Get all referenced entities for particular instance.
      */
-    get references2(): xmiBase[] {
-        const imports = super.references2;
+    get references(): xmiBase[] {
+        const imports = super.references;
 
         //Inject attributes type
-        this.attributes.forEach(attribute => {
-            if(attribute.typeRef) {
-                ArrayUtils.insertIfNotExists(attribute.typeRef, imports);
-            }
-        });
+        this.attributes.forEach(attribute =>
+            attribute.typeRef && ArrayUtils.insertIfNotExists(attribute.typeRef, imports));
 
         //Inject operation parameters and return types
         this.operations.forEach(operation => {

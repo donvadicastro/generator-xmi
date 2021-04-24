@@ -1,6 +1,4 @@
-<% entity.referencesAsList.forEach(reference => {%>
-  import {<%= reference.name %>} from '<%= reference.path.substr(3) %>';
-<% }) %>
+<%- include('partial/common/importReferences', {entity: entity, deepLevel: ''}) -%>
 
 <%- include('partial/common/classDescription', {entity: entity, system: true}) -%>
 

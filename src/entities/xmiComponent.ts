@@ -56,42 +56,17 @@ export class xmiComponent extends xmiAbstractClass {
         }
     }
 
-    get references(): Reference {
+    get references(): xmiBase[] {
         const imports = super.references;
 
-        this.provided.forEach(value => {
-            if(value.name) {
-                imports['../' + this.getRelativePath(<xmiInterface>value.typeRef) + '/contracts/' + value.name] = value.namePascal + 'Contract';
+        this.provided.filter(x => x.typeRef).forEach(value => {
+            const ref = <xmiInterface>value.typeRef;
+            ArrayUtils.insertIfNotExists(ref, imports);
 
-                const ref = <xmiInterface>value.typeRef;
-                (ref.attributes || []).filter(x => x.typeRef).forEach(attribute => {
-                    const typeRef = <xmiBase>attribute.typeRef;
-                    imports['../' + this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.namePascal  + 'Contract';
-                });
-            }
-        });
-
-        this.required.forEach(value => {
-            const typeRef = <xmiInterface>value.typeRef;
-            imports['../' + this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.namePascal + 'Contract';
-        });
-
-        return imports;
-    }
-
-    get references2(): xmiBase[] {
-        const imports = super.references2;
-
-        this.provided.forEach(value => {
-            if(value.name) {
-                ArrayUtils.insertIfNotExists(value, imports)
-
-                const ref = <xmiInterface>value.typeRef;
-                (ref.attributes || []).filter(x => x.typeRef).forEach(attribute => {
-                    const typeRef = <xmiBase>attribute.typeRef;
-                    ArrayUtils.insertIfNotExists(typeRef, imports)
-                });
-            }
+            (ref.attributes || []).filter(x => x.typeRef).forEach(attribute => {
+                const typeRef = <xmiBase>attribute.typeRef;
+                ArrayUtils.insertIfNotExists(typeRef, imports)
+            });
         });
 
         this.required.forEach(value => {

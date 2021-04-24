@@ -1,0 +1,5 @@
+<% let resolveFolder = (className) => ({'xmiDataType': 'types', 'xmiEnumeration': 'enums'}[className] || 'components'); %>
+
+<% entity.references.forEach(reference => {%>
+    import com.generator.design.<%= reference.getPathFromRootWithModifier(utils.self, '.') %>.<%= resolveFolder(reference.className) %>.<%= reference.namePascal %>;
+<% }) %>

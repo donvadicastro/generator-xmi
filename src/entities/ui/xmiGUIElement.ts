@@ -7,6 +7,7 @@ import {xmiCollaboration} from "../xmiCollaboration";
 import {xmiDiagram} from "../diagrams/xmiDiagram";
 import {xmiClass} from "../xmiClass";
 import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
+import {ArrayUtils} from "../../utils/arrayUtils";
 
 const assert = require('assert');
 
@@ -17,7 +18,7 @@ export class xmiGUIElement extends xmiBase {
 
     children: xmiGUIElement[] = [];
 
-    get references(): Reference {
+    get references(): xmiBase[] {
         const imports = super.references;
 
         this.children.forEach((child, i) => {
@@ -25,13 +26,9 @@ export class xmiGUIElement extends xmiBase {
                 <xmiCollaboration>(<xmiDiagram>child.links.informationFLow[0].end).elementRef;
 
             if(elementRef) {
-                const elementRef = <xmiCollaboration>(<xmiDiagram>child.links.informationFLow[0].end).elementRef;
-                imports[this.getRelativePath(elementRef) + '/process/' + elementRef.name] = elementRef.namePascal;
-
-                elementRef.lifelines.forEach(lifeline => {
-                    imports[this.getRelativePath(lifeline.elementRef) + '/components/' + lifeline.elementRef.name] = lifeline.elementRef.namePascal;
-                });
-        }});
+                ArrayUtils.insertIfNotExists(elementRef, imports)
+                elementRef.lifelines.forEach(lifeline => ArrayUtils.insertIfNotExists(lifeline.elementRef, imports));
+            }});
 
         return imports;
     }
