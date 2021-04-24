@@ -1,6 +1,6 @@
 package com.generator.design.<%= entity.getPathFromRootWithModifier(utils.self, '.') %>.contracts;
 
-<%- include('../common/importReferences', {entity: entity, deepLevel: ''}) -%>
+<%- include('partial/common/importReferences', {entity: entity, deepLevel: ''}) -%>
 
 <%- include('partial/common/classDescription', {entity: entity, system: true}) -%>
 
