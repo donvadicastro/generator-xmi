@@ -1,0 +1,12 @@
+package com.generator.design.<%= entity.getPathFromRootWithModifier(utils.self, '.') %>.components.generated;
+
+<%- include('partial/class/import', {entity: entity}) -%>
+
+<%- include('partial/common/classDescription', {entity: entity, system: true}) -%>
+@MappedSuperclass
+public abstract class <%= entity.namePascal %>Base <%- include('partial/class/extend', {entity: entity}) -%> {
+  <%- include('partial/class/attributes', {entity: entity, orm: true}) -%>
+  <%- include('partial/class/links', {entity: entity}) -%>
+
+  <%- include('partial/class/operations', {entity: entity}) -%>
+}

@@ -5,14 +5,14 @@ import {xmiCollaboration} from "../xmiCollaboration";
 
 export class xmiDiagram extends xmiBase {
     get elementRef() {
-        return (<xmiPackage>xmiComponentFactory.getByKey(this.raw.model[0].$.owner))
+        return (<xmiPackage>this._factory.getByKey(this._raw.model[0].$.owner))
             .children.find(x => x instanceof xmiCollaboration);
     }
 
-  constructor(raw: any, parent?: xmiPackage) {
-    super(raw, parent);
+  constructor(raw: any, parent: xmiPackage | null, factory: xmiComponentFactory) {
+    super(raw, parent, factory);
 
-    this.type = this.raw.properties[0].$.type;
-    this.name = this.raw.properties[0].$.name;
+    this.typeId = this._raw.properties[0].$.type;
+    this.name = this._raw.properties[0].$.name;
   }
 }

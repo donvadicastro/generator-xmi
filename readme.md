@@ -37,6 +37,7 @@ Each generated sequence diagrams can be represented as individual API endpoint s
 Next command will be available after project generation:
 * "**api:start**" - start local web server
 * "**app:start**" - run local application
+* "**all:docker:run**" - run all integrated environment in docker
 
 
 ### Start local web server

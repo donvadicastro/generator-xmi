@@ -14,15 +14,19 @@ describe('Generators', () => {
     describe('Templates', () => {
         describe('Monolith', () => {
             describe('Class (input)', () => {
-                const dir = path.join(__dirname, '../../../../generators/monolith/templates/partial/class');
+                const dir = path.join(__dirname, '../../../../generators/nodejs/templates/partial/class');
 
                 describe('check attribute references', () => {
-                    const data = readJSONSync('test/data/project2_class_associations.json');
-                    const parser = new XmiParser(data);
+                    let pkg, classes: any;
 
-                    parser.parse();
-                    const pkg = <xmiPackage>parser.packge;
-                    const classes = <xmiPackage>pkg.children[0];
+                    beforeEach(async () => {
+                        const data = readJSONSync('test/data/project2_class_associations.json');
+                        const parser = new XmiParser(data);
+                        await parser.parse();
+
+                        pkg = <xmiPackage>parser.packge;
+                        classes = <xmiPackage>pkg.children[0];
+                    });
 
                     it('check many to one relation', async () => {
                         const aircraft = <xmiClass>classes.children[0];
@@ -102,7 +106,7 @@ describe('Generators', () => {
                     const data = readJSONSync('test/data/project2_class.json');
                     const parser = new XmiParser(data);
 
-                    parser.parse();
+                    await parser.parse();
 
                     const pkg = <xmiPackage>parser.packge;
                     const entities = (<xmiPackage>pkg.children[0]).children;
@@ -133,12 +137,12 @@ describe('Generators', () => {
                     beforeAll((done) => {
                         parseString(fs.readFileSync(path.resolve(__dirname, '../../../data/fixtures.xml')), (err: any, result: any) => {
                             const parser = new XmiParser(result);
-                            parser.parse();
+                            parser.parse().then(() => {
+                                const pkg = <xmiPackage>parser.packge;
+                                entities = (<xmiPackage>pkg.children[2]).children;
 
-                            const pkg = <xmiPackage>parser.packge;
-                            entities = (<xmiPackage>pkg.children[2]).children;
-
-                            done();
+                                done();
+                            });
                         });
                     });
 

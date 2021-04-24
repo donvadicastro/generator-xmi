@@ -14,11 +14,11 @@ export class xmiPackage extends xmiBase {
         return node;
     }
 
-    constructor(raw: any, parent?: xmiPackage) {
-        super(raw, parent);
+    constructor(raw: any, parent: xmiPackage | null, factory: xmiComponentFactory) {
+        super(raw, parent, factory);
 
         this.children = (raw.packagedElement || []).reverse()
-            .map((x: any) => xmiComponentFactory.get(x, this)).filter((x: any) => x).reverse();
+            .map((x: any) => this._factory.get(x, this)).filter((x: any) => x).reverse();
     }
 
     toConsole() {

@@ -12,14 +12,18 @@ describe('Generators', () => {
         describe('Microservices', () => {
             describe('Class (input)', () => {
                 const dir = path.join(__dirname, '../../../../generators/microservices/templates/partial/class');
-                const data = readJSONSync('test/data/project4_component.json');
-                const parser = new XmiParser(data);
+                let pkg, entities, c1: any;
 
-                parser.parse();
+                beforeEach(async () => {
+                    const data = readJSONSync('test/data/project4_component.json');
 
-                const pkg = <xmiPackage>parser.packge;
-                const entities = (<xmiPackage>pkg.children[0]).children;
-                const c1: xmiComponent = <xmiComponent>entities[1];
+                    const parser = new XmiParser(data);
+                    await parser.parse();
+
+                    pkg = <xmiPackage>parser.packge;
+                    entities = (<xmiPackage>pkg.children[0]).children;
+                    c1 = <xmiComponent>entities[1];
+                });
 
                 it('check constructor', async () => {
                     const content = await ejs.renderFile(path.join(dir, 'constructor.ejs'), {entity: c1});

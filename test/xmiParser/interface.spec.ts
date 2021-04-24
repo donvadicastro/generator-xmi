@@ -9,9 +9,9 @@ describe('xmiParser', () => {
         const data = readJSONSync('test/data/project3_interface.json');
         const parser = new XmiParser(data);
 
-        parser.parse();
+        beforeEach(async () => await parser.parse());
 
-        it('Verify interface realization', () => {
+        it('Verify interface realization', async () => {
             const pkg = <xmiPackage>parser.packge;
             const entities = (<xmiPackage>pkg.children[0]).children;
             const a: xmiClass = <xmiClass>entities[0];

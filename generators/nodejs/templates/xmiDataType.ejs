@@ -1,0 +1,9 @@
+<% entity.referencesAsList.forEach(reference => {%>
+  import {<%= reference.name %>} from '<%= reference.path %>';
+<% }) %>
+
+<%- include('partial/common/classDescription', {entity: entity, system: true}) -%>
+
+export class <%= entity.namePascal %> {
+  <%- include('partial/class/attributes', {entity: entity, orm: false}) -%>
+}

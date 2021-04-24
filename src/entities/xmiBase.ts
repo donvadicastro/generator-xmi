@@ -3,24 +3,45 @@ import {xmiPackage} from "./xmiPackage";
 import {xmiComment} from "./xmiComment";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {Reference} from "../types/reference";
+import {ReplaySubject} from "rxjs";
+import {TypeConverter} from "../utils/typeConverter";
+
 const camel = require('to-camel-case');
 const pascal = require('to-pascal-case');
 
 export default class xmiBase {
-    parent?: xmiPackage | xmiBase;
-    raw: any;
+    protected readonly _raw: any;
+    protected readonly _factory: xmiComponentFactory;
+
+    parent: xmiPackage | xmiBase | null;
 
     id: string;
-    type: string;
+    typeId: string;
+
     name: string;
     nameOrigin: string;
     namePascal: string;
+
     description: string;
     alias: string;
     stereotype: string;
 
     comments: xmiComment[] = [];
     tags: {[key: string]: string} = {};
+
+    /**
+     * Trigger event when element is resolved
+     * @param x resolved element
+     */
+    onAfterInit = new ReplaySubject<xmiBase>();
+
+    /**
+     * Notify element fully initialized.
+     */
+    initialized() {
+        this.onAfterInit.next(this);
+        this.onAfterInit.complete();
+    }
 
     get path(): xmiBase[] {
         let path = [];
@@ -32,6 +53,10 @@ export default class xmiBase {
         }
 
         return path;
+    }
+
+    get className() {
+        return this.constructor.name;
     }
 
     get pathFromRoot() {
@@ -56,11 +81,23 @@ export default class xmiBase {
         return `${this.getPathFromRootWithModifier(input => input, '_')}_${this.name}`;
     }
 
+    get type() {
+        return TypeConverter.getType(this.typeId, this._factory.dialect);
+    }
+
     /**
      * Get all referenced entities for particular instance.
+     * @deprecated
      */
     get references(): Reference {
         return {};
+    }
+
+    /**
+     * Get all referenced entities for particular instance.
+     */
+    get references2(): xmiBase[] {
+        return [];
     }
 
     /**
@@ -73,24 +110,27 @@ export default class xmiBase {
             .map(key => ({name: imports[key], path: key}));
     }
 
-    constructor(raw: any, parent?: xmiPackage | xmiBase) {
-        this.parent = parent;
-        this.raw = raw;
+    constructor(raw: any, parent: xmiPackage | xmiBase | null, factory: xmiComponentFactory) {
+        this._factory = factory;
+        this._raw = raw;
 
-        this.id = this.raw.$['xmi:id'] || this.raw.$['xmi:ifrefs'] || this.raw.$['xmi:idref'];
-        this.type = this.raw.$['xmi:type'];
-        this.nameOrigin = this.raw.$.name;
+        this.parent = parent;
+
+        this.id = this._raw.$['xmi:id'] || this._raw.$['xmi:ifrefs'] || this._raw.$['xmi:idref'];
+        this.typeId = this._raw.$['xmi:type'];
+
+        this.nameOrigin = this._raw.$.name;
         this.name = this.nameOrigin && camel(this.nameOrigin);
         this.namePascal = this.nameOrigin && pascal(this.nameOrigin);
-        this.description = get(this.raw, ['properties', '0', '$', 'documentation']);
+        this.description = get(this._raw, ['properties', '0', '$', 'documentation']);
 
-        this.alias = get(this.raw, ['properties', '0', '$', 'alias']);
+        this.alias = get(this._raw, ['properties', '0', '$', 'alias']);
         this.alias && (this.alias = this.alias.split('.').map(x => camel(x)).join('.'));
 
-        this.stereotype = get(this.raw, ['properties', '0', '$', 'stereotype']);
+        this.stereotype = get(this._raw, ['properties', '0', '$', 'stereotype']);
 
         //parse comments
-        this.comments = get(raw, 'ownedComment', []).map(x => <xmiComment>xmiComponentFactory.get(x));
+        this.comments = get(raw, 'ownedComment', []).map(x => <xmiComment>this._factory.get(x));
 
         //parse tags
         this.tags = (raw.tags || []).reduce((prev: any, current: any) => {
@@ -101,10 +141,12 @@ export default class xmiBase {
     }
 
     refreshBase(raw: any, parent?: xmiPackage | xmiBase) {
-        this.parent = this.parent || parent;
+        if(parent) {
+            this.parent = this.parent || parent;
+        }
     }
 
     toConsole(): any | string {
-        return `[${this.type}] ${this.name} (${this.id})`;
+        return `[${this.typeId}] ${this.name} (${this.id})`;
     }
 }

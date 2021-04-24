@@ -9,9 +9,9 @@ describe('xmiParser', () => {
         const data = readJSONSync('test/data/project4_component.json');
         const parser = new XmiParser(data);
 
-        parser.parse();
+        beforeEach(async () => await parser.parse());
 
-        it('Verify component structure', () => {
+        it('Verify component structure', async () => {
             const pkg = <xmiPackage>parser.packge;
             const entities = (<xmiPackage>pkg.children[0]).children;
             const c1: xmiComponent = <xmiComponent>entities[1];
@@ -42,44 +42,48 @@ describe('xmiParser', () => {
     });
 
     describe('Component dependencies', () => {
-        const data = readJSONSync('test/data/project9_component_dep.json');
-        const parser = new XmiParser(data);
+        let pkg, entities, classes: any, root: any, dep1: any, dep2: any, config: any, http: any, httpOptions: any;
 
-        parser.parse();
-        const pkg = <xmiPackage>parser.packge;
-        const entities = (<xmiPackage>pkg.children[0]).children;
-        const classes = (<xmiPackage>pkg.children[1]).children;
+        beforeEach(async () => {
+            const data = readJSONSync('test/data/project9_component_dep.json');
+            const parser = new XmiParser(data);
+            await parser.parse();
 
-        const root: xmiComponent = <xmiComponent>entities[2];
-        const dep1: xmiComponent = <xmiComponent>entities[4];
-        const dep2: xmiComponent = <xmiComponent>entities[3];
+            pkg = <xmiPackage>parser.packge;
+            entities = (<xmiPackage>pkg.children[0]).children;
+            classes = (<xmiPackage>pkg.children[1]).children;
 
-        const config: xmiInterface = <xmiComponent>classes[2];
-        const http: xmiInterface = <xmiComponent>classes[1];
-        const httpOptions: xmiInterface = <xmiComponent>classes[0];
+            root = <xmiComponent>entities[2];
+            dep1 = <xmiComponent>entities[4];
+            dep2 = <xmiComponent>entities[3];
 
-        it('Verify component structure', () => {
+            config = <xmiComponent>classes[2];
+            http = <xmiComponent>classes[1];
+            httpOptions = <xmiComponent>classes[0];
+        });
+
+        it('Verify component structure', async () => {
             expect(root.name).toBe('rootComponent');
             expect(dep1.name).toBe('dep1Component');
             expect(dep2.name).toBe('dep2Component');
         });
 
-        it('Verify class structure', () => {
+        it('Verify class structure', async () => {
             expect(config.name).toBe('iConfig');
             expect(http.name).toBe('iHttp');
             expect(httpOptions.name).toBe('iHttpOptions');
         });
 
-        it('Verify component realize', () => {
+        it('Verify component realize', async () => {
             expect(dep1.required).toEqual([]);
             expect(dep1.provided.length).toBe(1);
             expect(dep1.provided[0].typeRef).toBe(classes[2]);
-            expect(dep1.provided[0].linkRef.owner).toBe(dep1);
+            expect(dep1.provided[0].linkRef?.owner).toBe(dep1);
 
             expect(dep2.required).toEqual([]);
             expect(dep2.provided.length).toBe(1);
             expect(dep2.provided[0].typeRef).toBe(classes[1]);
-            expect(dep2.provided[0].linkRef.owner).toBe(dep2);
+            expect(dep2.provided[0].linkRef?.owner).toBe(dep2);
 
             expect(root.provided).toEqual([]);
             expect(root.required.length).toBe(2);

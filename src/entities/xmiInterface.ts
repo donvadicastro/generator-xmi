@@ -6,7 +6,8 @@ import {xmiPackage} from "./xmiPackage";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {xmiGeneralization} from "./connectors/xmiGeneralization";
 import {Reference} from "../types/reference";
-import {xmiEnumeration} from "./xmiEnumeration";
+import {forkJoin} from "rxjs";
+import {ArrayUtils} from "../utils/arrayUtils";
 
 export class xmiInterface extends xmiBase {
     attributes: xmiAttribute[] = [];
@@ -42,8 +43,34 @@ export class xmiInterface extends xmiBase {
         return imports;
     }
 
-    constructor(raw: any, parent?: xmiPackage) {
-        super(raw, parent);
+    /**
+     * Get all referenced entities for particular instance.
+     */
+    get references2(): xmiBase[] {
+        const imports = super.references2;
+
+        //Inject attributes type
+        this.attributes.forEach(attribute => {
+            if(attribute.typeRef) {
+                ArrayUtils.insertIfNotExists(attribute.typeRef, imports);
+            }
+        });
+
+        //Inject operation parameters and return types
+        this.operations.forEach(operation => {
+            operation.returnParameter.typeRef &&
+                ArrayUtils.insertIfNotExists(operation.returnParameter.typeRef, imports);
+
+            //Inject operation input parameter types
+            operation.inputParameters
+                .forEach(param => param.typeRef && ArrayUtils.insertIfNotExists(param.typeRef, imports));
+        });
+
+        return imports;
+    }
+
+    constructor(raw: any, parent: xmiPackage, factory: xmiComponentFactory) {
+        super(raw, parent, factory);
         this.refresh(raw, parent);
     }
 
@@ -52,28 +79,31 @@ export class xmiInterface extends xmiBase {
 
         if(raw.ownedAttribute) {
             this.attributes = raw.ownedAttribute
-                .map((x: any) => <xmiAttribute>xmiComponentFactory.get(x, this))
+                .map((x: any) => <xmiAttribute>this._factory.get(x, this))
                 .filter((x: xmiAttribute) => x.name);
         } else {
             this.attributes = get(raw, ['attributes', '0', 'attribute'], [])
-                .map((x: any) => <xmiAttribute>xmiComponentFactory.get(x, this))
+                .map((x: any) => <xmiAttribute>this._factory.get(x, this))
                 .filter((x: xmiAttribute) => x.name);
         }
 
         if(raw.ownedOperation) {
             this.operations = raw.ownedOperation
-                .map((x: any, i: number) => this.operations[i] ? this.operations[i].refresh(x) : new xmiOperation(x, this));
+                .map((x: any, i: number) => this.operations[i] ? this.operations[i].refresh(x) : new xmiOperation(x, this, this._factory));
         } else {
             this.operations = get(raw, ['operations','0','operation'], [])
-                .map((x: any, i: number) => this.operations[i] ? this.operations[i].refresh(x) : new xmiOperation(x, this));
+                .map((x: any, i: number) => this.operations[i] ? this.operations[i].refresh(x) : new xmiOperation(x, this, this._factory));
         }
 
         if(raw.generalization) {
-            this.generalization = new xmiGeneralization(get(raw, 'generalization.0'), this);
+            this.generalization = new xmiGeneralization(get(raw, 'generalization.0'), this, this._factory);
         }
 
         this.attributes.sort((a, b) => a.name > b.name ? 1 : -1);
         this.operations.sort((a, b) => a.name > b.name ? 1 : -1);
+
+        forkJoin(this.attributes.map(x => x.onAfterInit))
+            .subscribe(() => this.initialized());
 
         return this;
     }
@@ -82,7 +112,7 @@ export class xmiInterface extends xmiBase {
         const key: string = super.toConsole();
         const ret: any = {[key]: {}};
 
-        this.attributes.length && (ret[key].attributes = this.attributes.map(x => ({[x.name]: (x.typeRef ? `${x.typeRef.name}(${x.type})` : x.type)})));
+        this.attributes.length && (ret[key].attributes = this.attributes.map(x => ({[x.name]: (x.typeRef ? `${x.typeRef.name}(${x.typeId})` : x.typeId)})));
         this.operations.length && (ret[key].operations = this.operations
             .reduce((prev: any, x) => {
                 const returnParameter = x.parameters.find(x => x.name === 'return');

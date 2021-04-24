@@ -1,0 +1,21 @@
+  <%= context.entity.elementId %>:
+    type: "object"
+  <% if(context.entity.generalizationLinksTo) { %>
+    allOf:
+    - $ref: "#/definitions/<%= context.entity.generalizationLinksTo.elementId %>"
+  <% } %>
+    properties:
+  <% (context.entity.attributesCombinedToEdit || []).filter(x => x.name && !x.isArray && !x.isOptional).forEach(attr => { %>
+        <%= attr.name %>:
+      <% if(attr.typeRef && attr.isEnum) { %>
+          type: "string"
+          enum: <% attr.typeRef.literals.forEach(x => { %>
+            - <%= x %><% }) %>
+      <% } else if(attr.typeRef && (attr.isParent || attr.linkType === 'none' || attr.linkType === 'shared')) { %>
+          type: "number"
+        <% } else if(attr.typeRef) { %>
+          $ref: "#/definitions/<%= attr.typeRef.elementId %>"
+        <% } else { %>
+          type: "<%= attr.type === 'Date' ? 'string' : attr.type %>"
+      <% } %>
+  <% }) %>

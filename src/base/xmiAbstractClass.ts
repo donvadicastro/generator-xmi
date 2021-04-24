@@ -9,6 +9,7 @@ import {IAttribute} from "../contracts/attribute";
 import {Reference} from "../types/reference";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {xmiClass} from "../entities/xmiClass";
+import {ArrayUtils} from "../utils/arrayUtils";
 
 const assert = require('assert');
 
@@ -25,23 +26,23 @@ export class xmiAbstractClass extends xmiInterface {
      */
     conditions: {[operationName: string]: string[]} = {};
 
-    constructor(raw: any, parent?: xmiPackage) {
-        super(raw, parent);
+    constructor(raw: any, parent: xmiPackage, factory: xmiComponentFactory) {
+        super(raw, parent, factory);
 
         if(raw.links && raw.links.length && raw.links[0].Aggregation) {
-            this.links.aggregation = raw.links[0].Aggregation.map((x: any) => new xmiAggregationLink(x));
+            this.links.aggregation = raw.links[0].Aggregation.map((x: any) => new xmiAggregationLink(x, this, factory));
         }
 
         if(raw.links && raw.links.length && raw.links[0].Association) {
-            this.links.association = raw.links[0].Association.map((x: any) => new xmiAggregationLink(x));
+            this.links.association = raw.links[0].Association.map((x: any) => new xmiAggregationLink(x, this, factory));
         }
 
         if(raw.links && raw.links.length && raw.links[0].Generalization) {
-            this.links.generalization = raw.links[0].Generalization.map((x: any) => new xmiAggregationLink(x));
+            this.links.generalization = raw.links[0].Generalization.map((x: any) => new xmiAggregationLink(x, this, factory));
         }
 
         if(raw.links && raw.links.length && raw.links[0].Realisation) {
-            this.links.realization = raw.links[0].Realisation.map((x: any) => new xmiAggregationLink(x));
+            this.links.realization = raw.links[0].Realisation.map((x: any) => new xmiAggregationLink(x, this, factory));
         }
     }
 
@@ -88,7 +89,7 @@ export class xmiAbstractClass extends xmiInterface {
             this.links.generalization.filter(x => x.start === this) : [];
 
         assert(links.length <= 1, `Class "${this.nameOrigin}" can have no more than 1 generalization links. Current: ${links.length}`);
-        return links.length ? links[0].end : null;
+        return links.length ? <xmiBase>links[0].end : null;
     }
 
     /**
@@ -166,6 +167,21 @@ export class xmiAbstractClass extends xmiInterface {
             imports['../' + this.getRelativePath(typeRef) + '/contracts/' + typeRef.name] = typeRef.namePascal + 'Contract';
             imports['../' + this.getRelativePath(typeRef) + '/components/' + typeRef.name] = typeRef.namePascal;
         });
+
+        return imports;
+    }
+
+    get references2(): xmiBase[] {
+        const imports = super.references2;
+
+        //Inject generalization references
+        if(this.generalizationLinksTo) {
+            ArrayUtils.insertIfNotExists(this.generalizationLinksTo, imports)
+        }
+
+        //Inject base interface when instance specification is used
+        this.associationLinks.forEach(x => ArrayUtils.insertIfNotExists(<xmiClass>x.target.typeRef, imports));
+        this.aggregationLinks.forEach(x => ArrayUtils.insertIfNotExists(<xmiClass>x.target.typeRef, imports));
 
         return imports;
     }

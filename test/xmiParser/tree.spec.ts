@@ -13,9 +13,9 @@ describe('xmiParser', () => {
         const parser = new XmiParser(data);
 
         assert.mockResolvedValue(true);
-        parser.parse();
+        beforeEach(async () => await parser.parse());
 
-        it('Verify package tree', () => {
+        it('Verify package tree', async () => {
             const pkg = <xmiPackage>parser.packge;
 
             expect(pkg.name).toBe('model');

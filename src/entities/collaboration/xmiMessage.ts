@@ -1,5 +1,4 @@
 import xmiBase from "../xmiBase";
-import {xmiFragment} from "./xmiFragment";
 import {xmiOperation} from "../class/xmiOperation";
 import {xmiLifeline} from "../xmiLifeline";
 import {xmiComponent} from "../xmiComponent";
@@ -8,16 +7,34 @@ import xmiConnector from "../connectors/xmiConnector";
 import {xmiCollaboration} from "../xmiCollaboration";
 import {xmiClass} from "../xmiClass";
 import {xmiOperand} from "./xmiOperand";
+import {forkJoin, Observable} from "rxjs";
+import {xmiFragment} from "./xmiFragment";
 
 const assert = require('assert');
 
 export class xmiMessage extends xmiBase {
-    get operation(): xmiOperation {
-        return this.to && this.to.elementRef && (<xmiClass>this.to.elementRef).operations.filter(x => x.id === this.raw.$.signature)[0];
+    /**
+     * Source for FROM fragment
+     * @private
+     */
+    private get fromSource(): xmiFragment {
+        return this._factory.fragmentHash.filter(x => x.id === this._raw.$.sendEvent)[0];
     }
 
-    get from(): xmiLifeline | {elementRef: xmiComponent} {
-        const f = xmiComponentFactory.instance.fragmentHash.filter(x => x.id === this.raw.$.sendEvent)[0];
+    /**
+     * Source for TO fragment
+     * @private
+     */
+    private get toSource(): xmiFragment {
+        return this._factory.fragmentHash.filter(x => x.id === this._raw.$.receiveEvent)[0];
+    }
+
+    get operation(): xmiOperation {
+        return this.to && this.to.elementRef && (<xmiClass>this.to.elementRef).operations.filter(x => x.id === this._raw.$.signature)[0];
+    }
+
+    get from(): xmiLifeline | {onAfterInit: Observable<void>, elementRef: xmiComponent} {
+        const f = this.fromSource;
         return f && f.lifelines[0];
     }
 
@@ -25,12 +42,12 @@ export class xmiMessage extends xmiBase {
      * Get operand in combined fragment where this start message belongs to (e.g. loop)
      */
     get fromOperand(): xmiOperand | null {
-        const f = xmiComponentFactory.instance.fragmentHash.filter(x => x.id === this.raw.$.sendEvent)[0];
+        const f = this.fromSource;
         return (f && f.operands.length) ? f.operands[0] : null;
     }
 
-    get to(): xmiLifeline | {elementRef: xmiComponent} {
-        const f = xmiComponentFactory.instance.fragmentHash.filter(x => x.id === this.raw.$.receiveEvent)[0];
+    get to(): xmiLifeline | {onAfterInit: Observable<void>, elementRef: xmiComponent} {
+        const f = this.toSource;
         return f && f.lifelines[0];
     }
 
@@ -38,33 +55,34 @@ export class xmiMessage extends xmiBase {
      * Get operand in combined fragment where this end message belongs to (e.g. loop)
      */
     get toOperand(): xmiOperand | null {
-        const f = xmiComponentFactory.instance.fragmentHash.filter(x => x.id === this.raw.$.receiveEvent)[0];
+        const f = this.toSource;
         return (f && f.operands.length) ? f.operands[0] : null;
     }
 
     get connector(): xmiConnector {
-        return xmiComponentFactory.instance.connectorHash[this.id];
+        return this._factory.connectorHash[this.id];
     }
 
-    constructor(raw: any, parent?: xmiCollaboration) {
-        super(raw, parent);
+    constructor(raw: any, parent: xmiCollaboration, factory: xmiComponentFactory) {
+        super(raw, parent, factory);
 
         //set reference to source when condition is used
         if (this.connector.condition) {
-            const from = this.from;
-            const to = this.to;
-            const operation = this.operation;
+            forkJoin([this.fromSource.onAfterInit, this.toSource.onAfterInit])
+                .subscribe(() => {
+                    assert(this.from, `Source component for message "${this.name}" not exists`);
+                    assert(this.to, `Target component for message "${this.name}" not exists`);
 
-            assert(from, `Source component for message "${this.name}" not exists`);
-            assert(from.elementRef, `Source component reference for message "${this.name}" not exists`);
+                    forkJoin([this.from.onAfterInit, this.to.onAfterInit]).subscribe((val) => {
+                        assert(this.from.elementRef, `Source component reference for message "${this.name}" not exists`);
+                        assert(this.to.elementRef, `Target component reference for message "${this.name}" not exists`);
 
-            assert(to, `Target component for message "${this.name}" not exists`);
-            assert(to.elementRef, `Target component reference for message "${this.name}" not exists`);
-
-            //link condition with operation that will be affected by this condition.
-            const key = `${to.elementRef.name}_${operation.name}`;
-            from.elementRef.conditions[key] || (from.elementRef.conditions[key] = []);
-            from.elementRef.conditions[key].push(this.connector.condition);
+                        //link condition with operation that will be affected by this condition.
+                        const key = `${this.to.elementRef.name}_${this.operation.name}`;
+                        this.from.elementRef.conditions[key] || (this.from.elementRef.conditions[key] = []);
+                        this.from.elementRef.conditions[key].push(this.connector.condition);
+                    });
+                });
         }
     }
 

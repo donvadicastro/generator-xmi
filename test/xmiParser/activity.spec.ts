@@ -10,11 +10,11 @@ const parseString = require('xml2js').parseString;
 
 describe('xmiParser', () => {
     describe('Activities', () => {
-        it('Verify activity diagram', () => {
+        it('Verify activity diagram', async () => {
             const data = readJSONSync('test/data/project6_activity.json');
             const parser = new XmiParser(data);
 
-            parser.parse();
+            await parser.parse();
 
             const pkg = <xmiPackage>parser.packge;
             const sequence: xmiCollaboration = <xmiCollaboration>(<xmiPackage>pkg.children[0]).children[0];
@@ -44,11 +44,11 @@ describe('xmiParser', () => {
     });
 
     describe('Activities loop', () => {
-        it('verify activity diagram with loop', () => {
+        it('verify activity diagram with loop', async () => {
             const data = readJSONSync('test/data/project11_activity_loop.json');
             const parser = new XmiParser(data);
 
-            parser.parse();
+            await parser.parse();
 
             const pkg = <xmiPackage>parser.packge;
             const sequence: xmiCollaboration = <xmiCollaboration>(<xmiPackage>pkg.children[0]).children[0];
@@ -80,11 +80,11 @@ describe('xmiParser', () => {
     });
 
     describe('Activities condition', () => {
-        it('verify activity diagram with condition', () => {
+        it('verify activity diagram with condition', async () => {
             const data = readJSONSync('test/data/project11_activity_condition.json');
             const parser = new XmiParser(data);
 
-            parser.parse();
+            await parser.parse();
             const pkg = <xmiPackage>parser.packge;
             const sequence: xmiCollaboration = <xmiCollaboration>(<xmiPackage>pkg.children[0]).children[0];
             const fragmentSequence: xmiCollaboration = <xmiCollaboration>(<xmiPackage>(<xmiPackage>pkg.children[0]).children[4]).children[0];

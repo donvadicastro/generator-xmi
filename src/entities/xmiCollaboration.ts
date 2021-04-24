@@ -8,6 +8,9 @@ import {xmiPackage} from "./xmiPackage";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 import {xmiCombinedFragment} from "./collaboration/xmiCombinedFragment";
 import {Reference} from "../types/reference";
+import {forkJoin, of} from "rxjs";
+import {ArrayUtils} from "../utils/arrayUtils";
+
 const assert = require('assert');
 
 export class xmiCollaboration extends xmiBase {
@@ -16,42 +19,48 @@ export class xmiCollaboration extends xmiBase {
     fragments: (xmiFragment | xmiCombinedFragment)[] = [];
     messages: xmiMessage[] = [];
 
-    constructor(raw: any, parent?: xmiPackage) {
-        super(raw, parent);
+    constructor(raw: any, parent: xmiPackage, factory: xmiComponentFactory) {
+        super(raw, parent, factory);
 
-        this.attributes = (this.raw.ownedAttribute || [])
-            .map((x: any) => new xmiAttribute(x, this));
+        this.attributes = (this._raw.ownedAttribute || [])
+            .map((x: any) => new xmiAttribute(x, this, factory));
 
-        this.lifelines = get(this.raw, 'ownedBehavior.0.lifeline', [])
-            .map((x: any) => <xmiLifeline>xmiComponentFactory.get(x, this, this.attributes));
-    }
+        this.lifelines = get(this._raw, 'ownedBehavior.0.lifeline', [])
+            .map((x: any) => <xmiLifeline>this._factory.get(x, this, this.attributes));
 
-    initialize() {
-        this.fragments = get(this.raw, 'ownedBehavior.0.fragment', [])
-            .map((x: any) => <xmiFragment>xmiComponentFactory.get(x, this, this.lifelines));
+        this.fragments = get(this._raw, 'ownedBehavior.0.fragment', [])
+            .map((x: any) => <xmiFragment>this._factory.get(x, this, this.lifelines));
 
-        this.messages = get(this.raw, 'ownedBehavior.0.message', [])
+        this.messages = get(this._raw, 'ownedBehavior.0.message', [])
             .map((x: any) => {
-                const message = <xmiMessage>xmiComponentFactory.get(x, this, this.fragments);
+                const message = <xmiMessage>this._factory.get(x, this, this.fragments);
 
-                //when lifeline is not presenter in XMI, but message use
-                if(message.from && !this.lifelines.find(x => x.elementRef === message.from.elementRef)) {
-                    const lifeline = xmiComponentFactory.instance.lifelineHash.find(x => x.elementRef === message.from.elementRef);
-                    assert(lifeline, `Lifeline for FROM (${message.from.elementRef.name}) object not exists: ${this.path.map(x => x.name).join(' -> ')}`);
+                forkJoin({
+                    from: message.from ? message.from.onAfterInit : of(),
+                    to: message.to ? message.to.onAfterInit : of()
+                }).subscribe(() => {
+                    //when lifeline is not presenter in XMI, but message use
+                    if(message.from && !this.lifelines.find(x => x.elementRef === message.from.elementRef)) {
+                        const lifeline = this._factory.lifelineHash.find(x => x.elementRef === message.from.elementRef);
+                        assert(lifeline, `Lifeline for FROM (${message.from.elementRef.name}) object not exists: ${this.path.map(x => x.name).join(' -> ')}`);
 
-                    this.lifelines.push(<xmiLifeline>lifeline);
-                }
+                        this.lifelines.push(<xmiLifeline>lifeline);
+                    }
 
-                //when lifeline is not presenter in XMI, but message use
-                if(message.to && !this.lifelines.find(x => (x || {}).elementRef === message.to.elementRef)) {
-                    const lifeline = xmiComponentFactory.instance.lifelineHash.find(x => x.elementRef === message.to.elementRef);
-                    assert(lifeline, `Lifeline for TO(${message.to.elementRef.name}) object not exists: ${this.path.map(x => x.name).join(' -> ')}`);
+                    //when lifeline is not presenter in XMI, but message use
+                    if(message.to && !this.lifelines.find(x => (x || {}).elementRef === message.to.elementRef)) {
+                        const lifeline = this._factory.lifelineHash.find(x => x.elementRef === message.to.elementRef);
+                        assert(lifeline, `Lifeline for TO(${message.to.elementRef.name}) object not exists: ${this.path.map(x => x.name).join(' -> ')}`);
 
-                    this.lifelines.push(<xmiLifeline>lifeline);
-                }
+                        this.lifelines.push(<xmiLifeline>lifeline);
+                    }
+                });
 
                 return message;
             });
+    }
+
+    initialize() {
     }
 
     get loopFragments(): xmiCombinedFragment[] {
@@ -68,6 +77,15 @@ export class xmiCollaboration extends xmiBase {
         this.lifelines.forEach((lifeline, index) => {
             imports[this.getRelativePath(lifeline.elementRef) + '/contracts/' + lifeline.elementRef.name] = lifeline.elementRef.namePascal + 'Contract';
         });
+
+        return imports;
+    }
+
+    get references2(): xmiBase[] {
+        const imports = super.references2;
+
+        this.lifelines.forEach((lifeline, index) =>
+            ArrayUtils.insertIfNotExists(lifeline.elementRef, imports));
 
         return imports;
     }
