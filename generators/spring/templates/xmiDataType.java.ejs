@@ -1,9 +1,10 @@
 package com.generator.design.<%= entity.getPathFromRootWithModifier(utils.self, '.') %>.types;
 
+import java.io.Serializable;
 <%- include('partial/common/importReferences', {entity: entity, deepLevel: ''}) -%>
 
 <%- include('partial/common/classDescription', {entity: entity, system: true}) -%>
 
-public class <%= entity.namePascal %> {
+public class <%= entity.namePascal %> implements Serializable {
   <%- include('partial/class/attributes', {entity: entity, orm: false}) -%>
 }

@@ -19,11 +19,3 @@
     <% } %>
     private <%= attr.typeRef ? attr.typeRef.namePascal : attr.type %> <%= attr.name %>;
 <% }) %>
-
-<% if(orm && entity.generalizationLinksFrom.length) { %>
-    @Column()
-    private String _generalizationLinkType;
-
-    @Column()
-    private int _generalizationLinkId;
-<% } %>

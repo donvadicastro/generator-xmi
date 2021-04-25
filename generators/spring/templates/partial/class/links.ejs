@@ -14,10 +14,10 @@
     <%} else {%>
         <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
             @OneToMany(cascade = CascadeType.REMOVE)
-            <%= x.target.typeRef.namePascal %>[] <%= x.target.typeRef.name %>RefList;
+            List<<%= x.target.typeRef.namePascal %>> <%= x.target.typeRef.name %>RefList;
         <% } else { %>
             @ManyToMany()
-            <%= x.target.typeRef.namePascal %>[] <%= x.target.typeRef.name %>RefList;
+            List<<%= x.target.typeRef.namePascal %>> <%= x.target.typeRef.name %>RefList;
         <% } %>
 <% }}) %>
 
