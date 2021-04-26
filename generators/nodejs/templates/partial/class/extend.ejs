@@ -1,2 +1,2 @@
-<%= entity.generalizationLinksTo ? `extends ${entity.generalizationLinksTo.namePascal}` : (entity.elementRef && `extends ${entity.elementRef.name}`) %>
-    <% if ((entity.provided || []).length) { %>implements <%= (entity.provided || []).map(x => x.namePascal + 'Contract').join(', ') %><%}%>
+<%= entity.generalizationLinksTo ? `extends ${entity.generalizationLinksTo.elementId}` : (entity.elementRef && `extends ${entity.elementRef.name}`) %>
+    <% if ((entity.provided || []).length) { %>implements <%= (entity.provided || []).map(x => x.elementId).join(', ') %><%}%>

@@ -2,9 +2,8 @@ import { injectable } from "inversify";
 import "reflect-metadata";
 import {<%= entity.namePascal %>Base} from './generated/<%= entity.name %>.generated';
 
-/**
-* <%- (entity.description || `${entity.namePascal} description`).replace(/\n/g, '\n* ') %>.
- */
+<%- include('../partial/common/classDescription', {entity: entity, system: false}) -%>
+
 @injectable()
 export class <%= entity.namePascal %> extends <%= entity.namePascal %>Base {
 }

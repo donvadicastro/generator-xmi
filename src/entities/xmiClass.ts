@@ -1,5 +1,4 @@
 import {xmiAbstractClass} from "../base/xmiAbstractClass";
-import {xmiComponentFactory} from "../factories/xmiComponentFactory";
 
 export class xmiClass extends xmiAbstractClass {
     toConsole(): any {

@@ -1,0 +1,14 @@
+<%
+let resolveFolder = (className) => (
+    // for proper DI management - components should be injected using their interfaces
+    {'xmiDataType': 'types', 'xmiEnumeration': 'enums', 'xmiInterface': 'contracts', 'xmiComponent': 'contracts'}[className] || 'components');
+
+let resolveName = (className, name) =>
+    // for proper DI management - components should be injected using their interfaces
+    ((className === 'xmiInterface' || className === 'xmiComponent') ? (name + 'Contract'): name);
+%>
+
+<% entity.references.forEach(reference => {%>
+    import {<%= resolveName(reference.className, reference.namePascal) %> as <%= reference.elementId %>} from
+        '<%= deepLevel %><%= entity.getRelativePath(reference) %>/<%= resolveFolder(reference.className) %>/<%= reference.name %>';
+<% }) %>

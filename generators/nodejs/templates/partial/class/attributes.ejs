@@ -16,7 +16,7 @@
             @Column('<%= attr.dbType %>')
         <% }%>
     <% } %>
-    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.namePascal : attr.type %>;
+    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.elementId : attr.type %>;
 <% }) %>
 
 <% if(orm && entity.generalizationLinksFrom.length) { %>
