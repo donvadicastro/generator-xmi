@@ -73,7 +73,7 @@ export class <%= entity.namePascal %>ScreenComponent {
   <% (entity.children || []).filter(x => x.stereotype).forEach(function (child, i) { %>
     <% child.getInformationFlows('in').forEach(x => { %>
       protected loadData_<%= child.namePascal %>(data?: any, changePath?: string) {
-        <% var elementRefPath = x.start.elementRef.getPathFromRootWithModifier(utils.kebabCase) %>
+        <% var elementRefPath = x.start.elementRef.getPathFromRoot(utils.kebabCase) %>
         this.http.post(`${environment.api.url}/<%= elementRefPath %>`, data)
         .subscribe((res: any) => <% if(child.stereotype === 'table') { %>this.form.setControl('<%= child.name %>', this.fb.array((res ? (res.length >= 0 ? res : [res]) : []).map((x: any) => this.fb.group({...x, ...{_checked: false}}))))<% } else if(['combo', 'combobox'].indexOf(child.stereotype) >= 0) { %>this.<%= child.name %>All = res<% } else {%>this.form.patchValue({ <%= child.name %>: res })<% } %>);
       }
@@ -92,7 +92,7 @@ export class <%= entity.namePascal %>ScreenComponent {
     protected loadData_<%= x.namePascal %>(data?: any, changePath?: string) {
       const query = changePath ? `?${changePath}=${get(data, changePath + '.id')}` : '';
 
-      this.http.get(`${environment.api.url}/<%= x.typeRef.getPathFromRootWithModifier(utils.kebabCase) %>/<%= utils.kebabCase(x.typeRef.name) %>` + query, {})
+      this.http.get(`${environment.api.url}/<%= x.typeRef.getPathFromRoot(utils.kebabCase) %>/<%= utils.kebabCase(x.typeRef.name) %>` + query, {})
         .subscribe((res: any) =>  this.<%= x.name %>All = res);
     }
   <% }) %>

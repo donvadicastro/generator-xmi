@@ -3,6 +3,6 @@ import {ListPageObject} from "../../<%= entity.getRelativeRoot() %>/base/adminis
 export class <%= entity.namePascal %>ListPage extends ListPageObject {
     constructor() {
         super();
-        this.baseUrl = 'administration/<%= entity.pathFromRoot %>/<%= entity.name %>';
+        this.baseUrl = 'administration/<%= entity.getPathFromRoot() %>/<%= entity.name %>';
     }
 }

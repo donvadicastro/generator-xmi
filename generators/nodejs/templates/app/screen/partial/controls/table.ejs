@@ -17,7 +17,7 @@
         <% } else if(x.stereotype === 'button') { %>
                 <% if(x.links.informationFLow.length && x.links.informationFLow[0].end) {%>
                     <% const elementRef = x.links.informationFLow[0].end.elementRef; %>
-                    <% const elementRefPath = elementRef.getPathFromRootWithModifier(utils.kebabCase); %>
+                    <% const elementRefPath = elementRef.getPathFromRoot(utils.kebabCase); %>
                     <% const firstCmp = elementRef.messages && elementRef.messages.length && elementRef.messages[0].to.elementRef; %>
                     <% const firstOperation = firstCmp && firstCmp.operations.find(y => y.name === elementRef.messages[0].operation.name); %>
                     <% const firstParam = firstOperation && firstOperation.inputParameters && firstOperation.inputParameters[0]; %>

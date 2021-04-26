@@ -16,7 +16,7 @@ export class xmiRequired extends xmiBase {
         const typeRefId = raw.$['xmi:idref'];
         const linkRefId = raw.$['xmi:id'];
 
-        assert(typeRefId, `There is no required or provided interface specified for "${parent.name} -> ${parent.path.map(x => x.name).join(' -> ')}" component`);
+        assert(typeRefId, `There is no required or provided interface specified for "${parent.name} -> ${parent.pathToRoot.map(x => x.name).join(' -> ')}" component`);
 
         this._factory.resolveById(linkRefId).subscribe(x => this.linkRef = <xmiInterface>x);
         this._factory.resolveById(typeRefId).subscribe(x => this.typeRef = <xmiInterface>x);

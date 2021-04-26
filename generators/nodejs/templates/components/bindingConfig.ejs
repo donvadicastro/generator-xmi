@@ -2,19 +2,19 @@
     const refs = {};
 
     components.forEach(x => {
-        refs[`./design/${x.entity.pathFromRoot}/contracts/${x.entity.name}`] = {key: `${x.entity.namePascal}Contract`, id: `${x.entity.elementId}Contract`};
-        refs[`./design/${x.entity.pathFromRoot}/components/${x.entity.name}`] = {key: x.entity.namePascal, id: x.entity.elementId};
+        refs[`./design/${x.entity.getPathFromRoot()}/contracts/${x.entity.name}`] = {key: `${x.entity.namePascal}Contract`, id: `${x.entity.elementId}Contract`};
+        refs[`./design/${x.entity.getPathFromRoot()}/components/${x.entity.name}`] = {key: x.entity.namePascal, id: x.entity.elementId};
 
         x.entity.provided.forEach(y => {
-            refs[`./design/${y.typeRef.pathFromRoot}/contracts/${y.typeRef.name}`] = {key: `${y.typeRef.namePascal}Contract`, id: `${y.typeRef.elementId}Contract` };
+            refs[`./design/${y.typeRef.getPathFromRoot()}/contracts/${y.typeRef.name}`] = {key: `${y.typeRef.namePascal}Contract`, id: `${y.typeRef.elementId}Contract` };
         });
     });
 %>
 
-import { Container } from "inversify";
+import { Container, interfaces } from "inversify";
 import { DITypes } from "./design/types/diTypes";
 import { DbManagerCommon } from "./design/common/dbManagerCommon";
-import {Context} from "inversify/dts/planning/context";
+import {Context} from interfaces.Context;
 
 <% Object.keys(refs).forEach(x => { %>
 import {<%= refs[x].key %> as <%= refs[x].id %> } from '<%= x %>';
