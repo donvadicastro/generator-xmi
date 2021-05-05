@@ -41,4 +41,4 @@ Next command will be available after project generation:
 
 
 ### Start local web server
-Navigate to "[http://localhost:3000/api-explorer](http://localhost:3000/api-explorer)" to run local Swagger.
+Navigate to "[http://localhost:3000](http://localhost:3000)" to run local API server.
