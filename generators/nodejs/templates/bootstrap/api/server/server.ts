@@ -32,7 +32,7 @@ export default class ExpressServer {
     return this;
   }
 
-  async listen(port: number = parseInt(env.PORT || '3000')): Promise<Application> {
+  async listen(port: number = parseInt(env.SERVER_PORT || '3000')): Promise<Application> {
     //fix ORM entities path
     ormConfig.entities = ormConfig.entities.map((x: string) => `${solutionRoot}/${x}`);
     ormConfig.subscribers = ormConfig.subscribers.map((x: string) => `${solutionRoot}/${x}`);

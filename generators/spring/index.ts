@@ -33,16 +33,12 @@ export class XmiGenerator extends XmiGeneratorBase {
     // }
 
     generate() {
-        this._bootstrap([], []);
+        this._bootstrap([], ['.env']);
 
         this.log(chalk.green('Generate'));
         this._generate('', this.options.parser.packge);
 
-        this.testFiles.forEach(x => {
-            //this.spawnCommand('tsc', ['--project', this.options.destination, x]);
-            this._beautify(x);
-        });
-
+        this.testFiles.forEach(x => this._beautify(x));
         this.generatedFiles.forEach(x => this._beautify(x));
     }
 

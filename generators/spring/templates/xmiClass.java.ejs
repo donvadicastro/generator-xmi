@@ -7,7 +7,7 @@ import com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.compo
 
 <%- include('partial/common/classDescription', {entity: entity, system: false}) -%>
 
-@ApiModel()
+@ApiModel("<%= entity.elementId %>")
 @AllArgsConstructor
 @Entity(name = "<%= entity.elementId %>")
 public class <%= entity.namePascal %> extends <%= entity.namePascal %>Base {
