@@ -56,7 +56,7 @@
 
 <div class="tree">
 <% render(buildTree(pkg), (x) => { %>
-    <a routerLink="screen/<%= x.entity.pathFromRoot %>/<%= x.entity.name %>"><%= x.name %></a>
+    <a routerLink="screen/<%= x.entity.getPathFromRoot() %>/<%= x.entity.name %>"><%= x.name %></a>
 <%}, (x, callback) => { %>
     <% if(x.isLeaf) { %>
         <% callback() %>

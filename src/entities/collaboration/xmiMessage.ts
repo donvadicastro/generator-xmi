@@ -90,7 +90,7 @@ export class xmiMessage extends xmiBase {
         this.from && assert(this.from.elementRef, `Null ref for message "${this.name}": from "${this.from.elementRef.name}" (${this.from.elementRef.id})`);
         this.to && assert(this.to.elementRef, `Null ref for message "${this.name}": to "${this.to.elementRef.name}" (${this.to.elementRef.id})`);
 
-        assert(this.operation, `Operation should be specified for "${this.to && this.to.elementRef.name}" component: ${this.path.map(x => x.name).join(' -> ')}`);
+        assert(this.operation, `Operation should be specified for "${this.to && this.to.elementRef.name}" component: ${this.pathToRoot.map(x => x.name).join(' -> ')}`);
         assert(this.connector, `Connector should be attached to message "${this.name}"`);
 
         return {[this.name]: `${this.id} (${this.from && this.from.elementRef.name} - ${this.to && this.to.elementRef.name}::${this.operation.name})`};

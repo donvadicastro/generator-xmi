@@ -16,15 +16,15 @@ const routes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'administration',  children: [
     <% classes.forEach(x => { %>
-        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>',  component: <%= x.entity.elementId %>ListComponent },
-        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>/new',  component: <%= x.entity.elementId %>EditComponent },
-        { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>/:id',  component: <%= x.entity.elementId %>EditComponent },
+        { path: '<%= x.entity.getPathFromRoot() %>/<%= x.entity.name %>',  component: <%= x.entity.elementId %>ListComponent },
+        { path: '<%= x.entity.getPathFromRoot() %>/<%= x.entity.name %>/new',  component: <%= x.entity.elementId %>EditComponent },
+        { path: '<%= x.entity.getPathFromRoot() %>/<%= x.entity.name %>/:id',  component: <%= x.entity.elementId %>EditComponent },
     <% }) %>
     ]
   }, {
     path: 'screen', children: [
     <% screens.forEach(x => { %>
-      { path: '<%= x.entity.pathFromRoot %>/<%= x.entity.name %>',  component: <%= x.entity.namePascal %>ScreenComponent },
+      { path: '<%= x.entity.getPathFromRoot() %>/<%= x.entity.name %>',  component: <%= x.entity.namePascal %>ScreenComponent },
     <% }) %>
     ]
   }

@@ -13,6 +13,6 @@ export class <%= entity.namePascal %>ListComponent {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get(environment.api.url + '/<%= entity.getPathFromRootWithModifier(utils.kebabCase) %>/<%= utils.kebabCase(entity.name) %>').subscribe(res => this.data = <any>res);
+    this.http.get(environment.api.url + '/<%= entity.getPathFromRoot(utils.kebabCase) %>/<%= utils.kebabCase(entity.name) %>').subscribe(res => this.data = <any>res);
   }
 }

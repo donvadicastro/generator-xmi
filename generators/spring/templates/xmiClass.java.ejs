@@ -1,9 +1,9 @@
-package com.generator.design.<%= entity.getPathFromRootWithModifier(utils.self, '.') %>.components;
+package com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.components;
 
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import javax.persistence.Entity;
-import com.generator.design.<%= entity.getPathFromRootWithModifier(utils.self, '.') %>.components.generated.<%= entity.namePascal %>Base;
+import com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.components.generated.<%= entity.namePascal %>Base;
 
 <%- include('partial/common/classDescription', {entity: entity, system: false}) -%>
 

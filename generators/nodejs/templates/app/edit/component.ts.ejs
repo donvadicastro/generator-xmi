@@ -6,7 +6,7 @@ import {environment} from "../../../<%= entity.getRelativeRoot() %>/environments
 
 <% var imports = {};
   (entity.attributesCombined || []).filter(x => x.typeRef && x.isEnum).forEach(x => {
-    imports[x.typeRef.pathFromRoot + '/enums/' + x.typeRef.name] = x.typeRef.namePascal;
+    imports[x.typeRef.getPathFromRoot() + '/enums/' + x.typeRef.name] = x.typeRef.namePascal;
   }); %>
 
 <% Object.keys(imports).forEach(key => { %>
@@ -19,7 +19,7 @@ import {environment} from "../../../<%= entity.getRelativeRoot() %>/environments
   styleUrls: ['./component.sass']
 })
 export class <%= entity.namePascal %>EditComponent {
-  private apiRootUrl = environment.api.url + '/<%= entity.getPathFromRootWithModifier(utils.kebabCase) %>/<%= utils.kebabCase(entity.name) %>';
+  private apiRootUrl = environment.api.url + '/<%= entity.getPathFromRoot(utils.kebabCase) %>/<%= utils.kebabCase(entity.name) %>';
 
   public data: any = {};
   public form: FormGroup;
@@ -70,7 +70,7 @@ export class <%= entity.namePascal %>EditComponent {
       .filter((key: string) => isNaN(parseInt(key)))
       .map((key: string) => ({ id: <%= x.typeRef.namePascal + (x.isEnum ? '' : 'Contract')%>[key as keyof typeof <%= x.typeRef.namePascal + (x.isEnum ? '' : 'Contract')%>], label: key }));
     <% } else if(!x.isDataType) { %>
-    this.http.get(environment.api.url + '/<%= (x.typeRef ? x.typeRef : x).getPathFromRootWithModifier(utils.kebabCase) %>/<%= utils.kebabCase(x.typeRef.name) %>').subscribe(
+    this.http.get(environment.api.url + '/<%= (x.typeRef ? x.typeRef : x).getPathFromRoot(utils.kebabCase) %>/<%= utils.kebabCase(x.typeRef.name) %>').subscribe(
       (res: any) => this.<%= x.name %>All = res);
     <% } %>
   <% }) %>

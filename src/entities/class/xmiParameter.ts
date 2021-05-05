@@ -18,7 +18,7 @@ export class xmiParameter extends xmiBase {
         super(raw, parent, factory);
 
         this.typeId = raw.$.type;
-        assert(this.typeId, `Type is not specified for parameter "${this.name}" in operation "${parent.name} -> ${parent.path.map(x => x.name).join(' -> ')}"`);
+        assert(this.typeId, `Type is not specified for parameter "${this.name}" in operation "${parent.name} -> ${parent.pathToRoot.map(x => x.name).join(' -> ')}"`);
 
         this.isArray = TypeConverter.isArray(this.typeId) || this.name.endsWith('List');
 

@@ -41,7 +41,7 @@ export class xmiCollaboration extends xmiBase {
                     //when lifeline is not presenter in XMI, but message use
                     if(message.from && !this.lifelines.find(x => x.elementRef === message.from.elementRef)) {
                         const lifeline = this._factory.lifelineHash.find(x => x.elementRef === message.from.elementRef);
-                        assert(lifeline, `Lifeline for FROM (${message.from.elementRef.name}) object not exists: ${this.path.map(x => x.name).join(' -> ')}`);
+                        assert(lifeline, `Lifeline for FROM (${message.from.elementRef.name}) object not exists: ${this.pathToRoot.map(x => x.name).join(' -> ')}`);
 
                         this.lifelines.push(<xmiLifeline>lifeline);
                     }
@@ -49,7 +49,7 @@ export class xmiCollaboration extends xmiBase {
                     //when lifeline is not presenter in XMI, but message use
                     if(message.to && !this.lifelines.find(x => (x || {}).elementRef === message.to.elementRef)) {
                         const lifeline = this._factory.lifelineHash.find(x => x.elementRef === message.to.elementRef);
-                        assert(lifeline, `Lifeline for TO(${message.to.elementRef.name}) object not exists: ${this.path.map(x => x.name).join(' -> ')}`);
+                        assert(lifeline, `Lifeline for TO(${message.to.elementRef.name}) object not exists: ${this.pathToRoot.map(x => x.name).join(' -> ')}`);
 
                         this.lifelines.push(<xmiLifeline>lifeline);
                     }

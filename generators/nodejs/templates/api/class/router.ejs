@@ -1,6 +1,6 @@
 import express from 'express';
 import {Request, Response} from "express";
-import {<%= entity.namePascal %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= entity.pathFromRoot %>/components/<%= entity.name %>';
+import {<%= entity.namePascal %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= entity.getPathFromRoot() %>/components/<%= entity.name %>';
 
 import {DITypes} from "../../<%= entity.getRelativeRoot() %>/design/types/diTypes";
 import {DIContainer, DbManagerProvider} from "../../<%= entity.getRelativeRoot() %>/inversify.config";
