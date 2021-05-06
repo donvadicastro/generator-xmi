@@ -1,13 +1,9 @@
 package com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.repositories;
 
 import com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.components.<%= entity.namePascal %>;
-import io.swagger.annotations.Api;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
-@Api(tags = "<%= entity.namePascal %> Entity")
-@RepositoryRestResource(path = "<%= entity.elementId %>")
 @Repository("<%= entity.elementId %>")
 public interface <%= entity.namePascal %>Repository extends PagingAndSortingRepository<<%= entity.namePascal %>, Integer> {
 }

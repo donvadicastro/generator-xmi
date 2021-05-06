@@ -153,6 +153,7 @@ export class XmiGenerator extends XmiGeneratorBase {
                 const baseClassFileName = this.destinationPath(`${path}/components/generated/${x.namePascal}Base.java`);
                 const classFileName = this.destinationPath(`${path}/components/${x.namePascal}.java`);
                 const repositoryFileName = this.destinationPath(`${path}/repositories/${x.namePascal}Repository.java`);
+                const controllerFileName = this.destinationPath(`${path}/controllers/${x.namePascal}Controller.java`);
                 const classTestFileName = this.destinationPath(`${path}/components/${x.namePascal}.test.java`);
 
                 this.fs.copyTpl(this.templatePath('xmiClass.generated.java.ejs'), baseClassFileName, options);
@@ -163,6 +164,7 @@ export class XmiGenerator extends XmiGeneratorBase {
                 }
 
                 this.fs.copyTpl(this.templatePath('spring/repository.java.ejs'), repositoryFileName, options);
+                this.fs.copyTpl(this.templatePath('spring/controller.java.ejs'), controllerFileName, options);
 
                 // if(!this.fs.exists(classTestFileName)) {
                 //     this.fs.copyTpl(this.templatePath('xmiClass.test.java.ejs'), classTestFileName, options);
