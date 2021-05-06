@@ -1,6 +1,7 @@
 package com.generator.common.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +29,8 @@ public abstract class AbstractResourceController<T> {
     @PutMapping({"/{id}"})
     public ResponseEntity<T> update(@PathVariable("id") Integer id, @RequestBody T entity) {
         return repository.findById(id).map(t -> {
-            repository.save(entity);
-            return new ResponseEntity<>(repository.save(entity), HttpStatus.OK);
+            BeanUtils.copyProperties(entity, t, "id");
+            return new ResponseEntity<>(repository.save(t), HttpStatus.OK);
         }).orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
     }
 
