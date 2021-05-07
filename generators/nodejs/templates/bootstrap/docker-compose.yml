@@ -18,5 +18,13 @@ services:
       - .env # configure postgres
     ports:
       - "5432:5432"
+
+  auth:
+    image: "quay.io/keycloak/keycloak" # use latest official Keycloak version
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+
 volumes:
   database-data: # named volumes can be managed easier using docker-compose
