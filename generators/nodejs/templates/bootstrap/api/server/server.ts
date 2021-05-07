@@ -1,5 +1,4 @@
-import express from 'express';
-import { Application } from 'express';
+import express, {Application} from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
 import http from 'http';
@@ -7,7 +6,9 @@ import os from 'os';
 import cookieParser from 'cookie-parser';
 import swaggerify from './swagger';
 import logger from './logger';
+import keycloak from "./config/keycloak";
 
+const session = require('express-session');
 const root = path.normalize(__dirname + '/..');
 const solutionRoot = path.normalize(root + '/..');
 const pino = require('express-pino-logger')({ logger: logger });
@@ -19,6 +20,9 @@ const env = process.env;
 export default class ExpressServer {
   constructor() {
     app.set('appPath', root + 'client');
+
+    app.use(session({ secret: env.SESSION_SECRET, resave: false, saveUninitialized: true }));
+    app.use(keycloak.middleware());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(cookieParser(env.SESSION_SECRET));

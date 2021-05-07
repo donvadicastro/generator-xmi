@@ -14,7 +14,7 @@
 import { Container, interfaces } from "inversify";
 import { DITypes } from "./design/types/diTypes";
 import { DbManagerCommon } from "./design/common/dbManagerCommon";
-import {Context} from interfaces.Context;
+import Context = interfaces.Context;
 
 <% Object.keys(refs).forEach(x => { %>
 import {<%= refs[x].key %> as <%= refs[x].id %> } from '<%= x %>';
