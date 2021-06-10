@@ -2,16 +2,21 @@
     get:
       tags:
       - "Entities: <%= context.entity.name %> (<%= context.url %>)"
-      description: <%= context.entity.namePascal %>
-
+      description: Get all entities
+      summary: get all
       responses:
         200:
-          description: Get all <%= context.entity.name %>
+          description: OK
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/<%= context.entity.elementId %>"
 
     post:
       tags:
       - "Entities: <%= context.entity.name %> (<%= context.url %>)"
-      description: <%= context.entity.namePascal %>
+      description: Create new entity
+      summary: create new
 
       parameters:
       - in: "body"
@@ -22,14 +27,15 @@
           $ref: "#/definitions/<%= context.entity.elementId %>"
 
       responses:
-        200:
-          description: Create <%= context.entity.name %>
+        201:
+          description: OK
 
   <%= context.url %>/<%= options.utils.kebabCase(context.entity.name) %>/{id}:
     get:
       tags:
       - "Entities: <%= context.entity.name %> (<%= context.url %>)"
-      description: <%= context.entity.name %>
+      description: Get single entity by id
+      summary: get by id
 
       parameters:
       - in: "path"
@@ -40,11 +46,15 @@
 
       responses:
         200:
-          description: Get <%= context.entity.nameOrigin %> by id
+          description: OK
+          schema:
+            $ref: "#/definitions/<%= context.entity.elementId %>"
+
     put:
       tags:
       - "Entities: <%= context.entity.name %> (<%= context.url %>)"
-      description: <%= context.entity.name %>
+      description: Update entity by id
+      summary: update by id
 
       parameters:
       - in: "path"
@@ -61,12 +71,15 @@
 
       responses:
         200:
-          description: Update <%= context.entity.name %> by id
+          description: OK
+          schema:
+            $ref: "#/definitions/<%= context.entity.elementId %>"
 
     delete:
       tags:
       - "Entities: <%= context.entity.name %> (<%= context.url %>)"
-      description: <%= context.entity.name %>
+      description: Delete entity by id
+      summary: delete by id
 
       parameters:
       - in: "path"
@@ -77,4 +90,4 @@
 
       responses:
         200:
-          description: Delete <%= context.entity.name %> by id
+          description: OK

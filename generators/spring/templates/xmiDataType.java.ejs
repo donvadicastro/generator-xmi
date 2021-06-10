@@ -1,10 +1,15 @@
 package com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.types;
 
 import java.io.Serializable;
+import io.swagger.annotations.ApiModel;
+import lombok.Data;
+
 <%- include('partial/common/importReferences', {entity: entity, deepLevel: ''}) -%>
 
 <%- include('partial/common/classDescription', {entity: entity, system: true}) -%>
 
+@Data
+@ApiModel("<%= entity.elementId %>")
 public class <%= entity.namePascal %> implements Serializable {
   <%- include('partial/class/attributes', {entity: entity, orm: false}) -%>
 }

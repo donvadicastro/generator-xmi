@@ -17,5 +17,6 @@
           $ref: "#/definitions/<%= attr.typeRef.elementId %>"
         <% } else { %>
           type: "<%= attr.type === 'Date' ? 'string' : attr.type %>"
+          <% if(attr.type === 'Date') { %>format: "date-time"<% } %>
       <% } %>
   <% }) %>
