@@ -8,24 +8,11 @@ describe('nodejs generator E2E tests', () => {
     beforeAll(async () => {
         jest.setTimeout(240000);
 
-        try {
-            console.log('building image');
-            const buildContainer = await GenericContainer.fromDockerfile(path.resolve('./test/generator/e2e'))
-                .build();
+        console.log('building image');
+        const buildContainer = await GenericContainer.fromDockerfile(path.resolve('./test/generator/e2e'))
+            .build();
 
-            console.log('starting container');
-            container = await buildContainer
-                .withName('docker-xmi')
-                .withCopyFileToContainer(path.resolve(__dirname, '../../../package.json'), "/package.json")
-                // .withCopyFileToContainer(path.resolve(__dirname, '../../../generators'), "/generators")
-                // .withCopyFileToContainer(path.resolve(__dirname, '../../../test/data'), "/data")
-                .start();
-
-            console.log('installing');
-            console.log(await container.exec(["npm", "install"]));
-        } catch (e) {
-            console.log(e);
-        }
+        container = await buildContainer.start();
     });
 
     // beforeAll(async () => {
@@ -50,8 +37,8 @@ describe('nodejs generator E2E tests', () => {
 
     describe('API server', () => {
         it('should generate successfully', async () => {
-            expect(await container.exec(["ls"])).toBe("")
-            //expect(await container.exec(["yo", "xmi", "data/fixtures.xml --type=nodejs"])).toBe('');
+            await container.exec(["yo", "xmi", "data/fixtures.xml --type=nodejs"]);
+            expect(await container.exec(["ls"])).toBe('');
         });
     });
 });

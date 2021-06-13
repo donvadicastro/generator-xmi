@@ -18,18 +18,10 @@ RUN apk update && apk upgrade && \
 
 RUN echo -n "Node: " && node -v && echo -n "npm: " && npm -v
 RUN echo "Yeoman Doctor will warn about our npm version being outdated. It is expected and OK."
-RUN npm install --global --silent yo
+RUN npm install --global --silent yo generator-xmi
 
-# Add a yeoman user because Yeoman freaks out and runs setuid(501).
-# This was because less technical people would run Yeoman as root and cause problems.
-# Setting uid to 501 here since it's already a random number being thrown around.
-# @see https://github.com/yeoman/yeoman.github.io/issues/282
-# @see https://github.com/cthulhu666/docker-yeoman/blob/master/Dockerfile
-RUN adduser -D -u 501 yeoman && \
-  echo "yeoman ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+#USER root
+#RUN chmod g+rwx /root /root/.config /root/.config/insight-nodejs
 
-# Yeoman needs the use of a home directory for caching and certain config storage.
-ENV HOME /home/yeoman
-
-# Always run as the yeoman user
-USER yeoman
+#USER node
+ENTRYPOINT ["tail", "-f", "/dev/null"]
