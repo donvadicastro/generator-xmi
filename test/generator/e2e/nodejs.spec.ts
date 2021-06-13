@@ -12,7 +12,9 @@ describe('nodejs generator E2E tests', () => {
         const buildContainer = await GenericContainer.fromDockerfile(path.resolve('./test/generator/e2e'))
             .build();
 
-        container = await buildContainer.start();
+        container = await buildContainer
+            .withCopyFileToContainer(path.resolve(__dirname, '../../../test/data/fixtures.xml'), "/fixtures.xml")
+            .start();
     });
 
     // beforeAll(async () => {

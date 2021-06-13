@@ -1,4 +1,4 @@
-FROM node:11-alpine
+FROM node:16-alpine
 
 # @see http://label-schema.org/rc1/
 LABEL maintainer "vb" \
@@ -18,7 +18,10 @@ RUN apk update && apk upgrade && \
 
 RUN echo -n "Node: " && node -v && echo -n "npm: " && npm -v
 RUN echo "Yeoman Doctor will warn about our npm version being outdated. It is expected and OK."
-RUN npm install --global --silent yo generator-xmi
+RUN npm install --global --silent yo generator-xmi@1.0.4
+
+RUN mkdir -p /root/.config/insight-nodejs &&\
+    chmod g+rwx /root /root/.config /root/.config/insight-nodejs
 
 #USER root
 #RUN chmod g+rwx /root /root/.config /root/.config/insight-nodejs
