@@ -37,8 +37,8 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
     }
 
     clean() {
-        this.spawnCommandSync('rimraf', [`${this.options.destination}/api`]);
-        this.spawnCommandSync('rimraf', [`${this.options.destination}/app`]);
+        this.spawnCommandSync('rm', ['-rf', `${this.options.destination}/api`]);
+        this.spawnCommandSync('rm', ['-rf', `${this.options.destination}/app`]);
     }
 
     generate() {
