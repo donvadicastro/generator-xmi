@@ -41,12 +41,14 @@ describe('nodejs generator E2E tests', () => {
         let req: any;
 
         beforeAll(async () => {
-            await appContainer.exec(["npm", "run", "api:start:forever"]);
+            console.log(await appContainer.exec(["npm", "run", "api:start:forever"]));
             req = request(`http://localhost:${appContainer.getMappedPort(3000)}`);
+
+            await new Promise((resolve) => setTimeout(resolve, 10000));
         });
 
         it('should start API server successfully', (done) => {
-            req.get('/api-explorer').expect(200, done);
+            req.get('/').expect(200, done);
         });
 
         describe('x1-simple-independent-classes -> vehicle', () => {
@@ -67,13 +69,13 @@ describe('nodejs generator E2E tests', () => {
 
     describe('APP server', () => {
         beforeAll(async () => {
-            await appContainer.exec(["npm", "run", "app:start:forever"]);
-            await new Promise(x => setTimeout(x, 10000));
+            console.log(await appContainer.exec(["npm", "run", "app:start:forever"]));
+            await new Promise(x => setTimeout(x, 20000));
         });
 
         it('should start APP server successfully', (done) => {
             const req = request(`http://localhost:${appContainer.getMappedPort(4200)}`);
-            req.get('/administration/classDiagrams/x1SimpleIndependentClasses/person').expect(200, done);
+            req.get('/').expect(200, done);
         });
     });
 });
