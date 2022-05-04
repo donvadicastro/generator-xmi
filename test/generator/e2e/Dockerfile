@@ -1,4 +1,4 @@
-FROM node:11-alpine
+FROM node:14-alpine
 
 # @see http://label-schema.org/rc1/
 LABEL maintainer "vb" \
@@ -19,6 +19,20 @@ RUN apk update && apk upgrade && \
 RUN echo -n "Node: " && node -v && echo -n "npm: " && npm -v
 RUN echo "Yeoman Doctor will warn about our npm version being outdated. It is expected and OK."
 RUN npm install --global --silent yo generator-xmi
+
+RUN adduser -D -u 501 yeoman && \
+  echo "yeoman ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# Yeoman needs the use of a home directory for caching and certain config storage.
+ENV HOME /home/yeoman
+
+RUN mkdir /generated && chown yeoman:yeoman /generated
+WORKDIR /generated
+
+# Always run as the yeoman user
+USER yeoman
+
+#RUN chmod g+rwx /root /root/.config /root/.config/insight-nodejs
 
 #USER root
 #RUN chmod g+rwx /root /root/.config /root/.config/insight-nodejs

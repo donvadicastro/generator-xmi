@@ -5,11 +5,9 @@
   "main": "index.js",
   "author": "",
   "license": "ISC",
-
   "scripts": {
     "build": "tsc",
     "test": "jest",
-
     "api:start": "npm run api:compile && node dist/api/server/index.js",
     "api:start:prod": "NODE_ENV=production npm run api:compile && pm2 start dist/api/server/index.js",
     "api:compile": "ts-node build.ts",
@@ -17,28 +15,21 @@
     "api:dev:debug": "nodemon --exec 'node -r ts-node/register --inspect-brk' api/server/index.ts  | pino -o 'short'",
     "api:test": "mocha api/test/**/*.ts --exit",
     "api:test:debug": "mocha --inspect-brk api/test/**/*.ts --exit",
-
     "api:docker:build": "npm run api:compile && docker build -t generator-xmi/api -f api/Dockerfile .",
     "api:docker:run": "docker run -p 3000:3000 generator-xmi/api",
-
     "app:ng": "ng",
     "app:start": "ng serve --host 0.0.0.0",
     "app:build": "ng build --outputPath=dist/app_compiled",
     "app:build:prod": "ng build --outputPath=dist/app_compiled --prod",
     "app:test": "ng test",
-
     "app:docker:build": "npm run app:build && docker build -t generator-xmi/app -f app/Dockerfile .",
     "app:docker:run": "docker run -p 4200:80 generator-xmi/app",
-
     "all:docker:build": "npm run api:docker:build && npm run app:docker:build",
     "all:docker:run": "npm run all:docker:build && docker-compose up",
-
     "lint": "ng lint",
     "e2e": "protractor e2e/protractor.conf.js",
-
     "jira:sync": "ts-node cmd/jira_sync.ts"
   },
-
   "jest": {
     "testEnvironment": "node",
     "verbose": false,
@@ -55,7 +46,6 @@
       "node"
     ]
   },
-
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
     "@angular/cli": "~7.3.8",
@@ -98,7 +88,6 @@
     "typescript": "~4.2.4",
     "webpack-dev-server": "^3.4.1"
   },
-
   "dependencies": {
     "@angular/animations": "^7.2.13",
     "@angular/cdk": "^7.3.7",
