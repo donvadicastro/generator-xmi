@@ -268,10 +268,10 @@ export class XmiGenerator extends XmiGeneratorBase {
                 localPath || this.fs.copyTpl(this.templatePath('readme.ejs'), `${this.options.destination}/readme.md`, options);
 
                 //clean generated content
-                existsSync(`${localPath}/${x.name}/components/generated`) && this.spawnCommandSync('rimraf', [`${localPath}/${x.name}/components/generated`]);
-                existsSync(`${localPath}/${x.name}/contracts`) && this.spawnCommandSync('rimraf', [`${localPath}/${x.name}/contracts`]);
-                existsSync(`${localPath}/${x.name}/enums`) && this.spawnCommandSync('rimraf', [`${localPath}/${x.name}/enums`]);
-                existsSync(`${localPath}/${x.name}/types`) && this.spawnCommandSync('rimraf', [`${localPath}/${x.name}/types`]);
+                existsSync(`${localPath}/${x.name}/components/generated`) && this.spawnCommandSync('rm', ['-rf', `${localPath}/${x.name}/components/generated`]);
+                existsSync(`${localPath}/${x.name}/contracts`) && this.spawnCommandSync('rm', ['-rf', `${localPath}/${x.name}/contracts`]);
+                existsSync(`${localPath}/${x.name}/enums`) && this.spawnCommandSync('rm', ['-rf', `${localPath}/${x.name}/enums`]);
+                existsSync(`${localPath}/${x.name}/types`) && this.spawnCommandSync('rm', ['-rf', `${localPath}/${x.name}/types`]);
 
                 this._generate(`${localPath}/${x.name}`, x);
 

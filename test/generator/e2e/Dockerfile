@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:11-alpine
 
 # @see http://label-schema.org/rc1/
 LABEL maintainer "vb" \
@@ -16,9 +16,12 @@ LABEL maintainer "vb" \
 RUN apk update && apk upgrade && \
     apk add --no-cache bash git openssh curl
 
+# For some internal modules Python in needed
+RUN apk add --update --no-cache curl py-pip python2 make
+
 RUN echo -n "Node: " && node -v && echo -n "npm: " && npm -v
 RUN echo "Yeoman Doctor will warn about our npm version being outdated. It is expected and OK."
-RUN npm install --global --silent yo generator-xmi
+RUN npm install --global --silent yo forever generator-xmi@1.0.10
 
 RUN adduser -D -u 501 yeoman && \
   echo "yeoman ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
@@ -36,6 +39,9 @@ USER yeoman
 
 #USER root
 #RUN chmod g+rwx /root /root/.config /root/.config/insight-nodejs
+
+# APP port
+EXPOSE 4200
 
 #USER node
 ENTRYPOINT ["tail", "-f", "/dev/null"]

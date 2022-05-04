@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
 import {Actor, ActorRef, ActorSystem} from "comedy";
 
-const actorPath = require.resolve('./actor');
+const actor = require('./actor');
 
 export default class Controller {
     private actor: Promise<ActorRef>;
 
     constructor(actorSystem: ActorSystem) {
-        this.actor = actorSystem.rootActor().then((x: Actor) => x.createChild(actorPath));
+        this.actor = actorSystem.rootActor().then((x: Actor) => x.createChild(actor));
     }
 
     run(req: Request, res: Response): void {

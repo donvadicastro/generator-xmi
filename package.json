@@ -1,6 +1,6 @@
 {
   "name": "generator-xmi",
-  "version": "1.0.3",
+  "version": "1.0.10",
   "description": "",
   "main": "generators/app/index.js",
   "keywords": [
@@ -49,8 +49,9 @@
     "jest": "^26.4.2",
     "jira-connector": "^2.10.0",
     "markdown-toc": "^1.2.0",
+    "supertest": "^6.1.4",
     "rimraf": "^2.7.1",
-    "testcontainers": "^8.9.0",
+    "testcontainers": "^7.18.1",
     "ts-jest": "^26.4.1",
     "typescript": "^4.0.3"
   },

@@ -10,6 +10,7 @@
     "test": "jest",
     "api:start": "npm run api:compile && node dist/api/server/index.js",
     "api:start:prod": "NODE_ENV=production npm run api:compile && pm2 start dist/api/server/index.js",
+    "api:start:forever": "npm run api:compile && forever start dist/api/server/index.js",
     "api:compile": "ts-node build.ts",
     "api:dev": "nodemon api/server/index.ts | pino -o 'short'",
     "api:dev:debug": "nodemon --exec 'node -r ts-node/register --inspect-brk' api/server/index.ts  | pino -o 'short'",
@@ -19,6 +20,7 @@
     "api:docker:run": "docker run -p 3000:3000 generator-xmi/api",
     "app:ng": "ng",
     "app:start": "ng serve --host 0.0.0.0",
+    "app:start:forever": "forever start node_modules/@angular/cli/bin/ng serve --host 0.0.0.0",
     "app:build": "ng build --outputPath=dist/app_compiled",
     "app:build:prod": "ng build --outputPath=dist/app_compiled --prod",
     "app:test": "ng test",
@@ -67,6 +69,7 @@
     "chai": "^4.2.0",
     "codelyzer": "~4.5.0",
     "cucumber": "^5.1.0",
+    "forever": "^4.0.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "jest": "^22.4.3",
@@ -85,7 +88,7 @@
     "supertest": "^3.1.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~4.2.4",
+    "typescript": "3.2.4",
     "webpack-dev-server": "^3.4.1"
   },
   "dependencies": {
