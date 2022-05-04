@@ -1,7 +1,7 @@
-FROM node:11-alpine
+FROM node:12-alpine
 
 # @see http://label-schema.org/rc1/
-LABEL maintainer "vb" \
+LABEL maintainer="vb" \
   # Replacement for the old MAINTAINER directive has fragmented.
   # "vendor" prevents CentOS from leaking through, the other is for tools integrations.
   vendor="vb" \
@@ -17,7 +17,7 @@ RUN apk update && apk upgrade && \
     apk add --no-cache bash git openssh curl
 
 # For some internal modules Python in needed
-RUN apk add --update --no-cache curl py-pip python2 make
+#RUN apk add --update --no-cache curl py-pip python2 make
 
 RUN echo -n "Node: " && node -v && echo -n "npm: " && npm -v
 RUN echo "Yeoman Doctor will warn about our npm version being outdated. It is expected and OK."
@@ -35,13 +35,21 @@ WORKDIR /generated
 # Always run as the yeoman user
 USER yeoman
 
-#RUN chmod g+rwx /root /root/.config /root/.config/insight-nodejs
+#RUN mkdir -p /root/.config/insight-nodejs &&\
+#    chmod g+rwx /root /root/.config /root/.config/insight-nodejs
 
 #USER root
 #RUN chmod g+rwx /root /root/.config /root/.config/insight-nodejs
 
 # APP port
 EXPOSE 4200
+EXPOSE 3000
+
+ARG GENERATOR_TYPE
+ENV GENERATOR_TYPE=$GENERATOR_TYPE
+
+COPY ./data/fixtures.xml .
+RUN yo xmi fixtures.xml --type=$GENERATOR_TYPE --destination=.
 
 #USER node
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+#CMD ["tail", "-f", "/dev/null"]
