@@ -1,11 +1,11 @@
-import {readJSONSync} from "fs-extra";
 import {XmiParser} from "../../../../src/xmiParser";
 import {xmiPackage} from "../../../../src/entities/xmiPackage";
 import '../../../../utils/normilize';
 import {xmiCollaboration} from "../../../../src/entities/xmiCollaboration";
+import {readJSONSync} from "fs-extra";
+import {parseString} from "xml2js";
+import * as fs from "fs";
 
-const parseString = require('xml2js').parseString;
-const fs = require('fs');
 const path = require('path');
 const ejs = require('ejs');
 
@@ -13,16 +13,15 @@ describe('Generators', () => {
     describe('Templates', () => {
         describe('Monolith', () => {
             describe('Collaboration with condition', () => {
-                const dir = path.join(__dirname, '../../../../generators/monolith/templates/partial/collaboration');
+                const dir = path.join(__dirname, '../../../../generators/nodejs/templates/partial/collaboration');
                 const data = readJSONSync('test/data/project11_activity_condition.json');
                 const parser = new XmiParser(data);
 
-                parser.parse();
-
-                const pkg = <xmiPackage>parser.packge;
-                const sequence: xmiCollaboration = <xmiCollaboration>(<xmiPackage>pkg.children[0]).children[0];
+                beforeAll(async () => await parser.parse());
 
                 it('check conditions', async () => {
+                    const pkg = <xmiPackage>parser.packge;
+                    const sequence: xmiCollaboration = <xmiCollaboration>(<xmiPackage>pkg.children[0]).children[0];
                     const content = await ejs.renderFile(path.join(dir, 'flow.ejs'), {entity: sequence});
 
                     expect(content.normalizeSpace()).toBe(`
@@ -55,20 +54,20 @@ describe('Generators', () => {
 
             describe('Collaboration with loop', () => {
                 let data: any, parser: XmiParser;
-                const dir = path.join(__dirname, '../../../../generators/monolith/templates/partial/collaboration');
+                const dir = path.join(__dirname, '../../../../generators/nodejs/templates/partial/collaboration');
 
                 beforeEach((done) => {
                     parseString(fs.readFileSync('test/data/fixtures.xml'), (err: any, result: any) => { data = result; done(); });
                 });
 
-                beforeEach(() => {
+                beforeEach(async () => {
                     parser = new XmiParser(data);
-                    parser.parse();
+                    await parser.parse();
                 });
 
                 it('check loop', async () => {
                     const pkg = <xmiPackage>parser.packge;
-                    const sequence: xmiCollaboration = <xmiCollaboration>(pkg.getNode('sequenceDiagrams.1SimpleLoop.eaCollaboration1'));
+                    const sequence: xmiCollaboration = <xmiCollaboration>(pkg.getNode('sequenceDiagrams.x1SimpleLoop.eaCollaboration1'));
                     const content = await ejs.renderFile(path.join(dir, 'flow.ejs'), {entity: sequence});
 
                     expect(content.normalizeSpace()).toBe(`
@@ -90,7 +89,7 @@ describe('Generators', () => {
 
                 it('check loop with final call', async () => {
                     const pkg = <xmiPackage>parser.packge;
-                    const sequence: xmiCollaboration = <xmiCollaboration>(pkg.getNode('sequenceDiagrams.2SimpleLoopWithFinalCall.eaCollaboration2'));
+                    const sequence: xmiCollaboration = <xmiCollaboration>(pkg.getNode('sequenceDiagrams.x2SimpleLoopWithFinalCall.eaCollaboration2'));
                     const content = await ejs.renderFile(path.join(dir, 'flow.ejs'), {entity: sequence});
 
                     expect(content.normalizeSpace()).toBe(`

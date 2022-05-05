@@ -1,8 +1,0 @@
-const chalk = require("chalk");
-const storage = require('node-persist');
-
-import {FlowState} from '<%= entity.getRelativeRoot() %>/types/flowState';
-
-<% entity.referencesAsList.forEach(reference => {%>
-    import {<%= reference.name %>} from '<%= reference.path %>';
-<% }) %>

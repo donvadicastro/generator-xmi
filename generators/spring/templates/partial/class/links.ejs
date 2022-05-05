@@ -1,0 +1,30 @@
+<% const refLinkNames = []; %>
+
+<% entity.associationLinks.forEach(x => { %>
+    <% if(!x.target.multiplicity || x.target.multiplicity === '1' || x.target.multiplicity === '0..1') { %>
+        <% refLinkNames.push(x.target.typeRef.name) %>
+        <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
+            @OneToOne(cascade = CascadeType.REMOVE)
+            <% if(x.source.multiplicity === '0..1') { %>@JoinColumn()<% } %>
+            <%= x.target.typeRef.namePascal %> <%= x.target.typeRef.name %>Ref;
+        <% } else { %>
+            @ManyToOne(cascade = CascadeType.REMOVE)
+            <%= x.target.typeRef.namePascal %> <%= x.target.typeRef.name %>Ref;
+        <% } %>
+    <%} else {%>
+        <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
+            @OneToMany(cascade = CascadeType.REMOVE)
+            List<<%= x.target.typeRef.namePascal %>> <%= x.target.typeRef.name %>RefList;
+        <% } else { %>
+            @ManyToMany()
+            List<<%= x.target.typeRef.namePascal %>> <%= x.target.typeRef.name %>RefList;
+        <% } %>
+<% }}) %>
+
+<% entity.aggregationLinks.filter(x => x.source.typeRef === entity && x.source.aggregation !== 'none').forEach(x => { %>
+    <% refLinkNames.push(x.target.typeRef.name) %>
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn()
+    <%= x.target.typeRef.namePascal %> <%= x.target.typeRef.name %>Ref;
+<% }) %>

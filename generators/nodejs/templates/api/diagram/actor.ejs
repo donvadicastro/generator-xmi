@@ -1,0 +1,23 @@
+import {DIContainer} from "../../<%= entity.getRelativeRoot() %>/inversify.config";
+import {DITypes} from "../../<%= entity.getRelativeRoot() %>/design/types/diTypes";
+import {<%= entity.namePascal %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= entity.getPathFromRoot() %>/process/<%= entity.name %>';
+import {FlowState} from "../../<%= entity.getRelativeRoot() %>/design/types/flowState";
+
+<% entity.lifelines.forEach(x => { %>
+    import {<%= x.ref.namePascal %>Contract} from '../../<%= entity.getRelativeRoot() %>/design/<%= x.ref.getPathFromRoot() %>/contracts/<%= x.ref.name %>';
+<% }) %>
+
+
+export default class Actor {
+    private flow: <%= entity.namePascal %>;
+
+    constructor() {
+        this.flow = new <%= entity.namePascal %>(<% (entity.lifelines || []).forEach(function (lifeline) { %>
+            DIContainer.get<<%= lifeline.ref.namePascal %>Contract>(DITypes.<%= lifeline.ref.elementId %>),
+        <% }) %>);
+    }
+
+    run(input: any): Promise<any> {
+        return this.flow.run(new FlowState(input));
+    }
+}

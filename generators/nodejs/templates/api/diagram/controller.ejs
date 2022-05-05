@@ -1,0 +1,20 @@
+import { Request, Response } from 'express';
+import {Actor, ActorRef, ActorSystem} from "comedy";
+
+const actor = require('./actor');
+
+export default class Controller {
+    private actor: Promise<ActorRef>;
+
+    constructor(actorSystem: ActorSystem) {
+        this.actor = actorSystem.rootActor().then((x: Actor) => x.createChild(actor));
+    }
+
+    run(req: Request, res: Response): void {
+        this.actor.then(x => x.sendAndReceive('run', req.body)).then((ret: any) => res.status(201).json(ret)).catch(error => res.status(500).json({
+            error: error.message,
+            name: error.name,
+            stack: error.stack
+        }));
+    }
+}

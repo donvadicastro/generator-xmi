@@ -1,11 +1,12 @@
 import xmiBase from "../xmiBase";
 import {TypeConverter} from "../../utils/typeConverter";
+import {xmiInterface} from "../xmiInterface";
 import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
+
 const assert = require('assert');
 
 export class xmiParameter extends xmiBase {
-    type: string;
-    typeRef: xmiBase | null = null;
+    typeRef: xmiBase | undefined = undefined;
     typeDefaultValue = 'null';
 
     /**
@@ -13,18 +14,19 @@ export class xmiParameter extends xmiBase {
      */
     isArray = false;
 
-    constructor(raw: any, parent: xmiBase) {
-        super(raw, parent);
-        this.type = raw.$.type;
-        assert(this.type, `Type is not specified for parameter "${this.name}" in operation "${parent.name} -> ${parent.path.map(x => x.name).join(' -> ')}"`);
+    constructor(raw: any, parent: xmiBase, factory: xmiComponentFactory) {
+        super(raw, parent, factory);
 
-        this.isArray = TypeConverter.isArray(this.type) || this.name.endsWith('List');
+        this.typeId = raw.$.type;
+        assert(this.typeId, `Type is not specified for parameter "${this.name}" in operation "${parent.name} -> ${parent.pathToRoot.map(x => x.name).join(' -> ')}"`);
 
-        if(TypeConverter.isPrimititive(this.type)) {
-            this.type = TypeConverter.convert(this.type);
+        this.isArray = TypeConverter.isArray(this.typeId) || this.name.endsWith('List');
+
+        if(TypeConverter.isPrimitive(this.typeId)) {
+            this.typeId = TypeConverter.convert(this.typeId);
             this.typeDefaultValue = this.isArray ? [] : TypeConverter.getTypeDefaultValue(this.type);
         } else {
-            xmiComponentFactory.getByKeyDeffered(this, 'typeRef', this.type);
+            this._factory.resolveById(this.typeId).subscribe(x => this.typeRef = x);
         }
     }
 }

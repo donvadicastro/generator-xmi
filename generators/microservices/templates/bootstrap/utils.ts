@@ -1,7 +1,5 @@
-import {Message} from "kafka-node";
-
 export const utils = {
-    decode: (message: Message): any => {
+    decode: (message: {value: string}): any => {
         const buf = new Buffer(<string>message.value, "binary");
 
         try {

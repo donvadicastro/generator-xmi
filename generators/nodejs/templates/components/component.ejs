@@ -1,0 +1,9 @@
+import { injectable } from "inversify";
+import "reflect-metadata";
+import {<%= entity.namePascal %>Base} from './generated/<%= entity.name %>.generated';
+
+<%- include('../partial/common/classDescription', {entity: entity, system: false}) -%>
+
+@injectable()
+export class <%= entity.namePascal %> extends <%= entity.namePascal %>Base {
+}

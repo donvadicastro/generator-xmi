@@ -1,0 +1,21 @@
+<% if (orm) { %>
+    @Id()
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+<% } %>
+
+<% (entity.attributes || []).forEach(function (attr) { %>
+    <% if (orm) { %>
+        <% if(attr.isEnum) { %>
+            @Column()
+        <% } else if(attr.isDataType) { %>
+            @Column()
+        <% } else if(attr.typeRef) { %>
+            @ManyToOne(type => <%= attr.typeRef.namePascal %>, {nullable: false})
+            @JoinColumn()
+        <% } else { %>
+            @Column()
+        <% }%>
+    <% } %>
+    private <%= attr.typeRef ? attr.typeRef.namePascal : attr.type %> <%= attr.name %>;
+<% }) %>

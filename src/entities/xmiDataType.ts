@@ -1,19 +1,14 @@
 import {xmiInterface} from "./xmiInterface";
-import {Reference} from "../types/reference";
 import {IAttribute} from "../contracts/attribute";
+import {ArrayUtils} from "../utils/arrayUtils";
+import xmiBase from "./xmiBase";
 
 export class xmiDataType extends xmiInterface {
-    get references(): Reference {
-        const imports: any = {};
+    get references(): xmiBase[] {
+        const imports: any = super.references;
 
         //Inject attributes type
-        this.attributes.forEach(attribute => {
-            if(attribute.typeRef) {
-                imports[this.getRelativePath(attribute.typeRef) +
-                (attribute.isEnum ? '/enums/' : (attribute.isDataType ? '/types/' : '/components/')) + attribute.typeRef.name] =
-                    attribute.typeRef.namePascal;
-            }
-        });
+        this.attributes.forEach(attribute => attribute.typeRef && ArrayUtils.insertIfNotExists(attribute, imports));
 
         return imports;
     }

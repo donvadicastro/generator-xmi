@@ -1,0 +1,20 @@
+@AfterInsert()
+async addGeneralizationLink() {
+    const repo = await getRepository(<%= entity.generalizationLinksTo.elementId %>);
+    repo.save(repo.create({ ...<<%= entity.generalizationLinksTo.elementId %>>this, ...{ id: undefined, _generalizationLinkType: '<%= entity.name %>', _generalizationLinkId: this.id } }));
+}
+
+@BeforeRemove()
+async removeGeneralizationLink() {
+    const repo = await getRepository(<%= entity.generalizationLinksTo.elementId %>);
+    const generalizedEntityToDelete = await repo.findOne({
+        where: {
+            _generalizationLinkType: '<%= entity.name %>',
+            _generalizationLinkId: this.id
+        }
+    });
+
+    if(generalizedEntityToDelete) {
+        repo.remove(generalizedEntityToDelete);
+    }
+}
