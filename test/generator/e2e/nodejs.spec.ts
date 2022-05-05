@@ -1,16 +1,17 @@
 import {StartedTestContainer} from "testcontainers/dist/test-container";
 import * as path from "path";
 import {GenericContainer} from "testcontainers";
-import anything = jasmine.anything;
+
 
 const request = require('supertest');
 
 describe('nodejs generator E2E tests', () => {
-    let appContainer: StartedTestContainer;
     let postgresContainer: StartedTestContainer;
+    let apiContainer: StartedTestContainer;
+    let appContainer: StartedTestContainer;
 
     beforeAll(async () => {
-        jest.setTimeout(360000);
+        jest.setTimeout(600_000);
 
         postgresContainer = await new GenericContainer("postgres")
             .withExposedPorts(5432)
@@ -19,31 +20,35 @@ describe('nodejs generator E2E tests', () => {
             .withEnv("POSTGRES_DB", "test")
             .start();
 
-        const buildContainer = await GenericContainer.fromDockerfile(path.resolve('./test/generator/e2e'))
-            .build();
+        const buildContainer = await GenericContainer.fromDockerfile(path.resolve('./test'))
+            .withBuildArg("GENERATOR_TYPE", "nodejs")
+            .build("generator-xmi-runner");
+
+        apiContainer = await buildContainer
+            .withExposedPorts(3000)
+            .withCmd(["npm", "run", "api:start"])
+            .withEnv('DB_HOST', postgresContainer.getIpAddress('bridge'))
+            .start();
 
         appContainer = await buildContainer
-            .withCopyFileToContainer(path.resolve(__dirname, '../../../test/data/fixtures.xml'), "/generated/fixtures.xml")
-            .withExposedPorts(3000, 4200)
-            .withEnv('DB_HOST', postgresContainer.getIpAddress('bridge'))
+            .withExposedPorts(4200)
+            .withCmd(["npm", "run", "app:start"])
             .start();
     });
 
-    beforeAll(async () => {
-        expect(await appContainer.exec(["yo", "--generators"]))
-            .toEqual({exitCode: 0, output: 'Available Generators:\n\n  xmi\n    microservices\n    nodejs\n    spring\n    monolith\n'});
-
-        expect(await appContainer.exec(["yo", "xmi", "fixtures.xml", "--type=nodejs", "--destination=."]))
-            .toEqual({exitCode: 0, output: anything()});
-    });
+    // beforeAll(async () => {
+    //     expect(await appContainer.exec(["yo", "--generators"]))
+    //         .toEqual({exitCode: 0, output: 'Available Generators:\n\n  xmi\n    microservices\n    nodejs\n    spring\n    monolith\n'});
+    //
+    //     expect(await appContainer.exec(["yo", "xmi", "fixtures.xml", "--type=nodejs", "--destination=."]))
+    //         .toEqual({exitCode: 0, output: anything()});
+    // });
 
     describe('API server', () => {
         let req: any;
 
         beforeAll(async () => {
-            console.log(await appContainer.exec(["npm", "run", "api:start:forever"]));
-            req = request(`http://localhost:${appContainer.getMappedPort(3000)}`);
-
+            req = request(`http://localhost:${apiContainer.getMappedPort(3000)}`);
             await new Promise((resolve) => setTimeout(resolve, 10000));
         });
 
@@ -67,10 +72,9 @@ describe('nodejs generator E2E tests', () => {
         });
     });
 
-    describe('APP server', () => {
+    xdescribe('APP server', () => {
         beforeAll(async () => {
-            console.log(await appContainer.exec(["npm", "run", "app:start:forever"]));
-            await new Promise(x => setTimeout(x, 20000));
+            await new Promise(x => setTimeout(x, 10000));
         });
 
         it('should start APP server successfully', (done) => {

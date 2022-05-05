@@ -1,7 +1,7 @@
 .idea
 .vscode
 
-dist
+dist*
 node_modules
 
 *.spec.js
