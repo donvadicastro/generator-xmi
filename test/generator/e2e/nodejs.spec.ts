@@ -72,7 +72,7 @@ describe('nodejs generator E2E tests', () => {
         });
     });
 
-    describe('APP server', () => {
+    xdescribe('APP server', () => {
         beforeAll(async () => {
             await new Promise(x => setTimeout(x, 10000));
         });
