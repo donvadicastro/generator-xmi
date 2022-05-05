@@ -21,7 +21,7 @@ RUN apk update && apk upgrade && \
 
 RUN echo -n "Node: " && node -v && echo -n "npm: " && npm -v
 RUN echo "Yeoman Doctor will warn about our npm version being outdated. It is expected and OK."
-RUN npm install --global --silent yo forever generator-xmi@1.0.10
+RUN npm install --global --silent yo generator-xmi
 
 RUN adduser -D -u 501 yeoman && \
   echo "yeoman ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
@@ -35,12 +35,6 @@ WORKDIR /generated
 # Always run as the yeoman user
 USER yeoman
 
-#RUN mkdir -p /root/.config/insight-nodejs &&\
-#    chmod g+rwx /root /root/.config /root/.config/insight-nodejs
-
-#USER root
-#RUN chmod g+rwx /root /root/.config /root/.config/insight-nodejs
-
 # APP port
 EXPOSE 4200
 EXPOSE 3000
@@ -50,6 +44,3 @@ ENV GENERATOR_TYPE=$GENERATOR_TYPE
 
 COPY ./data/fixtures.xml .
 RUN yo xmi fixtures.xml --type=$GENERATOR_TYPE --destination=.
-
-#USER node
-#CMD ["tail", "-f", "/dev/null"]
