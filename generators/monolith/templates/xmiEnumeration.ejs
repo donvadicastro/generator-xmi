@@ -1,7 +1,0 @@
-/**
-* This file is auto-generated. Do not update it's content!
-* <%= (entity.description || `${entity.name} description`).replace(/\n/g, '\n* ') %>.
-*/
-export enum <%= entity.namePascal %> {
-    <%= entity.literals.map(literal => literal.toUpperCase() ).join(', ') %>
-}

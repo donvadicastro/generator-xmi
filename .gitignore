@@ -12,4 +12,4 @@ node_modules
 *.js
 *.js.map
 
-!generators/monolith/templates/bootstrap/api/public
+!generators/nodejs/templates/bootstrap/api/public

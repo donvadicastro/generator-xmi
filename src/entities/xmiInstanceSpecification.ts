@@ -1,19 +1,19 @@
-import {xmiComponentFactory} from "../factories/xmiComponentFactory";
-import {Reference} from "../types/reference";
 import {xmiAbstractClass} from "../base/xmiAbstractClass";
 import {xmiClass} from "./xmiClass";
+import xmiBase from "./xmiBase";
+import {ArrayUtils} from "../utils/arrayUtils";
 
 export class xmiInstanceSpecification extends xmiAbstractClass {
     get elementRef(): xmiClass {
-        return <xmiClass>xmiComponentFactory.getByKey(this.raw.$.classifier);
+        return <xmiClass>this._factory.getByKey(this._raw.$.classifier);
     }
 
-    get references(): Reference {
+    get references(): xmiBase[] {
         const imports = super.references;
 
-        //Inject base class when instance speciaification is used
+        //Inject base class when instance specification is used
         if (this.elementRef) {
-            imports['../' + this.getRelativePath(this.elementRef) + '/components/' + this.elementRef.name] = this.elementRef.namePascal;
+            ArrayUtils.insertIfNotExists(this.elementRef, imports)
         }
 
         return imports;

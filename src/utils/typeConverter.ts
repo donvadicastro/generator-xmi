@@ -1,5 +1,10 @@
+import {DialectType} from "../types/dialectType";
+
+type StringDictionary = { [key: string]: string };
+type ArrayDictionary = { [key: string]: any[] };
+
 export class TypeConverter {
-    private static typesMap: {[key: string]: string} = {
+    private static typesMap: StringDictionary = {
         eajava_char: 'string',
         eajava_string: 'string',
         eajava_date: 'Date',
@@ -20,7 +25,7 @@ export class TypeConverter {
         'http://schema.omg.org/spec/uml/2.1/uml.xml#integer': 'number'
     };
 
-    public static isPrimititive(typeName: string): boolean {
+    public static isPrimitive(typeName: string): boolean {
         if(typeName.endsWith('__')) {
             typeName = typeName.slice(0, typeName.length - 2);
         }
@@ -44,28 +49,22 @@ export class TypeConverter {
     }
 
     public static getTypeDefaultValue(type: string): any {
-        let value;
-
-        switch(type) {
-            case 'string': value = '\'\''; break;
-            case 'Date': value = 'new Date()'; break;
-            case 'number': value = '0'; break;
-            case 'boolean': value = 'false'; break;
-
-            default: value = 'null';
-        }
-
-        return value;
+        return (<StringDictionary>{'string': '\'\'','Date': 'new Date()', 'number': '0', 'boolean': 'false'})[type] || 'null';
     }
 
     public static getTypeAllowedValues(type: string): any[] {
-        let value: any[] = [];
+        return (<ArrayDictionary>{'boolean': [true, false]})[type] || [];
+    }
 
-        switch(type) {
-            case 'boolean': value = [true, false]; break;
-            default: value = [];
-        }
+    public static getType(typeId: string, dialect: DialectType): string {
+        return this.typesDialectMap[typeId] ? this.typesDialectMap[typeId][dialect] : typeId;
+    }
 
-        return value;
+    private static typesDialectMap: {[key: string]: StringDictionary} = {
+        'string':       { 'js': 'string',       'java': 'String'    },
+        'Date':         { 'js': 'Date',         'java': 'Date'      },
+        'number':       { 'js': 'number',       'java': 'int'       },
+        'boolean':      { 'js': 'boolean',      'java': 'boolean'   },
+        'void':         { 'js': 'void',         'java': 'void'      },
     }
 }

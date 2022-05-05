@@ -37,7 +37,10 @@ Each generated sequence diagrams can be represented as individual API endpoint s
 Next command will be available after project generation:
 * "**api:start**" - start local web server
 * "**app:start**" - run local application
+* "**all:docker:run**" - run all integrated environment in docker
 
 
-### Start local web server
-Navigate to "[http://localhost:3000/api-explorer](http://localhost:3000/api-explorer)" to run local Swagger.
+### Bootstrapped applications
+* "[http://localhost:3000](http://localhost:3000)" - local API server
+* "[http://localhost:4200](http://localhost:4200)" - local client application
+* "[http://localhost:8080/auth](http://localhost:8080/auth)" - local auth server (if appropriate generator option specified)

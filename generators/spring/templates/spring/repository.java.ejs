@@ -1,0 +1,9 @@
+package com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.repositories;
+
+import com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.components.<%= entity.namePascal %>;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository("<%= entity.elementId %>")
+public interface <%= entity.namePascal %>Repository extends PagingAndSortingRepository<<%= entity.namePascal %>, Integer> {
+}

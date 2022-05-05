@@ -1,0 +1,7 @@
+<%- include('partial/common/importReferences', {entity: entity, deepLevel: ''}) -%>
+
+<%- include('partial/common/classDescription', {entity: entity, system: true}) -%>
+
+export class <%= entity.namePascal %> {
+  <%- include('partial/class/attributes', {entity: entity, orm: false}) -%>
+}

@@ -14,15 +14,19 @@ describe('Generators', () => {
     describe('Templates', () => {
         describe('Monolith', () => {
             describe('Class (input)', () => {
-                const dir = path.join(__dirname, '../../../../generators/monolith/templates/partial/class');
+                const dir = path.join(__dirname, '../../../../generators/nodejs/templates/partial/class');
 
                 describe('check attribute references', () => {
-                    const data = readJSONSync('test/data/project2_class_associations.json');
-                    const parser = new XmiParser(data);
+                    let pkg, classes: any;
 
-                    parser.parse();
-                    const pkg = <xmiPackage>parser.packge;
-                    const classes = <xmiPackage>pkg.children[0];
+                    beforeEach(async () => {
+                        const data = readJSONSync('test/data/project2_class_associations.json');
+                        const parser = new XmiParser(data);
+                        await parser.parse();
+
+                        pkg = <xmiPackage>parser.packge;
+                        classes = <xmiPackage>pkg.children[0];
+                    });
 
                     it('check many to one relation', async () => {
                         const aircraft = <xmiClass>classes.children[0];
@@ -42,11 +46,11 @@ describe('Generators', () => {
                         expect(aircraft.name).toBe('aircraft');
                         expect(content.normalizeSpace()).toBe(`
                         
-                        @ManyToMany(type => Pilot)
-                        pilotRefList?: Pilot[];
+                        @ManyToMany(type => basicClassDiagramWithMultiplicities_pilot)
+                        pilotRefList?: basicClassDiagramWithMultiplicities_pilot[];
                         
-                        @ManyToOne(type => Airline, airline => airline.aircraftRefList, {onDelete: 'CASCADE', nullable: false})
-                        airlineRef: Airline;
+                        @ManyToOne(type => basicClassDiagramWithMultiplicities_airline, airline => airline.aircraftRefList, {onDelete: 'CASCADE', nullable: false})
+                        airlineRef: basicClassDiagramWithMultiplicities_airline;
                         
                         /** 
                          * Refresh current entity. 
@@ -64,12 +68,12 @@ describe('Generators', () => {
                         expect(airline.name).toBe('airline');
                         expect(content.normalizeSpace()).toBe(`
 
-                        @OneToMany(type => Aircraft, aircraft => aircraft.airlineRef, {onDelete: 'CASCADE'})
-                        aircraftRefList?: Aircraft[];
+                        @OneToMany(type => basicClassDiagramWithMultiplicities_aircraft, aircraft => aircraft.airlineRef, {onDelete: 'CASCADE'})
+                        aircraftRefList?: basicClassDiagramWithMultiplicities_aircraft[];
                         
-                        @OneToOne(type => City, city => city.airlineRef, {onDelete: 'CASCADE', nullable: false})
+                        @OneToOne(type => basicClassDiagramWithMultiplicities_city, city => city.airlineRef, {onDelete: 'CASCADE', nullable: false})
                         @JoinColumn()
-                        cityRef: City;
+                        cityRef: basicClassDiagramWithMultiplicities_city;
                         
                         /** 
                          * Refresh current entity. 
@@ -87,8 +91,8 @@ describe('Generators', () => {
                         expect(city.name).toBe('city');
                         expect(content.normalizeSpace()).toBe(`
                                                 
-                        @OneToOne(type => Airline, airline => airline.cityRef, {onDelete: 'CASCADE', nullable: true}) 
-                        airlineRef?: Airline;
+                        @OneToOne(type => basicClassDiagramWithMultiplicities_airline, airline => airline.cityRef, {onDelete: 'CASCADE', nullable: true}) 
+                        airlineRef?: basicClassDiagramWithMultiplicities_airline;
                         
                         /** * Refresh current entity. */ 
                         async refreshEntity(references?: ('airlineRef')[]): Promise<this> { 
@@ -102,7 +106,7 @@ describe('Generators', () => {
                     const data = readJSONSync('test/data/project2_class.json');
                     const parser = new XmiParser(data);
 
-                    parser.parse();
+                    await parser.parse();
 
                     const pkg = <xmiPackage>parser.packge;
                     const entities = (<xmiPackage>pkg.children[0]).children;
@@ -121,7 +125,7 @@ describe('Generators', () => {
                     /** 
                     * getBaseLocation action. 
                     */ 
-                    getBaseLocation(): Promise<Location | null> { 
+                    getBaseLocation(): Promise<testModel_location | null> { 
                         return Promise.resolve(null); 
                     }
                     `.normalizeSpace());
@@ -133,12 +137,12 @@ describe('Generators', () => {
                     beforeAll((done) => {
                         parseString(fs.readFileSync(path.resolve(__dirname, '../../../data/fixtures.xml')), (err: any, result: any) => {
                             const parser = new XmiParser(result);
-                            parser.parse();
+                            parser.parse().then(() => {
+                                const pkg = <xmiPackage>parser.packge;
+                                entities = (<xmiPackage>pkg.children[2]).children;
 
-                            const pkg = <xmiPackage>parser.packge;
-                            entities = (<xmiPackage>pkg.children[2]).children;
-
-                            done();
+                                done();
+                            });
                         });
                     });
 
@@ -157,9 +161,9 @@ describe('Generators', () => {
                             }`.normalizeSpace());
 
                         expect(personContent.normalizeSpace()).toBe(`
-                            @OneToOne(type => Address, {cascade: true})
+                            @OneToOne(type => classDiagrams_x3CompositionRelation_address, {cascade: true})
                             @JoinColumn() 
-                            addressRef: Address;
+                            addressRef: classDiagrams_x3CompositionRelation_address;
                             
                             /** 
                              * Refresh current entity. 

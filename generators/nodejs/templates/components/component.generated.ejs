@@ -1,0 +1,23 @@
+<%- include('../partial/component/import', {entity: entity}) -%>
+
+<%- include('../partial/common/classDescription', {entity: entity, system: true}) -%>
+
+@injectable()
+export abstract class <%= entity.namePascal %>Base extends <%- include('../partial/component/extend', {entity: entity}) -%> {
+  <%- include('../partial/component/attributes', {entity: entity, orm: true}) -%>
+
+  constructor(
+  <% (entity.required || []).map(function (value, i, list) { %>
+    @inject(DITypes.<%= value.typeRef.elementId %>) protected <%= value.typeRef.name %>: <%= value.typeRef.elementId %> <% if(i < list.length) { %>,<% } %>
+  <% }) %>) {
+    super();
+  }
+
+<% if(entity.hasLoop) { %>
+  <%- include('../partial/component/loop', {entity: entity}) -%>
+<% } %>
+
+  <%- include('../partial/component/conditions', {entity: entity}) -%>
+  <%- include('../partial/component/operations', {entity: entity}) -%>
+  <%- include('../partial/component/provide', {entity: entity}) -%>
+}

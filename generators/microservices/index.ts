@@ -5,7 +5,6 @@ import {xmiPackage} from "../../src/entities/xmiPackage";
 import {default as chalk} from "chalk";
 import {xmiCollaboration} from "../../src/entities/xmiCollaboration";
 import {xmiActor} from "../../src/entities/xmiActor";
-import {xmiScreen} from "../../src/entities/ui/xmiScreen";
 import {xmiInterface} from "../../src/entities/xmiInterface";
 import {xmiComponentFactory} from "../../src/factories/xmiComponentFactory";
 import {xmiUseCase} from "../../src/entities/xmiUseCase";

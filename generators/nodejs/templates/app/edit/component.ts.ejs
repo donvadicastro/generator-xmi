@@ -1,0 +1,93 @@
+import { Component } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import {environment} from "../../../<%= entity.getRelativeRoot() %>/environments/environment";
+
+<% var imports = {};
+  (entity.attributesCombined || []).filter(x => x.typeRef && x.isEnum).forEach(x => {
+    imports[x.typeRef.getPathFromRoot() + '/enums/' + x.typeRef.name] = x.typeRef.namePascal;
+  }); %>
+
+<% Object.keys(imports).forEach(key => { %>
+  import {<%= imports[key] %>} from '../../../../<%= entity.getRelativeRoot() %>/design/<%= key %>';
+<% }); %>
+
+@Component({
+  selector: 'app-<%= entity.name %>-edit',
+  templateUrl: './component.html',
+  styleUrls: ['./component.sass']
+})
+export class <%= entity.namePascal %>EditComponent {
+  private apiRootUrl = environment.api.url + '/<%= entity.getPathFromRoot(utils.kebabCase) %>/<%= utils.kebabCase(entity.name) %>';
+
+  public data: any = {};
+  public form: FormGroup;
+  public errorMessage = '';
+
+<% (entity.attributesCombined || []).filter(x => x.typeRef).forEach(x => { %>
+  public <%= x.name %>All: any[] = [];
+<% }) %>
+
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private http: HttpClient) {
+  }
+
+  ngOnInit() {
+    this.loadData();
+    this.form = this.fb.group({
+    <% const formBuilder = (entity, containerCallback, callback) => (entity.attributesCombinedToEdit || [])
+            .map(x => (x.typeRef && (x.isDataType || x.linkType === 'composite')) ? containerCallback(x, formBuilder(x.typeRef, containerCallback, callback)) : callback(x)).join('') %>
+
+    <%- formBuilder(entity,
+            (attr, content) => `${attr.name}: this.fb.group({ id:0, ${content} }),`,
+            (attr) => attr.isArray ? `${attr.name}: [],` : `${attr.name}: [${attr.typeDefaultValue}${!attr.isOptional ? ', Validators.required' : ''}],`) %>
+  });
+  }
+
+  protected save() {
+    const data = this.form.getRawValue();
+
+    this.http[this.data.id ? 'put' : 'post'](this.data.id ? `${this.apiRootUrl}/${this.data.id}` : this.apiRootUrl, data)
+      .subscribe(() => this.router.navigate(['..'], { relativeTo: this.activatedRoute }), (ex) => this.errorMessage = ex.error.error);
+  }
+
+  protected delete() {
+    const url = `${this.apiRootUrl}/${this.data.id}`;
+
+    if(window.confirm('Confirm delete')) {
+      this.http.delete(url)
+          .subscribe(() => this.router.navigate(['..'], {relativeTo: this.activatedRoute}));
+    }
+  }
+
+  private loadData() {
+  <% (entity.attributesCombined || []).filter(x => x.typeRef).forEach(x => { %>
+    <% if(x.isEnum) { %>
+    this.<%= x.name %>All = Object.keys(<%= x.typeRef.namePascal + (x.isEnum ? '' : 'Contract') %>)
+      .filter((key: string) => isNaN(parseInt(key)))
+      .map((key: string) => ({ id: <%= x.typeRef.namePascal + (x.isEnum ? '' : 'Contract')%>[key as keyof typeof <%= x.typeRef.namePascal + (x.isEnum ? '' : 'Contract')%>], label: key }));
+    <% } else if(!x.isDataType) { %>
+    this.http.get(environment.api.url + '/<%= (x.typeRef ? x.typeRef : x).getPathFromRoot(utils.kebabCase) %>/<%= utils.kebabCase(x.typeRef.name) %>').subscribe(
+      (res: any) => this.<%= x.name %>All = res);
+    <% } %>
+  <% }) %>
+
+    this.activatedRoute.params.subscribe(params => {
+      if (params['id']) {
+        this.http.get(`${this.apiRootUrl}/${params['id']}`)
+          .subscribe(res => {
+            this.data = <any>res;
+
+          <% (entity.attributesCombined || []).filter(x => x.name && x.type === 'Date').forEach((attr) => { %>
+            this.data.<%= attr.name %> && (this.data.<%= attr.name %> = new Date(this.data.<%= attr.name %>));
+          <% }) %>
+
+            this.form.patchValue(this.data)
+          });
+      }
+    });
+  }
+}
