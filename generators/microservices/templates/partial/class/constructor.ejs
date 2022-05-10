@@ -1,3 +1,0 @@
-constructor(kafkaClient: KafkaClientExt, dbClient: DbClient | null, topicIn?: string, topicOut?: string) {
-    super(kafkaClient, dbClient, topicIn ? [topicIn] : [<%- (entity.operations || []).map(x => `'${entity.name}-${x.name}'`) %>], topicOut);
-}

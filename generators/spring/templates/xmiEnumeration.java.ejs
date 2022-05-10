@@ -1,7 +1,0 @@
-package com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.enums;
-
-<%- include('partial/common/classDescription', {entity: entity, system: true}) -%>
-
-public enum <%= entity.namePascal %> {
-    <%= entity.literals.map(literal => literal.toUpperCase() ).join(', ') %>
-}
