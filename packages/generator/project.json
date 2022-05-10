@@ -1,0 +1,33 @@
+{
+  "root": "packages/generator",
+  "sourceRoot": "packages/generator/app",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/generator",
+        "main": "packages/generator/app/index.ts",
+        "tsConfig": "packages/generator/tsconfig.lib.json",
+        "assets": ["packages/generator/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/generator/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/generator"],
+      "options": {
+        "jestConfig": "packages/generator/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": []
+}

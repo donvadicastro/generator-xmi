@@ -1,0 +1,28 @@
+<% let loops = {}; currentLoopId = null; %>
+<% (entity.messages || []).forEach(message => { %>
+    <% const loopFrom = message.from && message.fromOperand && message.from.elementRef.fragments.find(x => x.interactionOperator === 'loop') %>
+    <% const loopTo = message.to && message.toOperand && message.to.elementRef.fragments.find(x => x.interactionOperator === 'loop') %>
+    <% const loop = loopFrom || loopTo %>
+
+    <% if(currentLoopId && (!loop || loop.id !== currentLoopId)) { %>
+        <% //when loop completed - activate parent loop or skip
+            delete loops[currentLoopId];
+            const loopIds = Object.keys(loops);
+
+            currentLoopId = loopIds.length ? loop[loopIds[loopIds.length-1]] : null;
+        %>
+        }));
+    <% } %>
+
+    <% if(loop && !loops[loop.id]) { %>
+        <% loops[loop.id] = message.from.elementRef; currentLoopId = loop.id; %>
+        // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to && message.to.elementRef.name %>
+        inputState.value = await Promise.all(inputState.resetActionStart().value.map(async (x: any): Promise<any> => {
+    <% } %>
+
+    // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to && message.to.elementRef.name %>
+    <%- include('action', {message: message, isLoop: currentLoopId}) -%>
+<% }) %>
+<% Object.keys(loops).reverse().forEach(x => { %>
+}));
+<% }) %>

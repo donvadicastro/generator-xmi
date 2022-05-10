@@ -1,0 +1,25 @@
+import {<%= entity.namePascal %>} from "./<%= entity.name %>";
+import {createConnection, getRepository, In} from "typeorm";
+import {DatabaseUtils} from "../<%= entity.getRelativeRoot() %>/utils/database";
+import '../<%= entity.getRelativeRoot() %>/api/server/env';
+
+const ormConfig = require('../<%= entity.getRelativeRoot() %>/ormconfig.json');
+const db = { type: process.env.DB_TYPE, host: process.env.DB_HOST, port: process.env.DB_PORT, username: process.env.POSTGRES_USER, password: process.env.POSTGRES_PASSWORD, database: process.env.POSTGRES_DB };
+
+describe('<%= entity.name %> specification check', () => {
+    beforeAll((done) => {
+        createConnection({...db, ...ormConfig}).then(connection => done())
+            .catch(error => { console.log("CREATE CONNECTION ERROR", error); done(); });
+    });
+
+    beforeEach(async (done) => {
+        await DatabaseUtils.cleanAll();
+        await DatabaseUtils.loadAll();
+        done();
+    });
+
+    it('verify create', async () => {
+        const entity = new <%= entity.namePascal %>();
+        await getRepository(<%= entity.namePascal %>).save(entity);
+    });
+});

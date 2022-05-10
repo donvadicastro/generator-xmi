@@ -1,0 +1,15 @@
+import { Message } from "kafka-node";
+import <%= entity.namePascal %>Base from "./generated/<%= entity.name %>.generated";
+import {IMessageBase} from "../<%= entity.getRelativeRoot() %>/contracts/messages/baseMessage";
+
+/**
+* <%= entity.namePascal %> actor implementation.
+*/
+export default class <%= entity.namePascal %> extends <%= entity.namePascal %>Base {
+    <% entity.operations.forEach(x => { %>
+        <%- include('partial/class/methods_onmessage_description') -%>
+        onMessage_<%= x.name %>(message: IMessageBase, kafkaMessage: Message) {
+            super.onMessage_<%= x.name %>(message, kafkaMessage);
+        }
+    <% }) %>
+}

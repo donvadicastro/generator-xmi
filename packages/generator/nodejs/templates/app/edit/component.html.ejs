@@ -1,0 +1,17 @@
+<h3>{{data.id ? 'Edit' : 'Create'}} <%= entity.nameOrigin %></h3>
+
+<div class="alert alert-danger" *ngIf="errorMessage">
+    {{errorMessage}}
+</div>
+
+<form [formGroup]="form">
+<% entity.attributesCombinedToEdit.forEach(attr => { %>
+    <%- include('field.html.ejs', {field: attr, parent: entity, prefix: attr.name}) -%>
+<% }) %>
+</form>
+
+<a routerLink="../">Return back</a>
+<div class="float-right">
+    <button class="btn btn-danger" (click)="delete()" *ngIf="data.id">Delete</button>&nbsp;
+    <button class="btn btn-primary" (click)="save()" [disabled]="!form.valid">Save</button>
+</div>

@@ -1,0 +1,3 @@
+<%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.namePascal}` : operation.returnParameter.type %><%= operation.isReturnArray ? '[]' : '' %> <%= operation.name %>(<%= operation.inputParameters.length > 1 ? 'value: { ' : '' %><% operation.inputParameters.forEach(x => { %>
+    <%= x.typeRef ? `${x.typeRef.namePascal}${x.isArray ? '[]' : ''}` : x.type %> <%= x.name %>
+<% }) %><%= operation.inputParameters.length > 1 ? ' }' : '' %>)

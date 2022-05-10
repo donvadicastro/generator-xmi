@@ -1,0 +1,10 @@
+import { inject, injectable } from "inversify";
+import "reflect-metadata";
+
+import {ComponentBase} from '../<%= entity.getRelativeRoot() %>/base/componentBase';
+import {FlowState} from '../<%= entity.getRelativeRoot() %>/types/flowState';
+import {DITypes} from "../<%= entity.getRelativeRoot() %>/types/diTypes";
+
+import {<%= entity.namePascal %>Contract} from '../../contracts/<%= entity.name %>';
+
+<%- include('../common/importReferences', {entity: entity, deepLevel: '../'}) -%>

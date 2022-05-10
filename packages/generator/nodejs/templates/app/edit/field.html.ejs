@@ -1,0 +1,50 @@
+<% if(field.isArray) { %>
+    <div class="form-group">
+        <label for="<%= prefix %>-edit"><%= field.name %></label>
+        <div><p-multiSelect id="<%= prefix %>-edit" [options]="<%= field.name %>All" optionLabel="<%= field.typeRef.tags.displayName || 'name'%>" dataKey="id" formControlName="<%= field.name %>"></p-multiSelect></div>
+    </div>
+<% } else if(field.typeRef && (field.isDataType || field.linkType === 'composite')) { %>
+    <div class="card">
+        <div class="card-header">
+            <%= field.name %><% if(!field.isOptional) { %><span class="text-danger"> *</span><%}%>
+        </div>
+        <div class="card-body" formGroupName="<%= field.name %>">
+            <% (field.typeRef.attributes || []).filter(x => x.name).forEach((attr) => { %>
+                <%- include('field.html.ejs', {field: attr, parent: field, prefix: prefix + '-' + attr.name}) -%>
+            <% }) %>
+        </div>
+    </div>
+    <br/>
+<% } else if(field.typeRef && field.isEnum) { %>
+    <label><%= field.name %><% if(!field.isOptional) { %><span class="text-danger"> *</span><%}%></label>
+    <% field.typeRef.literals.forEach((x, i) => { %>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" id="<%= `${prefix}-${i}` %>-edit" [value]="<%= i %>" formControlName="<%= field.name %>">
+            <label class="form-check-label" for="<%= `${prefix}-${i}` %>-edit"><%= x %></label>
+        </div>
+    <% }) %>
+<% } else if(field.typeRef) { %>
+    <div class="form-group">
+        <label for="<%= prefix %>-edit"><%= field.name %><% if(!field.isOptional) { %><span class="text-danger"> *</span><%}%></label>
+        <p-dropdown id="<%= prefix %>-edit" styleClass="form-control p-0" [showClear]="true" [options]="<%= field.name %>All" optionLabel="<%= field.typeRef.tags.displayName || 'name'%>" dataKey="id" [autoDisplayFirst]="false" formControlName="<%= field.name %>"<%= field.isOptional ? "" : " required"%>>
+            <% if(field.typeRef.generalizationLinksFrom.length) { %>
+                <ng-template let-item pTemplate="item">{{item.value._generalizationLinkType || '<%= field.typeRef.name %>' }} - {{item.label}}</ng-template>
+            <% } %>
+        </p-dropdown>
+    </div>
+<% } else if(field.type === 'boolean') { %>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="<%= prefix %>-edit" formControlName="<%= field.name %>" />
+        <label class="form-check-label" for="<%= prefix %>-edit"><%= field.name %><% if(!field.isOptional) { %><span class="text-danger"> *</span><%}%></label>
+    </div>
+<% } else if(field.type === 'Date') { %>
+    <div class="form-group">
+        <label for="<%= prefix %>-edit"><%= field.name %><% if(!field.isOptional) { %><span class="text-danger"> *</span><%}%></label>
+        <div><p-calendar id="<%= prefix %>-edit" [showIcon]="true" showTime="true" formControlName="<%= field.name %>" <%= field.isOptional ? "" : " required" %>></p-calendar></div>
+    </div>
+<% } else { %>
+    <div class="form-group">
+        <label for="<%= prefix %>-edit"><%= field.name %><% if(!field.isOptional) { %><span class="text-danger"> *</span><%}%></label>
+        <input class="form-control" type="<%= field.type %>" id="<%= prefix %>-edit" formControlName="<%= field.name %>"<%= field.typeRef ? " disabled" : "" %><%= field.isOptional ? "" : " required" %>/>
+    </div>
+<% } %>

@@ -1,0 +1,10 @@
+import {<%= namePascal %>} from '../process/<%= name %>';
+
+<% (lifelines || []).forEach(function (lifeline, index) { %>
+import {<%= lifeline.elementRef.namePascal %>} from '../components/<%= lifeline.elementRef.name %>'; <% }) %>
+
+const process = new <%= name %>(<% (lifelines || []).forEach(function (lifeline, index) { %>
+    new <%= lifeline.namePascal %>(<%= index > 0 ? array[index - 1].lifeline.name : '' %>),
+<% }) %>);
+
+process.run(0).then(ret => console.log(ret));

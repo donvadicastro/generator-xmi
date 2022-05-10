@@ -1,0 +1,28 @@
+const inquirer = require('inquirer');
+
+<%- include('partial/common/importReferences', {entity: entity, deepLevel: ''}) -%>
+
+/**
+* Terminal screen class.
+* Allows to get user data using terminal with user friendly notifiers using interactive command line user interfaces.
+*/
+export class <%= entity.namePascal %> {
+    run() {
+        const answers = inquirer.prompt([
+            <% (entity.children || []).filter(x => x.stereotype !== 'button').forEach(function (child) { %>
+            <% if (child.stereotype === 'checkbox') { %>
+            { type: '<%= child.stereotype %>', name: '<%= child.alias || child.name %>', message: 'Enter <%= child.properties.get('label') || child.name %>', choices: [<%- child.properties.get('dictionary').split(',').map(function(x) {return '\'' + x + '\'';}) %>] },
+            <% } else { %>
+            { type: '<%= child.stereotype %>', name: '<%= child.alias || child.name %>', message: 'Enter <%= child.properties.get('label') || child.name %>' },
+            <% }}) %>
+        ]);
+
+        <% (entity.children || []).filter(x => x.stereotype === 'button').forEach(function (child, i) { %>
+            <% if(child.links.informationFLow.length && child.links.informationFLow[0].end) {%>
+                <% var elementRef = child.links.informationFLow[0].end.elementRef %>
+                const collaboration<%= i %> = new <%= elementRef.namePascal %>(<% (elementRef.lifelines || []).forEach(function (lifeline) { %> new <%= lifeline.namePascal %>(), <% }) %>);
+                collaboration<%= i %>.run(answers);
+            <% } %>
+        <% }) %>
+    }
+}

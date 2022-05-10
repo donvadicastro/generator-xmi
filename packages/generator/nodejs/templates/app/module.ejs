@@ -1,0 +1,63 @@
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
+
+import { AppRoutingModule } from './routing.module';
+import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
+import {initializer} from '../init';
+import {AppComponent} from './master/app.component';
+import {IndexComponent} from './master/index.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TableModule} from 'primeng/table';
+import {DropdownModule} from 'primeng/dropdown';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {CalendarModule} from 'primeng/calendar';
+
+<% classes.forEach(x => { %>
+import {<%= x.entity.namePascal %>ListComponent as <%= x.entity.elementId %>ListComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/list/component';
+import {<%= x.entity.namePascal %>EditComponent as <%= x.entity.elementId %>EditComponent} from './administration/<%= x.path %>/<%= x.entity.name %>/edit/component';
+<% }) %>
+
+<% screens.forEach(x => { %>
+import {<%= x.entity.namePascal %>ScreenComponent} from './screens/<%= x.path %>/<%= x.entity.name %>/component';
+<% }) %>
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    IndexComponent,
+  <% classes.forEach(x => { %>
+    <%= x.entity.elementId %>ListComponent,
+    <%= x.entity.elementId %>EditComponent,
+  <% }) %>
+
+  <% screens.forEach(x => { %>
+    <%= x.entity.namePascal %>ScreenComponent,
+  <% }) %>
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    KeycloakAngularModule,
+
+    CalendarModule,
+    MultiSelectModule,
+    DropdownModule,
+    TableModule,
+    AppRoutingModule
+  ],
+  providers: [<% if(options.auth) { %>{
+    provide: APP_INITIALIZER,
+    useFactory: initializer,
+    multi: true,
+    deps: [KeycloakService]
+  }<% } %>],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

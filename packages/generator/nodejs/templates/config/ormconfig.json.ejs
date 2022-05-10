@@ -1,0 +1,15 @@
+{
+   "synchronize": true,
+   "logging": false,
+   "entities": [<% classes.forEach((x, i, list) => { %>
+      "design<%= x.path %>/components/<%= x.entity.name %>{.ts,.js}"<% if(list.length-1 > i) {%>,<%}%><% }) %>
+   ],
+   "subscribers": [<% classes.forEach((x, i, list) => { %>
+      "design<%= x.path %>/components/<%= x.entity.name %>{.ts,.js}"<% if(list.length-1 > i) {%>,<%}%><% }) %>
+   ],
+   "cli": {
+      "entitiesDir": "src/entity",
+      "migrationsDir": "src/migration",
+      "subscribersDir": "src/subscriber"
+   }
+}

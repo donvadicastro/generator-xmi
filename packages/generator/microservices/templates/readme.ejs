@@ -1,0 +1,10 @@
+<% function parseTree(pkg, callback) {
+    callback(pkg);
+    (pkg.children || []).forEach(x => parseTree(x, callback));
+} %>
+
+<% parseTree(entity, (x) => { %>
+    <% if(x.constructor.name  === 'xmiCollaboration') { %>
+
+    <% } %>
+<% }) %>

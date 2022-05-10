@@ -1,0 +1,30 @@
+import {Promise} from 'es6-promise';
+import {pubnub} from 'client';
+
+<% (lifelines || []).forEach(function (lifeline, index) { %>
+import {<%= lifeline.elementRef.namePascal %>} from '../components/<%= lifeline.elementRef.name %>'; <% }) %>
+
+export class <%= name %> {
+    private pub_channel: string;
+
+    constructor(
+        <% (lifelines || []).forEach(function (lifeline, index) { %>
+        /**
+        * <%= lifeline.elementRef.name %> component
+        */
+        private cmp<%= lifeline.elementRef.namePascal %>:  <%= lifeline.elementRef.namePascal %>,
+        <% }) %>
+    ) {
+        this.pub_channel = (lifelines || []).length ? lifelines[0].elementRef.name;
+    }
+
+    /**
+    /* Execute process
+    */
+    run(inputState): void {
+        pubnub.publish({
+            message: inputState,
+            channel: pub_channel
+        });
+    }
+}

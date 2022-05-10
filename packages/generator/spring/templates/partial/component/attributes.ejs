@@ -1,0 +1,3 @@
+<% (entity.attributes || []).forEach(function (attr) { %>
+    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.namePascal : attr.type %>;
+<% }) %>

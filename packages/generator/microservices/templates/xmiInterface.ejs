@@ -1,0 +1,10 @@
+import {IMessageBase} from '../<%= entity.getRelativeRoot() %>/contracts/messages/baseMessage';
+
+export interface <%= entity.namePascal %>Message extends IMessageBase {
+    <% (entity.attributes || []).forEach(function (attr) { %>
+    /**
+    * <%= attr.name %> property
+    */
+    <%= attr.name %>: <%= attr.typeRef ? attr.typeRef.name + 'Contract' : attr.type %>;
+    <% }) %>
+}

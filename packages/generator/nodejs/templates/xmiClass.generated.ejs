@@ -1,0 +1,18 @@
+<%- include('partial/class/import', {entity: entity}) -%>
+
+<%- include('partial/common/classDescription', {entity: entity, system: true}) -%>
+
+export abstract class <%= entity.namePascal %>Base <%- include('partial/class/extend', {entity: entity}) -%> {
+  constructor(params?: <%= entity.namePascal %>Contract) {
+    <% if(entity.generalizationLinksTo) { %>super();<%}%>
+    params && Object.assign(this, params);
+  }
+  <%- include('partial/class/attributes', {entity: entity, orm: true}) -%>
+  <%- include('partial/class/links', {entity: entity}) -%>
+
+  <%- include('partial/class/operations', {entity: entity}) -%>
+
+  <% if(entity.generalizationLinksTo) { %>
+      <%- include('partial/class/generalizationSync', {entity: entity}) -%>
+  <%}%>
+}

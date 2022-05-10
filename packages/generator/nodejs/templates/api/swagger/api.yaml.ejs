@@ -1,0 +1,34 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: api
+  description: REST API
+basePath: /api/v1
+tags:
+  - name: Examples
+    description: Simple example endpoints
+  - name: Specification
+    description: The swagger API specification
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+<% classes.forEach(x => { %>
+<%- include('../../partial/swagger/class.ejs', {context: x, options: options}) %>
+<% }) %>
+
+<% diagrams.forEach(x => { %>
+<%- include('../../partial/swagger/diagram.ejs', {context: x, options: options}) %>
+<% }) %>
+
+definitions:
+<% classes.forEach(x => { %>
+<%- include('../../partial/swagger/definition.ejs', {context: x, options: options}) %>
+<% }) %>
+
+<% dataTypes.forEach(x => { %>
+<%- include('../../partial/swagger/definition.ejs', {context: x, options: options}) %>
+<% }) %>
