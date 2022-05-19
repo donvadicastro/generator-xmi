@@ -1,15 +1,15 @@
 'use strict';
 
-import {xmiComponent} from "@xmi/core";
-import {xmiPackage} from "@xmi/core";
+import {xmiComponent} from "generator-xmi-core";
+import {xmiPackage} from "generator-xmi-core";
 import {green} from "chalk";
-import {xmiCollaboration} from "@xmi/core";
-import {xmiActor} from "@xmi/core";
-import {xmiInterface} from "@xmi/core";
-import {xmiComponentFactory} from "@xmi/core";
-import {xmiUseCase} from "@xmi/core";
+import {xmiCollaboration} from "generator-xmi-core";
+import {xmiActor} from "generator-xmi-core";
+import {xmiInterface} from "generator-xmi-core";
+import {xmiComponentFactory} from "generator-xmi-core";
+import {xmiUseCase} from "generator-xmi-core";
 import {XmiGeneratorBase} from "../_base/xmiGeneratorBase";
-import {xmiClass} from "@xmi/core";
+import {xmiClass} from "generator-xmi-core";
 
 const pascal = require('to-pascal-case');
 

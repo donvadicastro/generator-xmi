@@ -1,7 +1,7 @@
 import {js as beautify} from "js-beautify";
 import kebabCase from "just-kebab-case";
 import Generator = require('yeoman-generator');
-import {xmiUseCase} from "@xmi/core";
+import {xmiUseCase} from "generator-xmi-core";
 
 export class XmiGeneratorBase extends (Generator as { new(args: any, opts: any): any; }) {
     testFiles: string[] = [];

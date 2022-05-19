@@ -1,16 +1,20 @@
 {
-  "root": "packages/generator",
-  "sourceRoot": "packages/generator/app",
+  "root": "apps/generator",
+  "sourceRoot": "apps/generator/app",
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/packages/generator",
-        "main": "packages/generator/app/index.ts",
-        "tsConfig": "packages/generator/tsconfig.lib.json",
-        "assets": ["packages/generator/*.md"]
-      }
+        "outputPath": "dist/generators",
+        "main": "apps/generator/app/index.ts",
+        "tsConfig": "apps/generator/tsconfig.lib.json",
+        "assets": ["apps/generator/*.md"]
+      },
+      "dependsOn": [{
+        "target": "build",
+        "projects": "dependencies"
+      }]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -29,5 +33,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": []
+  "implicitDependencies": ["core"]
 }

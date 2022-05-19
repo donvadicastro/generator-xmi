@@ -1,7 +1,7 @@
 {
   "version": 2,
   "projects": {
-    "app": "packages/app",
-    "generator": "packages/generator"
+    "core": "packages/core",
+    "generator": "apps/generator"
   }
 }

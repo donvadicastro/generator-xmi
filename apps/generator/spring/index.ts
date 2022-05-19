@@ -1,6 +1,6 @@
 'use strict';
 
-import {xmiComponentFactory} from "@xmi/core";
+import {xmiComponentFactory} from "generator-xmi-core";
 import {green, yellow} from "chalk";
 import {
   xmiActor,
@@ -14,7 +14,7 @@ import {
   xmiInterface, xmiPackage,
   xmiScreen,
   xmiUseCase
-} from "@xmi/core/entities";
+} from "generator-xmi-core";
 import {XmiGeneratorBase} from "../_base/xmiGeneratorBase";
 import {existsSync, readdirSync, statSync} from "fs";
 import {join} from "path";

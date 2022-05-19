@@ -1,20 +1,20 @@
 'use strict';
 
-import {xmiPackage} from "@xmi/core";
+import {xmiPackage} from "generator-xmi-core";
 import {green, yellow} from "chalk";
-import {xmiCollaboration} from "@xmi/core";
-import {xmiActor} from "@xmi/core";
-import {xmiScreen} from "@xmi/core";
-import {xmiInterface} from "@xmi/core";
-import {xmiComponentFactory} from "@xmi/core";
-import {xmiUseCase} from "@xmi/core";
+import {xmiCollaboration} from "generator-xmi-core";
+import {xmiActor} from "generator-xmi-core";
+import {xmiScreen} from "generator-xmi-core";
+import {xmiInterface} from "generator-xmi-core";
+import {xmiComponentFactory} from "generator-xmi-core";
+import {xmiUseCase} from "generator-xmi-core";
 import {XmiGeneratorBase} from "../_base/xmiGeneratorBase";
-import {xmiInstanceSpecification} from "@xmi/core";
-import {xmiComponent} from "@xmi/core";
-import {xmiBoundary} from "@xmi/core";
-import {xmiEnumeration} from "@xmi/core";
-import {xmiDataType} from "@xmi/core";
-import {xmiClass} from "@xmi/core";
+import {xmiInstanceSpecification} from "generator-xmi-core";
+import {xmiComponent} from "generator-xmi-core";
+import {xmiBoundary} from "generator-xmi-core";
+import {xmiEnumeration} from "generator-xmi-core";
+import {xmiDataType} from "generator-xmi-core";
+import {xmiClass} from "generator-xmi-core";
 import {existsSync, readdirSync, statSync} from 'fs';
 import {join} from 'path';
 
