@@ -20,14 +20,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/generator/**/*.ts"]
+        "lintFilePatterns": ["apps/generator/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/generator"],
+      "outputs": ["coverage/apps/generator"],
       "options": {
-        "jestConfig": "packages/generator/jest.config.js",
+        "jestConfig": "apps/generator/jest.config.js",
         "passWithNoTests": true
       }
     }

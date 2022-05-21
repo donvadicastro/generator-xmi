@@ -1,0 +1,5 @@
+{
+    "name": "useCase1",
+    "description": "useCase1 description",
+    "basicPathScenarios": ["Action1","Action2","Action3"]
+}

@@ -10,7 +10,7 @@
         "outputPath": "dist/core",
         "main": "packages/core/index.ts",
         "tsConfig": "packages/core/tsconfig.lib.json",
-        "assets": ["packages/generator/*.md"]
+        "assets": ["apps/generator/*.md"]
       }
     },
     "lint": {

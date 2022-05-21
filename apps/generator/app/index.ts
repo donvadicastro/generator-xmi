@@ -8,6 +8,7 @@ import {parseString} from "xml2js";
 import Generator = require('yeoman-generator');
 import yosay = require('yosay');
 import treeify = require('treeify');
+import shell = require('shelljs');
 
 export class XmiGenerator extends (Generator as { new(args: any, opts: any): any; }) {
     dist: string = 'dist';
@@ -37,8 +38,8 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
     }
 
     clean() {
-        this.spawnCommandSync('rm', ['-rf', `${this.options.destination}/api`]);
-        this.spawnCommandSync('rm', ['-rf', `${this.options.destination}/app`]);
+        shell.rm('-rf', `${this.options.destination}/api`);
+        shell.rm('-rf', `${this.options.destination}/app`);
     }
 
     generate() {

@@ -3,7 +3,10 @@
   "version": "1.0.1",
   "license": "MIT",
   "main": "dist/generators/app/index.js",
-  "scripts": {},
+  "scripts": {
+    "build": "nx build",
+    "test": "nx test"
+  },
   "workspaces": [
     "apps/**",
     "packages/**"

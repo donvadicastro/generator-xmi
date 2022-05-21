@@ -3,6 +3,7 @@ import {xmiPackage} from "../../src/entities/xmiPackage";
 import {xmiCollaboration} from "../../src/entities/xmiCollaboration";
 import {xmiComponent} from "../../src/entities/xmiComponent";
 import {xmiClass} from "../../src/entities/xmiClass";
+import * as path from "path";
 
 const parseString = require('xml2js').parseString;
 const fs = require('fs');
@@ -13,7 +14,7 @@ describe('xmiParser', () => {
             let data: any, parser: XmiParser;
 
             beforeEach((done) => {
-                parseString(fs.readFileSync('test/data/fixtures.xml'), (err: any, result: any) => { data = result; done(); });
+                parseString(fs.readFileSync(path.resolve('./resources/models/fixtures.xml')), (err: any, result: any) => { data = result; done(); });
             });
 
             beforeEach(async () => {

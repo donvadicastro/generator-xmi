@@ -1,0 +1,4240 @@
+{
+  "xmi:XMI": {
+    "$": {
+      "xmi:version": "2.1",
+      "xmlns:uml": "http://schema.omg.org/spec/UML/2.1",
+      "xmlns:xmi": "http://schema.omg.org/spec/XMI/2.1",
+      "xmlns:thecustomprofile": "http://www.sparxsystems.com/profiles/thecustomprofile/1.0"
+    },
+    "xmi:Documentation": [
+      {
+        "$": {
+          "exporter": "Enterprise Architect",
+          "exporterVersion": "6.5"
+        }
+      }
+    ],
+    "uml:Model": [
+      {
+        "$": {
+          "xmi:type": "uml:Model",
+          "name": "EA_Model",
+          "visibility": "public"
+        },
+        "packagedElement": [
+          {
+            "$": {
+              "xmi:type": "uml:Package",
+              "xmi:id": "EAPK_E6C09816_A658_4fd8_9BAB_5327E7AD2C53",
+              "name": "Model",
+              "visibility": "public"
+            },
+            "packagedElement": [
+              {
+                "$": {
+                  "xmi:type": "uml:Package",
+                  "xmi:id": "EAPK_F9124A53_CD66_4bed_9059_0069AEDDA4D7",
+                  "name": "Use Case Model",
+                  "visibility": "public"
+                },
+                "packagedElement": [
+                  {
+                    "$": {
+                      "xmi:type": "uml:Package",
+                      "xmi:id": "EAPK_A004E6C8_5590_4d2d_884F_CCEB8973987F",
+                      "name": "Components",
+                      "visibility": "public"
+                    },
+                    "packagedElement": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:Component",
+                          "xmi:id": "EAID_E307581E_0C14_471a_BE24_15BE08B12572",
+                          "name": "BuyAuto",
+                          "visibility": "public"
+                        },
+                        "ownedOperation": [
+                          {
+                            "$": {
+                              "xmi:id": "EAID_405612F2_42FB_4b26_A3CA_60E0585B7085",
+                              "name": "buy",
+                              "visibility": "public",
+                              "concurrency": "sequential"
+                            },
+                            "ownedParameter": [
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_7117F61E_365E_4053_B5B4_E9000110E5C4",
+                                  "name": "x",
+                                  "direction": "in",
+                                  "isStream": "false",
+                                  "isException": "false",
+                                  "isOrdered": "false",
+                                  "isUnique": "true",
+                                  "type": "EAJava_int"
+                                }
+                              },
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_RT000000_42FB_4b26_A3CA_60E0585B7085",
+                                  "name": "return",
+                                  "direction": "return",
+                                  "type": "EAJava_void"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:Component",
+                          "xmi:id": "EAID_B7F95A86_81D8_4165_BB90_0BA8A8AE62A0",
+                          "name": "MakeMoney",
+                          "visibility": "public"
+                        },
+                        "ownedOperation": [
+                          {
+                            "$": {
+                              "xmi:id": "EAID_9CE44F58_7E58_443a_8CC3_95FA59E3C5FD",
+                              "name": "make",
+                              "visibility": "public",
+                              "concurrency": "sequential"
+                            },
+                            "ownedParameter": [
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_9073141A_F187_47a8_A17D_BFDEDF394557",
+                                  "name": "x",
+                                  "type": "EAID_1F49E2E2_116F_4a75_A3BA_176EFBA0FDB4",
+                                  "direction": "in",
+                                  "isStream": "false",
+                                  "isException": "false",
+                                  "isOrdered": "false",
+                                  "isUnique": "true"
+                                }
+                              },
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_RT000000_7E58_443a_8CC3_95FA59E3C5FD",
+                                  "name": "return",
+                                  "direction": "return",
+                                  "type": "EAJava_void"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:Component",
+                          "xmi:id": "EAID_83FF6BBD_0A8E_46e9_89BB_249C92AAEDF0",
+                          "name": "SellHouse",
+                          "visibility": "public"
+                        },
+                        "ownedOperation": [
+                          {
+                            "$": {
+                              "xmi:id": "EAID_E06E5E72_6D52_48dc_8080_A9EDC77FB776",
+                              "name": "sell",
+                              "visibility": "public",
+                              "concurrency": "sequential"
+                            },
+                            "ownedParameter": [
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_69F6A8D3_F76C_4e51_8408_B1CA85976CDD",
+                                  "name": "a",
+                                  "direction": "in",
+                                  "isStream": "false",
+                                  "isException": "false",
+                                  "isOrdered": "false",
+                                  "isUnique": "true",
+                                  "type": "EAJava_int"
+                                }
+                              },
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_RT000000_6D52_48dc_8080_A9EDC77FB776",
+                                  "name": "return",
+                                  "direction": "return",
+                                  "type": "EAJava_void"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Package",
+                      "xmi:id": "EAPK_604559C0_EE82_4e77_8241_D81D6486982D",
+                      "name": "Diagrams",
+                      "visibility": "public"
+                    },
+                    "packagedElement": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:Collaboration",
+                          "xmi:id": "EAID_CB000000_9C0_EE82_4e77_8241_D81D6486982",
+                          "name": "EA_Collaboration1",
+                          "visibility": "public"
+                        },
+                        "ownedBehavior": [
+                          {
+                            "$": {
+                              "xmi:type": "uml:Interaction",
+                              "xmi:id": "EAID_IN000000_9C0_EE82_4e77_8241_D81D6486982",
+                              "name": "EA_Interaction1",
+                              "visibility": "public"
+                            },
+                            "lifeline": [
+                              {
+                                "$": {
+                                  "xmi:type": "uml:Lifeline",
+                                  "xmi:id": "EAID_LL000000_0C14_471a_BE24_15BE08B12572",
+                                  "name": "BuyAuto",
+                                  "visibility": "public",
+                                  "represents": "EAID_AT000000_000_0C14_471a_BE24_15BE08B1257"
+                                }
+                              },
+                              {
+                                "$": {
+                                  "xmi:type": "uml:Lifeline",
+                                  "xmi:id": "EAID_LL000000_81D8_4165_BB90_0BA8A8AE62A0",
+                                  "name": "MakeMoney",
+                                  "visibility": "public",
+                                  "represents": "EAID_AT000000_000_81D8_4165_BB90_0BA8A8AE62A"
+                                }
+                              },
+                              {
+                                "$": {
+                                  "xmi:type": "uml:Lifeline",
+                                  "xmi:id": "EAID_LL000000_0A8E_46e9_89BB_249C92AAEDF0",
+                                  "name": "SellHouse",
+                                  "visibility": "public",
+                                  "represents": "EAID_AT000000_000_0A8E_46e9_89BB_249C92AAEDF"
+                                }
+                              }
+                            ],
+                            "fragment": [
+                              {
+                                "$": {
+                                  "xmi:type": "uml:OccurrenceSpecification",
+                                  "xmi:id": "EAID_FR000000_0C14_471a_BE24_15BE08B12572",
+                                  "covered": "EAID_LL000000_0C14_471a_BE24_15BE08B12572"
+                                }
+                              },
+                              {
+                                "$": {
+                                  "xmi:type": "uml:OccurrenceSpecification",
+                                  "xmi:id": "EAID_FR000000_81D8_4165_BB90_0BA8A8AE62A0",
+                                  "covered": "EAID_B7F95A86_81D8_4165_BB90_0BA8A8AE62A0"
+                                }
+                              },
+                              {
+                                "$": {
+                                  "xmi:type": "uml:OccurrenceSpecification",
+                                  "xmi:id": "EAID_FR000001_81D8_4165_BB90_0BA8A8AE62A0",
+                                  "covered": "EAID_LL000000_81D8_4165_BB90_0BA8A8AE62A0"
+                                }
+                              },
+                              {
+                                "$": {
+                                  "xmi:type": "uml:OccurrenceSpecification",
+                                  "xmi:id": "EAID_FR000000_0A8E_46e9_89BB_249C92AAEDF0",
+                                  "covered": "EAID_83FF6BBD_0A8E_46e9_89BB_249C92AAEDF0"
+                                }
+                              },
+                              {
+                                "$": {
+                                  "xmi:type": "uml:OccurrenceSpecification",
+                                  "xmi:id": "EAID_FR000001_0A8E_46e9_89BB_249C92AAEDF0",
+                                  "covered": "EAID_LL000000_0A8E_46e9_89BB_249C92AAEDF0"
+                                }
+                              },
+                              {
+                                "$": {
+                                  "xmi:type": "uml:OccurrenceSpecification",
+                                  "xmi:id": "EAID_FR000002_81D8_4165_BB90_0BA8A8AE62A0",
+                                  "covered": "EAID_LL000000_81D8_4165_BB90_0BA8A8AE62A0"
+                                }
+                              }
+                            ],
+                            "message": [
+                              {
+                                "$": {
+                                  "xmi:type": "uml:Message",
+                                  "xmi:id": "EAID_A716A471_D030_4462_B83D_1B7AB93849FA",
+                                  "name": "make(Building)",
+                                  "messageKind": "complete",
+                                  "messageSort": "synchCall",
+                                  "sendEvent": "EAID_FR000000_0C14_471a_BE24_15BE08B12572",
+                                  "receiveEvent": "EAID_FR000000_81D8_4165_BB90_0BA8A8AE62A0",
+                                  "signature": "EAID_9CE44F58_7E58_443a_8CC3_95FA59E3C5FD"
+                                },
+                                "argument": [
+                                  {
+                                    "$": {
+                                      "xmi:type": "uml:LiteralString",
+                                      "xmi:id": "EAID_AR000000_D030_4462_B83D_1B7AB93849FA",
+                                      "name": "x"
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "$": {
+                                  "xmi:type": "uml:Message",
+                                  "xmi:id": "EAID_21AFBF08_B443_4057_A382_8CB951C6276E",
+                                  "name": "sell(int)",
+                                  "messageKind": "complete",
+                                  "messageSort": "synchCall",
+                                  "sendEvent": "EAID_FR000001_81D8_4165_BB90_0BA8A8AE62A0",
+                                  "receiveEvent": "EAID_FR000000_0A8E_46e9_89BB_249C92AAEDF0",
+                                  "signature": "EAID_E06E5E72_6D52_48dc_8080_A9EDC77FB776"
+                                },
+                                "argument": [
+                                  {
+                                    "$": {
+                                      "xmi:type": "uml:LiteralString",
+                                      "xmi:id": "EAID_AR000000_B443_4057_A382_8CB951C6276E",
+                                      "name": "a"
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "$": {
+                                  "xmi:type": "uml:Message",
+                                  "xmi:id": "EAID_34FAEC38_0956_426a_8EFA_D8866B736F70",
+                                  "name": "make(Building)",
+                                  "messageKind": "complete",
+                                  "messageSort": "synchCall",
+                                  "sendEvent": "EAID_FR000001_0A8E_46e9_89BB_249C92AAEDF0",
+                                  "receiveEvent": "EAID_FR000002_81D8_4165_BB90_0BA8A8AE62A0",
+                                  "signature": "EAID_9CE44F58_7E58_443a_8CC3_95FA59E3C5FD"
+                                },
+                                "argument": [
+                                  {
+                                    "$": {
+                                      "xmi:type": "uml:LiteralString",
+                                      "xmi:id": "EAID_AR000000_0956_426a_8EFA_D8866B736F70",
+                                      "name": "x"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "ownedAttribute": [
+                          {
+                            "$": {
+                              "xmi:type": "uml:Property",
+                              "xmi:id": "EAID_AT000000_000_0C14_471a_BE24_15BE08B1257"
+                            },
+                            "type": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_E307581E_0C14_471a_BE24_15BE08B12572"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "$": {
+                              "xmi:type": "uml:Property",
+                              "xmi:id": "EAID_AT000000_000_81D8_4165_BB90_0BA8A8AE62A"
+                            },
+                            "type": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_B7F95A86_81D8_4165_BB90_0BA8A8AE62A0"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "$": {
+                              "xmi:type": "uml:Property",
+                              "xmi:id": "EAID_AT000000_000_0A8E_46e9_89BB_249C92AAEDF"
+                            },
+                            "type": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_83FF6BBD_0A8E_46e9_89BB_249C92AAEDF0"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Package",
+                      "xmi:id": "EAPK_2E26DC22_F377_4857_A09F_133D9DE121F0",
+                      "name": "Entities",
+                      "visibility": "public"
+                    },
+                    "packagedElement": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:Class",
+                          "xmi:id": "EAID_1F49E2E2_116F_4a75_A3BA_176EFBA0FDB4",
+                          "name": "Building",
+                          "visibility": "public"
+                        },
+                        "ownedAttribute": [
+                          {
+                            "$": {
+                              "xmi:type": "uml:Property",
+                              "xmi:id": "EAID_F47617D0_0275_46e6_86EC_8C15B529BB27",
+                              "name": "code",
+                              "visibility": "private",
+                              "isStatic": "false",
+                              "isReadOnly": "false",
+                              "isDerived": "false",
+                              "isOrdered": "false",
+                              "isUnique": "true",
+                              "isDerivedUnion": "false"
+                            },
+                            "lowerValue": [
+                              {
+                                "$": {
+                                  "xmi:type": "uml:LiteralInteger",
+                                  "xmi:id": "EAID_LI000001_0275_46e6_86EC_8C15B529BB27",
+                                  "value": "1"
+                                }
+                              }
+                            ],
+                            "upperValue": [
+                              {
+                                "$": {
+                                  "xmi:type": "uml:LiteralInteger",
+                                  "xmi:id": "EAID_LI000002_0275_46e6_86EC_8C15B529BB27",
+                                  "value": "1"
+                                }
+                              }
+                            ],
+                            "type": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAJava_int"
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "ownedOperation": [
+                          {
+                            "$": {
+                              "xmi:id": "EAID_63018ECB_69B3_42d3_AB95_50E99DD03756",
+                              "name": "build",
+                              "visibility": "public",
+                              "concurrency": "sequential"
+                            },
+                            "ownedParameter": [
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_CE2985D2_3486_46a5_8BE3_CBB81F0BEEC1",
+                                  "name": "big",
+                                  "direction": "in",
+                                  "isStream": "false",
+                                  "isException": "false",
+                                  "isOrdered": "false",
+                                  "isUnique": "true",
+                                  "type": "EAJava_boolean"
+                                }
+                              },
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_RT000000_69B3_42d3_AB95_50E99DD03756",
+                                  "name": "return",
+                                  "direction": "return",
+                                  "type": "EAJava_void"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:Realization",
+                          "xmi:id": "EAID_48167039_274F_4ac8_A2EE_A3879EE8689D",
+                          "visibility": "public",
+                          "supplier": "EAID_7549CEEE_27C3_4101_B142_ED4F7E5D057D",
+                          "client": "EAID_1F49E2E2_116F_4a75_A3BA_176EFBA0FDB4"
+                        }
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:Class",
+                          "xmi:id": "EAID_9153BBD2_57A6_46ea_B58D_3D69D6CA8E4F",
+                          "name": "Team",
+                          "visibility": "public"
+                        },
+                        "ownedAttribute": [
+                          {
+                            "$": {
+                              "xmi:type": "uml:Property",
+                              "xmi:id": "EAID_4D56256D_E7FC_484f_B682_9C23636E1933",
+                              "name": "description",
+                              "visibility": "private",
+                              "isStatic": "false",
+                              "isReadOnly": "false",
+                              "isDerived": "false",
+                              "isOrdered": "false",
+                              "isUnique": "true",
+                              "isDerivedUnion": "false"
+                            },
+                            "lowerValue": [
+                              {
+                                "$": {
+                                  "xmi:type": "uml:LiteralInteger",
+                                  "xmi:id": "EAID_LI000003_E7FC_484f_B682_9C23636E1933",
+                                  "value": "1"
+                                }
+                              }
+                            ],
+                            "upperValue": [
+                              {
+                                "$": {
+                                  "xmi:type": "uml:LiteralInteger",
+                                  "xmi:id": "EAID_LI000004_E7FC_484f_B682_9C23636E1933",
+                                  "value": "1"
+                                }
+                              }
+                            ],
+                            "type": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAJava_char"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "$": {
+                              "xmi:type": "uml:Property",
+                              "xmi:id": "EAID_86F7AB8B_6A19_4367_A4AC_CAC6EC8B9F00",
+                              "name": "name",
+                              "visibility": "private",
+                              "isStatic": "false",
+                              "isReadOnly": "false",
+                              "isDerived": "false",
+                              "isOrdered": "false",
+                              "isUnique": "true",
+                              "isDerivedUnion": "false"
+                            },
+                            "lowerValue": [
+                              {
+                                "$": {
+                                  "xmi:type": "uml:LiteralInteger",
+                                  "xmi:id": "EAID_LI000005_6A19_4367_A4AC_CAC6EC8B9F00",
+                                  "value": "1"
+                                }
+                              }
+                            ],
+                            "upperValue": [
+                              {
+                                "$": {
+                                  "xmi:type": "uml:LiteralInteger",
+                                  "xmi:id": "EAID_LI000006_6A19_4367_A4AC_CAC6EC8B9F00",
+                                  "value": "1"
+                                }
+                              }
+                            ],
+                            "type": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAJava_char"
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "ownedOperation": [
+                          {
+                            "$": {
+                              "xmi:id": "EAID_B9D5B8AB_0C60_49c2_A675_D4B6E7146ABD",
+                              "name": "create",
+                              "visibility": "public",
+                              "concurrency": "sequential"
+                            },
+                            "ownedParameter": [
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_39A0C189_02DC_4278_9614_58E311AAACA6",
+                                  "name": "x",
+                                  "direction": "in",
+                                  "isStream": "false",
+                                  "isException": "false",
+                                  "isOrdered": "false",
+                                  "isUnique": "true",
+                                  "type": "EAJava_int"
+                                }
+                              },
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_RT000000_0C60_49c2_A675_D4B6E7146ABD",
+                                  "name": "return",
+                                  "direction": "return",
+                                  "type": "EAJava_void"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:Package",
+                          "xmi:id": "EAPK_16B61A78_7249_46ab_82FC_BF40F101E91C",
+                          "name": "Contracts",
+                          "visibility": "public"
+                        },
+                        "packagedElement": [
+                          {
+                            "$": {
+                              "xmi:type": "uml:Interface",
+                              "xmi:id": "EAID_7549CEEE_27C3_4101_B142_ED4F7E5D057D",
+                              "name": "IBuild",
+                              "visibility": "public",
+                              "isAbstract": "true"
+                            },
+                            "ownedOperation": [
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_6B5592FE_EBA0_4f5f_A5E4_856BF7B983FF",
+                                  "name": "build",
+                                  "visibility": "public",
+                                  "concurrency": "sequential"
+                                },
+                                "ownedParameter": [
+                                  {
+                                    "$": {
+                                      "xmi:id": "EAID_C69830C8_8A5D_4283_8CEE_F834CAFDB916",
+                                      "name": "big",
+                                      "direction": "in",
+                                      "isStream": "false",
+                                      "isException": "false",
+                                      "isOrdered": "false",
+                                      "isUnique": "true",
+                                      "type": "EAJava_boolean"
+                                    }
+                                  },
+                                  {
+                                    "$": {
+                                      "xmi:id": "EAID_RT000000_EBA0_4f5f_A5E4_856BF7B983FF",
+                                      "name": "return",
+                                      "direction": "return",
+                                      "type": "EAJava_void"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "thecustomprofile:operation_guid": [
+          {
+            "$": {
+              "base_Message": "EAID_A716A471_D030_4462_B83D_1B7AB93849FA",
+              "operation_guid": "{9CE44F58-7E58-443a-8CC3-95FA59E3C5FD}"
+            }
+          },
+          {
+            "$": {
+              "base_Message": "EAID_21AFBF08_B443_4057_A382_8CB951C6276E",
+              "operation_guid": "{E06E5E72-6D52-48dc-8080-A9EDC77FB776}"
+            }
+          },
+          {
+            "$": {
+              "base_Message": "EAID_34FAEC38_0956_426a_8EFA_D8866B736F70",
+              "operation_guid": "{9CE44F58-7E58-443a-8CC3-95FA59E3C5FD}"
+            }
+          }
+        ],
+        "thecustomprofile:ImplementsGuid": [
+          {
+            "$": {
+              "base_Operation": "EAID_63018ECB_69B3_42d3_AB95_50E99DD03756",
+              "ImplementsGuid": "{6B5592FE-EBA0-4f5f-A5E4-856BF7B983FF}"
+            }
+          }
+        ],
+        "thecustomprofile:Implements": [
+          {
+            "$": {
+              "base_Operation": "EAID_63018ECB_69B3_42d3_AB95_50E99DD03756",
+              "Implements": "IBuild.build"
+            }
+          }
+        ]
+      }
+    ],
+    "xmi:Extension": [
+      {
+        "$": {
+          "extender": "Enterprise Architect",
+          "extenderID": "6.5"
+        },
+        "elements": [
+          {
+            "element": [
+              {
+                "$": {
+                  "xmi:idref": "EAPK_E6C09816_A658_4fd8_9BAB_5327E7AD2C53"
+                },
+                "packageproperties": [
+                  ""
+                ],
+                "paths": [
+                  ""
+                ],
+                "times": [
+                  {
+                    "$": {
+                      "created": "2012-04-17 00:00:00",
+                      "modified": "2012-04-17 00:00:00",
+                      "lastloaddate": "2018-04-27 19:21:00"
+                    }
+                  }
+                ],
+                "flags": [
+                  {
+                    "$": {
+                      "iscontrolled": "FALSE",
+                      "isprotected": "FALSE",
+                      "usedtd": "FALSE",
+                      "logxml": "FALSE",
+                      "packageFlags": "isModel=1;"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAPK_F9124A53_CD66_4bed_9059_0069AEDDA4D7",
+                  "xmi:type": "uml:Package",
+                  "name": "Use Case Model",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package2": "EAID_F9124A53_CD66_4bed_9059_0069AEDDA4D7",
+                      "package": "EAPK_E6C09816_A658_4fd8_9BAB_5327E7AD2C53",
+                      "tpos": "3",
+                      "ea_localid": "3",
+                      "ea_eleType": "package"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Package",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "phase": "1.0",
+                      "created": "2018-04-27 19:20:59",
+                      "modified": "2018-04-27 19:21:00",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  ""
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Model"
+                    }
+                  }
+                ],
+                "packageproperties": [
+                  {
+                    "$": {
+                      "tpos": "3"
+                    }
+                  }
+                ],
+                "paths": [
+                  ""
+                ],
+                "times": [
+                  {
+                    "$": {
+                      "created": "2018-04-27 19:20:59",
+                      "modified": "2018-04-27 19:21:00",
+                      "lastloaddate": "2018-04-27 19:20:59",
+                      "lastsavedate": "2018-04-27 19:20:59"
+                    }
+                  }
+                ],
+                "flags": [
+                  {
+                    "$": {
+                      "iscontrolled": "FALSE",
+                      "isprotected": "FALSE",
+                      "batchsave": "0",
+                      "batchload": "0",
+                      "usedtd": "FALSE",
+                      "logxml": "FALSE",
+                      "packageFlags": "isModel=1;VICON=1;"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAPK_A004E6C8_5590_4d2d_884F_CCEB8973987F",
+                  "xmi:type": "uml:Package",
+                  "name": "Components",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package2": "EAID_A004E6C8_5590_4d2d_884F_CCEB8973987F",
+                      "package": "EAPK_F9124A53_CD66_4bed_9059_0069AEDDA4D7",
+                      "tpos": "0",
+                      "ea_localid": "7",
+                      "ea_eleType": "package"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Package",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-04-27 19:21:44",
+                      "modified": "2018-04-27 19:21:44",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "Java"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Use Case Model"
+                    }
+                  }
+                ],
+                "packageproperties": [
+                  {
+                    "$": {
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "paths": [
+                  ""
+                ],
+                "times": [
+                  {
+                    "$": {
+                      "created": "2018-04-27 19:21:44",
+                      "modified": "2018-04-27 19:21:44"
+                    }
+                  }
+                ],
+                "flags": [
+                  {
+                    "$": {
+                      "iscontrolled": "FALSE",
+                      "isprotected": "FALSE",
+                      "usedtd": "FALSE",
+                      "logxml": "FALSE"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_E307581E_0C14_471a_BE24_15BE08B12572",
+                  "xmi:type": "uml:Component",
+                  "name": "BuyAuto",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_A004E6C8_5590_4d2d_884F_CCEB8973987F",
+                      "tpos": "0",
+                      "ea_localid": "23",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Component",
+                      "nType": "0",
+                      "scope": "public",
+                      "isRoot": "false",
+                      "isLeaf": "false",
+                      "isAbstract": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-04-27 19:31:51",
+                      "modified": "2018-04-27 19:31:51",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "Java"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Components"
+                    }
+                  }
+                ],
+                "operations": [
+                  {
+                    "operation": [
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_405612F2_42FB_4b26_A3CA_60E0585B7085",
+                          "name": "buy",
+                          "scope": "Public"
+                        },
+                        "properties": [
+                          {
+                            "$": {
+                              "position": "0"
+                            }
+                          }
+                        ],
+                        "stereotype": [
+                          ""
+                        ],
+                        "model": [
+                          {
+                            "$": {
+                              "ea_guid": "{405612F2-42FB-4b26-A3CA-60E0585B7085}",
+                              "ea_localid": "6"
+                            }
+                          }
+                        ],
+                        "type": [
+                          {
+                            "$": {
+                              "type": "void",
+                              "const": "false",
+                              "static": "false",
+                              "isAbstract": "false",
+                              "synchronised": "0",
+                              "concurrency": "Sequential",
+                              "pure": "0",
+                              "isQuery": "false"
+                            }
+                          }
+                        ],
+                        "behaviour": [
+                          ""
+                        ],
+                        "code": [
+                          ""
+                        ],
+                        "style": [
+                          ""
+                        ],
+                        "styleex": [
+                          ""
+                        ],
+                        "documentation": [
+                          ""
+                        ],
+                        "tags": [
+                          ""
+                        ],
+                        "parameters": [
+                          {
+                            "parameter": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_RETURNID_42FB_4b26_A3CA_60E0585B7085",
+                                  "visibility": "public"
+                                },
+                                "properties": [
+                                  {
+                                    "$": {
+                                      "pos": "0",
+                                      "type": "void",
+                                      "const": "false",
+                                      "ea_guid": "{RETURNID-42FB-4b26-A3CA-60E0585B7085}"
+                                    }
+                                  }
+                                ],
+                                "style": [
+                                  ""
+                                ],
+                                "styleex": [
+                                  ""
+                                ],
+                                "documentation": [
+                                  ""
+                                ],
+                                "tags": [
+                                  ""
+                                ],
+                                "xrefs": [
+                                  ""
+                                ]
+                              },
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_7117F61E_365E_4053_B5B4_E9000110E5C4",
+                                  "visibility": "public"
+                                },
+                                "properties": [
+                                  {
+                                    "$": {
+                                      "pos": "0",
+                                      "type": "int",
+                                      "const": "false",
+                                      "ea_guid": "{7117F61E-365E-4053-B5B4-E9000110E5C4}"
+                                    }
+                                  }
+                                ],
+                                "style": [
+                                  ""
+                                ],
+                                "styleex": [
+                                  ""
+                                ],
+                                "documentation": [
+                                  ""
+                                ],
+                                "tags": [
+                                  ""
+                                ],
+                                "xrefs": [
+                                  ""
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "xrefs": [
+                          ""
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "links": [
+                  {
+                    "Sequence": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_A716A471_D030_4462_B83D_1B7AB93849FA",
+                          "start": "EAID_E307581E_0C14_471a_BE24_15BE08B12572",
+                          "end": "EAID_B7F95A86_81D8_4165_BB90_0BA8A8AE62A0"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_B7F95A86_81D8_4165_BB90_0BA8A8AE62A0",
+                  "xmi:type": "uml:Component",
+                  "name": "MakeMoney",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_A004E6C8_5590_4d2d_884F_CCEB8973987F",
+                      "tpos": "0",
+                      "ea_localid": "22",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Component",
+                      "nType": "0",
+                      "scope": "public",
+                      "isRoot": "false",
+                      "isLeaf": "false",
+                      "isAbstract": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-04-27 19:30:59",
+                      "modified": "2018-04-27 19:30:59",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "Java"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Components"
+                    }
+                  }
+                ],
+                "operations": [
+                  {
+                    "operation": [
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_9CE44F58_7E58_443a_8CC3_95FA59E3C5FD",
+                          "name": "make",
+                          "scope": "Public"
+                        },
+                        "properties": [
+                          {
+                            "$": {
+                              "position": "0"
+                            }
+                          }
+                        ],
+                        "stereotype": [
+                          ""
+                        ],
+                        "model": [
+                          {
+                            "$": {
+                              "ea_guid": "{9CE44F58-7E58-443a-8CC3-95FA59E3C5FD}",
+                              "ea_localid": "5"
+                            }
+                          }
+                        ],
+                        "type": [
+                          {
+                            "$": {
+                              "type": "void",
+                              "const": "false",
+                              "static": "false",
+                              "isAbstract": "false",
+                              "synchronised": "0",
+                              "concurrency": "Sequential",
+                              "pure": "0",
+                              "isQuery": "false"
+                            }
+                          }
+                        ],
+                        "behaviour": [
+                          ""
+                        ],
+                        "code": [
+                          ""
+                        ],
+                        "style": [
+                          ""
+                        ],
+                        "styleex": [
+                          ""
+                        ],
+                        "documentation": [
+                          ""
+                        ],
+                        "tags": [
+                          {
+                            "tag": [
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_ACA75E5D_5C64_452c_9D95_65A1A27DFE8E",
+                                  "name": "ea_guid",
+                                  "value": "{9CE44F58-7E58-443a-8CC3-95FA59E3C5FD}"
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "parameters": [
+                          {
+                            "parameter": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_RETURNID_7E58_443a_8CC3_95FA59E3C5FD",
+                                  "visibility": "public"
+                                },
+                                "properties": [
+                                  {
+                                    "$": {
+                                      "pos": "0",
+                                      "type": "void",
+                                      "const": "false",
+                                      "ea_guid": "{RETURNID-7E58-443a-8CC3-95FA59E3C5FD}"
+                                    }
+                                  }
+                                ],
+                                "style": [
+                                  ""
+                                ],
+                                "styleex": [
+                                  ""
+                                ],
+                                "documentation": [
+                                  ""
+                                ],
+                                "tags": [
+                                  ""
+                                ],
+                                "xrefs": [
+                                  ""
+                                ]
+                              },
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_9073141A_F187_47a8_A17D_BFDEDF394557",
+                                  "visibility": "public"
+                                },
+                                "properties": [
+                                  {
+                                    "$": {
+                                      "pos": "0",
+                                      "type": "Building",
+                                      "const": "false",
+                                      "classifier": "EAID_1F49E2E2_116F_4a75_A3BA_176EFBA0FDB4",
+                                      "ea_guid": "{9073141A-F187-47a8-A17D-BFDEDF394557}"
+                                    }
+                                  }
+                                ],
+                                "style": [
+                                  ""
+                                ],
+                                "styleex": [
+                                  ""
+                                ],
+                                "documentation": [
+                                  ""
+                                ],
+                                "tags": [
+                                  ""
+                                ],
+                                "xrefs": [
+                                  ""
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "xrefs": [
+                          ""
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "links": [
+                  {
+                    "Sequence": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_21AFBF08_B443_4057_A382_8CB951C6276E",
+                          "start": "EAID_B7F95A86_81D8_4165_BB90_0BA8A8AE62A0",
+                          "end": "EAID_83FF6BBD_0A8E_46e9_89BB_249C92AAEDF0"
+                        }
+                      },
+                      {
+                        "$": {
+                          "xmi:id": "EAID_34FAEC38_0956_426a_8EFA_D8866B736F70",
+                          "start": "EAID_83FF6BBD_0A8E_46e9_89BB_249C92AAEDF0",
+                          "end": "EAID_B7F95A86_81D8_4165_BB90_0BA8A8AE62A0"
+                        }
+                      },
+                      {
+                        "$": {
+                          "xmi:id": "EAID_A716A471_D030_4462_B83D_1B7AB93849FA",
+                          "start": "EAID_E307581E_0C14_471a_BE24_15BE08B12572",
+                          "end": "EAID_B7F95A86_81D8_4165_BB90_0BA8A8AE62A0"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_83FF6BBD_0A8E_46e9_89BB_249C92AAEDF0",
+                  "xmi:type": "uml:Component",
+                  "name": "SellHouse",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_A004E6C8_5590_4d2d_884F_CCEB8973987F",
+                      "tpos": "0",
+                      "ea_localid": "25",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Component",
+                      "nType": "0",
+                      "scope": "public",
+                      "isRoot": "false",
+                      "isLeaf": "false",
+                      "isAbstract": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-04-27 19:39:23",
+                      "modified": "2018-04-27 19:39:23",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "Java"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Components"
+                    }
+                  }
+                ],
+                "operations": [
+                  {
+                    "operation": [
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_E06E5E72_6D52_48dc_8080_A9EDC77FB776",
+                          "name": "sell",
+                          "scope": "Public"
+                        },
+                        "properties": [
+                          {
+                            "$": {
+                              "position": "0"
+                            }
+                          }
+                        ],
+                        "stereotype": [
+                          ""
+                        ],
+                        "model": [
+                          {
+                            "$": {
+                              "ea_guid": "{E06E5E72-6D52-48dc-8080-A9EDC77FB776}",
+                              "ea_localid": "7"
+                            }
+                          }
+                        ],
+                        "type": [
+                          {
+                            "$": {
+                              "type": "void",
+                              "const": "false",
+                              "static": "false",
+                              "isAbstract": "false",
+                              "synchronised": "0",
+                              "concurrency": "Sequential",
+                              "pure": "0",
+                              "isQuery": "false"
+                            }
+                          }
+                        ],
+                        "behaviour": [
+                          ""
+                        ],
+                        "code": [
+                          ""
+                        ],
+                        "style": [
+                          ""
+                        ],
+                        "styleex": [
+                          ""
+                        ],
+                        "documentation": [
+                          ""
+                        ],
+                        "tags": [
+                          {
+                            "tag": [
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_9531366A_12CA_4dc1_8729_8A2C16E843FC",
+                                  "name": "ea_guid",
+                                  "value": "{E06E5E72-6D52-48dc-8080-A9EDC77FB776}"
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "parameters": [
+                          {
+                            "parameter": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_RETURNID_6D52_48dc_8080_A9EDC77FB776",
+                                  "visibility": "public"
+                                },
+                                "properties": [
+                                  {
+                                    "$": {
+                                      "pos": "0",
+                                      "type": "void",
+                                      "const": "false",
+                                      "ea_guid": "{RETURNID-6D52-48dc-8080-A9EDC77FB776}"
+                                    }
+                                  }
+                                ],
+                                "style": [
+                                  ""
+                                ],
+                                "styleex": [
+                                  ""
+                                ],
+                                "documentation": [
+                                  ""
+                                ],
+                                "tags": [
+                                  ""
+                                ],
+                                "xrefs": [
+                                  ""
+                                ]
+                              },
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_69F6A8D3_F76C_4e51_8408_B1CA85976CDD",
+                                  "visibility": "public"
+                                },
+                                "properties": [
+                                  {
+                                    "$": {
+                                      "pos": "0",
+                                      "type": "int",
+                                      "const": "false",
+                                      "ea_guid": "{69F6A8D3-F76C-4e51-8408-B1CA85976CDD}"
+                                    }
+                                  }
+                                ],
+                                "style": [
+                                  ""
+                                ],
+                                "styleex": [
+                                  ""
+                                ],
+                                "documentation": [
+                                  ""
+                                ],
+                                "tags": [
+                                  ""
+                                ],
+                                "xrefs": [
+                                  ""
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "xrefs": [
+                          ""
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "links": [
+                  {
+                    "Sequence": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_34FAEC38_0956_426a_8EFA_D8866B736F70",
+                          "start": "EAID_83FF6BBD_0A8E_46e9_89BB_249C92AAEDF0",
+                          "end": "EAID_B7F95A86_81D8_4165_BB90_0BA8A8AE62A0"
+                        }
+                      },
+                      {
+                        "$": {
+                          "xmi:id": "EAID_21AFBF08_B443_4057_A382_8CB951C6276E",
+                          "start": "EAID_B7F95A86_81D8_4165_BB90_0BA8A8AE62A0",
+                          "end": "EAID_83FF6BBD_0A8E_46e9_89BB_249C92AAEDF0"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAPK_604559C0_EE82_4e77_8241_D81D6486982D",
+                  "xmi:type": "uml:Package",
+                  "name": "Diagrams",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package2": "EAID_604559C0_EE82_4e77_8241_D81D6486982D",
+                      "package": "EAPK_F9124A53_CD66_4bed_9059_0069AEDDA4D7",
+                      "tpos": "0",
+                      "ea_localid": "9",
+                      "ea_eleType": "package"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Package",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-04-27 19:37:23",
+                      "modified": "2018-04-27 19:37:23",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "Java"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Use Case Model"
+                    }
+                  }
+                ],
+                "packageproperties": [
+                  {
+                    "$": {
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "paths": [
+                  ""
+                ],
+                "times": [
+                  {
+                    "$": {
+                      "created": "2018-04-27 19:37:23",
+                      "modified": "2018-04-27 19:37:23"
+                    }
+                  }
+                ],
+                "flags": [
+                  {
+                    "$": {
+                      "iscontrolled": "FALSE",
+                      "isprotected": "FALSE",
+                      "usedtd": "FALSE",
+                      "logxml": "FALSE"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAPK_2E26DC22_F377_4857_A09F_133D9DE121F0",
+                  "xmi:type": "uml:Package",
+                  "name": "Entities",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package2": "EAID_2E26DC22_F377_4857_A09F_133D9DE121F0",
+                      "package": "EAPK_F9124A53_CD66_4bed_9059_0069AEDDA4D7",
+                      "tpos": "0",
+                      "ea_localid": "6",
+                      "ea_eleType": "package"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Package",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-04-27 19:21:37",
+                      "modified": "2018-04-27 19:21:37",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "Java"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Use Case Model"
+                    }
+                  }
+                ],
+                "packageproperties": [
+                  {
+                    "$": {
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "paths": [
+                  ""
+                ],
+                "times": [
+                  {
+                    "$": {
+                      "created": "2018-04-27 19:21:37",
+                      "modified": "2018-04-27 19:21:37"
+                    }
+                  }
+                ],
+                "flags": [
+                  {
+                    "$": {
+                      "iscontrolled": "FALSE",
+                      "isprotected": "FALSE",
+                      "usedtd": "FALSE",
+                      "logxml": "FALSE"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_1F49E2E2_116F_4a75_A3BA_176EFBA0FDB4",
+                  "xmi:type": "uml:Class",
+                  "name": "Building",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_2E26DC22_F377_4857_A09F_133D9DE121F0",
+                      "tpos": "0",
+                      "ea_localid": "19",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "documentation": "Class is used for...",
+                      "isSpecification": "false",
+                      "sType": "Class",
+                      "nType": "0",
+                      "scope": "public",
+                      "isRoot": "false",
+                      "isLeaf": "false",
+                      "isAbstract": "false",
+                      "isActive": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-04-27 19:22:22",
+                      "modified": "2018-04-27 19:34:20",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "product_name": "Java",
+                      "gentype": "Java"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Entities",
+                      "ea_oprparamsclassified": "{9073141A-F187-47a8-A17D-BFDEDF394557}"
+                    }
+                  }
+                ],
+                "attributes": [
+                  {
+                    "attribute": [
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_F47617D0_0275_46e6_86EC_8C15B529BB27",
+                          "name": "code",
+                          "scope": "Private"
+                        },
+                        "initial": [
+                          ""
+                        ],
+                        "documentation": [
+                          ""
+                        ],
+                        "model": [
+                          {
+                            "$": {
+                              "ea_localid": "3",
+                              "ea_guid": "{F47617D0-0275-46e6-86EC-8C15B529BB27}"
+                            }
+                          }
+                        ],
+                        "properties": [
+                          {
+                            "$": {
+                              "type": "int",
+                              "collection": "false",
+                              "duplicates": "0",
+                              "changeability": "changeable"
+                            }
+                          }
+                        ],
+                        "coords": [
+                          {
+                            "$": {
+                              "ordered": "0"
+                            }
+                          }
+                        ],
+                        "containment": [
+                          {
+                            "$": {
+                              "containment": "Not Specified",
+                              "position": "0"
+                            }
+                          }
+                        ],
+                        "stereotype": [
+                          ""
+                        ],
+                        "bounds": [
+                          {
+                            "$": {
+                              "lower": "1",
+                              "upper": "1"
+                            }
+                          }
+                        ],
+                        "options": [
+                          ""
+                        ],
+                        "style": [
+                          ""
+                        ],
+                        "styleex": [
+                          {
+                            "$": {
+                              "value": "volatile=0;"
+                            }
+                          }
+                        ],
+                        "tags": [
+                          ""
+                        ],
+                        "xrefs": [
+                          ""
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "operations": [
+                  {
+                    "operation": [
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_63018ECB_69B3_42d3_AB95_50E99DD03756",
+                          "name": "build",
+                          "scope": "Public"
+                        },
+                        "properties": [
+                          {
+                            "$": {
+                              "position": "0"
+                            }
+                          }
+                        ],
+                        "stereotype": [
+                          ""
+                        ],
+                        "model": [
+                          {
+                            "$": {
+                              "ea_guid": "{63018ECB-69B3-42d3-AB95-50E99DD03756}",
+                              "ea_localid": "4"
+                            }
+                          }
+                        ],
+                        "type": [
+                          {
+                            "$": {
+                              "type": "void",
+                              "const": "false",
+                              "static": "false",
+                              "isAbstract": "false",
+                              "synchronised": "0",
+                              "concurrency": "Sequential",
+                              "pure": "0",
+                              "isQuery": "false"
+                            }
+                          }
+                        ],
+                        "behaviour": [
+                          ""
+                        ],
+                        "code": [
+                          ""
+                        ],
+                        "style": [
+                          ""
+                        ],
+                        "styleex": [
+                          ""
+                        ],
+                        "documentation": [
+                          ""
+                        ],
+                        "tags": [
+                          {
+                            "tag": [
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_966D3A12_7A5F_4271_80DE_EA767D5C6D78",
+                                  "name": "ImplementsGuid",
+                                  "value": "{6B5592FE-EBA0-4f5f-A5E4-856BF7B983FF}",
+                                  "notes": "Identifies the interface operation"
+                                }
+                              },
+                              {
+                                "$": {
+                                  "xmi:id": "EAID_E5DB3819_B22F_4755_B78C_95D4896BABA9",
+                                  "name": "Implements",
+                                  "value": "IBuild.build",
+                                  "notes": "Qualified name for the interface operation"
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "parameters": [
+                          {
+                            "parameter": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_RETURNID_69B3_42d3_AB95_50E99DD03756",
+                                  "visibility": "public"
+                                },
+                                "properties": [
+                                  {
+                                    "$": {
+                                      "pos": "0",
+                                      "type": "void",
+                                      "const": "false",
+                                      "ea_guid": "{RETURNID-69B3-42d3-AB95-50E99DD03756}"
+                                    }
+                                  }
+                                ],
+                                "style": [
+                                  ""
+                                ],
+                                "styleex": [
+                                  ""
+                                ],
+                                "documentation": [
+                                  ""
+                                ],
+                                "tags": [
+                                  ""
+                                ],
+                                "xrefs": [
+                                  ""
+                                ]
+                              },
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_CE2985D2_3486_46a5_8BE3_CBB81F0BEEC1",
+                                  "visibility": "public"
+                                },
+                                "properties": [
+                                  {
+                                    "$": {
+                                      "pos": "0",
+                                      "type": "boolean",
+                                      "const": "false",
+                                      "ea_guid": "{CE2985D2-3486-46a5-8BE3-CBB81F0BEEC1}"
+                                    }
+                                  }
+                                ],
+                                "style": [
+                                  ""
+                                ],
+                                "styleex": [
+                                  ""
+                                ],
+                                "documentation": [
+                                  ""
+                                ],
+                                "tags": [
+                                  ""
+                                ],
+                                "xrefs": [
+                                  ""
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "xrefs": [
+                          ""
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "links": [
+                  {
+                    "Realisation": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_48167039_274F_4ac8_A2EE_A3879EE8689D",
+                          "start": "EAID_1F49E2E2_116F_4a75_A3BA_176EFBA0FDB4",
+                          "end": "EAID_7549CEEE_27C3_4101_B142_ED4F7E5D057D"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_9153BBD2_57A6_46ea_B58D_3D69D6CA8E4F",
+                  "xmi:type": "uml:Class",
+                  "name": "Team",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_2E26DC22_F377_4857_A09F_133D9DE121F0",
+                      "tpos": "0",
+                      "ea_localid": "18",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Class",
+                      "nType": "0",
+                      "scope": "public",
+                      "isRoot": "false",
+                      "isLeaf": "false",
+                      "isAbstract": "false",
+                      "isActive": "false"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-04-27 19:22:14",
+                      "modified": "2018-04-27 19:22:14",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "Java"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Entities"
+                    }
+                  }
+                ],
+                "attributes": [
+                  {
+                    "attribute": [
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_4D56256D_E7FC_484f_B682_9C23636E1933",
+                          "name": "description",
+                          "scope": "Private"
+                        },
+                        "initial": [
+                          ""
+                        ],
+                        "documentation": [
+                          ""
+                        ],
+                        "model": [
+                          {
+                            "$": {
+                              "ea_localid": "2",
+                              "ea_guid": "{4D56256D-E7FC-484f-B682-9C23636E1933}"
+                            }
+                          }
+                        ],
+                        "properties": [
+                          {
+                            "$": {
+                              "type": "char",
+                              "collection": "false",
+                              "duplicates": "0",
+                              "changeability": "changeable"
+                            }
+                          }
+                        ],
+                        "coords": [
+                          {
+                            "$": {
+                              "ordered": "0"
+                            }
+                          }
+                        ],
+                        "containment": [
+                          {
+                            "$": {
+                              "containment": "Not Specified",
+                              "position": "1"
+                            }
+                          }
+                        ],
+                        "stereotype": [
+                          ""
+                        ],
+                        "bounds": [
+                          {
+                            "$": {
+                              "lower": "1",
+                              "upper": "1"
+                            }
+                          }
+                        ],
+                        "options": [
+                          ""
+                        ],
+                        "style": [
+                          ""
+                        ],
+                        "styleex": [
+                          {
+                            "$": {
+                              "value": "volatile=0;"
+                            }
+                          }
+                        ],
+                        "tags": [
+                          ""
+                        ],
+                        "xrefs": [
+                          ""
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_86F7AB8B_6A19_4367_A4AC_CAC6EC8B9F00",
+                          "name": "name",
+                          "scope": "Private"
+                        },
+                        "initial": [
+                          ""
+                        ],
+                        "documentation": [
+                          ""
+                        ],
+                        "model": [
+                          {
+                            "$": {
+                              "ea_localid": "1",
+                              "ea_guid": "{86F7AB8B-6A19-4367-A4AC-CAC6EC8B9F00}"
+                            }
+                          }
+                        ],
+                        "properties": [
+                          {
+                            "$": {
+                              "type": "char",
+                              "collection": "false",
+                              "duplicates": "0",
+                              "changeability": "changeable"
+                            }
+                          }
+                        ],
+                        "coords": [
+                          {
+                            "$": {
+                              "ordered": "0"
+                            }
+                          }
+                        ],
+                        "containment": [
+                          {
+                            "$": {
+                              "containment": "Not Specified",
+                              "position": "0"
+                            }
+                          }
+                        ],
+                        "stereotype": [
+                          ""
+                        ],
+                        "bounds": [
+                          {
+                            "$": {
+                              "lower": "1",
+                              "upper": "1"
+                            }
+                          }
+                        ],
+                        "options": [
+                          ""
+                        ],
+                        "style": [
+                          ""
+                        ],
+                        "styleex": [
+                          {
+                            "$": {
+                              "value": "volatile=0;"
+                            }
+                          }
+                        ],
+                        "tags": [
+                          ""
+                        ],
+                        "xrefs": [
+                          ""
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "operations": [
+                  {
+                    "operation": [
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_B9D5B8AB_0C60_49c2_A675_D4B6E7146ABD",
+                          "name": "create",
+                          "scope": "Public"
+                        },
+                        "properties": [
+                          {
+                            "$": {
+                              "position": "0"
+                            }
+                          }
+                        ],
+                        "stereotype": [
+                          ""
+                        ],
+                        "model": [
+                          {
+                            "$": {
+                              "ea_guid": "{B9D5B8AB-0C60-49c2-A675-D4B6E7146ABD}",
+                              "ea_localid": "1"
+                            }
+                          }
+                        ],
+                        "type": [
+                          {
+                            "$": {
+                              "type": "void",
+                              "const": "false",
+                              "static": "false",
+                              "isAbstract": "false",
+                              "synchronised": "0",
+                              "concurrency": "Sequential",
+                              "pure": "0",
+                              "isQuery": "false"
+                            }
+                          }
+                        ],
+                        "behaviour": [
+                          ""
+                        ],
+                        "code": [
+                          ""
+                        ],
+                        "style": [
+                          ""
+                        ],
+                        "styleex": [
+                          ""
+                        ],
+                        "documentation": [
+                          ""
+                        ],
+                        "tags": [
+                          ""
+                        ],
+                        "parameters": [
+                          {
+                            "parameter": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_RETURNID_0C60_49c2_A675_D4B6E7146ABD",
+                                  "visibility": "public"
+                                },
+                                "properties": [
+                                  {
+                                    "$": {
+                                      "pos": "0",
+                                      "type": "void",
+                                      "const": "false",
+                                      "ea_guid": "{RETURNID-0C60-49c2-A675-D4B6E7146ABD}"
+                                    }
+                                  }
+                                ],
+                                "style": [
+                                  ""
+                                ],
+                                "styleex": [
+                                  ""
+                                ],
+                                "documentation": [
+                                  ""
+                                ],
+                                "tags": [
+                                  ""
+                                ],
+                                "xrefs": [
+                                  ""
+                                ]
+                              },
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_39A0C189_02DC_4278_9614_58E311AAACA6",
+                                  "visibility": "public"
+                                },
+                                "properties": [
+                                  {
+                                    "$": {
+                                      "pos": "0",
+                                      "type": "int",
+                                      "const": "false",
+                                      "ea_guid": "{39A0C189-02DC-4278-9614-58E311AAACA6}"
+                                    }
+                                  }
+                                ],
+                                "style": [
+                                  ""
+                                ],
+                                "styleex": [
+                                  ""
+                                ],
+                                "documentation": [
+                                  ""
+                                ],
+                                "tags": [
+                                  ""
+                                ],
+                                "xrefs": [
+                                  ""
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "xrefs": [
+                          ""
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAPK_16B61A78_7249_46ab_82FC_BF40F101E91C",
+                  "xmi:type": "uml:Package",
+                  "name": "Contracts",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package2": "EAID_16B61A78_7249_46ab_82FC_BF40F101E91C",
+                      "package": "EAPK_2E26DC22_F377_4857_A09F_133D9DE121F0",
+                      "tpos": "0",
+                      "ea_localid": "8",
+                      "ea_eleType": "package"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Package",
+                      "nType": "0",
+                      "scope": "public"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-04-27 19:24:19",
+                      "modified": "2018-04-27 19:24:19",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "Java"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Entities"
+                    }
+                  }
+                ],
+                "packageproperties": [
+                  {
+                    "$": {
+                      "version": "1.0"
+                    }
+                  }
+                ],
+                "paths": [
+                  ""
+                ],
+                "times": [
+                  {
+                    "$": {
+                      "created": "2018-04-27 19:24:19",
+                      "modified": "2018-04-27 19:24:19"
+                    }
+                  }
+                ],
+                "flags": [
+                  {
+                    "$": {
+                      "iscontrolled": "FALSE",
+                      "isprotected": "FALSE",
+                      "usedtd": "FALSE",
+                      "logxml": "FALSE"
+                    }
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_7549CEEE_27C3_4101_B142_ED4F7E5D057D",
+                  "xmi:type": "uml:Interface",
+                  "name": "IBuild",
+                  "scope": "public"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_16B61A78_7249_46ab_82FC_BF40F101E91C",
+                      "tpos": "0",
+                      "ea_localid": "21",
+                      "ea_eleType": "element"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "isSpecification": "false",
+                      "sType": "Interface",
+                      "nType": "0",
+                      "scope": "public",
+                      "isRoot": "false",
+                      "isLeaf": "false",
+                      "isAbstract": "true"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "phase": "1.0",
+                      "created": "2018-04-27 19:24:52",
+                      "modified": "2018-04-27 19:24:52",
+                      "complexity": "1",
+                      "status": "Proposed"
+                    }
+                  }
+                ],
+                "code": [
+                  {
+                    "$": {
+                      "gentype": "Java"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "appearance": "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"
+                    }
+                  }
+                ],
+                "tags": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "tagged": "0",
+                      "package_name": "Contracts"
+                    }
+                  }
+                ],
+                "operations": [
+                  {
+                    "operation": [
+                      {
+                        "$": {
+                          "xmi:idref": "EAID_6B5592FE_EBA0_4f5f_A5E4_856BF7B983FF",
+                          "name": "build",
+                          "scope": "Public"
+                        },
+                        "properties": [
+                          {
+                            "$": {
+                              "position": "0"
+                            }
+                          }
+                        ],
+                        "stereotype": [
+                          ""
+                        ],
+                        "model": [
+                          {
+                            "$": {
+                              "ea_guid": "{6B5592FE-EBA0-4f5f-A5E4-856BF7B983FF}",
+                              "ea_localid": "3"
+                            }
+                          }
+                        ],
+                        "type": [
+                          {
+                            "$": {
+                              "type": "void",
+                              "const": "false",
+                              "static": "false",
+                              "isAbstract": "false",
+                              "synchronised": "0",
+                              "concurrency": "Sequential",
+                              "pure": "0",
+                              "isQuery": "false"
+                            }
+                          }
+                        ],
+                        "behaviour": [
+                          ""
+                        ],
+                        "code": [
+                          ""
+                        ],
+                        "style": [
+                          ""
+                        ],
+                        "styleex": [
+                          ""
+                        ],
+                        "documentation": [
+                          ""
+                        ],
+                        "tags": [
+                          ""
+                        ],
+                        "parameters": [
+                          {
+                            "parameter": [
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_RETURNID_EBA0_4f5f_A5E4_856BF7B983FF",
+                                  "visibility": "public"
+                                },
+                                "properties": [
+                                  {
+                                    "$": {
+                                      "pos": "0",
+                                      "type": "void",
+                                      "const": "false",
+                                      "ea_guid": "{RETURNID-EBA0-4f5f-A5E4-856BF7B983FF}"
+                                    }
+                                  }
+                                ],
+                                "style": [
+                                  ""
+                                ],
+                                "styleex": [
+                                  ""
+                                ],
+                                "documentation": [
+                                  ""
+                                ],
+                                "tags": [
+                                  ""
+                                ],
+                                "xrefs": [
+                                  ""
+                                ]
+                              },
+                              {
+                                "$": {
+                                  "xmi:idref": "EAID_C69830C8_8A5D_4283_8CEE_F834CAFDB916",
+                                  "visibility": "public"
+                                },
+                                "properties": [
+                                  {
+                                    "$": {
+                                      "pos": "0",
+                                      "type": "boolean",
+                                      "const": "false",
+                                      "ea_guid": "{C69830C8-8A5D-4283-8CEE-F834CAFDB916}"
+                                    }
+                                  }
+                                ],
+                                "style": [
+                                  ""
+                                ],
+                                "styleex": [
+                                  ""
+                                ],
+                                "documentation": [
+                                  ""
+                                ],
+                                "tags": [
+                                  ""
+                                ],
+                                "xrefs": [
+                                  ""
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "xrefs": [
+                          ""
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "links": [
+                  {
+                    "Realisation": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_48167039_274F_4ac8_A2EE_A3879EE8689D",
+                          "start": "EAID_1F49E2E2_116F_4a75_A3BA_176EFBA0FDB4",
+                          "end": "EAID_7549CEEE_27C3_4101_B142_ED4F7E5D057D"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "connectors": [
+          {
+            "connector": [
+              {
+                "$": {
+                  "xmi:idref": "EAID_A716A471_D030_4462_B83D_1B7AB93849FA"
+                },
+                "source": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_E307581E_0C14_471a_BE24_15BE08B12572"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "23",
+                          "type": "Component",
+                          "name": "BuyAuto"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Non-Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "target": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_B7F95A86_81D8_4165_BB90_0BA8A8AE62A0"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "22",
+                          "type": "Component",
+                          "name": "MakeMoney"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "true"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "model": [
+                  {
+                    "$": {
+                      "ea_localid": "8"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "make(Building)",
+                      "ea_type": "Sequence",
+                      "direction": "Source -> Destination"
+                    }
+                  }
+                ],
+                "documentation": [
+                  ""
+                ],
+                "appearance": [
+                  {
+                    "$": {
+                      "linemode": "1",
+                      "linecolor": "-1",
+                      "linewidth": "0",
+                      "seqno": "1",
+                      "headStyle": "0",
+                      "lineStyle": "0"
+                    }
+                  }
+                ],
+                "labels": [
+                  {
+                    "$": {
+                      "mt": "make(Building)"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "stateflags": "Activation=0;ExtendActivationUp=0;",
+                      "virtualInheritance": "0",
+                      "diagram": "EAID_7764324A_57A3_4e74_98BC_804C482CF4DF",
+                      "privatedata1": "Synchronous",
+                      "privatedata2": "retval=void;params=;paramsDlg=x;",
+                      "privatedata3": "Call",
+                      "privatedata4": "0",
+                      "privatedata5": "SX=0;SY=-16;EX=0;EY=0;$LLB=;LLT=;LMT=CX=70:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LMB=;LRT=;LRB=;IRHS=;ILHS=;",
+                      "sequence_points": "PtStartX=216;PtStartY=-151;PtEndX=529;PtEndY=-151;"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "value": "aliasparamsTO=Building;"
+                    }
+                  }
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "tags": [
+                  {
+                    "tag": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_B5BCD604_945F_41d7_A05D_B73A13BF869C",
+                          "name": "operation_guid",
+                          "value": "{9CE44F58-7E58-443a-8CC3-95FA59E3C5FD}"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_21AFBF08_B443_4057_A382_8CB951C6276E"
+                },
+                "source": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_B7F95A86_81D8_4165_BB90_0BA8A8AE62A0"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "22",
+                          "type": "Component",
+                          "name": "MakeMoney"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Non-Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "target": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_83FF6BBD_0A8E_46e9_89BB_249C92AAEDF0"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "25",
+                          "type": "Component",
+                          "name": "SellHouse"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "true"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "model": [
+                  {
+                    "$": {
+                      "ea_localid": "9"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "sell(int)",
+                      "ea_type": "Sequence",
+                      "direction": "Source -> Destination"
+                    }
+                  }
+                ],
+                "documentation": [
+                  ""
+                ],
+                "appearance": [
+                  {
+                    "$": {
+                      "linemode": "1",
+                      "linecolor": "-1",
+                      "linewidth": "0",
+                      "seqno": "1",
+                      "headStyle": "0",
+                      "lineStyle": "0"
+                    }
+                  }
+                ],
+                "labels": [
+                  {
+                    "$": {
+                      "mt": "sell(int)"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "stateflags": "Activation=0;ExtendActivationUp=0;",
+                      "virtualInheritance": "0",
+                      "diagram": "EAID_4F59D108_2C6E_4589_95B4_25703DF64BAE",
+                      "privatedata1": "Synchronous",
+                      "privatedata2": "retval=void;params=;paramsDlg=a;",
+                      "privatedata3": "Call",
+                      "privatedata4": "0",
+                      "privatedata5": "SX=0;SY=-28;EX=0;EY=0;$LLB=;LLT=;LMT=CX=36:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LMB=;LRT=;LRB=;IRHS=;ILHS=;",
+                      "sequence_points": "PtStartX=183;PtStartY=-163;PtEndX=517;PtEndY=-163;"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "value": "aliasparamsTO=int;"
+                    }
+                  }
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "tags": [
+                  {
+                    "tag": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_AE709DDA_940A_4ff5_BA32_E62B9ADB7AB8",
+                          "name": "operation_guid",
+                          "value": "{E06E5E72-6D52-48dc-8080-A9EDC77FB776}"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_34FAEC38_0956_426a_8EFA_D8866B736F70"
+                },
+                "source": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_83FF6BBD_0A8E_46e9_89BB_249C92AAEDF0"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "25",
+                          "type": "Component",
+                          "name": "SellHouse"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Non-Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "target": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_B7F95A86_81D8_4165_BB90_0BA8A8AE62A0"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "22",
+                          "type": "Component",
+                          "name": "MakeMoney"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "true"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "model": [
+                  {
+                    "$": {
+                      "ea_localid": "10"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "make(Building)",
+                      "ea_type": "Sequence",
+                      "direction": "Source -> Destination"
+                    }
+                  }
+                ],
+                "documentation": [
+                  ""
+                ],
+                "appearance": [
+                  {
+                    "$": {
+                      "linemode": "1",
+                      "linecolor": "-1",
+                      "linewidth": "0",
+                      "seqno": "2",
+                      "headStyle": "0",
+                      "lineStyle": "0"
+                    }
+                  }
+                ],
+                "labels": [
+                  {
+                    "$": {
+                      "mt": "make(Building)"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "stateflags": "Activation=0;",
+                      "virtualInheritance": "0",
+                      "diagram": "EAID_4F59D108_2C6E_4589_95B4_25703DF64BAE",
+                      "privatedata1": "Synchronous",
+                      "privatedata2": "retval=void;params=;paramsDlg=x;",
+                      "privatedata3": "Call",
+                      "privatedata4": "0",
+                      "privatedata5": "SX=0;SY=-18;EX=0;EY=0;$LLB=;LLT=;LMT=CX=70:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LMB=;LRT=;LRB=;IRHS=;ILHS=;",
+                      "sequence_points": "PtStartX=517;PtStartY=-216;PtEndX=188;PtEndY=-216;"
+                    }
+                  }
+                ],
+                "style": [
+                  {
+                    "$": {
+                      "value": "aliasparamsTO=Building;"
+                    }
+                  }
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "tags": [
+                  {
+                    "tag": [
+                      {
+                        "$": {
+                          "xmi:id": "EAID_58D6A387_6747_4af5_9317_523D1B1E2C1F",
+                          "name": "operation_guid",
+                          "value": "{9CE44F58-7E58-443a-8CC3-95FA59E3C5FD}"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:idref": "EAID_48167039_274F_4ac8_A2EE_A3879EE8689D"
+                },
+                "source": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_1F49E2E2_116F_4a75_A3BA_176EFBA0FDB4"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "19",
+                          "type": "Class",
+                          "name": "Building"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "false"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Non-Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "target": [
+                  {
+                    "$": {
+                      "xmi:idref": "EAID_7549CEEE_27C3_4101_B142_ED4F7E5D057D"
+                    },
+                    "model": [
+                      {
+                        "$": {
+                          "ea_localid": "21",
+                          "type": "Interface",
+                          "name": "IBuild"
+                        }
+                      }
+                    ],
+                    "role": [
+                      {
+                        "$": {
+                          "visibility": "Public",
+                          "targetScope": "instance"
+                        }
+                      }
+                    ],
+                    "type": [
+                      {
+                        "$": {
+                          "aggregation": "none",
+                          "containment": "Unspecified"
+                        }
+                      }
+                    ],
+                    "constraints": [
+                      ""
+                    ],
+                    "modifiers": [
+                      {
+                        "$": {
+                          "isOrdered": "false",
+                          "changeable": "none",
+                          "isNavigable": "true"
+                        }
+                      }
+                    ],
+                    "style": [
+                      {
+                        "$": {
+                          "value": "Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Navigable;"
+                        }
+                      }
+                    ],
+                    "documentation": [
+                      ""
+                    ],
+                    "xrefs": [
+                      ""
+                    ],
+                    "tags": [
+                      ""
+                    ]
+                  }
+                ],
+                "model": [
+                  {
+                    "$": {
+                      "ea_localid": "7"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "ea_type": "Realisation",
+                      "direction": "Source -> Destination"
+                    }
+                  }
+                ],
+                "parameterSubstitutions": [
+                  ""
+                ],
+                "documentation": [
+                  ""
+                ],
+                "appearance": [
+                  {
+                    "$": {
+                      "linemode": "3",
+                      "linecolor": "-1",
+                      "linewidth": "0",
+                      "seqno": "0",
+                      "headStyle": "0",
+                      "lineStyle": "0"
+                    }
+                  }
+                ],
+                "labels": [
+                  ""
+                ],
+                "extendedProperties": [
+                  {
+                    "$": {
+                      "virtualInheritance": "0"
+                    }
+                  }
+                ],
+                "style": [
+                  ""
+                ],
+                "xrefs": [
+                  ""
+                ],
+                "tags": [
+                  ""
+                ]
+              }
+            ]
+          }
+        ],
+        "primitivetypes": [
+          {
+            "packagedElement": [
+              {
+                "$": {
+                  "xmi:type": "uml:Package",
+                  "xmi:id": "EAPrimitiveTypesPackage",
+                  "name": "EA_PrimitiveTypes_Package",
+                  "visibility": "public"
+                },
+                "packagedElement": [
+                  {
+                    "$": {
+                      "xmi:type": "uml:Package",
+                      "xmi:id": "EAJavaTypesPackage",
+                      "name": "EA_Java_Types_Package",
+                      "visibility": "public"
+                    },
+                    "packagedElement": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:PrimitiveType",
+                          "xmi:id": "EAJava_int",
+                          "name": "int",
+                          "visibility": "public"
+                        },
+                        "generalization": [
+                          {
+                            "$": {
+                              "xmi:type": "uml:Generalization",
+                              "xmi:id": "EAJava_int_General"
+                            },
+                            "general": [
+                              {
+                                "$": {
+                                  "href": "http://schema.omg.org/spec/UML/2.1/uml.xml#Integer"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:PrimitiveType",
+                          "xmi:id": "EAJava_void",
+                          "name": "void",
+                          "visibility": "public"
+                        }
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:PrimitiveType",
+                          "xmi:id": "EAJava_boolean",
+                          "name": "boolean",
+                          "visibility": "public"
+                        },
+                        "generalization": [
+                          {
+                            "$": {
+                              "xmi:type": "uml:Generalization",
+                              "xmi:id": "EAJava_boolean_General"
+                            },
+                            "general": [
+                              {
+                                "$": {
+                                  "href": "http://schema.omg.org/spec/UML/2.1/uml.xml#Boolean"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:PrimitiveType",
+                          "xmi:id": "EAJava_char",
+                          "name": "char",
+                          "visibility": "public"
+                        },
+                        "generalization": [
+                          {
+                            "$": {
+                              "xmi:type": "uml:Generalization",
+                              "xmi:id": "EAJava_char_General"
+                            },
+                            "general": [
+                              {
+                                "$": {
+                                  "href": "http://schema.omg.org/spec/UML/2.1/uml.xml#String"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "profiles": [
+          {
+            "uml:Profile": [
+              {
+                "$": {
+                  "xmi:version": "2.1",
+                  "xmlns:uml": "http://schema.omg.org/spec/UML/2.1/",
+                  "xmlns:xmi": "http://schema.omg.org/spec/XMI/2.1",
+                  "xmi:id": "thecustomprofile",
+                  "nsPrefix": "thecustomprofile",
+                  "name": "thecustomprofile",
+                  "metamodelReference": "mmref01"
+                },
+                "ownedComment": [
+                  {
+                    "$": {
+                      "xmi:type": "uml:Comment",
+                      "xmi:id": "comment01",
+                      "annotatedElement": "thecustomprofile"
+                    },
+                    "body": [
+                      " Version:1.0"
+                    ]
+                  }
+                ],
+                "packageImport": [
+                  {
+                    "$": {
+                      "xmi:id": "mmref01"
+                    },
+                    "importedPackage": [
+                      {
+                        "$": {
+                          "href": "http://schema.omg.org/spec/UML/2.1/"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "packagedElement": [
+                  {
+                    "$": {
+                      "xmi:type": "uml:Stereotype",
+                      "xmi:id": "Implements",
+                      "name": "Implements"
+                    },
+                    "ownedAttribute": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:Property",
+                          "xmi:id": "Implements-base_Operation",
+                          "name": "base_Operation",
+                          "association": "Operation_Implements"
+                        },
+                        "type": [
+                          {
+                            "$": {
+                              "href": "http://schema.omg.org/spec/UML/2.1/Operation"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:Property",
+                          "xmi:id": "Implements-Implements",
+                          "name": "Implements"
+                        },
+                        "type": [
+                          {
+                            "$": {
+                              "href": "http://schema.omg.org/spec/UML/2.1/String"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Extension",
+                      "xmi:id": "Operation_Implements",
+                      "name": "A_Operation_Implements",
+                      "memberEnd": "extension_Implements Implements-base_Operation"
+                    },
+                    "ownedEnd": [
+                      {
+                        "$": {
+                          "xmi:id": "extension_Implements",
+                          "name": "extension_Implements",
+                          "type": "Implements",
+                          "isComposite": "true",
+                          "lower": "0",
+                          "upper": "1",
+                          "memberEnd": "extension_Implements Implements-base_Operation"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Stereotype",
+                      "xmi:id": "operation_guid",
+                      "name": "operation_guid"
+                    },
+                    "ownedAttribute": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:Property",
+                          "xmi:id": "operation_guid-base_Message",
+                          "name": "base_Message",
+                          "association": "Message_operation_guid"
+                        },
+                        "type": [
+                          {
+                            "$": {
+                              "href": "http://schema.omg.org/spec/UML/2.1/Message"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:Property",
+                          "xmi:id": "operation_guid-operation_guid",
+                          "name": "operation_guid"
+                        },
+                        "type": [
+                          {
+                            "$": {
+                              "href": "http://schema.omg.org/spec/UML/2.1/String"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Extension",
+                      "xmi:id": "Message_operation_guid",
+                      "name": "A_Message_operation_guid",
+                      "memberEnd": "extension_operation_guid operation_guid-base_Message"
+                    },
+                    "ownedEnd": [
+                      {
+                        "$": {
+                          "xmi:id": "extension_operation_guid",
+                          "name": "extension_operation_guid",
+                          "type": "operation_guid",
+                          "isComposite": "true",
+                          "lower": "0",
+                          "upper": "1",
+                          "memberEnd": "extension_operation_guid operation_guid-base_Message"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Stereotype",
+                      "xmi:id": "ImplementsGuid",
+                      "name": "ImplementsGuid"
+                    },
+                    "ownedAttribute": [
+                      {
+                        "$": {
+                          "xmi:type": "uml:Property",
+                          "xmi:id": "ImplementsGuid-base_Operation",
+                          "name": "base_Operation",
+                          "association": "Operation_ImplementsGuid"
+                        },
+                        "type": [
+                          {
+                            "$": {
+                              "href": "http://schema.omg.org/spec/UML/2.1/Operation"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "$": {
+                          "xmi:type": "uml:Property",
+                          "xmi:id": "ImplementsGuid-ImplementsGuid",
+                          "name": "ImplementsGuid"
+                        },
+                        "type": [
+                          {
+                            "$": {
+                              "href": "http://schema.omg.org/spec/UML/2.1/String"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "$": {
+                      "xmi:type": "uml:Extension",
+                      "xmi:id": "Operation_ImplementsGuid",
+                      "name": "A_Operation_ImplementsGuid",
+                      "memberEnd": "extension_ImplementsGuid ImplementsGuid-base_Operation"
+                    },
+                    "ownedEnd": [
+                      {
+                        "$": {
+                          "xmi:id": "extension_ImplementsGuid",
+                          "name": "extension_ImplementsGuid",
+                          "type": "ImplementsGuid",
+                          "isComposite": "true",
+                          "lower": "0",
+                          "upper": "1",
+                          "memberEnd": "extension_ImplementsGuid ImplementsGuid-base_Operation"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "diagrams": [
+          {
+            "diagram": [
+              {
+                "$": {
+                  "xmi:id": "EAID_7764324A_57A3_4e74_98BC_804C482CF4DF"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_604559C0_EE82_4e77_8241_D81D6486982D",
+                      "localID": "6",
+                      "owner": "EAPK_604559C0_EE82_4e77_8241_D81D6486982D"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "MakeMoneyProcess",
+                      "type": "Sequence"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "created": "2018-04-27 19:37:47",
+                      "modified": "2018-04-27 19:38:26"
+                    }
+                  }
+                ],
+                "style1": [
+                  {
+                    "$": {
+                      "value": "ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=1;DocSize.cx=827;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"
+                    }
+                  }
+                ],
+                "style2": [
+                  {
+                    "$": {
+                      "value": "ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=0;INT_ARGS=;INT_RET=;INT_ATT=;SeqTopMargin=50;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=6C7C8A7A;"
+                    }
+                  }
+                ],
+                "swimlanes": [
+                  {
+                    "$": {
+                      "value": "locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;cls=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"
+                    }
+                  }
+                ],
+                "matrixitems": [
+                  {
+                    "$": {
+                      "value": "locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  ""
+                ],
+                "elements": [
+                  {
+                    "element": [
+                      {
+                        "$": {
+                          "geometry": "Left=489;Top=50;Right=579;Bottom=390;",
+                          "subject": "EAID_B7F95A86_81D8_4165_BB90_0BA8A8AE62A0",
+                          "seqno": "1",
+                          "style": "DUID=A499429D;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=166;Top=50;Right=256;Bottom=390;",
+                          "subject": "EAID_E307581E_0C14_471a_BE24_15BE08B12572",
+                          "seqno": "2",
+                          "style": "DUID=B0D02BCA;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "SX=0;SY=0;EX=0;EY=0;Path=;",
+                          "subject": "EAID_A716A471_D030_4462_B83D_1B7AB93849FA",
+                          "style": ";Hidden=0;"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:id": "EAID_4F59D108_2C6E_4589_95B4_25703DF64BAE"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_604559C0_EE82_4e77_8241_D81D6486982D",
+                      "localID": "7",
+                      "owner": "EAPK_604559C0_EE82_4e77_8241_D81D6486982D"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "SellHouseProcess",
+                      "type": "Sequence"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "created": "2018-04-27 19:39:56",
+                      "modified": "2018-04-27 19:40:52"
+                    }
+                  }
+                ],
+                "style1": [
+                  {
+                    "$": {
+                      "value": "ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=1;DocSize.cx=827;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"
+                    }
+                  }
+                ],
+                "style2": [
+                  {
+                    "$": {
+                      "value": "ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=0;INT_ARGS=;INT_RET=;INT_ATT=;SeqTopMargin=50;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=26E26A9D;"
+                    }
+                  }
+                ],
+                "swimlanes": [
+                  {
+                    "$": {
+                      "value": "locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;cls=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"
+                    }
+                  }
+                ],
+                "matrixitems": [
+                  {
+                    "$": {
+                      "value": "locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  ""
+                ],
+                "elements": [
+                  {
+                    "element": [
+                      {
+                        "$": {
+                          "geometry": "Left=477;Top=50;Right=567;Bottom=390;",
+                          "subject": "EAID_83FF6BBD_0A8E_46e9_89BB_249C92AAEDF0",
+                          "seqno": "1",
+                          "style": "DUID=BA14F408;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=133;Top=50;Right=223;Bottom=390;",
+                          "subject": "EAID_B7F95A86_81D8_4165_BB90_0BA8A8AE62A0",
+                          "seqno": "2",
+                          "style": "DUID=1D1370C2;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "SX=0;SY=0;EX=0;EY=0;Path=;",
+                          "subject": "EAID_21AFBF08_B443_4057_A382_8CB951C6276E",
+                          "style": ";Hidden=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "SX=0;SY=0;EX=0;EY=0;Path=;",
+                          "subject": "EAID_34FAEC38_0956_426a_8EFA_D8866B736F70",
+                          "style": ";Hidden=0;"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "xmi:id": "EAID_737283FE_58A7_462e_A6F3_3AB97A6861E8"
+                },
+                "model": [
+                  {
+                    "$": {
+                      "package": "EAPK_2E26DC22_F377_4857_A09F_133D9DE121F0",
+                      "localID": "5",
+                      "owner": "EAPK_2E26DC22_F377_4857_A09F_133D9DE121F0"
+                    }
+                  }
+                ],
+                "properties": [
+                  {
+                    "$": {
+                      "name": "CompanyClassDiagram",
+                      "type": "Logical"
+                    }
+                  }
+                ],
+                "project": [
+                  {
+                    "$": {
+                      "author": "vadim",
+                      "version": "1.0",
+                      "created": "2018-04-27 19:25:34",
+                      "modified": "2018-04-27 19:26:50"
+                    }
+                  }
+                ],
+                "style1": [
+                  {
+                    "$": {
+                      "value": "ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=1;DocSize.cx=827;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"
+                    }
+                  }
+                ],
+                "style2": [
+                  {
+                    "$": {
+                      "value": "ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=2D70B7F4;"
+                    }
+                  }
+                ],
+                "swimlanes": [
+                  {
+                    "$": {
+                      "value": "locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=0;ufh=0;cls=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"
+                    }
+                  }
+                ],
+                "matrixitems": [
+                  {
+                    "$": {
+                      "value": "locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"
+                    }
+                  }
+                ],
+                "extendedProperties": [
+                  ""
+                ],
+                "elements": [
+                  {
+                    "element": [
+                      {
+                        "$": {
+                          "geometry": "Left=457;Top=432;Right=578;Bottom=522;",
+                          "subject": "EAID_7549CEEE_27C3_4101_B142_ED4F7E5D057D",
+                          "seqno": "1",
+                          "style": "DUID=86EFC8D0;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=540;Top=126;Right=658;Bottom=209;",
+                          "subject": "EAID_1F49E2E2_116F_4a75_A3BA_176EFBA0FDB4",
+                          "seqno": "2",
+                          "style": "DUID=6A80F274;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "Left=331;Top=128;Right=438;Bottom=211;",
+                          "subject": "EAID_9153BBD2_57A6_46ea_B58D_3D69D6CA8E4F",
+                          "seqno": "3",
+                          "style": "DUID=58C6214B;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"
+                        }
+                      },
+                      {
+                        "$": {
+                          "geometry": "SX=0;SY=0;EX=0;EY=0;EDGE=3;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;",
+                          "subject": "EAID_48167039_274F_4ac8_A2EE_A3879EE8689D",
+                          "style": "Mode=3;EOID=86EFC8D0;SOID=6A80F274;Color=-1;LWidth=0;Hidden=0;"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

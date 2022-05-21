@@ -1,17 +1,11 @@
-import {xmiClass} from "../../src/entities/xmiClass";
+import {xmiActor, xmiClass, xmiCollaboration, xmiComponent, xmiPackage, XmiParser} from "generator-xmi-core";
 import {readJSONSync} from "fs-extra";
-import {XmiParser} from "../../src/xmiParser";
-import {xmiComponent} from "../../src/entities/xmiComponent";
-import {xmiCollaboration} from "../../src/entities/xmiCollaboration";
-import {xmiActor} from "../../src/entities/xmiActor";
-import {xmiPackage} from "../../src/entities/xmiPackage";
-
-const parseString = require('xml2js').parseString;
+import * as path from "path";
 
 describe('xmiParser', () => {
     describe('Activities', () => {
         it('Verify activity diagram', async () => {
-            const data = readJSONSync('test/data/project6_activity.json');
+            const data = readJSONSync(path.resolve('./resources/models/project6_activity.json'));
             const parser = new XmiParser(data);
 
             await parser.parse();
@@ -45,7 +39,7 @@ describe('xmiParser', () => {
 
     describe('Activities loop', () => {
         it('verify activity diagram with loop', async () => {
-            const data = readJSONSync('test/data/project11_activity_loop.json');
+            const data = readJSONSync(path.resolve('./resources/models/project11_activity_loop.json'));
             const parser = new XmiParser(data);
 
             await parser.parse();
@@ -81,7 +75,7 @@ describe('xmiParser', () => {
 
     describe('Activities condition', () => {
         it('verify activity diagram with condition', async () => {
-            const data = readJSONSync('test/data/project11_activity_condition.json');
+            const data = readJSONSync(path.resolve('./resources/models/project11_activity_condition.json'));
             const parser = new XmiParser(data);
 
             await parser.parse();

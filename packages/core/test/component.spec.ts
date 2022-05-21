@@ -1,12 +1,10 @@
 import {readJSONSync} from "fs-extra";
-import {XmiParser} from "../../src/xmiParser";
-import {xmiComponent} from "../../src/entities/xmiComponent";
-import {xmiPackage} from "../../src/entities/xmiPackage";
-import {xmiInterface} from "../../src/entities/xmiInterface";
+import {xmiComponent, xmiPackage, XmiParser} from "generator-xmi-core";
+import * as path from "path";
 
 describe('xmiParser', () => {
     describe('Components', () => {
-        const data = readJSONSync('test/data/project4_component.json');
+        const data = readJSONSync(path.resolve('./resources/models/project4_component.json'));
         const parser = new XmiParser(data);
 
         beforeEach(async () => await parser.parse());

@@ -6,9 +6,15 @@
     "generator-xmi-core": "*",
     "js-beautify": "^1.7.5",
     "just-kebab-case": "^1.1.0",
+    "shelljs": "^0.8.5",
     "treeify": "^1.1.0",
     "xml2js": "^0.4.23",
     "yeoman-generator": "^5.3.0",
     "yosay": "^2.0.1"
+  },
+  "devDependencies": {
+    "async-redis": "^2.0.0",
+    "testcontainers": "^8.10.1",
+    "supertest": "^6.2.3"
   }
 }
