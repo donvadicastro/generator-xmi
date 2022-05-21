@@ -31,6 +31,9 @@
         "passWithNoTests": true
       },
       "dependsOn": [{
+        "target": "build",
+        "projects": "self"
+      },{
         "target": "test",
         "projects": "dependencies"
       }]
