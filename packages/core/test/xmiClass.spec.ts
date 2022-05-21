@@ -1,5 +1,5 @@
-import {xmiComponentFactory} from "../../src/factories/xmiComponentFactory";
-import {xmiClass} from "../../src/entities/xmiClass";
+import {xmiComponentFactory} from "../src";
+import {xmiClass} from "../src";
 
 describe('xmiClass', () => {
     it('constructor', () => {

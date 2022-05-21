@@ -1,4 +1,4 @@
-import {xmiComponentFactory} from "../../src/factories/xmiComponentFactory";
+import {xmiComponentFactory} from "../src";
 
 describe('xmiComponentFactory', () => {
     const factory = new xmiComponentFactory('js');

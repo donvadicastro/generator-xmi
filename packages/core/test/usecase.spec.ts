@@ -1,11 +1,12 @@
 import {readJSONSync} from "fs-extra";
-import {xmiPackage} from "../../src/entities/xmiPackage";
-import {XmiParser} from "../../src/xmiParser";
-import {xmiUseCase} from "../../src/entities/xmiUseCase";
+import {xmiPackage} from "../src";
+import {XmiParser} from "../src";
+import {xmiUseCase} from "../src";
+import path = require("path");
 
 xdescribe('xmiParser', () => {
     describe('UseCase', () => {
-        const data = readJSONSync('test/data/project12_usecase.json');
+        const data = readJSONSync(path.resolve('./resources/models/project12_usecase.json'));
         const parser = new XmiParser(data);
 
         beforeAll(async () => await parser.parse());

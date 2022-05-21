@@ -29,7 +29,11 @@
       "options": {
         "jestConfig": "apps/generator/jest.config.js",
         "passWithNoTests": true
-      }
+      },
+      "dependsOn": [{
+        "target": "test",
+        "projects": "dependencies"
+      }]
     }
   },
   "tags": [],

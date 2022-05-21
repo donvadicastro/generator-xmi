@@ -13,3 +13,13 @@ export * from './xmiPackage';
 export * from './ui/xmiScreen';
 export * from './xmiText';
 export * from './xmiUseCase';
+
+export * from './class/xmiAttribute';
+export * from './class/xmiOperation';
+export * from './class/xmiParameter';
+
+export * from './diagrams/xmiDiagram';
+export * from './diagrams/xmiUMLDiagram';
+
+export * from './ui/xmiGUIElement';
+export * from './ui/xmiScreen';

@@ -1,5 +1,5 @@
-import {xmiAttribute} from "../../src/entities/class/xmiAttribute";
-import {xmiComponentFactory} from "../../src/factories/xmiComponentFactory";
+import {xmiAttribute} from "../src";
+import {xmiComponentFactory} from "../src";
 
 describe('xmiAttribute', () => {
     it('constructor', () => {

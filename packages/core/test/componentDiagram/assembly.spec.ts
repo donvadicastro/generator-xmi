@@ -1,16 +1,17 @@
 import * as fs from "fs";
-import {XmiParser} from "../../../src/xmiParser";
-import {xmiPackage} from "../../../src/entities/xmiPackage";
+import {XmiParser} from "../../src";
+import {xmiPackage} from "../../src";
 import * as path from "path";
-import {parseString} from "xml2js";
-import {xmiComponent} from "../../../src/entities/xmiComponent";
+import {xmiComponent} from "../../src";
+
+const parseString = require('xml2js').parseString;
 
 describe('xmiParser', () => {
     describe('Components', () => {
         let entities: any[];
 
         beforeAll((done) => {
-            parseString(fs.readFileSync(path.resolve(__dirname, '../../data/fixtures.xml')), async (err: any, result: any) => {
+            parseString(fs.readFileSync(path.resolve('./resources/models/fixtures.xml')), async (err: any, result: any) => {
                 const parser = new XmiParser(result);
                 parser.parse().then(() => {
                     const pkg = <xmiPackage>parser.packge;

@@ -1,5 +1,5 @@
-import {xmiActor} from "../../src/entities/xmiActor";
-import {xmiComponentFactory} from "../../src/factories/xmiComponentFactory";
+import {xmiActor} from "../src";
+import {xmiComponentFactory} from "../src";
 
 describe('xmiActor', () => {
     const factory = new xmiComponentFactory('js');

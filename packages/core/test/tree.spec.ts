@@ -1,6 +1,7 @@
 import {readJSONSync} from "fs-extra";
-import {XmiParser} from "../../src/xmiParser";
-import {xmiPackage} from "../../src/entities/xmiPackage";
+import {XmiParser} from "../src";
+import {xmiPackage} from "../src";
+import path = require("path");
 
 const assert = require('assert');
 jest.mock('assert');
@@ -9,7 +10,7 @@ describe('xmiParser', () => {
     jest.mock('assert');
 
     describe('Tree', () => {
-        const data = readJSONSync('test/data/project1.json');
+        const data = readJSONSync(path.resolve('./resources/models/project1.json'));
         const parser = new XmiParser(data);
 
         assert.mockResolvedValue(true);
