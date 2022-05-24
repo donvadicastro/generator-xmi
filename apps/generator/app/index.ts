@@ -1,8 +1,7 @@
 'use strict';
 
-import {XmiParser} from "generator-xmi-core";
+import {DialectType, XmiParser} from "generator-xmi-core";
 import {red, green} from "chalk";
-import {DialectType} from "generator-xmi-core";
 
 import {parseString} from "xml2js";
 import Generator = require('yeoman-generator');

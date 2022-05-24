@@ -2,16 +2,21 @@
   "name": "generator-xmi",
   "version": "1.0.1",
   "license": "MIT",
-  "main": "dist/generators/app/index.js",
+  "main": "index.js",
   "scripts": {
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "dockerBuildBase": "cross-var docker build -t generator-xmi -f DockerfileBase .",
+    "dockerTagBase": "cross-var docker tag generator-xmi donvadicastro/generator-xmi:base-$npm_package_version",
+    "dockerPushTagBase": "cross-var docker push donvadicastro/generator-xmi:base-$npm_package_version",
+    "dockerRebuildBaseImage": "npm run dockerBuildBase && npm run dockerTagBase && npm run dockerPushTagBase"
   },
   "workspaces": [
     "apps/**",
     "packages/**"
   ],
   "dependencies": {
+    "generator-xmi-app": "*",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
@@ -20,10 +25,17 @@
     "@nrwl/jest": "13.10.4",
     "@nrwl/js": "^13.10.4",
     "@nrwl/linter": "13.10.4",
-    "@nrwl/node": "14.1.1",
+    "@nrwl/node": "^14.1.1",
     "@nrwl/nx-cloud": "latest",
     "@nrwl/workspace": "13.10.4",
+    "@types/jest": "27.4.1",
+    "@types/node": "16.11.7",
+    "cross-var": "^1.1.0",
+    "dotenv": "^16.0.1",
+    "jest": "27.5.1",
     "nx": "13.10.4",
-    "typescript": "~4.6.2"
+    "ts-jest": "27.1.4",
+    "ts-node": "9.1.1",
+    "typescript": "^4.6.4"
   }
 }

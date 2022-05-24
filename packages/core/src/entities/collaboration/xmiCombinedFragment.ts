@@ -5,7 +5,7 @@ import {xmiOperand} from "./xmiOperand";
 import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
 
 export class xmiCombinedFragment extends xmiFragment {
-    operands: xmiOperand[];
+    override operands: xmiOperand[];
 
     constructor(raw: any, parent: xmiBase, factory: xmiComponentFactory, lifelines: xmiLifeline[]) {
         super(raw, parent, factory, lifelines);

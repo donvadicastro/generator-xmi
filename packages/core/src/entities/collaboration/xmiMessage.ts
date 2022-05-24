@@ -73,7 +73,7 @@ export class xmiMessage extends xmiBase {
                     assert(this.from, `Source component for message "${this.name}" not exists`);
                     assert(this.to, `Target component for message "${this.name}" not exists`);
 
-                    forkJoin([this.from.onAfterInit, this.to.onAfterInit]).subscribe((val) => {
+                    forkJoin([this.from.onAfterInit, this.to.onAfterInit]).subscribe(() => {
                         assert(this.from.elementRef, `Source component reference for message "${this.name}" not exists`);
                         assert(this.to.elementRef, `Target component reference for message "${this.name}" not exists`);
 
@@ -86,7 +86,7 @@ export class xmiMessage extends xmiBase {
         }
     }
 
-    toConsole() {
+    override toConsole() {
         this.from && assert(this.from.elementRef, `Null ref for message "${this.name}": from "${this.from.elementRef.name}" (${this.from.elementRef.id})`);
         this.to && assert(this.to.elementRef, `Null ref for message "${this.name}": to "${this.to.elementRef.name}" (${this.to.elementRef.id})`);
 

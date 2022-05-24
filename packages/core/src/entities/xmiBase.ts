@@ -77,7 +77,7 @@ export default class xmiBase {
      * Gets list of parent elements up to root.
      */
     get pathToRoot(): xmiBase[] {
-        let path = [];
+        let path: xmiBase[] = [];
         let parent = this.parent;
 
         while (parent) {
@@ -103,7 +103,7 @@ export default class xmiBase {
      * @param element element to build path to
      */
     getRelativePath(element: xmiBase): string {
-        return this.pathToRoot.map(x => '..').join('/') + '/' +
+        return this.pathToRoot.map(() => '..').join('/') + '/' +
             element.pathToRoot.slice(0, element.pathToRoot.length - 1).reverse().map(x => x.name).join('/');
     }
 
@@ -111,7 +111,7 @@ export default class xmiBase {
      * Gets relative root path, e.g. "../../"
      */
     getRelativeRoot(): string {
-        return this.pathToRoot.map(x => '..').join('/');
+        return this.pathToRoot.map(() => '..').join('/');
     }
 
     /**

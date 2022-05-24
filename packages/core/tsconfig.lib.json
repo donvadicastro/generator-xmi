@@ -3,8 +3,7 @@
   "compilerOptions": {
     "outDir": "../../dist/core",
     "declaration": true,
-    "types": ["node"],
-    "composite": true
+    "types": ["node"]
   },
   "include": ["**/*.ts"],
   "exclude": ["**/*.spec.ts"]

@@ -7,7 +7,7 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/generators",
-        "main": "apps/generator/app/index.ts",
+        "main": "app/index.ts",
         "tsConfig": "apps/generator/tsconfig.lib.json",
         "assets": ["apps/generator/*.md"]
       },

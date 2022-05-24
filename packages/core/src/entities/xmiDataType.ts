@@ -1,10 +1,10 @@
 import {xmiInterface} from "./xmiInterface";
-import {IAttribute} from "../contracts/attribute";
+import {IAttribute} from "../contracts";
 import {ArrayUtils} from "../utils/arrayUtils";
 import xmiBase from "./xmiBase";
 
 export class xmiDataType extends xmiInterface {
-    get references(): xmiBase[] {
+    override get references(): xmiBase[] {
         const imports: any = super.references;
 
         //Inject attributes type

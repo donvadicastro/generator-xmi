@@ -70,16 +70,16 @@ export class xmiCollaboration extends xmiBase {
         return <xmiCombinedFragment[]>this.fragments.filter(x => x.type === 'uml:CombinedFragment' && x.interactionOperator === 'alt');
     }
 
-    get references(): xmiBase[] {
+    override get references(): xmiBase[] {
         const imports = super.references;
 
-        this.lifelines.forEach((lifeline, index) =>
+        this.lifelines.forEach((lifeline) =>
             ArrayUtils.insertIfNotExists(lifeline.elementRef, imports));
 
         return imports;
     }
 
-    toConsole() {
+    override toConsole() {
         return {
             lifelines: this.lifelines.map(x => x.toConsole()),
             fragments: this.fragments.filter(x => x.name).map(x => x.toConsole()),

@@ -17,10 +17,10 @@ export class xmiGUIElement extends xmiBase {
 
     children: xmiGUIElement[] = [];
 
-    get references(): xmiBase[] {
+    override get references(): xmiBase[] {
         const imports = super.references;
 
-        this.children.forEach((child, i) => {
+        this.children.forEach((child) => {
             const elementRef = child.links.informationFLow.length && child.links.informationFLow[0].end &&
                 <xmiCollaboration>(<xmiDiagram>child.links.informationFLow[0].end).elementRef;
 
@@ -70,7 +70,7 @@ export class xmiGUIElement extends xmiBase {
             `Control names on the "${this.name}" UI form should be unique: "${this.children.map(x => x.name)}"`);
     }
 
-    toConsole() {
+    override toConsole() {
         const key: string = super.toConsole();
         const ret: any = {[key]: this.children.map(x => x.toConsole()) || []};
 

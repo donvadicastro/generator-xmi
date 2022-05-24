@@ -1,8 +1,5 @@
 {
   "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "outDir": "../../dist/generators"
-  },
   "include": ["**/*.ts"],
   "exclude": ["**/*.spec.ts", "**/*.test.ts", "**/templates/**"]
 }

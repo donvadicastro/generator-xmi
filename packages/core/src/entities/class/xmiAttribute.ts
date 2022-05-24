@@ -1,14 +1,13 @@
 import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
 
-import { strict as assert } from 'assert';
-
 import {get} from "object-path";
 import xmiBase from "../xmiBase";
 import {TypeConverter} from "../../utils/typeConverter";
-import {IAttribute} from "../../contracts/attribute";
+import {IAttribute} from "../../contracts";
 import {xmiEnumeration} from "../xmiEnumeration";
 import {xmiDataType} from "../xmiDataType";
 import * as _ from "lodash";
+import * as assert from "assert";
 
 export class xmiAttribute extends xmiBase implements IAttribute {
     typeRef?: xmiBase;

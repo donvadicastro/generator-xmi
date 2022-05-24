@@ -1,7 +1,6 @@
 'use strict';
 
 import {xmiComponentFactory} from "generator-xmi-core";
-import {green, yellow} from "chalk";
 import {
   xmiActor,
   xmiBoundary,
@@ -21,8 +20,7 @@ import {join} from "path";
 
 import kebabCase from "just-kebab-case";
 import pascal from "to-pascal-case";
-
-// const prettier = require('prettier');
+import {green, yellow} from "chalk";
 
 export class XmiGenerator extends XmiGeneratorBase {
     staleContent: string[] = [];

@@ -21,7 +21,7 @@ export class xmiPackage extends xmiBase {
             .map((x: any) => this._factory.get(x, this)).filter((x: any) => x).reverse();
     }
 
-    toConsole() {
+    override toConsole() {
         return {[super.toConsole()]: this.children.map(x => x.toConsole())};
     }
 }

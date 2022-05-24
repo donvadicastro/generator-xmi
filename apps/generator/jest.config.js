@@ -7,7 +7,7 @@ module.exports = {
     },
   },
   transform: {
-    '^.+\\.[tj]s$': 'ts-jest',
+    '^.+\\.tsx?$': 'ts-jest'
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/apps/generator',

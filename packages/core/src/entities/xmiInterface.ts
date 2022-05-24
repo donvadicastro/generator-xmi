@@ -16,7 +16,7 @@ export class xmiInterface extends xmiBase {
     /**
      * Get all referenced entities for particular instance.
      */
-    get references(): xmiBase[] {
+    override get references(): xmiBase[] {
         const imports = super.references;
 
         //Inject attributes type
@@ -75,7 +75,7 @@ export class xmiInterface extends xmiBase {
         return this;
     }
 
-    toConsole() {
+    override toConsole() {
         const key: string = super.toConsole();
         const ret: any = {[key]: {}};
 

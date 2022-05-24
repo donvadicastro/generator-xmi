@@ -25,7 +25,7 @@ export class xmiLifeline extends xmiBase {
         });
     }
 
-    toConsole() {
+    override toConsole() {
         return {[this.name]: (<xmiClass>this.ref).fragments.length };
     }
 }

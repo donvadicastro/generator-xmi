@@ -1,8 +1,9 @@
 {
   "name": "generator-xmi-core",
   "version": "0.0.1",
-  "type": "commonjs",
-  "main": "../../dist/core/src/index.js",
+  "type": "module",
+  "main": "src/index.js",
+  "private": true,
   "scripts": {
     "build": "tsc"
   },

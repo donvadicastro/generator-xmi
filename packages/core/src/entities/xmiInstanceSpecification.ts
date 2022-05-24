@@ -8,7 +8,7 @@ export class xmiInstanceSpecification extends xmiAbstractClass {
         return <xmiClass>this._factory.getByKey(this._raw.$.classifier);
     }
 
-    get references(): xmiBase[] {
+    override get references(): xmiBase[] {
         const imports = super.references;
 
         //Inject base class when instance specification is used

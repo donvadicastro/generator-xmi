@@ -54,7 +54,7 @@ export class xmiComponent extends xmiAbstractClass {
         }
     }
 
-    get references(): xmiBase[] {
+    override get references(): xmiBase[] {
         const imports = super.references;
 
         this.provided.filter(x => x.typeRef).forEach(value => {
@@ -75,7 +75,7 @@ export class xmiComponent extends xmiAbstractClass {
         return imports;
     }
 
-    toConsole() {
+    override toConsole() {
         const ret: any = super.toConsole();
         const key: string = Object.keys(ret)[0];
 

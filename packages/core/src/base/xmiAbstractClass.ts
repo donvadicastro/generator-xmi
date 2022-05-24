@@ -1,13 +1,13 @@
-import {xmiInterface} from "../entities/xmiInterface";
+import {xmiInterface} from "../entities";
 import {xmiFragment} from "../entities/collaboration/xmiFragment";
-import {xmiPackage} from "../entities/xmiPackage";
+import {xmiPackage} from "../entities";
 import {xmiAggregationLink} from "../entities/links/xmiAggregationLink";
-import {LinkType} from "../types/linkType";
+import {LinkType} from "../types";
 import xmiBase from "../entities/xmiBase";
-import {IConnector} from "../contracts/connector";
-import {IAttribute} from "../contracts/attribute";
+import {IConnector} from "../contracts";
+import {IAttribute} from "../contracts";
 import {xmiComponentFactory} from "../factories/xmiComponentFactory";
-import {xmiClass} from "../entities/xmiClass";
+import {xmiClass} from "../entities";
 import {ArrayUtils} from "../utils/arrayUtils";
 
 const assert = require('assert');
@@ -146,7 +146,7 @@ export class xmiAbstractClass extends xmiInterface {
         return attrs.filter(x => x.name && !x.isParent);
     }
 
-    get references(): xmiBase[] {
+    override get references(): xmiBase[] {
         const imports = super.references;
 
         //Inject generalization references
@@ -161,7 +161,7 @@ export class xmiAbstractClass extends xmiInterface {
         return imports;
     }
 
-    toConsole(): any {
+    override toConsole(): any {
         const ret = super.toConsole();
         ret[Object.keys(ret)[0]].conditions = this.conditions;
 
