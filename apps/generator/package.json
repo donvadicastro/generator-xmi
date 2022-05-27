@@ -21,6 +21,7 @@
   "devDependencies": {
     "@types/jest": "^22.2.3",
     "async-redis": "^2.0.0",
+    "jest-environment-jsdom": "^28.1.0",
     "jest": "^28.1.0",
     "testcontainers": "^8.10.1",
     "supertest": "^6.2.3",

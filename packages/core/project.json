@@ -1,7 +1,6 @@
 {
   "root": "packages/core",
   "sourceRoot": "packages/core/src",
-  "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",

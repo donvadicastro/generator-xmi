@@ -5,7 +5,7 @@
   "main": "dist/generators/app/index.js",
   "scripts": {
     "build": "nx build",
-    "test": "nx test",
+    "test": "nx run-many --all --target=test",
     "dockerBuildBase": "cross-var docker build -t generator-xmi -f DockerfileBase .",
     "dockerTagBase": "cross-var docker tag generator-xmi donvadicastro/generator-xmi:base-$npm_package_version",
     "dockerPushTagBase": "cross-var docker push donvadicastro/generator-xmi:base-$npm_package_version",

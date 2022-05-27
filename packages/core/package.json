@@ -5,7 +5,6 @@
   "main": "dist/index.js",
   "private": true,
   "scripts": {
-    "test": "jest",
     "compile": "tsc --build tsconfig.lib.json"
   },
   "dependencies": {
@@ -15,12 +14,7 @@
     "@types/node": "^16.11.33",
     "@types/object-path": "^0.11.1",
     "@types/to-camel-case": "^1.0.0",
-    "@typescript-eslint/eslint-plugin": "~5.18.0",
-    "@typescript-eslint/parser": "~5.18.0",
-    "eslint": "~8.12.0",
-    "eslint-config-prettier": "8.1.0",
     "fs-extra": "^5.0.0",
-    "jest": "27.2.3",
     "just-kebab-case": "^1.1.0",
     "lodash": "^4.17.21",
     "object-path": "^0.11.8",
@@ -28,7 +22,15 @@
     "to-camel-case": "^1.0.0",
     "to-pascal-case": "^1.0.0",
     "treeify": "^1.1.0",
-    "ts-jest": "27.0.5",
     "xml2js": "^0.4.23"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "~5.18.0",
+    "@typescript-eslint/parser": "~5.18.0",
+    "eslint": "~8.12.0",
+    "eslint-config-prettier": "8.1.0",
+    "jest-environment-jsdom": "^28.1.0",
+    "jest": "^28.1.0",
+    "ts-jest": "^28.0.3"
   }
 }

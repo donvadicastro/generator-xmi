@@ -6,7 +6,7 @@ const { GenericContainer } = require("testcontainers");
 jest.useRealTimers();
 jest.setTimeout(600_000);
 
-describe("GenericContainer", () => {
+xdescribe("GenericContainer", () => {
     let container: StartedTestContainer;
     let redisClient: any;
 

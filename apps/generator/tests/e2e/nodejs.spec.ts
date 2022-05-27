@@ -7,7 +7,7 @@ const request = require('supertest');
 jest.useRealTimers();
 jest.setTimeout(1200_000);
 
-describe('nodejs generator E2E tests', () => {
+xdescribe('nodejs generator E2E tests', () => {
     let postgresContainer: StartedTestContainer;
     let apiContainer: StartedTestContainer;
     let appContainer: StartedTestContainer;
