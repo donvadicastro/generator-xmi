@@ -13,7 +13,7 @@ describe('Generators', () => {
     describe('Templates', () => {
         describe('Monolith', () => {
             describe('Collaboration with condition', () => {
-                const dir = path.resolve( './apps/generator/nodejs/templates/partial/collaboration');
+                const dir = path.resolve( './apps/generator/src/nodejs/templates/partial/collaboration');
                 const data = readJSONSync(path.resolve('./resources/models/project11_activity_condition.json'));
                 const parser = new XmiParser(data);
 
@@ -54,7 +54,7 @@ describe('Generators', () => {
 
             describe('Collaboration with loop', () => {
                 let data: any, parser: XmiParser;
-                const dir = path.resolve('./apps/generator/nodejs/templates/partial/collaboration');
+                const dir = path.resolve('./apps/generator/src/nodejs/templates/partial/collaboration');
 
                 beforeEach((done) => {
                     parseString(fs.readFileSync(path.resolve('./resources/models/fixtures.xml')), (err: any, result: any) => { data = result; done(); });

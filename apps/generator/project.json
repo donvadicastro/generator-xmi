@@ -2,20 +2,6 @@
   "root": "apps/generator",
   "sourceRoot": "apps/generator/app",
   "targets": {
-    "build": {
-      "executor": "@nrwl/js:tsc",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/generators",
-        "main": "app/index.ts",
-        "tsConfig": "apps/generator/tsconfig.lib.json",
-        "assets": ["apps/generator/*.md"]
-      },
-      "dependsOn": [{
-        "target": "build",
-        "projects": "dependencies"
-      }]
-    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
@@ -29,16 +15,9 @@
       "options": {
         "jestConfig": "apps/generator/jest.config.js",
         "passWithNoTests": true
-      },
-      "dependsOn": [{
-        "target": "build",
-        "projects": "self"
-      },{
-        "target": "test",
-        "projects": "dependencies"
-      }]
+      }
     }
   },
   "tags": [],
-  "implicitDependencies": ["core"]
+  "implicitDependencies": []
 }

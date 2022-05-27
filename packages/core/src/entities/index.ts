@@ -7,7 +7,6 @@ export * from './xmiComponent';
 export * from './xmiDataType';
 export * from './xmiEnumeration';
 export * from './xmiInstanceSpecification';
-export * from './xmiInterface';
 export * from './xmiLifeline';
 export * from './xmiPackage';
 export * from './ui/xmiScreen';

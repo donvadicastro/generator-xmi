@@ -244,6 +244,7 @@ export class XmiGenerator extends XmiGeneratorBase {
         this._generateUseCase(x, options);
       } else if (x instanceof xmiPackage) {
         localPath || this.fs.copyTpl(this.templatePath('readme.ejs'), `${this.options.destination}/readme.md`, options);
+        localPath || this.fs.copyTpl(this.templatePath('package.json.ejs'), `${this.options.destination}/package.json`, options);
 
         //clean generated content
         existsSync(`${localPath}/${x.name}/components/generated`) && this.spawnCommandSync('rm', ['-rf', `${localPath}/${x.name}/components/generated`]);

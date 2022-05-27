@@ -11,7 +11,7 @@ describe('Generators', () => {
     describe('Templates', () => {
         describe('Monolith', () => {
             describe('Class (input)', () => {
-                const dir = path.resolve('./apps/generator/nodejs/templates/partial/class');
+                const dir = path.resolve('./apps/generator/src/nodejs/templates/partial/class');
 
                 describe('check attribute references', () => {
                     let pkg, classes: any;

@@ -11,7 +11,7 @@ describe('Generators', () => {
     describe('Templates', () => {
         describe('Microservices', () => {
             describe('Collaboration', () => {
-                const dir = path.resolve('apps/generator/microservices/templates');
+                const dir = path.resolve('apps/generator/src/microservices/templates');
                 const data = readJSONSync(path.resolve('./resources/models/project6_activity.json'));
                 const parser = new XmiParser(data);
 

@@ -2,7 +2,11 @@
   "name": "generator-xmi-app",
   "version": "0.0.1",
   "type": "commonjs",
-  "main": "app/index.js",
+  "main": "src/app/index.js",
+  "private": true,
+  "scripts": {
+    "compile": "tsc --build tsconfig.lib.json"
+  },
   "dependencies": {
     "chalk": "^4.1.2",
     "generator-xmi-core": "*",
@@ -17,9 +21,9 @@
   "devDependencies": {
     "@types/jest": "^22.2.3",
     "async-redis": "^2.0.0",
-    "jest": "^26.4.2",
+    "jest": "^28.1.0",
     "testcontainers": "^8.10.1",
     "supertest": "^6.2.3",
-    "ts-jest": "^26.4.1"
+    "ts-jest": "^28.0.3"
   }
 }

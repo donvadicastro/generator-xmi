@@ -85,6 +85,8 @@ export class XmiGenerator extends XmiGeneratorBase {
 
             if (x instanceof xmiPackage) {
                 localPath || this.fs.copyTpl(this.templatePath('readme.ejs'), `${this.options.destination}/readme.md`, options);
+                localPath || this.fs.copyTpl(this.templatePath('package.json.ejs'), `${this.options.destination}/package.json`, options);
+
                 this._generate(`${localPath}/${x.name}`, x);
             }
         });

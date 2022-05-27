@@ -11,7 +11,7 @@ describe('Generators', () => {
     describe('Templates', () => {
         describe('Microservices', () => {
             describe('Class (input)', () => {
-                const dir = path.resolve('./apps/generator/microservices/templates/partial/class');
+                const dir = path.resolve('./apps/generator/src/microservices/templates/partial/class');
                 let pkg, entities, c1: any;
 
                 beforeEach(async () => {

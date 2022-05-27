@@ -14,7 +14,7 @@ describe('Generators', () => {
     describe('Templates', () => {
         describe('Monolith', () => {
             describe('Component', () => {
-                const dir = path.resolve('./apps/generator/nodejs/templates/partial/component');
+                const dir = path.resolve('./apps/generator/src/nodejs/templates/partial/component');
 
                 describe('Methods and conditions', () => {
                     let pkg, classes, classA: any;

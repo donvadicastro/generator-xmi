@@ -1,11 +1,12 @@
 {
   "name": "generator-xmi-core",
   "version": "0.0.1",
-  "type": "module",
-  "main": "src/index.js",
+  "type": "commonjs",
+  "main": "dist/index.js",
   "private": true,
   "scripts": {
-    "build": "tsc"
+    "test": "jest",
+    "compile": "tsc --build tsconfig.lib.json"
   },
   "dependencies": {
     "@types/fs-extra": "^5.0.2",

@@ -4,8 +4,6 @@
     "module": "commonjs",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
@@ -16,9 +14,8 @@
   },
   "files": [],
   "include": [],
+  "exclude": [],
   "references": [
-    { "path": "../../packages/core" },
-    { "path": "./tsconfig.lib.json" },
-    { "path": "./tsconfig.spec.json" }
+    { "path": "../../packages/core" }
   ]
 }

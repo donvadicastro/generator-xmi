@@ -1,4 +1,4 @@
-import {xmiInterface} from "../entities";
+import {xmiInterface} from "../entities/xmiInterface";
 import {xmiFragment} from "../entities/collaboration/xmiFragment";
 import {xmiPackage} from "../entities";
 import {xmiAggregationLink} from "../entities/links/xmiAggregationLink";
