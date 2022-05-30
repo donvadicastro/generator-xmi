@@ -1,0 +1,23 @@
+{
+  "root": "apps/generator",
+  "sourceRoot": "apps/generator/app",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/generator/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/generator"],
+      "options": {
+        "jestConfig": "apps/generator/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": []
+}

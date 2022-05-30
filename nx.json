@@ -1,0 +1,20 @@
+{
+  "extends": "@nrwl/workspace/presets/core.json",
+  "npmScope": "xmi",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/node"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": ""
+      }
+    }
+  },
+  "defaultProject": "generator"
+}
