@@ -1,6 +1,6 @@
 {
   "name": "generator-xmi-core",
-  "version": "0.0.1",
+  "version": "1.0.10",
   "type": "commonjs",
   "main": "dist/index.js",
   "private": true,
