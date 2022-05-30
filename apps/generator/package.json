@@ -1,6 +1,6 @@
 {
   "name": "generator-xmi-app",
-  "version": "1.1.11",
+  "version": "0.0.0",
   "type": "commonjs",
   "main": "src/app/index.js",
   "private": true,
