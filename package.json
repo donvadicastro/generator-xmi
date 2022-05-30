@@ -1,6 +1,6 @@
 {
   "name": "generator-xmi",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "license": "MIT",
   "main": "dist/generators/app/index.js",
   "scripts": {
