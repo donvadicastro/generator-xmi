@@ -1,8 +1,12 @@
-FROM donvadicastro/generator-xmi:base-1.0.1
+FROM donvadicastro/generator-xmi:base-1.0.8
 
 ARG GENERATOR_TYPE
 ENV GENERATOR_TYPE=$GENERATOR_TYPE
 
-COPY ./dist/generators .
+COPY ./dist/generators ./dist/generators
 COPY ./resources/models/fixtures.xml .
-RUN yo xmi fixtures.xml --type=$GENERATOR_TYPE --destination=.
+COPY ./node_modules ./node_modules
+COPY ./packages/core ./node_modules/generator-xmi-core
+
+RUN yo xmi fixtures.xml --type=$GENERATOR_TYPE --destination=./output
+WORKDIR /home/yeoman/generated/output

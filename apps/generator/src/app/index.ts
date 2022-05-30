@@ -52,7 +52,7 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
             this.log(treeify.asTree(parser.toConsole(), true, true));
 
             if(success && !this.options.dryRun) {
-                this.composeWith(import('../' + this.options.type), {
+                this.composeWith(require.resolve('../' + this.options.type), {
                     ...this.options,
                     parser: parser
                 });

@@ -1,5 +1,4 @@
 import {StartedTestContainer} from "testcontainers/dist/test-container";
-import * as path from "path";
 import {GenericContainer} from "testcontainers";
 
 const request = require('supertest');
@@ -7,7 +6,7 @@ const request = require('supertest');
 jest.useRealTimers();
 jest.setTimeout(1200_000);
 
-xdescribe('nodejs generator E2E tests', () => {
+describe('nodejs generator E2E tests', () => {
     let postgresContainer: StartedTestContainer;
     let apiContainer: StartedTestContainer;
     let appContainer: StartedTestContainer;
@@ -20,17 +19,13 @@ xdescribe('nodejs generator E2E tests', () => {
             .withEnv("POSTGRES_DB", "test")
             .start();
 
-        const buildContainer = await GenericContainer.fromDockerfile(path.resolve('./'))
-            .withBuildArg("GENERATOR_TYPE", "nodejs")
-            .build("generator-xmi-runner");
-
-        apiContainer = await buildContainer
+        apiContainer = await new GenericContainer("generator-xmi-runner-node")
             .withExposedPorts(3000)
             .withCmd(["npm", "run", "api:start"])
             .withEnv('DB_HOST', postgresContainer.getIpAddress('bridge'))
             .start();
 
-        appContainer = await buildContainer
+        appContainer = await new GenericContainer("generator-xmi-runner-node")
             .withExposedPorts(4200)
             .withCmd(["npm", "run", "app:start"])
             .start();

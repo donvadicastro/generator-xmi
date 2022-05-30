@@ -32,12 +32,23 @@ RUN adduser -D -u 501 yeoman && \
 # Yeoman needs the use of a home directory for caching and certain config storage.
 ENV HOME /home/yeoman
 
-RUN mkdir /generated && chown yeoman:yeoman /generated
-WORKDIR /generated
+RUN mkdir /home/yeoman/generated
+WORKDIR /home/yeoman/generated
+
+COPY ./package.json .
+COPY ./dist/generators ./dist/generators
+COPY ./apps ./apps
+COPY ./packages ./packages
+
+RUN npm install --only=prod --silent
+RUN npm install --workspaces --only=prod --silent
+
+#COPY ./packages/core ./node_modules/generator-xmi-core
 
 # Grant access for symbolic link later
 RUN chown -R yeoman /usr/local/lib/node_modules
-RUN chown -R yeoman /generated
+RUN chown -R yeoman /home/yeoman /home/yeoman/.config
+RUN chown -R yeoman /home/yeoman/generated
 
 # Always run as the yeoman user
 USER yeoman
@@ -46,5 +57,4 @@ USER yeoman
 EXPOSE 4200
 EXPOSE 3000
 
-COPY ./package.json .
 RUN npm link

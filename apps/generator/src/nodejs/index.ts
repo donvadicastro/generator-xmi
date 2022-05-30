@@ -20,6 +20,7 @@ import {join} from 'path';
 
 import kebabCase = require('just-kebab-case');
 import pascal = require('to-pascal-case');
+import { exec } from "child_process";
 
 export class XmiGenerator extends XmiGeneratorBase {
   staleContent: string[] = [];
@@ -36,6 +37,11 @@ export class XmiGenerator extends XmiGeneratorBase {
     });
 
     this.generatedFiles.forEach(x => this._beautify(x));
+  }
+
+  async install() {
+    this.log.info(`Installing npm packages in ${this.options.destination}`);
+    await exec(`npm install --prefix ${this.options.destination}`);
   }
 
   end() {

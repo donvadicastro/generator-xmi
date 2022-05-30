@@ -18,7 +18,7 @@ import {XmiGeneratorBase} from "../_base/xmiGeneratorBase";
 import {existsSync, readdirSync, statSync} from "fs";
 import {join} from "path";
 
-import kebabCase from "just-kebab-case";
+import * as kebabCase from "just-kebab-case";
 import pascal from "to-pascal-case";
 import {green, yellow} from "chalk";
 

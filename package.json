@@ -1,16 +1,16 @@
 {
   "name": "generator-xmi",
-  "version": "1.0.1",
+  "version": "1.0.8",
   "license": "MIT",
   "main": "dist/generators/app/index.js",
   "scripts": {
-    "build": "nx build",
-    "test": "nx run-many --all --target=test",
+    "compile": "lerna run compile",
+    "test": "npm run compile && npm run dockerBuildGeneratorNode && nx run-many --all --target=test",
     "dockerBuildBase": "cross-var docker build -t generator-xmi -f DockerfileBase .",
+    "dockerBuildGeneratorNode": "cross-var  docker build --build-arg GENERATOR_TYPE=nodejs --progress=plain -t generator-xmi-runner-node .",
     "dockerTagBase": "cross-var docker tag generator-xmi donvadicastro/generator-xmi:base-$npm_package_version",
     "dockerPushTagBase": "cross-var docker push donvadicastro/generator-xmi:base-$npm_package_version",
-    "dockerRebuildBaseImage": "npm run dockerBuildBase && npm run dockerTagBase && npm run dockerPushTagBase",
-    "compile": "lerna run compile"
+    "dockerRebuildBaseImage": "npm run compile && npm run dockerBuildBase && npm run dockerTagBase && npm run dockerPushTagBase"
   },
   "workspaces": [
     "packages/**",
@@ -30,10 +30,11 @@
     "@nrwl/workspace": "13.10.4",
     "@types/jest": "27.4.1",
     "@types/node": "16.11.7",
+    "copyfiles": "^2.4.1",
     "cross-var": "^1.1.0",
     "dotenv": "^16.0.1",
-    "jest-environment-jsdom": "^28.1.0",
     "jest": "^28.1.0",
+    "jest-environment-jsdom": "^28.1.0",
     "lerna": "^5.0.0",
     "nx": "13.10.4",
     "ts-jest": "^28.0.3",

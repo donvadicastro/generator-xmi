@@ -1,5 +1,5 @@
 import {js as beautify} from "js-beautify";
-import kebabCase from "just-kebab-case";
+import * as kebabCase from "just-kebab-case";
 import Generator = require('yeoman-generator');
 import {xmiUseCase} from "generator-xmi-core";
 

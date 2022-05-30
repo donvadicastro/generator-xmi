@@ -5,14 +5,14 @@
   "main": "src/app/index.js",
   "private": true,
   "scripts": {
-    "compile": "tsc --build tsconfig.lib.json"
+    "compile": "tsc --build tsconfig.lib.json",
+    "postcompile":  "copyfiles --up 1 --all --verbose src/**/templates/** ../../dist/generators"
   },
   "dependencies": {
     "chalk": "^4.1.2",
     "generator-xmi-core": "*",
     "js-beautify": "^1.7.5",
     "just-kebab-case": "^1.1.0",
-    "shelljs": "^0.8.5",
     "treeify": "^1.1.0",
     "xml2js": "^0.4.23",
     "yeoman-generator": "^5.3.0",
@@ -21,10 +21,11 @@
   "devDependencies": {
     "@types/jest": "^22.2.3",
     "async-redis": "^2.0.0",
-    "jest-environment-jsdom": "^28.1.0",
     "jest": "^28.1.0",
-    "testcontainers": "^8.10.1",
+    "jest-environment-jsdom": "^28.1.0",
+    "shelljs": "^0.8.5",
     "supertest": "^6.2.3",
+    "testcontainers": "^8.10.1",
     "ts-jest": "^28.0.3"
   }
 }
