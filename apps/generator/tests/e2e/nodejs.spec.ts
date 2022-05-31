@@ -1,7 +1,7 @@
 import {StartedTestContainer} from "testcontainers/dist/test-container";
 import {GenericContainer} from "testcontainers";
 
-const request = require('supertest');
+import * as request from 'supertest';
 
 jest.useRealTimers();
 jest.setTimeout(1200_000);
@@ -31,14 +31,6 @@ describe('nodejs generator E2E tests', () => {
             .start();
     });
 
-    // beforeAll(async () => {
-    //     expect(await appContainer.exec(["yo", "--generators"]))
-    //         .toEqual({exitCode: 0, output: 'Available Generators:\n\n  xmi\n    microservices\n    nodejs\n    spring\n    monolith\n'});
-    //
-    //     expect(await appContainer.exec(["yo", "xmi", "fixtures.xml", "--type=nodejs", "--destination=."]))
-    //         .toEqual({exitCode: 0, output: anything()});
-    // });
-
     describe('API server', () => {
         let req: any;
 
@@ -47,34 +39,86 @@ describe('nodejs generator E2E tests', () => {
             await new Promise((resolve) => setTimeout(resolve, 10000));
         });
 
-        it('should start API server successfully', (done) => {
-            req.get('/').expect(200, done);
+        it('should start API server successfully', async () => {
+            await req.get('/').expect(200);
         });
 
         describe('x1-simple-independent-classes -> vehicle', () => {
+            const rootVehicleAPI = '/api/v1/class-diagrams/x1-simple-independent-classes/vehicle';
+
             describe('should support GET method', () => {
-                it('existing', (done) => {
-                    req.get('/api/v1/class-diagrams/x1-simple-independent-classes/vehicle').expect(200, done);
+                it('existing', async () => {
+                    await req.get(rootVehicleAPI).expect(200);
                 });
 
-                it('not found', (done) => {
-                    req.get('/api/v1/class-diagrams/x1-simple-independent-classes/vehicle/0').expect(404, done);
+                it('not found', async () => {
+                    await req.get(`${rootVehicleAPI}/0`).expect(404);
                 });
             });
 
-            it('should support POST method', () => {
+            describe('should support POST method', () => {
+                it('created', async () => {
+                    let expected = { id: 1, name: "string", serial: 0 };
+
+                    let response = await req.post(rootVehicleAPI).send({ name: "string", serial: 0 }).expect(201);
+                    expect(response.body).toEqual(expected);
+
+                    response = await req.get(`${rootVehicleAPI}/1`).expect(200);
+                    expect(response.body).toEqual({ id: 1, name: "string", serial: 0 });
+                });
+            });
+
+            describe('should support PUT method', () => {
+                let id = 0;
+
+                beforeAll(async () => {
+                    let response = await req.post(rootVehicleAPI).send({ name: "created-for-update", serial: 1 }).expect(201);
+                    id = response.body.id;
+                });
+
+                it('updated', async () => {
+                    let actual = { name: "updated", serial: 2 };
+                    let expected = { id: id, ...actual };
+
+                    let response = await req.put(`${rootVehicleAPI}/${id}`).send(actual).expect(200);
+                    expect(response.body).toEqual(expected);
+
+                    response = await req.get(`${rootVehicleAPI}/${id}`).expect(200);
+                    expect(response.body).toEqual(expected);
+                });
+            });
+
+            describe('should support DELETE method', () => {
+                let id = 0;
+
+                beforeAll(async () => {
+                    let response = await req.post(rootVehicleAPI).send({ name: "created-for-delete", serial: 1 }).expect(201);
+                    id = response.body.id;
+                });
+
+                it('deleted', async () => {
+                    await req.delete(`${rootVehicleAPI}/${id}`).expect(200);
+                    await req.get(`${rootVehicleAPI}/${id}`).expect(404);
+
+                    // second time to delete
+                    await req.delete(`${rootVehicleAPI}/${id}`).expect(404);
+                });
+
+                it('not found', async () => {
+                    await req.get(`${rootVehicleAPI}/99999`).expect(404);
+                });
             });
         });
     });
 
-    xdescribe('APP server', () => {
+    describe('APP server', () => {
         beforeAll(async () => {
             await new Promise(x => setTimeout(x, 10000));
         });
 
-        it('should start APP server successfully', (done) => {
+        it('should start APP server successfully', async () => {
             const req = request(`http://localhost:${appContainer.getMappedPort(4200)}`);
-            req.get('/').expect(200, done);
+            await req.get('/').expect(200);
         });
     });
 });
