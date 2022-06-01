@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "compile": "tsc --build tsconfig.lib.json",
-    "postcompile": "copyfiles --up 1 --all --verbose src/**/templates/** ../../dist/generators"
+    "postcompile": "copyfiles --up 1 --all --verbose src/**/templates/**/*.* ../../dist/generators"
   },
   "dependencies": {
     "@types/supertest": "^2.0.12",
