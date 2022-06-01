@@ -29,6 +29,9 @@ jobs:
                         ${{ runner.os }}-build-
                         ${{ runner.os }}-
 
+            -   uses: satackey/action-docker-layer-caching@v0.0.11
+                continue-on-error: true
+
             -   if: ${{ steps.cache-npm.outputs.cache-hit == 'false' }}
                 name: List the state of node modules
                 continue-on-error: true
