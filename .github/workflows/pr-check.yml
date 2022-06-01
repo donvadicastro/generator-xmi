@@ -1,19 +1,44 @@
 name: 'build-test'
 on: # rebuild any PRs and main branch changes
-  pull_request:
-  push:
-    branches:
-      - master
-      - 'releases/*'
+    pull_request:
+    push:
+        branches:
+            - master
+            - 'releases/*'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16
-      - run: npm install
-      - run: npm install --workspaces
-      - run: npm test
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v3
+            -   uses: actions/setup-node@v2
+                with:
+                    node-version: 16
+
+            -   name: Cache node modules
+                id: cache-npm
+                uses: actions/cache@v3
+                env:
+                    cache-name: cache-node-modules
+                with:
+                    # npm cache files are stored in `~/.npm` on Linux/macOS
+                    path: |
+                        ~/.npm
+                        **/node_modules
+                    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+                    restore-keys: |
+                        ${{ runner.os }}-build-${{ env.cache-name }}-
+                        ${{ runner.os }}-build-
+                        ${{ runner.os }}-
+
+            -   uses: satackey/action-docker-layer-caching@v0.0.11
+                continue-on-error: true
+
+            -   if: ${{ steps.cache-npm.outputs.cache-hit == 'false' }}
+                name: List the state of node modules
+                continue-on-error: true
+                run: npm list
+
+            -   run: npm install
+            -   run: npm install --workspaces
+            -   run: npm test
