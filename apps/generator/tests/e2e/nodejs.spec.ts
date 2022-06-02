@@ -2,6 +2,10 @@ import {StartedTestContainer} from "testcontainers/dist/test-container";
 import {GenericContainer} from "testcontainers";
 
 import * as request from 'supertest';
+import {getCheck} from "./api/get.check";
+import {postCheck} from "./api/post.check";
+import {putCheck} from "./api/put.check";
+import {deleteCheck} from "./api/delete.check";
 
 jest.useRealTimers();
 jest.setTimeout(1200_000);
@@ -43,71 +47,35 @@ describe('nodejs generator E2E tests', () => {
             await req.get('/').expect(200);
         });
 
+        describe('x1-simple-independent-classes -> person', () => {
+            const rootPersonAPI = '/api/v1/class-diagrams/x1-simple-independent-classes/person';
+
+            const address = { address: "addressInfo", city: "cityInfo", country: "countryInfo", postCode: 1 };
+            const createdActual = {fisrtName: "created-first-name", lastName: "created-last-name", birthdate: "2022-06-01T19:41:16.357Z", address: address};
+            const createdExpected = {id: 1, fisrtName: "created-first-name", lastName: "created-last-name", birthdate: "2022-06-01T19:41:16.357Z", address: address};
+            const updatedBefore = {fisrtName: "updated-before-first-name", lastName: "updated-before-last-name", birthdate: "2022-06-01T19:41:16.357Z", address: address};
+            const updatedAfter = {fisrtName: "updated-after-first-name", lastName: "updated-after-last-name", birthdate: "2022-07-01T19:41:16.357Z", address: address};
+            const deletedActual = {fisrtName: "deleted-first-name", lastName: "deleted-last-name", birthdate: "2022-06-01T19:41:16.357Z", address: address};
+
+            getCheck(() => req, rootPersonAPI);
+            postCheck(() => req, rootPersonAPI, createdActual, createdExpected);
+            putCheck(() => req, rootPersonAPI, updatedBefore, updatedAfter);
+            deleteCheck(() => req, rootPersonAPI, deletedActual);
+        });
+
         describe('x1-simple-independent-classes -> vehicle', () => {
             const rootVehicleAPI = '/api/v1/class-diagrams/x1-simple-independent-classes/vehicle';
 
-            describe('should support GET method', () => {
-                it('existing', async () => {
-                    await req.get(rootVehicleAPI).expect(200);
-                });
+            const createdActual = {name: "created-check", serial: 0};
+            const createdExpected = {id: 1, name: "created-check", serial: 0};
+            const updatedBefore = {name: "updated-check", serial: 1};
+            const updatedAfter = {name: "updated", serial: 2};
+            const deletedActual = {name: "deleted-check", serial: 1};
 
-                it('not found', async () => {
-                    await req.get(`${rootVehicleAPI}/0`).expect(404);
-                });
-            });
-
-            describe('should support POST method', () => {
-                it('created', async () => {
-                    let expected = { id: 1, name: "string", serial: 0 };
-
-                    let response = await req.post(rootVehicleAPI).send({ name: "string", serial: 0 }).expect(201);
-                    expect(response.body).toEqual(expected);
-
-                    response = await req.get(`${rootVehicleAPI}/1`).expect(200);
-                    expect(response.body).toEqual({ id: 1, name: "string", serial: 0 });
-                });
-            });
-
-            describe('should support PUT method', () => {
-                let id = 0;
-
-                beforeAll(async () => {
-                    let response = await req.post(rootVehicleAPI).send({ name: "created-for-update", serial: 1 }).expect(201);
-                    id = response.body.id;
-                });
-
-                it('updated', async () => {
-                    let actual = { name: "updated", serial: 2 };
-                    let expected = { id: id, ...actual };
-
-                    let response = await req.put(`${rootVehicleAPI}/${id}`).send(actual).expect(200);
-                    expect(response.body).toEqual(expected);
-
-                    response = await req.get(`${rootVehicleAPI}/${id}`).expect(200);
-                    expect(response.body).toEqual(expected);
-                });
-            });
-
-            describe('should support DELETE method', () => {
-                let id = 0;
-
-                beforeAll(async () => {
-                    let response = await req.post(rootVehicleAPI).send({ name: "created-for-delete", serial: 1 }).expect(201);
-                    id = response.body.id;
-                });
-
-                it('deleted', async () => {
-                    await req.delete(`${rootVehicleAPI}/${id}`).expect(200);
-                    await req.get(`${rootVehicleAPI}/${id}`).expect(404);
-
-                    // second time to delete
-                    await req.delete(`${rootVehicleAPI}/${id}`).expect(404);
-                });
-
-                it('not found', async () => {
-                    await req.get(`${rootVehicleAPI}/99999`).expect(404);
-                });
-            });
+            getCheck(() => req, rootVehicleAPI);
+            postCheck(() => req, rootVehicleAPI, createdActual, createdExpected);
+            putCheck(() => req, rootVehicleAPI, updatedBefore, updatedAfter);
+            deleteCheck(() => req, rootVehicleAPI, deletedActual);
         });
     });
 
