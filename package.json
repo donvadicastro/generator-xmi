@@ -5,16 +5,15 @@
   "main": "dist/generators/app/index.js",
   "scripts": {
     "compile": "lerna run compile",
-    "test": "npm run dockerBuildGeneratorNode && nx run-many --all --target=test",
+    "test": "lerna run test",
     "dockerBuildBase": "npm run compile && cross-var docker build -t generator-xmi -f DockerfileBase .",
-    "dockerBuildGeneratorNode": "npm run compile && cross-var docker build --build-arg GENERATOR_TYPE=nodejs --progress=plain -t generator-xmi-runner-node .",
     "dockerTagBase": "cross-var docker tag generator-xmi donvadicastro/generator-xmi:base-$npm_package_version",
     "dockerPushTagBase": "cross-var docker push donvadicastro/generator-xmi:base-$npm_package_version",
     "dockerRebuildBaseImage": "npm run compile && npm run dockerBuildBase && npm run dockerTagBase && npm run dockerPushTagBase"
   },
   "workspaces": [
     "packages/**",
-    "apps/**"
+    "generators/**"
   ],
   "dependencies": {
     "tslib": "^2.0.0"

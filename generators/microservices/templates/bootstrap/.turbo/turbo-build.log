@@ -1,0 +1,51 @@
+generator-xmi:build: cache hit, replaying output [2m8d9fff63389069fd[0m
+[36mgenerator-xmi:build: [0m
+[36mgenerator-xmi:build: [0m> generator-xmi@1.0.0 build
+[36mgenerator-xmi:build: [0m> webpack --config webpack.config.js --mode none
+[36mgenerator-xmi:build: [0m
+[36mgenerator-xmi:build: [0mC:\Users\vadimb\WebstormProjects\generator-xmi\apps\generator\node_modules\webpack-cli\bin\cli.js:93
+[36mgenerator-xmi:build: [0m				throw err;
+[36mgenerator-xmi:build: [0m				^
+[36mgenerator-xmi:build: [0m
+[36mgenerator-xmi:build: [0mError: Cannot find module 'C:\Users\vadimb\WebstormProjects\generator-xmi\apps\generator\microservices\templates\bootstrap\webpack.config.js'
+[36mgenerator-xmi:build: [0mRequire stack:
+[36mgenerator-xmi:build: [0m- C:\Users\vadimb\WebstormProjects\generator-xmi\apps\generator\node_modules\webpack-cli\bin\utils\convert-argv.js
+[36mgenerator-xmi:build: [0m- C:\Users\vadimb\WebstormProjects\generator-xmi\apps\generator\node_modules\webpack-cli\bin\cli.js
+[36mgenerator-xmi:build: [0m- C:\Users\vadimb\WebstormProjects\generator-xmi\apps\generator\node_modules\webpack\bin\webpack.js
+[36mgenerator-xmi:build: [0m    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:933:15)
+[36mgenerator-xmi:build: [0m    at Function.Module._load (node:internal/modules/cjs/loader:778:27)
+[36mgenerator-xmi:build: [0m    at Module.require (node:internal/modules/cjs/loader:1005:19)
+[36mgenerator-xmi:build: [0m    at require (C:\Users\vadimb\WebstormProjects\generator-xmi\node_modules\v8-compile-cache\v8-compile-cache.js:159:20)
+[36mgenerator-xmi:build: [0m    at WEBPACK_OPTIONS (C:\Users\vadimb\WebstormProjects\generator-xmi\apps\generator\node_modules\webpack-cli\bin\utils\convert-argv.js:114:13)
+[36mgenerator-xmi:build: [0m    at requireConfig (C:\Users\vadimb\WebstormProjects\generator-xmi\apps\generator\node_modules\webpack-cli\bin\utils\convert-argv.js:116:6)
+[36mgenerator-xmi:build: [0m    at C:\Users\vadimb\WebstormProjects\generator-xmi\apps\generator\node_modules\webpack-cli\bin\utils\convert-argv.js:123:17
+[36mgenerator-xmi:build: [0m    at Array.forEach (<anonymous>)
+[36mgenerator-xmi:build: [0m    at module.exports (C:\Users\vadimb\WebstormProjects\generator-xmi\apps\generator\node_modules\webpack-cli\bin\utils\convert-argv.js:121:15)
+[36mgenerator-xmi:build: [0m    at C:\Users\vadimb\WebstormProjects\generator-xmi\apps\generator\node_modules\webpack-cli\bin\cli.js:71:45
+[36mgenerator-xmi:build: [0m    at Object.parse (C:\Users\vadimb\WebstormProjects\generator-xmi\apps\generator\node_modules\webpack-cli\node_modules\yargs\yargs.js:576:18)
+[36mgenerator-xmi:build: [0m    at C:\Users\vadimb\WebstormProjects\generator-xmi\apps\generator\node_modules\webpack-cli\bin\cli.js:49:8
+[36mgenerator-xmi:build: [0m    at Object.<anonymous> (C:\Users\vadimb\WebstormProjects\generator-xmi\apps\generator\node_modules\webpack-cli\bin\cli.js:366:3)
+[36mgenerator-xmi:build: [0m    at Module._compile (node:internal/modules/cjs/loader:1105:14)
+[36mgenerator-xmi:build: [0m    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
+[36mgenerator-xmi:build: [0m    at Module.load (node:internal/modules/cjs/loader:981:32)
+[36mgenerator-xmi:build: [0m    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+[36mgenerator-xmi:build: [0m    at Module.require (node:internal/modules/cjs/loader:1005:19)
+[36mgenerator-xmi:build: [0m    at require (node:internal/modules/cjs/helpers:102:18)
+[36mgenerator-xmi:build: [0m    at Object.<anonymous> (C:\Users\vadimb\WebstormProjects\generator-xmi\apps\generator\node_modules\webpack\bin\webpack.js:156:2)
+[36mgenerator-xmi:build: [0m    at Module._compile (node:internal/modules/cjs/loader:1105:14)
+[36mgenerator-xmi:build: [0m    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
+[36mgenerator-xmi:build: [0m    at Module.load (node:internal/modules/cjs/loader:981:32)
+[36mgenerator-xmi:build: [0m    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+[36mgenerator-xmi:build: [0m    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
+[36mgenerator-xmi:build: [0m    at node:internal/main/run_main_module:17:47 {
+[36mgenerator-xmi:build: [0m  code: 'MODULE_NOT_FOUND',
+[36mgenerator-xmi:build: [0m  requireStack: [
+[36mgenerator-xmi:build: [0m    'C:\\Users\\vadimb\\WebstormProjects\\generator-xmi\\apps\\generator\\node_modules\\webpack-cli\\bin\\utils\\convert-argv.js',
+[36mgenerator-xmi:build: [0m    'C:\\Users\\vadimb\\WebstormProjects\\generator-xmi\\apps\\generator\\node_modules\\webpack-cli\\bin\\cli.js',
+[36mgenerator-xmi:build: [0m    'C:\\Users\\vadimb\\WebstormProjects\\generator-xmi\\apps\\generator\\node_modules\\webpack\\bin\\webpack.js'
+[36mgenerator-xmi:build: [0m  ]
+[36mgenerator-xmi:build: [0m}
+[36mgenerator-xmi:build: [0mnpm ERR! Lifecycle script `build` failed with error: 
+[36mgenerator-xmi:build: [0mnpm ERR! Error: command failed 
+[36mgenerator-xmi:build: [0mnpm ERR!   in workspace: generator-xmi@1.0.0 
+[36mgenerator-xmi:build: [0mnpm ERR!   at location: C:\Users\vadimb\WebstormProjects\generator-xmi\apps\generator\microservices\templates\bootstrap 

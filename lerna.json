@@ -1,6 +1,6 @@
 {
   "lerna": "2.2.0",
-  "packages": ["packages/*", "apps/*"],
+  "packages": ["packages/*", "generators/*"],
   "npmClient": "npm",
   "version": "1.0.0"
 }

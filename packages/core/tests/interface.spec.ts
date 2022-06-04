@@ -7,7 +7,7 @@ import path = require("path");
 
 describe('xmiParser', () => {
   describe('Interfaces', () => {
-    const data = readJSONSync(path.resolve('./resources/models/project3_interface.json'));
+    const data = readJSONSync(path.resolve('../../resources/models/project3_interface.json'));
     const parser = new XmiParser(data);
 
     beforeEach(async () => await parser.parse());

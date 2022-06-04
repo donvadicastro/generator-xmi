@@ -1,6 +1,6 @@
 module.exports = {
     displayName: 'generator',
-    preset: '../../jest.preset.js',
+    roots: [ '<rootDir>' ],
     globals: {
         'ts-jest': {
             tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,5 @@ module.exports = {
     },
     reporters: ['default', 'summary'],
     moduleFileExtensions: ['ts', 'js', 'html'],
-    coverageDirectory: '../../coverage/apps/generators',
+    coverageDirectory: '../coverage/generators'
 };

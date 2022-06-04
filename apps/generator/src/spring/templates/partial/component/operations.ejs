@@ -1,9 +1,0 @@
-<% (entity.operations || []).forEach(function (operation) { %>
-    /**
-    * <%= operation.nameOrigin %> action.<% if(operation.description) { %>
-    * <%- operation.description.replace(/\n/g, '\n* ') %>.<% } %>
-    */
-    async <%- include('../interface/operation', {operation: operation}) -%> {
-        return null;
-    }
-<% }) %>

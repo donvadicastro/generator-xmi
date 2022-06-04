@@ -10,7 +10,7 @@ describe('xmiParser', () => {
     jest.mock('assert');
 
     describe('Tree', () => {
-        const data = readJSONSync(path.resolve('./resources/models/project1.json'));
+        const data = readJSONSync(path.resolve('../../resources/models/project1.json'));
         const parser = new XmiParser(data);
 
         assert.mockResolvedValue(true);

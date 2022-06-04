@@ -9,7 +9,7 @@ describe('xmiParser', () => {
     let entities: any[];
 
     beforeAll((done) => {
-      parseString(fs.readFileSync(path.resolve('./resources/models/fixtures.xml')), (err: any, result: any) => {
+      parseString(fs.readFileSync(path.resolve('../../resources/models/fixtures.xml')), (err: any, result: any) => {
         const parser = new XmiParser(result);
 
         parser.parse().then(() => {

@@ -14,7 +14,7 @@ describe('xmiParser', () => {
       let data: any, parser: XmiParser;
 
       beforeEach((done) => {
-        parseString(fs.readFileSync(path.resolve('./resources/models/fixtures.xml')), (err: any, result: any) => {
+        parseString(fs.readFileSync(path.resolve('../../resources/models/fixtures.xml')), (err: any, result: any) => {
           data = result;
           done();
         });

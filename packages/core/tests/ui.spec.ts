@@ -9,7 +9,7 @@ import path = require("path");
 
 describe('xmiParser', () => {
   describe('UI', () => {
-    const data = readJSONSync(path.resolve('./resources/models/project8_ui.json'));
+    const data = readJSONSync(path.resolve('../../resources/models/project8_ui.json'));
     const parser = new XmiParser(data);
 
     beforeEach(async () => await parser.parse());
@@ -34,7 +34,7 @@ describe('xmiParser', () => {
     let pkg: any;
 
     beforeEach(async () => {
-      const data = readJSONSync(path.resolve('./resources/models/project8_ui_iteraction.json'));
+      const data = readJSONSync(path.resolve('../../resources/models/project8_ui_iteraction.json'));
       const parser = new XmiParser(data);
 
       await parser.parse();

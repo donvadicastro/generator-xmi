@@ -5,7 +5,7 @@ import * as path from "path";
 describe('xmiParser', () => {
     describe('Activities', () => {
         it('Verify activity diagram', async () => {
-            const data = readJSONSync(path.resolve('./resources/models/project6_activity.json'));
+            const data = readJSONSync(path.resolve('../../resources/models/project6_activity.json'));
             const parser = new XmiParser(data);
 
             await parser.parse();
@@ -39,7 +39,7 @@ describe('xmiParser', () => {
 
     describe('Activities loop', () => {
         it('verify activity diagram with loop', async () => {
-            const data = readJSONSync(path.resolve('./resources/models/project11_activity_loop.json'));
+            const data = readJSONSync(path.resolve('../../resources/models/project11_activity_loop.json'));
             const parser = new XmiParser(data);
 
             await parser.parse();
@@ -75,7 +75,7 @@ describe('xmiParser', () => {
 
     describe('Activities condition', () => {
         it('verify activity diagram with condition', async () => {
-            const data = readJSONSync(path.resolve('./resources/models/project11_activity_condition.json'));
+            const data = readJSONSync(path.resolve('../../resources/models/project11_activity_condition.json'));
             const parser = new XmiParser(data);
 
             await parser.parse();

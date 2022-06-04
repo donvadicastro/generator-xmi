@@ -1,0 +1,11 @@
+{
+    "name": "generator-xmi-common",
+    "version": "0.0.0",
+    "type": "commonjs",
+    "main": "src/index.js",
+    "private": true,
+    "scripts": {
+        "test": "jest --verbose --passWithNoTests --silent=false",
+        "compile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*.*\" \"../../dist/generators/common\""
+    }
+}

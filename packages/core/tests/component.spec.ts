@@ -4,7 +4,7 @@ import * as path from "path";
 
 describe('xmiParser', () => {
     describe('Components', () => {
-        const data = readJSONSync(path.resolve('./resources/models/project4_component.json'));
+        const data = readJSONSync(path.resolve('../../resources/models/project4_component.json'));
         const parser = new XmiParser(data);
 
         beforeEach(async () => await parser.parse());
@@ -43,7 +43,7 @@ describe('xmiParser', () => {
         let pkg, entities, classes: any, root: any, dep1: any, dep2: any, config: any, http: any, httpOptions: any;
 
         beforeEach(async () => {
-            const data = readJSONSync(path.resolve('./resources/models/project9_component_dep.json'));
+            const data = readJSONSync(path.resolve('../../resources/models/project9_component_dep.json'));
             const parser = new XmiParser(data);
             await parser.parse();
 

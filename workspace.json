@@ -2,6 +2,6 @@
   "version": 2,
   "projects": {
     "core": "packages/core",
-    "generator": "apps/generator"
+    "generator": "apps/generators"
   }
 }

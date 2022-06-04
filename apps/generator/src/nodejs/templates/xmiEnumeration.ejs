@@ -1,5 +1,0 @@
-<%- include('partial/common/classDescription', {entity: entity, system: true}) -%>
-
-export enum <%= entity.namePascal %> {
-    <%= entity.literals.map(literal => literal.toUpperCase() ).join(', ') %>
-}

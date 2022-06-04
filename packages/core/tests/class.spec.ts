@@ -7,7 +7,7 @@ import * as path from "path";
 describe('xmiParser', () => {
     describe('Classes', () => {
         it('Verify custom', async () => {
-            const data = readJSONSync(path.resolve('./resources/models/project2_class.json'));
+            const data = readJSONSync(path.resolve('../../resources/models/project2_class.json'));
             const parser = new XmiParser(data);
 
             await parser.parse();
@@ -53,7 +53,7 @@ describe('xmiParser', () => {
         });
 
         it('Verify association', async () => {
-            const data = readJSONSync(path.resolve('./resources/models/project2_class_associations.json'));
+            const data = readJSONSync(path.resolve('../../resources/models/project2_class_associations.json'));
             const parser = new XmiParser(data);
 
             await parser.parse();
@@ -70,7 +70,7 @@ describe('xmiParser', () => {
         });
 
         it('Verify generalization', async () => {
-            const data = readJSONSync(path.resolve('./resources/models/project2_class_inheritance.json'));
+            const data = readJSONSync(path.resolve('../../resources/models/project2_class_inheritance.json'));
             const parser = new XmiParser(data);
 
             await parser.parse();
