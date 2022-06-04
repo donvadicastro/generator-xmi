@@ -4,7 +4,7 @@
   "license": "MIT",
   "main": "dist/generators/app/index.js",
   "scripts": {
-    "compile": "lerna run compile",
+    "compile": "lerna run compile --include-dependencies --stream",
     "test": "lerna run test",
     "dockerBuild": "lerna run dockerBuild",
     "dockerBuildBase": "npm run compile && cross-var docker build -t generator-xmi -f DockerfileBase .",

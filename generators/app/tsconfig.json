@@ -9,7 +9,7 @@
         "noImplicitAny": false,
         "composite": true,
         "paths": {
-            "generator-xmi-core": [ "../packages/core" ]
+            "generator-xmi-core": [ "../../packages/core" ]
         }
     },
     "files": [],

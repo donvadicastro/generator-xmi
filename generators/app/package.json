@@ -12,6 +12,7 @@
     "dependencies": {
         "@types/supertest": "^2.0.12",
         "chalk": "^4.1.2",
+        "generator-xmi-core": "*",
         "just-kebab-case": "^1.1.0",
         "treeify": "^1.1.0",
         "xml2js": "^0.4.23",
