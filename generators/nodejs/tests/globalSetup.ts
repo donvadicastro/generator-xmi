@@ -14,7 +14,7 @@ module.exports = async () => {
         .withEnv('DB_HOST', postgresContainer.getIpAddress('bridge'))
         .start();
 
-    const appContainer = await new GenericContainer("generator-xmi-runner-node")
+    const appContainer = await new GenericContainer("generator-xmi-runner-nodejs")
         .withExposedPorts(4200)
         .withCmd(["npm", "run", "app:start"])
         .start();
