@@ -1,0 +1,8 @@
+<div class="card">
+    <div class="card-header"><%= entity.properties.get('label') || entity.name %></div>
+    <div class="card-body">
+        <% build(entity, (controlName, childEntity) => { %>
+            <%- include(controlName, {entity: childEntity, build: build}) -%>
+        <% }) %>
+    </div>
+</div>

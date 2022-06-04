@@ -1,0 +1,2 @@
+<%= entity.generalizationLinksTo ? `${entity.generalizationLinksTo.name}Base` : (entity.elementRef ? entity.elementRef.name : 'ComponentBase') %>
+    implements <%= entity.namePascal %>Contract<% if ((entity.provided || []).length) { %>, <%= entity.provided.map(x => x.typeRef.elementId).join(', ') %><%}%>

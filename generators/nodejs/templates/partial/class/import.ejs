@@ -1,0 +1,12 @@
+import {PrimaryGeneratedColumn, OneToMany, ManyToOne, ObjectID, ObjectIdColumn, getRepository, AfterInsert, BeforeRemove} from "typeorm";
+import {Column} from "typeorm/decorator/columns/Column";
+import {OneToOne} from "typeorm/decorator/relations/OneToOne";
+import {JoinColumn} from "typeorm/decorator/relations/JoinColumn";
+import {ManyToMany} from "typeorm/decorator/relations/ManyToMany";
+import {JoinTable} from "typeorm/decorator/relations/JoinTable";
+import {PrimaryColumn} from "typeorm/decorator/columns/PrimaryColumn";
+
+import {<%= entity.namePascal %>Contract} from '../../contracts/<%= entity.name %>';
+import {<%= entity.namePascal %>} from "../<%= entity.name %>";
+
+<%- include('../common/importReferences', {entity: entity, deepLevel: '../'}) -%>

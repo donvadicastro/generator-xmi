@@ -1,0 +1,4 @@
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" id="<%= entity.alias || entity.name %>-edit" formControlName="<%= entity.alias || entity.name %>"/>
+    <label class="form-check-label" for="<%= entity.alias || entity.name %>-edit"><%= entity.properties.get('label') || entity.name %></label>
+</div>

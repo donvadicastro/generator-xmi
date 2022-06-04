@@ -1,0 +1,21 @@
+dist:build: cache hit, replaying output [2ma7a2a3a7d4e182a6[0m
+[35mdist:build: [0m
+[35mdist:build: [0m> dist@1.0.0 build
+[35mdist:build: [0m> tsc
+[35mdist:build: [0m
+[35mdist:build: [0m../../../../../node_modules/@types/node/assert.d.ts(12,72): error TS1144: '{' or ';' expected.
+[35mdist:build: [0m../../../../../node_modules/@types/node/assert.d.ts(229,72): error TS1144: '{' or ';' expected.
+[35mdist:build: [0m../../../../../node_modules/@types/node/assert.d.ts(400,98): error TS1144: '{' or ';' expected.
+[35mdist:build: [0m../../../../../node_modules/@types/node/assert.d.ts(400,105): error TS1005: ';' expected.
+[35mdist:build: [0m../../../../../node_modules/@types/node/assert.d.ts(400,108): error TS1005: ';' expected.
+[35mdist:build: [0m../../../../../node_modules/@types/node/assert.d.ts(432,102): error TS1144: '{' or ';' expected.
+[35mdist:build: [0m../../../../../node_modules/@types/node/assert.d.ts(432,109): error TS1005: ';' expected.
+[35mdist:build: [0m../../../../../node_modules/@types/node/assert.d.ts(432,112): error TS1005: ';' expected.
+[35mdist:build: [0m../../../../../node_modules/@types/node/assert.d.ts(734,51): error TS1144: '{' or ';' expected.
+[35mdist:build: [0m../../../../../node_modules/@types/node/assert.d.ts(734,57): error TS1005: ';' expected.
+[35mdist:build: [0m../../../../../node_modules/@types/node/assert.d.ts(734,60): error TS1005: ';' expected.
+[35mdist:build: [0m../../../../../node_modules/@types/node/assert.d.ts(892,65): error TS1005: ';' expected.
+[35mdist:build: [0mnpm ERR! Lifecycle script `build` failed with error: 
+[35mdist:build: [0mnpm ERR! Error: command failed 
+[35mdist:build: [0mnpm ERR!   in workspace: dist@1.0.0 
+[35mdist:build: [0mnpm ERR!   at location: C:\Users\vadimb\WebstormProjects\generator-xmi\apps\generator\nodejs\templates\bootstrap 

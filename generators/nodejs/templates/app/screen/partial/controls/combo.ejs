@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label for="<%= entity.alias || entity.name %>-edit"><%= entity.properties.get('label') || entity.name %></label>
+    <select class="form-control" id="<%= entity.alias || entity.name %>-edit" formControlName="<%= entity.alias || entity.name %>" (ngModelChange)="change_<%= entity.namePascal %>($event)">
+        <option [ngValue]="null" value="">Select...</option>
+        <option *ngFor="let item of <%= entity.name %>All" [ngValue]="item<% if(entity.typeRef && entity.typeRef.literals) { %>.id<% } %>">{{item.<%= (entity.typeRef ? entity.typeRef : entity).tags.displayName || 'name' %>}}</option>
+    </select>
+</div>

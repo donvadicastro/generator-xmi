@@ -1,0 +1,64 @@
+import {BeforeAll, Given, Then, When} from 'cucumber';
+import {expect} from 'chai';
+import {<%= entity.namePascal %>ListPage} from "./list.po";
+import {<%= entity.namePascal %>EditorPage} from "./editor.po";
+import {browser, protractor} from "protractor";
+
+const listPage: <%= entity.namePascal %>ListPage = new <%= entity.namePascal %>ListPage();
+const editorPage: <%= entity.namePascal %>EditorPage = new <%= entity.namePascal %>EditorPage();
+const expectedCondition = protractor.ExpectedConditions;
+
+Given(/^I am on the <%= entity.namePascal %> page$/, async () => {
+    await listPage.navigateTo();
+});
+
+
+
+When(/^I add new <%= entity.namePascal %>$/, async () => {
+    await listPage.addNewButton.click();
+    browser.wait(expectedCondition.urlContains('/new'), 1000);
+});
+
+When(/^I fill <%= entity.namePascal %> form$/, async (data: any) => {
+    for (let i = 0; i < data.rawTable.length; i++) {
+        await (<any>editorPage)[data.rawTable[i][0]].setValue(data.rawTable[i][1]);
+    }
+});
+
+When(/^Press "Save" button on <%= entity.namePascal %> form/, async () => {
+    await editorPage.saveButton.click();
+});
+
+When(/^I open <%= entity.namePascal %> to edit with ID "([^"]*)"$/, async (id) => {
+    await listPage.openEntity(id);
+    await browser.wait(expectedCondition.urlContains(`/${id}`), 1000);
+    await browser.wait(expectedCondition.visibilityOf(editorPage.saveButton), 1000);
+});
+
+When(/^I delete <%= entity.namePascal %>$/, async () => {
+    await editorPage.deleteButton.click();
+    await browser.switchTo().alert().accept();
+});
+
+
+
+Then(/^I should see <%= entity.namePascal %> list title "([^"]*)"$/, async (title: string) => {
+    await browser.wait(expectedCondition.presenceOf(listPage.title), 1000);
+    expect(await listPage.titleText).to.equal(title);
+});
+
+Then(/^I should see <%= entity.namePascal %> editor title "([^"]*)"$/, async (title: string) => {
+    expect(await editorPage.titleText).to.equal(title);
+});
+
+Then(/^I should see <%= entity.namePascal %> list with data$/, async (data: any) => {
+    expect(await listPage.listRawData).to.deep.equal(data.rawTable);
+});
+
+Then(/^I should see item in <%= entity.namePascal %> list$/, async (data: any) => {
+    expect(await listPage.getPresenceOf(data.rowsHash())).to.be.true;
+});
+
+Then(/^I should not see item in <%= entity.namePascal %> list$/, async (data: any) => {
+    expect(await listPage.getPresenceOf(data.rowsHash())).to.be.false;
+});
