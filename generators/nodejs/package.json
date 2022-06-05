@@ -5,7 +5,7 @@
     "main": "src/index.js",
     "private": true,
     "scripts": {
-        "test": "jest --verbose --silent=false --runInBand --detectOpenHandles",
+        "test": "cross-env DEBUG=testcontainers* jest --verbose --silent=false --runInBand --detectOpenHandles",
         "compile": "tsc --build tsconfig.lib.json",
         "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*.*\" \"../../dist/generators/nodejs\"",
         "dockerBuild": "cross-var docker build --build-arg GENERATOR_TYPE=nodejs --progress=plain -f ../../Dockerfile -t generator-xmi-runner-nodejs ../../"
@@ -23,6 +23,7 @@
     },
     "devDependencies": {
         "@types/jest": "^22.2.3",
+        "cross-env": "^7.0.3",
         "jest": "^28.1.0",
         "jest-environment-jsdom": "^28.1.0",
         "supertest": "^6.2.3",
