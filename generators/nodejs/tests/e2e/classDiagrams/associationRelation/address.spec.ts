@@ -57,7 +57,7 @@ describe('nodejs generator E2E tests', () => {
 
                     // check parent
                     response = await API.get(`${rootPersonAPI}/${personId1}`).expect(200);
-                    expect(response.body).toEqual({personRef1, addressRef: updateExpected});
+                    expect(response.body).toEqual({...personRef1, addressRef: updateExpected});
                 });
             });
 
