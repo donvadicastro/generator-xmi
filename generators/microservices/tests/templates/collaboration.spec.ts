@@ -11,8 +11,8 @@ describe('Generators', () => {
     describe('Templates', () => {
         describe('Microservices', () => {
             describe('Collaboration', () => {
-                const dir = path.resolve('../../apps/generators/src/microservices/templates');
-                const data = readJSONSync(path.resolve('../../resources/models/project6_activity.json'));
+                const dir = path.resolve(__dirname, '../../../../generators/microservices/templates');
+                const data = readJSONSync(path.resolve(__dirname, '../../../../resources/models/project6_activity.json'));
                 const parser = new XmiParser(data);
 
                 beforeEach(async () => await parser.parse());

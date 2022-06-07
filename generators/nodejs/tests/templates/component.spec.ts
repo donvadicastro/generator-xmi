@@ -14,13 +14,13 @@ describe('Generators', () => {
     describe('Templates', () => {
         describe('Monolith', () => {
             describe('Component', () => {
-                const dir = path.resolve('../../generators/nodejs/templates/partial/component');
+                const dir = path.resolve(__dirname, '../../../../generators/nodejs/templates/partial/component');
 
                 describe('Methods and conditions', () => {
                     let pkg, classes, classA: any;
 
                     beforeEach(async () => {
-                        const data = readJSONSync(path.resolve('../../resources/models/project11_activity_condition.json'));
+                        const data = readJSONSync(path.resolve(__dirname, '../../../../resources/models/project11_activity_condition.json'));
                         const parser = new XmiParser(data);
                         await parser.parse();
 
@@ -63,7 +63,7 @@ describe('Generators', () => {
                     let data: any, parser: XmiParser;
 
                     beforeEach((done) => {
-                        parseString(fs.readFileSync(path.resolve('../../resources/models/fixtures.xml')), (err: any, result: any) => { data = result; done(); });
+                        parseString(fs.readFileSync(path.resolve(__dirname, '../../../../resources/models/fixtures.xml')), (err: any, result: any) => { data = result; done(); });
                     });
 
                     beforeEach(async () => {

@@ -1,3 +1,5 @@
+import {postCheck} from "../../../../../common/tests/e2e/api/post.check";
+
 const request = require("supertest");
 
 describe('nodejs generator E2E tests', () => {
@@ -17,22 +19,16 @@ describe('nodejs generator E2E tests', () => {
 
             describe('should support POST method', () => {
                 let personId;
-                let personRef = {firstName: "person1-first-name", lastName: "person1-last-name"};
+                const personRef = {firstName: "person1-first-name", lastName: "person1-last-name"};
 
                 // create person to link with
                 beforeAll(async () => {
-                    personId = (await API.post(rootPersonAPI).send(personRef).expect(201)).body.id;
+                    personId = await postCheck(API, rootPersonAPI, {...personRef, addressRef: null});
                 });
 
                 it('created', async () => {
-                    const actual = {city: 'testCity', num: 'testNum', street: 'testStreet', personRef: personId};
-                    const expected = {id: 1, city: 'testCity', num: 'testNum', street: 'testStreet', personRef: personId};
-
-                    let response = await API.post(rootAddressAPI).send(actual).expect(201);
-                    expect(response.body).toEqual(expected);
-
-                    response = await API.get(`${rootAddressAPI}/1`).expect(200);
-                    expect(response.body).toEqual(expected);
+                    const actual = {city: 'testCity', num: 'testNum', street: 'testStreet', personRef: {...personRef, id: personId}};
+                    await postCheck(API, rootAddressAPI, actual);
                 });
             });
 
@@ -44,17 +40,13 @@ describe('nodejs generator E2E tests', () => {
 
                 // create person to link with
                 beforeAll(async () => {
-                    personId1 = (await API.post(rootPersonAPI).send(personRef1).expect(201)).body.id;
-                    personId2 = (await API.post(rootPersonAPI).send(personRef2).expect(201)).body.id;
-                });
-
-                // create address to update
-                beforeAll(async () => {
-                    id = (await API.post(rootAddressAPI).send({ ...actual, personRef: personId1 }).expect(201)).body.id;
+                    personId1 = await postCheck(API, rootPersonAPI, {...personRef1, addressRef: null});
+                    personId2 = await postCheck(API, rootPersonAPI, {...personRef2, addressRef: null});
+                    id = await postCheck(API, rootAddressAPI, { ...actual, personRef: {...personRef1, id: personId1}})
                 });
 
                 it('updated', async () => {
-                    const updateActual = { ...actual, city: 'testCityUpdated', personRef: personId1 };
+                    const updateActual = { ...actual, city: 'testCityUpdated', personRef: {...personRef1, id: personId1}};
                     const updateExpected = { ...updateActual, id: id };
 
                     let response = await API.put(`${rootAddressAPI}/${id}`).send(updateActual).expect(200);

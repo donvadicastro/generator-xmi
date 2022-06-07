@@ -11,13 +11,13 @@ describe('Generators', () => {
     describe('Templates', () => {
         describe('Monolith', () => {
             describe('Class (input)', () => {
-                const dir = path.resolve('../../generators/nodejs/templates/partial/class');
+                const dir = path.resolve(__dirname, '../../../../generators/nodejs/templates/partial/class');
 
                 describe('check attribute references', () => {
                     let pkg, classes: any;
 
                     beforeEach(async () => {
-                        const data = readJSONSync(path.resolve('../../resources/models/project2_class_associations.json'));
+                        const data = readJSONSync(path.resolve(__dirname, '../../../../resources/models/project2_class_associations.json'));
                         const parser = new XmiParser(data);
                         await parser.parse();
 
@@ -100,7 +100,7 @@ describe('Generators', () => {
                 });
 
                 it('check operation return type', async () => {
-                    const data = readJSONSync(path.resolve('../../resources/models/project2_class.json'));
+                    const data = readJSONSync(path.resolve(__dirname, '../../../../resources/models/project2_class.json'));
                     const parser = new XmiParser(data);
 
                     await parser.parse();
@@ -131,7 +131,7 @@ describe('Generators', () => {
                     let entities: any[];
 
                     beforeAll((done) => {
-                        parseString(fs.readFileSync(path.resolve('../../resources/models/fixtures.xml')), (err: any, result: any) => {
+                        parseString(fs.readFileSync(path.resolve(__dirname, '../../../../resources/models/fixtures.xml')), (err: any, result: any) => {
                             const parser = new XmiParser(result);
                             parser.parse().then(() => {
                                 const pkg = <xmiPackage>parser.packge;

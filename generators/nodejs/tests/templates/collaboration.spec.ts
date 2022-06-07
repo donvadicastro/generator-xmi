@@ -13,8 +13,8 @@ describe('Generators', () => {
     describe('Templates', () => {
         describe('Monolith', () => {
             describe('Collaboration with condition', () => {
-                const dir = path.resolve( '../../generators/nodejs/templates/partial/collaboration');
-                const data = readJSONSync(path.resolve('../../resources/models/project11_activity_condition.json'));
+                const dir = path.resolve( __dirname, '../../../../generators/nodejs/templates/partial/collaboration');
+                const data = readJSONSync(path.resolve(__dirname, '../../../../resources/models/project11_activity_condition.json'));
                 const parser = new XmiParser(data);
 
                 beforeAll(async () => await parser.parse());
@@ -54,10 +54,10 @@ describe('Generators', () => {
 
             describe('Collaboration with loop', () => {
                 let data: any, parser: XmiParser;
-                const dir = path.resolve('../../generators/nodejs/templates/partial/collaboration');
+                const dir = path.resolve(__dirname, '../../../../generators/nodejs/templates/partial/collaboration');
 
                 beforeEach((done) => {
-                    parseString(fs.readFileSync(path.resolve('../../resources/models/fixtures.xml')), (err: any, result: any) => { data = result; done(); });
+                    parseString(fs.readFileSync(path.resolve(__dirname, '../../../../resources/models/fixtures.xml')), (err: any, result: any) => { data = result; done(); });
                 });
 
                 beforeEach(async () => {

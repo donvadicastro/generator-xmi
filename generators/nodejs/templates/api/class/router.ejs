@@ -56,7 +56,7 @@ export default class <%= entity.namePascal %>Router {
                 const entity = repository.create(<<%= entity.namePascal %>>req.body);
 
                 repository.save(entity)
-                    .then((result: any) => res.status(201).set('Location', `/<%= utils.kebabCase(entity.name) %>/${result.id}`))
+                    .then((result: any) => res.set('Location', `${req.originalUrl}/<%= utils.kebabCase(entity.name) %>/${result.id}`).sendStatus(201))
                     .catch((error: any) => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));
             })
 

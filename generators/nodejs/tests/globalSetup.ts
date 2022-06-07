@@ -10,6 +10,7 @@ module.exports = async () => {
 
     const apiContainer = await new GenericContainer("generator-xmi-runner-nodejs")
         .withExposedPorts(3000)
+        .withBindMount('/dist/share', '/home/yeoman/generated/share', 'rw')
         .withCmd(["npm", "run", "api:start"])
         .withEnv('DB_HOST', postgresContainer.getIpAddress('bridge'))
         .start();

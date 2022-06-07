@@ -1,4 +1,3 @@
-import {getCheck} from "../../../../../common/tests/e2e/api/get.check";
 import {postCheck} from "../../../../../common/tests/e2e/api/post.check";
 import {putCheck} from "../../../../../common/tests/e2e/api/put.check";
 import {deleteCheck} from "../../../../../common/tests/e2e/api/delete.check";
@@ -16,10 +15,14 @@ describe('nodejs generator E2E tests', () => {
             const updatedAfter = {name: "updated", serial: 2};
             const deletedActual = {name: "deleted-check", serial: 1};
 
-            getCheck(() => API, rootVehicleAPI);
-            postCheck(() => API, rootVehicleAPI, createdActual);
             putCheck(() => API, rootVehicleAPI, updatedBefore, updatedAfter);
             deleteCheck(() => API, rootVehicleAPI, deletedActual);
+
+            describe('should support POST method', () => {
+                it('created', async () => {
+                    await postCheck(API, rootVehicleAPI, createdActual);
+                });
+            });
         });
 
         describe('APP server', () => {

@@ -12,8 +12,8 @@ describe('Generators', () => {
     describe('Templates', () => {
         describe('Microservices', () => {
             describe('Interface', () => {
-                const dir = path.resolve('../../apps/generators/src/microservices/templates');
-                const data = readJSONSync(path.resolve('../../resources/models/project2_class.json'));
+                const dir = path.resolve(__dirname, '../../../../generators/microservices/templates');
+                const data = readJSONSync(path.resolve(__dirname, '../../../../resources/models/project2_class.json'));
                 const parser = new XmiParser(data);
 
                 beforeEach(async () => await parser.parse());

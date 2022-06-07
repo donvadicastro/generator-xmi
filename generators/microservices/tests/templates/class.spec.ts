@@ -11,11 +11,11 @@ describe('Generators', () => {
     describe('Templates', () => {
         describe('Microservices', () => {
             describe('Class (input)', () => {
-                const dir = path.resolve('../apps/generators/src/microservices/templates/partial/class');
+                const dir = path.resolve(__dirname, '../../../../generators/microservices/templates/partial/class');
                 let pkg, entities, c1: any;
 
                 beforeEach(async () => {
-                    const data = readJSONSync(path.resolve('../resources/models/project4_component.json'));
+                    const data = readJSONSync(path.resolve(__dirname, '../../../../resources/models/project4_component.json'));
 
                     const parser = new XmiParser(data);
                     await parser.parse();

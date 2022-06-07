@@ -1,11 +1,10 @@
+import {postCheck} from "./post.check";
+
 export const putCheck = (req: () => any, rootUrl: string, before: any, after: any) => {
     describe('should support PUT method', () => {
         let id = 0;
 
-        beforeAll(async () => {
-            let response = await req().post(rootUrl).send(before).expect(201);
-            id = response.body.id;
-        });
+        beforeAll(async () => id = await postCheck(req(), rootUrl, before));
 
         it('updated', async () => {
             let expected = { id: id, ...after };

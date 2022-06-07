@@ -1,4 +1,3 @@
-import {getCheck} from "../../../../../common/tests/e2e/api/get.check";
 import {postCheck} from "../../../../../common/tests/e2e/api/post.check";
 import {putCheck} from "../../../../../common/tests/e2e/api/put.check";
 import {deleteCheck} from "../../../../../common/tests/e2e/api/delete.check";
@@ -17,10 +16,14 @@ describe('nodejs generator E2E tests', () => {
             const updatedAfter = {fisrtName: "updated-after-first-name", lastName: "updated-after-last-name", birthdate: "2022-07-01T19:41:16.357Z", address: address};
             const deletedActual = {fisrtName: "deleted-first-name", lastName: "deleted-last-name", birthdate: "2022-06-01T19:41:16.357Z", address: address};
 
-            getCheck(() => API, rootPersonAPI);
-            postCheck(() => API, rootPersonAPI, createdActual);
             putCheck(() => API, rootPersonAPI, updatedBefore, updatedAfter);
             deleteCheck(() => API, rootPersonAPI, deletedActual);
+
+            describe('should support POST method', () => {
+                it('created', async () => {
+                    await postCheck(API, rootPersonAPI, createdActual);
+                });
+            });
         });
 
         describe('APP server', () => {
