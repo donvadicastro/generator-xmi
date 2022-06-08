@@ -46,18 +46,21 @@ describe('nodejs generator E2E tests', () => {
                 });
 
                 it('updated', async () => {
-                    const updateActual = { ...actual, city: 'testCityUpdated', personRef: {...personRef1, id: personId1}};
-                    const updateExpected = { ...updateActual, id: id };
+                    let updateActual = { ...actual, city: 'testCityUpdated'};
+                    let updateExpected = { ...updateActual, id: id, personRef: {...personRef1, id: personId1} };
 
-                    let response = await API.put(`${rootAddressAPI}/${id}`).send(updateActual).expect(200);
+                    // TODO: require `PersonRef` as part of payload, review possibility only id to use
+                    const data = {...updateActual, personRef: {...personRef1, id: personId1}};
+                    let response = await API.put(`${rootAddressAPI}/${id}`).send(data).expect(200);
                     expect(response.body).toEqual(updateExpected);
 
                     response = await API.get(`${rootAddressAPI}/${id}`).expect(200);
                     expect(response.body).toEqual(updateExpected);
 
                     // check parent
+                    // parent Person entity contains address without cross link back to parent
                     response = await API.get(`${rootPersonAPI}/${personId1}`).expect(200);
-                    expect(response.body).toEqual({...personRef1, addressRef: updateExpected});
+                    expect(response.body.addressRef).toEqual({...updateActual, id: id});
                 });
             });
 
