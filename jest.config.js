@@ -1,5 +1,4 @@
-const { getJestProjects } = require('@nrwl/jest');
-
 module.exports = {
-  projects: getJestProjects(),
+    preset: './jest.preset.js',
+    projects: ["<rootDir>/packages/*", "<rootDir>/generators/*"]
 };

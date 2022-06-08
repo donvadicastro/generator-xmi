@@ -4,30 +4,22 @@
   "license": "MIT",
   "main": "dist/generators/app/index.js",
   "scripts": {
-    "compile": "lerna run compile",
-    "test": "npm run dockerBuildGeneratorNode && nx run-many --all --target=test",
+    "compile": "lerna run compile --include-dependencies --stream",
+    "test": "lerna run test",
+    "dockerBuild": "lerna run dockerBuild",
     "dockerBuildBase": "npm run compile && cross-var docker build -t generator-xmi -f DockerfileBase .",
-    "dockerBuildGeneratorNode": "npm run compile && cross-var docker build --build-arg GENERATOR_TYPE=nodejs --progress=plain -t generator-xmi-runner-node .",
     "dockerTagBase": "cross-var docker tag generator-xmi donvadicastro/generator-xmi:base-$npm_package_version",
     "dockerPushTagBase": "cross-var docker push donvadicastro/generator-xmi:base-$npm_package_version",
     "dockerRebuildBaseImage": "npm run compile && npm run dockerBuildBase && npm run dockerTagBase && npm run dockerPushTagBase"
   },
   "workspaces": [
     "packages/**",
-    "apps/**"
+    "generators/**"
   ],
   "dependencies": {
     "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "@nrwl/cli": "13.10.4",
-    "@nrwl/eslint-plugin-nx": "13.10.4",
-    "@nrwl/jest": "13.10.4",
-    "@nrwl/js": "^13.10.4",
-    "@nrwl/linter": "13.10.4",
-    "@nrwl/node": "^14.1.1",
-    "@nrwl/nx-cloud": "latest",
-    "@nrwl/workspace": "13.10.4",
     "@types/jest": "27.4.1",
     "@types/node": "16.11.7",
     "copyfiles": "^2.4.1",
