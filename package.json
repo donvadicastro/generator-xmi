@@ -20,14 +20,6 @@
     "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "@nrwl/cli": "13.10.4",
-    "@nrwl/eslint-plugin-nx": "13.10.4",
-    "@nrwl/jest": "13.10.4",
-    "@nrwl/js": "^13.10.4",
-    "@nrwl/linter": "13.10.4",
-    "@nrwl/node": "^14.1.1",
-    "@nrwl/nx-cloud": "latest",
-    "@nrwl/workspace": "13.10.4",
     "@types/jest": "27.4.1",
     "@types/node": "16.11.7",
     "copyfiles": "^2.4.1",
