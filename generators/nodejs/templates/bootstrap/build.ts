@@ -1,4 +1,4 @@
-import s from 'shelljs';
+import * as s from 'shelljs';
 const config = require('./tsconfig.json');
 const outDir = config.compilerOptions.outDir;
 
