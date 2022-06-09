@@ -21,6 +21,7 @@ import kebabCase = require('just-kebab-case');
 import pascal = require('to-pascal-case');
 import { exec } from "child_process";
 import {XmiGeneratorBase} from "../../common/src/xmiGeneratorBase";
+import * as path from "path";
 
 export class XmiGenerator extends XmiGeneratorBase {
   staleContent: string[] = [];
@@ -40,8 +41,8 @@ export class XmiGenerator extends XmiGeneratorBase {
   }
 
   async install() {
-    this.log.info(`Installing npm packages in ${this.options.destination}`);
-    await exec(`npm install --prefix ${this.options.destination}`);
+    this.log.info(`Installing npm packages in ${path.resolve(__dirname, this.options.destination)}`);
+    await exec(`npm install --prefix ${path.resolve(__dirname, this.options.destination)}`);
   }
 
   end() {
