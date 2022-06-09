@@ -41,8 +41,8 @@ export class XmiGenerator extends XmiGeneratorBase {
   }
 
   async install() {
-    this.log.info(`Installing npm packages in ${path.resolve(__dirname, this.options.destination)}`);
-    await exec(`npm install --prefix ${path.resolve(__dirname, this.options.destination)}`);
+    this.log.info(`Installing npm packages in ${path.resolve(process.cwd(), this.options.destination)}`);
+    await exec(`npm install --prefix ${path.resolve(process.cwd(), this.options.destination)} --force`);
   }
 
   end() {
