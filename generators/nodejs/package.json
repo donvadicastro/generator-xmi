@@ -8,7 +8,7 @@
         "test": "cross-env DEBUG=testcontainers jest --verbose --silent=false --runInBand --detectOpenHandles",
         "compile": "tsc --build tsconfig.lib.json",
         "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*\" \"../../dist/generators/nodejs\"",
-        "generate": "yo xmi ../../resources/models/fixtures.xml --type=nodejs --destination=../../output/nodejs --force",
+        "generate": "npx yo xmi ../../resources/models/fixtures.xml --type=nodejs --destination=../../output/nodejs --force",
         "dockerBuild": "npm run all:docker:build --prefix ../../output/nodejs"
     },
     "dependencies": {
