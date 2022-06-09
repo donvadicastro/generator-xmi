@@ -1,13 +1,13 @@
 version: '3'
 services:
   api:
-    image: "generator-xmi/api"
+    image: "generator-xmi-nodejs-api"
     depends_on:
       - database
     ports:
       - "3000:3000"
   app:
-    image: "generator-xmi/app"
+    image: "generator-xmi-nodejs/app"
     depends_on:
       - api
     ports:

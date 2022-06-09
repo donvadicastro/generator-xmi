@@ -1,5 +1,5 @@
 {
-    "name": "generator-xmi-nodejs",
+    "name": "generator-xmi-spring",
     "version": "0.0.0",
     "type": "commonjs",
     "main": "src/index.js",
@@ -7,9 +7,8 @@
     "scripts": {
         "test": "cross-env DEBUG=testcontainers jest --verbose --silent=false --runInBand --detectOpenHandles",
         "compile": "tsc --build tsconfig.lib.json",
-        "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*\" \"../../dist/generators/nodejs\"",
-        "generate": "yo xmi ../../resources/models/fixtures.xml --type=nodejs --destination=../../output/nodejs --force",
-        "dockerBuild": "npm run all:docker:build --prefix ../../output/nodejs"
+        "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*\" \"../../dist/generators/spring\"",
+        "dockerBuild": "cross-var docker build --build-arg GENERATOR_TYPE=spring --progress=plain -f ../../Dockerfile -t generator-xmi-runner-spring ../../"
     },
     "dependencies": {
         "@types/supertest": "^2.0.12",
@@ -30,7 +29,6 @@
         "jest": "^28.1.0",
         "jest-environment-jsdom": "^28.1.0",
         "supertest": "^6.2.3",
-        "shelljs": "^0.8.5",
         "testcontainers": "^8.10.1",
         "ts-jest": "^28.0.3"
     }

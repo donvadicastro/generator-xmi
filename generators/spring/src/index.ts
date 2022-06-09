@@ -18,7 +18,7 @@ import {existsSync, readdirSync, statSync} from "fs";
 import {join} from "path";
 
 import * as kebabCase from "just-kebab-case";
-import pascal from "to-pascal-case";
+import pascal = require('to-pascal-case');
 import {green, yellow} from "chalk";
 import {XmiGeneratorBase} from "../../common/src/xmiGeneratorBase";
 

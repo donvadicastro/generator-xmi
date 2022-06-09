@@ -8,17 +8,19 @@ module.exports = async () => {
         .withEnv("POSTGRES_DB", "test")
         .start();
 
-    const apiContainer = await new GenericContainer("generator-xmi-runner-nodejs/api")
+    const apiContainer = await new GenericContainer("generator-xmi-runner-spring")
         .withExposedPorts(3000)
+        .withCmd(["gradlew", "bootRun"])
         .withEnv('DB_HOST', postgresContainer.getIpAddress('bridge'))
         .start();
 
-    const appContainer = await new GenericContainer("generator-xmi-runner-nodejs/app")
-        .withExposedPorts(80)
-        .start();
+    // const appContainer = await new GenericContainer("generator-xmi-runner-spring")
+    //     .withExposedPorts(4200)
+    //     .withCmd(["npm", "run", "app:start"])
+    //     .start();
 
-    process.env.NODE_API_URL = `http://localhost:${apiContainer.getMappedPort(3000)}`;
-    process.env.NODE_APP_URL = `http://localhost:${appContainer.getMappedPort(80)}`;
+    process.env.SPRING_API_URL = `http://localhost:${apiContainer.getMappedPort(3000)}`;
+    // process.env.NODE_APP_URL = `http://localhost:${appContainer.getMappedPort(4200)}`;
 
     await new Promise((resolve) => setTimeout(resolve, 10000));
 };
