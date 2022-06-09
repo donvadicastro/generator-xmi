@@ -34,9 +34,7 @@ jobs:
                 run: npm list
 
             -   run: npm install
-            -   run: npm install --workspaces
             -   run: npm run compile
-            -   run: npm link
             -   run: npm run generate
             -   run: npm run dockerBuild
             -   run: npm test
