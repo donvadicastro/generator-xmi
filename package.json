@@ -6,6 +6,7 @@
   "scripts": {
     "compile": "lerna run compile --include-dependencies --stream",
     "test": "lerna run test",
+    "generate": "lerna run generate",
     "dockerBuild": "lerna run dockerBuild",
     "dockerBuildBase": "npm run compile && cross-var docker build -t generator-xmi -f DockerfileBase .",
     "dockerTagBase": "cross-var docker tag generator-xmi donvadicastro/generator-xmi:base-$npm_package_version",
