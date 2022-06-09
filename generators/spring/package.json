@@ -7,8 +7,7 @@
     "scripts": {
         "test": "cross-env DEBUG=testcontainers jest --verbose --silent=false --runInBand --detectOpenHandles",
         "compile": "tsc --build tsconfig.lib.json",
-        "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*\" \"../../dist/generators/spring\"",
-        "dockerBuild": "cross-var docker build --build-arg GENERATOR_TYPE=spring --progress=plain -f ../../Dockerfile -t generator-xmi-runner-spring ../../"
+        "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*\" \"../../dist/generators/spring\""
     },
     "dependencies": {
         "@types/supertest": "^2.0.12",
