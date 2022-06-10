@@ -40,7 +40,8 @@ jobs:
             -   run: npm run compile
             -   run: npm link
             -   run: npm run generate
+            -   run: cp ./node_modules ./output/nodejs
             -   run: ls ./output/nodejs
             -   run: ls ./output/nodejs/node_modules
-#            -   run: npm run dockerBuild
-#            -   run: npm test
+            -   run: npm run dockerBuild
+            -   run: npm test
