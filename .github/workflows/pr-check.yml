@@ -15,8 +15,8 @@ jobs:
                 with:
                     node-version: 16
 
-            - run: node -v
-            - run: npm -v
+            -   run: node -v
+            -   run: npm -v
 
             -   name: Cache node modules
                 id: cache-npm
@@ -40,5 +40,6 @@ jobs:
             -   run: npm run compile
             -   run: npm link
             -   run: npm run generate
-            -   run: npm run dockerBuild
-            -   run: npm test
+            -   run: ls ./output/nodejs
+#            -   run: npm run dockerBuild
+#            -   run: npm test
