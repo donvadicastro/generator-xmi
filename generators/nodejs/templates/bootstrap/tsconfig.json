@@ -18,7 +18,7 @@
             "node_modules/@types"
         ],
         "types": [
-            "node"
+            "node", "jest"
         ],
         "esModuleInterop": true,
         "strictPropertyInitialization": false,

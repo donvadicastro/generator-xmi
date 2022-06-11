@@ -63,13 +63,13 @@ export class DatabaseUtils {
                     const items = JSON.parse(fs.readFileSync(fixtureFile, 'utf8'));
 
                     for (let i = 0; i < items.length; i++) {
-                        //make sequential insert to ensure all referenced entities are 
+                        //make sequential insert to ensure all referenced entities are
                         //created in scope of single insert on parent entity too.
 
                         await repository.createQueryBuilder(entity.name).insert().values(items[i]).execute();
                     }
                 }
-            } catch (error) {
+            } catch (error: any) {
                 throw new Error(`ERROR [TestUtils.loadAll()]: Loading fixture "${entity.name}" on test db: ${error.message} on query "${error.query}"`);
             }
 
