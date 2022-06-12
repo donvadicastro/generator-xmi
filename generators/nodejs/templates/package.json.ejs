@@ -26,7 +26,7 @@
         "app:test": "ng test",
         "app:docker:build": "npm run app:build && docker build -t generator-xmi-runner-nodejs/app -f app/Dockerfile .",
         "app:docker:run": "docker run -p 4200:80 generator-xmi-runner-nodejs/app",
-        "all:docker:build": "npm run api:docker:build",
+        "all:docker:build": "npm run api:docker:build && npm run app:docker:build",
         "all:docker:run": "npm run all:docker:build && docker-compose up",
         "lint": "ng lint",
         "e2e": "protractor e2e/protractor.conf.js",

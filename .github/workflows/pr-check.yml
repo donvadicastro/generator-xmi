@@ -41,6 +41,7 @@ jobs:
                 continue-on-error: true
                 run: npm list
 
+            -   run: npm install -g node-sass
             -   run: npm install
             -   run: npm run compile
             -   run: npm link
