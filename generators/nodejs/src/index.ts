@@ -40,15 +40,15 @@ export class XmiGenerator extends XmiGeneratorBase {
         this.generatedFiles.forEach(x => this._beautify(x));
     }
 
-    async install() {
-        const destination = path.resolve(process.cwd(), this.options.destination);
-        const callback = (error, stdout, stderr) => this.log.info(stdout, stderr);
-
-        this.log.info(`Installing npm packages in ${destination}`);
-
-        await exec(`cd ${destination} && npm install --force`, callback);
-        await exec(`dir ${destination}`, callback);
-    }
+    // async install() {
+    //     const destination = path.resolve(process.cwd(), this.options.destination);
+    //     const callback = (error, stdout, stderr) => this.log.info(stdout, stderr);
+    //
+    //     this.log.info(`Installing npm packages in ${destination}`);
+    //
+    //     await exec(`cd ${destination} && npm install --force`, callback);
+    //     await exec(`dir ${destination}`, callback);
+    // }
 
     end() {
         this.log('\r\n\r\nProject generated successfully.\r\nUpdate configuration to start using application:');

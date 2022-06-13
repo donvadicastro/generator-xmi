@@ -1,14 +1,15 @@
-FROM node:11
+FROM node:16
 
 # Copy app source
-COPY ./dist .
-COPY ./ormconfig.json .
+COPY . .
 
 RUN npm install
 #RUN npm install pm2@latest -g
 
 ENV NODE_ENV production
 EXPOSE 3000
+
+RUN npm run api:compile
 
 #CMD [ "pm2", "start", "api/server/index.js", "--no-daemon" ]
 CMD [ "node", "api/server/index.js" ]
