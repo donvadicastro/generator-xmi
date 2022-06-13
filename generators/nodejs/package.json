@@ -21,7 +21,7 @@
         "to-pascal-case": "^1.0.0",
         "treeify": "^1.1.0",
         "xml2js": "^0.4.23",
-        "yeoman-generator": "^4.13.0",
+        "yeoman-generator": "^5.6.1",
         "yosay": "^2.0.1"
     },
     "devDependencies": {
@@ -29,8 +29,8 @@
         "cross-env": "^7.0.3",
         "jest": "^28.1.0",
         "jest-environment-jsdom": "^28.1.0",
-        "supertest": "^6.2.3",
         "shelljs": "^0.8.5",
+        "supertest": "^6.2.3",
         "testcontainers": "^8.10.1",
         "ts-jest": "^28.0.3"
     }

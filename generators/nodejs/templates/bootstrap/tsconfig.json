@@ -26,6 +26,9 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true
     },
+    "angularCompilerOptions": {
+        "disableTypeScriptVersionCheck": true
+    },
     "include": [
         "typings.d.ts",
         "**/*.ts"
