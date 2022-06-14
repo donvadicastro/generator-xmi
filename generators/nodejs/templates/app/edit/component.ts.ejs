@@ -47,14 +47,14 @@ export class <%= entity.namePascal %>EditComponent {
   });
   }
 
-  protected save() {
+  public save() {
     const data = this.form.getRawValue();
 
     this.http[this.data.id ? 'put' : 'post'](this.data.id ? `${this.apiRootUrl}/${this.data.id}` : this.apiRootUrl, data)
       .subscribe(() => this.router.navigate(['..'], { relativeTo: this.activatedRoute }), (ex) => this.errorMessage = ex.error.error);
   }
 
-  protected delete() {
+  public delete() {
     const url = `${this.apiRootUrl}/${this.data.id}`;
 
     if(window.confirm('Confirm delete')) {
