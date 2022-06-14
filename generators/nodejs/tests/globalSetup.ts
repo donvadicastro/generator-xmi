@@ -14,11 +14,11 @@ module.exports = async () => {
         .start();
 
     const appContainer = await new GenericContainer("generator-xmi-runner-nodejs/app")
-        .withExposedPorts(80)
+        .withExposedPorts(4200)
         .start();
 
     process.env.NODE_API_URL = `http://localhost:${apiContainer.getMappedPort(3000)}`;
-    process.env.NODE_APP_URL = `http://localhost:${appContainer.getMappedPort(80)}`;
+    process.env.NODE_APP_URL = `http://localhost:${appContainer.getMappedPort(4200)}`;
 
     await new Promise((resolve) => setTimeout(resolve, 10000));
 };
