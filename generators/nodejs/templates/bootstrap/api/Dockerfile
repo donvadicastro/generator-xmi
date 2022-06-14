@@ -3,7 +3,7 @@ FROM node:16
 # Copy app source
 COPY . .
 
-#RUN npm install
+RUN npm install
 #RUN npm install pm2@latest -g
 
 ENV NODE_ENV production
