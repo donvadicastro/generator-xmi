@@ -1,5 +1,4 @@
 FROM node:16
-WORKDIR api
 
 # Copy app source
 COPY . .
