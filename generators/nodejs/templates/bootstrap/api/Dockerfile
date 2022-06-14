@@ -12,4 +12,4 @@ EXPOSE 3000
 RUN npm run api:compile
 
 #CMD [ "pm2", "start", "api/server/index.js", "--no-daemon" ]
-CMD [ "node", "api/server/index.js" ]
+CMD [ "node", "dist/api/server/index.js" ]
