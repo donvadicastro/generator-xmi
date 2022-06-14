@@ -1,13 +1,13 @@
 FROM node:16
+WORKDIR app
 
 # Copy app source
 COPY . .
 
-RUN npm install
+#RUN npm install
 
 ENV NODE_ENV production
 EXPOSE 4200
 
 RUN npm run app:build
-
 CMD [ "npm", "run", "app:start" ]
