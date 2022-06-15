@@ -1,15 +1,12 @@
 FROM node:16
 
 # Copy app source
-COPY . .
-
-RUN npm install
-#RUN npm install pm2@latest -g
+COPY ./dist ./api
+COPY ./ormconfig.json ./api
+COPY ./node_modules ./api
 
 ENV NODE_ENV production
 EXPOSE 3000
 
-RUN npm run api:compile
-
-#CMD [ "pm2", "start", "api/server/index.js", "--no-daemon" ]
-CMD [ "node", "dist/api/server/index.js" ]
+WORKDIR api
+CMD [ "node", "api/server/index.js" ]

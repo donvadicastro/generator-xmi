@@ -1,14 +1,6 @@
-FROM node:16
-WORKDIR app
+FROM nginx:1.17.1-alpine
 
-# Copy app source
-COPY . .
+COPY app/nginx.conf /etc/nginx/nginx.conf
+COPY dist/app_compiled /usr/share/nginx/html
 
-#RUN npm install
-
-ENV NODE_ENV production
-EXPOSE 4200
-
-RUN npm run app:build
-
-CMD [ "npm", "run", "app:start" ]
+EXPOSE 80

@@ -11,7 +11,7 @@ services:
     depends_on:
       - api
     ports:
-      - "4200:80"
+      - "80:80"
   database:
     image: "postgres" # use latest official postgres version
     env_file:
