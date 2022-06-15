@@ -46,8 +46,13 @@ export class XmiGenerator extends XmiGeneratorBase {
 
         this.log.info(`Installing npm packages in ${destination}`);
 
-        await exec(`cd ${destination} && npm install --force`, callback);
-        await exec(`dir ${destination}`, callback);
+        try {
+            await exec(`cd ${destination} && npm install --force`, callback);
+            await exec(`dir ${destination}`, callback);
+            await exec('npm run build', callback);
+        } catch (e) {
+            this.log.error('Exception on install', e);
+        }
     }
 
     end() {
