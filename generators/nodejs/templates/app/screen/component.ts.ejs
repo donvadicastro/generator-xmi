@@ -55,11 +55,11 @@ export class <%= entity.namePascal %>ScreenComponent {
     });
   }
 
-  protected getGroupControls(formControlName: string): { [key: string]: AbstractControl } {
+  public getGroupControls(formControlName: string): { [key: string]: AbstractControl } {
     return (<FormGroup>this.form.get(formControlName)).controls;
   }
 
-  protected run(action: string, data?: any) {
+  public run(action: string, data?: any) {
     data = data || this.formRawValue;
 
     this.http.post(`${environment.api.url}/${action}`, data).subscribe((res: any) => {
@@ -80,7 +80,7 @@ export class <%= entity.namePascal %>ScreenComponent {
     <% }) %>
 
     <% if(['combo', 'combobox'].indexOf(child.stereotype) >= 0) { %>
-      protected change_<%= child.namePascal %>($event: KeyboardEvent) {
+      public change_<%= child.namePascal %>($event: KeyboardEvent) {
         <% child.getCascadeFlows('out').forEach(x => { %>
           this.loadData_<%= x.end.namePascal %>(this.formRawValue, '<%= child.alias || child.name%>');
         <% }) %>

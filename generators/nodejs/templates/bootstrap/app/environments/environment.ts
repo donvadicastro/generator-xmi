@@ -2,8 +2,8 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-const config: any = require('!!raw-loader!../../.env').split('\n')
-    .map((x: string) => x.split('='))
+const env: any = require('!!raw-loader!../../.env').default;
+const config = env.split('\n').map((x: string) => x.split('='))
     .reduce((prev: any, x: string[]) => { prev[x[0]] = x[1]; return prev; }, {});
 
 export const environment = {

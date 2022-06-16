@@ -8,20 +8,17 @@ module.exports = async () => {
         .withEnv("POSTGRES_DB", "test")
         .start();
 
-    const apiContainer = await new GenericContainer("generator-xmi-runner-nodejs")
+    const apiContainer = await new GenericContainer("generator-xmi-runner-nodejs/api")
         .withExposedPorts(3000)
-        .withBindMount('/dist/share', '/home/yeoman/generated/share', 'rw')
-        .withCmd(["npm", "run", "api:start"])
         .withEnv('DB_HOST', postgresContainer.getIpAddress('bridge'))
         .start();
 
-    const appContainer = await new GenericContainer("generator-xmi-runner-nodejs")
-        .withExposedPorts(4200)
-        .withCmd(["npm", "run", "app:start"])
+    const appContainer = await new GenericContainer("generator-xmi-runner-nodejs/app")
+        .withExposedPorts(80)
         .start();
 
     process.env.NODE_API_URL = `http://localhost:${apiContainer.getMappedPort(3000)}`;
-    process.env.NODE_APP_URL = `http://localhost:${appContainer.getMappedPort(4200)}`;
+    process.env.NODE_APP_URL = `http://localhost:${appContainer.getMappedPort(80)}`;
 
     await new Promise((resolve) => setTimeout(resolve, 10000));
 };
