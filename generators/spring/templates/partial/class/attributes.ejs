@@ -1,7 +1,7 @@
 <% if (orm) { %>
     @Id()
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
 <% } %>
 
 <% (entity.attributes || []).forEach(function (attr) { %>

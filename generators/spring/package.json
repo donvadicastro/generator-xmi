@@ -7,7 +7,9 @@
     "scripts": {
         "test": "cross-env DEBUG=testcontainers jest --verbose --silent=false --runInBand --detectOpenHandles",
         "compile": "tsc --build tsconfig.lib.json",
-        "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*\" \"../../dist/generators/spring\""
+        "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*\" \"../../dist/generators/spring\"",
+        "generate": "npx yo xmi ../../resources/models/fixtures.xml --type=spring --destination=../../output/spring --force",
+        "dockerBuild": "docker build --progress=plain -t generator-xmi-runner-spring/api -f ../../output/spring/Dockerfile ../../output/spring"
     },
     "dependencies": {
         "@types/supertest": "^2.0.12",

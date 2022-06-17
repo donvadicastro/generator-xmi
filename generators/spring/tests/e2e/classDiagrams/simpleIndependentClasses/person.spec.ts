@@ -4,10 +4,10 @@ import {deleteCheck} from "../../../../../common/tests/e2e/api/delete.check";
 
 const request = require("supertest");
 
-xdescribe('nodejs generator E2E tests', () => {
+describe('nodejs generator E2E tests', () => {
     describe('x1-simple-independent-classes -> person', () => {
         describe('API server', () => {
-            const API = request(process.env.NODE_API_URL);
+            const API = request(process.env.SPRING_API_URL);
             const rootPersonAPI = '/api/v1/class-diagrams/x1-simple-independent-classes/person';
 
             const address = { address: "addressInfo", city: "cityInfo", country: "countryInfo", postCode: 1 };
@@ -26,7 +26,7 @@ xdescribe('nodejs generator E2E tests', () => {
             });
         });
 
-        describe('APP server', () => {
+        xdescribe('APP server', () => {
             const APP = request(process.env.NODE_APP_URL);
 
             it('should start APP server successfully', async () => {

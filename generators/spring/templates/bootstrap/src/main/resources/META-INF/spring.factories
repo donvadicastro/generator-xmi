@@ -1,0 +1,3 @@
+# Enabled Spring Boot autoconfiguration for dependency
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.generator.configuration.DateTimeAutoConfiguration
