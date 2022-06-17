@@ -1,5 +1,6 @@
 package com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.components.generated;
 
+import com.generator.common.contracts.Identifiable;
 import lombok.Data;
 import javax.persistence.*;
 <%- include('partial/class/import', {entity: entity}) -%>
@@ -7,7 +8,7 @@ import javax.persistence.*;
 <%- include('partial/common/classDescription', {entity: entity, system: true}) -%>
 @Data
 @MappedSuperclass
-public abstract class <%= entity.namePascal %>Base <%- include('partial/class/extend', {entity: entity}) -%> {
+public abstract class <%= entity.namePascal %>Base <%- include('partial/class/extend', {entity: entity}) -%> implements Identifiable<Integer> {
   <%- include('partial/class/attributes', {entity: entity, orm: true}) -%>
   <%- include('partial/class/links', {entity: entity}) -%>
 

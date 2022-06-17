@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController("<%= entity.elementId %>_api")
-@RequestMapping("<%= entity.getPathFromRoot(utils.kebabCase) %>/<%= utils.kebabCase(entity.name) %>")
+@RequestMapping("/api/v1/<%= entity.getPathFromRoot(utils.kebabCase) %>/<%= utils.kebabCase(entity.name) %>")
 @Api(tags = "Entities: <%= entity.namePascal %> (/<%= entity.getPathFromRoot(utils.kebabCase) %>)")
 public class <%= entity.namePascal %>Controller extends AbstractResourceController<<%= entity.namePascal %>> {
     public <%= entity.namePascal %>Controller(@Qualifier("<%= entity.elementId %>") <%= entity.namePascal %>Repository repository) { super(repository); }

@@ -1,5 +1,6 @@
 package com.generator.common.controllers;
 
+import com.generator.common.contracts.Identifiable;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -7,9 +8,12 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RequiredArgsConstructor
-public abstract class AbstractResourceController<T> {
+public abstract class AbstractResourceController<T extends Identifiable<Integer>> {
     private final PagingAndSortingRepository<T, Integer> repository;
 
     @GetMapping
@@ -26,8 +30,13 @@ public abstract class AbstractResourceController<T> {
     @PostMapping()
     @ApiOperation(value = "create new", notes = "Create new entity")
     public ResponseEntity<T> create(@RequestBody T entity) {
-        //TODO: add support location header
-        return new ResponseEntity<>(repository.save(entity), HttpStatus.CREATED);
+        T created = repository.save(entity);
+        URI createdPath = ServletUriComponentsBuilder.fromCurrentRequest()
+            .pathSegment(created.getId().toString())
+            .build()
+            .toUri();
+
+        return ResponseEntity.created(createdPath).build();
     }
 
     @PutMapping({"/{id}"})
