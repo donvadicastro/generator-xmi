@@ -2,7 +2,7 @@ import {postCheck} from "../../../../../common/tests/e2e/api/post.check";
 
 const request = require("supertest");
 
-describe('nodejs generator E2E tests', () => {
+describe('spring generator E2E tests', () => {
     describe('x2-association-relation -> address', () => {
         xdescribe('API server', () => {
             const API = request(process.env.SPRING_API_URL);

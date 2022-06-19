@@ -4,9 +4,9 @@ import {deleteCheck} from "../../../../../common/tests/e2e/api/delete.check";
 
 const request = require("supertest");
 
-describe('nodejs generator E2E tests', () => {
+describe('spring generator E2E tests', () => {
     describe('x2-association-relation -> person', () => {
-        xdescribe('API server', () => {
+        describe('API server', () => {
             const API = request(process.env.SPRING_API_URL);
             const rootPersonAPI = '/api/v1/class-diagrams/x2-association-relation/person';
 
