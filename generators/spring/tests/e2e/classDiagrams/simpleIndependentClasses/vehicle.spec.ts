@@ -4,7 +4,7 @@ import {deleteCheck} from "../../../../../common/tests/e2e/api/delete.check";
 
 const request = require("supertest");
 
-describe('nodejs generator E2E tests', () => {
+describe('spring generator E2E tests', () => {
     describe('x1-simple-independent-classes -> vehicle', () => {
         describe('API server', () => {
             const API = request(process.env.SPRING_API_URL);
