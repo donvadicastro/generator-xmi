@@ -9,8 +9,7 @@
         ]
     },
     "include": [
-        "../common/tests/utils/*.ts",
-        "../common/tests/e2e/api/*.check.ts",
+        "../common/tests/**/*.*",
         "**/*.spec.ts",
         "**/*.d.ts"
     ]

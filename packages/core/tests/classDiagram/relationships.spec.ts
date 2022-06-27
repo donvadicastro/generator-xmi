@@ -64,7 +64,7 @@ describe('xmiParser', () => {
 
       it('Verify reference', () => {
         const addressClass: xmiClass = <xmiClass>classDiagramPackage.children[0];
-        const personClass: xmiClass = <xmiClass>classDiagramPackage.children[2];
+        const personClass: xmiClass = <xmiClass>classDiagramPackage.children[8];
 
         expect(addressClass.links.association.length).toBe(1);
         expect(personClass.links.association.length).toBe(1);
