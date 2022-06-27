@@ -4,7 +4,7 @@
     <% if(!x.target.multiplicity || x.target.multiplicity === '1' || x.target.multiplicity === '0..1') { %>
         <% refLinkNames.push(x.target.typeRef.name) %>
         <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
-            @OneToOne(cascade = CascadeType.ALL)
+            @OneToOne(cascade = CascadeType.MERGE)
             <% if(x.source.multiplicity === '0..1') { %>@JoinColumn()<% } %>
             <%= x.target.typeRef.namePascal %> <%= x.target.typeRef.name %>Ref;
         <% } else { %>
@@ -24,7 +24,7 @@
 <% entity.aggregationLinks.filter(x => x.source.typeRef === entity && x.source.aggregation !== 'none').forEach(x => { %>
     <% refLinkNames.push(x.target.typeRef.name) %>
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn()
     <%= x.target.typeRef.namePascal %> <%= x.target.typeRef.name %>Ref;
 <% }) %>
