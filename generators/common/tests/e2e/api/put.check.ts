@@ -13,7 +13,7 @@ export const putCheck = (req: () => any, rootUrl: string, before: any, after: an
             expect(response.body).toEqual(expected);
 
             response = await req().get(`${rootUrl}/${id}`).expect(200);
-            expect(response.body).toEqual(expected);
+            expect(response.body).toEqual(expect.objectContaining(expected));
         });
     });
 }

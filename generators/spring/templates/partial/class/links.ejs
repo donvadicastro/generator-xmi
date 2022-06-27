@@ -4,11 +4,11 @@
     <% if(!x.target.multiplicity || x.target.multiplicity === '1' || x.target.multiplicity === '0..1') { %>
         <% refLinkNames.push(x.target.typeRef.name) %>
         <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
-            @OneToOne(cascade = CascadeType.REMOVE)
+            @OneToOne(cascade = CascadeType.ALL)
             <% if(x.source.multiplicity === '0..1') { %>@JoinColumn()<% } %>
             <%= x.target.typeRef.namePascal %> <%= x.target.typeRef.name %>Ref;
         <% } else { %>
-            @ManyToOne(cascade = CascadeType.REMOVE)
+            @ManyToOne(cascade = CascadeType.ALL)
             <%= x.target.typeRef.namePascal %> <%= x.target.typeRef.name %>Ref;
         <% } %>
     <%} else {%>
