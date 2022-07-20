@@ -12,8 +12,13 @@ export const scenario = (API: any) => {
             const updatedAfter = {name: "updated", serial: 2};
             const deletedActual = {name: "deleted-check", serial: 1};
 
-            putCheck(() => API, rootVehicleAPI, updatedBefore, updatedAfter);
-            deleteCheck(() => API, rootVehicleAPI, deletedActual);
+            describe('should support PUT method', () => {
+                putCheck(() => API, rootVehicleAPI, () => updatedBefore, () => updatedAfter);
+            });
+
+            describe('should support DELETE method', () => {
+                deleteCheck(() => API, rootVehicleAPI, () => deletedActual);
+            });
 
             describe('should support POST method', () => {
                 it('created', async () => {

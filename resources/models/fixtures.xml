@@ -487,7 +487,6 @@
 							<upperValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000054__03EC_4e06_AEB5_72842F558BB3" value="1"/>
 						</ownedEnd>
 					</packagedElement>
-					<packagedElement xmi:type="uml:Class" xmi:id="EAID_FF24E2E4_0EA0_4f05_B472_350EE3D82067" name="Class1" visibility="public"/>
 					<packagedElement xmi:type="uml:Class" xmi:id="EAID_270218B1_3D3B_410f_84F0_C7C8F213C751" name="Cource" visibility="public">
 						<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_F8CA1327_AF1A_4f49_BD1D_AB220DB9AFBF" name="name" visibility="private" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false">
 							<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000047_AF1A_4f49_BD1D_AB220DB9AFBF" value="1"/>
@@ -2679,16 +2678,6 @@
 				<links>
 					<Association xmi:id="EAID_FBD162A4_03EC_4e06_AEB5_72842F558BB3" start="EAID_12A35ECE_7C48_4b43_BAAA_792670F6EF54" end="EAID_66631FE9_4CAB_4e9c_8F52_25FE3B013BA6"/>
 				</links>
-			</element>
-			<element xmi:idref="EAID_FF24E2E4_0EA0_4f05_B472_350EE3D82067" xmi:type="uml:Class" name="Class1" scope="public">
-				<model package="EAPK_97C1DED8_7943_41dc_843B_F282E3E35F57" tpos="0" ea_localid="145" ea_eleType="element"/>
-				<properties isSpecification="false" sType="Class" nType="0" scope="public" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
-				<project author="vadimb" version="1.0" phase="1.0" created="2022-06-21 23:10:40" modified="2022-06-21 23:10:40" complexity="1" status="Proposed"/>
-				<code gentype="Java"/>
-				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
-				<tags/>
-				<xrefs/>
-				<extendedProperties tagged="0" package_name="x2. Association relation"/>
 			</element>
 			<element xmi:idref="EAID_270218B1_3D3B_410f_84F0_C7C8F213C751" xmi:type="uml:Class" name="Cource" scope="public">
 				<model package="EAPK_97C1DED8_7943_41dc_843B_F282E3E35F57" tpos="0" ea_localid="150" ea_eleType="element"/>

@@ -33,8 +33,13 @@ export const scenario = (API: any) => {
                 address: address
             };
 
-            putCheck(() => API, rootPersonAPI, updatedBefore, updatedAfter);
-            deleteCheck(() => API, rootPersonAPI, deletedActual);
+            describe('should support PUT method', () => {
+                putCheck(() => API, rootPersonAPI, () => updatedBefore, () => updatedAfter);
+            });
+
+            describe('should support DELETE method', () => {
+                deleteCheck(() => API, rootPersonAPI, () => deletedActual);
+            });
 
             describe('should support POST method', () => {
                 it('created', async () => {

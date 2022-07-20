@@ -13,7 +13,7 @@ private static _instance: DbManagerCommon | null = null;
     public static async getInstance() {
         const connectionInfo = {
             type: process.env.DB_TYPE, host: process.env.DB_HOST, port: process.env.DB_PORT,
-            username: process.env.POSTGRES_USER, password: process.env.POSTGRES_PASSWORD, database: process.env.POSTGRES_DB };
+            username: process.env.POSTGRES_USER, password: process.env.POSTGRES_PASSWORD, database: process.env.POSTGRES_DB, logging: true };
 
         return this._instance || (this._instance = new DbManagerCommon(await createConnection({ ...connectionInfo, ...ormConfig})));
     }
