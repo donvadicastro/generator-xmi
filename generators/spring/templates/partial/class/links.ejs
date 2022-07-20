@@ -8,11 +8,12 @@
             <% if(x.source.multiplicity === '0..1') { %>@JoinColumn()<% } %>
             <%= x.target.typeRef.namePascal %> <%= x.target.typeRef.name %>Ref;
         <% } else { %>
-            @ManyToOne(cascade = CascadeType.ALL)
+            @ManyToOne()
             <%= x.target.typeRef.namePascal %> <%= x.target.typeRef.name %>Ref;
         <% } %>
     <%} else {%>
         <% if(!x.source.multiplicity || x.source.multiplicity === '1' || x.source.multiplicity === '0..1') { %>
+            @JsonIgnore
             @OneToMany(cascade = CascadeType.REMOVE)
             List<<%= x.target.typeRef.namePascal %>> <%= x.target.typeRef.name %>RefList;
         <% } else { %>

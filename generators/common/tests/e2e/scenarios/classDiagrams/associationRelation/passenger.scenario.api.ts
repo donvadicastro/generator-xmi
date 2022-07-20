@@ -7,14 +7,12 @@ export const scenario = (API: any) => {
         const rootAirplaneAPI = '/api/v1/class-diagrams/x2-association-relation/airplane';
         const rootPassengerAPI = '/api/v1/class-diagrams/x2-association-relation/passenger';
 
-        let airplaneId, createdActual, updatedBefore, updatedAfter, deletedActual;
+        let createdActual, updatedBefore, updatedAfter, deletedActual;
 
         // create airplane to link with
         beforeAll(async () => {
-            let airplaneRef: {id?: string, type: string} = { type: "reference-type" };
-
-            airplaneId = await postCheck(API, rootAirplaneAPI, airplaneRef);
-            airplaneRef.id = airplaneId;
+            let airplaneRef: {id?: number, type: string} = { type: "reference-type" };
+            airplaneRef.id = await postCheck(API, rootAirplaneAPI, airplaneRef);
 
             createdActual = { fullName: "created-type", airplaneRef: airplaneRef };
             updatedBefore = { fullName: "updated-before-fullName", airplaneRef: airplaneRef };

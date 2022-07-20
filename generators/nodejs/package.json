@@ -5,7 +5,7 @@
     "main": "src/index.js",
     "private": true,
     "scripts": {
-        "test": "jest --verbose --silent=false --runInBand --detectOpenHandles",
+        "test": "cross-env DEBUG=testcontainers jest --verbose --silent=false --runInBand --detectOpenHandles",
         "compile": "tsc --build tsconfig.lib.json",
         "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*\" \"../../dist/generators/nodejs\"",
         "generate": "npx yo xmi ../../resources/models/fixtures.xml --type=nodejs --destination=../../output/nodejs --force",
