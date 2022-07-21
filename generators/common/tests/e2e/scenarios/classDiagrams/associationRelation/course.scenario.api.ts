@@ -71,7 +71,7 @@ export const scenario = (API: any) => {
 
                 const updated = { ...courseToLink, studentRefList: [studentToLinkForUpdate] };
                 let response = await API.put(`${rootCourseAPI}/${courseToLink.id}`).send(updated).expect(200);
-                expect(response.body).toEqual(updated);
+                expect(response.body).toMatchObject(updated);
             });
         });
     });

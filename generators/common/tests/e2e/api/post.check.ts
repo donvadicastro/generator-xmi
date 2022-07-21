@@ -18,7 +18,8 @@ export async function postCheck(req: any, rootUrl: string, actual: any): Promise
     expect(response.body).toEqual({});
 
     response = await req.get(`${rootUrl}/${id}`);
-    expect(response.body).toEqual(expect.objectContaining(expected));
+
+    expect(response.body).toMatchObject(expected);
     expect(response.status).toEqual(200);
 
     return id;
