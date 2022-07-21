@@ -17,8 +17,7 @@
             @OneToMany(cascade = CascadeType.REMOVE)
             List<<%= x.target.typeRef.namePascal %>> <%= x.target.typeRef.name %>RefList;
         <% } else { %>
-            @JsonIgnore
-            @ManyToMany()
+            @ManyToMany(fetch = FetchType.LAZY)
             List<<%= x.target.typeRef.namePascal %>> <%= x.target.typeRef.name %>RefList;
         <% } %>
 <% }}) %>
