@@ -17,6 +17,7 @@
             <%= x.target.typeRef.name %>RefList?: <%= x.target.typeRef.elementId %>[];
         <% } else { %>
             @ManyToMany(type => <%= x.target.typeRef.elementId %>)
+            @JoinTable()
             <%= x.target.typeRef.name %>RefList?: <%= x.target.typeRef.elementId %>[];
         <% } %>
 <% }}) %>

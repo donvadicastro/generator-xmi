@@ -44,6 +44,7 @@ describe('Generators', () => {
                         expect(content.normalizeSpace()).toBe(`
 
                         @ManyToMany(type => basicClassDiagramWithMultiplicities_pilot)
+                        @JoinTable()
                         pilotRefList?: basicClassDiagramWithMultiplicities_pilot[];
 
                         @ManyToOne(type => basicClassDiagramWithMultiplicities_airline, airline => airline.aircraftRefList, {onDelete: 'CASCADE', nullable: false})
