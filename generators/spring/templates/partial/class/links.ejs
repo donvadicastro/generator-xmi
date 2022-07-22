@@ -17,7 +17,7 @@
             @OneToMany(cascade = CascadeType.REMOVE)
             List<<%= x.target.typeRef.namePascal %>> <%= x.target.typeRef.name %>RefList;
         <% } else { %>
-            @ManyToMany(fetch = FetchType.LAZY)
+            @ManyToMany(fetch = FetchType.EAGER)
             List<<%= x.target.typeRef.namePascal %>> <%= x.target.typeRef.name %>RefList;
         <% } %>
 <% }}) %>

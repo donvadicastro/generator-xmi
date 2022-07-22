@@ -88,7 +88,7 @@ export default class <%= entity.namePascal %>Router {
                     repository.remove(entityToDelete)
                     <% entity.attributesCombinedToEdit.filter(x => x.typeRef && x.linkType === "composite").forEach(x => { %>
                         // emulating composite reference behavior - delete child property "<%= x.name %>" when parent is deleted
-                        .then((result: any) => <%= x.name %>Repository.remove(entityToDelete.<%= x.name %>))
+                        .then((result: any) => entityToDelete.<%= x.name %> && <%= x.name %>Repository.remove(entityToDelete.<%= x.name %>))
                     <% }) %>
                         .then((result: any) => res.send(entityToDelete))
                         .catch((error: any) => res.status(500).json({ error: error.message, name: error.name, stack: error.stack}));

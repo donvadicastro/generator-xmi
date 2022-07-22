@@ -50,10 +50,12 @@ public abstract class AbstractResourceController<T extends Identifiable<Integer>
 
     @DeleteMapping({"/{id}"})
     @ApiOperation(value = "delete by id", notes = "Delete entity by id")
-    public ResponseEntity delete(@PathVariable("id") Integer id) {
-        return repository.findById(id).map(t -> {
-            repository.deleteById(id);
-            return new ResponseEntity(HttpStatus.OK);
-        }).orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
+    public ResponseEntity<T> delete(@PathVariable("id") Integer id) {
+        return repository.findById(id)
+            .map(t -> {
+                repository.delete(t);
+                return new ResponseEntity(t, HttpStatus.OK);
+            })
+            .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
     }
 }
