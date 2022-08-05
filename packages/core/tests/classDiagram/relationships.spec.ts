@@ -23,9 +23,10 @@ describe('xmiParser', () => {
 
     describe('Composition relation', () => {
       let classDiagramPackage: xmiPackage;
+
       beforeAll(() => {
         classDiagramPackage = entities[2];
-      }); //select appropriate package
+      });
 
       it('Verify reference', () => {
         const addressClass: xmiClass = <xmiClass>classDiagramPackage.children[0];

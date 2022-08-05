@@ -139,7 +139,7 @@ export class xmiAbstractClass extends xmiInterface {
     get attributesCombinedToEdit(): IAttribute[] {
         let attrs = this.attributesCombined;
 
-        if(this.generalizationLinksTo) {
+        if (this.generalizationLinksTo) {
             attrs = attrs.concat((<xmiAbstractClass>this.generalizationLinksTo).attributesCombinedToEdit);
         }
 
