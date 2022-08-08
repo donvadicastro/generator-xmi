@@ -22,10 +22,11 @@
         <% } %>
 <% }}) %>
 
-<% entity.aggregationLinks.filter(x => x.source.typeRef === entity && x.source.aggregation !== 'none').forEach(x => { %>
+<% entity.aggregationLinks.filter(x => x.source.typeRef === entity && x.source.aggregation === 'none').forEach(x => { %>
     <% refLinkNames.push(x.target.typeRef.name) %>
 
     @OneToOne(cascade = CascadeType.MERGE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn()
     <%= x.target.typeRef.namePascal %> <%= x.target.typeRef.name %>Ref;
 <% }) %>
