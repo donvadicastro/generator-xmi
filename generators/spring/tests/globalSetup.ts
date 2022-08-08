@@ -10,6 +10,7 @@ module.exports = async () => {
 
     const apiContainer = await new GenericContainer("generator-xmi-runner-spring/api")
         .withExposedPorts(3000)
+        .withStartupTimeout(120_000)
         .withEnv('DB_HOST', postgresContainer.getIpAddress('bridge'))
         .start();
 

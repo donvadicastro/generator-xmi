@@ -6,9 +6,11 @@
  * @param actual actual payload to store
  */
 export async function postCheck(req: any, rootUrl: string, actual: any): Promise<number> {
-    let response = await req.post(rootUrl).send(actual).expect(201);
+    let response = await req.post(rootUrl).send(actual);
 
     const location = response.get('Location');
+    expect(response.body).toEqual({});
+    expect(response.status).toBe(201);
     expect(location).toBeDefined();
 
     const id = location.split('/').pop() - 0;

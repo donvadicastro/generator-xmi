@@ -6,7 +6,10 @@ export const deleteCheck = (req: () => any, rootUrl: string, supplyBefore: () =>
     beforeAll(async () => id = await postCheck(req(), rootUrl, supplyBefore()));
 
     it('deleted', async () => {
-        await req().delete(`${rootUrl}/${id}`).expect(200);
+        const response = await req().delete(`${rootUrl}/${id}`);
+        expect(response.body).toMatchObject(supplyBefore());
+        expect(response.status).toBe(200);
+
         await req().get(`${rootUrl}/${id}`).expect(404);
 
         // second time to delete
