@@ -10,9 +10,9 @@ export const putCheck = (req: () => any, rootUrl: string, supplyBefore: () => an
         let expected = { id: id, ...after };
 
         let response = await req().put(`${rootUrl}/${id}`).send(after).expect(200);
-        expect(response.body).toEqual(expected);
+        expect(response.body).toMatchObject(expected);
 
         response = await req().get(`${rootUrl}/${id}`).expect(200);
-        expect(response.body).toEqual(expect.objectContaining(expected));
+        expect(response.body).toMatchObject(expected);
     });
 }
