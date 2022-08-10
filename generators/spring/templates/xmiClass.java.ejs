@@ -2,6 +2,7 @@ package com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.comp
 
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.components.generated.<%= entity.namePascal %>Base;
 
@@ -10,5 +11,6 @@ import com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.compo
 @ApiModel("<%= entity.elementId %>")
 @AllArgsConstructor
 @Entity(name = "<%= entity.elementId %>")
+@DiscriminatorColumn(length = 255)
 public class <%= entity.namePascal %> extends <%= entity.namePascal %>Base {
 }
