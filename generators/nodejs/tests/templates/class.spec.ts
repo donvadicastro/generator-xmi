@@ -150,7 +150,7 @@ describe('Generators', () => {
                         const personContent = await ejs.renderFile(path.join(dir, 'links.ejs'), {entity: personClass, orm: true});
 
                         expect(addressContent.normalizeSpace()).toBe(`
-                            @OneToOne(() => classDiagrams_x3CompositionRelation_person, (ref) => ref.addressRef, {nullable: false, onDelete: "CASCADE"})
+                            @OneToOne(() => classDiagrams_x3CompositionRelation_person, (ref) => ref.addressRef, { nullable: false, onDelete: "CASCADE" })
                             @JoinColumn()
                             personRef: classDiagrams_x3CompositionRelation_person;
 
@@ -162,7 +162,7 @@ describe('Generators', () => {
                             }`.normalizeSpace());
 
                         expect(personContent.normalizeSpace()).toBe(`
-                            @OneToOne(() => classDiagrams_x3CompositionRelation_address,  (ref) => ref.personRef, {onDelete: "CASCADE"})
+                            @OneToOne(() => classDiagrams_x3CompositionRelation_address,  (ref) => ref.personRef)
                             addressRef: classDiagrams_x3CompositionRelation_address;
 
                             /**
