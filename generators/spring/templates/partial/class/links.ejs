@@ -26,7 +26,7 @@
     <% refLinkNames.push(x.target.typeRef.name) %>
 
     @OneToOne(cascade = CascadeType.MERGE)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn()
+    <% if (x.target.aggregation === 'composite') { %>@OnDelete(action = OnDeleteAction.CASCADE)<% } %>
+    @JoinColumn(<% if (x.target.aggregation === 'composite') { %>nullable = false<% } %>)
     <%= x.target.typeRef.namePascal %> <%= x.target.typeRef.name %>Ref;
 <% }) %>

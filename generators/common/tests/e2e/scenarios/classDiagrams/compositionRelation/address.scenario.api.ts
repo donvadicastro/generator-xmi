@@ -47,10 +47,12 @@ export const scenario = (API: any) => {
                     const deletedParent: any = { city: "delete-parent-first-name", num: "delete-parent-last-name", street: "2019-07-21T20:40:40.718Z", personRef: person };
                     deletedParent.id = await postCheck(API, rootAddressAPI, deletedParent);
 
-                    const response = await API.delete(`${rootPersonAPI}/${person.id}`);
-                    expect(response.status).toBe(200);
+                    // unlink address is not allowed in this reference type
+                    await API.put(`${rootAddressAPI}/${deletedParent.id}`).send({...deletedParent, personRef: null}).expect(500);
 
-                    await API.delete(`${rootAddressAPI}/${deletedParent.id}`).expect(404);
+                    // should delete linked address as part of person deletion
+                    await API.delete(`${rootPersonAPI}/${person.id}`).expect(200);
+                    await API.get(`${rootAddressAPI}/${deletedParent.id}`).expect(404);
                 });
             });
 

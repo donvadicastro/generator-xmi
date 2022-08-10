@@ -25,7 +25,7 @@
 <% entity.aggregationLinks.filter(x => x.source.typeRef === entity).forEach(x => { %>
     <% refLinkNames.push(x.target.typeRef.name) %>
 
-    @OneToOne(() => <%= x.target.typeRef.elementId %>, (ref) => ref.<%= x.source.typeRef.name %>Ref, {<% if (x.source.aggregation === 'none') { %>nullable: false, <% } %>onDelete: "CASCADE"})
+    @OneToOne(() => <%= x.target.typeRef.elementId %>, (ref) => ref.<%= x.source.typeRef.name %>Ref<% if (x.target.aggregation === 'composite') { %>, { nullable: false, onDelete: "CASCADE" }<% } %>)
     <% if (x.source.aggregation === 'none') { %> @JoinColumn() <% } %>
     <%= x.target.typeRef.name %>Ref: <%= x.target.typeRef.elementId %>;
 <% }) %>
