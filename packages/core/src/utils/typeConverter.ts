@@ -1,4 +1,4 @@
-import {DialectType} from "../types/dialectType";
+import {DialectType} from "../types";
 
 type StringDictionary = { [key: string]: string };
 type ArrayDictionary = { [key: string]: any[] };
@@ -64,7 +64,7 @@ export class TypeConverter {
         'string':       { 'js': 'string',       'java': 'String'    },
         'Date':         { 'js': 'Date',         'java': 'Date'      },
         'number':       { 'js': 'number',       'java': 'int'       },
-        'boolean':      { 'js': 'boolean',      'java': 'boolean'   },
+        'boolean':      { 'js': 'boolean',      'java': 'Boolean'   },
         'void':         { 'js': 'void',         'java': 'void'      },
     }
 }
