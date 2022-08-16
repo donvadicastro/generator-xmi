@@ -1,13 +1,13 @@
 <% if(message.connector.condition) { %>
     if(this.cmp<%= message.from.elementRef.namePascal %>['<%- message.connector.condition %>'](state)) {
-        console.log('--> <%= message.to.elementRef.name %>::<%= message.operation.name %>');<%if(isLoop) {%>
+        state.history.push('--> <%= message.to.elementRef.name %>::<%= message.operation.name %>');<%if(isLoop) {%>
         return await this.cmp<%= message.to.elementRef.namePascal %>.<%= message.operation.name %>(<% if(message.operation.inputParameters.length) { %>x<% } %>);<% } else { %>
-        inputState.value = await this.cmp<%= message.to.elementRef.namePascal %>.<%= message.operation.name %>(<% if(message.operation.inputParameters.length) { %>inputState.resetActionStart().value<% } %>);<% } %>
+        state.value = await this.cmp<%= message.to.elementRef.namePascal %>.<%= message.operation.name %>(<% if(message.operation.inputParameters.length) { %>state.resetActionStart().value<% } %>);<% } %>
     } else {
-        console.log('--> \x1b[43m<%= message.to.elementRef.name %>::<%= message.operation.name %>: 0 ms\x1b[m <- ignored by condition');
+        state.history.push('--> \x1b[43m<%= message.to.elementRef.name %>::<%= message.operation.name %>: 0 ms\x1b[m <- ignored by condition');
     }
 <% } else { %>
-    console.log('--> <%= message.to.elementRef.name %>::<%= message.operation.name %>');<%if(isLoop) {%>
+    state.history.push('--> <%= message.to.elementRef.name %>::<%= message.operation.name %>');<%if(isLoop) {%>
     return await this.cmp<%= message.to.elementRef.namePascal %>.<%= message.operation.name %>(<% if(message.operation.inputParameters.length) { %>x<% } %>);<% } else { %>
-    inputState.value = await this.cmp<%= message.to.elementRef.namePascal %>.<%= message.operation.name %>(<% if(message.operation.inputParameters.length) { %>inputState.resetActionStart().value<% } %>);<% } %>
+    state.value = await this.cmp<%= message.to.elementRef.namePascal %>.<%= message.operation.name %>(<% if(message.operation.inputParameters.length) { %>state.resetActionStart().value<% } %>);<% } %>
 <% } %>

@@ -21,9 +21,9 @@ export class <%= name %> {
     /**
     /* Execute process
     */
-    run(inputState): void {
+    run(state): void {
         pubnub.publish({
-            message: inputState,
+            message: state,
             channel: pub_channel
         });
     }

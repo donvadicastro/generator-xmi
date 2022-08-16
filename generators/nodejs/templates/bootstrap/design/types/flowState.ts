@@ -1,5 +1,6 @@
 export class FlowState {
     stack: any[];
+    history: string[] = [];
 
     flowStart?: Date;
     flowEnd?: Date;

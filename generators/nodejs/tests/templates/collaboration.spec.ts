@@ -26,27 +26,27 @@ describe('Generators', () => {
 
                     expect(content.normalizeSpace()).toBe(`
                         // Start call classA
-                        console.log('--> classA::afn1');
-                        inputState.value = await this.cmpClassA.afn1();
+                        state.history.push('--> classA::afn1');
+                        state.value = await this.cmpClassA.afn1();
 
                         // classA call classB
-                        console.log('--> classB::bfn1');
-                        inputState.value = await this.cmpClassB.bfn1();
+                        state.history.push('--> classB::bfn1');
+                        state.value = await this.cmpClassB.bfn1();
 
                         // classA call classB
                         if(this.cmpClassA['a >= b'](state)) {
-                            console.log('--> classB::bfn2');
-                            inputState.value = await this.cmpClassB.bfn2();
+                            state.history.push('--> classB::bfn2');
+                            state.value = await this.cmpClassB.bfn2();
                         } else {
-                            console.log('--> \\x1b[43mclassB::bfn2: 0 ms\\x1b[m <- ignored by condition');
+                            state.history.push('--> \\x1b[43mclassB::bfn2: 0 ms\\x1b[m <- ignored by condition');
                         }
 
                         // classA call classB
                         if(this.cmpClassA['a < b'](state)) {
-                            console.log('--> classB::bfn3');
-                            inputState.value = await this.cmpClassB.bfn3();
+                            state.history.push('--> classB::bfn3');
+                            state.value = await this.cmpClassB.bfn3();
                         } else {
-                            console.log('--> \\x1b[43mclassB::bfn3: 0 ms\\x1b[m <- ignored by condition');
+                            state.history.push('--> \\x1b[43mclassB::bfn3: 0 ms\\x1b[m <- ignored by condition');
                         }
                     `.normalizeSpace());
                 });
@@ -72,17 +72,17 @@ describe('Generators', () => {
 
                     expect(content.normalizeSpace()).toBe(`
                         // Start call componentA1
-                        console.log('--> componentA1::actionA1');
-                        inputState.value = await this.cmpComponentA1.actionA1();
+                        state.history.push('--> componentA1::actionA1');
+                        state.value = await this.cmpComponentA1.actionA1();
 
                         // componentA1 call componentB1
-                        console.log('--> componentB1::actionB1');
-                        inputState.value = await this.cmpComponentB1.actionB1();
+                        state.history.push('--> componentB1::actionB1');
+                        state.value = await this.cmpComponentB1.actionB1();
 
                         // componentA1 call componentB1
-                        inputState.value = await Promise.all(inputState.resetActionStart().value.map(async (x: any): Promise<any> => {
+                        state.value = await Promise.all(state.resetActionStart().value.map(async (x: any): Promise<any> => {
                             // componentA1 call componentB1
-                            console.log('--> componentB1::actionB2');
+                            state.history.push('--> componentB1::actionB2');
                             return await this.cmpComponentB1.actionB2();
                         }));`.normalizeSpace());
                 });
@@ -94,19 +94,19 @@ describe('Generators', () => {
 
                     expect(content.normalizeSpace()).toBe(`
                         // Start call componentA2
-                        console.log('--> componentA2::actionA1');
-                        inputState.value = await this.cmpComponentA2.actionA1();
+                        state.history.push('--> componentA2::actionA1');
+                        state.value = await this.cmpComponentA2.actionA1();
 
                         // componentA2 call componentB2
-                        inputState.value = await Promise.all(inputState.resetActionStart().value.map(async (x: any): Promise<any> => {
+                        state.value = await Promise.all(state.resetActionStart().value.map(async (x: any): Promise<any> => {
                             // componentA2 call componentB2
-                            console.log('--> componentB2::actionB1');
+                            state.history.push('--> componentB2::actionB1');
                             return await this.cmpComponentB2.actionB1();
                         }));
 
                         // componentA2 call componentB2
-                        console.log('--> componentB2::actionB2');
-                        inputState.value = await this.cmpComponentB2.actionB2();
+                        state.history.push('--> componentB2::actionB2');
+                        state.value = await this.cmpComponentB2.actionB2();
                     `.normalizeSpace());
                 });
             });
