@@ -4,6 +4,6 @@
     * <%- operation.description.replace(/\n/g, '\n* ') %>.<% } %>
     */
     async <%- include('../interface/operation', {operation: operation}) -%> {
-        return null;
+        return Promise.resolve(<%= operation.isReturnArray ? '[]' : 'null' %>);
     }
 <% }) %>

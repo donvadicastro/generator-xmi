@@ -37,7 +37,7 @@ describe('Generators', () => {
                          * afn1 action.
                         */
                         async afn1(): Promise<void | null> {
-                            return null;
+                            return Promise.resolve(null);
                         }
                     `.normalizeSpace());
                     });
@@ -81,14 +81,14 @@ describe('Generators', () => {
                         * error action.
                         */
                         async error( message: string, ): Promise<void | null> {
-                            return null;
+                            return Promise.resolve(null);
                         }
 
                        /**
                         * info action.
                         */
                         async info( message: string, ): Promise<void | null> {
-                            return null;
+                            return Promise.resolve(null);
                         }
                     `.normalizeSpace());
                     });
@@ -103,14 +103,14 @@ describe('Generators', () => {
                         * login action.
                         */
                         async login(value: { username: string, password: string, }): Promise<boolean | null> {
-                            return null;
+                            return Promise.resolve(null);
                         }
 
                        /**
                         * logout action.
                         */
                         async logout(): Promise<void | null> {
-                            return null;
+                            return Promise.resolve(null);
                         }
                     `.normalizeSpace());
                     });

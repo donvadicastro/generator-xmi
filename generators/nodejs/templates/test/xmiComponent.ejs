@@ -35,6 +35,6 @@ flow.run({actionStart: new Date(),
     <%= x.name %>: <%- x.isArray ? '[]' : (x.typeRef ? `new ${x.typeRef.namePascal}()` : x.typeDefaultValue) %>,
 <% }) %>
 }).then((ret: any) => {
-    console.log('--> Completed');
+    state.history.push('--> Completed');
     process.exit(0);
 });
