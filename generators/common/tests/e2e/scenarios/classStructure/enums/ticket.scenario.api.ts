@@ -3,7 +3,7 @@ import {deleteCheck} from "../../../api/delete.check";
 import {postCheck} from "../../../api/post.check";
 
 export const scenario = (API: any) => {
-    describe('x3-enums -> ticket', () => {
+    describe('class-structure -> x3-enums -> ticket', () => {
         describe('API server', () => {
             const rootTicketAPI = '/api/v1/class-structure/x3-enums/ticket';
 
