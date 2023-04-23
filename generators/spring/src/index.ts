@@ -21,8 +21,8 @@ import {join} from "path";
 import * as kebabCase from "just-kebab-case";
 import {green, yellow} from "chalk";
 import {XmiGeneratorBase} from "generator-xmi-common";
-import pascal = require('to-pascal-case');
 import * as console from "console";
+import pascal = require('to-pascal-case');
 
 const prettier = require("prettier");
 
