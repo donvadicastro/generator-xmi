@@ -16,8 +16,8 @@
     "types": ["node"],
     "composite": true,
     "paths": {
-        "generator-xmi-core/*": [ "lib/packages/core/*" ],
-        "generator-xmi-common/*": [ "lib/generators/common/*" ],
+        "generator-xmi-core/*": [ "packages/core/*" ],
+        "generator-xmi-common/*": [ "generators/common/*" ],
     }
   },
   "exclude": ["node_modules", "tmp"],

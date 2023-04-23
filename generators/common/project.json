@@ -1,13 +1,13 @@
 {
     "name": "generator-xmi-common",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
-    "projectType": "library",
+    "projectType": "application",
     "sourceRoot": "generators/common/src",
     "tags": [],
     "targets": {
         "compile": {
             "executor": "nx:run-script",
-            "outputs": ["lib/generators/common", "generators/common/lib"],
+            "outputs": ["generators/common/lib", "lib/generators/common"],
             "options": {
                 "script": "compile"
             }

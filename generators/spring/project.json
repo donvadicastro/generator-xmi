@@ -16,6 +16,17 @@
                 "projects": "dependencies"
             }]
         },
+        "generate": {
+            "executor": "nx:run-script",
+            "outputs": ["output/spring"],
+            "options": {
+                "script": "generate"
+            },
+            "dependsOn": [{
+                "target": "compile",
+                "projects": "dependencies"
+            }]
+        },
         "test": {
             "executor": "@nrwl/jest:jest",
             "outputs": ["lib/coverage/generators/app"],
