@@ -6,7 +6,7 @@ import {Component} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {environment} from "../../<%= entity.getRelativeRoot() %>/environments/environment";
+import {environment} from "../../<%= entity.relativeRoot %>/environments/environment";
 
 @Component({
   selector: 'app-<%= entity.name %>-screen',

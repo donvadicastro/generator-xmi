@@ -48,8 +48,8 @@ export class TypeConverter {
         return typeName.endsWith('__');
     }
 
-    public static getTypeDefaultValue(type: string): any {
-        return (<StringDictionary>{'string': '\'\'','Date': 'new Date()', 'number': '0', 'boolean': 'false'})[type] || 'null';
+    public static getTypeDefaultValue(type: string, dialect: DialectType): any {
+        return this.typesDefaultValuesDialectMap[type] ? this.typesDefaultValuesDialectMap[type][dialect] : 'null';
     }
 
     public static getTypeAllowedValues(type: string): any[] {
@@ -65,6 +65,14 @@ export class TypeConverter {
         'Date':         { 'js': 'Date',         'java': 'Date'      },
         'number':       { 'js': 'number',       'java': 'int'       },
         'boolean':      { 'js': 'boolean',      'java': 'Boolean'   },
+        'void':         { 'js': 'void',         'java': 'void'      },
+    }
+
+    private static typesDefaultValuesDialectMap: {[key: string]: StringDictionary} = {
+        'string':       { 'js': '\'\'',         'java': '""'        },
+        'Date':         { 'js': 'new Date()',   'java': 'new Date()'},
+        'number':       { 'js': '0',            'java': '0'         },
+        'boolean':      { 'js': 'false',        'java': 'false'     },
         'void':         { 'js': 'void',         'java': 'void'      },
     }
 }

@@ -1,0 +1,3 @@
+<% (entity.lifelines || []).forEach(function (lifeline) { %>
+    private final <%= lifeline.elementRef.namePascal %> cmp<%= lifeline.elementRef.namePascal %>;
+<% }) %>

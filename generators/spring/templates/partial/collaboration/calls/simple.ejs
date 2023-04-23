@@ -1,0 +1,6 @@
+this.cmp<%= message.to.elementRef.namePascal %>.<%= message.operation.name %>(
+    <% message.operation.inputParameters.forEach((x, i, arr) => { %>
+        <% if(x.type !== 'void') { %>(<%= x.typeRef ? x.typeRef.namePascal : x.type %>) <% } %>state.resetActionStart().getValue()
+        <% if(arr.length - 1 > i) { %>,<% } %>
+    <% }) %>
+)

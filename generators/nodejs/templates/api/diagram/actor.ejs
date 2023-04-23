@@ -1,10 +1,10 @@
-import {DIContainer} from "../../<%= entity.getRelativeRoot() %>/inversify.config";
-import {DITypes} from "../../<%= entity.getRelativeRoot() %>/design/types/diTypes";
-import {<%= entity.namePascal %>} from '../../<%= entity.getRelativeRoot() %>/design/<%= entity.getPathFromRoot() %>/process/<%= entity.name %>';
-import {FlowState} from "../../<%= entity.getRelativeRoot() %>/design/types/flowState";
+import {DIContainer} from "../../<%= entity.relativeRoot %>/inversify.config";
+import {DITypes} from "../../<%= entity.relativeRoot %>/design/types/diTypes";
+import {<%= entity.namePascal %>} from '../../<%= entity.relativeRoot %>/design/<%= entity.getPathFromRoot() %>/process/<%= entity.name %>';
+import {FlowState} from "../../<%= entity.relativeRoot %>/design/types/flowState";
 
 <% entity.lifelines.forEach(x => { %>
-    import {<%= x.ref.namePascal %>Contract} from '../../<%= entity.getRelativeRoot() %>/design/<%= x.ref.getPathFromRoot() %>/contracts/<%= x.ref.name %>';
+    import {<%= x.ref.namePascal %>Contract} from '../../<%= entity.relativeRoot %>/design/<%= x.ref.getPathFromRoot() %>/contracts/<%= x.ref.name %>';
 <% }) %>
 
 

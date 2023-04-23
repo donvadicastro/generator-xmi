@@ -1,37 +1,47 @@
 {
-  "name": "generator-xmi",
-  "version": "1.1.33",
-  "license": "MIT",
-  "main": "dist/generators/app/index.js",
-  "scripts": {
-    "compile": "lerna run compile --include-dependencies --stream",
-    "test": "lerna run test --stream",
-    "generate": "lerna run generate --stream",
-    "dockerBuild": "lerna run dockerBuild --stream",
-    "dockerBuildBase": "npm run compile && cross-var docker build -t generator-xmi -f DockerfileBase .",
-    "dockerTagBase": "cross-var docker tag generator-xmi donvadicastro/generator-xmi:base-$npm_package_version",
-    "dockerPushTagBase": "cross-var docker push donvadicastro/generator-xmi:base-$npm_package_version",
-    "dockerRebuildBaseImage": "npm run compile && npm run dockerBuildBase && npm run dockerTagBase && npm run dockerPushTagBase"
-  },
-  "workspaces": [
-    "packages/**",
-    "generators/**"
-  ],
-  "dependencies": {
-    "tslib": "^2.0.0"
-  },
-  "devDependencies": {
-    "@types/jest": "27.4.1",
-    "@types/node": "16.11.7",
-    "copyfiles": "^2.4.1",
-    "cross-var": "^1.1.0",
-    "dotenv": "^16.0.1",
-    "jest": "^28.1.0",
-    "jest-environment-jsdom": "^28.1.0",
-    "jest-environment-node": "^28.1.0",
-    "lerna": "^5.0.0",
-    "ts-jest": "^28.0.3",
-    "ts-node": "^10.8.1",
-    "typescript": "^4.7.3"
-  }
+    "name": "generator-xmi",
+    "version": "1.1.33",
+    "license": "MIT",
+    "files": [
+        "lib/generators"
+    ],
+    "keywords": ["yeoman-generator"],
+    "scripts": {
+        "compile": "nx run-many --target=compile",
+        "lint": "nx run-many --target=lint",
+        "test": "nx run-many --target=test --parallel=1",
+        "generate": "nx run-many --target=generate",
+        "dockerBuild": "nx run-many --target=dockerBuild",
+        "dockerBuildBase": "npm run compile && cross-var docker build -t generator-xmi -f DockerfileBase .",
+        "dockerTagBase": "cross-var docker tag generator-xmi donvadicastro/generator-xmi:base-$npm_package_version",
+        "dockerPushTagBase": "cross-var docker push donvadicastro/generator-xmi:base-$npm_package_version",
+        "dockerRebuildBaseImage": "npm run compile && npm run dockerBuildBase && npm run dockerTagBase && npm run dockerPushTagBase"
+    },
+    "workspaces": [
+        "packages/**",
+        "generators/**"
+    ],
+    "dependencies": {
+        "tslib": "^2.0.0",
+        "yeoman-generator": "^5.8.0"
+    },
+    "devDependencies": {
+        "@nrwl/jest": "^15.9.2",
+        "@nrwl/js": "^15.9.2",
+        "@nrwl/nx-cloud": "^15.3.5",
+        "@types/jest": "27.4.1",
+        "@types/node": "16.11.7",
+        "copyfiles": "^2.4.1",
+        "cross-var": "^1.1.0",
+        "dotenv": "^16.0.1",
+        "jest": "^28.1.0",
+        "jest-environment-jsdom": "^28.1.0",
+        "jest-environment-node": "^28.1.0",
+        "lerna": "^5.0.0",
+        "nx": "^15.9.2",
+        "prettier-plugin-java": "^1.6.2",
+        "ts-jest": "^28.0.3",
+        "ts-node": "^10.8.1",
+        "typescript": "^4.7.3"
+    }
 }

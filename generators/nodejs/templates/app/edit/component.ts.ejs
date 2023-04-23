@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import {environment} from "../../../<%= entity.getRelativeRoot() %>/environments/environment";
+import {environment} from "../../../<%= entity.relativeRoot %>/environments/environment";
 
 <% var imports = {};
   (entity.attributesCombined || []).filter(x => x.typeRef && x.isEnum).forEach(x => {
@@ -10,7 +10,7 @@ import {environment} from "../../../<%= entity.getRelativeRoot() %>/environments
   }); %>
 
 <% Object.keys(imports).forEach(key => { %>
-  import {<%= imports[key] %>} from '../../../../<%= entity.getRelativeRoot() %>/design/<%= key %>';
+  import {<%= imports[key] %>} from '../../../../<%= entity.relativeRoot %>/design/<%= key %>';
 <% }); %>
 
 @Component({

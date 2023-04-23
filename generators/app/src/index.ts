@@ -8,7 +8,6 @@ import Generator = require('yeoman-generator');
 import yosay = require('yosay');
 import treeify = require('treeify');
 import shell = require('shelljs');
-
 export class XmiGenerator extends (Generator as { new(args: any, opts: any): any; }) {
     dist: string = 'dist';
 
@@ -18,12 +17,12 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
 
     constructor(args: any, opts: any) {
         super(args, opts);
-        this.argument('xmiFileName', { type: String, required: true });
+        this.argument('xmiFileName', {type: String, required: true});
 
-        this.option('destination', { type: String, default: 'dist' });
-        this.option('type', { type: String, default: 'nodejs' });
-        this.option('auth', { type: Boolean, default: false });
-        this.option('dryRun', { type: Boolean, default: false });
+        this.option('destination', {type: String, default: 'dist'});
+        this.option('type', {type: String, default: 'nodejs'});
+        this.option('auth', {type: Boolean, default: false});
+        this.option('dryRun', {type: Boolean, default: false});
     }
 
     prompting() {
@@ -46,12 +45,15 @@ export class XmiGenerator extends (Generator as { new(args: any, opts: any): any
 
         this._readData(async (result: any) => {
             const parser = new XmiParser(result);
-            const success = await parser.parse((<{[key: string]: DialectType}>{'nodejs': 'js', 'spring': 'java'})[this.options.type]);
+            const success = await parser.parse((<{ [key: string]: DialectType }>{
+                'nodejs': 'js',
+                'spring': 'java'
+            })[this.options.type]);
 
             this.log(green('Model'));
             this.log(treeify.asTree(parser.toConsole(), true, true));
 
-            if(success && !this.options.dryRun) {
+            if (success && !this.options.dryRun) {
                 this.composeWith(require.resolve(`../${this.options.type}/src`), {
                     ...this.options,
                     parser: parser

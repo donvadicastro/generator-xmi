@@ -1,0 +1,34 @@
+package com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.process;
+
+<% const firstCmp = entity.messages && entity.messages.length && entity.messages[0].to.elementRef; %>
+<% const firstOperation = firstCmp && firstCmp.operations.find(x => x.name === entity.messages[0].operation.name); %>
+<%- include('partial/collaboration/import', {entity: entity}) -%>
+
+<%
+    var componentImports = [];
+
+    firstOperation && firstOperation.inputParameters.filter(x => x.typeRef).forEach(x => {
+        componentImports.some(y => y === x.typeRef) || componentImports.push(x.typeRef);
+    });
+%>
+
+<% componentImports.forEach(x => { %>
+    import com.generator.design.<%= x.getPathFromRoot(utils.self, '.') %>.components.<%= x.namePascal %>;
+<% }) %>
+
+@RequiredArgsConstructor()
+public class <%= entity.namePascal %> {
+    <%- include('partial/collaboration/required', {entity: entity}) -%>
+
+    /**
+    /* Execute process
+    */
+    public FlowState run(FlowState state) {
+        state.getHistory().add("--> initialize local state storage");
+
+        // define flow
+        <%- include('partial/collaboration/flow', {entity: entity}) -%>
+
+        return state;
+    }
+}

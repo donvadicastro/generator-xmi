@@ -1,0 +1,18 @@
+package com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.components.generated;
+
+<%- include('../partial/component/import', {entity: entity}) -%>
+
+<%- include('../partial/common/classDescription', {entity: entity, system: true}) -%>
+
+public abstract class <%= entity.namePascal %>Base extends <%- include('../partial/component/extend', {entity: entity}) -%> {
+  <%- include('../partial/component/require', {entity: entity, orm: true}) -%>
+  <%- include('../partial/component/attributes', {entity: entity, orm: true}) -%>
+
+<% if(entity.hasLoop) { %>
+  <%- include('../partial/component/loop', {entity: entity}) -%>
+<% } %>
+
+  <%- include('../partial/component/conditions', {entity: entity}) -%>
+  <%- include('../partial/component/operations', {entity: entity}) -%>
+  <%- include('../partial/component/provide', {entity: entity}) -%>
+}

@@ -7,6 +7,7 @@ import javax.persistence.*;
 <%- include('partial/class/import', {entity: entity}) -%>
 
 <%- include('partial/common/classDescription', {entity: entity, system: true}) -%>
+
 @Data
 @MappedSuperclass
 public abstract class <%= entity.namePascal %>Base <%- include('partial/class/extend', {entity: entity}) -%> implements Identifiable<Integer> {

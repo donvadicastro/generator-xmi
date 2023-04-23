@@ -2,17 +2,16 @@
     "name": "generator-xmi-app",
     "version": "0.0.0",
     "type": "commonjs",
-    "main": "dist/app/index.js",
+    "main": "src/index.js",
     "private": true,
     "scripts": {
         "test": "jest --verbose --passWithNoTests --silent=false",
-        "compile": "tsc --build tsconfig.lib.json",
-        "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*.*\" \"../../dist/generators/app\""
+        "compile": "tsc --build tsconfig.app.json",
+        "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*.*\" \"../../lib/generators/app\""
     },
     "dependencies": {
         "@types/supertest": "^2.0.12",
         "chalk": "^4.1.2",
-        "generator-xmi-core": "*",
         "just-kebab-case": "^1.1.0",
         "treeify": "^1.1.0",
         "xml2js": "^0.4.23",

@@ -9,8 +9,6 @@
         ]
     },
     "include": [
-        "../common/tests/**/*.*",
-        "**/*.spec.ts",
-        "**/*.d.ts"
+        "tests"
     ]
 }

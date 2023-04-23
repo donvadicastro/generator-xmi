@@ -4,7 +4,10 @@ export const scenario = (API: any) => {
             const sequenceAPI = '/api/v1/sequence-diagrams/x3-simple-sequence';
 
             it('should support POST method', async () => {
-                const response = await API.post(sequenceAPI).expect(201);
+                const response = await API.post(sequenceAPI)
+                    .set('Content-Type', 'text/plain')
+                    .send('test').expect(201);
+
                 expect(response.body).toMatchObject({
                     history: [
                         "--> initialize local state storage",

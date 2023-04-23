@@ -6,7 +6,6 @@ const assert = require('assert');
 
 export class xmiParameter extends xmiBase {
     typeRef: xmiBase | undefined = undefined;
-    typeDefaultValue = 'null';
 
     /**
      * Indicates parameter is an array.
@@ -23,7 +22,6 @@ export class xmiParameter extends xmiBase {
 
         if(TypeConverter.isPrimitive(this.typeId)) {
             this.typeId = TypeConverter.convert(this.typeId);
-            this.typeDefaultValue = this.isArray ? [] : TypeConverter.getTypeDefaultValue(this.type);
         } else {
             this._factory.resolveById(this.typeId).subscribe(x => this.typeRef = x);
         }

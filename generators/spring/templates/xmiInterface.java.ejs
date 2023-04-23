@@ -1,17 +1,13 @@
 package com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.contracts;
 
 <%- include('partial/common/importReferences', {entity: entity, deepLevel: ''}) -%>
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 <%- include('partial/common/classDescription', {entity: entity, system: true}) -%>
 
 public interface <%= entity.namePascal %> {
-  <% (entity.attributes || []).forEach(function (attr) { %>
-    /**
-    * <%= attr.name %> property
-    */
-    <%= attr.typeRef ? attr.typeRef.namePascal : attr.type %> <%= attr.name %>;
-  <% }) %>
-
   <% [...entity.associationLinks || [], ...entity.aggregationLinks || []].forEach(x => { %>
     <% if(!x.target.multiplicity || x.target.multiplicity === '1' || x.target.multiplicity === '0..1') { %>
         /**
@@ -31,24 +27,4 @@ public interface <%= entity.namePascal %> {
     */
     <%- include('partial/interface/operation', {operation: operation}) -%>;
   <% }) %>
-
-  <% if(entity.hasLoop) { %>
-    //#region Loop
-    /**
-    * Loop condition.
-    */
-    loopCondition: boolean;
-
-    /**
-    * Get loop delay in ms.
-    */
-    loopDelay: number;
-    //#endregion
-  <% } %>
-
-  //# region Message conditions
-  <% entity.conditions && Object.keys(entity.conditions).forEach(x => entity.conditions[x].forEach(y => { %>
-    '<%- y %>'(state: any): boolean;
-  <% })) %>
-  //# endregion
   }

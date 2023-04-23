@@ -7,17 +7,14 @@
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": false,
-        "composite": true,
-        "paths": {
-            "generator-xmi-core": [ "../../packages/core" ]
-        }
+        "composite": true
     },
     "files": [],
     "include": [],
     "exclude": [],
     "references": [
         {
-            "path": "../packages/core"
+            "path": "../../packages/core"
         }
     ]
 }

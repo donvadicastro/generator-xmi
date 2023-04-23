@@ -1,0 +1,9 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "rootDir": "./",
+        "outDir": "../../lib/generators/nodejs",
+    },
+    "files": ["src/index.ts"],
+    "exclude": ["**/tests/**", "dist"]
+}

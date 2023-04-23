@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": ".",
     "sourceMap": true,
     "declaration": true,
     "moduleResolution": "node",
@@ -15,7 +14,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "types": ["node"],
-    "composite": true
+    "composite": true,
+    "paths": {
+        "generator-xmi-core/*": [ "lib/packages/core/*" ],
+        "generator-xmi-common/*": [ "lib/generators/common/*" ],
+    }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp"],
+  "include": ["**/*.ts"]
 }

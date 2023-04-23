@@ -1,0 +1,46 @@
+package com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.process;
+
+import com.generator.common.contracts.FlowState;
+import com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.process.<%= entity.namePascal %>;
+
+<% (entity.lifelines || []).forEach(lifeline => { %>
+    import com.generator.design.<%= lifeline.ref.getPathFromRoot(utils.self, '.') %>.contracts.<%= lifeline.ref.namePascal %> %>;
+<% }) %>
+
+<%
+    const getInputType = function (entity) {
+        return entity.messages.length &&
+            entity.messages[0].operation &&
+            entity.messages[0].operation.parameters.length &&
+            entity.messages[0].operation.parameters[0];
+    }
+%>
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController("<%= entity.elementId %>_api")
+@RequestMapping("/api/v1/<%= entity.getPathFromRoot(utils.kebabCase) %>")
+@Api(tags = "Collaboration: <%= entity.namePascal %> (/<%= entity.getPathFromRoot(utils.kebabCase) %>)")
+public class <%= entity.namePascal %>Controller {
+    protected final <%= entity.namePascal %> flow;
+
+    public <%= entity.namePascal %>Controller(<%= (entity.lifelines || []).map(lifeline =>
+        `${lifeline.ref.namePascal} ${lifeline.ref.name}`).join(',') %>) {
+
+        this.flow = new <%= entity.namePascal %>(<%= (entity.lifelines || []).map(lifeline =>
+            lifeline.ref.name).join(',') %>);
+    }
+
+    @PostMapping(consumes = "<%= getInputType(entity)?.typeId ? 'text/plain' : 'application/json' %>")
+    @ApiOperation(value = "Run process", notes = "Run process")
+    public ResponseEntity run(<% if(getInputType(entity)) { %>@RequestBody <%= getInputType(entity).typeId || getInputType(entity).typeRef.namePascal %> input<% } %>) {
+        return new ResponseEntity(this.flow.run(new FlowState(<%= getInputType(entity) ? 'input' : 'null' %>)), HttpStatus.CREATED);
+    }
+}

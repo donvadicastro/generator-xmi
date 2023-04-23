@@ -36,7 +36,7 @@ RUN mkdir /home/yeoman/generated
 WORKDIR /home/yeoman/generated
 
 COPY ./package.json .
-COPY ./dist/generators ./dist/generators
+COPY ./lib/generators ./lib/generators
 COPY ./apps ./apps
 COPY ./packages ./packages
 

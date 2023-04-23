@@ -1,36 +1,41 @@
 'use strict';
 
-import {xmiComponentFactory} from "generator-xmi-core";
 import {
-  xmiActor,
-  xmiBoundary,
-  xmiClass,
-  xmiCollaboration,
-  xmiComponent,
-  xmiDataType,
-  xmiEnumeration,
-  xmiInstanceSpecification,
-  xmiInterface, xmiPackage,
-  xmiScreen,
-  xmiUseCase
+    xmiActor,
+    xmiBoundary,
+    xmiClass,
+    xmiCollaboration,
+    xmiComponent,
+    xmiComponentFactory,
+    xmiDataType,
+    xmiEnumeration,
+    xmiInstanceSpecification,
+    xmiInterface,
+    xmiPackage,
+    xmiScreen,
+    xmiUseCase
 } from "generator-xmi-core";
 import {existsSync, readdirSync, statSync} from "fs";
 import {join} from "path";
 
 import * as kebabCase from "just-kebab-case";
-import pascal = require('to-pascal-case');
 import {green, yellow} from "chalk";
-import {XmiGeneratorBase} from "../../common/src/xmiGeneratorBase";
+import {XmiGeneratorBase} from "generator-xmi-common";
+import pascal = require('to-pascal-case');
+import * as console from "console";
+
+const prettier = require("prettier");
 
 export class XmiGenerator extends XmiGeneratorBase {
     staleContent: string[] = [];
 
-    //TODO: requires Node > 10
-    // _beautify(filename: string) {
-    //     this.fs.write(filename, prettier.format(this.fs.read(filename), {
-    //         parser: 'java', tabWidth: 4
-    //     }));
-    // }
+    _beautify(filename: string) {
+        try {
+            this.fs.write(filename, prettier.format(this.fs.read(filename), {parser: 'java', tabWidth: 4}));
+        } catch (e) {
+            console.log(filename, e);
+        }
+    }
 
     generate() {
         this._bootstrap([], ['.env']);
@@ -48,7 +53,7 @@ export class XmiGenerator extends XmiGeneratorBase {
         this.log(green('JIRA credentials:         ') + `${this.options.destination}/.env -> "jira" section`);
         this.log(green('Auth server connection:   ') + `${this.options.destination}/.env -> "keycloak" section`);
 
-        if(this.staleContent.length) {
+        if (this.staleContent.length) {
             this.log(yellow('\r\nStale content: '));
             this.staleContent.forEach(x => this.log(x));
         }
@@ -79,15 +84,11 @@ export class XmiGenerator extends XmiGeneratorBase {
                 // const destFileName = this.destinationPath(`${path}/components/generated/${x.name}.generated.ts`);
                 // this.fs.copyTpl(this.templatePath('xmiActor.ejs'), destFileName, options);
                 // this.generatedFiles.push(destFileName);
-            }
-
-            else if (x instanceof xmiBoundary) {
+            } else if (x instanceof xmiBoundary) {
                 // const destFileName = this.destinationPath(`${path}/components/generated/${x.name}.generated.ts`);
                 // this.fs.copyTpl(this.templatePath('xmiActor.ejs'), destFileName, options);
                 // this.generatedFiles.push(destFileName);
-            }
-
-            else if (x instanceof xmiEnumeration) {
+            } else if (x instanceof xmiEnumeration) {
                 const fileName = `${path}/enums/${x.namePascal}.java`;
                 const destFileName = this.destinationPath(fileName);
 
@@ -95,61 +96,46 @@ export class XmiGenerator extends XmiGeneratorBase {
                 this.generatedFiles.push(destFileName);
 
                 this.enums.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
-            }
+            } else if (x instanceof xmiInstanceSpecification) {
+                const baseClassFileName = this.destinationPath(`${path}/components/generated/${x.name}Base.java`);
+                const classFileName = this.destinationPath(`${path}/components/${x.name}.java`);
 
-            else if (x instanceof xmiInstanceSpecification) {
-                // const baseClassFileName = this.destinationPath(`${path}/components/generated/${x.name}.generated.ts`);
-                // const classFileName = this.destinationPath(`${path}/components/${x.name}.ts`);
-                //
-                // this.fs.copyTpl(this.templatePath('xmiClass.generated.java.ejs'), baseClassFileName, options);
-                // this.generatedFiles.push(baseClassFileName);
-                //
-                // if(!this.fs.exists(classFileName)) {
-                //     this.fs.copyTpl(this.templatePath('xmiClass.java.ejs'), classFileName, options);
-                //     this.generatedFiles.push(classFileName);
-                // }
-                //
-                // //store all non-generated content
-                // childComponents.push(classFileName);
-            }
+                this.fs.copyTpl(this.templatePath('xmiClass.generated.java.ejs'), baseClassFileName, options);
+                this.generatedFiles.push(baseClassFileName);
 
-            else if (x instanceof xmiComponent) {
-                // const interfaceFileName = this.destinationPath(`${path}/contracts/${x.name}.ts`);
-                // const baseClassFileName = this.destinationPath(`${path}/components/generated/${x.name}.generated.ts`);
-                // const classFileName = this.destinationPath(`${path}/components/${x.name}.ts`);
-                // const classTestFileName = this.destinationPath(`${path}/components/${x.name}.test.ts`);
-                //
-                // this.fs.copyTpl(this.templatePath('xmiInterface.java.ejs'), interfaceFileName, options);
-                // this.generatedFiles.push(interfaceFileName);
-                //
-                // this.fs.copyTpl(this.templatePath('components/component.generated.ejs'), baseClassFileName, options);
-                // this.generatedFiles.push(baseClassFileName);
-                // this.components.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
-                //
-                // if(!this.fs.exists(classFileName)) {
-                //     this.fs.copyTpl(this.templatePath('components/component.ejs'), classFileName, options);
-                // }
-                //
-                // if(!this.fs.exists(classTestFileName)) {
-                //     this.fs.copyTpl(this.templatePath('components/component.test.ejs'), classTestFileName, options);
-                //     // this.generatedFiles.push(classTestFileName);
-                // }
-                //
-                // //store all non-generated content
-                // childComponents.push(classFileName);
-                // childComponents.push(classTestFileName);
-            }
+                if (!this.fs.exists(classFileName)) {
+                    this.fs.copyTpl(this.templatePath('xmiClass.java.ejs'), classFileName, options);
+                    this.generatedFiles.push(classFileName);
+                }
 
-            else if (x instanceof xmiDataType) {
+                //store all non-generated content
+                childComponents.push(classFileName);
+            } else if (x instanceof xmiComponent) {
+                const interfaceFileName = this.destinationPath(`${path}/contracts/${x.namePascal}.java`);
+                const baseClassFileName = this.destinationPath(`${path}/components/generated/${x.namePascal}Base.java`);
+                const classFileName = this.destinationPath(`${path}/components/${x.namePascal}Impl.java`);
+
+                this.fs.copyTpl(this.templatePath('xmiInterface.java.ejs'), interfaceFileName, options);
+                this.generatedFiles.push(interfaceFileName);
+
+                this.fs.copyTpl(this.templatePath('components/component.generated.ejs'), baseClassFileName, options);
+                this.generatedFiles.push(baseClassFileName);
+                this.components.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
+
+                if (!this.fs.exists(classFileName)) {
+                    this.fs.copyTpl(this.templatePath('components/component.ejs'), classFileName, options);
+                }
+
+                //store all non-generated content
+                childComponents.push(classFileName);
+            } else if (x instanceof xmiDataType) {
                 const baseClassFileName = this.destinationPath(`${path}/types/${x.namePascal}.java`);
 
                 this.fs.copyTpl(this.templatePath('xmiDataType.java.ejs'), baseClassFileName, options);
                 this.generatedFiles.push(baseClassFileName);
                 this.dataTypes.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
 
-            }
-
-            else if (x instanceof xmiClass) {
+            } else if (x instanceof xmiClass) {
                 const baseClassFileName = this.destinationPath(`${path}/components/generated/${x.namePascal}Base.java`);
                 const classFileName = this.destinationPath(`${path}/components/${x.namePascal}.java`);
                 const repositoryFileName = this.destinationPath(`${path}/repositories/${x.namePascal}Repository.java`);
@@ -159,7 +145,7 @@ export class XmiGenerator extends XmiGeneratorBase {
                 this.fs.copyTpl(this.templatePath('xmiClass.generated.java.ejs'), baseClassFileName, options);
                 this.generatedFiles.push(baseClassFileName);
 
-                if(!this.fs.exists(classFileName)) {
+                if (!this.fs.exists(classFileName)) {
                     this.fs.copyTpl(this.templatePath('xmiClass.java.ejs'), classFileName, options);
                 }
 
@@ -175,33 +161,27 @@ export class XmiGenerator extends XmiGeneratorBase {
                 childComponents.push(classTestFileName);
 
                 this.classes.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
-            }
-
-            else if (x instanceof xmiInterface) {
+            } else if (x instanceof xmiInterface) {
                 const interfaceFileName = this.destinationPath(`${path}/contracts/${x.namePascal}.java`);
 
                 this.fs.copyTpl(this.templatePath('xmiInterface.java.ejs'), interfaceFileName, options);
                 this.generatedFiles.push(interfaceFileName);
-            }
-
-            else if (x instanceof xmiCollaboration) {
-                // const diagramFileName = this.destinationPath(`${path}/process/${x.name}.ts`);
+            } else if (x instanceof xmiCollaboration) {
+                const diagramFileName = this.destinationPath(`${path}/process/${x.namePascal}.java`);
                 // const apiRouterFileName = this.destinationPath(`${this.options.destination}/api/server/routes/${localPath}/router.ts`);
                 // const apiActorFileName = this.destinationPath(`${this.options.destination}/api/server/routes/${localPath}/actor.ts`);
-                // const apiControllerFileName = this.destinationPath(`${this.options.destination}/api/server/routes/${localPath}/controller.ts`);
+                const apiControllerFileName = this.destinationPath(`${path}/process/${x.namePascal}Controller.java`);
                 //
-                // this.fs.copyTpl(this.templatePath('xmiCollaboration.ejs'), diagramFileName, options);
+                this.fs.copyTpl(this.templatePath('xmiCollaboration.ejs'), diagramFileName, options);
                 //
                 // this.fs.copyTpl(this.templatePath('api/diagram/router.ejs'), apiRouterFileName, options);
                 // this.fs.copyTpl(this.templatePath('api/diagram/actor.ejs'), apiActorFileName, options);
-                // this.fs.copyTpl(this.templatePath('api/diagram/controller.ejs'), apiControllerFileName, options);
+                this.fs.copyTpl(this.templatePath('spring/collaboration.java.ejs'), apiControllerFileName, options);
                 //
-                // this.generatedFiles.push(diagramFileName);
-                // this.generatedFiles.push(apiActorFileName);
+                this.generatedFiles.push(diagramFileName);
+                this.generatedFiles.push(apiControllerFileName);
                 // this.collaborationDiagrams.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
-            }
-
-            else if (x instanceof xmiScreen) {
+            } else if (x instanceof xmiScreen) {
                 // const appComponentRootPath = this.destinationPath(`${this.options.destination}/app/pages/screens/${localPath}`);
                 // const screenComponentFileName = `${appComponentRootPath}/${x.name}/component.ts`;
                 //
@@ -211,13 +191,9 @@ export class XmiGenerator extends XmiGeneratorBase {
                 //
                 // this.generatedFiles.push(screenComponentFileName);
                 // this.screens.push({path: localPath, url: this._getLocationFromPath(localPath), entity: x});
-            }
-
-            else if (x instanceof xmiUseCase) {
+            } else if (x instanceof xmiUseCase) {
                 // this._generateUseCase(x, options);
-            }
-
-            else if (x instanceof xmiPackage) {
+            } else if (x instanceof xmiPackage) {
                 localPath || this.fs.copyTpl(this.templatePath('readme.ejs'), `${this.options.destination}/readme.md`, options);
 
                 //clean generated content
@@ -236,13 +212,13 @@ export class XmiGenerator extends XmiGeneratorBase {
     }
 
     _calculateDiff(localPath: string, folders: string[], componentFiles: string[]) {
-        if(existsSync(localPath)) {
+        if (existsSync(localPath)) {
             const dirs = readdirSync(this.destinationPath(localPath)).filter(f => statSync(join(localPath, f)).isDirectory());
             this.staleContent = this.staleContent.concat(dirs.filter(x => folders.indexOf(x) === -1).map(x => `(D) ${localPath}/${x}`));
         }
 
         const cmpFolder = join(localPath, 'components');
-        if(existsSync(cmpFolder)) {
+        if (existsSync(cmpFolder)) {
             const files = readdirSync(this.destinationPath(cmpFolder)).filter(f => statSync(join(cmpFolder, f)).isFile());
             this.staleContent = this.staleContent.concat(files.filter(x => componentFiles.indexOf(this.destinationPath(join(cmpFolder, x))) === -1).map(x => `(F) ${localPath}/components/${x}`));
         }

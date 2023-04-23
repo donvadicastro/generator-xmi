@@ -1,0 +1,32 @@
+{
+    "targetDefaults": {
+        "generate": {
+            "outputs": [
+                "{workspaceRoot}/lib/generate"
+            ]
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "**/*.ts"
+                ]
+            }
+        }
+    },
+    "tasksRunnerOptions": {
+        "default": {
+            "runner": "@nrwl/nx-cloud",
+            "options": {
+                "cacheableOperations": [
+                    "build",
+                    "compile",
+                    "test",
+                    "generate",
+                    "dockerBuild"
+                ],
+                "accessToken": "NTg2MGVkYTgtOWEzNC00MjhiLTg1ZDktOTZhNzc0OGJmYWQxfHJlYWQtd3JpdGU="
+            }
+        }
+    }
+}

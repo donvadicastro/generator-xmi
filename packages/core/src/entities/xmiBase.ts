@@ -34,9 +34,10 @@ export default class xmiBase {
      */
     typeId: string;
 
-    name: string;
+    /**
+     * Element name.
+     */
     nameOrigin: string;
-    namePascal: string;
 
     description: string;
     alias: string;
@@ -64,6 +65,14 @@ export default class xmiBase {
      */
     get className(): string {
         return this.constructor.name;
+    }
+
+    get name(): string {
+        return this.nameOrigin && camel(this.nameOrigin)
+    }
+
+    get namePascal(): string {
+        return this.nameOrigin && pascal(this.nameOrigin)
     }
 
     /**
@@ -110,7 +119,7 @@ export default class xmiBase {
     /**
      * Gets relative root path, e.g. "../../"
      */
-    getRelativeRoot(): string {
+    get relativeRoot(): string {
         return this.pathToRoot.map(() => '..').join('/');
     }
 
@@ -126,6 +135,13 @@ export default class xmiBase {
      */
     get type() {
         return TypeConverter.getType(this.typeId, this._factory.dialect);
+    }
+
+    /**
+     * Gets actual type default value (using language qualifier).
+     */
+    get typeDefaultValue() {
+        return TypeConverter.getTypeDefaultValue(this.typeId, this._factory.dialect);
     }
 
     /**
@@ -145,8 +161,6 @@ export default class xmiBase {
         this.typeId = this._raw.$['xmi:type'];
 
         this.nameOrigin = this._raw.$.name;
-        this.name = this.nameOrigin && camel(this.nameOrigin);
-        this.namePascal = this.nameOrigin && pascal(this.nameOrigin);
         this.description = get(this._raw, ['properties', '0', '$', 'documentation']);
 
         this.alias = get(this._raw, ['properties', '0', '$', 'alias']);
