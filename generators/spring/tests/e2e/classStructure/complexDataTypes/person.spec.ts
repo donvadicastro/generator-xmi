@@ -1,4 +1,4 @@
-import {scenario as api} from '../../../../../common/tests/e2e/scenarios/classStructure/complexDataTypes/person.scenario.api';
+import {scenario as api} from 'generator-xmi-common/tests/e2e/scenarios/classStructure/complexDataTypes/person.scenario.api';
 const request = require("supertest");
 
 describe('spring generator E2E tests', () => {

@@ -1,4 +1,4 @@
-import {scenario as api} from '../../../../../common/tests/e2e/scenarios/sequenceDiagrams/simpleLoop/sequence.scenario.api';
+import {scenario as api} from 'generator-xmi-common/tests/e2e/scenarios/sequenceDiagrams/simpleLoop/sequence.scenario.api';
 const request = require("supertest");
 
 describe('node generator E2E tests', () => {
