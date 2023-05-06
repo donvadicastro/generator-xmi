@@ -2,9 +2,10 @@
     "name": "generator-xmi-common",
     "version": "0.0.0",
     "type": "commonjs",
-    "main": "src/index.js",
+    "main": "lib/index.js",
     "private": true,
     "scripts": {
-        "compile": "tsc --build tsconfig.app.json"
+        "compile": "tsc --build tsconfig.app.json",
+        "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*\" \"../../lib/generators/common\""
     }
 }

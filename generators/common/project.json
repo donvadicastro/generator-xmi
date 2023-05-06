@@ -7,7 +7,7 @@
     "targets": {
         "compile": {
             "executor": "nx:run-script",
-            "outputs": ["generators/common/lib", "lib/generators/common"],
+            "outputs": ["lib/generators/common"],
             "options": {
                 "script": "compile"
             }

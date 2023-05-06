@@ -19,7 +19,7 @@
         "just-kebab-case": "^1.1.0",
         "to-pascal-case": "^1.0.0",
         "treeify": "^1.1.0",
-        "xml2js": "^0.4.23",
+        "xml2js": "^0.5.0",
         "yeoman-generator": "^5.6.1",
         "yosay": "^2.0.1"
     },
