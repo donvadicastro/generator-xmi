@@ -2,7 +2,7 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "rootDir": "./",
-        "outDir": "../../lib/generators/spring",
+        "outDir": "lib",
     },
     "files": ["src/index.ts"],
     "exclude": ["**/tests/**", "dist"]
