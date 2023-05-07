@@ -7,7 +7,6 @@
     "scripts": {
         "test": "cross-env DEBUG=testcontainers jest --verbose --silent=false --runInBand --detectOpenHandles",
         "compile": "tsc --build tsconfig.app.json",
-        "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*\" \"../../lib/generators/nodejs\"",
         "generate": "npx yo xmi ../../resources/models/fixtures.xml --type=nodejs --destination=../../output/nodejs --force",
         "dockerBuild": "npm run all:docker:build --prefix ../../output/nodejs"
     },

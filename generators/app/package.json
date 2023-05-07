@@ -2,12 +2,11 @@
     "name": "generator-xmi-app",
     "version": "0.0.0",
     "type": "commonjs",
-    "main": "src/index.js",
+    "main": "index.js",
     "private": true,
     "scripts": {
         "test": "jest --verbose --passWithNoTests --silent=false",
-        "compile": "tsc --build tsconfig.app.json",
-        "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*.*\" \"../../lib/generators/app\""
+        "compile": "tsc --build tsconfig.app.json"
     },
     "dependencies": {
         "@types/supertest": "^2.0.12",

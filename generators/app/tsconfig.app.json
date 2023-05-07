@@ -1,10 +1,5 @@
 {
     "extends": "./tsconfig.json",
-    "compilerOptions": {
-        "rootDir": "./src",
-        "outDir": "../../lib/generators/app",
-    },
-    "files": ["src/index.ts"],
-    "include": ["src/**/*.ts"],
+    "files": ["index.ts"],
     "exclude": ["**/tests/**", "dist"]
 }
