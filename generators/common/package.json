@@ -6,9 +6,6 @@
     "private": true,
     "scripts": {
         "compile": "tsc --build tsconfig.app.json",
-        "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*\" \"../../lib/generators/common\""
-    },
-    "dependencies": {
-        "generator-xmi-core": "*"
+        "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*\" \"lib\""
     }
 }
