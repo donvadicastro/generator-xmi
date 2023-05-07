@@ -5,7 +5,6 @@
     "main": "lib/index.js",
     "private": true,
     "scripts": {
-        "compile": "tsc --build tsconfig.app.json",
-        "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*\" \"lib\""
+        "compile": "tsc --build tsconfig.app.json"
     }
 }
