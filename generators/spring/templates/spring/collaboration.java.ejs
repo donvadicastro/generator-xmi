@@ -16,6 +16,10 @@ import com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.proce
     }
 %>
 
+<% if (getInputType(entity) && getInputType(entity).typeRef) { %>
+    import com.generator.design.<%= getInputType(entity).typeRef.getPathFromRoot(utils.self, '.') %>.contracts.<%= getInputType(entity).typeRef.namePascal %>;
+<% } %>
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
@@ -40,7 +44,7 @@ public class <%= entity.namePascal %>Controller {
 
     @PostMapping(consumes = "<%= getInputType(entity)?.typeId ? 'text/plain' : 'application/json' %>")
     @ApiOperation(value = "Run process", notes = "Run process")
-    public ResponseEntity run(<% if(getInputType(entity)) { %>@RequestBody <%= getInputType(entity).type || getInputType(entity).typeRef.namePascal %> input<% } %>) {
+    public ResponseEntity run(<% if(getInputType(entity)) { %>@RequestBody <%= getInputType(entity).typeRef ? getInputType(entity).typeRef.namePascal : getInputType(entity).type %> input<% } %>) {
         return new ResponseEntity(this.flow.run(new FlowState(<%= getInputType(entity) ? 'input' : 'null' %>)), HttpStatus.CREATED);
     }
 }
