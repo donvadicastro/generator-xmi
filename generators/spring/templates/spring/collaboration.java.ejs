@@ -40,7 +40,7 @@ public class <%= entity.namePascal %>Controller {
 
     @PostMapping(consumes = "<%= getInputType(entity)?.typeId ? 'text/plain' : 'application/json' %>")
     @ApiOperation(value = "Run process", notes = "Run process")
-    public ResponseEntity run(<% if(getInputType(entity)) { %>@RequestBody <%= getInputType(entity).typeId || getInputType(entity).typeRef.namePascal %> input<% } %>) {
+    public ResponseEntity run(<% if(getInputType(entity)) { %>@RequestBody <%= getInputType(entity).type || getInputType(entity).typeRef.namePascal %> input<% } %>) {
         return new ResponseEntity(this.flow.run(new FlowState(<%= getInputType(entity) ? 'input' : 'null' %>)), HttpStatus.CREATED);
     }
 }
