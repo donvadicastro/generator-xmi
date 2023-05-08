@@ -9,11 +9,11 @@
         "yeoman-generator"
     ],
     "scripts": {
-        "compile": "nx run-many --target=compile",
-        "lint": "nx run-many --target=lint",
-        "test": "nx run-many --target=test",
-        "generate": "nx run-many --target=generate",
-        "dockerBuild": "nx run-many --target=dockerBuild",
+        "compile": "nx run-many --target=compile --skip-nx-cache",
+        "lint": "nx run-many --target=lint --skip-nx-cache",
+        "test": "nx run-many --target=test --skip-nx-cache",
+        "generate": "nx run-many --target=generate --skip-nx-cache",
+        "dockerBuild": "nx run-many --target=dockerBuild --skip-nx-cache",
         "dockerBuildBase": "npm run compile && cross-var docker build -t generator-xmi -f DockerfileBase .",
         "dockerTagBase": "cross-var docker tag generator-xmi donvadicastro/generator-xmi:base-$npm_package_version",
         "dockerPushTagBase": "cross-var docker push donvadicastro/generator-xmi:base-$npm_package_version",
