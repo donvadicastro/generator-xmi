@@ -7,7 +7,7 @@
     "targets": {
         "compile": {
             "executor": "nx:run-script",
-            "outputs": ["lib/generators/spring", "generators/spring/lib"],
+            "outputs": ["generators/spring/lib"],
             "options": {
                 "script": "compile"
             },
