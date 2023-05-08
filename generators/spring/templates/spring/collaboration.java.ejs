@@ -4,7 +4,7 @@ import com.generator.common.contracts.FlowState;
 import com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.process.<%= entity.namePascal %>;
 
 <% (entity.lifelines || []).forEach(lifeline => { %>
-    import com.generator.design.<%= lifeline.ref.getPathFromRoot(utils.self, '.') %>.contracts.<%= lifeline.ref.namePascal %> %>;
+    import com.generator.design.<%= lifeline.ref.getPathFromRoot(utils.self, '.') %>.components.<%= lifeline.ref.namePascal %> %>;
 <% }) %>
 
 <%
