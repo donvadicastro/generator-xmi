@@ -10,7 +10,11 @@
             "outputs": ["lib/generators/common", "generators/common/lib"],
             "options": {
                 "script": "compile"
-            }
+            },
+            "dependsOn": [{
+                "target": "compile",
+                "projects": "dependencies"
+            }]
         },
         "test": {
             "executor": "@nrwl/jest:jest",
