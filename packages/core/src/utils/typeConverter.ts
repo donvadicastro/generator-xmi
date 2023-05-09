@@ -73,6 +73,5 @@ export class TypeConverter {
         'Date':         { 'js': 'new Date()',   'java': 'new Date()'},
         'number':       { 'js': '0',            'java': '0'         },
         'boolean':      { 'js': 'false',        'java': 'false'     },
-        'void':         { 'js': 'void',         'java': 'void'      },
     }
 }
