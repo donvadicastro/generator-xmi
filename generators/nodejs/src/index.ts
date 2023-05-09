@@ -144,10 +144,10 @@ export class XmiGenerator extends XmiGeneratorBase {
                     this.fs.copyTpl(this.templatePath('components/component.ejs'), classFileName, options);
                 }
 
-                if (!this.fs.exists(classTestFileName)) {
-                    this.fs.copyTpl(this.templatePath('components/component.test.ejs'), classTestFileName, options);
-                    // this.generatedFiles.push(classTestFileName);
-                }
+                // if (!this.fs.exists(classTestFileName)) {
+                //     this.fs.copyTpl(this.templatePath('components/component.test.ejs'), classTestFileName, options);
+                //     this.generatedFiles.push(classTestFileName);
+                // }
 
                 //store all non-generated content
                 childComponents.push(classFileName);

@@ -20,7 +20,7 @@ describe('<%= entity.name %> specification check', () => {
 <% (entity.operations || []).forEach(operation => { %>
     it('verify "<%= operation.name %>"', async () => {<% operation.inputParameters.forEach(x => { %>
         const <%= x.name %> = <%= x.isArray ? '[' : '' %><%- x.typeRef ? `new ${x.typeRef.namePascal}()` : x.typeDefaultValue %><%= x.isArray ? ']' : '' %>;<% }) %>
-        const expected <% if(operation.isReturnArray) { %>: <%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.namePascal}` : operation.returnParameter.type %>[]<% } %> = <%- operation.isReturnArray ? '[]' : operation.returnParameter.typeRef ? `new ${operation.returnParameter.typeRef.namePascal}()` : (operation.returnParameter.typeDefaultValue || 'null') %>;
+        const expected <% if(operation.isReturnArray) { %>: <%= operation.returnParameter.typeRef ? `${operation.returnParameter.typeRef.namePascal}` : operation.returnParameter.type %>[]<% } %> = <%- operation.isReturnArray ? '[]' : operation.returnParameter.typeRef ? `new ${operation.returnParameter.typeRef.namePascal}()` : operation.returnParameter.typeDefaultValue %>;
         <% if(operation.inputParameters.length > 0) { %>
         const params = <% if(operation.inputParameters.length > 1) { %>{ <%= operation.inputParameters.map(x => `${x.name}: ${x.name}`).join(', ')%> }<% } else { %><%= operation.inputParameters[0].name %><% } %>;
         <% } %>
