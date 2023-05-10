@@ -13,7 +13,7 @@
         "lint": "nx run-many --target=lint --skip-nx-cache",
         "test": "nx run-many --target=test --skip-nx-cache",
         "generate": "nx run-many --target=generate --skip-nx-cache",
-        "dockerBuild": "nx run-many --target=dockerBuild --skip-nx-cache",
+        "dockerBuild": "nx run-many --target=dockerBuild --skip-nx-cache --verbose",
         "dockerBuildBase": "npm run compile && cross-var docker build -t generator-xmi -f DockerfileBase .",
         "dockerTagBase": "cross-var docker tag generator-xmi donvadicastro/generator-xmi:base-$npm_package_version",
         "dockerPushTagBase": "cross-var docker push donvadicastro/generator-xmi:base-$npm_package_version",
