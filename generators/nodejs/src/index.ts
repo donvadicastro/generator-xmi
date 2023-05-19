@@ -183,9 +183,9 @@ export class XmiGenerator extends XmiGeneratorBase {
                     this.fs.copyTpl(this.templatePath('xmiClass.ejs'), classFileName, options);
                 }
 
-                if (!this.fs.exists(classTestFileName)) {
-                    this.fs.copyTpl(this.templatePath('xmiClass.test.ejs'), classTestFileName, options);
-                }
+                // if (!this.fs.exists(classTestFileName)) {
+                //     this.fs.copyTpl(this.templatePath('xmiClass.test.ejs'), classTestFileName, options);
+                // }
 
                 //api
                 this.fs.copyTpl(this.templatePath('api/class/router.ejs'), apiRouterFileName, options);
