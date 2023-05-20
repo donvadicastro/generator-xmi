@@ -6,7 +6,7 @@
     "author": "",
     "license": "ISC",
     "scripts": {
-        "build": "npm run api:build && npm run app:build",
+        "build": "npm run api:build",
         "test": "jest",
         "api:start": "npm run api:build && node dist/api/server/index.js",
         "api:start:prod": "NODE_ENV=production npm run api:build && pm2 start dist/api/server/index.js",
@@ -26,7 +26,7 @@
         "app:test": "ng test",
         "app:docker:build": "docker build --progress=plain -t generator-xmi-runner-nodejs/app -f app/Dockerfile .",
         "app:docker:run": "docker run -p 80:80 generator-xmi-runner-nodejs/app",
-        "all:docker:build": "tsc -v && ts-node -v && npm run api:docker:build && npm run app:docker:build",
+        "all:docker:build": "tsc -v && ts-node -v && npm run api:docker:build",
         "all:docker:run": "npm run all:docker:build && docker-compose up",
         "lint": "ng lint",
         "e2e": "protractor e2e/protractor.conf.js",
