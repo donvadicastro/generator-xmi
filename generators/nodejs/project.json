@@ -1,5 +1,5 @@
 {
-    "name": "generator-xmi-nodejs",
+    "name": "generator-xmi-ui",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "application",
     "sourceRoot": "generators/nodejs/src",
