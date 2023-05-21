@@ -1,7 +1,7 @@
 FROM node:16
 
 # Copy app source
-COPY ./lib .
+COPY ./dist .
 COPY ./ormconfig.json .
 COPY ./node_modules ./node_modules
 
