@@ -1,9 +1,12 @@
 {
     "targetDefaults": {
+        "compile": {
+            "inputs": [{ "runtime": "node -v" }],
+            "outputs": ["{projectRoot}/lib"]
+        },
         "generate": {
-            "outputs": [
-                "{workspaceRoot}/lib/generate"
-            ]
+            "inputs": [{ "runtime": "node -v" }],
+            "outputs": ["{workspaceRoot}/output"]
         },
         "lint": {
             "executor": "@nrwl/linter:eslint",
