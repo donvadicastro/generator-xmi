@@ -44,6 +44,7 @@ jobs:
                 run: npm list
 
             -   run: npm install
+            -   run: rm -rf ./node_modules/.cache/nx
             -   run: npm run compile
             -   run: npm link
             -   run: DEBUG=yeoman:generator npm run generate
