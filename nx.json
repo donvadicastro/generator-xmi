@@ -1,35 +1,47 @@
 {
-    "targetDefaults": {
-        "compile": {
-            "inputs": [{ "runtime": "node -v" }],
-            "outputs": ["{projectRoot}/lib"]
-        },
-        "generate": {
-            "inputs": [{ "runtime": "node -v" }],
-            "outputs": ["{workspaceRoot}/output"]
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": [
-                    "**/*.ts"
-                ]
-            }
+  "targetDefaults": {
+    "compile": {
+      "inputs": [
+        {
+          "runtime": "node -v"
         }
+      ],
+      "outputs": [
+        "{projectRoot}/lib"
+      ]
     },
-    "tasksRunnerOptions": {
-        "default": {
-            "runner": "@nrwl/nx-cloud",
-            "options": {
-                "cacheableOperations": [
-                    "build",
-                    "compile",
-                    "test",
-                    "generate",
-                    "dockerBuild"
-                ],
-                "accessToken": "NTg2MGVkYTgtOWEzNC00MjhiLTg1ZDktOTZhNzc0OGJmYWQxfHJlYWQtd3JpdGU="
-            }
+    "generate": {
+      "inputs": [
+        {
+          "runtime": "node -v"
         }
+      ],
+      "outputs": [
+        "{workspaceRoot}/output"
+      ]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "**/*.ts"
+        ]
+      }
     }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx-cloud",
+      "options": {
+        "cacheableOperations": [
+            "build",
+            "compile",
+            "test",
+            "generate",
+            "dockerBuild"
+        ],
+        "accessToken": "NTk5MzUyNGYtZTQyMy00YjkxLWI0MmUtMzdiNjAwZjZmOGUyfHJlYWQtd3JpdGU="
+      }
+    }
+  }
 }
