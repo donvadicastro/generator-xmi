@@ -9,7 +9,7 @@
         "yeoman-generator"
     ],
     "scripts": {
-        "compile": "nx run-many --target=compile",
+        "compile": "nx run-many --target=compile --skip-nx-cache",
         "lint": "nx run-many --target=lint",
         "test": "nx run-many --target=test",
         "generate": "nx run-many --target=generate --skip-nx-cache",
