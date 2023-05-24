@@ -44,4 +44,3 @@ Next command will be available after project generation:
 * "[http://localhost:3000](http://localhost:3000)" - local API server
 * "[http://localhost:4200](http://localhost:4200)" - local client application
 * "[http://localhost:8080/auth](http://localhost:8080/auth)" - local auth server (if appropriate generator option specified)
-
