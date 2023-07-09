@@ -39,8 +39,7 @@
             "test",
             "generate",
             "dockerBuild"
-        ],
-        "accessToken": "NTk5MzUyNGYtZTQyMy00YjkxLWI0MmUtMzdiNjAwZjZmOGUyfHJlYWQtd3JpdGU="
+        ]
       }
     }
   }
