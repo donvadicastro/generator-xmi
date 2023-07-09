@@ -17,7 +17,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/keycloak-angular",
+                        "outputPath": "lib/keycloak-angular",
                         "index": "app/index.html",
                         "main": "app/main.ts",
                         "polyfills": "app/polyfills.ts",

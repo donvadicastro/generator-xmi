@@ -6,8 +6,7 @@
     "private": true,
     "scripts": {
         "test": "cross-env DEBUG=testcontainers* jest --verbose --silent=false --runInBand --detectOpenHandles",
-        "compile": "tsc --build tsconfig.lib.json",
-        "postcompile": "copyfiles --up 0 --all --verbose --exclude \"**/tests/**/*.*\" \"**/templates/**/*\" \"../../dist/generators/spring\"",
+        "compile": "tsc --build tsconfig.app.json",
         "generate": "npx yo xmi ../../resources/models/fixtures.xml --type=spring --destination=../../output/spring --force",
         "dockerBuild": "docker build --progress=plain -t generator-xmi-runner-spring/api -f ../../output/spring/Dockerfile ../../output/spring"
     },
@@ -15,12 +14,11 @@
         "@types/supertest": "^2.0.12",
         "chalk": "^4.1.2",
         "ejs": "^3.1.8",
-        "generator-xmi-core": "*",
         "js-beautify": "^1.14.1",
         "just-kebab-case": "^1.1.0",
         "to-pascal-case": "^1.0.0",
         "treeify": "^1.1.0",
-        "xml2js": "^0.4.23",
+        "xml2js": "^0.5.0",
         "yeoman-generator": "^5.6.1",
         "yosay": "^2.0.1"
     },

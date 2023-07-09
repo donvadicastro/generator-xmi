@@ -11,18 +11,16 @@
 
             currentLoopId = loopIds.length ? loop[loopIds[loopIds.length-1]] : null;
         %>
-        }));
+        });
     <% } %>
 
     <% if(loop && !loops[loop.id]) { %>
         <% loops[loop.id] = message.from.elementRef; currentLoopId = loop.id; %>
         // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to && message.to.elementRef.name %>
-        state.value = await Promise.all(state.resetActionStart().value.map(async (x: any): Promise<any> => {
+        ((List<Object>)state.resetActionStart().getValue()).forEach(x -> {
     <% } %>
 
     // <%= message.from ? message.from.elementRef.name : 'Start' %> call <%= message.to && message.to.elementRef.name %>
     <%- include('action', {message: message, isLoop: currentLoopId}) -%>
 <% }) %>
-<% Object.keys(loops).reverse().forEach(x => { %>
-}));
-<% }) %>
+<% Object.keys(loops).reverse().forEach(() => { %>});<% }) %>

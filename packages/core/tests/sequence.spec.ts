@@ -63,6 +63,14 @@ describe('xmiParser', () => {
         expect(sequence.lifelines[0].elementRef.fragments.length).toBe(1);                      // how many fragments this lifeline belongs to
         expect(sequence.lifelines[0].elementRef.fragments[0]).toBe(sequence.loopFragments[0]);  // map with fragment
       });
+
+      test('Check path to child', () => {
+          const pkg = <xmiPackage>parser.packge;
+          const sequence: xmiComponent = <xmiComponent>(pkg.getNode('uiDiagrams.x3FormWithDependentControls.loadCountries.eaCollaboration7'));
+
+          expect(sequence).toBeDefined();
+          expect(sequence.getPathFromRoot()).toBe('uiDiagrams/x3FormWithDependentControls/loadCountries');
+      });
     });
   });
 });

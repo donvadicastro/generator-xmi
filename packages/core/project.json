@@ -1,0 +1,24 @@
+{
+    "name": "generator-xmi-core",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "packages/core/src",
+    "tags": [],
+    "targets": {
+        "compile": {
+            "executor": "nx:run-script",
+            "outputs": ["lib/packages/core", "packages/core/lib"],
+            "options": {
+                "script": "compile"
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["dist/coverage/generators/packages/core"],
+            "options": {
+                "jestConfig": "packages/core/jest.config.js",
+                "passWithNoTests": true
+            }
+        }
+    }
+}

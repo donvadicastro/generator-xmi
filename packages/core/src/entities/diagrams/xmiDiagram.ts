@@ -13,6 +13,6 @@ export class xmiDiagram extends xmiBase {
     super(raw, parent, factory);
 
     this.typeId = this._raw.properties[0].$.type;
-    this.name = this._raw.properties[0].$.name;
+    this.nameOrigin = this._raw.properties[0].$.name;
   }
 }

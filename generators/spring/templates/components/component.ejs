@@ -1,0 +1,14 @@
+package com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.components;
+
+import com.generator.design.<%= entity.getPathFromRoot(utils.self, '.') %>.components.generated.<%= entity.namePascal %>Base;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.springframework.stereotype.Component;
+
+<%- include('../partial/common/classDescription', {entity: entity, system: false}) -%>
+
+@Data()
+@Component("<%= entity.elementId %>")
+@EqualsAndHashCode(callSuper = true)
+public class <%= entity.namePascal %>Impl extends <%= entity.namePascal %>Base {
+}

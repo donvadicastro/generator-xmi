@@ -1,9 +1,9 @@
 import {<%= entity.namePascal %>} from "./<%= entity.name %>";
 import {createConnection, getRepository, In} from "typeorm";
-import {DatabaseUtils} from "../<%= entity.getRelativeRoot() %>/utils/database";
-import '../<%= entity.getRelativeRoot() %>/api/server/env';
+import {DatabaseUtils} from "../<%= entity.relativeRoot %>/utils/database";
+import '../<%= entity.relativeRoot %>/api/server/env';
 
-const ormConfig = require('../<%= entity.getRelativeRoot() %>/ormconfig.json');
+const ormConfig = require('../<%= entity.relativeRoot %>/ormconfig.json');
 const db = { type: process.env.DB_TYPE, host: process.env.DB_HOST, port: process.env.DB_PORT, username: process.env.POSTGRES_USER, password: process.env.POSTGRES_PASSWORD, database: process.env.POSTGRES_DB };
 
 describe('<%= entity.name %> specification check', () => {

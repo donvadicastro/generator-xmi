@@ -1,0 +1,3 @@
+<% (entity.required || []).forEach(function (value) { %>
+    protected <%= value.typeRef.namePascal %> <%= value.typeRef.name %>;
+<% }) %>

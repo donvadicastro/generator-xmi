@@ -1,30 +1,38 @@
 'use strict';
 
-import {xmiPackage} from "generator-xmi-core";
+import {
+    xmiActor,
+    xmiBoundary,
+    xmiClass,
+    xmiCollaboration,
+    xmiComponent,
+    xmiComponentFactory,
+    xmiDataType,
+    xmiEnumeration,
+    xmiInstanceSpecification,
+    xmiInterface,
+    xmiPackage,
+    xmiScreen,
+    xmiUseCase
+} from "generator-xmi-core";
 import {green, yellow} from "chalk";
-import {xmiCollaboration} from "generator-xmi-core";
-import {xmiActor} from "generator-xmi-core";
-import {xmiScreen} from "generator-xmi-core";
-import {xmiInterface} from "generator-xmi-core";
-import {xmiComponentFactory} from "generator-xmi-core";
-import {xmiUseCase} from "generator-xmi-core";
-import {xmiInstanceSpecification} from "generator-xmi-core";
-import {xmiComponent} from "generator-xmi-core";
-import {xmiBoundary} from "generator-xmi-core";
-import {xmiEnumeration} from "generator-xmi-core";
-import {xmiDataType} from "generator-xmi-core";
-import {xmiClass} from "generator-xmi-core";
 import {existsSync, readdirSync, statSync} from 'fs';
+import * as path from 'path';
 import {join} from 'path';
-
+import {js as beautify} from "js-beautify";
+import {exec} from "child_process";
+import {XmiGeneratorBase} from "generator-xmi-common";
 import kebabCase = require('just-kebab-case');
 import pascal = require('to-pascal-case');
-import {exec} from "child_process";
-import {XmiGeneratorBase} from "../../common/src/xmiGeneratorBase";
-import * as path from "path";
 
 export class XmiGenerator extends XmiGeneratorBase {
     staleContent: string[] = [];
+
+    _beautify(filename: string) {
+        this.fs.write(filename, beautify(this.fs.read(filename), {
+            jslint_happy: true, preserve_newlines: false
+        }));
+    }
 
     generate() {
         this._bootstrap(['.cfignore', '.yo-rc.json'], ['.env', 'app/environments']);
@@ -136,10 +144,10 @@ export class XmiGenerator extends XmiGeneratorBase {
                     this.fs.copyTpl(this.templatePath('components/component.ejs'), classFileName, options);
                 }
 
-                if (!this.fs.exists(classTestFileName)) {
-                    this.fs.copyTpl(this.templatePath('components/component.test.ejs'), classTestFileName, options);
-                    // this.generatedFiles.push(classTestFileName);
-                }
+                // if (!this.fs.exists(classTestFileName)) {
+                //     this.fs.copyTpl(this.templatePath('components/component.test.ejs'), classTestFileName, options);
+                //     this.generatedFiles.push(classTestFileName);
+                // }
 
                 //store all non-generated content
                 childComponents.push(classFileName);
@@ -175,9 +183,9 @@ export class XmiGenerator extends XmiGeneratorBase {
                     this.fs.copyTpl(this.templatePath('xmiClass.ejs'), classFileName, options);
                 }
 
-                if (!this.fs.exists(classTestFileName)) {
-                    this.fs.copyTpl(this.templatePath('xmiClass.test.ejs'), classTestFileName, options);
-                }
+                // if (!this.fs.exists(classTestFileName)) {
+                //     this.fs.copyTpl(this.templatePath('xmiClass.test.ejs'), classTestFileName, options);
+                // }
 
                 //api
                 this.fs.copyTpl(this.templatePath('api/class/router.ejs'), apiRouterFileName, options);

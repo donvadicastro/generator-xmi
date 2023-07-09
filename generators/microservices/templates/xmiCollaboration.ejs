@@ -1,5 +1,5 @@
-import {KafkaClientExt} from '../<%= entity.getRelativeRoot() %>/clients/kafkaClient';
-import {DbClient} from '../<%= entity.getRelativeRoot() %>/clients/dbClient';
+import {KafkaClientExt} from '../<%= entity.relativeRoot %>/clients/kafkaClient';
+import {DbClient} from '../<%= entity.relativeRoot %>/clients/dbClient';
 
 <% (entity.lifelines || []).forEach(lifeline => { %>
     import <%= lifeline.elementRef.name %> from '<%= entity.getRelativePath(lifeline.elementRef) %>/components/<%= lifeline.elementRef.name %>';

@@ -3,8 +3,8 @@ const chalk = require("chalk");
 
 import "reflect-metadata";
 import {<%= entity.namePascal %>} from '../process/<%= entity.namePascal %>';
-import {DIContainer} from "../<%= entity.getRelativeRoot() %>/inversify.config";
-import {DITypes} from "../<%= entity.getRelativeRoot() %>/design/types/diTypes";
+import {DIContainer} from "../<%= entity.relativeRoot %>/inversify.config";
+import {DITypes} from "../<%= entity.relativeRoot %>/design/types/diTypes";
 
 <%
     var componentImports = [];

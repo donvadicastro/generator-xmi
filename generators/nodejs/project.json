@@ -1,0 +1,40 @@
+{
+    "name": "generator-xmi-nodejs",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "application",
+    "sourceRoot": "generators/nodejs/src",
+    "tags": [],
+    "targets": {
+        "compile": {
+            "executor": "nx:run-script",
+            "outputs": ["generators/nodejs/lib"],
+            "options": {
+                "script": "compile"
+            },
+            "dependsOn": [{
+                "target": "compile",
+                "projects": "dependencies"
+            }]
+        },
+        "generate": {
+            "executor": "nx:run-script",
+            "outputs": ["output/nodejs"],
+            "options": {
+                "script": "generate"
+            },
+            "dependsOn": [{
+                "target": "compile",
+                "projects": "self"
+            }]
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["lib/coverage/generators/nodejs"],
+            "options": {
+                "jestConfig": "generators/nodejs/jest.config.js",
+                "passWithNoTests": true,
+                "runInBand": true
+            }
+        }
+    }
+}

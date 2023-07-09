@@ -4,7 +4,6 @@ import {xmiParameter} from "./xmiParameter";
 import {get} from "object-path";
 import {xmiComponentFactory} from "../../factories/xmiComponentFactory";
 
-const camel = require('to-camel-case');
 const assert = require('assert');
 
 export class xmiOperation extends xmiBase {
@@ -29,7 +28,6 @@ export class xmiOperation extends xmiBase {
     }
 
     refresh(raw: any): this {
-        this.name = this.name && camel(this.name);
         this.description = this.description || get(raw, 'documentation.0.$.value');
         this.parameters = (raw.ownedParameter || []).map((x: any) => new xmiParameter(x, this, this._factory));
 

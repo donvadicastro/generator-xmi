@@ -1,0 +1,39 @@
+{
+    "name": "generator-xmi-spring",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "application",
+    "sourceRoot": "generators/spring/src",
+    "tags": [],
+    "targets": {
+        "compile": {
+            "executor": "nx:run-script",
+            "outputs": ["generators/spring/lib"],
+            "options": {
+                "script": "compile"
+            },
+            "dependsOn": [{
+                "target": "compile",
+                "projects": "dependencies"
+            }]
+        },
+        "generate": {
+            "executor": "nx:run-script",
+            "outputs": ["output/spring"],
+            "options": {
+                "script": "generate"
+            },
+            "dependsOn": [{
+                "target": "compile",
+                "projects": "self"
+            }]
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["lib/coverage/generators/app"],
+            "options": {
+                "jestConfig": "generators/spring/jest.config.js",
+                "passWithNoTests": true
+            }
+        }
+    }
+}

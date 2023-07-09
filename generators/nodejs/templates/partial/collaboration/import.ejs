@@ -1,6 +1,6 @@
 const chalk = require("chalk");
 const storage = require('node-persist');
 
-import {FlowState} from '<%= entity.getRelativeRoot() %>/types/flowState';
+import {FlowState} from '<%= entity.relativeRoot %>/types/flowState';
 
 <%- include('../common/importReferences', {entity: entity, deepLevel: ''}) -%>

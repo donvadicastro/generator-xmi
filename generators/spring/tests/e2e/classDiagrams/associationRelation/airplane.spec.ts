@@ -1,4 +1,4 @@
-import {scenario as api} from '../../../../../common/tests/e2e/scenarios/classDiagrams/associationRelation/airplane.scenario.api';
+import {scenario as api} from 'generator-xmi-common/tests/e2e/scenarios/classDiagrams/associationRelation/airplane.scenario.api';
 
 const request = require("supertest");
 

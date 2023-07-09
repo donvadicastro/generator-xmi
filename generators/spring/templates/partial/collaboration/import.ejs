@@ -1,6 +1,7 @@
-const chalk = require("chalk");
-const storage = require('node-persist');
-
-import {FlowState} from '<%= entity.getRelativeRoot() %>/types/flowState';
+import com.generator.common.contracts.FlowState;
 
 <%- include('../common/importReferences', {entity: entity, deepLevel: '../'}) -%>
+import lombok.RequiredArgsConstructor;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;

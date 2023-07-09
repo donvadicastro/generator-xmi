@@ -5,6 +5,7 @@ export const scenario = (API: any) => {
 
             it('should support POST method', async () => {
                 const response = await API.post(sequenceAPI).expect(201);
+
                 expect(response.body).toMatchObject({
                     history: [
                         "--> initialize local state storage",

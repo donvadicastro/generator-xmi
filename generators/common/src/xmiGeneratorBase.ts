@@ -1,4 +1,3 @@
-import {js as beautify} from "js-beautify";
 import * as kebabCase from "just-kebab-case";
 import Generator = require('yeoman-generator');
 import {xmiUseCase} from "generator-xmi-core";
@@ -30,9 +29,6 @@ export class XmiGeneratorBase extends (Generator as { new(args: any, opts: any):
     }
 
     _beautify(filename: string) {
-        this.fs.write(filename, beautify(this.fs.read(filename), {
-            jslint_happy: true, preserve_newlines: false
-        }));
     }
 
     _getLocationFromPath(path: string | null): string {

@@ -1,0 +1,46 @@
+{
+  "targetDefaults": {
+    "compile": {
+      "inputs": [
+        {
+          "runtime": "node -v"
+        }
+      ],
+      "outputs": [
+        "{projectRoot}/lib"
+      ]
+    },
+    "generate": {
+      "inputs": [
+        {
+          "runtime": "node -v"
+        }
+      ],
+      "outputs": [
+        "{workspaceRoot}/output"
+      ]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "**/*.ts"
+        ]
+      }
+    }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx-cloud",
+      "options": {
+        "cacheableOperations": [
+            "build",
+            "compile",
+            "test",
+            "generate",
+            "dockerBuild"
+        ]
+      }
+    }
+  }
+}

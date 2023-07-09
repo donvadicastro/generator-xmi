@@ -3,7 +3,9 @@
     * <%= operation.nameOrigin %> action.<% if(operation.description) { %>
     * <%- operation.description.replace(/\n/g, '\n* ') %>.<% } %>
     */
-    async <%- include('../interface/operation', {operation: operation}) -%> {
-        return null;
+    public <%- include('../interface/operation', {operation: operation}) -%> {
+        <% if(operation.returnParameter.type !== 'void') { %>
+            return <%- operation.isReturnArray ? 'Collections.emptyList()' : operation.returnParameter.typeDefaultValue %>;
+        <% } %>
     }
 <% }) %>

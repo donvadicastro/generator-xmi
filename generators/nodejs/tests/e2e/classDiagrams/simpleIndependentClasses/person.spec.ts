@@ -1,5 +1,5 @@
-import {scenario as api} from '../../../../../common/tests/e2e/scenarios/classDiagrams/simpleIndependentClasses/person.scenario.api';
-import {scenario as app} from '../../../../../common/tests/e2e/scenarios/classDiagrams/simpleIndependentClasses/person.scenario.app';
+import {scenario as api} from 'generator-xmi-common/tests/e2e/scenarios/classDiagrams/simpleIndependentClasses/person.scenario.api';
+import {scenario as app} from 'generator-xmi-common/tests/e2e/scenarios/classDiagrams/simpleIndependentClasses/person.scenario.app';
 const request = require("supertest");
 
 describe('node generator E2E tests', () => {

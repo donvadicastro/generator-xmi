@@ -1,8 +1,8 @@
 import {<%= entity.namePascal %>Contract} from "../contracts/<%= entity.name %>";
-import {FlowState} from "<%= entity.getRelativeRoot() %>/types/flowState";
+import {FlowState} from "<%= entity.relativeRoot %>/types/flowState";
 
-import {DIContainer} from "../<%= entity.getRelativeRoot() %>/inversify.config";
-import {DITypes} from "<%= entity.getRelativeRoot() %>/types/diTypes";
+import {DIContainer} from "../<%= entity.relativeRoot %>/inversify.config";
+import {DITypes} from "<%= entity.relativeRoot %>/types/diTypes";
 <%
     const imports = (entity.operations || []).reduce((memo, operation) => {
         operation.inputParameters.filter(x => x.typeRef).forEach(x => memo[entity.getRelativePath(x.typeRef) + '/components/' + x.typeRef.name] = x.typeRef);

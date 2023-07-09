@@ -20,5 +20,5 @@ module.exports = async () => {
     process.env.NODE_API_URL = `http://localhost:${apiContainer.getMappedPort(3000)}`;
     process.env.NODE_APP_URL = `http://localhost:${appContainer.getMappedPort(80)}`;
 
-    await new Promise((resolve) => setTimeout(resolve, 10000));
+    await new Promise((resolve) => setTimeout(resolve, 10000) );
 };

@@ -76,6 +76,10 @@ export class xmiCollaboration extends xmiBase {
         this.lifelines.forEach((lifeline) =>
             ArrayUtils.insertIfNotExists(lifeline.elementRef, imports));
 
+        this.messages.forEach(message =>
+            message.to && message.to.elementRef.operations.forEach(operation =>
+                operation.returnParameter.typeRef && ArrayUtils.insertIfNotExists(operation.returnParameter.typeRef, imports)));
+
         return imports;
     }
 

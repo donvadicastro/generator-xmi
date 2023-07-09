@@ -1,11 +1,11 @@
-import {getRepository, Repository, DeleteResult, FindManyOptions, createConnection, Connection} from "typeorm";
+import {getRepository, Repository, DeleteResult, FindManyOptions, createConnection, Connection, ObjectLiteral} from "typeorm";
 import {injectable} from "inversify";
 
 <% classes.forEach((x, i) => { %>
 import {<%= x.entity.namePascal %> as <%= x.entity.elementId %>} from '..<%= x.path %>/components/<%= x.entity.name %>';<% }) %>
 const ormConfig = require('../../ormconfig.json');
 
-type crudType<T> = {repository: Repository<T>, loadAll: () => Promise<T[]>, load: (id: number) => Promise<T | undefined>, save: (entity: T) => Promise<T>, delete: (id: number) => Promise<DeleteResult> };
+type crudType<T extends ObjectLiteral> = {repository: Repository<T>, loadAll: () => Promise<T[]>, load: (id: number) => Promise<T | undefined>, save: (entity: T) => Promise<T>, delete: (id: number) => Promise<DeleteResult> };
 
 @injectable()
 export class DbManagerCommon {

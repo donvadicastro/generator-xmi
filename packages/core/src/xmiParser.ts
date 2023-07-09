@@ -1,7 +1,7 @@
 import {get} from 'object-path';
 import {xmiComponentFactory} from "./factories/xmiComponentFactory";
-import {xmiPackage} from "./entities/xmiPackage";
-import {DialectType} from "./types/dialectType";
+import {xmiPackage} from "./entities";
+import {DialectType} from "./types";
 
 export class XmiParser {
     private ELEMENTS_PATH = ['xmi:XMI', 'xmi:Extension', '0', 'elements', '0', 'element'];

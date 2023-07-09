@@ -21,9 +21,9 @@ jobs:
       - run: |
           git config --global user.name 'Vadym Barylo'
           git config --global user.email 'donvadicastro@users.noreply.github.com'
-      - run: npm publish dist/libs/core --tag ${{ github.event.release.target_commitish }}
+      - run: npm publish lib/libs/core --tag ${{ github.event.release.target_commitish }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-      - run: npm publish dist/libs/react-components --tag ${{ github.event.release.target_commitish }}
+      - run: npm publish lib/libs/react-components --tag ${{ github.event.release.target_commitish }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}

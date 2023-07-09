@@ -1,7 +1,7 @@
-import {EditorPageObject} from "../../<%= entity.getRelativeRoot() %>/base/administration/editor.po";
-import {InputControl} from "../../<%= entity.getRelativeRoot() %>/controls/input";
-import {DropdownControl} from "../../<%= entity.getRelativeRoot() %>/controls/dropdown";
-import {CheckboxControl} from "../../<%= entity.getRelativeRoot() %>/controls/checkbox";
+import {EditorPageObject} from "../../<%= entity.relativeRoot %>/base/administration/editor.po";
+import {InputControl} from "../../<%= entity.relativeRoot %>/controls/input";
+import {DropdownControl} from "../../<%= entity.relativeRoot %>/controls/dropdown";
+import {CheckboxControl} from "../../<%= entity.relativeRoot %>/controls/checkbox";
 import {$} from "protractor";
 
 export class <%= entity.namePascal %>EditorPage extends EditorPageObject {

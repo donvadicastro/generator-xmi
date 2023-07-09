@@ -18,5 +18,5 @@
             }
         ]
     },
-    "ignorePatterns": ["dist/**/*", "output/**/*", "resources/**/*"]
+    "ignorePatterns": ["lib/**/*", "output/**/*", "resources/**/*"]
 }
