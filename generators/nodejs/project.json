@@ -32,7 +32,8 @@
             "outputs": ["lib/coverage/generators/nodejs"],
             "options": {
                 "jestConfig": "generators/nodejs/jest.config.js",
-                "passWithNoTests": true
+                "passWithNoTests": true,
+                "runInBand": true
             }
         }
     }
