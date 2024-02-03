@@ -11,10 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: 'Checkout source code'
+        uses: 'actions/checkout@v4'
       - name: 'Automated Version Bump'
         uses: 'phips28/gh-action-bump-version@master'
         with:
           tag-prefix: 'v'
-          commit-message: 'CI: bumps version to {{version}} [skip ci]'
+          commit-message: 'CI: bumps ROOT version to {{version}}'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
