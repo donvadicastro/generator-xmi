@@ -14,6 +14,8 @@ jobs:
       - name: 'Checkout source code'
         uses: 'actions/checkout@v2'
         with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
           ref: ${{ github.ref }}
       - name: 'Automated Version Bump for root'
         uses: 'phips28/gh-action-bump-version@master'
